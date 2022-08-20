@@ -626,55 +626,6 @@
 		{ NS4_SET_COMPOSER( u8"Graeme Norgate" ) },
 	   } },
 
-{ u8"Oceanbed.mid", u8"", u8"Deep Sea: Nullify Threat Beta", 0,
-	6 + 9 + 16 + 2, {
-		//{ ns4::CMidiFile::NS4_ES_POST_UNROLL, ns4::CMidiFile::NS4_E_REPLACE_INST, 0, 8, 0x84 },		// Snare.
-		//{ ns4::CMidiFile::NS4_ES_POST_UNROLL, ns4::CMidiFile::NS4_E_REPLACE_INST, 0, 32, 0x85 },		// Marc.
-		//{ ns4::CMidiFile::NS4_ES_POST_UNROLL, ns4::CMidiFile::NS4_E_REPLACE_INST, 0, 73, 0x86 },		// Ass-Kick.
-		{ ns4::CMidiFile::NS4_ES_POST_UNROLL, ns4::CMidiFile::NS4_E_REPLACE_INST, 0, 63, 0x80 },		// Strings.
-		{ ns4::CMidiFile::NS4_ES_POST_UNROLL, ns4::CMidiFile::NS4_E_REPLACE_INST, 0, 40, 0x87 },		// Choir.
-		{ ns4::CMidiFile::NS4_ES_POST_UNROLL, ns4::CMidiFile::NS4_E_REPLACE_INST, 0, 39, 0x88 },		// Low Choir.
-		{ ns4::CMidiFile::NS4_ES_POST_UNROLL, ns4::CMidiFile::NS4_E_REPLACE_INST, 0, 23, 0x83 },		// Timpani.
-		{ ns4::CMidiFile::NS4_ES_POST_UNROLL, ns4::CMidiFile::NS4_E_REPLACE_INST, 0, 61, 0x7E },		// Horn.
-		{ ns4::CMidiFile::NS4_ES_POST_UNROLL, ns4::CMidiFile::NS4_E_REPLACE_INST, 0, 48, 0x81 },		// Organ.
-
-		{ ns4::CMidiFile::NS4_ES_POST_UNROLL, ns4::CMidiFile::NS4_E_REPLACE_INST, 0, 84, 0x89 },		// Saw.
-		{ ns4::CMidiFile::NS4_ES_POST_UNROLL, ns4::CMidiFile::NS4_E_REPLACE_INST, 0, 85, 0x8A },		// Saw.
-		{ ns4::CMidiFile::NS4_ES_POST_UNROLL, ns4::CMidiFile::NS4_E_REPLACE_INST, 0, 86, 0x8B },		// Saw.
-		{ ns4::CMidiFile::NS4_ES_POST_UNROLL, ns4::CMidiFile::NS4_E_REPLACE_INST, 0, 87, 0x8C },		// Saw.
-		{ ns4::CMidiFile::NS4_ES_POST_UNROLL, ns4::CMidiFile::NS4_E_REPLACE_INST, 0, 88, 0x8D },		// Saw.
-		{ ns4::CMidiFile::NS4_ES_POST_UNROLL, ns4::CMidiFile::NS4_E_REPLACE_INST, 0, 89, 0x8E },		// Saw.
-		{ ns4::CMidiFile::NS4_ES_POST_UNROLL, ns4::CMidiFile::NS4_E_REPLACE_INST, 0, 90, 0x8F },		// Saw.
-		{ ns4::CMidiFile::NS4_ES_POST_UNROLL, ns4::CMidiFile::NS4_E_REPLACE_INST, 0, 91, 0x90 },		// Saw.
-		{ ns4::CMidiFile::NS4_ES_POST_UNROLL, ns4::CMidiFile::NS4_E_REPLACE_INST, 0, 92, 0x91 },		// Saw.
-		{ ns4::CMidiFile::NS4_ES_POST_UNROLL, ns4::CMidiFile::NS4_E_REPLACE_INST, 0, 93, 0x92 },		// Saw.
-		{ ns4::CMidiFile::NS4_ES_POST_UNROLL, ns4::CMidiFile::NS4_E_REPLACE_INST, 0, 94, 0x93 },		// Saw.
-		{ ns4::CMidiFile::NS4_ES_POST_UNROLL, ns4::CMidiFile::NS4_E_REPLACE_INST, 0, 95, 0x94 },		// Saw.
-		{ ns4::CMidiFile::NS4_ES_POST_UNROLL, ns4::CMidiFile::NS4_E_REPLACE_INST, 0, 96, 0x95 },		// Saw.
-		{ ns4::CMidiFile::NS4_ES_POST_UNROLL, ns4::CMidiFile::NS4_E_REPLACE_INST, 0, 97, 0x96 },		// Saw.
-		{ ns4::CMidiFile::NS4_ES_POST_UNROLL, ns4::CMidiFile::NS4_E_REPLACE_INST, 0, 98, 0x97 },		// Saw.
-		{ ns4::CMidiFile::NS4_ES_POST_UNROLL, ns4::CMidiFile::NS4_E_REPLACE_INST, 0, 99, 0x98 },		// Saw.
-
-		{ ns4::CMidiFile::NS4_ES_PRE_UNROLL, ns4::CMidiFile::NS4_E_MERGE_TRACKS_BY_INDEX, 0, 4, 3 },	// Marc.
-		{ ns4::CMidiFile::NS4_ES_PRE_UNROLL, ns4::CMidiFile::NS4_E_MERGE_TRACKS_BY_INDEX, 0, 7, 6 },	// Sawtooth.
-		{ ns4::CMidiFile::NS4_ES_PRE_UNROLL, ns4::CMidiFile::NS4_E_MERGE_TRACKS_BY_INDEX, 0, 10, 9 },	// Strings.
-		{ ns4::CMidiFile::NS4_ES_PRE_UNROLL, ns4::CMidiFile::NS4_E_MERGE_TRACKS_BY_INDEX, 0, 22, 9 },	// Strings.
-		{ ns4::CMidiFile::NS4_ES_PRE_UNROLL, ns4::CMidiFile::NS4_E_MERGE_TRACKS_BY_INDEX, 0, 12, 11 },	// Choir.
-		{ ns4::CMidiFile::NS4_ES_PRE_UNROLL, ns4::CMidiFile::NS4_E_MERGE_TRACKS_BY_INDEX, 0, 13, 15 },	// Choir Low.
-		{ ns4::CMidiFile::NS4_ES_PRE_UNROLL, ns4::CMidiFile::NS4_E_MERGE_TRACKS_BY_INDEX, 0, 14, 15 },	// Choir Low.
-		{ ns4::CMidiFile::NS4_ES_PRE_UNROLL, ns4::CMidiFile::NS4_E_MERGE_TRACKS_BY_INDEX, 0, 18, 17 },	// Saw delay.
-		{ ns4::CMidiFile::NS4_ES_POST_SUPPLEMENTAL, ns4::CMidiFile::NS4_E_SET_LOOP_POINTS_ALL_TRACKS, 0, 0, 0, { 1, 1, 1, 0 }, { 103, 1, 1, 0 } },
-
-		/*{ ns4::CMidiFile::NS4_ES_POST_UNROLL, ns4::CMidiFile::NS4_E_REPLACE_INST, 0, 10, 0x7E },
-		{ ns4::CMidiFile::NS4_ES_POST_UNROLL, ns4::CMidiFile::NS4_E_REPLACE_INST, 0, 109, 0x7F },
-		{ ns4::CMidiFile::NS4_ES_POST_UNROLL, ns4::CMidiFile::NS4_E_REPLACE_INST, 0, 9, 0x80 },		// Strings.
-		{ ns4::CMidiFile::NS4_ES_POST_UNROLL, ns4::CMidiFile::NS4_E_REPLACE_INST, 0, 7, 0x81 },		// Organ.
-		{ ns4::CMidiFile::NS4_ES_POST_UNROLL, ns4::CMidiFile::NS4_E_REPLACE_INST, 0, 6, 0x82 },		// Choir.
-		{ ns4::CMidiFile::NS4_ES_POST_UNROLL, ns4::CMidiFile::NS4_E_REPLACE_INST, 0, 5, 0x83 },		// Timpani.
-		*/
-		{ NS4_SET_COMPOSER( u8"Graeme Norgate" ) },
-	   } },
-
 
 { u8"00 Perfect Dark (U) (V1.1) 00000015 00E92502 Beta Combat Simulator Fail.mid", u8"Perfect Dark (U) (V1.1) 00000015 00E92502 BETA Combat Simulator death soundtrack.mid TrackParseDebug.txt", u8"Combat Simulator Fail Beta", 0,
 	1,
