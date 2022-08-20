@@ -1,0 +1,380 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <VCProjectVersion>15.0</VCProjectVersion>
+    <ProjectGuid>{A5BB72C5-5031-4636-87B6-1A46683A0F83}</ProjectGuid>
+    <Keyword>Win32Proj</Keyword>
+    <RootNamespace>LSWave</RootNamespace>
+    <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>v143</PlatformToolset>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>v143</PlatformToolset>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Label="Shared">
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <LinkIncremental>true</LinkIncremental>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <LinkIncremental>true</LinkIncremental>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <LinkIncremental>false</LinkIncremental>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <LinkIncremental>false</LinkIncremental>
+  </PropertyGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <ClCompile>
+      <PrecompiledHeader>
+      </PrecompiledHeader>
+      <WarningLevel>Level3</WarningLevel>
+      <Optimization>Disabled</Optimization>
+      <SDLCheck>true</SDLCheck>
+      <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;%(PreprocessorDefinitions);_CRT_SECURE_NO_WARNINGS; _SILENCE_CXX17_CODECVT_HEADER_DEPRECATION_WARNING</PreprocessorDefinitions>
+      <ConformanceMode>true</ConformanceMode>
+      <LanguageStandard>stdcpp20</LanguageStandard>
+    </ClCompile>
+    <Link>
+      <SubSystem>Console</SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <StackCommitSize>1048576</StackCommitSize>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <ClCompile>
+      <PrecompiledHeader>
+      </PrecompiledHeader>
+      <WarningLevel>Level3</WarningLevel>
+      <Optimization>Disabled</Optimization>
+      <SDLCheck>true</SDLCheck>
+      <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions);_CRT_SECURE_NO_WARNINGS; _SILENCE_CXX17_CODECVT_HEADER_DEPRECATION_WARNING</PreprocessorDefinitions>
+      <ConformanceMode>true</ConformanceMode>
+      <LanguageStandard>stdcpp20</LanguageStandard>
+    </ClCompile>
+    <Link>
+      <SubSystem>Console</SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <StackCommitSize>1048576</StackCommitSize>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <ClCompile>
+      <PrecompiledHeader>
+      </PrecompiledHeader>
+      <WarningLevel>Level3</WarningLevel>
+      <Optimization>MaxSpeed</Optimization>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <SDLCheck>true</SDLCheck>
+      <PreprocessorDefinitions>WIN32;NDEBUG;_CONSOLE;%(PreprocessorDefinitions);_CRT_SECURE_NO_WARNINGS; _SILENCE_CXX17_CODECVT_HEADER_DEPRECATION_WARNING</PreprocessorDefinitions>
+      <ConformanceMode>true</ConformanceMode>
+      <LanguageStandard>stdcpp20</LanguageStandard>
+    </ClCompile>
+    <Link>
+      <SubSystem>Console</SubSystem>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <StackCommitSize>1048576</StackCommitSize>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <ClCompile>
+      <PrecompiledHeader>
+      </PrecompiledHeader>
+      <WarningLevel>Level3</WarningLevel>
+      <Optimization>MaxSpeed</Optimization>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <SDLCheck>true</SDLCheck>
+      <PreprocessorDefinitions>NDEBUG;_CONSOLE;%(PreprocessorDefinitions);_CRT_SECURE_NO_WARNINGS; _SILENCE_CXX17_CODECVT_HEADER_DEPRECATION_WARNING</PreprocessorDefinitions>
+      <ConformanceMode>true</ConformanceMode>
+      <LanguageStandard>stdcpp20</LanguageStandard>
+    </ClCompile>
+    <Link>
+      <SubSystem>Console</SubSystem>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <StackCommitSize>1048576</StackCommitSize>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <ClCompile Include="NS4NintendoSynthy4.cpp" />
+    <ClCompile Include="Src\Crc\NS4Crc.cpp" />
+    <ClCompile Include="Src\Envelope\NS4Envelope.cpp" />
+    <ClCompile Include="Src\Filter\NS4BiquadChain.cpp" />
+    <ClCompile Include="Src\Filter\NS4Butterworth.cpp" />
+    <ClCompile Include="Src\Filter\NS4IrConvolution.cpp" />
+    <ClCompile Include="Src\MIDI\NS4MidiFile.cpp" />
+    <ClCompile Include="Src\Operator\NS4Operator.cpp" />
+    <ClCompile Include="Src\Reverb\NS4Reverb.cpp" />
+    <ClCompile Include="Src\Sample\NS4Sample.cpp" />
+    <ClCompile Include="Src\Sample\NS4Sampler.cpp" />
+    <ClCompile Include="Src\SoundBank\NS4SoundBank.cpp" />
+    <ClCompile Include="Src\Time\NS4TimeBlock.cpp" />
+    <ClCompile Include="Src\WavFile\NS4WavFile.cpp" />
+    <ClCompile Include="Src\WavLib\NS4WavLib.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="Src\Crc\NS4Crc.h" />
+    <ClInclude Include="Src\Envelope\NS4Envelope.h" />
+    <ClInclude Include="Src\Filter\NS4Biquad.h" />
+    <ClInclude Include="Src\Filter\NS4BiquadChain.h" />
+    <ClInclude Include="Src\Filter\NS4Butterworth.h" />
+    <ClInclude Include="Src\Filter\NS4Ir.h" />
+    <ClInclude Include="Src\Filter\NS4IrConvolution.h" />
+    <ClInclude Include="Src\Filter\NS4PreEmphasis.h" />
+    <ClInclude Include="Src\MIDI\NS4MidiFile.h" />
+    <ClInclude Include="Src\Operator\NS4LinearInterpolator.h" />
+    <ClInclude Include="Src\Operator\NS4Operator.h" />
+    <ClInclude Include="Src\Operator\NS4Osculator.h" />
+    <ClInclude Include="Src\Reverb\NS4DelayN64.h" />
+    <ClInclude Include="Src\Reverb\NS4FxN64.h" />
+    <ClInclude Include="Src\Reverb\NS4Reverb.h" />
+    <ClInclude Include="Src\Reverb\NS4ReverbDelayLine.h" />
+    <ClInclude Include="Src\Reverb\NS4ReverbTap.h" />
+    <ClInclude Include="Src\Reverb\NS4TableReverb.h" />
+    <ClInclude Include="Src\Sample\NS4Sample.h" />
+    <ClInclude Include="Src\Sample\NS4Sampler.h" />
+    <ClInclude Include="Src\SoundBank\NS4SoundBank.h" />
+    <ClInclude Include="Src\Stream\NS4ByteStream.h" />
+    <ClInclude Include="Src\Time\NS4TimeBlock.h" />
+    <ClInclude Include="Src\WavFile\NS4WavFile.h" />
+    <ClInclude Include="Src\WavLib\NS4WavLib.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Src\Games\NS4AeroFightersAssaultFiles.inl" />
+    <None Include="Src\Games\NS4ArmorinesProjectSWARMFiles.inl" />
+    <None Include="Src\Games\NS4ArmyMenAirCombatFiles.inl" />
+    <None Include="Src\Games\NS4ArmyMenSargesHeroesFiles.inl" />
+    <None Include="Src\Games\NS4AutomobiliLamborghiniFiles.inl" />
+    <None Include="Src\Games\NS4BanjoKazooieFiles.inl" />
+    <None Include="Src\Games\NS4BanjoTooieFiles.inl" />
+    <None Include="Src\Games\NS4BattleTanxFiles.inl" />
+    <None Include="Src\Games\NS4BattlezoneRiseOfTheBlackDogsFiles.inl" />
+    <None Include="Src\Games\NS4BeetAdventureRacing!Files.inl" />
+    <None Include="Src\Games\NS4BlastCorpsFiles.inl" />
+    <None Include="Src\Games\NS4BodyHarvestFiles.inl" />
+    <None Include="Src\Games\NS4Bomberman64EFiles.inl" />
+    <None Include="Src\Games\NS4Bomberman64Files.inl" />
+    <None Include="Src\Games\NS4Bomberman64TheSecondAttackFiles.inl" />
+    <None Include="Src\Games\NS4BombermanHeroFiles.inl" />
+    <None Include="Src\Games\NS4BuckBumbleFiles.inl" />
+    <None Include="Src\Games\NS4BustAMove2ArcadeEditionFiles.inl" />
+    <None Include="Src\Games\NS4BustAMove99Files.inl" />
+    <None Include="Src\Games\NS4CaliforniaSpeedFiles.inl" />
+    <None Include="Src\Games\NS4ChameleonTwist2Files.inl" />
+    <None Include="Src\Games\NS4ChameleonTwistFiles.inl" />
+    <None Include="Src\Games\NS4ChopperAttackFiles.inl" />
+    <None Include="Src\Games\NS4ClayFighter63_3rdFiles.inl" />
+    <None Include="Src\Games\NS4ConkersBadFurDayFiles.inl" />
+    <None Include="Src\Games\NS4CruisnExoticaFiles.inl" />
+    <None Include="Src\Games\NS4CruisnUsaFiles.inl" />
+    <None Include="Src\Games\NS4CruisnWorldFiles.inl" />
+    <None Include="Src\Games\NS4DenshaDeGo!64Files.inl" />
+    <None Include="Src\Games\NS4DiddyKongRacingFiles.inl" />
+    <None Include="Src\Games\NS4DonaldDuckGoinQuakersFiles.inl" />
+    <None Include="Src\Games\NS4DonkeyKong64Files.inl" />
+    <None Include="Src\Games\NS4Doom64Files.inl" />
+    <None Include="Src\Games\NS4Doraemon2NobitaFiles.inl" />
+    <None Include="Src\Games\NS4DoraemonNobitaFiles.inl" />
+    <None Include="Src\Games\NS4DrMario64Files.inl" />
+    <None Include="Src\Games\NS4DryDryDocks64Files.inl" />
+    <None Include="Src\Games\NS4DualHeroesFiles.inl" />
+    <None Include="Src\Games\NS4ExtremeGFiles.inl" />
+    <None Include="Src\Games\NS4ExtremeGXG2Files.inl" />
+    <None Include="Src\Games\NS4F1RacingChampionshipFiles.inl" />
+    <None Include="Src\Games\NS4F1WorldGrandPrixFiles.inl" />
+    <None Include="Src\Games\NS4FlyingDragonFiles.inl" />
+    <None Include="Src\Games\NS4Gex3DeepCoverGeckoFiles.inl" />
+    <None Include="Src\Games\NS4GloverFiles.inl" />
+    <None Include="Src\Games\NS4GoldenEye007Files.inl" />
+    <None Include="Src\Games\NS4HarvestMoonFiles.inl" />
+    <None Include="Src\Games\NS4HeyYouPikachuFiles.inl" />
+    <None Include="Src\Games\NS4IggysReckinBallsFiles.inl" />
+    <None Include="Src\Games\NS4JetForceGemini2Files.inl" />
+    <None Include="Src\Games\NS4JetForceGeminiFiles.inl" />
+    <None Include="Src\Games\NS4JetForceGeminiKioskFiles.inl" />
+    <None Include="Src\Games\NS4JLeagueSoccer64Files.inl" />
+    <None Include="Src\Games\NS4KillerInstinctGold2Files.inl" />
+    <None Include="Src\Games\NS4KillerInstinctGoldFiles.inl" />
+    <None Include="Src\Games\NS4Kirby64TheCrystalShardsFiles.inl" />
+    <None Include="Src\Games\NS4LastLegionUxFiles.inl" />
+    <None Include="Src\Games\NS4MaceTheDarkAgesFiles.inl" />
+    <None Include="Src\Games\NS4MarioKart64Files.inl" />
+    <None Include="Src\Games\NS4MarioParty2Files.inl" />
+    <None Include="Src\Games\NS4MarioParty3Files.inl" />
+    <None Include="Src\Games\NS4MarioPartyFiles.inl" />
+    <None Include="Src\Games\NS4MickeysSpeedwayUsaFiles.inl" />
+    <None Include="Src\Games\NS4MicroMachines64TurboFiles.inl" />
+    <None Include="Src\Games\NS4MischiefMakersFiles.inl" />
+    <None Include="Src\Games\NS4MissionImpossibleFiles.inl" />
+    <None Include="Src\Games\NS4MonopolyFiles.inl" />
+    <None Include="Src\Games\NS4PennyRacersFiles.inl" />
+    <None Include="Src\Games\NS4PerfectDarkFiles.inl" />
+    <None Include="Src\Games\NS4Pilotwings64Files.inl" />
+    <None Include="Src\Games\NS4PokemonSnapFiles.inl" />
+    <None Include="Src\Games\NS4PokemonStadiumFiles.inl" />
+    <None Include="Src\Games\NS4PuyoPuyoSun64Files.inl" />
+    <None Include="Src\Games\NS4Quest64Files.inl" />
+    <None Include="Src\Games\NS4Rayman2TheGreatEscapeFiles.inl" />
+    <None Include="Src\Games\NS4RoadstersTrophyFiles.inl" />
+    <None Include="Src\Games\NS4Rush2Files.inl" />
+    <None Include="Src\Games\NS4SanFranciscoRushFiles.inl" />
+    <None Include="Src\Games\NS4SCARSFiles.inl" />
+    <None Include="Src\Games\NS4SnowboardKidsFiles.inl" />
+    <None Include="Src\Games\NS4SpaceStationSiliconValleyFiles.inl" />
+    <None Include="Src\Games\NS4Starfox64Files.inl" />
+    <None Include="Src\Games\NS4StarSoldierVanishingEarthFiles.inl" />
+    <None Include="Src\Games\NS4SupermanFiles.inl" />
+    <None Include="Src\Games\NS4SuperMario64Files.inl" />
+    <None Include="Src\Games\NS4SuperMario64ModFiles.inl" />
+    <None Include="Src\Games\NS4SuperMario64SourceFiles.inl" />
+    <None Include="Src\Games\NS4SuperRobotSpiritsFiles.inl" />
+    <None Include="Src\Games\NS4SuperSmashBrosFiles.inl" />
+    <None Include="Src\Games\NS4TheLegendOfZeldaOcarinaOfTimeFiles.inl" />
+    <None Include="Src\Games\NS4TonicTroubleFiles.inl" />
+    <None Include="Src\Games\NS4TransformersBeastWarsTransmetalsFiles.inl" />
+    <None Include="Src\Games\NS4Turok2SeedsOfEvilFiles.inl" />
+    <None Include="Src\Games\NS4Turok3ShadowOfOblivion.inl" />
+    <None Include="Src\Games\NS4TurokDinosaurHunterFiles.inl" />
+    <None Include="Src\Games\NS4TurokRageWars.inl" />
+    <None Include="Src\Games\NS4WarGodsFiles.inl" />
+    <None Include="Src\Games\NS4WcwBackstageAssaultFiles.inl" />
+    <None Include="Src\Games\NS4WCWvsnWoWorldTourFiles.inl" />
+    <None Include="Src\Games\NS4WonderProjectJFiles.inl" />
+    <None Include="Src\Games\NS4WormsArmageddonFiles.inl" />
+    <None Include="Src\Games\NS4YoshisStoryFiles.inl" />
+    <None Include="Src\Games\NS4ZoorFiles.inl" />
+    <None Include="Src\Reverb\Taps\NS4PerfectDark0.inl" />
+    <None Include="Src\Reverb\Taps\NS4PerfectDark1.inl" />
+    <None Include="Src\Reverb\Taps\NS4Reverb0.inl" />
+    <None Include="Src\Reverb\Taps\NS4ReverbAeroFightersAssault0.inl" />
+    <None Include="Src\Reverb\Taps\NS4ReverbArmorinesProjectSwarm0.inl" />
+    <None Include="Src\Reverb\Taps\NS4ReverbBanjoKazooie0.inl" />
+    <None Include="Src\Reverb\Taps\NS4ReverbBanjoTooie0.inl" />
+    <None Include="Src\Reverb\Taps\NS4ReverbBanjoTooie1.inl" />
+    <None Include="Src\Reverb\Taps\NS4ReverbBattlezoneRiseOfTheBlackDogs0.inl" />
+    <None Include="Src\Reverb\Taps\NS4ReverbBlastCorps0.inl" />
+    <None Include="Src\Reverb\Taps\NS4ReverbBodyHarvest0.inl" />
+    <None Include="Src\Reverb\Taps\NS4ReverbBomberman640.inl" />
+    <None Include="Src\Reverb\Taps\NS4ReverbBomberman64TheSecondAttack0.inl" />
+    <None Include="Src\Reverb\Taps\NS4ReverbChameleonTwist20.inl" />
+    <None Include="Src\Reverb\Taps\NS4ReverbClayFighter0.inl" />
+    <None Include="Src\Reverb\Taps\NS4ReverbConkersBadFurDay0.inl" />
+    <None Include="Src\Reverb\Taps\NS4ReverbDiddyKongRacing0.inl" />
+    <None Include="Src\Reverb\Taps\NS4ReverbDonkeyKong64Left0.inl" />
+    <None Include="Src\Reverb\Taps\NS4ReverbDonkeyKong64Right0.inl" />
+    <None Include="Src\Reverb\Taps\NS4ReverbDoraemonNobita0.inl" />
+    <None Include="Src\Reverb\Taps\NS4ReverbDualHeroes0.inl" />
+    <None Include="Src\Reverb\Taps\NS4ReverbExtremeG20.inl" />
+    <None Include="Src\Reverb\Taps\NS4ReverbF1WorldGrandPrix0.inl" />
+    <None Include="Src\Reverb\Taps\NS4ReverbF1WorldGrandPrix1.inl" />
+    <None Include="Src\Reverb\Taps\NS4ReverbF1WorldGrandPrix2.inl" />
+    <None Include="Src\Reverb\Taps\NS4ReverbF1WorldGrandPrix3.inl" />
+    <None Include="Src\Reverb\Taps\NS4ReverbF1WorldGrandPrix4.inl" />
+    <None Include="Src\Reverb\Taps\NS4ReverbF1WorldGrandPrix5.inl" />
+    <None Include="Src\Reverb\Taps\NS4ReverbF1WorldGrandPrix6.inl" />
+    <None Include="Src\Reverb\Taps\NS4ReverbFlyingDragon0.inl" />
+    <None Include="Src\Reverb\Taps\NS4ReverbGE0070.inl" />
+    <None Include="Src\Reverb\Taps\NS4ReverbHeyYouPikachu0.inl" />
+    <None Include="Src\Reverb\Taps\NS4ReverbIggysReckinBalls0.inl" />
+    <None Include="Src\Reverb\Taps\NS4ReverbJetForceGeminiLeft0.inl" />
+    <None Include="Src\Reverb\Taps\NS4ReverbJetForceGeminiRight0.inl" />
+    <None Include="Src\Reverb\Taps\NS4ReverbJetForceGeminiStereo0.inl" />
+    <None Include="Src\Reverb\Taps\NS4ReverbJLeagueDynamiteSoccer640.inl" />
+    <None Include="Src\Reverb\Taps\NS4ReverbKillerInstinctGold0.inl" />
+    <None Include="Src\Reverb\Taps\NS4ReverbKirby64TheCrystalShards0.inl" />
+    <None Include="Src\Reverb\Taps\NS4ReverbLastLegionUx0.inl" />
+    <None Include="Src\Reverb\Taps\NS4ReverbMarioParty0.inl" />
+    <None Include="Src\Reverb\Taps\NS4ReverbMarioParty20.inl" />
+    <None Include="Src\Reverb\Taps\NS4ReverbMarioParty30.inl" />
+    <None Include="Src\Reverb\Taps\NS4ReverbMickeysSpeedwayUsaLeft0.inl" />
+    <None Include="Src\Reverb\Taps\NS4ReverbMickeysSpeedwayUsaRight0.inl" />
+    <None Include="Src\Reverb\Taps\NS4ReverbMischiefMakers0.inl" />
+    <None Include="Src\Reverb\Taps\NS4ReverbMissionImpossible0.inl" />
+    <None Include="Src\Reverb\Taps\NS4ReverbPerfectDarkLeft0.inl" />
+    <None Include="Src\Reverb\Taps\NS4ReverbPerfectDarkRight0.inl" />
+    <None Include="Src\Reverb\Taps\NS4ReverbPilotwings640.inl" />
+    <None Include="Src\Reverb\Taps\NS4ReverbPokemonSnap0.inl" />
+    <None Include="Src\Reverb\Taps\NS4ReverbPokemonSnap1.inl" />
+    <None Include="Src\Reverb\Taps\NS4ReverbSCARS0.inl" />
+    <None Include="Src\Reverb\Taps\NS4ReverbSnowboardKids0.inl" />
+    <None Include="Src\Reverb\Taps\NS4ReverbSpaceStationSiliconValley0.inl" />
+    <None Include="Src\Reverb\Taps\NS4ReverbStarSoldierVanishingEarth0.inl" />
+    <None Include="Src\Reverb\Taps\NS4ReverbSuperRobotSpirits0.inl" />
+    <None Include="Src\Reverb\Taps\NS4ReverbSuperSmashBros0.inl" />
+    <None Include="Src\Reverb\Taps\NS4ReverbTonicTrouble0.inl" />
+    <None Include="Src\Reverb\Taps\NS4ReverbTransformersBeastWarsTransmetals0.inl" />
+    <None Include="Src\Reverb\Taps\NS4ReverbTurok20.inl" />
+    <None Include="Src\Reverb\Taps\NS4ReverbTurok3ShadowsOfOblivion0.inl" />
+    <None Include="Src\Reverb\Taps\NS4ReverbTurokRageWars0.inl" />
+    <None Include="Src\Reverb\Taps\NS4ReverbWarGods0.inl" />
+    <None Include="Src\Reverb\Taps\NS4ReverbWCWvsnWoWorldTour0.inl" />
+    <None Include="Src\Reverb\Taps\NS4ReverbWonderProjectJ20.inl" />
+    <None Include="Src\Reverb\Taps\NS4ReverbZoor0.inl" />
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+</Project>
