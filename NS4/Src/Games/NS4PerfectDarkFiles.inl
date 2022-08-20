@@ -13,7 +13,6 @@
 #define NS4_WET_FILTER_FREQ					0.0//(NS4_ORIG_HZ / std::pow( 2.0, 1.125 ))
 //#define NS4_MASTER_REVERB_VOLUME			2.0
 #define NS4_VIB_SCALE						2.0
-#define NS4_SAMPLE_REPLACEMENTS				{ { 0x01, 26, 0, u8"vocal_wierd_8+1" }, { 0x01, 113, 0, u8"orchestcrash_22" }, { 0x01, 116, 0, u8"dopebeat1_16" }, { 0x01, 118, 0, u8"clusterC3L_22" } }
 
 
 
