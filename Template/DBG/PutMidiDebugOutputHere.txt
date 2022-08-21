@@ -1,0 +1,7 @@
+Example:
+
+Penny Racers (U) 00000000 005759A4.mid TrackParseDebug.txt
+Penny Racers (U) 00000001 00577794.mid TrackParseDebug.txt
+Penny Racers (U) 00000002 00579F30.mid TrackParseDebug.txt
+Penny Racers (U) 00000003 0057B248.mid TrackParseDebug.txt
+…
