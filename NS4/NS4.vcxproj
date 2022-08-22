@@ -249,6 +249,7 @@
     <None Include="Src\Games\NS4Gex3DeepCoverGeckoFiles.inl" />
     <None Include="Src\Games\NS4GloverFiles.inl" />
     <None Include="Src\Games\NS4GoldenEye007Files.inl" />
+    <None Include="Src\Games\NS4GoldenEye007OstFiles.inl" />
     <None Include="Src\Games\NS4HarvestMoonFiles.inl" />
     <None Include="Src\Games\NS4HeyYouPikachuFiles.inl" />
     <None Include="Src\Games\NS4IggysReckinBallsFiles.inl" />

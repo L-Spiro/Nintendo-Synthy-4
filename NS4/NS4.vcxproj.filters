@@ -727,5 +727,8 @@
     <None Include="Src\Reverb\Taps\NS4ReverbHeyYouPikachu0.inl">
       <Filter>Header Files\Reverb\Taps</Filter>
     </None>
+    <None Include="Src\Games\NS4GoldenEye007OstFiles.inl">
+      <Filter>Header Files\Games</Filter>
+    </None>
   </ItemGroup>
 </Project>

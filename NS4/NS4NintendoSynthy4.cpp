@@ -81,7 +81,7 @@
 #ifdef NS4_BULK
 //#define NS4_ONE_OFF								(3-1)
 //#define NS4_EXPORT_SOME
-#define NS4_EPORT_FROM								(214-1)
+//#define NS4_EPORT_FROM								(214-1)
 #else
 #define NS4_FOLDER								u8"Super Smash Bros"
 #define NS4_FILE								u8"01 Super Smash Bros. (U) 00000021 00B413A4 Intro"
@@ -263,11 +263,12 @@ int main() {
 	};
 	static const NS4_MIDI_FILE mfFiles[] = {
 #ifdef NS4_BULK
-#include "Src/Games/NS4ConkersBadFurDayFiles.inl"
+//#include "Src/Games/NS4ConkersBadFurDayFiles.inl"
 //#include "Src/Games/NS4JetForceGeminiFiles.inl"
 //#include "Src/Games/NS4JetForceGemini2Files.inl"
 //#include "Src/Games/NS4PerfectDarkFiles.inl"
 //#include "Src/Games/NS4GoldenEye007Files.inl"
+#include "Src/Games/NS4GoldenEye007OstFiles.inl"
 //#include "Src/Games/NS4DiddyKongRacingFiles.inl"
 //#include "Src/Games/NS4SuperSmashBrosFiles.inl"
 //#include "Src/Games/NS4Kirby64TheCrystalShardsFiles.inl"
