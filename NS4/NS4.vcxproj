@@ -267,6 +267,7 @@
     <None Include="Src\Games\NS4MarioParty3Files.inl" />
     <None Include="Src\Games\NS4MarioPartyFiles.inl" />
     <None Include="Src\Games\NS4MickeysSpeedwayUsaFiles.inl" />
+    <None Include="Src\Games\NS4MickeysSpeedwayUsaStereoFiles.inl" />
     <None Include="Src\Games\NS4MicroMachines64TurboFiles.inl" />
     <None Include="Src\Games\NS4MischiefMakersFiles.inl" />
     <None Include="Src\Games\NS4MissionImpossibleFiles.inl" />

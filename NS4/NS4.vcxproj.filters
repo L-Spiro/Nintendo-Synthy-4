@@ -730,5 +730,8 @@
     <None Include="Src\Games\NS4GoldenEye007OstFiles.inl">
       <Filter>Header Files\Games</Filter>
     </None>
+    <None Include="Src\Games\NS4MickeysSpeedwayUsaStereoFiles.inl">
+      <Filter>Header Files\Games</Filter>
+    </None>
   </ItemGroup>
 </Project>

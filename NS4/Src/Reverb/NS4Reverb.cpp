@@ -2101,7 +2101,15 @@ namespace ns4 {
 			NS4_NO_FADE,
 			NS4_NO_LPF,
 		},	// 124
-
+		// Mickey's Speedway USA.
+		{
+			NS4_TAPS( m_rtMickeysSpeedwayUsaLeft0 ),
+			NS4_SQRT_0_5,															// dTapVol
+			0,																		// i64TapOffset
+			NS4_PD_FADE,															// dTime
+			NS4_PD_FILTER,															// dLpfFactor
+			NS4_NO_DELAY,															// dDelayVol
+		},	// 125
 	};
 
 
