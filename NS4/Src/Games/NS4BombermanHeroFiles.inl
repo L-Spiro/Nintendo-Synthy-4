@@ -47,4 +47,4 @@
 { u8"Bomberman Hero (U) 00000014 00476ED8.mid", u8"Bomberman Hero (U) 00000014 00476ED8.mid TrackParseDebug.txt", u8"Unknown 2" },
 { u8"Bomberman Hero (U) 00000015 00477170.mid", u8"Bomberman Hero (U) 00000015 00477170.mid TrackParseDebug.txt", u8"Unknown 3" },
 { u8"Bomberman Hero (U) 00000016 004772C0.mid", u8"Bomberman Hero (U) 00000016 004772C0.mid TrackParseDebug.txt", u8"Unknown 4" },
-{ u8"Bomberman Hero (U) 0000001C 00478AA0.mid", u8"Bomberman Hero (U) 0000001C 00478AA0.mid TrackParseDebug.txt", u8"Unknown 4" },
+{ u8"Bomberman Hero (U) 0000001C 00478AA0.mid", u8"Bomberman Hero (U) 0000001C 00478AA0.mid TrackParseDebug.txt", u8"Unknown 5" },
