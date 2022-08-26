@@ -258,8 +258,8 @@
 { u8"00 GoldenEye 007 (U) 0000000B 00420B2C Archives.mid", u8"GoldenEye 007 (U) 0000000B 00420B2C Archives Main Theme.mid TrackParseDebug.txt", u8"Archives", 0,
 	3 + 1,
 	{
-		{ NS4_STOP_AT_TICK( 83 + (11 - 3), 1, 1, 0 ), },
-		{ NS4_SET_CURSOR_BY_TICK( 83 + (11 - 3), 1, 1, 0 ), },
+		{ NS4_STOP_AT_TICK( 83 + (3 - 3), 1, 1, 0 ), },
+		{ NS4_SET_CURSOR_BY_TICK( 83 + (3 - 3), 1, 1, 0 ), },
 		{ NS4_STORE_RESULT, },
 
 		{ NS4_SET_COMPOSER( u8"Grant Kirkhope" ) },
