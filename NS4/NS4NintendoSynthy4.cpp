@@ -79,7 +79,7 @@
 //#define NS4_PRINT_BEST_BANK
 
 #ifdef NS4_BULK
-//#define NS4_ONE_OFF								(3-1)
+//#define NS4_ONE_OFF								(31-1)
 //#define NS4_EXPORT_SOME
 //#define NS4_EPORT_FROM								(214-1)
 #else
@@ -294,7 +294,7 @@ int main() {
 //#include "Src/Games/NS4MischiefMakersFiles.inl"
 //#include "Src/Games/NS4ChameleonTwistFiles.inl"
 //#include "Src/Games/NS4ChameleonTwist2Files.inl"
-//#include "Src/Games/NS4BombermanHeroFiles.inl"
+#include "Src/Games/NS4BombermanHeroFiles.inl"
 //#include "Src/Games/NS4PokemonSnapFiles.inl"
 //#include "Src/Games/NS4ClayFighter63_3rdFiles.inl"
 //#include "Src/Games/NS4MarioPartyFiles.inl"
@@ -332,7 +332,7 @@ int main() {
 //#include "Src/Games/NS4Rush2Files.inl"
 //#include "Src/Games/NS4SanFranciscoRushFiles.inl"
 //#include "Src/Games/NS4MickeysSpeedwayUsaFiles.inl"
-#include "Src/Games/NS4MickeysSpeedwayUsaStereoFiles.inl"
+//#include "Src/Games/NS4MickeysSpeedwayUsaStereoFiles.inl"
 //#include "Src/Games/NS4DenshaDeGo!64Files.inl"
 //#include "Src/Games/NS4MaceTheDarkAgesFiles.inl"
 //#include "Src/Games/NS4Bomberman64Files.inl"

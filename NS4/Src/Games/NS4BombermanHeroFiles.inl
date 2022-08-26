@@ -11,7 +11,7 @@
 #define NS4_OUT_DIRECTORY_NUMBERS			NS4_OUT_DIRECTORY u8"Numbered\\"
 #define NS4_WET_FILTER_FREQ					0.0//(NS4_ORIG_HZ / 4.0)
 //#define NS4_ENV_MULTIPLIER					(5.0 / 6.0 * 0.5)
-#define NS4_MASTER_REVERB_VOLUME			NS4_INV_QRT_0_5
+//#define NS4_MASTER_REVERB_VOLUME			NS4_INV_QRT_0_5
 
 
 { u8"Bomberman Hero (U) 00000005 0046EF00.mid", u8"Bomberman Hero (U) 00000005 0046EF00.mid TrackParseDebug.txt", u8"Foehn" },

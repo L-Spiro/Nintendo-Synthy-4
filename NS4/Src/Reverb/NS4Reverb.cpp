@@ -340,7 +340,7 @@ namespace ns4 {
 		{
 			8000,																	// ui32Delay
 			8000,																	// ui32FeedbackDelay
-			1.0,																	// dVol
+			NS4_INV_QRT_0_5,														// dVol
 			12000.0 / double( 0x7FFF ),												// dFeedback
 			8.0 / 0x7FFF															// dMinLevel
 		},
