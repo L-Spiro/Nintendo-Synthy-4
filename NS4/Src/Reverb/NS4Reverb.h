@@ -140,6 +140,8 @@ namespace ns4 {
 			NS4_T_MICKEYS_SPEEDWAY_USA_MONO_0	= 125,
 			NS4_T_MRC_DELAY_0					= 126,
 			NS4_T_MRC_0							= 127,
+			NS4_T_F1_POLE_POSITION_DELAY_0		= 128,
+			NS4_T_F1_POLE_POSITION_0			= 129,
 		};
 
 
@@ -623,6 +625,12 @@ namespace ns4 {
 
 		/** The comb filter delay lines for MRC: Multi-Racing Championship. */
 		static NS4_DELAY_N64					m_dn64MrcMultiRacingChampionship0[];
+
+		/** Taps harvested from F1 Pole Position 64. */
+		static NS4_REVERB_TAP					m_rtF1PolePosition0[];
+
+		/** The comb filter delay lines for F1 Pole Position 64. */
+		static NS4_DELAY_N64					m_dn64F1PolePosition0[];
 
 
 		// == Functions.

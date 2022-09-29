@@ -742,5 +742,11 @@
     <None Include="Src\Reverb\Taps\NS4ReverbMrcMultiRacingChampionship0.inl">
       <Filter>Header Files\Reverb\Taps</Filter>
     </None>
+    <None Include="Src\Reverb\Taps\NS4ReverbF1PolePosition0.inl">
+      <Filter>Header Files\Reverb\Taps</Filter>
+    </None>
+    <None Include="Src\Games\NS4F1PolePositionFiles.inl">
+      <Filter>Header Files\Games</Filter>
+    </None>
   </ItemGroup>
 </Project>

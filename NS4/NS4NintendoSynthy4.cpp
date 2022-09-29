@@ -18,7 +18,7 @@
  *	example microseconds accumulated in uint64_t) and then have time derived from that each cycle.
  *		Consider this: (1/7.0)+(1/7.0)+(1/7.0)+(1/7.0)+(1/7.0)+(1/7.0)+(1/7.0)
  *			= 0.9999999999999997779553950749686919152736663818359375
- *	7 accumulations of 1/7th doesn't add up to 1, even using 64-bit doubles.  So I jump through a few hoops here to make it
+ *	7 accumulations of 1/7th don't add up to 1, even using 64-bit doubles.  So I jump through a few hoops here to make it
  *	so that positions within samples (etc.) can be derived each cycle rather than accumulated each cycle.
  *	For systems where time is changing (pitch-bending or tempo changes, etc.), a time block stores the time at the moment
  *	of change and then continues deriving from the new offset.  This means that bad accumulations can occur only during the
@@ -81,7 +81,7 @@
 #ifdef NS4_BULK
 //#define NS4_ONE_OFF								(31-1)
 //#define NS4_EXPORT_SOME
-//#define NS4_EPORT_FROM								(214-1)
+//#define NS4_EPORT_FROM								(32-1)
 #else
 #define NS4_FOLDER								u8"Super Smash Bros"
 #define NS4_FILE								u8"01 Super Smash Bros. (U) 00000021 00B413A4 Intro"
@@ -339,7 +339,7 @@ int main() {
 //#include "Src/Games/NS4Bomberman64Files.inl"
 //#include "Src/Games/NS4Bomberman64EFiles.inl"
 //#include "Src/Games/NS4Bomberman64TheSecondAttackFiles.inl"
-#include "Src/Games/NS4ArmorinesProjectSWARMFiles.inl"
+//#include "Src/Games/NS4ArmorinesProjectSWARMFiles.inl"
 //#include "Src/Games/NS4DoraemonNobitaFiles.inl"
 //#include "Src/Games/NS4Doraemon2NobitaFiles.inl"
 //#include "Src/Games/NS4DualHeroesFiles.inl"
@@ -371,6 +371,7 @@ int main() {
 //#include "Src/Games/NS4HeyYouPikachuFiles.inl"
 //#include "Src/Games/NS4MonacoGrandPrixFiles.inl"
 //#include "Src/Games/NS4MRCMultiRacingChampionshipFiles.inl"
+#include "Src/Games/NS4F1PolePositionFiles.inl"
 #else
 		{}
 #endif

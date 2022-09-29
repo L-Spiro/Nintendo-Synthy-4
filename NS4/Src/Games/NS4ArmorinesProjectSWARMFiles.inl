@@ -9,7 +9,7 @@
 #define NS4_CURVE							40.0
 #define NS4_OUT_DIRECTORY					u8"T:\\N64OST\\Armorines - Project S.W.A.R.M\\"
 #define NS4_OUT_DIRECTORY_NUMBERS			NS4_OUT_DIRECTORY u8"Numbered\\"
-//#define NS4_WET_FILTER_FREQ					8191.0
+#define NS4_WET_FILTER_FREQ					8191.0
 #define NS4_ROOT_OFFSET						12
 //#define NS4_ENV_MULTIPLIER					(2.0)
 //#define NS4_MASTER_REVERB_VOLUME			(2.0)
@@ -47,12 +47,12 @@
 { u8"Armorines - Project S.W.A.R.M. (U) 00000007 004EA62C.mid", u8"Armorines - Project S.W.A.R.M. (U) 00000007 004EA62C.mid TrackParseDebug.txt", u8"Unknown 5", 0 },
 { u8"Armorines - Project S.W.A.R.M. (U) 00000008 004EAC74.mid", u8"Armorines - Project S.W.A.R.M. (U) 00000008 004EAC74.mid TrackParseDebug.txt", u8"Unknown 6", 0 },
 { u8"Armorines - Project S.W.A.R.M. (U) 00000009 004EB09C.mid", u8"Armorines - Project S.W.A.R.M. (U) 00000009 004EB09C.mid TrackParseDebug.txt", u8"Unknown 7", 0 },
-{ u8"Armorines - Project S.W.A.R.M. (U) 0000000C 004EC1D4.mid", u8"Armorines - Project S.W.A.R.M. (U) 0000000C 004EC1D4.mid TrackParseDebug.txt", u8"Unknown 8", 0 },
-{ u8"Armorines - Project S.W.A.R.M. (U) 00000011 004EE15C.mid", u8"Armorines - Project S.W.A.R.M. (U) 00000011 004EE15C.mid TrackParseDebug.txt", u8"Unknown 9", 0 },
-{ u8"Armorines - Project S.W.A.R.M. (U) 00000013 004EEC8C.mid", u8"Armorines - Project S.W.A.R.M. (U) 00000013 004EEC8C.mid TrackParseDebug.txt", u8"Unknown 10", 0 },
-{ u8"Armorines - Project S.W.A.R.M. (U) 00000016 004F014C.mid", u8"Armorines - Project S.W.A.R.M. (U) 00000016 004F014C.mid TrackParseDebug.txt", u8"Unknown 11", 0 },
-{ u8"Armorines - Project S.W.A.R.M. (U) 00000017 004F0794.mid", u8"Armorines - Project S.W.A.R.M. (U) 00000017 004F0794.mid TrackParseDebug.txt", u8"Unknown 12", 0 },
-{ u8"Armorines - Project S.W.A.R.M. (U) 00000018 004F0BE4.mid", u8"Armorines - Project S.W.A.R.M. (U) 00000018 004F0BE4.mid TrackParseDebug.txt", u8"Unknown 13", 0 },
-{ u8"Armorines - Project S.W.A.R.M. (U) 0000001B 004F181C.mid", u8"Armorines - Project S.W.A.R.M. (U) 0000001B 004F181C.mid TrackParseDebug.txt", u8"Unknown 14", 0 },
-{ u8"Armorines - Project S.W.A.R.M. (U) 00000021 004F2B04.mid", u8"Armorines - Project S.W.A.R.M. (U) 00000021 004F2B04.mid TrackParseDebug.txt", u8"Unknown 15", 0 },
-{ u8"Armorines - Project S.W.A.R.M. (U) 00000027 004F55FC.mid", u8"Armorines - Project S.W.A.R.M. (U) 00000027 004F55FC.mid TrackParseDebug.txt", u8"Unknown 16", 0 },
+//{ u8"Armorines - Project S.W.A.R.M. (U) 0000000C 004EC1D4.mid", u8"Armorines - Project S.W.A.R.M. (U) 0000000C 004EC1D4.mid TrackParseDebug.txt", u8"Unknown 8", 0 },
+//{ u8"Armorines - Project S.W.A.R.M. (U) 00000011 004EE15C.mid", u8"Armorines - Project S.W.A.R.M. (U) 00000011 004EE15C.mid TrackParseDebug.txt", u8"Unknown 9", 0 },
+{ u8"Armorines - Project S.W.A.R.M. (U) 00000013 004EEC8C.mid", u8"Armorines - Project S.W.A.R.M. (U) 00000013 004EEC8C.mid TrackParseDebug.txt", u8"Unknown 8", 0 },
+//{ u8"Armorines - Project S.W.A.R.M. (U) 00000016 004F014C.mid", u8"Armorines - Project S.W.A.R.M. (U) 00000016 004F014C.mid TrackParseDebug.txt", u8"Unknown 11", 0 },
+{ u8"Armorines - Project S.W.A.R.M. (U) 00000017 004F0794.mid", u8"Armorines - Project S.W.A.R.M. (U) 00000017 004F0794.mid TrackParseDebug.txt", u8"Unknown 9", 0 },
+{ u8"Armorines - Project S.W.A.R.M. (U) 00000018 004F0BE4.mid", u8"Armorines - Project S.W.A.R.M. (U) 00000018 004F0BE4.mid TrackParseDebug.txt", u8"Unknown 10", 0 },
+//{ u8"Armorines - Project S.W.A.R.M. (U) 0000001B 004F181C.mid", u8"Armorines - Project S.W.A.R.M. (U) 0000001B 004F181C.mid TrackParseDebug.txt", u8"Unknown 14", 0 },
+{ u8"Armorines - Project S.W.A.R.M. (U) 00000021 004F2B04.mid", u8"Armorines - Project S.W.A.R.M. (U) 00000021 004F2B04.mid TrackParseDebug.txt", u8"Unknown 11", 0 },
+{ u8"Armorines - Project S.W.A.R.M. (U) 00000027 004F55FC.mid", u8"Armorines - Project S.W.A.R.M. (U) 00000027 004F55FC.mid TrackParseDebug.txt", u8"Unknown 12", 0 },

@@ -243,6 +243,7 @@
     <None Include="Src\Games\NS4DualHeroesFiles.inl" />
     <None Include="Src\Games\NS4ExtremeGFiles.inl" />
     <None Include="Src\Games\NS4ExtremeGXG2Files.inl" />
+    <None Include="Src\Games\NS4F1PolePositionFiles.inl" />
     <None Include="Src\Games\NS4F1RacingChampionshipFiles.inl" />
     <None Include="Src\Games\NS4F1WorldGrandPrixFiles.inl" />
     <None Include="Src\Games\NS4FlyingDragonFiles.inl" />
@@ -332,6 +333,7 @@
     <None Include="Src\Reverb\Taps\NS4ReverbDoraemonNobita0.inl" />
     <None Include="Src\Reverb\Taps\NS4ReverbDualHeroes0.inl" />
     <None Include="Src\Reverb\Taps\NS4ReverbExtremeG20.inl" />
+    <None Include="Src\Reverb\Taps\NS4ReverbF1PolePosition0.inl" />
     <None Include="Src\Reverb\Taps\NS4ReverbF1WorldGrandPrix0.inl" />
     <None Include="Src\Reverb\Taps\NS4ReverbF1WorldGrandPrix1.inl" />
     <None Include="Src\Reverb\Taps\NS4ReverbF1WorldGrandPrix2.inl" />

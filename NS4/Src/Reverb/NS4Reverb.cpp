@@ -1210,6 +1210,20 @@ namespace ns4 {
 		{         0,	      3760,	    +8000,		       +0,	          0,		                      0,	                      0,		        +0,		                      0,	/*0xDFEF9110*/   10240 },
 	};
 
+	/** Taps harvested from F1 Pole Position 64. */
+	NS4_REVERB_TAP CReverb::m_rtF1PolePosition0[] = {
+#include "Taps/NS4ReverbF1PolePosition0.inl"
+	};
+
+	/** The comb filter delay lines for F1 Pole Position 64. */
+	NS4_DELAY_N64 CReverb::m_dn64F1PolePosition0[] = {
+		//ui32Input		ui32Output	i16FfCoef		i16FbCoef		i16Gain							 dRsInc						 dRsVal			i32RsDelta						dRsGain						ui16Fc
+		{         0,	      2640,	    +9830,		    -9830,	          0 },
+		{       880,	      2160,	    +3276,		    -3276,	      16383 },
+		{      2640,	      3640,	    +3276,		    -3276,	      16383 },
+		{         0,	      3760,	    +8000,		       +0,	          0,		                      0,	                      0,		        +0,		                      0,	/*0xDFFB8930*/   10240 },
+	};
+
 }	// namespace ns4
 
 namespace ns4 {
@@ -2137,6 +2151,19 @@ namespace ns4 {
 			NS4_NO_FADE,
 			NS4_NO_LPF,
 		},	// 127
+		// F1 Pole Position 64.
+		{
+			NS4_ONLY_COMB( 1.0, 0 ),
+			NS4_COMB( 4000, 320 / 2, m_dn64F1PolePosition0, 20.0 ),
+		},	// 128
+		// F1 Pole Position 64.
+		{
+			NS4_TAPS( m_rtF1PolePosition0 ),
+			NS4_SQRT_0_5,															// dTapVol
+			0,																		// i64TapOffset
+			NS4_NO_FADE,
+			NS4_NO_LPF,
+		},	// 129
 	};
 
 
