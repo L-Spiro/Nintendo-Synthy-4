@@ -97,91 +97,92 @@ int main() {
 #if 0
 	{
 		// Reverb harvesting.
-		//ns4::CWavLib::ReverbProfileKillerInstinctGold( u8"J:\\My Projects\\LSWave\\LSWave\\Src\\Reverb\\Rec\\Killer Instinct Gold Reverb 0.wav", 160 );
-		//ns4::CWavLib::ReverbProfileDonkeyKong64( u8"J:\\My Projects\\LSWave\\LSWave\\Src\\Reverb\\Rec\\Donkey Kong 64 Reverb 0.wav", 192, 0 );
-		//ns4::CWavLib::ReverbProfileBanjoTooieRight( u8"J:\\My Projects\\LSWave\\LSWave\\Src\\Reverb\\Rec\\Banjo-Tooie Reverb 2.wav", -1 );
-		//ns4::CWavLib::ReverbProfileBanjoTooieLeft( u8"J:\\My Projects\\LSWave\\LSWave\\Src\\Reverb\\Rec\\Banjo-Tooie Reverb 2.wav", 0 );
-		//ns4::CReverb::HarvestUnfilteredMonoTaps( u8"J:\\My Projects\\LSWave\\LSWave\\Src\\Reverb\\Rec\\Blast Corps NF 6.wav", 160, 160, -26, 0 );
-		//ns4::CReverb::HarvestUnfilteredMonoTaps( u8"J:\\My Projects\\LSWave\\LSWave\\Src\\Reverb\\Rec\\GoldenEye 007 NF 4.wav", 160, 160, -16, 0 );
-		//ns4::CReverb::HarvestUnfilteredMonoTaps_EndingWithPattern( u8"J:\\My Projects\\LSWave\\LSWave\\Src\\Reverb\\Rec\\Turok 2 Seeds of Evil NF 5.wav", 160, 16, 23, 1 );
-		//ns4::CReverb::HarvestUnfilteredMonoTaps( u8"J:\\My Projects\\LSWave\\LSWave\\Src\\Reverb\\Rec\\Jet Force Gemini NF Stereo 0.wav", 192, 8, -34, 0 );
-		//ns4::CReverb::HarvestUnfilteredMonoTaps( u8"J:\\My Projects\\LSWave\\LSWave\\Src\\Reverb\\Rec\\Jet Force Gemini NF Surround 0.wav", 192, 8, -20, 0, 0 );
-		//ns4::CReverb::HarvestUnfilteredMonoTaps( u8"J:\\My Projects\\LSWave\\LSWave\\Src\\Reverb\\Rec\\Jet Force Gemini NF Surround 0.wav", 192, 8, -26, 0, 1 );
-		//ns4::CReverb::HarvestUnfilteredMonoTaps_EndingWithPattern( u8"J:\\My Projects\\LSWave\\LSWave\\Src\\Reverb\\Rec\\Banjo-Kazooie NF 0.wav", 160, 160, 368, 0 );
-		//ns4::CReverb::HarvestUnfilteredMonoTaps( u8"J:\\My Projects\\LSWave\\LSWave\\Src\\Reverb\\Rec\\Banjo-Kazooie NF 0.wav", 160, 160, 0, 0 );
-		//ns4::CReverb::HarvestUnfilteredMonoTaps( u8"J:\\My Projects\\LSWave\\LSWave\\Src\\Reverb\\Rec\\Pokémon Snap NF 0.wav", 128, 128, 0, 0, 0 );
-		//ns4::CReverb::HarvestUnfilteredMonoTaps( u8"J:\\My Projects\\LSWave\\LSWave\\Src\\Reverb\\Rec\\Transformers Beast Wars Transmetals NF 1.wav", 760, 40, -4, 0, 0 );
-		//ns4::CReverb::HarvestUnfilteredMonoTaps( u8"J:\\My Projects\\LSWave\\LSWave\\Src\\Reverb\\Rec\\Diddy Kong Racing NF 0.wav", 160, 160, -14, 0, 0 );
-		//ns4::CReverb::HarvestUnfilteredMonoTaps( u8"J:\\My Projects\\LSWave\\LSWave\\Src\\Reverb\\Rec\\Extreme G 2 NF 0.wav", 608, 32, -18, 0, 0 );
-		//ns4::CReverb::HarvestUnfilteredMonoTaps( u8"J:\\My Projects\\LSWave\\LSWave\\Src\\Reverb\\Rec\\Conker's Bad Fur Day NF 0.wav", 192, 8, -34, 0, 0 );
-		//ns4::CReverb::HarvestUnfilteredMonoTaps( u8"J:\\My Projects\\LSWave\\LSWave\\Src\\Reverb\\Rec\\Space Station Silicon Valley NF 0.wav", 192 + 160, 32, 0, 0, 0 );
-		//ns4::CReverb::HarvestUnfilteredMonoTaps( u8"J:\\My Projects\\LSWave\\LSWave\\Src\\Reverb\\Rec\\Killer Instinct Gold NF 1.wav", 160, 160, 0, 0, 0 );
-		//ns4::CReverb::HarvestUnfilteredMonoTaps( u8"J:\\My Projects\\LSWave\\LSWave\\Src\\Reverb\\Rec\\Mario Party NF 1.wav", 2560, 640, 0, 0, 0 );
-		//ns4::CReverb::HarvestUnfilteredMonoTaps( u8"J:\\My Projects\\LSWave\\LSWave\\Src\\Reverb\\Rec\\Snowboard Kids NF 0.wav", 880, 40, -12, 0, 0 );
-		//ns4::CReverb::HarvestUnfilteredMonoTaps( u8"J:\\My Projects\\LSWave\\LSWave\\Src\\Reverb\\Rec\\Super Robot Spirits NF 2.wav", 1056, 96, 0, 0, 0 );
-		//ns4::CReverb::HarvestUnfilteredMonoTaps( u8"J:\\My Projects\\LSWave\\LSWave\\Src\\Reverb\\Rec\\War Gods NF 0.wav", 760, 40, -4, 0, 0 );
-		//ns4::CReverb::HarvestUnfilteredMonoTaps( u8"J:\\My Projects\\LSWave\\LSWave\\Src\\Reverb\\Rec\\WCW vs nWo World Tour NF 0.wav", 760, 40, -4, 0, 0 );
-		//ns4::CReverb::HarvestUnfilteredMonoTaps( u8"J:\\My Projects\\LSWave\\LSWave\\Src\\Reverb\\Rec\\Wonder Project J2 NF 0.wav", 880, 40, -12, 0, 0 );
-		//ns4::CReverb::HarvestUnfilteredMonoTaps( u8"J:\\My Projects\\LSWave\\LSWave\\Src\\Reverb\\Rec\\Banjo-Tooie NF 3.wav", 0, 8, 28, 0, 0 );
-		//ns4::CReverb::HarvestUnfilteredMonoTaps( u8"J:\\My Projects\\LSWave\\LSWave\\Src\\Reverb\\Rec\\Banjo-Tooie NF 3.wav", 0, 8, 0, 0, 1 );
-		//ns4::CReverb::HarvestUnfilteredMonoTaps( u8"J:\\My Projects\\LSWave\\LSWave\\Src\\Reverb\\Rec\\Zoor NF 0.wav", 144, 16, 0, 0, 0 );
-		//ns4::CReverb::HarvestUnfilteredMonoTaps( u8"J:\\My Projects\\LSWave\\LSWave\\Src\\Reverb\\Rec\\Battlezone Rise of the Black Dogs NF 0.wav", 760, 40, 0, 0, 0 );
-		//ns4::CReverb::HarvestUnfilteredMonoTaps( u8"J:\\My Projects\\LSWave\\LSWave\\Src\\Reverb\\Rec\\Perfect Dark NF Surround 0.wav", 192, 8, -20, 0, 0 );
-		//ns4::CReverb::HarvestUnfilteredMonoTaps( u8"J:\\My Projects\\LSWave\\LSWave\\Src\\Reverb\\Rec\\Perfect Dark NF Surround 0.wav", 192, 8, -26, 0, 1 );
-		//ns4::CReverb::HarvestUnfilteredMonoTaps( u8"J:\\My Projects\\LSWave\\LSWave\\Src\\Reverb\\Rec\\Mickey's Speedway USA NF 1.wav", 192, 8, -20, 0, 0 );
-		//ns4::CReverb::HarvestUnfilteredMonoTaps( u8"J:\\My Projects\\LSWave\\LSWave\\Src\\Reverb\\Rec\\Mickey's Speedway USA NF 1.wav", 192, 8, -26, 0, 1 );
-		//ns4::CReverb::HarvestUnfilteredMonoTaps( u8"J:\\My Projects\\LSWave\\LSWave\\Src\\Reverb\\Research\\AFA HD.wav", 0, 16, 0, 0, 0 );
-		//ns4::CReverb::HarvestUnfilteredMonoTaps( u8"J:\\My Projects\\LSWave\\LSWave\\Src\\Reverb\\Research\\CT2 HD.wav", 0, 40, 0, 0, 0 );
-		//ns4::CReverb::HarvestUnfilteredMonoTaps( u8"J:\\My Projects\\LSWave\\LSWave\\Src\\Reverb\\Research\\PW64 HD.wav", 0, 16, 0, 0, 0 );
-		//ns4::CReverb::HarvestUnfilteredMonoTaps( u8"J:\\My Projects\\LSWave\\LSWave\\Src\\Reverb\\Research\\BH HD.wav", 192, 32, 0, 0, 0 );
-		//ns4::CReverb::HarvestUnfilteredMonoTaps( u8"J:\\My Projects\\LSWave\\LSWave\\Src\\Reverb\\Research\\BM64 HD.wav", 896, 64, 0, 1, 0 );
-		//ns4::CReverb::HarvestUnfilteredMonoTaps( u8"J:\\My Projects\\LSWave\\LSWave\\Src\\Reverb\\Research\\BC HD.wav", 0, 160, 0, 0, 0 );
-		//ns4::CReverb::HarvestUnfilteredMonoTaps( u8"J:\\My Projects\\LSWave\\LSWave\\Src\\Reverb\\Research\\BC HD.wav", -1, 1, 0, 0, 0 );
-		//ns4::CReverb::HarvestUnfilteredMonoTaps( u8"J:\\My Projects\\LSWave\\LSWave\\Src\\Reverb\\Research0\\PD HD.wav", 0, 8, 0, 0, 0 );
-		//ns4::CReverb::HarvestUnfilteredMonoTaps( u8"J:\\My Projects\\LSWave\\LSWave\\Src\\Reverb\\Research\\SRS HD.wav", 1056, 96, 0, 1, 0 );
-		//ns4::CReverb::HarvestUnfilteredMonoTaps( u8"J:\\My Projects\\LSWave\\LSWave\\Src\\Reverb\\Research\\MP HD.wav", 0, 640, 0, 0, 0 );
-		//ns4::CReverb::HarvestUnfilteredMonoTaps( u8"J:\\My Projects\\LSWave\\LSWave\\Src\\Reverb\\Research\\DK64 HD.wav", 0, 8, 0, 0, 0 );
-		//ns4::CReverb::HarvestUnfilteredMonoTaps( u8"J:\\My Projects\\LSWave\\LSWave\\Src\\Reverb\\Research\\BK HD.wav", 0, 160, 0, 0, 0 );
-		//ns4::CReverb::HarvestUnfilteredMonoTaps( u8"J:\\My Projects\\LSWave\\LSWave\\Src\\Reverb\\Research\\CF63 HD.wav", 760, 1, 0, 0, 0 );
-		//ns4::CReverb::HarvestUnfilteredMonoTaps( u8"J:\\My Projects\\LSWave\\LSWave\\Src\\Reverb\\Research\\SMB HD.wav", 320, 1, 0, 0, 0 );
-		//ns4::CReverb::HarvestUnfilteredMonoTaps( u8"J:\\My Projects\\LSWave\\LSWave\\Src\\Reverb\\Research\\ZOOL HD.wav", 80, 1, 0, 0, 0 );
-		//ns4::CReverb::HarvestUnfilteredMonoTaps( u8"J:\\My Projects\\LSWave\\LSWave\\Src\\Reverb\\Research\\GE007 HD.wav", 0, 1, 0, 0, 0 );
-		//ns4::CReverb::HarvestUnfilteredMonoTaps( u8"J:\\My Projects\\LSWave\\LSWave\\Src\\Reverb\\Research\\GE007 2 HD.wav", 0, 1, 0, 0, 0 );
-		//ns4::CReverb::HarvestUnfilteredMonoTaps( u8"J:\\My Projects\\LSWave\\LSWave\\Src\\Reverb\\Research\\JFG 2 HD.wav", 0, 1, 0, 0, 0 );
-		//ns4::CReverb::HarvestUnfilteredMonoTaps( u8"J:\\My Projects\\LSWave\\LSWave\\Src\\Reverb\\Research\\JFG 2 HD.wav", 0, 1, 0, 0, 0 );
-		//ns4::CReverb::HarvestUnfilteredMonoTaps( u8"J:\\My Projects\\LSWave\\LSWave\\Src\\Reverb\\Research\\DKR HD.wav", 0, 1, 0, 0, 0 );
-		//ns4::CReverb::HarvestUnfilteredMonoTaps( u8"J:\\My Projects\\LSWave\\LSWave\\Src\\Reverb\\Research\\CBFD HD.wav", 0, 1, 0, 0, 0 );
-		//ns4::CReverb::HarvestUnfilteredMonoTaps( u8"J:\\My Projects\\LSWave\\LSWave\\Src\\Reverb\\Research\\KIG HD.wav", 0, 1, 0, 0, 0 );
-		//ns4::CReverb::HarvestUnfilteredMonoTaps( u8"J:\\My Projects\\LSWave\\LSWave\\Src\\Reverb\\Research\\TBWT HD.wav", 760, 1, 0, 0, 0 );
-		//ns4::CReverb::HarvestUnfilteredMonoTaps( u8"J:\\My Projects\\LSWave\\LSWave\\Src\\Reverb\\Research\\F1WGP 0 HD.wav", 0, 1, 0, 0, 0 );
-		//ns4::CReverb::HarvestUnfilteredMonoTaps( u8"J:\\My Projects\\LSWave\\LSWave\\Src\\Reverb\\Research\\F1WGP 1 HD.wav", 0, 1, 0, 0, 0 );
-		//ns4::CReverb::HarvestUnfilteredMonoTaps( u8"J:\\My Projects\\LSWave\\LSWave\\Src\\Reverb\\Research\\SSSV HD.wav", 352, 1, 0, 0, 0 );
-		//ns4::CReverb::HarvestUnfilteredMonoTaps( u8"J:\\My Projects\\LSWave\\LSWave\\Src\\Reverb\\Research\\BROTBD HD.wav", 760, 1, 0, 0, 0 );
-		//ns4::CReverb::HarvestUnfilteredMonoTaps( u8"J:\\My Projects\\LSWave\\LSWave\\Src\\Reverb\\Research\\BT 0 HD.wav", 0, 1, 0, 0, 0 );
-		//ns4::CReverb::HarvestUnfilteredMonoTaps( u8"J:\\My Projects\\LSWave\\LSWave\\Src\\Reverb\\Research\\BT 1 HD.wav", 0, 1, 0, 0, 0 );
-		//ns4::CReverb::HarvestUnfilteredMonoTaps( u8"J:\\My Projects\\LSWave\\LSWave\\Src\\Reverb\\Research\\MP2 HD.wav", 0, 1, 0, 0, 0 );
-		//ns4::CReverb::HarvestUnfilteredMonoTaps( u8"J:\\My Projects\\LSWave\\LSWave\\Src\\Reverb\\Research\\APS HD.wav", 160, 1, 0, 1, 0 );
-		//ns4::CReverb::HarvestUnfilteredMonoTaps( u8"J:\\My Projects\\LSWave\\LSWave\\Src\\Reverb\\Research\\DORAEMON HD.wav", 760, 1, 0, 0, 0 );
-		//ns4::CReverb::HarvestUnfilteredMonoTaps( u8"J:\\My Projects\\LSWave\\LSWave\\Src\\Reverb\\Research\\DH HD.wav", -1, 1, 0, 1, 0 );
-		//ns4::CReverb::HarvestUnfilteredMonoTaps( u8"J:\\My Projects\\LSWave\\LSWave\\Src\\Reverb\\Research\\IRB HD.wav", -1, 1, 0, 1, 0 );
-		//ns4::CReverb::HarvestUnfilteredMonoTaps( u8"J:\\My Projects\\LSWave\\LSWave\\Src\\Reverb\\Research\\MSUSA HD.wav", -1, 1, 0, 0, 0 );
-		//ns4::CReverb::HarvestUnfilteredMonoTaps( u8"J:\\My Projects\\LSWave\\LSWave\\Src\\Reverb\\Research\\TT HD.wav", -1, 1, 0, 0, 0 );
-		//ns4::CReverb::HarvestUnfilteredMonoTaps( u8"J:\\My Projects\\LSWave\\LSWave\\Src\\Reverb\\Research\\TRW HD.wav", -1, 1, 0, 1, 0 );
-		//ns4::CReverb::HarvestUnfilteredMonoTaps( u8"J:\\My Projects\\LSWave\\LSWave\\Src\\Reverb\\Research\\T3SoO HD.wav", -1, 1, 0, 1, 0 );
-		//ns4::CReverb::HarvestUnfilteredMonoTaps( u8"J:\\My Projects\\LSWave\\LSWave\\Src\\Reverb\\Research\\WG HD.wav", -1, 1, 0, 0, 0 );
-		//ns4::CReverb::HarvestUnfilteredMonoTaps( u8"J:\\My Projects\\LSWave\\LSWave\\Src\\Reverb\\Research\\WPJ2 HD.wav", -1, 1, 0, 0, 0 );
-		//ns4::CReverb::HarvestUnfilteredMonoTaps( u8"J:\\My Projects\\LSWave\\LSWave\\Src\\Reverb\\Research\\K64TCS HD.wav", -1, 1, 0, 0, 0 );
-		//ns4::CReverb::HarvestUnfilteredMonoTaps( u8"J:\\My Projects\\LSWave\\LSWave\\Src\\Reverb\\Research\\MI HD.wav", -1, 1, 0, 0, 0 );
-		//ns4::CReverb::HarvestUnfilteredMonoTaps( u8"J:\\My Projects\\LSWave\\LSWave\\Src\\Reverb\\Research\\FD HD.wav", -1, 1, 0, 0, 0 );
-		//ns4::CReverb::HarvestUnfilteredMonoTaps( u8"J:\\My Projects\\LSWave\\LSWave\\Src\\Reverb\\Research\\SCARS HD.wav", -1, 1, 0, 0, 0 );
-		//ns4::CReverb::HarvestUnfilteredMonoTaps( u8"J:\\My Projects\\LSWave\\LSWave\\Src\\Reverb\\Research\\SSVE HD.wav", -1, 1, 0, 0, 0 );
-		//ns4::CReverb::HarvestUnfilteredMonoTaps( u8"J:\\My Projects\\LSWave\\LSWave\\Src\\Reverb\\Research\\MM HD.wav", -1, 1, 0, 0, 0 );
-		//ns4::CReverb::HarvestUnfilteredMonoTaps( u8"J:\\My Projects\\LSWave\\LSWave\\Src\\Reverb\\Research\\BM64TSA HD.wav", -1, 1, 0, 0, 0 );
-		ns4::CReverb::HarvestUnfilteredMonoTaps( u8"J:\\My Projects\\LSWave\\LSWave\\Src\\Reverb\\Research\\HYP HD.wav", -1, 1, 0, 0, 0 );
+		//ns4::CWavLib::ReverbProfileKillerInstinctGold( u8"J:\\My Projects\\Nintendo Synthy-4\\NS4\\Src\\Reverb\\Rec\\Killer Instinct Gold Reverb 0.wav", 160 );
+		//ns4::CWavLib::ReverbProfileDonkeyKong64( u8"J:\\My Projects\\Nintendo Synthy-4\\NS4\\Src\\Reverb\\Rec\\Donkey Kong 64 Reverb 0.wav", 192, 0 );
+		//ns4::CWavLib::ReverbProfileBanjoTooieRight( u8"J:\\My Projects\\Nintendo Synthy-4\\NS4\\Src\\Reverb\\Rec\\Banjo-Tooie Reverb 2.wav", -1 );
+		//ns4::CWavLib::ReverbProfileBanjoTooieLeft( u8"J:\\My Projects\\Nintendo Synthy-4\\NS4\\Src\\Reverb\\Rec\\Banjo-Tooie Reverb 2.wav", 0 );
+		//ns4::CReverb::HarvestUnfilteredMonoTaps( u8"J:\\My Projects\\Nintendo Synthy-4\\NS4\\Src\\Reverb\\Rec\\Blast Corps NF 6.wav", 160, 160, -26, 0 );
+		//ns4::CReverb::HarvestUnfilteredMonoTaps( u8"J:\\My Projects\\Nintendo Synthy-4\\NS4\\Src\\Reverb\\Rec\\GoldenEye 007 NF 4.wav", 160, 160, -16, 0 );
+		//ns4::CReverb::HarvestUnfilteredMonoTaps_EndingWithPattern( u8"J:\\My Projects\\Nintendo Synthy-4\\NS4\\Src\\Reverb\\Rec\\Turok 2 Seeds of Evil NF 5.wav", 160, 16, 23, 1 );
+		//ns4::CReverb::HarvestUnfilteredMonoTaps( u8"J:\\My Projects\\Nintendo Synthy-4\\NS4\\Src\\Reverb\\Rec\\Jet Force Gemini NF Stereo 0.wav", 192, 8, -34, 0 );
+		//ns4::CReverb::HarvestUnfilteredMonoTaps( u8"J:\\My Projects\\Nintendo Synthy-4\\NS4\\Src\\Reverb\\Rec\\Jet Force Gemini NF Surround 0.wav", 192, 8, -20, 0, 0 );
+		//ns4::CReverb::HarvestUnfilteredMonoTaps( u8"J:\\My Projects\\Nintendo Synthy-4\\NS4\\Src\\Reverb\\Rec\\Jet Force Gemini NF Surround 0.wav", 192, 8, -26, 0, 1 );
+		//ns4::CReverb::HarvestUnfilteredMonoTaps_EndingWithPattern( u8"J:\\My Projects\\Nintendo Synthy-4\\NS4\\Src\\Reverb\\Rec\\Banjo-Kazooie NF 0.wav", 160, 160, 368, 0 );
+		//ns4::CReverb::HarvestUnfilteredMonoTaps( u8"J:\\My Projects\\Nintendo Synthy-4\\NS4\\Src\\Reverb\\Rec\\Banjo-Kazooie NF 0.wav", 160, 160, 0, 0 );
+		//ns4::CReverb::HarvestUnfilteredMonoTaps( u8"J:\\My Projects\\Nintendo Synthy-4\\NS4\\Src\\Reverb\\Rec\\Pokémon Snap NF 0.wav", 128, 128, 0, 0, 0 );
+		//ns4::CReverb::HarvestUnfilteredMonoTaps( u8"J:\\My Projects\\Nintendo Synthy-4\\NS4\\Src\\Reverb\\Rec\\Transformers Beast Wars Transmetals NF 1.wav", 760, 40, -4, 0, 0 );
+		//ns4::CReverb::HarvestUnfilteredMonoTaps( u8"J:\\My Projects\\Nintendo Synthy-4\\NS4\\Src\\Reverb\\Rec\\Diddy Kong Racing NF 0.wav", 160, 160, -14, 0, 0 );
+		//ns4::CReverb::HarvestUnfilteredMonoTaps( u8"J:\\My Projects\\Nintendo Synthy-4\\NS4\\Src\\Reverb\\Rec\\Extreme G 2 NF 0.wav", 608, 32, -18, 0, 0 );
+		//ns4::CReverb::HarvestUnfilteredMonoTaps( u8"J:\\My Projects\\Nintendo Synthy-4\\NS4\\Src\\Reverb\\Rec\\Conker's Bad Fur Day NF 0.wav", 192, 8, -34, 0, 0 );
+		//ns4::CReverb::HarvestUnfilteredMonoTaps( u8"J:\\My Projects\\Nintendo Synthy-4\\NS4\\Src\\Reverb\\Rec\\Space Station Silicon Valley NF 0.wav", 192 + 160, 32, 0, 0, 0 );
+		//ns4::CReverb::HarvestUnfilteredMonoTaps( u8"J:\\My Projects\\Nintendo Synthy-4\\NS4\\Src\\Reverb\\Rec\\Killer Instinct Gold NF 1.wav", 160, 160, 0, 0, 0 );
+		//ns4::CReverb::HarvestUnfilteredMonoTaps( u8"J:\\My Projects\\Nintendo Synthy-4\\NS4\\Src\\Reverb\\Rec\\Mario Party NF 1.wav", 2560, 640, 0, 0, 0 );
+		//ns4::CReverb::HarvestUnfilteredMonoTaps( u8"J:\\My Projects\\Nintendo Synthy-4\\NS4\\Src\\Reverb\\Rec\\Snowboard Kids NF 0.wav", 880, 40, -12, 0, 0 );
+		//ns4::CReverb::HarvestUnfilteredMonoTaps( u8"J:\\My Projects\\Nintendo Synthy-4\\NS4\\Src\\Reverb\\Rec\\Super Robot Spirits NF 2.wav", 1056, 96, 0, 0, 0 );
+		//ns4::CReverb::HarvestUnfilteredMonoTaps( u8"J:\\My Projects\\Nintendo Synthy-4\\NS4\\Src\\Reverb\\Rec\\War Gods NF 0.wav", 760, 40, -4, 0, 0 );
+		//ns4::CReverb::HarvestUnfilteredMonoTaps( u8"J:\\My Projects\\Nintendo Synthy-4\\NS4\\Src\\Reverb\\Rec\\WCW vs nWo World Tour NF 0.wav", 760, 40, -4, 0, 0 );
+		//ns4::CReverb::HarvestUnfilteredMonoTaps( u8"J:\\My Projects\\Nintendo Synthy-4\\NS4\\Src\\Reverb\\Rec\\Wonder Project J2 NF 0.wav", 880, 40, -12, 0, 0 );
+		//ns4::CReverb::HarvestUnfilteredMonoTaps( u8"J:\\My Projects\\Nintendo Synthy-4\\NS4\\Src\\Reverb\\Rec\\Banjo-Tooie NF 3.wav", 0, 8, 28, 0, 0 );
+		//ns4::CReverb::HarvestUnfilteredMonoTaps( u8"J:\\My Projects\\Nintendo Synthy-4\\NS4\\Src\\Reverb\\Rec\\Banjo-Tooie NF 3.wav", 0, 8, 0, 0, 1 );
+		//ns4::CReverb::HarvestUnfilteredMonoTaps( u8"J:\\My Projects\\Nintendo Synthy-4\\NS4\\Src\\Reverb\\Rec\\Zoor NF 0.wav", 144, 16, 0, 0, 0 );
+		//ns4::CReverb::HarvestUnfilteredMonoTaps( u8"J:\\My Projects\\Nintendo Synthy-4\\NS4\\Src\\Reverb\\Rec\\Battlezone Rise of the Black Dogs NF 0.wav", 760, 40, 0, 0, 0 );
+		//ns4::CReverb::HarvestUnfilteredMonoTaps( u8"J:\\My Projects\\Nintendo Synthy-4\\NS4\\Src\\Reverb\\Rec\\Perfect Dark NF Surround 0.wav", 192, 8, -20, 0, 0 );
+		//ns4::CReverb::HarvestUnfilteredMonoTaps( u8"J:\\My Projects\\Nintendo Synthy-4\\NS4\\Src\\Reverb\\Rec\\Perfect Dark NF Surround 0.wav", 192, 8, -26, 0, 1 );
+		//ns4::CReverb::HarvestUnfilteredMonoTaps( u8"J:\\My Projects\\Nintendo Synthy-4\\NS4\\Src\\Reverb\\Rec\\Mickey's Speedway USA NF 1.wav", 192, 8, -20, 0, 0 );
+		//ns4::CReverb::HarvestUnfilteredMonoTaps( u8"J:\\My Projects\\Nintendo Synthy-4\\NS4\\Src\\Reverb\\Rec\\Mickey's Speedway USA NF 1.wav", 192, 8, -26, 0, 1 );
+		//ns4::CReverb::HarvestUnfilteredMonoTaps( u8"J:\\My Projects\\Nintendo Synthy-4\\NS4\\Src\\Reverb\\Research\\AFA HD.wav", 0, 16, 0, 0, 0 );
+		//ns4::CReverb::HarvestUnfilteredMonoTaps( u8"J:\\My Projects\\Nintendo Synthy-4\\NS4\\Src\\Reverb\\Research\\CT2 HD.wav", 0, 40, 0, 0, 0 );
+		//ns4::CReverb::HarvestUnfilteredMonoTaps( u8"J:\\My Projects\\Nintendo Synthy-4\\NS4\\Src\\Reverb\\Research\\PW64 HD.wav", 0, 16, 0, 0, 0 );
+		//ns4::CReverb::HarvestUnfilteredMonoTaps( u8"J:\\My Projects\\Nintendo Synthy-4\\NS4\\Src\\Reverb\\Research\\BH HD.wav", 192, 32, 0, 0, 0 );
+		//ns4::CReverb::HarvestUnfilteredMonoTaps( u8"J:\\My Projects\\Nintendo Synthy-4\\NS4\\Src\\Reverb\\Research\\BM64 HD.wav", 896, 64, 0, 1, 0 );
+		//ns4::CReverb::HarvestUnfilteredMonoTaps( u8"J:\\My Projects\\Nintendo Synthy-4\\NS4\\Src\\Reverb\\Research\\BC HD.wav", 0, 160, 0, 0, 0 );
+		//ns4::CReverb::HarvestUnfilteredMonoTaps( u8"J:\\My Projects\\Nintendo Synthy-4\\NS4\\Src\\Reverb\\Research\\BC HD.wav", -1, 1, 0, 0, 0 );
+		//ns4::CReverb::HarvestUnfilteredMonoTaps( u8"J:\\My Projects\\Nintendo Synthy-4\\NS4\\Src\\Reverb\\Research0\\PD HD.wav", 0, 8, 0, 0, 0 );
+		//ns4::CReverb::HarvestUnfilteredMonoTaps( u8"J:\\My Projects\\Nintendo Synthy-4\\NS4\\Src\\Reverb\\Research\\SRS HD.wav", 1056, 96, 0, 1, 0 );
+		//ns4::CReverb::HarvestUnfilteredMonoTaps( u8"J:\\My Projects\\Nintendo Synthy-4\\NS4\\Src\\Reverb\\Research\\MP HD.wav", 0, 640, 0, 0, 0 );
+		//ns4::CReverb::HarvestUnfilteredMonoTaps( u8"J:\\My Projects\\Nintendo Synthy-4\\NS4\\Src\\Reverb\\Research\\DK64 HD.wav", 0, 8, 0, 0, 0 );
+		//ns4::CReverb::HarvestUnfilteredMonoTaps( u8"J:\\My Projects\\Nintendo Synthy-4\\NS4\\Src\\Reverb\\Research\\BK HD.wav", 0, 160, 0, 0, 0 );
+		//ns4::CReverb::HarvestUnfilteredMonoTaps( u8"J:\\My Projects\\Nintendo Synthy-4\\NS4\\Src\\Reverb\\Research\\CF63 HD.wav", 760, 1, 0, 0, 0 );
+		//ns4::CReverb::HarvestUnfilteredMonoTaps( u8"J:\\My Projects\\Nintendo Synthy-4\\NS4\\Src\\Reverb\\Research\\SMB HD.wav", 320, 1, 0, 0, 0 );
+		//ns4::CReverb::HarvestUnfilteredMonoTaps( u8"J:\\My Projects\\Nintendo Synthy-4\\NS4\\Src\\Reverb\\Research\\ZOOL HD.wav", 80, 1, 0, 0, 0 );
+		//ns4::CReverb::HarvestUnfilteredMonoTaps( u8"J:\\My Projects\\Nintendo Synthy-4\\NS4\\Src\\Reverb\\Research\\GE007 HD.wav", 0, 1, 0, 0, 0 );
+		//ns4::CReverb::HarvestUnfilteredMonoTaps( u8"J:\\My Projects\\Nintendo Synthy-4\\NS4\\Src\\Reverb\\Research\\GE007 2 HD.wav", 0, 1, 0, 0, 0 );
+		//ns4::CReverb::HarvestUnfilteredMonoTaps( u8"J:\\My Projects\\Nintendo Synthy-4\\NS4\\Src\\Reverb\\Research\\JFG 2 HD.wav", 0, 1, 0, 0, 0 );
+		//ns4::CReverb::HarvestUnfilteredMonoTaps( u8"J:\\My Projects\\Nintendo Synthy-4\\NS4\\Src\\Reverb\\Research\\JFG 2 HD.wav", 0, 1, 0, 0, 0 );
+		//ns4::CReverb::HarvestUnfilteredMonoTaps( u8"J:\\My Projects\\Nintendo Synthy-4\\NS4\\Src\\Reverb\\Research\\DKR HD.wav", 0, 1, 0, 0, 0 );
+		//ns4::CReverb::HarvestUnfilteredMonoTaps( u8"J:\\My Projects\\Nintendo Synthy-4\\NS4\\Src\\Reverb\\Research\\CBFD HD.wav", 0, 1, 0, 0, 0 );
+		//ns4::CReverb::HarvestUnfilteredMonoTaps( u8"J:\\My Projects\\Nintendo Synthy-4\\NS4\\Src\\Reverb\\Research\\KIG HD.wav", 0, 1, 0, 0, 0 );
+		//ns4::CReverb::HarvestUnfilteredMonoTaps( u8"J:\\My Projects\\Nintendo Synthy-4\\NS4\\Src\\Reverb\\Research\\TBWT HD.wav", 760, 1, 0, 0, 0 );
+		//ns4::CReverb::HarvestUnfilteredMonoTaps( u8"J:\\My Projects\\Nintendo Synthy-4\\NS4\\Src\\Reverb\\Research\\F1WGP 0 HD.wav", 0, 1, 0, 0, 0 );
+		//ns4::CReverb::HarvestUnfilteredMonoTaps( u8"J:\\My Projects\\Nintendo Synthy-4\\NS4\\Src\\Reverb\\Research\\F1WGP 1 HD.wav", 0, 1, 0, 0, 0 );
+		//ns4::CReverb::HarvestUnfilteredMonoTaps( u8"J:\\My Projects\\Nintendo Synthy-4\\NS4\\Src\\Reverb\\Research\\SSSV HD.wav", 352, 1, 0, 0, 0 );
+		//ns4::CReverb::HarvestUnfilteredMonoTaps( u8"J:\\My Projects\\Nintendo Synthy-4\\NS4\\Src\\Reverb\\Research\\BROTBD HD.wav", 760, 1, 0, 0, 0 );
+		//ns4::CReverb::HarvestUnfilteredMonoTaps( u8"J:\\My Projects\\Nintendo Synthy-4\\NS4\\Src\\Reverb\\Research\\BT 0 HD.wav", 0, 1, 0, 0, 0 );
+		//ns4::CReverb::HarvestUnfilteredMonoTaps( u8"J:\\My Projects\\Nintendo Synthy-4\\NS4\\Src\\Reverb\\Research\\BT 1 HD.wav", 0, 1, 0, 0, 0 );
+		//ns4::CReverb::HarvestUnfilteredMonoTaps( u8"J:\\My Projects\\Nintendo Synthy-4\\NS4\\Src\\Reverb\\Research\\MP2 HD.wav", 0, 1, 0, 0, 0 );
+		//ns4::CReverb::HarvestUnfilteredMonoTaps( u8"J:\\My Projects\\Nintendo Synthy-4\\NS4\\Src\\Reverb\\Research\\APS HD.wav", 160, 1, 0, 1, 0 );
+		//ns4::CReverb::HarvestUnfilteredMonoTaps( u8"J:\\My Projects\\Nintendo Synthy-4\\NS4\\Src\\Reverb\\Research\\DORAEMON HD.wav", 760, 1, 0, 0, 0 );
+		//ns4::CReverb::HarvestUnfilteredMonoTaps( u8"J:\\My Projects\\Nintendo Synthy-4\\NS4\\Src\\Reverb\\Research\\DH HD.wav", -1, 1, 0, 1, 0 );
+		//ns4::CReverb::HarvestUnfilteredMonoTaps( u8"J:\\My Projects\\Nintendo Synthy-4\\NS4\\Src\\Reverb\\Research\\IRB HD.wav", -1, 1, 0, 1, 0 );
+		//ns4::CReverb::HarvestUnfilteredMonoTaps( u8"J:\\My Projects\\Nintendo Synthy-4\\NS4\\Src\\Reverb\\Research\\MSUSA HD.wav", -1, 1, 0, 0, 0 );
+		//ns4::CReverb::HarvestUnfilteredMonoTaps( u8"J:\\My Projects\\Nintendo Synthy-4\\NS4\\Src\\Reverb\\Research\\TT HD.wav", -1, 1, 0, 0, 0 );
+		//ns4::CReverb::HarvestUnfilteredMonoTaps( u8"J:\\My Projects\\Nintendo Synthy-4\\NS4\\Src\\Reverb\\Research\\TRW HD.wav", -1, 1, 0, 1, 0 );
+		//ns4::CReverb::HarvestUnfilteredMonoTaps( u8"J:\\My Projects\\Nintendo Synthy-4\\NS4\\Src\\Reverb\\Research\\T3SoO HD.wav", -1, 1, 0, 1, 0 );
+		//ns4::CReverb::HarvestUnfilteredMonoTaps( u8"J:\\My Projects\\Nintendo Synthy-4\\NS4\\Src\\Reverb\\Research\\WG HD.wav", -1, 1, 0, 0, 0 );
+		//ns4::CReverb::HarvestUnfilteredMonoTaps( u8"J:\\My Projects\\Nintendo Synthy-4\\NS4\\Src\\Reverb\\Research\\WPJ2 HD.wav", -1, 1, 0, 0, 0 );
+		//ns4::CReverb::HarvestUnfilteredMonoTaps( u8"J:\\My Projects\\Nintendo Synthy-4\\NS4\\Src\\Reverb\\Research\\K64TCS HD.wav", -1, 1, 0, 0, 0 );
+		//ns4::CReverb::HarvestUnfilteredMonoTaps( u8"J:\\My Projects\\Nintendo Synthy-4\\NS4\\Src\\Reverb\\Research\\MI HD.wav", -1, 1, 0, 0, 0 );
+		//ns4::CReverb::HarvestUnfilteredMonoTaps( u8"J:\\My Projects\\Nintendo Synthy-4\\NS4\\Src\\Reverb\\Research\\FD HD.wav", -1, 1, 0, 0, 0 );
+		//ns4::CReverb::HarvestUnfilteredMonoTaps( u8"J:\\My Projects\\Nintendo Synthy-4\\NS4\\Src\\Reverb\\Research\\SCARS HD.wav", -1, 1, 0, 0, 0 );
+		//ns4::CReverb::HarvestUnfilteredMonoTaps( u8"J:\\My Projects\\Nintendo Synthy-4\\NS4\\Src\\Reverb\\Research\\SSVE HD.wav", -1, 1, 0, 0, 0 );
+		//ns4::CReverb::HarvestUnfilteredMonoTaps( u8"J:\\My Projects\\Nintendo Synthy-4\\NS4\\Src\\Reverb\\Research\\MM HD.wav", -1, 1, 0, 0, 0 );
+		//ns4::CReverb::HarvestUnfilteredMonoTaps( u8"J:\\My Projects\\Nintendo Synthy-4\\NS4\\Src\\Reverb\\Research\\BM64TSA HD.wav", -1, 1, 0, 0, 0 );
+		//ns4::CReverb::HarvestUnfilteredMonoTaps( u8"J:\\My Projects\\Nintendo Synthy-4\\NS4\\Src\\Reverb\\Research\\HYP HD.wav", -1, 1, 0, 0, 0 );
+		ns4::CReverb::HarvestUnfilteredMonoTaps( u8"J:\\My Projects\\Nintendo Synthy-4\\NS4\\Src\\Reverb\\Research\\MRC HD.wav", -1, 1, 0, 0, 0 );
 	}
 	{
-		ns4::CWavLib::DetermineLevelsStereo( u8"J:\\My Projects\\LSWave\\LSWave\\Src\\Reverb\\Research\\MM V 127 R 0 P 56 NF.wav",
-			u8"J:\\My Projects\\LSWave\\LSWave\\Src\\Reverb\\Research\\MM V 127 R 127 P 56 NF.wav", 280, size_t( -1 ), 1.0, 0, ns4::CReverb::m_rtMischiefMakers0, 4478 );
+		ns4::CWavLib::DetermineLevelsStereo( u8"J:\\My Projects\\Nintendo Synthy-4\\NS4\\Src\\Reverb\\Research\\MM V 127 R 0 P 56 NF.wav",
+			u8"J:\\My Projects\\Nintendo Synthy-4\\NS4\\Src\\Reverb\\Research\\MM V 127 R 127 P 56 NF.wav", 280, size_t( -1 ), 1.0, 0, ns4::CReverb::m_rtMischiefMakers0, 4478 );
 	}
 #endif
 
@@ -221,11 +222,11 @@ int main() {
 
 #if 0
 	{
-		const uint32_t ui32SampRate = 32006;
+		const uint32_t ui32SampRate = 22049;
 		
 		ns4::lwaudio aWet = ns4::CWavLib::AllocateSamples( 1, ui32SampRate * 30 );
 		aWet[0][0] = 1.0;
-		ns4::lwaudio aAccum = ns4::CReverb::CreateReverb( ns4::CReverb::NS4_T_HEY_YOU_PIKACHU_DELAY_0, aWet, ui32SampRate, ui32SampRate, 0.0, 0 );
+		ns4::lwaudio aAccum = ns4::CReverb::CreateReverb( ns4::CReverb::NS4_T_MRC_DELAY_0, aWet, ui32SampRate, ui32SampRate, 0.0, 0 );
 		ns4::lwsample sFirst = aWet[0][0];
 		if ( sFirst == 0.0 ) {
 			::OutputDebugStringA( "Measles.\r\n" );
@@ -268,7 +269,7 @@ int main() {
 //#include "Src/Games/NS4JetForceGemini2Files.inl"
 //#include "Src/Games/NS4PerfectDarkFiles.inl"
 //#include "Src/Games/NS4GoldenEye007Files.inl"
-#include "Src/Games/NS4GoldenEye007OstFiles.inl"
+//#include "Src/Games/NS4GoldenEye007OstFiles.inl"
 //#include "Src/Games/NS4DiddyKongRacingFiles.inl"
 //#include "Src/Games/NS4SuperSmashBrosFiles.inl"
 //#include "Src/Games/NS4Kirby64TheCrystalShardsFiles.inl"
@@ -338,7 +339,7 @@ int main() {
 //#include "Src/Games/NS4Bomberman64Files.inl"
 //#include "Src/Games/NS4Bomberman64EFiles.inl"
 //#include "Src/Games/NS4Bomberman64TheSecondAttackFiles.inl"
-//#include "Src/Games/NS4ArmorinesProjectSWARMFiles.inl"
+#include "Src/Games/NS4ArmorinesProjectSWARMFiles.inl"
 //#include "Src/Games/NS4DoraemonNobitaFiles.inl"
 //#include "Src/Games/NS4Doraemon2NobitaFiles.inl"
 //#include "Src/Games/NS4DualHeroesFiles.inl"
@@ -368,6 +369,8 @@ int main() {
 //#include "Src/Games/NS4LastLegionUxFiles.inl"
 //#include "Src/Games/NS4DonaldDuckGoinQuakersFiles.inl"
 //#include "Src/Games/NS4HeyYouPikachuFiles.inl"
+//#include "Src/Games/NS4MonacoGrandPrixFiles.inl"
+//#include "Src/Games/NS4MRCMultiRacingChampionshipFiles.inl"
 #else
 		{}
 #endif

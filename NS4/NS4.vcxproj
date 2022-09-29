@@ -271,7 +271,9 @@
     <None Include="Src\Games\NS4MicroMachines64TurboFiles.inl" />
     <None Include="Src\Games\NS4MischiefMakersFiles.inl" />
     <None Include="Src\Games\NS4MissionImpossibleFiles.inl" />
+    <None Include="Src\Games\NS4MonacoGrandPrixFiles.inl" />
     <None Include="Src\Games\NS4MonopolyFiles.inl" />
+    <None Include="Src\Games\NS4MRCMultiRacingChampionshipFiles.inl" />
     <None Include="Src\Games\NS4PennyRacersFiles.inl" />
     <None Include="Src\Games\NS4PerfectDarkFiles.inl" />
     <None Include="Src\Games\NS4Pilotwings64Files.inl" />
@@ -355,6 +357,7 @@
     <None Include="Src\Reverb\Taps\NS4ReverbMickeysSpeedwayUsaRight0.inl" />
     <None Include="Src\Reverb\Taps\NS4ReverbMischiefMakers0.inl" />
     <None Include="Src\Reverb\Taps\NS4ReverbMissionImpossible0.inl" />
+    <None Include="Src\Reverb\Taps\NS4ReverbMrcMultiRacingChampionship0.inl" />
     <None Include="Src\Reverb\Taps\NS4ReverbPerfectDarkLeft0.inl" />
     <None Include="Src\Reverb\Taps\NS4ReverbPerfectDarkRight0.inl" />
     <None Include="Src\Reverb\Taps\NS4ReverbPilotwings640.inl" />

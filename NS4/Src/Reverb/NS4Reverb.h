@@ -138,6 +138,8 @@ namespace ns4 {
 			NS4_T_HEY_YOU_PIKACHU_DELAY_0		= 123,
 			NS4_T_HEY_YOU_PIKACHU_0				= 124,
 			NS4_T_MICKEYS_SPEEDWAY_USA_MONO_0	= 125,
+			NS4_T_MRC_DELAY_0					= 126,
+			NS4_T_MRC_0							= 127,
 		};
 
 
@@ -615,6 +617,12 @@ namespace ns4 {
 
 		/** The comb filter delay lines for Hey You, Pikachu!. */
 		static NS4_DELAY_N64					m_dn64HeyYouPikachu0[];
+
+		/** Taps harvested from MRC: Multi-Racing Championship. */
+		static NS4_REVERB_TAP					m_rtMrcMultiRacingChampionship0[];
+
+		/** The comb filter delay lines for MRC: Multi-Racing Championship. */
+		static NS4_DELAY_N64					m_dn64MrcMultiRacingChampionship0[];
 
 
 		// == Functions.
