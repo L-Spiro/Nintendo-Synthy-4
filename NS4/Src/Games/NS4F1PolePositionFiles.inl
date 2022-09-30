@@ -24,7 +24,7 @@
 { u8"F-1 Pole Position 64 (U) (M3) 00000006 0074C9C8.mid", u8"F-1 Pole Position 64 (U) (M3) 00000006 0074C9C8.mid TrackParseDebug.txt", u8"Race Results", 0 },
 { u8"F-1 Pole Position 64 (U) (M3) 00000007 0074D3C0.mid", u8"F-1 Pole Position 64 (U) (M3) 00000007 0074D3C0.mid TrackParseDebug.txt", u8"Credits", 0 },
 
-{ u8"F-1 Pole Position 64 (U) (M3) 00000001 0074298C.mid", u8"F-1 Pole Position 64 (U) (M3) 00000001 0074298C.mid TrackParseDebug.txt", u8"Unknown 1", 0 },
-{ u8"F-1 Pole Position 64 (U) (M3) 00000004 00748D4C.mid", u8"F-1 Pole Position 64 (U) (M3) 00000004 00748D4C.mid TrackParseDebug.txt", u8"Unknown 2", 0 },
+{ u8"F-1 Pole Position 64 (U) (M3) 00000001 0074298C.mid", u8"F-1 Pole Position 64 (U) (M3) 00000001 0074298C.mid TrackParseDebug.txt", u8"Intro (Japan)", 0 },
+{ u8"F-1 Pole Position 64 (U) (M3) 00000004 00748D4C.mid", u8"F-1 Pole Position 64 (U) (M3) 00000004 00748D4C.mid TrackParseDebug.txt", u8"Unknown 1", 0 },
 
 

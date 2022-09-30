@@ -226,6 +226,7 @@
     <None Include="Src\Games\NS4ChameleonTwist2Files.inl" />
     <None Include="Src\Games\NS4ChameleonTwistFiles.inl" />
     <None Include="Src\Games\NS4ChopperAttackFiles.inl" />
+    <None Include="Src\Games\NS4ChoroQIIFiles.inl" />
     <None Include="Src\Games\NS4ClayFighter63_3rdFiles.inl" />
     <None Include="Src\Games\NS4ConkersBadFurDayFiles.inl" />
     <None Include="Src\Games\NS4CruisnExoticaFiles.inl" />

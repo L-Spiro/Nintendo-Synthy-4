@@ -81,7 +81,7 @@
 #ifdef NS4_BULK
 //#define NS4_ONE_OFF								(31-1)
 //#define NS4_EXPORT_SOME
-//#define NS4_EPORT_FROM								(32-1)
+//#define NS4_EPORT_FROM								(12-1)
 #else
 #define NS4_FOLDER								u8"Super Smash Bros"
 #define NS4_FILE								u8"01 Super Smash Bros. (U) 00000021 00B413A4 Intro"
@@ -371,7 +371,8 @@ int main() {
 //#include "Src/Games/NS4HeyYouPikachuFiles.inl"
 //#include "Src/Games/NS4MonacoGrandPrixFiles.inl"
 //#include "Src/Games/NS4MRCMultiRacingChampionshipFiles.inl"
-#include "Src/Games/NS4F1PolePositionFiles.inl"
+//#include "Src/Games/NS4F1PolePositionFiles.inl"
+#include "Src/Games/NS4ChoroQIIFiles.inl"
 #else
 		{}
 #endif

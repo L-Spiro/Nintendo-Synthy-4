@@ -748,5 +748,8 @@
     <None Include="Src\Games\NS4F1PolePositionFiles.inl">
       <Filter>Header Files\Games</Filter>
     </None>
+    <None Include="Src\Games\NS4ChoroQIIFiles.inl">
+      <Filter>Header Files\Games</Filter>
+    </None>
   </ItemGroup>
 </Project>
