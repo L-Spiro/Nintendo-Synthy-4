@@ -298,6 +298,7 @@ int main() {
 //#include "Src/Games/NS4BombermanHeroFiles.inl"
 //#include "Src/Games/NS4PokemonSnapFiles.inl"
 //#include "Src/Games/NS4ClayFighter63_3rdFiles.inl"
+#include "Src/Games/NS4ClayFighterSculptorsCutFiles.inl"
 //#include "Src/Games/NS4MarioPartyFiles.inl"
 //#include "Src/Games/NS4MarioParty2Files.inl"
 //#include "Src/Games/NS4MarioParty3Files.inl"
@@ -372,7 +373,7 @@ int main() {
 //#include "Src/Games/NS4MonacoGrandPrixFiles.inl"
 //#include "Src/Games/NS4MRCMultiRacingChampionshipFiles.inl"
 //#include "Src/Games/NS4F1PolePositionFiles.inl"
-#include "Src/Games/NS4ChoroQIIFiles.inl"
+//#include "Src/Games/NS4ChoroQIIFiles.inl"
 #else
 		{}
 #endif

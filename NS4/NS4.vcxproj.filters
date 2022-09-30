@@ -751,5 +751,8 @@
     <None Include="Src\Games\NS4ChoroQIIFiles.inl">
       <Filter>Header Files\Games</Filter>
     </None>
+    <None Include="Src\Games\NS4ClayFighterSculptorsCutFiles.inl">
+      <Filter>Header Files\Games</Filter>
+    </None>
   </ItemGroup>
 </Project>

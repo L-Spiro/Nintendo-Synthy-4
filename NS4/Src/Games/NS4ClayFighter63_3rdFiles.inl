@@ -33,7 +33,7 @@
 { u8"Clay Fighter 63 1-3 (U) 00000019 00B10BE0 Freezing Fortress Finale.mid", u8"Clay Fighter 63 1-3 (U) 00000019 00B10BE0.mid TrackParseDebug.txt", u8"Freezing Fortress Finale", 0 },
 { u8"Clay Fighter 63 1-3 (U) 00000002 00AD9310 Happy Harry's Hut.mid", u8"Clay Fighter 63 1-3 (U) 00000002 00AD9310.mid TrackParseDebug.txt", u8"Happy Harry’s Hut", 0 },
 { u8"Clay Fighter 63 1-3 (U) 00000028 00B13BB0 Happy Harry's Hut Finale.mid", u8"Clay Fighter 63 1-3 (U) 00000028 00B13BB0.mid TrackParseDebug.txt", u8"Happy Harry’s Hut Finale", 0 },
-{ u8"Clay Fighter 63 1-3 (U) 00000010 00AFE630 Camp Claynaveral, Claynavarel Hanger, Outhouse.mid", u8"Clay Fighter 63 1-3 (U) 00000010 00AFE630.mid TrackParseDebug.txt", u8"Camp Claynaveral, Claynavarel Hanger, Outhouse", 0 },
+{ u8"Clay Fighter 63 1-3 (U) 00000010 00AFE630 Camp Claynaveral, Claynavarel Hanger, Outhouse.mid", u8"Clay Fighter 63 1-3 (U) 00000010 00AFE630.mid TrackParseDebug.txt", u8"Camp Claynaveral, Claynavarel Hanger, The Outhouse", 0 },
 { u8"Clay Fighter 63 1-3 (U) 00000022 00B12420 Camp Claynaveral, Claynavarel Hanger, The Outhouse Finale.mid", u8"Clay Fighter 63 1-3 (U) 00000022 00B12420.mid TrackParseDebug.txt", u8"Camp Claynaveral, Claynavarel Hanger, The Outhouse Finale", 0 },
 { u8"Clay Fighter 63 1-3 (U) 00000003 00ADBCE0 Clayribbean Cruise.mid", u8"Clay Fighter 63 1-3 (U) 00000003 00ADBCE0.mid TrackParseDebug.txt", u8"Clayribbean Cruise", 0 },
 { u8"Clay Fighter 63 1-3 (U) 00000023 00B127A0 Clayribbean Cruise Finale.mid", u8"Clay Fighter 63 1-3 (U) 00000023 00B127A0.mid TrackParseDebug.txt", u8"Clayribbean Cruise Finale", 0 },

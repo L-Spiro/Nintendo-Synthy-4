@@ -228,6 +228,7 @@
     <None Include="Src\Games\NS4ChopperAttackFiles.inl" />
     <None Include="Src\Games\NS4ChoroQIIFiles.inl" />
     <None Include="Src\Games\NS4ClayFighter63_3rdFiles.inl" />
+    <None Include="Src\Games\NS4ClayFighterSculptorsCutFiles.inl" />
     <None Include="Src\Games\NS4ConkersBadFurDayFiles.inl" />
     <None Include="Src\Games\NS4CruisnExoticaFiles.inl" />
     <None Include="Src\Games\NS4CruisnUsaFiles.inl" />
