@@ -24,6 +24,7 @@
 //#define NS4_PREMULTIPLY_MASTER				true
 #define NS4_MAIN_VOL_CURVE					20.0
 #define NS4_MASTER_VOL_CONTROL				21		// Just for sequencing.
+#define NS4_PERC_INST						127
 //#define NS4_OVERSAMPLING_BW					500.0
 
 
@@ -75,8 +76,8 @@
 
 { u8"27 Mario Kart 64 (U) 0000001A 0000001A Trophy Presentations (Part 1).mid", u8"Mario Kart 64 (U) 0000001A 00BC5F60 Trophy Presentations (Part 1).mid TrackParseDebug.txt", u8"Trophy Presentations (Top-3)", 0x13,
 	3, {
-		{ NS4_STOP_AT_TIME( (299344.0 - 515.0) / NS4_ORIG_HZ ), },
-		{ NS4_SET_CURSOR_BY_TIME( (299344.0 - 515.0) / NS4_ORIG_HZ ), },
+		{ NS4_STOP_AT_TIME( (299344.0 /*- 515.0*/) / NS4_ORIG_HZ ), },
+		{ NS4_SET_CURSOR_BY_TIME( (299344.0 /*- 515.0*/) / NS4_ORIG_HZ ), },
 		{ NS4_STORE_RESULT, },
 	},
 },
@@ -84,8 +85,8 @@
 
 { u8"27 Mario Kart 64 (U) 0000001A 0000001A Trophy Presentations (Part 1).mid", u8"Mario Kart 64 (U) 0000001A 00BC5F60 Trophy Presentations (Part 1).mid TrackParseDebug.txt", u8"Trophy Presentations (No Trophy)", 0x13,
 	3, {
-		{ NS4_STOP_AT_TIME( (265360.0 - 515.0) / NS4_ORIG_HZ ), },
-		{ NS4_SET_CURSOR_BY_TIME( (265360.0 - 515.0) / NS4_ORIG_HZ ), },
+		{ NS4_STOP_AT_TIME( (265360.0 /*- 515.0*/) / NS4_ORIG_HZ ), },
+		{ NS4_SET_CURSOR_BY_TIME( (265360.0 /*- 515.0*/) / NS4_ORIG_HZ ), },
 		{ NS4_STORE_RESULT, },
 	},
 },

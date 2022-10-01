@@ -243,6 +243,7 @@
     <None Include="Src\Games\NS4DrMario64Files.inl" />
     <None Include="Src\Games\NS4DryDryDocks64Files.inl" />
     <None Include="Src\Games\NS4DualHeroesFiles.inl" />
+    <None Include="Src\Games\NS4EikouNoStAndrewsFiles.inl" />
     <None Include="Src\Games\NS4ExtremeGFiles.inl" />
     <None Include="Src\Games\NS4ExtremeGXG2Files.inl" />
     <None Include="Src\Games\NS4F1PolePositionFiles.inl" />
@@ -277,6 +278,7 @@
     <None Include="Src\Games\NS4MonacoGrandPrixFiles.inl" />
     <None Include="Src\Games\NS4MonopolyFiles.inl" />
     <None Include="Src\Games\NS4MRCMultiRacingChampionshipFiles.inl" />
+    <None Include="Src\Games\NS4NeonGenesisEvangelionFiles.inl" />
     <None Include="Src\Games\NS4PennyRacersFiles.inl" />
     <None Include="Src\Games\NS4PerfectDarkFiles.inl" />
     <None Include="Src\Games\NS4Pilotwings64Files.inl" />
@@ -289,10 +291,12 @@
     <None Include="Src\Games\NS4Rush2Files.inl" />
     <None Include="Src\Games\NS4SanFranciscoRushFiles.inl" />
     <None Include="Src\Games\NS4SCARSFiles.inl" />
+    <None Include="Src\Games\NS4SimCity2000Files.inl" />
     <None Include="Src\Games\NS4SnowboardKidsFiles.inl" />
     <None Include="Src\Games\NS4SpaceStationSiliconValleyFiles.inl" />
     <None Include="Src\Games\NS4Starfox64Files.inl" />
     <None Include="Src\Games\NS4StarSoldierVanishingEarthFiles.inl" />
+    <None Include="Src\Games\NS4SuperBDamonBattlePhoenix64Files.inl" />
     <None Include="Src\Games\NS4SupermanFiles.inl" />
     <None Include="Src\Games\NS4SuperMario64Files.inl" />
     <None Include="Src\Games\NS4SuperMario64ModFiles.inl" />
@@ -371,6 +375,7 @@
     <None Include="Src\Reverb\Taps\NS4ReverbSnowboardKids0.inl" />
     <None Include="Src\Reverb\Taps\NS4ReverbSpaceStationSiliconValley0.inl" />
     <None Include="Src\Reverb\Taps\NS4ReverbStarSoldierVanishingEarth0.inl" />
+    <None Include="Src\Reverb\Taps\NS4ReverbSuperBDamonBattlePhoenix640.inl" />
     <None Include="Src\Reverb\Taps\NS4ReverbSuperRobotSpirits0.inl" />
     <None Include="Src\Reverb\Taps\NS4ReverbSuperSmashBros0.inl" />
     <None Include="Src\Reverb\Taps\NS4ReverbTonicTrouble0.inl" />

@@ -1224,6 +1224,19 @@ namespace ns4 {
 		{         0,	      3760,	    +8000,		       +0,	          0,		                      0,	                      0,		        +0,		                      0,	/*0xDFFB8930*/   10240 },
 	};
 
+	/** Taps harvested from Super B-Daman: Battle Phoenix 64. */
+	NS4_REVERB_TAP CReverb::m_rtSuperBDamonBattlePhoenix640[] = {
+#include "Taps/NS4ReverbSuperBDamonBattlePhoenix640.inl"
+	};
+
+	/** The comb filter delay lines for Super B-Daman: Battle Phoenix 64. */
+	NS4_DELAY_N64 CReverb::m_dn64SuperBDamonBattlePhoenix640[] = {
+		//ui32Input		ui32Output	i16FfCoef		i16FbCoef		i16Gain							 dRsInc						 dRsVal			i32RsDelta						dRsGain						ui16Fc
+		{         0,	      2160,	    +9830,		    -9830,	          0 },
+		{       760,	      1520,	    +3276,		    -3276,	      16383 },
+		{         0,	      2400,	    +5000,		       +0,	          0,		                      0,	                      0,		        +0,		                      0,	/*0xDFFA2B40*/   10240 },
+	};
+
 }	// namespace ns4
 
 namespace ns4 {
@@ -2164,6 +2177,19 @@ namespace ns4 {
 			NS4_NO_FADE,
 			NS4_NO_LPF,
 		},	// 129
+		// Super B-Daman: Battle Phoenix 64.
+		{
+			NS4_ONLY_COMB( 1.0, 0 ),
+			NS4_COMB( 4000, 320 / 2, m_dn64SuperBDamonBattlePhoenix640, 20.0 ),
+		},	// 130
+		// Super B-Daman: Battle Phoenix 64.
+		{
+			NS4_TAPS( m_rtSuperBDamonBattlePhoenix640 ),
+			NS4_SQRT_0_5,															// dTapVol
+			0,																		// i64TapOffset
+			NS4_NO_FADE,
+			NS4_NO_LPF,
+		},	// 131
 	};
 
 

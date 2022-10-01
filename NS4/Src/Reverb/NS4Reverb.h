@@ -142,6 +142,8 @@ namespace ns4 {
 			NS4_T_MRC_0							= 127,
 			NS4_T_F1_POLE_POSITION_DELAY_0		= 128,
 			NS4_T_F1_POLE_POSITION_0			= 129,
+			NS4_T_SUPER_B_DAMON_BATTLE_PHOENIX_64_DELAY_0		= 130,
+			NS4_T_SUPER_B_DAMON_BATTLE_PHOENIX_64_0				= 131,
 		};
 
 
@@ -631,6 +633,12 @@ namespace ns4 {
 
 		/** The comb filter delay lines for F1 Pole Position 64. */
 		static NS4_DELAY_N64					m_dn64F1PolePosition0[];
+
+		/** Taps harvested from Super B-Daman: Battle Phoenix 64. */
+		static NS4_REVERB_TAP					m_rtSuperBDamonBattlePhoenix640[];
+
+		/** The comb filter delay lines for Super B-Daman: Battle Phoenix 64. */
+		static NS4_DELAY_N64					m_dn64SuperBDamonBattlePhoenix640[];
 
 
 		// == Functions.

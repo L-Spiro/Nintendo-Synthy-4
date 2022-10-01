@@ -72,11 +72,11 @@
 
 #define NS4_BULK
 
-//#define NS4_SINGLE_TRACK								1
+//#define NS4_SINGLE_TRACK								10
 //#define NS4_NO_NORMALIZE
 // 
 //#define NS4_NO_OUTPUT									// Used to quickly print information in the MIDI files without actually generating WAV content.
-//#define NS4_PRINT_BEST_BANK
+#define NS4_PRINT_BEST_BANK
 
 #ifdef NS4_BULK
 //#define NS4_ONE_OFF								(31-1)
@@ -298,7 +298,7 @@ int main() {
 //#include "Src/Games/NS4BombermanHeroFiles.inl"
 //#include "Src/Games/NS4PokemonSnapFiles.inl"
 //#include "Src/Games/NS4ClayFighter63_3rdFiles.inl"
-#include "Src/Games/NS4ClayFighterSculptorsCutFiles.inl"
+//#include "Src/Games/NS4ClayFighterSculptorsCutFiles.inl"
 //#include "Src/Games/NS4MarioPartyFiles.inl"
 //#include "Src/Games/NS4MarioParty2Files.inl"
 //#include "Src/Games/NS4MarioParty3Files.inl"
@@ -374,6 +374,10 @@ int main() {
 //#include "Src/Games/NS4MRCMultiRacingChampionshipFiles.inl"
 //#include "Src/Games/NS4F1PolePositionFiles.inl"
 //#include "Src/Games/NS4ChoroQIIFiles.inl"
+//#include "Src/Games/NS4EikouNoStAndrewsFiles.inl"
+//#include "Src/Games/NS4NeonGenesisEvangelionFiles.inl"
+//#include "Src/Games/NS4SimCity2000Files.inl"
+#include "Src/Games/NS4SuperBDamonBattlePhoenix64Files.inl"
 #else
 		{}
 #endif
