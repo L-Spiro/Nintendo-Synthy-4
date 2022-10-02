@@ -76,7 +76,7 @@
 //#define NS4_NO_NORMALIZE
 // 
 //#define NS4_NO_OUTPUT									// Used to quickly print information in the MIDI files without actually generating WAV content.
-#define NS4_PRINT_BEST_BANK
+//#define NS4_PRINT_BEST_BANK
 
 #ifdef NS4_BULK
 //#define NS4_ONE_OFF								(31-1)
@@ -377,7 +377,8 @@ int main() {
 //#include "Src/Games/NS4EikouNoStAndrewsFiles.inl"
 //#include "Src/Games/NS4NeonGenesisEvangelionFiles.inl"
 //#include "Src/Games/NS4SimCity2000Files.inl"
-#include "Src/Games/NS4SuperBDamonBattlePhoenix64Files.inl"
+//#include "Src/Games/NS4SuperBDamonBattlePhoenix64Files.inl"
+#include "Src/Games/NS4ToonPanicFiles.inl"
 #else
 		{}
 #endif

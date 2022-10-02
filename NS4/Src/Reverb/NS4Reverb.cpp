@@ -1237,6 +1237,20 @@ namespace ns4 {
 		{         0,	      2400,	    +5000,		       +0,	          0,		                      0,	                      0,		        +0,		                      0,	/*0xDFFA2B40*/   10240 },
 	};
 
+	/** Taps harvested from Toon Panic. */
+	NS4_REVERB_TAP CReverb::m_rtToonPanic0[] = {
+#include "Taps/NS4ReverbToonPanic0.inl"
+	};
+
+	/** The comb filter delay lines for Toon Panic. */
+	NS4_DELAY_N64 CReverb::m_dn64ToonPanic0[] = {
+		//ui32Input		ui32Output	i16FfCoef		i16FbCoef		i16Gain							 dRsInc						 dRsVal			i32RsDelta						dRsGain						ui16Fc
+		{         0,	      2640,	    +9830,		    -9830,	          0 },
+		{       880,	      2160,	    +3276,		    -3276,	      16383 },
+		{      2640,	      3640,	    +3276,		    -3276,	      16383 },
+		{         0,	      3760,	    +8000,		       +0,	          0,		                      0,	                      0,		        +0,		                      0,	/*0xE005E380*/   10240 },
+	};
+
 }	// namespace ns4
 
 namespace ns4 {
@@ -2190,6 +2204,19 @@ namespace ns4 {
 			NS4_NO_FADE,
 			NS4_NO_LPF,
 		},	// 131
+		// Toon Panic.
+		{
+			NS4_ONLY_COMB( 1.0, 0 ),
+			NS4_COMB( 4000, 320 / 2, m_dn64ToonPanic0, 20.0 ),
+		},	// 132
+		// Toon Panic.
+		{
+			NS4_TAPS( m_rtToonPanic0 ),
+			NS4_SQRT_0_5,															// dTapVol
+			0,																		// i64TapOffset
+			NS4_NO_FADE,
+			NS4_NO_LPF,
+		},	// 133
 	};
 
 

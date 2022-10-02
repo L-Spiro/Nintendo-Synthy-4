@@ -769,5 +769,11 @@
     <None Include="Src\Reverb\Taps\NS4ReverbSuperBDamonBattlePhoenix640.inl">
       <Filter>Header Files\Reverb\Taps</Filter>
     </None>
+    <None Include="Src\Reverb\Taps\NS4ReverbToonPanic0.inl">
+      <Filter>Header Files\Reverb\Taps</Filter>
+    </None>
+    <None Include="Src\Games\NS4ToonPanicFiles.inl">
+      <Filter>Header Files\Games</Filter>
+    </None>
   </ItemGroup>
 </Project>

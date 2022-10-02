@@ -305,6 +305,7 @@
     <None Include="Src\Games\NS4SuperSmashBrosFiles.inl" />
     <None Include="Src\Games\NS4TheLegendOfZeldaOcarinaOfTimeFiles.inl" />
     <None Include="Src\Games\NS4TonicTroubleFiles.inl" />
+    <None Include="Src\Games\NS4ToonPanicFiles.inl" />
     <None Include="Src\Games\NS4TransformersBeastWarsTransmetalsFiles.inl" />
     <None Include="Src\Games\NS4Turok2SeedsOfEvilFiles.inl" />
     <None Include="Src\Games\NS4Turok3ShadowOfOblivion.inl" />
@@ -379,6 +380,7 @@
     <None Include="Src\Reverb\Taps\NS4ReverbSuperRobotSpirits0.inl" />
     <None Include="Src\Reverb\Taps\NS4ReverbSuperSmashBros0.inl" />
     <None Include="Src\Reverb\Taps\NS4ReverbTonicTrouble0.inl" />
+    <None Include="Src\Reverb\Taps\NS4ReverbToonPanic0.inl" />
     <None Include="Src\Reverb\Taps\NS4ReverbTransformersBeastWarsTransmetals0.inl" />
     <None Include="Src\Reverb\Taps\NS4ReverbTurok20.inl" />
     <None Include="Src\Reverb\Taps\NS4ReverbTurok3ShadowsOfOblivion0.inl" />
