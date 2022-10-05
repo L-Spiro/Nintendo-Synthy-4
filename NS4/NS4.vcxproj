@@ -204,6 +204,7 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Src\Games\NS4AeroFightersAssaultFiles.inl" />
+    <None Include="Src\Games\NS4AeroGaugeFiles.inl" />
     <None Include="Src\Games\NS4ArmorinesProjectSWARMFiles.inl" />
     <None Include="Src\Games\NS4ArmyMenAirCombatFiles.inl" />
     <None Include="Src\Games\NS4ArmyMenSargesHeroesFiles.inl" />

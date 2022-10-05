@@ -775,5 +775,8 @@
     <None Include="Src\Games\NS4ToonPanicFiles.inl">
       <Filter>Header Files\Games</Filter>
     </None>
+    <None Include="Src\Games\NS4AeroGaugeFiles.inl">
+      <Filter>Header Files\Games</Filter>
+    </None>
   </ItemGroup>
 </Project>

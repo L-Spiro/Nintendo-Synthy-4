@@ -72,7 +72,7 @@
 
 #define NS4_BULK
 
-//#define NS4_SINGLE_TRACK								10
+//#define NS4_SINGLE_TRACK								4
 //#define NS4_NO_NORMALIZE
 // 
 //#define NS4_NO_OUTPUT									// Used to quickly print information in the MIDI files without actually generating WAV content.
@@ -378,7 +378,8 @@ int main() {
 //#include "Src/Games/NS4NeonGenesisEvangelionFiles.inl"
 //#include "Src/Games/NS4SimCity2000Files.inl"
 //#include "Src/Games/NS4SuperBDamonBattlePhoenix64Files.inl"
-#include "Src/Games/NS4ToonPanicFiles.inl"
+//#include "Src/Games/NS4ToonPanicFiles.inl"
+#include "Src/Games/NS4AeroGaugeFiles.inl"
 #else
 		{}
 #endif
@@ -522,9 +523,9 @@ int main() {
 		troOptions.pmMods = nullptr;
 #endif
 
-		const char * pcMidiFoloder = reinterpret_cast<const char *>(u8"J:\\My Projects\\MIDIWorks\\Exports\\" NS4_FOLDER "\\");
+		const char * pcMidiFolder = reinterpret_cast<const char *>(u8"J:\\My Projects\\MIDIWorks\\Exports\\" NS4_FOLDER "\\");
 
-		std::string sFile = std::string( pcMidiFoloder ) + reinterpret_cast<const char *>(mfFiles[F].pcMidiFile);
+		std::string sFile = std::string( pcMidiFolder ) + reinterpret_cast<const char *>(mfFiles[F].pcMidiFile);
 		bool bMidi = mfMidi.Open( sFile.c_str() );
 #ifdef NS4_EXPORT_SOME
 		// Any conditionals go here.
@@ -550,12 +551,12 @@ int main() {
 #endif	// NS4_PRINT_BEST_BANK
 
 
-		mfMidi.ApplyPreUnrollMods( mfFiles[F].ui32Modifiers, mfFiles[F].mModifiers, ns4::CMidiFile::NS4_ES_PRE_UNROLL, pcMidiFoloder );
+		mfMidi.ApplyPreUnrollMods( mfFiles[F].ui32Modifiers, mfFiles[F].mModifiers, ns4::CMidiFile::NS4_ES_PRE_UNROLL, pcMidiFolder );
 		ns4::CMidiFile::m_sSettings.bIgnoreLoops = ns4::CMidiFile::FindGlobalMod( ns4::CMidiFile::NS4_E_GLOBAL_IGNORE_LOOPS, troOptions.ui32TotalMods, troOptions.pmMods ) != nullptr;
 		if ( mfFiles[F].pcDbgFile && mfFiles[F].pcDbgFile[0] ) {
 			bool bMidiDbg = mfMidi.AddDebug_Standard( (std::string( reinterpret_cast<const char *>(u8"J:\\My Projects\\MIDIWorks\\Exports\\" NS4_FOLDER "\\DBG\\") ) + reinterpret_cast<const char *>(mfFiles[F].pcDbgFile)).c_str() );
 		}
-		mfMidi.ApplyPreUnrollMods( mfFiles[F].ui32Modifiers, mfFiles[F].mModifiers, ns4::CMidiFile::NS4_ES_POST_SUPPLEMENTAL, pcMidiFoloder );
+		mfMidi.ApplyPreUnrollMods( mfFiles[F].ui32Modifiers, mfFiles[F].mModifiers, ns4::CMidiFile::NS4_ES_POST_SUPPLEMENTAL, pcMidiFolder );
 		std::printf( "Loaded: %s\r\n", sFile.c_str() );
 		
 
