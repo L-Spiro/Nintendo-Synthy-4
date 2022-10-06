@@ -146,6 +146,8 @@ namespace ns4 {
 			NS4_T_SUPER_B_DAMON_BATTLE_PHOENIX_64_0				= 131,
 			NS4_T_TOON_PANIC_DELAY_0			= 132,
 			NS4_T_TOON_PANIC_0					= 133,
+			NS4_T_ALL_STAR_BASEBALL_99_DELAY_0	= 134,
+			NS4_T_ALL_STAR_BASEBALL_99_0		= 135,
 		};
 
 
@@ -647,6 +649,12 @@ namespace ns4 {
 
 		/** The comb filter delay lines for Toon Panic. */
 		static NS4_DELAY_N64					m_dn64ToonPanic0[];
+
+		/** Taps harvested from All-Star Baseball ‘99. */
+		static NS4_REVERB_TAP					m_rtAllStarBaseball990[];
+
+		/** The comb filter delay lines for All-Star Baseball ‘99. */
+		static NS4_DELAY_N64					m_dn64AllStarBaseball990[];
 
 
 		// == Functions.

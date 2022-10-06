@@ -178,7 +178,8 @@ int main() {
 		//ns4::CReverb::HarvestUnfilteredMonoTaps( u8"J:\\My Projects\\Nintendo Synthy-4\\NS4\\Src\\Reverb\\Research\\MM HD.wav", -1, 1, 0, 0, 0 );
 		//ns4::CReverb::HarvestUnfilteredMonoTaps( u8"J:\\My Projects\\Nintendo Synthy-4\\NS4\\Src\\Reverb\\Research\\BM64TSA HD.wav", -1, 1, 0, 0, 0 );
 		//ns4::CReverb::HarvestUnfilteredMonoTaps( u8"J:\\My Projects\\Nintendo Synthy-4\\NS4\\Src\\Reverb\\Research\\HYP HD.wav", -1, 1, 0, 0, 0 );
-		ns4::CReverb::HarvestUnfilteredMonoTaps( u8"J:\\My Projects\\Nintendo Synthy-4\\NS4\\Src\\Reverb\\Research\\MRC HD.wav", -1, 1, 0, 0, 0 );
+		//ns4::CReverb::HarvestUnfilteredMonoTaps( u8"J:\\My Projects\\Nintendo Synthy-4\\NS4\\Src\\Reverb\\Research\\MRC HD.wav", -1, 1, 0, 0, 0 );
+		ns4::CReverb::HarvestUnfilteredMonoTaps( u8"J:\\My Projects\\Nintendo Synthy-4\\NS4\\Src\\Reverb\\Research\\ASB99 HD.wav", -1, 1, 0, 0, 0 );
 	}
 	{
 		ns4::CWavLib::DetermineLevelsStereo( u8"J:\\My Projects\\Nintendo Synthy-4\\NS4\\Src\\Reverb\\Research\\MM V 127 R 0 P 56 NF.wav",
@@ -222,11 +223,11 @@ int main() {
 
 #if 0
 	{
-		const uint32_t ui32SampRate = 22049;
+		const uint32_t ui32SampRate = 22047;
 		
 		ns4::lwaudio aWet = ns4::CWavLib::AllocateSamples( 1, ui32SampRate * 30 );
 		aWet[0][0] = 1.0;
-		ns4::lwaudio aAccum = ns4::CReverb::CreateReverb( ns4::CReverb::NS4_T_MRC_DELAY_0, aWet, ui32SampRate, ui32SampRate, 0.0, 0 );
+		ns4::lwaudio aAccum = ns4::CReverb::CreateReverb( ns4::CReverb::NS4_T_ALL_STAR_BASEBALL_99_DELAY_0, aWet, ui32SampRate, ui32SampRate, 0.0, 0 );
 		ns4::lwsample sFirst = aWet[0][0];
 		if ( sFirst == 0.0 ) {
 			::OutputDebugStringA( "Measles.\r\n" );
@@ -379,7 +380,9 @@ int main() {
 //#include "Src/Games/NS4SimCity2000Files.inl"
 //#include "Src/Games/NS4SuperBDamonBattlePhoenix64Files.inl"
 //#include "Src/Games/NS4ToonPanicFiles.inl"
-#include "Src/Games/NS4AeroGaugeFiles.inl"
+//#include "Src/Games/NS4AeroGaugeFiles.inl"
+//#include "Src/Games/NS4AllStarBaseball99Files.inl"
+#include "Src/Games/NS4StarshotSpaceCircusFeverFiles.inl"
 #else
 		{}
 #endif

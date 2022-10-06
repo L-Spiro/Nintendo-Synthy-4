@@ -205,6 +205,7 @@
   <ItemGroup>
     <None Include="Src\Games\NS4AeroFightersAssaultFiles.inl" />
     <None Include="Src\Games\NS4AeroGaugeFiles.inl" />
+    <None Include="Src\Games\NS4AllStarBaseball99Files.inl" />
     <None Include="Src\Games\NS4ArmorinesProjectSWARMFiles.inl" />
     <None Include="Src\Games\NS4ArmyMenAirCombatFiles.inl" />
     <None Include="Src\Games\NS4ArmyMenSargesHeroesFiles.inl" />
@@ -296,6 +297,7 @@
     <None Include="Src\Games\NS4SnowboardKidsFiles.inl" />
     <None Include="Src\Games\NS4SpaceStationSiliconValleyFiles.inl" />
     <None Include="Src\Games\NS4Starfox64Files.inl" />
+    <None Include="Src\Games\NS4StarshotSpaceCircusFeverFiles.inl" />
     <None Include="Src\Games\NS4StarSoldierVanishingEarthFiles.inl" />
     <None Include="Src\Games\NS4SuperBDamonBattlePhoenix64Files.inl" />
     <None Include="Src\Games\NS4SupermanFiles.inl" />
@@ -323,6 +325,7 @@
     <None Include="Src\Reverb\Taps\NS4PerfectDark1.inl" />
     <None Include="Src\Reverb\Taps\NS4Reverb0.inl" />
     <None Include="Src\Reverb\Taps\NS4ReverbAeroFightersAssault0.inl" />
+    <None Include="Src\Reverb\Taps\NS4ReverbAllStarBaseball990.inl" />
     <None Include="Src\Reverb\Taps\NS4ReverbArmorinesProjectSwarm0.inl" />
     <None Include="Src\Reverb\Taps\NS4ReverbBanjoKazooie0.inl" />
     <None Include="Src\Reverb\Taps\NS4ReverbBanjoTooie0.inl" />

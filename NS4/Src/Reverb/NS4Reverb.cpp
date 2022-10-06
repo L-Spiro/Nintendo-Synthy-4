@@ -1251,6 +1251,22 @@ namespace ns4 {
 		{         0,	      3760,	    +8000,		       +0,	          0,		                      0,	                      0,		        +0,		                      0,	/*0xE005E380*/   10240 },
 	};
 
+	/** Taps harvested from All-Star Baseball ‘99. */
+	NS4_REVERB_TAP CReverb::m_rtAllStarBaseball990[] = {
+#include "Taps/NS4ReverbAllStarBaseball990.inl"
+	};
+
+	/** The comb filter delay lines for All-Star Baseball ‘99. */
+	NS4_DELAY_N64 CReverb::m_dn64AllStarBaseball990[] = {
+		//ui32Input		ui32Output	i16FfCoef		i16FbCoef		i16Gain							 dRsInc						 dRsVal			i32RsDelta						dRsGain						ui16Fc
+		{       160,	       944,	    +9830,		    -9830,	       2815,		                      0,	                      0,		        +0,		                      0,	/*0xDFECBF80*/    8191 },
+		{       416,	       768,	   +13107,		   -13107,	          0 },
+		{       784,	       912,	   +19660,		   -19660,	          0 },
+		{      1664,	      2864,	   +13107,		   -13107,	       2719,		                      0,	                      0,		        +0,		                      0,	/*0xDFECBFC0*/    8191 },
+		{      1984,	      2496,	   +14107,		   -14107,	          0 },
+		{        64,	      6192,	   +20384,		       +0,	      22015,		                      0,	                      0,		        +0,		                      0,	/*0xDFECC000*/   13695 },
+	};
+
 }	// namespace ns4
 
 namespace ns4 {
@@ -2217,6 +2233,19 @@ namespace ns4 {
 			NS4_NO_FADE,
 			NS4_NO_LPF,
 		},	// 133
+		// All-Star Baseball ‘99.
+		{
+			NS4_ONLY_COMB( 1.0, 0 ),
+			NS4_COMB( 6400, 320 / 2, m_dn64AllStarBaseball990, 20.0 ),
+		},	// 134
+		// All-Star Baseball ‘99.
+		{
+			NS4_TAPS( m_rtAllStarBaseball990 ),
+			NS4_SQRT_0_5,															// dTapVol
+			0,																		// i64TapOffset
+			NS4_NO_FADE,
+			NS4_LPF( 8191.0, 0.00725722320497120, 2.0, 0 ),
+		},	// 135
 	};
 
 
