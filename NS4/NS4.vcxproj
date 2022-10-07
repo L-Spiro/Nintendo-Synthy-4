@@ -204,7 +204,9 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Src\Games\NS4AeroFightersAssaultFiles.inl" />
+    <None Include="Src\Games\NS4AeroFightersAssaultOverSamplingFiles.inl" />
     <None Include="Src\Games\NS4AeroGaugeFiles.inl" />
+    <None Include="Src\Games\NS4AeroGaugeOverSamplingFiles.inl" />
     <None Include="Src\Games\NS4AllStarBaseball99Files.inl" />
     <None Include="Src\Games\NS4ArmorinesProjectSWARMFiles.inl" />
     <None Include="Src\Games\NS4ArmyMenAirCombatFiles.inl" />
@@ -228,6 +230,7 @@
     <None Include="Src\Games\NS4ChameleonTwist2Files.inl" />
     <None Include="Src\Games\NS4ChameleonTwistFiles.inl" />
     <None Include="Src\Games\NS4ChopperAttackFiles.inl" />
+    <None Include="Src\Games\NS4ChopperAttackOverSampledFiles.inl" />
     <None Include="Src\Games\NS4ChoroQIIFiles.inl" />
     <None Include="Src\Games\NS4ClayFighter63_3rdFiles.inl" />
     <None Include="Src\Games\NS4ClayFighterSculptorsCutFiles.inl" />
@@ -282,7 +285,9 @@
     <None Include="Src\Games\NS4MRCMultiRacingChampionshipFiles.inl" />
     <None Include="Src\Games\NS4NeonGenesisEvangelionFiles.inl" />
     <None Include="Src\Games\NS4PennyRacersFiles.inl" />
+    <None Include="Src\Games\NS4PennyRacersOverSamplingFiles.inl" />
     <None Include="Src\Games\NS4PerfectDarkFiles.inl" />
+    <None Include="Src\Games\NS4PerfectDarkOverSamplingFiles.inl" />
     <None Include="Src\Games\NS4Pilotwings64Files.inl" />
     <None Include="Src\Games\NS4PokemonSnapFiles.inl" />
     <None Include="Src\Games\NS4PokemonStadiumFiles.inl" />
@@ -299,16 +304,19 @@
     <None Include="Src\Games\NS4Starfox64Files.inl" />
     <None Include="Src\Games\NS4StarshotSpaceCircusFeverFiles.inl" />
     <None Include="Src\Games\NS4StarSoldierVanishingEarthFiles.inl" />
+    <None Include="Src\Games\NS4StarSoldierVanishingEarthOverSampledFiles.inl" />
     <None Include="Src\Games\NS4SuperBDamonBattlePhoenix64Files.inl" />
     <None Include="Src\Games\NS4SupermanFiles.inl" />
     <None Include="Src\Games\NS4SuperMario64Files.inl" />
     <None Include="Src\Games\NS4SuperMario64ModFiles.inl" />
     <None Include="Src\Games\NS4SuperMario64SourceFiles.inl" />
     <None Include="Src\Games\NS4SuperRobotSpiritsFiles.inl" />
+    <None Include="Src\Games\NS4SuperRobotSpiritsOverSampledFiles.inl" />
     <None Include="Src\Games\NS4SuperSmashBrosFiles.inl" />
     <None Include="Src\Games\NS4TheLegendOfZeldaOcarinaOfTimeFiles.inl" />
     <None Include="Src\Games\NS4TonicTroubleFiles.inl" />
     <None Include="Src\Games\NS4ToonPanicFiles.inl" />
+    <None Include="Src\Games\NS4ToonPanicOverSampledFiles.inl" />
     <None Include="Src\Games\NS4TransformersBeastWarsTransmetalsFiles.inl" />
     <None Include="Src\Games\NS4Turok2SeedsOfEvilFiles.inl" />
     <None Include="Src\Games\NS4Turok3ShadowOfOblivion.inl" />

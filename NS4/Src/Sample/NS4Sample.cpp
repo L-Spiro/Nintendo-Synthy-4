@@ -104,7 +104,8 @@ namespace ns4 {
 	 */
 	bool CSample::UpSampleTo( uint32_t _ui32Factor, NS4_UPSAMPLED &_uDst ) {
 		if ( m_dOversamplingBw == 0.0 ) { return true; }
-		double dBw = min( m_dOversamplingBw, m_uiHz );
+		
+		double dBw = min( m_dOversamplingBw, m_uiHz / 2.0 );
 		uint32_t ui32Extra = uint32_t( 4.0 / (dBw / m_uiHz) );
 		lwtrack tTmp1;
 		_uDst.tSamples = GetUnrolled( 2, ui32Extra * 2 );
@@ -122,21 +123,23 @@ namespace ns4 {
 		
 		_ui32Factor >>= 1;
 		while ( _ui32Factor ) {
+			CIr iIr = CIrConvolution::CreateSincFilter( dFreq * 2.0, dFilterFreq + dBw / 2.0, dBw, CIrConvolution::SynthesizeBlackmanWindow );
+
 			bool bFailed = true;
 			while ( bFailed ) {
 				try {
-					tTmp1.resize( _uDst.tSamples.size() * 2 );
+					tTmp1.resize( _uDst.tSamples.size() * 2 + iIr.GetLatency() + 1 );
 					bFailed = false;
 				}
 				catch ( ... ) {}
 			}
-			//std::memset( tTmp1.data(), 0, tTmp1.size() );
+			std::memset( tTmp1.data(), 0, tTmp1.size() * sizeof( lwtrack::value_type ) );
 			for ( auto I = _uDst.tSamples.size(); I--; ) {
 				tTmp1[(I<<1)+1] = _uDst.tSamples[I];
-				tTmp1[(I<<1)+0] = lwsample( 0.0 );
+				//tTmp1[(I<<1)+0] = lwsample( 0.0 );
 			}
 
-			CIr iIr = CIrConvolution::CreateSincFilter( dFreq * 2.0, dFilterFreq + dBw / 2.0, dBw, CIrConvolution::SynthesizeBlackmanWindow );
+			
 			CIrConvolution::Convolve( tTmp1, _uDst.tSamples, iIr );
 			ns4::CWavLib::ScaleSamples( _uDst.tSamples, 2.0 );
 

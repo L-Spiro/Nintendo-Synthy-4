@@ -268,7 +268,10 @@ namespace ns4 {
 			}
 #if 1		
 //#ifndef _DEBUG
-			m_vSamples[I].sSample.UpSampleTo( m_ui32OverSample );
+			if ( m_ui32OverSample ) {
+				std::printf( "Oversampling: B%.2X I%.2X S%.2X\r\n", m_vSamples[I].ui32Bank, m_vSamples[I].ui32Inst, m_vSamples[I].ui32Samp );
+				m_vSamples[I].sSample.UpSampleTo( m_ui32OverSample );
+			}
 			/*const CSample::NS4_UPSAMPLED & uOver = m_vSamples[I].sSample.GetOversampled();
 			ns4::lwtrack tCopy = uOver.tSamples;
 			ns4::CWavLib::ScaleSamples( tCopy, 1.0 / ns4::CWavLib::MaxSample( tCopy ) );
