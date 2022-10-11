@@ -268,7 +268,7 @@ namespace ns4 {
 			}
 #if 1		
 //#ifndef _DEBUG
-			if ( m_ui32OverSample ) {
+			if ( m_ui32OverSample > 1 && CSample::m_dOversamplingBw > 0.0 ) {
 				std::printf( "Oversampling: B%.2X I%.2X S%.2X\r\n", m_vSamples[I].ui32Bank, m_vSamples[I].ui32Inst, m_vSamples[I].ui32Samp );
 				m_vSamples[I].sSample.UpSampleTo( m_ui32OverSample );
 			}
@@ -704,6 +704,23 @@ std::string sLine = Read( _fStream );
 					_idData.ui8DecayLevel = 0;
 				}
 				_idData.dRelease = CentsToGameTime( ui32Temp3 );
+				continue;
+			}
+			if ( std::sscanf( _sLastLine.c_str(), "Key Base %X Fine Tune %X Volume Attenuation %X Pitch %f", &ui32Temp0, &i32Temp1, &ui32Temp2, &fTemp ) == 4 ) {
+				_idData.ui8RootKey = static_cast<uint8_t>(ui32Temp0);
+				_idData.ui8FineTune = static_cast<uint8_t>(i32Temp1);
+				_idData.ui8Vol = AttenuationTodBMidi( ui32Temp2 );
+				//_idData.dFineTuneFloat = fTemp;
+
+				double dRealBase = 60.0 - std::log2( double( fTemp ) ) * 12.0;
+				_idData.ui8RootKey = static_cast<uint8_t>(std::round( dRealBase ));
+				double dDiff = _idData.ui8RootKey - dRealBase;
+				//_idData.ui8FineTune = static_cast<uint8_t>(std::round( dDiff * 100 ));
+				_idData.dFineTuneFloat = dDiff;
+
+				/*char szBuffer[128];
+				::sprintf_s( szBuffer, "%-18s: Roots: %.2X -> %.2X; Fine; %.3d -> %+.8f\r\n", _idData.sSampleName.c_str(), static_cast<uint8_t>(ui32Temp0), _idData.ui8RootKey, static_cast<int8_t>(i32Temp1), _idData.dFineTuneFloat * 100.0 );
+				::OutputDebugStringA( szBuffer );*/
 				continue;
 			}
 			if ( std::sscanf( _sLastLine.c_str(), "Key Base %X Fine Tune %X Volume Attenuation %X", &ui32Temp0, &i32Temp1, &ui32Temp2 ) == 3 ) {

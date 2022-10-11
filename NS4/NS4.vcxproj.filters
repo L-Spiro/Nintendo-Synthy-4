@@ -811,5 +811,8 @@
     <None Include="Src\Games\NS4PerfectDarkOverSamplingFiles.inl">
       <Filter>Header Files\Games</Filter>
     </None>
+    <None Include="Src\Games\NS4TheLegendOfZeldaMajorasMaskFiles.inl">
+      <Filter>Header Files\Games</Filter>
+    </None>
   </ItemGroup>
 </Project>

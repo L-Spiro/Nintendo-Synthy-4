@@ -1994,6 +1994,7 @@ namespace ns4 {
 			uint32_t					ui32Hz;
 			uint32_t					ui32DustSettle;
 			int32_t						i32Base;
+			double						dPitchMod;
 			uint16_t					ui16PitchBendRange;
 			
 			bool						bLpf;
@@ -2027,12 +2028,14 @@ namespace ns4 {
 					ui16PitchBendRange = psSoundbankSample->ui32BendRange;
 					i32Base = psSoundbankSample->ui8RootKey;
 					i8FineTune = int8_t( psSoundbankSample->ui8FineTune );
+					dPitchMod = psSoundbankSample->dFineTuneFloat;
 					ui32Hz = psSoundbankSample->ui32SamplingRate;
 				}
 				else {
 					ui16PitchBendRange = 200;
 					i32Base = 0x3C;
 					i8FineTune = 0;
+					dPitchMod = 0.0f;
 					ui32Hz = 0;
 				}
 				if ( _psSample ) {
@@ -2082,7 +2085,8 @@ namespace ns4 {
 					std::pow( 2.0, (int8_t( ui8Note ) -
 						int8_t( i32Base ) +
 						dPitchBend * (ui16PitchBendRange / 100.0) +
-						((i8FineTune + i8TrackFineTune) / 100.0)) / 12.0 )
+						((i8FineTune + i8TrackFineTune) / 100.0) +
+						dPitchMod) / 12.0 )
 					* vVibrato.Value()
 					* vaVibratoAdsr.Value()
 					* dLinearPitchScale;

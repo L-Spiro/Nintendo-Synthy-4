@@ -1090,7 +1090,7 @@ namespace ns4 {
 							nNote.eEnvelope.SetReleaseSamples( static_cast<uint32_t>(max( max( AdsrReleaseRateToTime(
 								(ui32Bank == 127 && m_sSettings.ui8AdsrPercReleaseRate) ? m_sSettings.ui8AdsrPercReleaseRate : uint8_t( msState.ui16ReleaseRate ),
 								uint32_t( m_sSettings.dGameFreq ) ) * dReleaseFactor, m_sSettings.dMinReleaseTime ), 16.0 / m_sSettings.dGameFreq ) * _troOptions.uiSampleRate) );
-
+							nNote.eEnvelope.SetReleaseRate( true );
 							nNote.vaVibratoAdsr.SetDepth( msState.ui8State[NS4_CHN_VIB_DEPTH] );
 							nNote.vaVibratoAdsr.SetRate( msState.ui8State[NS4_CHN_VIB_RATE], uint32_t( m_sSettings.dGameFreq ), _troOptions.uiSampleRate );
 							nNote.vaVibratoAdsr.SetDelay( msState.ui8State[NS4_CHN_VIB_DELEY], _troOptions.uiSampleRate );

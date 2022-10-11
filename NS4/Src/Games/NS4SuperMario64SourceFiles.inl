@@ -121,7 +121,7 @@
 { u8"Super Mario 64 (U) 00000021 007B0860 File Select Screen.mid", u8"Super Mario 64 (U) 00000021 007B0860 File Select Screen.mid TrackParseDebug.txt", u8"File Select", 0x24 },
 { u8"Super Mario 64 (U) 0000001D 007B0860 Peach's Letter.mid", u8"Super Mario 64 (U) 0000001D 007B0860 Peach's Letter.mid TrackParseDebug.txt", u8"Peach’s Message", 0x1E },
 { u8"Super Mario 64 (U) 0000001E 007B0860 Opening Cutscene.mid", u8"Super Mario 64 (U) 0000001E 007B0860 Opening Cutscene.mid TrackParseDebug.txt", u8"Opening", 0x1B },
-{ u8"Super Mario 64 (U) 00000022 007B0860 Latiku's Theme.mid", u8"Super Mario 64 (U) 00000022 007B0860 Latiku's Theme.mid TrackParseDebug.txt", u8"Latiku’s Message", 0x1B },
+{ u8"Super Mario 64 (U) 00000022 007B0860 Latiku's Theme.mid", u8"Super Mario 64 (U) 00000022 007B0860 Latiku's Theme.mid TrackParseDebug.txt", u8"Lakitu’s Message", 0x1B },
 { u8"Super Mario 64 (U) 00000010 007B0860 Bowser's Message.mid", u8"Super Mario 64 (U) 00000010 007B0860 Bowser's Message.mid TrackParseDebug.txt", u8"Koopa’s Message", 0x12,
 	1, {
 		{ ns4::CMidiFile::NS4_ES_MASTER, ns4::CMidiFile::NS4_E_GLOBAL_SET_REVERB, 0, ns4::CReverb::NS4_T_SUPER_MARIO_64_1 },

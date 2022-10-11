@@ -21,6 +21,7 @@ namespace ns4 {
 			uint32_t					ui32SamplingRate;
 			double						dAttack;
 			double						dDecay;
+			double						dFineTuneFloat;
 			uint8_t						ui8AttackLevel;
 			uint8_t						ui8DecayLevel;
 			double						dRelease;
@@ -72,6 +73,7 @@ namespace ns4 {
 				idData.ui32SamplingRate = 22050;
 				idData.dAttack = 0.0;
 				idData.dDecay = -1.0;
+				idData.dFineTuneFloat = 0.0;
 				idData.ui8AttackLevel = 0x7F;
 				idData.ui8DecayLevel = 0x7F;
 				idData.dRelease = 0.1;

@@ -21,7 +21,8 @@ namespace ns4 {
 			m_uiTick( 0 ),
 			m_dReleaseTime( 200.0 ),
 			m_bRelease( false ),
-			m_dReleaseLevel( 0.0 ) {
+			m_dReleaseLevel( 0.0 ),
+			m_bReleaseIsRate( false ) {
 		}
 		~CEnvelope() {
 		}
@@ -63,13 +64,22 @@ namespace ns4 {
 		void						SetReleaseSamples( uint32_t _uiTime ) { m_dReleaseTime = static_cast<double>(_uiTime); }
 
 		/**
+		 * Sets he release type (time or rate).
+		 *
+		 * \param _bIsRate If true the release time is interpretted as a release rate, otherwise it is interpretted as a release time.
+		 */
+		void						SetReleaseRate( bool _bIsRate ) { m_bReleaseIsRate = _bIsRate; }
+
+		/**
 		 * Activate release.
 		 */
 		void						Release() {
 			if ( !m_bRelease ) {
 				m_dReleaseLevel = CurLevel();
 				m_bRelease = true;
-				//m_dReleaseTime *= m_dReleaseLevel;
+				if ( m_bReleaseIsRate ) {
+					m_dReleaseTime *= m_dReleaseLevel;
+				}
 				m_uiTick = 0;
 			}
 		}
@@ -158,6 +168,8 @@ namespace ns4 {
 		double						m_dReleaseLevel;
 		/** Are we in release? */
 		bool						m_bRelease;
+		/** Is the release time actually a release rate? */
+		bool						m_bReleaseIsRate;
 		
 	};
 
