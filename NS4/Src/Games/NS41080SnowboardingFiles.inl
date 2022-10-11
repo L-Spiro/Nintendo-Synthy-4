@@ -33,21 +33,21 @@
 //#define NS4_CHANNEL_DETERMINES_PROGRAM		true
 
 
-{ u8"1080 Snowboarding (JU) (M2) 00000000 00DBFE30.mid", u8"1080 Snowboarding (JU) (M2) 00000000 00DBFE30.mid TrackParseDebug.txt", u8"00000000 00DBFE30", 0,
+/*{ u8"1080 Snowboarding (JU) (M2) 00000000 00DBFE30.mid", u8"1080 Snowboarding (JU) (M2) 00000000 00DBFE30.mid TrackParseDebug.txt", u8"00000000 00DBFE30", 0,
 	2,
 	{
 		{ NS4_ADD_MIDI_FILE( u8"1080 Snowboarding (JU) (M2) 00000000 00DBFE30_AdditionalPart1.mid", false ) },
 		{ NS4_ADD_MIDI_FILE( u8"1080 Snowboarding (JU) (M2) 00000000 00DBFE30_AdditionalPart2.mid", false ) },
 	}
-},
+},*/
 //{ u8"1080 Snowboarding (JU) (M2) 00000000 00DBFE30_AdditionalPart1.mid", u8"1080 Snowboarding (JU) (M2) 00000000 00DBFE30_AdditionalPart1.mid TrackParseDebug.txt", u8"00000000 00DBFE30_AdditionalPart1", 0 },
 //{ u8"1080 Snowboarding (JU) (M2) 00000000 00DBFE30_AdditionalPart2.mid", u8"1080 Snowboarding (JU) (M2) 00000000 00DBFE30_AdditionalPart2.mid TrackParseDebug.txt", u8"00000000 00DBFE30_AdditionalPart2", 0 },
-{ u8"1080 Snowboarding (JU) (M2) 00000001 00DBFE30.mid", u8"1080 Snowboarding (JU) (M2) 00000001 00DBFE30.mid TrackParseDebug.txt", u8"00000001 00DBFE30", 0,
+/*{ u8"1080 Snowboarding (JU) (M2) 00000001 00DBFE30.mid", u8"1080 Snowboarding (JU) (M2) 00000001 00DBFE30.mid TrackParseDebug.txt", u8"00000001 00DBFE30", 0,
 	1,
 	{
 		{ NS4_ADD_MIDI_FILE( u8"1080 Snowboarding (JU) (M2) 00000001 00DBFE30_AdditionalPart1.mid", false ) },
 	}
-},
+},*/
 //{ u8"1080 Snowboarding (JU) (M2) 00000001 00DBFE30_AdditionalPart1.mid", u8"1080 Snowboarding (JU) (M2) 00000001 00DBFE30_AdditionalPart1.mid TrackParseDebug.txt", u8"00000001 00DBFE30_AdditionalPart1", 0 },
 { u8"1080 Snowboarding (JU) (M2) 00000002 00DBFE30.mid", u8"1080 Snowboarding (JU) (M2) 00000002 00DBFE30.mid TrackParseDebug.txt", u8"00000002 00DBFE30", 0 },
 { u8"1080 Snowboarding (JU) (M2) 00000003 00DBFE30.mid", u8"1080 Snowboarding (JU) (M2) 00000003 00DBFE30.mid TrackParseDebug.txt", u8"00000003 00DBFE30", 0 },

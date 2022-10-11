@@ -1727,6 +1727,21 @@ namespace ns4 {
 						}
 						break;
 					}
+					case NS4_E_COPY_CONTROL_TO_TICK : {
+						if ( iTrackByChan >= 0 && iTrackByChan < m_vTracks.size() ) {
+							uint64_t ui64SrcTick = CubaseToTick( _pmMods[I].tsTime0.ui32M, _pmMods[I].tsTime0.ui32B, _pmMods[I].tsTime0.ui32T, _pmMods[I].tsTime0.ui32S );
+							uint64_t ui64DstTick = CubaseToTick( _pmMods[I].tsTime1.ui32M, _pmMods[I].tsTime1.ui32B, _pmMods[I].tsTime1.ui32T, _pmMods[I].tsTime1.ui32S );
+							NS4_MIDI_STATE msState;
+							msState.MakeDefault();
+							for ( size_t K = 0; K < m_vTracks[iTrackByChan].vEvents.size(); ++K ) {
+								if ( m_vTracks[iTrackByChan].vEvents[K].ui64Time > ui64SrcTick ) { break; }
+								msState.AdvanceMidiState( m_vTracks[iTrackByChan].vEvents[K] );
+							}
+							uint8_t ui8Control = uint8_t( _pmMods[I].ui32Operand0 );
+							InsertEvent( m_vTracks[iTrackByChan].vEvents, ui8Control, msState.ui8State[ui8Control], uint8_t( iTrackByChan ), ui64DstTick, nullptr );
+						}
+						break;
+					}
 					case NS4_E_INSERT_FADE : {
 						for ( auto K = m_vTracks.size(); K--; ) {
 							int32_t iChan = GetTrackChannel( m_vTracks[K].vEvents );
@@ -1876,6 +1891,16 @@ namespace ns4 {
 								}
 							}
 							InsertEvent( m_vTracks[K].vEvents, CreatePitchBend( std::log2( dTargetVal ), uint32_t( ui64Tick + ui32Dur ), uint8_t( iChan ) ), nullptr );
+						}
+						break;
+					}
+					case NS4_E_REMOVE_ALL_EVENTS_FROM_TICK : {
+						uint64_t ui64Start = CubaseToTick( _pmMods[I].tsTime0.ui32M, _pmMods[I].tsTime0.ui32B, _pmMods[I].tsTime0.ui32T, _pmMods[I].tsTime0.ui32S );
+						for ( auto K = m_vTracks.size(); K--; ) {
+							for ( auto J = m_vTracks[K].vEvents.size(); J--; ) {
+								if ( m_vTracks[K].vEvents[J].ui64Time < ui64Start ) { break; }
+								m_vTracks[K].vEvents.pop_back();
+							}
 						}
 						break;
 					}
@@ -3850,6 +3875,21 @@ namespace ns4 {
 						}
 						break;
 					}
+					case NS4_E_COPY_CONTROL_TO_TICK : {
+						if ( _pmMods[I].ui32Channel == iTrackByChan ) {
+							uint64_t ui64SrcTick = CubaseToTick( _pmMods[I].tsTime0.ui32M, _pmMods[I].tsTime0.ui32B, _pmMods[I].tsTime0.ui32T, _pmMods[I].tsTime0.ui32S );
+							uint64_t ui64DstTick = CubaseToTick( _pmMods[I].tsTime1.ui32M, _pmMods[I].tsTime1.ui32B, _pmMods[I].tsTime1.ui32T, _pmMods[I].tsTime1.ui32S );
+							NS4_MIDI_STATE msState;
+							msState.MakeDefault();
+							for ( size_t K = 0; K < _vTrack.size(); ++K ) {
+								if ( _vTrack[K].ui64Time > ui64SrcTick ) { break; }
+								msState.AdvanceMidiState( _vTrack[K] );
+							}
+							uint8_t ui8Control = uint8_t( _pmMods[I].ui32Operand0 );
+							InsertEvent( _vTrack, ui8Control, msState.ui8State[ui8Control], uint8_t( iTrackByChan ), ui64DstTick, &_tbTimeBlock );
+						}
+						break;
+					}
 					case NS4_E_STOP_AT_TICK : {
 						uint64_t ui64Tick = CubaseToTick( _pmMods[I].tsTime0.ui32M, _pmMods[I].tsTime0.ui32B, _pmMods[I].tsTime0.ui32T, _pmMods[I].tsTime0.ui32S );
 						RemoveAllAfterTick( _vTrack, ui64Tick, true, &_tbTimeBlock );
@@ -4002,6 +4042,16 @@ namespace ns4 {
 							}
 						}
 						InsertEvent( _vTrack, CreatePitchBend( std::log2( dTargetVal ), uint32_t( ui64Tick + ui32Dur ), uint8_t( iChan ) ), &_tbTimeBlock );
+						break;
+					}
+					case NS4_E_REMOVE_ALL_EVENTS_FROM_TICK : {
+						uint64_t ui64Start = CubaseToTick( _pmMods[I].tsTime0.ui32M, _pmMods[I].tsTime0.ui32B, _pmMods[I].tsTime0.ui32T, _pmMods[I].tsTime0.ui32S );
+						for ( auto K = m_vTracks.size(); K--; ) {
+							for ( auto J = _vTrack.size(); J--; ) {
+								if ( _vTrack[J].ui64Time < ui64Start ) { break; }
+								_vTrack.pop_back();
+							}
+						}
 						break;
 					}
 					case NS4_E_REPLACE_INST : {

@@ -182,12 +182,14 @@ namespace ns4 {
 			NS4_E_INSERT_CONTROL_LINE_TO,						/**< Inserts an array of controls to a given value from its current value starting from a given tick and taking X ticks to complete. */
 			NS4_E_INSERT_CONTROL_LINE_TO_TIME,					/**< Inserts an array of controls to a given value from its current value starting from a given time (dOperandDouble0) and taking dOperandDouble1 seconds to complete. */
 			NS4_E_INSERT_CONTROL_LINE_TO_TICK_OVER_TIME,		/**< Inserts an array of controls to a given value from its current value ending at a given time (tsTime0) and taking dOperandDouble0 seconds to arrive at the given tick. */
+			NS4_E_COPY_CONTROL_TO_TICK,							/**< Copies the value of a given control (ui32Operand0) at the given tick (tsTime0) to another tick (tsTime1). */
 			NS4_E_INSERT_FADE,									/**< The same as NS4_E_INSERT_CONTROL_LINE_TO_TIME except that it is applied to all tracks. */
 			NS4_E_INSERT_TIME_FADE_AT_TIME,						/**< The same as NS4_E_INSERT_FADE except that the fade begins at the given time (dOperandDouble0) and lasts the given duration in seconds (dOperandDouble1). */
 			NS4_E_INSERT_TIME_FADE_AT_TICK,						/**< The same as NS4_E_INSERT_FADE except that the fade begins at the given tick and lasts the given duration in seconds (dOperandDouble0). */
 			NS4_E_INSERT_TIME_FADE_AT_TICK_TRACK_MASK,			/**< The same as NS4_E_INSERT_TIME_FADE_AT_TICK except that ui32Channel contains a bit-mask indicating which channels to fade. */
 			NS4_E_INSERT_TIME_FADEF_AT_TIME,					/**< The same as NS4_E_INSERT_FADE except that the fade begins at the given time (dOperandDouble0) and lasts the given duration in seconds (dOperandDouble1), and the target value is in dOperandDouble2. */
 			NS4_E_INSERT_PITCHBENDS_AT_TIME_ALL_TRACKS,			/**< The same as NS4_E_INSERT_FADE except that the pitch-change (ui32Operand0) begins at the given time (dOperandDouble0) and lasts the given duration in seconds (dOperandDouble1). */
+			NS4_E_REMOVE_ALL_EVENTS_FROM_TICK,					/**< Removes all events in all tracks starting at the given tick until the end of the file. */
 			NS4_E_TAG_TRACK_BY_IDX,								/**< Tags a track given a track index. */
 			NS4_E_TAG_TRACK_BY_CHNL,							/**< Tags a track given a track channel. */
 			NS4_E_MUTE_UNTAGGED_TRACKS,							/**< Mutes all tracks that have not been tagged by NS4_E_TAG_TRACK_BY_IDX.  ui32Channel serves as the track index. */
@@ -208,6 +210,7 @@ namespace ns4 {
 			NS4_E_SET_INST,										/**< Inserts a program-change (ui32Operand0) at the given tick (tsTime0) for the given channel (ui32Channel). */
 			NS4_E_REPLACE_INST,									/**< Replaces instrument ui32Operand0 with instrument ui32Operand1.  Only valid the post-unroll stage. */
 			NS4_E_SET_ADSR_VIBRATO_MAPPING,						/**< Sets the ADSR vibrato mapping.  Set ui32Operand0 to one of te NS4_ADSR_VIBRATO_MAPPING enumerations. */
+			NS4_E_SET_ADSR_RELEASE_RATE,						/**< Sets the default ADSR release rate for a file.  Can be overridden by MIDI commands. */
 			NS4_E_IGNORE_TEMPO_LOOPS,							/**< Ignore loop points when creating timelines.  Allows creating a set of tempo changes that are not repeated in loops.  Only useful in the pre-unroll or post-supplemental stage. */
 			NS4_E_STOP_AT_TICK,									/**< Stops a MIDI file at the given tick.  Unlike other forms of muting, this adds note-off events to close off any open notes at the given tick. */
 			NS4_E_STOP_AT_TIME,									/**< Stops a MIDI file at the given time (dOperandDouble0).  Unlike other forms of muting, this adds note-off events to close off any open notes at the given tick. */

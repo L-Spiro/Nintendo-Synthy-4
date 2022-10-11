@@ -207,6 +207,7 @@
     <ClInclude Include="Src\WavLib\NS4WavLib.h" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="Src\Games\NS41080SnowboardingFiles.inl" />
     <None Include="Src\Games\NS4AeroFightersAssaultFiles.inl" />
     <None Include="Src\Games\NS4AeroFightersAssaultOverSamplingFiles.inl" />
     <None Include="Src\Games\NS4AeroGaugeFiles.inl" />
