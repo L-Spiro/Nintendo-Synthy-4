@@ -79,7 +79,7 @@
 //#define NS4_PRINT_BEST_BANK
 
 #ifdef NS4_BULK
-//#define NS4_ONE_OFF								(114-1)
+//#define NS4_ONE_OFF								(27-1)
 //#define NS4_EXPORT_SOME
 //#define NS4_EPORT_FROM								(12-1)
 #else
@@ -325,8 +325,8 @@ int main() {
 //#include "Src/Games/NS4DryDryDocks64Files.inl"
 //#include "Src/Games/NS4SuperMario64ModFiles.inl"
 //#include "Src/Games/NS4Starfox64Files.inl"
-//#include "Src/Games/NS4TheLegendOfZeldaOcarinaOfTimeFiles.inl"
-#include "Src/Games/NS4TheLegendOfZeldaMajorasMaskFiles.inl"
+#include "Src/Games/NS4TheLegendOfZeldaOcarinaOfTimeFiles.inl"
+//#include "Src/Games/NS4TheLegendOfZeldaMajorasMaskFiles.inl"
 //#include "Src/Games/NS4YoshisStoryFiles.inl"
 //#include "Src/Games/NS4MarioKart64Files.inl"
 //#include "Src/Games/NS41080SnowboardingFiles.inl"

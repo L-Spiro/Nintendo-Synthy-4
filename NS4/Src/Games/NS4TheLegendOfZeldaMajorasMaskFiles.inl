@@ -125,7 +125,11 @@
 },
 { u8"Legend of Zelda, The - Majora's Mask (U) 00000057 00A684D0 Past midnight (day3).mid", u8"Legend of Zelda, The - Majora's Mask (U) 00000057 00A684D0 Past midnight (day3).mid TrackParseDebug.txt", u8"Final Hours", 0x17 },
 { u8"Legend of Zelda, The - Majora's Mask (U) 0000003A 00A684D0 Astral observatory.mid", u8"Legend of Zelda, The - Majora's Mask (U) 0000003A 00A684D0 Astral observatory.mid TrackParseDebug.txt", u8"Astral Observatory", 0x17 },
-{ u8"Legend of Zelda, The - Majora's Mask (U) 00000029 00A684D0 Zeldas lullaby.mid", u8"Legend of Zelda, The - Majora's Mask (U) 00000029 00A684D0 Zeldas lullaby.mid TrackParseDebug.txt", u8"Zelda’s Theme", 0x06 },
+{ u8"Legend of Zelda, The - Majora's Mask (U) 00000029 00A684D0 Zeldas lullaby.mid", u8"Legend of Zelda, The - Majora's Mask (U) 00000029 00A684D0 Zeldas lullaby.mid TrackParseDebug.txt", u8"Zelda’s Theme", 0x06,
+	1, {
+		{ ns4::CMidiFile::NS4_ES_MASTER, ns4::CMidiFile::NS4_E_GLOBAL_SET_REVERB, 0, ns4::CReverb::NS4_T_THE_LEGEND_OF_ZELDA_OCARINA_OF_TIME_0_0C00_2FFF }, // Guess.
+	},
+},
 { u8"Legend of Zelda, The - Majora's Mask (U) 00000034 00A684D0 Song of time.mid", u8"Legend of Zelda, The - Majora's Mask (U) 00000034 00A684D0 Song of time.mid TrackParseDebug.txt", u8"Ocarina “Song of Time”", 0x00,
 	1, {
 		{ NS4_STOP_AT_TICK( 5, 3, 1, 0 ) },

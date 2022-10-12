@@ -148,6 +148,7 @@ namespace ns4 {
 			NS4_T_TOON_PANIC_0					= 133,
 			NS4_T_ALL_STAR_BASEBALL_99_DELAY_0	= 134,
 			NS4_T_ALL_STAR_BASEBALL_99_0		= 135,
+			NS4_T_THE_LEGEND_OF_ZELDA_OCARINA_OF_TIME_2_9A00_5FFF		= 136,
 		};
 
 
@@ -373,6 +374,9 @@ namespace ns4 {
 
 		/** Delay lines for The Legend of Zelda: Ocarina of Time set. */
 		static NS4_REVERB_DELAY_LINE			m_rdlTheLegendOfZeldaOcarinaOfTime1[];
+
+		/** Delay lines for The Legend of Zelda: Ocarina of Time set. */
+		static NS4_REVERB_DELAY_LINE			m_rdlTheLegendOfZeldaOcarinaOfTime2[];
 
 		/** Delay lines for Mario Kart 64 set. */
 		static NS4_REVERB_DELAY_LINE			m_rdlMarioKart640[];

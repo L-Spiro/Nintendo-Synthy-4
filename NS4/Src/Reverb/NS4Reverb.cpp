@@ -379,6 +379,17 @@ namespace ns4 {
 		},
 	};
 
+	/** Delay lines for The Legend of Zelda: Ocarina of Time set. */
+	NS4_REVERB_DELAY_LINE CReverb::m_rdlTheLegendOfZeldaOcarinaOfTime2[] = {
+		{
+			0x9A00,																	// ui32Delay
+			0x9A00,																	// ui32FeedbackDelay
+			1.0,																	// dVol
+			0x5FFF / double( 0x7FFF ),												// dFeedback
+			1.0 / 0x7FFF															// dMinLevel
+		},
+	};
+
 	/** Delay lines for Mario Kart 64 set. */
 	NS4_REVERB_DELAY_LINE CReverb::m_rdlMarioKart640[] = {
 		{
@@ -2246,6 +2257,15 @@ namespace ns4 {
 			NS4_NO_FADE,
 			NS4_LPF( 8191.0, 0.00725722320497120, 2.0, 0 ),
 		},	// 135
+		// The Legend of Zelda: Ocarina of Time.
+		{
+			NS4_NO_TAPS,															// prtTable
+			0.0,																	// dTapVol
+			0,																		// i64TapOffset
+			NS4_NO_FADE,															// dTime
+			NS4_NO_LPF,																// dLpfFactor
+			NS4_DELAY( m_rdlTheLegendOfZeldaOcarinaOfTime2, (double( 0x7FFF ) / double( 0x7FFF )) ),	// dDelayVol
+		},	// 136
 	};
 
 
