@@ -72,14 +72,14 @@
 
 #define NS4_BULK
 
-//#define NS4_SINGLE_TRACK								2
+//#define NS4_SINGLE_TRACK								5
 //#define NS4_NO_NORMALIZE
 // 
 //#define NS4_NO_OUTPUT									// Used to quickly print information in the MIDI files without actually generating WAV content.
 //#define NS4_PRINT_BEST_BANK
 
 #ifdef NS4_BULK
-//#define NS4_ONE_OFF								(123-1)
+//#define NS4_ONE_OFF								(114-1)
 //#define NS4_EXPORT_SOME
 //#define NS4_EPORT_FROM								(12-1)
 #else
@@ -529,59 +529,7 @@ int main() {
 		ns4::CMidiFile::m_sSettings.bAfterTouchModsVibAndTrem = NS4_AFTERTOUCH_MODS_VIB_TREM;
 #endif	// NS4_AFTERTOUCH_MODS_VIB_TREM
 		
-		ns4::CMidiFile::NS4_TRACK_RENDER_OPTIONS troOptions;
-#ifdef NS4_BULK
-		troOptions.ui32TotalMods = mfFiles[F].ui32Modifiers;
-		troOptions.pmMods = mfFiles[F].mModifiers;
-#else
-		troOptions.ui32TotalMods = 0;
-		troOptions.pmMods = nullptr;
-#endif
 
-		const char * pcMidiFolder = reinterpret_cast<const char *>(u8"J:\\My Projects\\MIDIWorks\\Exports\\" NS4_FOLDER "\\");
-
-		std::string sFile = std::string( pcMidiFolder ) + reinterpret_cast<const char *>(mfFiles[F].pcMidiFile);
-		bool bMidi = mfMidi.Open( sFile.c_str() );
-#ifdef NS4_EXPORT_SOME
-		// Any conditionals go here.
-		//if ( !mfMidi.HasProgramChangeToValueOrAbove( 0x6F ) ) { continue; }
-#endif
-#ifdef NS4_BULK
-		uint32_t ui32FinalLoops = mfFiles[F].ui32Loops == 0 ? ui32Loops : mfFiles[F].ui32Loops;
-#else
-		uint32_t ui32FinalLoops = ui32Loops;
-#endif
-
-
-#ifdef NS4_PRINT_BEST_BANK
-		sReferencedInsts.clear();
-		mfMidi.GatherInstruments( sReferencedInsts );
-		for ( auto S = vBanks.size(); --S; ) {
-			bool bTotalsMatch;
-			double dSuitability = vBanks[S].SuitabilityWithInstrumentSet( sReferencedInsts, bTotalsMatch );
-			if ( dSuitability == 1.0 ) {
-				std::printf( "Suitable Bank: %.2X  Totals Match: %s\r\n", static_cast<uint32_t>(S), bTotalsMatch ? "true" : "false" );
-			}
-		}
-#endif	// NS4_PRINT_BEST_BANK
-
-
-		mfMidi.ApplyPreUnrollMods( mfFiles[F].ui32Modifiers, mfFiles[F].mModifiers, ns4::CMidiFile::NS4_ES_PRE_UNROLL, pcMidiFolder );
-		ns4::CMidiFile::m_sSettings.bIgnoreLoops = ns4::CMidiFile::FindGlobalMod( ns4::CMidiFile::NS4_E_GLOBAL_IGNORE_LOOPS, troOptions.ui32TotalMods, troOptions.pmMods ) != nullptr;
-		if ( mfFiles[F].pcDbgFile && mfFiles[F].pcDbgFile[0] ) {
-			bool bMidiDbg = mfMidi.AddDebug_Standard( (std::string( reinterpret_cast<const char *>(u8"J:\\My Projects\\MIDIWorks\\Exports\\" NS4_FOLDER "\\DBG\\") ) + reinterpret_cast<const char *>(mfFiles[F].pcDbgFile)).c_str() );
-		}
-		mfMidi.ApplyPreUnrollMods( mfFiles[F].ui32Modifiers, mfFiles[F].mModifiers, ns4::CMidiFile::NS4_ES_POST_SUPPLEMENTAL, pcMidiFolder );
-		std::printf( "Loaded: %s\r\n", sFile.c_str() );
-		
-
-#else
-		bool bMidi = mfMidi.Open( u8"J:\\My Projects\\MIDIWorks\\Exports\\" NS4_FOLDER "\\" NS4_FILE ".mid" );
-#ifdef NS4_DBG
-		bool bMidiDbg = mfMidi.AddDebug_Standard( u8"J:\\My Projects\\MIDIWorks\\Exports\\" NS4_FOLDER "\\DBG\\" NS4_DBG ".txt" );
-#endif	// NS4_DBG
-#endif
-		
 
 #ifdef NS4_SIDE_DUR
 		ns4::CWavLib::m_sSettings.dSideMaxDur = double( NS4_SIDE_DUR );
@@ -670,6 +618,59 @@ int main() {
 #ifdef NS4_ADSR_PERC_RELEASE
 		ns4::CMidiFile::m_sSettings.ui8AdsrPercReleaseRate = NS4_ADSR_PERC_RELEASE;
 #endif	// NS4_ADSR_PERC_RELEASE
+
+	ns4::CMidiFile::NS4_TRACK_RENDER_OPTIONS troOptions;
+#ifdef NS4_BULK
+		troOptions.ui32TotalMods = mfFiles[F].ui32Modifiers;
+		troOptions.pmMods = mfFiles[F].mModifiers;
+#else
+		troOptions.ui32TotalMods = 0;
+		troOptions.pmMods = nullptr;
+#endif
+
+		const char * pcMidiFolder = reinterpret_cast<const char *>(u8"J:\\My Projects\\MIDIWorks\\Exports\\" NS4_FOLDER "\\");
+
+		std::string sFile = std::string( pcMidiFolder ) + reinterpret_cast<const char *>(mfFiles[F].pcMidiFile);
+		bool bMidi = mfMidi.Open( sFile.c_str() );
+#ifdef NS4_EXPORT_SOME
+		// Any conditionals go here.
+		//if ( !mfMidi.HasProgramChangeToValueOrAbove( 0x6F ) ) { continue; }
+#endif
+#ifdef NS4_BULK
+		uint32_t ui32FinalLoops = mfFiles[F].ui32Loops == 0 ? ui32Loops : mfFiles[F].ui32Loops;
+#else
+		uint32_t ui32FinalLoops = ui32Loops;
+#endif
+
+
+#ifdef NS4_PRINT_BEST_BANK
+		sReferencedInsts.clear();
+		mfMidi.GatherInstruments( sReferencedInsts );
+		for ( auto S = vBanks.size(); --S; ) {
+			bool bTotalsMatch;
+			double dSuitability = vBanks[S].SuitabilityWithInstrumentSet( sReferencedInsts, bTotalsMatch );
+			if ( dSuitability == 1.0 ) {
+				std::printf( "Suitable Bank: %.2X  Totals Match: %s\r\n", static_cast<uint32_t>(S), bTotalsMatch ? "true" : "false" );
+			}
+		}
+#endif	// NS4_PRINT_BEST_BANK
+
+
+		mfMidi.ApplyPreUnrollMods( mfFiles[F].ui32Modifiers, mfFiles[F].mModifiers, ns4::CMidiFile::NS4_ES_PRE_UNROLL, pcMidiFolder );
+		ns4::CMidiFile::m_sSettings.bIgnoreLoops = ns4::CMidiFile::FindGlobalMod( ns4::CMidiFile::NS4_E_GLOBAL_IGNORE_LOOPS, troOptions.ui32TotalMods, troOptions.pmMods ) != nullptr;
+		if ( mfFiles[F].pcDbgFile && mfFiles[F].pcDbgFile[0] ) {
+			bool bMidiDbg = mfMidi.AddDebug_Standard( (std::string( reinterpret_cast<const char *>(u8"J:\\My Projects\\MIDIWorks\\Exports\\" NS4_FOLDER "\\DBG\\") ) + reinterpret_cast<const char *>(mfFiles[F].pcDbgFile)).c_str() );
+		}
+		mfMidi.ApplyPreUnrollMods( mfFiles[F].ui32Modifiers, mfFiles[F].mModifiers, ns4::CMidiFile::NS4_ES_POST_SUPPLEMENTAL, pcMidiFolder );
+		std::printf( "Loaded: %s\r\n", sFile.c_str() );
+		
+
+#else
+		bool bMidi = mfMidi.Open( u8"J:\\My Projects\\MIDIWorks\\Exports\\" NS4_FOLDER "\\" NS4_FILE ".mid" );
+#ifdef NS4_DBG
+		bool bMidiDbg = mfMidi.AddDebug_Standard( u8"J:\\My Projects\\MIDIWorks\\Exports\\" NS4_FOLDER "\\DBG\\" NS4_DBG ".txt" );
+#endif	// NS4_DBG
+#endif
 
 	{
 		const ns4::CMidiFile::NS4_MODIFIER * pmThis = ns4::CMidiFile::FindGlobalMod( ns4::CMidiFile::NS4_E_GLOBAL_SET_PERC_RELEASE_ADSR, troOptions.ui32TotalMods, troOptions.pmMods );

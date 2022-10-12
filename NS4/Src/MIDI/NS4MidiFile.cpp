@@ -1087,9 +1087,15 @@ namespace ns4 {
 							nNote.eEnvelope.AddBlock( bThis );
 
 							double dReleaseFactor = (ui32Bank == 127 && m_sSettings.dPercEnvReleaseMultiplier) ? m_sSettings.dPercEnvReleaseMultiplier : m_sSettings.dEnvReleaseMultiplier;
-							nNote.eEnvelope.SetReleaseSamples( static_cast<uint32_t>(max( max( AdsrReleaseRateToTime(
+							double dRelTime = AdsrReleaseRateToTime(
 								(ui32Bank == 127 && m_sSettings.ui8AdsrPercReleaseRate) ? m_sSettings.ui8AdsrPercReleaseRate : uint8_t( msState.ui16ReleaseRate ),
-								uint32_t( m_sSettings.dGameFreq ) ) * dReleaseFactor, m_sSettings.dMinReleaseTime ), 16.0 / m_sSettings.dGameFreq ) * _troOptions.uiSampleRate) );
+								uint32_t( m_sSettings.dGameFreq ) );
+							if ( dRelTime < 0.0 ) {
+								nNote.eEnvelope.SetInfiniteRelease();
+							}
+							else {
+								nNote.eEnvelope.SetReleaseSamples( static_cast<uint32_t>(max( max( dRelTime * dReleaseFactor, m_sSettings.dMinReleaseTime ), 16.0 / m_sSettings.dGameFreq ) * _troOptions.uiSampleRate) );
+							}
 							nNote.eEnvelope.SetReleaseRate( true );
 							nNote.vaVibratoAdsr.SetDepth( msState.ui8State[NS4_CHN_VIB_DEPTH] );
 							nNote.vaVibratoAdsr.SetRate( msState.ui8State[NS4_CHN_VIB_RATE], uint32_t( m_sSettings.dGameFreq ), _troOptions.uiSampleRate );
@@ -1420,7 +1426,7 @@ namespace ns4 {
 					msState.dPitch
 					//liPitchBend.Value()
 				);
-				if ( vNotes[J].bActive || (vNotes[J].eEnvelope.InRelease() && vNotes[J].psSoundbankSample) || vNotes[J].ui32DustSettle ) {
+				if ( vNotes[J].bActive || (vNotes[J].eEnvelope.InRelease() && vNotes[J].psSoundbankSample && !vNotes[J].eEnvelope.InfiniteRelease()) || vNotes[J].ui32DustSettle ) {
 					if ( vNotes[J].psSoundbankSample ) {
 						double dVal = vNotes[J].sSampler.Sample();
 						dVal *= MidiLevelToLinear( vNotes[J].eEnvelope.CurLevel() );
@@ -2077,6 +2083,18 @@ namespace ns4 {
 					}
 					case NS4_E_SET_ADSR_VIBRATO_MAPPING : {
 						m_sSettings.avmAdsrVibMap = NS4_ADSR_VIBRATO_MAPPING( _pmMods[I].ui32Operand0 );
+						break;
+					}
+					case NS4_E_SET_ENV_ATK_MULTIPLIER : {
+						m_sSettings.dEnvAttackMultiplier = _pmMods[I].dOperandDouble0;
+						break;
+					}
+					case NS4_E_SET_ENV_DEC_MULTIPLIER : {
+						m_sSettings.dEnvDecayMultiplier = _pmMods[I].dOperandDouble0;
+						break;
+					}
+					case NS4_E_SET_ENV_REL_MULTIPLIER : {
+						m_sSettings.dEnvReleaseMultiplier = _pmMods[I].dOperandDouble0;
 						break;
 					}
 					case NS4_E_SET_INST : {

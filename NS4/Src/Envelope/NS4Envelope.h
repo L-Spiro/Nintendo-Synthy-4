@@ -64,6 +64,11 @@ namespace ns4 {
 		void						SetReleaseSamples( uint32_t _uiTime ) { m_dReleaseTime = static_cast<double>(_uiTime); }
 
 		/**
+		 * Sets infinite release time.
+		 */
+		void						SetInfiniteRelease() { m_dReleaseTime = -1.0; }
+
+		/**
 		 * Sets he release type (time or rate).
 		 *
 		 * \param _bIsRate If true the release time is interpretted as a release rate, otherwise it is interpretted as a release time.
@@ -125,6 +130,7 @@ namespace ns4 {
 		 */
 		double						CurLevel() const {
 			if ( m_bRelease ) {
+				if ( m_dReleaseTime < 0.0 ) { return m_dReleaseLevel; }
 				double dLevel = (m_dReleaseTime - m_uiTick) / m_dReleaseTime * m_dReleaseLevel;
 				return max( dLevel, 0.0 );
 			}
@@ -148,8 +154,16 @@ namespace ns4 {
 		 * \return Returns true if the envelope is in release.
 		 */
 		bool						InRelease() const {
+			if ( m_dReleaseTime < 0.0 ) { return m_bRelease; }
 			return m_bRelease && m_dReleaseTime > m_uiTick;
 		}
+
+		/**
+		 * Returns true if the release is infinite.
+		 *
+		 * \return Returns true if the release is infinite.
+		 */
+		bool						InfiniteRelease() const { return m_dReleaseTime < 0.0; }
 
 
 	protected :

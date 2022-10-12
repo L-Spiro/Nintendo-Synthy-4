@@ -196,25 +196,27 @@ namespace ns4 {
 			NS4_E_MUTE_TAGGED_TRACKS,							/**< Mutes all tracks that have been tagged by NS4_E_TAG_TRACK_BY_IDX.  ui32Channel serves as the track index. */
 			NS4_E_SET_TEMPO_BY_MPQN,							/**< Sets the microseconds-per-quarter note of a song. */
 			NS4_E_TIMELINE_IGNORE_TRACK,						/**< Adds a track (by channel) to the timeline's track-ignore set, causing its loop points to be ignored during the creation of the timeline but present during actual track renering. */
-			NS4_E_REMOVE_LOOP_POINTS,							/**< Removes the loop points found in a given track.  Only useful in the pre-unroll or post-supplemental stage. */
-			NS4_E_REMOVE_ALL_LOOP_POINTS,						/**< Removes the loop points found all tracks.  Only useful in the pre-unroll or post-supplemental stage. */
-			NS4_E_SET_LOOP_POINTS,								/**< Removes existing loop points in a given track and then inserts both a loop-start and a loop-end at the given measures (tsTime0 and tsTime1).  Only useful in the pre-unroll or post-supplemental stage. */
+			NS4_E_REMOVE_LOOP_POINTS,							/**< Removes the loop points found in a given track.  Only useful in the pre-unroll or post-supplemental stages. */
+			NS4_E_REMOVE_ALL_LOOP_POINTS,						/**< Removes the loop points found all tracks.  Only useful in the pre-unroll or post-supplemental stages. */
+			NS4_E_SET_LOOP_POINTS,								/**< Removes existing loop points in a given track and then inserts both a loop-start and a loop-end at the given measures (tsTime0 and tsTime1).  Only useful in the pre-unroll or post-supplemental stages. */
 			NS4_E_SET_LOOP_POINTS_ALL_TRACKS,					/**< Same as NS4_E_SET_LOOP_POINTS, but applied to all tracks in the MIDI file. */
 			NS4_E_AUTO_LOOP,									/**< Automatically inserts loop points at {1,1,1,0} and at the final MIDI event, rounding down if the event is within tsTime0 beyond the interval specified by (Midi.Resolution/ui32Operand0), up to the next (Midi.Resolution/ui32Operand0) tick otherwise.  If ui32Operand0 is 0, looping occurs at exactly the last event in the file. */
 			NS4_E_SET_LOOP_START_BY_FINDING_CONTROL,			/**< Find a given control (ui32Operand0) on a given channel (ui32Channel) and uses the timestamp of that event to add loop-starts to every track.  If the channel is -1, the whole MIDI file is search for the given control until found. */
 			NS4_E_SET_LOOP_END_BY_FINDING_CONTROL,				/**< Find a given control (ui32Operand0) on a given channel (ui32Channel) and uses the timestamp of that event to add loop-ends to every track.  If the channel is -1, the whole MIDI file is search for the given control until found. */
-			NS4_E_SET_TEMPO,									/**< Inserts a tempo-change event at the given tick.  Only useful in the pre-unroll or post-supplemental stage. */
-			NS4_E_SET_TEMPO_AT_TIME,							/**< Inserts a tempo-change event (dOperandDouble0) at the given time in seconds (dOperandDouble1).  Only useful in the pre-unroll or post-supplemental stage. */
-			NS4_E_SET_FORCE_TEMPO,								/**< Replaces all tempo events with the given tempo (dOperandDouble0) or inserts a tempo at tick=0 if no tempo events are found.  Only useful in the pre-unroll or post-supplemental stage. */
+			NS4_E_SET_TEMPO,									/**< Inserts a tempo-change event at the given tick.  Only useful in the pre-unroll or post-supplemental stages. */
+			NS4_E_SET_TEMPO_AT_TIME,							/**< Inserts a tempo-change event (dOperandDouble0) at the given time in seconds (dOperandDouble1).  Only useful in the pre-unroll or post-supplemental stages. */
+			NS4_E_SET_FORCE_TEMPO,								/**< Replaces all tempo events with the given tempo (dOperandDouble0) or inserts a tempo at tick=0 if no tempo events are found.  Only useful in the pre-unroll or post-supplemental stages. */
 			NS4_E_SET_CHANNEL_OFFSET,							/**< Sets a value added to the MIDI channel to get the final channel for a track.  This allows there to be more channels than 16.  Only useful in the pre-unroll. */
 			NS4_E_SET_INST,										/**< Inserts a program-change (ui32Operand0) at the given tick (tsTime0) for the given channel (ui32Channel). */
 			NS4_E_REPLACE_INST,									/**< Replaces instrument ui32Operand0 with instrument ui32Operand1.  Only valid the post-unroll stage. */
 			NS4_E_SET_ADSR_VIBRATO_MAPPING,						/**< Sets the ADSR vibrato mapping.  Set ui32Operand0 to one of te NS4_ADSR_VIBRATO_MAPPING enumerations. */
-			NS4_E_SET_ADSR_RELEASE_RATE,						/**< Sets the default ADSR release rate for a file.  Can be overridden by MIDI commands. */
-			NS4_E_IGNORE_TEMPO_LOOPS,							/**< Ignore loop points when creating timelines.  Allows creating a set of tempo changes that are not repeated in loops.  Only useful in the pre-unroll or post-supplemental stage. */
+			NS4_E_SET_ENV_ATK_MULTIPLIER,						/**< Sets the envelope attack multiplier (dOperandDouble0).  Only useful in the pre-unroll or post-supplemental stages. */
+			NS4_E_SET_ENV_DEC_MULTIPLIER,						/**< Sets the envelope decay multiplier (dOperandDouble0).  Only useful in the pre-unroll or post-supplemental stages. */
+			NS4_E_SET_ENV_REL_MULTIPLIER,						/**< Sets the envelope release multiplier (dOperandDouble0).  Only useful in the pre-unroll or post-supplemental stages. */
+			NS4_E_IGNORE_TEMPO_LOOPS,							/**< Ignore loop points when creating timelines.  Allows creating a set of tempo changes that are not repeated in loops.  Only useful in the pre-unroll or post-supplemental stages. */
 			NS4_E_STOP_AT_TICK,									/**< Stops a MIDI file at the given tick.  Unlike other forms of muting, this adds note-off events to close off any open notes at the given tick. */
 			NS4_E_STOP_AT_TIME,									/**< Stops a MIDI file at the given time (dOperandDouble0).  Unlike other forms of muting, this adds note-off events to close off any open notes at the given tick. */
-			NS4_E_MERGE_TRACKS_BY_INDEX,						/**< Merges one track (ui32Operand0) into another (ui32Operand1).  The first track is then muted.  Only useful in the pre-unroll or post-supplemental stage. */
+			NS4_E_MERGE_TRACKS_BY_INDEX,						/**< Merges one track (ui32Operand0) into another (ui32Operand1).  The first track is then muted.  Only useful in the pre-unroll or post-supplemental stages. */
 			NS4_E_START_AT_TICK,								/**< Starts playback at the given tick. */
 			NS4_E_PLAY_SAMPLE,									/**< Plays a given sample at the given tick. */
 			NS4_E_ADD_MIDI_FILE,								/**< Loads the given MIDI file (pcStringOp), appending it to the end of the current list of tracks.  If ui32Operand0 is non-zero, the first track of the loaded MIDI file is not appended. */
@@ -235,6 +237,7 @@ namespace ns4 {
 			NS4_E_GLOBAL_SET_AS_BONUS,							/**< When alternative numbering is used, this marks a track as a bonus track. */
 			NS4_E_GLOBAL_SET_DEFAULT_REL_RATE,					/**< Sets the starting release rate on all tracks (EAD only).  The release rate can be changed with a NS4_CHN_RELEASE_RATE command. */
 			NS4_E_GLOBAL_SET_MAX_HZ,							/**< Sets the maximum sample-playback Hz (dOperandDouble0). */
+			
 
 		};
 
@@ -1279,6 +1282,7 @@ namespace ns4 {
 		 * \return Returns the ADSR value converted to time.
 		 */
 		static double					AdsrReleaseRateToTime( uint8_t _ui8Rate, uint32_t _ui32Freq ) {
+			if ( !_ui8Rate ) { return -1.0; }
 			const int32_t i32SampsPerFrame = ((_ui32Freq / 60) + 0xF) & ~0xF;
 			const int32_t i32UpsPerFrame = i32SampsPerFrame / 160 + 1;
 			double dTime = 0x8000 / (((_ui8Rate * 24.0)) * i32UpsPerFrame) / 60.0;
@@ -2066,7 +2070,7 @@ namespace ns4 {
 					dPitchBend = _dPitch;
 					dLinearPitchScale = _msCurState.dState[NS4_TRACK_PITCH_SCALE];
 				}
-				else if ( !eEnvelope.InRelease() ) {
+				else if ( !eEnvelope.InRelease() || (eEnvelope.InfiniteRelease() && sSampler.OutOfRange()) ) {
 					if ( ui32DustSettle ) {
 						--ui32DustSettle;
 					}
