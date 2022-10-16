@@ -12,9 +12,11 @@
 #define NS4_OUT_DIRECTORY_NUMBERS			NS4_OUT_DIRECTORY u8"Numbered\\"
 #define NS4_WET_FILTER_FREQ					0.0
 #define NS4_ENV_MULTIPLIER					(2.0)
-#define NS4_PERC_ATK_MULTIPLIER				(1.0)
-#define NS4_PITCH_RANGE						1200
+#define NS4_DEC_MULTIPLIER					(2.0)
+#define NS4_PERC_ATK_MULTIPLIER				(2.0)
+#define NS4_PERC_DEC_MULTIPLIER				(2.0)
 #define NS4_REL_MULTIPLIER					13.0
+#define NS4_PITCH_RANGE						1200
 #define NS4_PERC_INST						127
 #define NS4_ADSR_PERC_RELEASE				10
 #define NS4_NO_PROGRAM_CHANGE_SORT			true
@@ -27,6 +29,8 @@
 #define NS4_USE_CHAN_PAN_WEIGHTING			true
 //#define NS4_PREMULTIPLY_MASTER				true
 #define NS4_MAIN_VOL_CURVE					20.0
+#define NS4_MAIN_VOL_POW					2.0
+#define NS4_LINEAR_VOL_POW					2.0
 //#define NS4_OVERSAMPLING					(1 << 0)
 #define NS4_REVERB_OPTIONS					ns4::CMidiFile::NS4_OVER_127_SWAP_L_AND_R
 //#define NS4_CHANNEL_IDX_DETERMINES_PROGRAM	true
@@ -35,12 +39,13 @@
 
 
 { u8"Legend of Zelda, The - Ocarina of Time (U) (V1.2) 0000001E 00A62D40 Introduction.mid", u8"Legend of Zelda, The - Ocarina of Time (U) (V1.2) 0000001E 00A62D40 Introduction.mid TrackParseDebug.txt", u8"Title Theme", 0x06,
-	4 + 1, {
+	4 + 1 + 1, {
 		{ ns4::CMidiFile::NS4_ES_POST_SUPPLEMENTAL, ns4::CMidiFile::NS4_E_INSERT_CONTROL, 0xE, ns4::CMidiFile::NS4_C_MAIN_VOLUME, 127, { 1, 1, 1, 1 } },
 		{ ns4::CMidiFile::NS4_ES_POST_SUPPLEMENTAL, ns4::CMidiFile::NS4_E_INSERT_CONTROL, 0xF, ns4::CMidiFile::NS4_C_MAIN_VOLUME, 127, { 1, 1, 1, 1 } },
 		{ ns4::CMidiFile::NS4_ES_POST_SUPPLEMENTAL, ns4::CMidiFile::NS4_E_SET_INST, 0xD, 0xD, 0, { 1, 1, 1, 0 } },
 		{ ns4::CMidiFile::NS4_ES_POST_SUPPLEMENTAL, ns4::CMidiFile::NS4_E_SET_INST, 0xE, 0xE, 0, { 1, 1, 1, 0 } },
 		{ ns4::CMidiFile::NS4_ES_POST_SUPPLEMENTAL, ns4::CMidiFile::NS4_E_START_AT_TICK, 0, 0, 0, { 2, 1, 1, 0 } },
+		{ ns4::CMidiFile::NS4_ES_MASTER, ns4::CMidiFile::NS4_E_GLOBAL_SET_REVERB, 0, ns4::CReverb::NS4_T_THE_LEGEND_OF_ZELDA_OCARINA_OF_TIME_1_0C00_4FFF },
 	}
 },
 { u8"Legend of Zelda, The - Ocarina of Time (U) (V1.2) 00000028 00A62D40 Fairy Fountain.mid", u8"Legend of Zelda, The - Ocarina of Time (U) (V1.2) 00000028 00A62D40 Fairy Fountain.mid TrackParseDebug.txt", u8"File Menu", 0x09,
@@ -80,7 +85,7 @@
 { u8"Legend of Zelda, The - Ocarina of Time (U) (V1.2) 0000001A 00A62D40 An Enemy Is Near.mid", u8"Legend of Zelda, The - Ocarina of Time (U) (V1.2) 0000001A 00A62D40 An Enemy Is Near.mid TrackParseDebug.txt", u8"Battle", 0x03 },
 { u8"Legend of Zelda, The - Ocarina of Time (U) (V1.2) 0000001C 00A62D40 Deku Tree & Underground.mid", u8"Legend of Zelda, The - Ocarina of Time (U) (V1.2) 0000001C 00A62D40 Deku Tree & Underground.mid TrackParseDebug.txt", u8"Inside the Deku Tree", 0x04,
 	1, {
-		{ ns4::CMidiFile::NS4_ES_MASTER, ns4::CMidiFile::NS4_E_GLOBAL_SET_REVERB, 0, ns4::CReverb::NS4_T_THE_LEGEND_OF_ZELDA_OCARINA_OF_TIME_2_9A00_5FFF },
+		{ ns4::CMidiFile::NS4_ES_MASTER, ns4::CMidiFile::NS4_E_GLOBAL_SET_REVERB, 0, ns4::CReverb::NS4_T_THE_LEGEND_OF_ZELDA_OCARINA_OF_TIME_0_0C00_2FFF }, // Guess.
 	},
 },
 { u8"Legend of Zelda, The - Ocarina of Time (U) (V1.2) 0000001B 00A62D40 The Boss.mid", u8"Legend of Zelda, The - Ocarina of Time (U) (V1.2) 0000001B 00A62D40 The Boss.mid TrackParseDebug.txt", u8"Boss Battle", 0x03 },

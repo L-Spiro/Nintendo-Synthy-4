@@ -1302,6 +1302,12 @@ namespace ns4 {
 			/** Specifies the interpretation of track volume (NS4_C_MAIN_VOLUME). Defaults to 0.0, meaning dLevelInterpretation is used for the curve. */
 			double						dMainVolumeInterpretation = 0.0;
 
+			/** Specifies the pow() factor to apply to the track volume. */
+			double						dTrackVolPow = 1.0;
+
+			/** Specifies the pow() factor to apply to the linear volume. */
+			double						dLinearVolPow = 1.0;
+
 			/** Specifies an amount to add to all base notes. */
 			double						dBaseNoteOffset = 0.0;
 
@@ -1571,7 +1577,7 @@ namespace ns4 {
 				ui8State[NS4_C_EFX_1_DEPTH] = 0x00;
 				ui8State[NS4_TRACK_MASTER_VOL] = 0xFF;
 				ui8State[NS4_CHN_PAN_WEIGHT] = 128;
-				ui8State[NS4_CHN_LINEAR_VOL_SCALE] = 127;
+				ui8State[NS4_CHN_LINEAR_VOL_SCALE] = 128;
 				ui8State[NS4_CHN_VIB_RATE] = 0x40;
 				dState[NS4_TRACK_PITCH_SCALE] = 1.0;
 				if ( m_sSettings.ui8DryControl != 0 ) {

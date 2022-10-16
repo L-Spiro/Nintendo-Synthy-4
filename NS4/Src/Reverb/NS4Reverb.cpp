@@ -382,10 +382,10 @@ namespace ns4 {
 	/** Delay lines for The Legend of Zelda: Ocarina of Time set. */
 	NS4_REVERB_DELAY_LINE CReverb::m_rdlTheLegendOfZeldaOcarinaOfTime2[] = {
 		{
-			0x9A00,																	// ui32Delay
-			0x9A00,																	// ui32FeedbackDelay
+			0x0C00,																	// ui32Delay
+			0x0C00,																	// ui32FeedbackDelay
 			1.0,																	// dVol
-			0x5FFF / double( 0x7FFF ),												// dFeedback
+			0x2CFF / double( 0x7FFF ),												// dFeedback
 			1.0 / 0x7FFF															// dMinLevel
 		},
 	};

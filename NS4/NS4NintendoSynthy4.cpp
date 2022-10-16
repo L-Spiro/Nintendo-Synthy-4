@@ -555,6 +555,12 @@ int main() {
 #ifdef NS4_PREMULTIPLY_MASTER
 		ns4::CMidiFile::m_sSettings.bPremultiplyMasterVolume = NS4_PREMULTIPLY_MASTER;
 #endif	// NS4_PREMULTIPLY_MASTER
+#ifdef NS4_MAIN_VOL_POW
+		ns4::CMidiFile::m_sSettings.dTrackVolPow = NS4_MAIN_VOL_POW;
+#endif	// NS4_MAIN_VOL_POW
+#ifdef NS4_LINEAR_VOL_POW
+		ns4::CMidiFile::m_sSettings.dLinearVolPow = NS4_LINEAR_VOL_POW;
+#endif	// NS4_LINEAR_VOL_POW
 
 #ifdef NS4_ENV_MULTIPLIER
 		ns4::CMidiFile::m_sSettings.dEnvDecayMultiplier = NS4_ENV_MULTIPLIER;
