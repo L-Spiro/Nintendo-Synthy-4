@@ -1,13 +1,13 @@
 ﻿#define NS4_GAME							u8"Mario Kart 64"
 #define NS4_COMPOSERS						u8"Kenta Nagata"
 #define NS4_YEAR							u8"1996"
-#define NS4_TITLE_POSTFIX					u8" (Surround)"
+#define NS4_TITLE_POSTFIX					u8" (Headphones)"
 #define NS4_FOLDER							u8"Mario Kart 64"
 #define NS4_REVERB_TRACKS					2
 #define NS4_REVERB							ns4::CReverb::NS4_T_MARIO_KART_64_0
 #define NS4_ORIG_HZ							26807
 #define NS4_CURVE							40.0
-#define NS4_OUT_DIRECTORY					u8"T:\\N64OST\\Mario Kart 64\\"
+#define NS4_OUT_DIRECTORY					u8"T:\\N64OST\\Mario Kart 64 Headphones\\"
 #define NS4_OUT_DIRECTORY_NUMBERS			NS4_OUT_DIRECTORY u8"Numbered\\"
 #define NS4_WET_FILTER_FREQ					0.0//(NS4_ORIG_HZ / std::pow( 2.0, 3.0 ))
 #define NS4_ENV_MULTIPLIER					(2.0)
@@ -25,6 +25,7 @@
 #define NS4_MAIN_VOL_CURVE					20.0
 #define NS4_MASTER_VOL_CONTROL				21		// Just for sequencing.
 #define NS4_PERC_INST						127
+#define NS4_EAD_PAN							ns4::CMidiFile::NS4_EPT_HEADPHONES
 //#define NS4_OVERSAMPLING_BW					500.0
 
 

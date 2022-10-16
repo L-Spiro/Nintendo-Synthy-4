@@ -277,6 +277,7 @@
     <None Include="Src\Games\NS4LastLegionUxFiles.inl" />
     <None Include="Src\Games\NS4MaceTheDarkAgesFiles.inl" />
     <None Include="Src\Games\NS4MarioKart64Files.inl" />
+    <None Include="Src\Games\NS4MarioKart64HeadphonesFiles.inl" />
     <None Include="Src\Games\NS4MarioParty2Files.inl" />
     <None Include="Src\Games\NS4MarioParty3Files.inl" />
     <None Include="Src\Games\NS4MarioPartyFiles.inl" />
@@ -313,6 +314,7 @@
     <None Include="Src\Games\NS4SuperBDamonBattlePhoenix64Files.inl" />
     <None Include="Src\Games\NS4SupermanFiles.inl" />
     <None Include="Src\Games\NS4SuperMario64Files.inl" />
+    <None Include="Src\Games\NS4SuperMario64HeadphonesFiles.inl" />
     <None Include="Src\Games\NS4SuperMario64ModFiles.inl" />
     <None Include="Src\Games\NS4SuperMario64SourceFiles.inl" />
     <None Include="Src\Games\NS4SuperRobotSpiritsFiles.inl" />
