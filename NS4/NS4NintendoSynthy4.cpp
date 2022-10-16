@@ -325,10 +325,11 @@ int main() {
 //#include "Src/Games/NS4DryDryDocks64Files.inl"
 //#include "Src/Games/NS4SuperMario64ModFiles.inl"
 //#include "Src/Games/NS4Starfox64Files.inl"
-#include "Src/Games/NS4TheLegendOfZeldaOcarinaOfTimeFiles.inl"
-//#include "Src/Games/NS4TheLegendOfZeldaMajorasMaskFiles.inl"
+//#include "Src/Games/NS4TheLegendOfZeldaOcarinaOfTimeFiles.inl"
+#include "Src/Games/NS4TheLegendOfZeldaMajorasMaskFiles.inl"
 //#include "Src/Games/NS4YoshisStoryFiles.inl"
 //#include "Src/Games/NS4MarioKart64Files.inl"
+//#include "Src/Games/NS4MarioKart64HeadphonesFiles.inl"
 //#include "Src/Games/NS41080SnowboardingFiles.inl"
 
 //#include "Src/Games/NS4JetForceGeminiKioskFiles.inl"
@@ -624,6 +625,9 @@ int main() {
 #ifdef NS4_ADSR_PERC_RELEASE
 		ns4::CMidiFile::m_sSettings.ui8AdsrPercReleaseRate = NS4_ADSR_PERC_RELEASE;
 #endif	// NS4_ADSR_PERC_RELEASE
+#ifdef NS4_EAD_PAN
+		ns4::CMidiFile::m_sSettings.eptEadPanning = NS4_EAD_PAN;
+#endif	// NS4_EAD_PAN
 
 	ns4::CMidiFile::NS4_TRACK_RENDER_OPTIONS troOptions;
 #ifdef NS4_BULK

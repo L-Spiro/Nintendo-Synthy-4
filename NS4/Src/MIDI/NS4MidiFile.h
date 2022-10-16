@@ -254,6 +254,13 @@ namespace ns4 {
 			NS4_AVM_RING_MODULATOR,								/**< Ring modulator. */
 		};
 
+		/** EAD pan tables. */
+		enum NS4_EAD_PAN_TABLES : uint32_t {
+			NS4_EPT_STD,										/**< Standard pan table. */
+			NS4_EPT_HEADPHONES,									/**< Headphones pan table. */
+			NS4_EPT_MONO,										/**< Mono pan (no table). */
+		};
+
 
 		// == Types.
 		/** The header. */
@@ -1282,7 +1289,8 @@ namespace ns4 {
 		 * \return Returns the ADSR value converted to time.
 		 */
 		static double					AdsrReleaseRateToTime( uint8_t _ui8Rate, uint32_t _ui32Freq ) {
-			if ( !_ui8Rate ) { return -1.0; }
+			//if ( !_ui8Rate ) { return -1.0; }
+			_ui8Rate = _ui8Rate == 0 ? 1 : _ui8Rate;
 			const int32_t i32SampsPerFrame = ((_ui32Freq / 60) + 0xF) & ~0xF;
 			const int32_t i32UpsPerFrame = i32SampsPerFrame / 160 + 1;
 			double dTime = 0x8000 / (((_ui8Rate * 24.0)) * i32UpsPerFrame) / 60.0;
@@ -1421,6 +1429,9 @@ namespace ns4 {
 
 			/** The ADSR vibrato mapping.  Defaults to NS4_AVM_VIBRATO. */
 			NS4_ADSR_VIBRATO_MAPPING	avmAdsrVibMap = NS4_AVM_VIBRATO;
+
+			/** The EAD panning mode. */
+			NS4_EAD_PAN_TABLES			eptEadPanning = NS4_EPT_STD;
 			
 			/** If set, dry is unchanged and reverb is a linear value. */
 			bool						bAdditiveReverb = false;

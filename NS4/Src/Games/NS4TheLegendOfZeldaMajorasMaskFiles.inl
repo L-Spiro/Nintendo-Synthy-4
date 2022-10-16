@@ -3,6 +3,7 @@
 #define NS4_YEAR							u8"2000"
 #define NS4_TITLE_POSTFIX					u8" (Surround)"
 #define NS4_FOLDER							u8"The Legend of Zelda Majora's Mask"
+#define NS4_COMMENT							u8"HD Restore by L. Spiro; Special Thanks to punk7890"
 #define NS4_REVERB_TRACKS					2
 #define NS4_REVERB							ns4::CReverb::NS4_T_THE_LEGEND_OF_ZELDA_OCARINA_OF_TIME_0_0C00_2FFF
 #define NS4_ORIG_HZ							32006
@@ -11,10 +12,10 @@
 #define NS4_OUT_DIRECTORY					u8"T:\\N64OST\\The Legend of Zelda Majora's Mask\\"
 #define NS4_OUT_DIRECTORY_NUMBERS			NS4_OUT_DIRECTORY u8"Numbered\\"
 #define NS4_WET_FILTER_FREQ					0.0
-#define NS4_ENV_MULTIPLIER					(2.0)
-#define NS4_DEC_MULTIPLIER					(2.0)
-#define NS4_PERC_ATK_MULTIPLIER				(2.0)
-#define NS4_PERC_DEC_MULTIPLIER				(2.0)
+#define NS4_ENV_MULTIPLIER					(1.0)
+#define NS4_DEC_MULTIPLIER					(1.0)
+#define NS4_PERC_ATK_MULTIPLIER				(1.0)
+#define NS4_PERC_DEC_MULTIPLIER				(1.0)
 #define NS4_REL_MULTIPLIER					13.0
 #define NS4_PITCH_RANGE						1200
 //#define NS4_PERC_ATK_MULTIPLIER				(1.0)

@@ -1471,8 +1471,22 @@ namespace ns4 {
 							double dWeight = msState.ui8State[NS4_CHN_PAN_WEIGHT] / 128.0;
 							double dPan = (vNotes[J].liPanInterpolator.Value() * dWeight) + (vNotes[J].psSoundbankSample->ui8Pan * (1.0 - dWeight));
 							uint8_t ui8Pan = uint8_t( std::round( std::clamp( dPan, 0.0, 127.0 ) ) );
-							dL = m_fStdPanTable[ui8Pan];
-							dR = m_fStdPanTable[127-ui8Pan];
+							switch ( m_sSettings.eptEadPanning ) {
+								case NS4_EPT_HEADPHONES : {
+									dL = m_fHeadphonesPanTable[ui8Pan];
+									dR = m_fHeadphonesPanTable[127-ui8Pan];
+									break;
+								}
+								case NS4_EPT_MONO : {
+									dL = NS4_SQRT_0_5;
+									dR = NS4_SQRT_0_5;
+									break;
+								}
+								default : {
+									dL = m_fStdPanTable[ui8Pan];
+									dR = m_fStdPanTable[127-ui8Pan];
+								}
+							}
 						}
 						else {
 							int32_t i32Pan = int32_t( (std::round( vNotes[J].liPanInterpolator.Value() ) - 0x40) + int32_t( vNotes[J].psSoundbankSample->ui8Pan ) );
@@ -4225,8 +4239,22 @@ namespace ns4 {
 				double dWeight = msState.ui8State[NS4_CHN_PAN_WEIGHT] / 128.0;
 				double dPan = (nNote.liPanInterpolator.Value() * dWeight) + (ui8InstPan * (1.0 - dWeight));
 				uint8_t ui8Pan = uint8_t( std::round( std::clamp( dPan, 0.0, 127.0 ) ) );
-				dL = m_fStdPanTable[ui8Pan];
-				dR = m_fStdPanTable[127-ui8Pan];
+				switch ( m_sSettings.eptEadPanning ) {
+					case NS4_EPT_HEADPHONES : {
+						dL = m_fHeadphonesPanTable[ui8Pan];
+						dR = m_fHeadphonesPanTable[127-ui8Pan];
+						break;
+					}
+					case NS4_EPT_MONO : {
+						dL = NS4_SQRT_0_5;
+						dR = NS4_SQRT_0_5;
+						break;
+					}
+					default : {
+						dL = m_fStdPanTable[ui8Pan];
+						dR = m_fStdPanTable[127-ui8Pan];
+					}
+				}
 			}
 			else {
 				int32_t i32Pan = int32_t( (std::round( nNote.liPanInterpolator.Value() ) - 0x40) + int32_t( ui8InstPan ) );
