@@ -322,14 +322,16 @@ int main() {
 
 //#include "Src/Games/NS4SuperMario64Files.inl"
 //#include "Src/Games/NS4SuperMario64SourceFiles.inl"
+//#include "Src/Games/NS4SuperMario64HeadphonesFiles.inl"
 //#include "Src/Games/NS4DryDryDocks64Files.inl"
 //#include "Src/Games/NS4SuperMario64ModFiles.inl"
 //#include "Src/Games/NS4Starfox64Files.inl"
-//#include "Src/Games/NS4TheLegendOfZeldaOcarinaOfTimeFiles.inl"
+//#include "Src/Games/NS4Starfox64HeadphonesFiles.inl"
+#include "Src/Games/NS4TheLegendOfZeldaOcarinaOfTimeFiles.inl"
 //#include "Src/Games/NS4TheLegendOfZeldaMajorasMaskFiles.inl"
 //#include "Src/Games/NS4YoshisStoryFiles.inl"
 //#include "Src/Games/NS4MarioKart64Files.inl"
-#include "Src/Games/NS4MarioKart64HeadphonesFiles.inl"
+//#include "Src/Games/NS4MarioKart64HeadphonesFiles.inl"
 //#include "Src/Games/NS41080SnowboardingFiles.inl"
 
 //#include "Src/Games/NS4JetForceGeminiKioskFiles.inl"

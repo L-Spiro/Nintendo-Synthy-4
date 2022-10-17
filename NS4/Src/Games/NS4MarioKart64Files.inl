@@ -10,7 +10,8 @@
 #define NS4_OUT_DIRECTORY					u8"T:\\N64OST\\Mario Kart 64\\"
 #define NS4_OUT_DIRECTORY_NUMBERS			NS4_OUT_DIRECTORY u8"Numbered\\"
 #define NS4_WET_FILTER_FREQ					0.0//(NS4_ORIG_HZ / std::pow( 2.0, 3.0 ))
-#define NS4_ENV_MULTIPLIER					(2.0)
+#define NS4_ENV_MULTIPLIER					(1.0)
+#define NS4_REL_MULTIPLIER					2.0
 #define NS4_PITCH_RANGE						1200
 //#define NS4_PERC_INST						127
 #define NS4_ADSR_PERC_RELEASE				0x20
@@ -23,6 +24,8 @@
 #define NS4_USE_CHAN_PAN_WEIGHTING			true
 //#define NS4_PREMULTIPLY_MASTER				true
 #define NS4_MAIN_VOL_CURVE					20.0
+#define NS4_MAIN_VOL_POW					2.0
+#define NS4_LINEAR_VOL_POW					2.0
 #define NS4_MASTER_VOL_CONTROL				21		// Just for sequencing.
 #define NS4_PERC_INST						127
 //#define NS4_OVERSAMPLING_BW					500.0

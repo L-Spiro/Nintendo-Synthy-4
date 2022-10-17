@@ -1,17 +1,17 @@
 ﻿#define NS4_GAME							u8"Star Fox 64"
 #define NS4_COMPOSERS						u8"Koji Kondo and Hajime Wakai"
 #define NS4_YEAR							u8"1997"
-#define NS4_TITLE_POSTFIX					u8" (Surround)"
+#define NS4_TITLE_POSTFIX					u8" (Headphones)"
 #define NS4_FOLDER							u8"Star Fox 64"
 #define NS4_REVERB_TRACKS					2
 #define NS4_REVERB							ns4::CReverb::NS4_T_STAR_FOX_64_0
 #define NS4_ORIG_HZ							32006
 #define NS4_CURVE							40.0
 //#define NS4_MASTER_CURVE					40.0
-#define NS4_OUT_DIRECTORY					u8"T:\\N64OST\\Star Fox 64\\"
+#define NS4_OUT_DIRECTORY					u8"T:\\N64OST\\Star Fox 64 Headphones\\"
 #define NS4_OUT_DIRECTORY_NUMBERS			NS4_OUT_DIRECTORY u8"Numbered\\"
 #define NS4_WET_FILTER_FREQ					0.0//(NS4_ORIG_HZ / std::pow( 2.0, 3.0 ))
-#define NS4_ENV_MULTIPLIER					(1.0)
+#define NS4_ENV_MULTIPLIER					(2.0)
 #define NS4_REL_MULTIPLIER					3.0
 #define NS4_PERC_INST						127
 #define NS4_ADSR_PERC_RELEASE				0xFF
@@ -27,6 +27,7 @@
 #define NS4_MAIN_VOL_POW					2.0
 #define NS4_LINEAR_VOL_POW					2.0
 //#define NS4_OVERSAMPLING_BW					500.0
+#define NS4_EAD_PAN							ns4::CMidiFile::NS4_EPT_HEADPHONES
 
 { u8"Star Fox 64 (U) (V1.1) 00000023 000C4260.mid", u8"Star Fox 64 (U) (V1.1) 00000023 000C4260.mid TrackParseDebug.txt", u8"Opening", 0x15,
 	2,

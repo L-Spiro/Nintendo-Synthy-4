@@ -1453,14 +1453,12 @@ namespace ns4 {
 							dVal = std::clamp( dVal, -dClipLevel, dClipLevel );
 						}
 						
-						double dTrackVol = MidiLevelToLinear( vNotes[J].liVolumeInterpolator.Value() / 127.0, m_sSettings.dMainVolumeInterpretation );
-						dVal *= (m_sSettings.dTrackVolPow == 1.0) ? dTrackVol : std::pow( dTrackVol, m_sSettings.dTrackVolPow );
+						dVal *= CWavLib::Pow( MidiLevelToLinear( vNotes[J].liVolumeInterpolator.Value() / 127.0, m_sSettings.dMainVolumeInterpretation ), m_sSettings.dTrackVolPow );
 						dVal *= MidiLevelToLinear( liMasterVol.Value() / 127.0, m_sSettings.dMasterLevelInterpretation );
 						dVal *= MidiLevelToLinear( msState.ui8State[NS4_TRACK_MASTER_VOL] / 255.0 );
 						dVal *= MidiLevelToLinear( vNotes[J].ui8Vel );
 						dVal *= MidiLevelToLinear( vNotes[J].psSoundbankSample->ui8Vol );
-						double dLinearVol = liLinearVolScale.Value() / 128.0;
-						dVal *= (m_sSettings.dLinearVolPow == 1.0) ? dLinearVol : std::pow( dLinearVol, m_sSettings.dLinearVolPow );
+						dVal *= CWavLib::Pow( liLinearVolScale.Value() / 128.0, m_sSettings.dLinearVolPow );
 						
 
 						
@@ -4269,7 +4267,7 @@ namespace ns4 {
 					dR = 1.0;
 				}
 				else {
-					dL = std::cos( (i32Pan / 126.0) * NS4_HALF_PI );
+					dL = CWavLib::Cos( (i32Pan / 126.0) * NS4_HALF_PI );
 					dR = CWavLib::Sin( (i32Pan / 126.0) * NS4_HALF_PI );
 				}
 			}

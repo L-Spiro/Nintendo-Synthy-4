@@ -936,6 +936,19 @@ namespace ns4 {
 		}
 
 		/**
+		 * Optimized pow() for the 2 most-common cases we see (1 and 2).
+		 *
+		 * \param _dVal The value to pow().
+		 * \param _dPow The power to which to raise _dVal.
+		 * \return Returns a faster pow() of the given value.
+		 */
+		static _inline double								Pow( double _dVal, double _dPow ) {
+			if ( _dPow == 1.0 ) { return _dVal; }
+			if ( _dPow == 2.0 ) { return _dVal * _dVal; }
+			return std::pow( _dVal, _dPow );
+		}
+
+		/**
 		 * Gathers X samples before and Y samples after the given index inside an array of samples.  The given index is skipped.
 		 *
 		 * \param _tTrack The track from which to gather samples.

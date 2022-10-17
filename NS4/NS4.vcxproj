@@ -308,6 +308,7 @@
     <None Include="Src\Games\NS4SnowboardKidsFiles.inl" />
     <None Include="Src\Games\NS4SpaceStationSiliconValleyFiles.inl" />
     <None Include="Src\Games\NS4Starfox64Files.inl" />
+    <None Include="Src\Games\NS4Starfox64HeadphonesFiles.inl" />
     <None Include="Src\Games\NS4StarshotSpaceCircusFeverFiles.inl" />
     <None Include="Src\Games\NS4StarSoldierVanishingEarthFiles.inl" />
     <None Include="Src\Games\NS4StarSoldierVanishingEarthOverSampledFiles.inl" />

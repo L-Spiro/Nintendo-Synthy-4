@@ -823,5 +823,8 @@
     <None Include="Src\Games\NS4SuperMario64HeadphonesFiles.inl">
       <Filter>Header Files\Games</Filter>
     </None>
+    <None Include="Src\Games\NS4Starfox64HeadphonesFiles.inl">
+      <Filter>Header Files\Games</Filter>
+    </None>
   </ItemGroup>
 </Project>
