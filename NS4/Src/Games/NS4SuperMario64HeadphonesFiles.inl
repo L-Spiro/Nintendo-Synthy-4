@@ -25,6 +25,7 @@
 #define NS4_USE_CHAN_PAN_WEIGHTING			true
 //#define NS4_PREMULTIPLY_MASTER				true
 #define NS4_MAIN_VOL_CURVE					20.0
+#define NS4_ENVELOPE_VOL_CURVE				20.0
 #define NS4_EAD_PAN							ns4::CMidiFile::NS4_EPT_HEADPHONES
 
 

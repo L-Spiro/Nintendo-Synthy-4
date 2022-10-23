@@ -669,9 +669,11 @@ namespace ns4 {
 		 * \param _pcName Name of the song to log.
 		 * \param _dFadeStart The fade-start time.
 		 * \param _dScale The amount by which the song has been scaled.
+		 * \param _dNextBeat The time of the next beat following the last note-off.
 		 * \return Returns a log line.
 		 */
-		static std::string									LogNoLooped( uint32_t _ui32Number, const char * _pcName, double _dFadeStart, double _dScale );
+		static std::string									LogNoLooped( uint32_t _ui32Number, const char * _pcName, double _dFadeStart, double _dScale,
+			double _dNextBeat );
 
 		/**
 		 * Returns a log line for a song using alternative numbering.

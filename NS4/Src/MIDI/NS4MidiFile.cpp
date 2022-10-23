@@ -1429,7 +1429,7 @@ namespace ns4 {
 				if ( vNotes[J].bActive || (vNotes[J].eEnvelope.InRelease() && vNotes[J].psSoundbankSample && !vNotes[J].eEnvelope.InfiniteRelease()) || vNotes[J].ui32DustSettle ) {
 					if ( vNotes[J].psSoundbankSample ) {
 						double dVal = vNotes[J].sSampler.Sample();
-						dVal *= MidiLevelToLinear( vNotes[J].eEnvelope.CurLevel() );
+						dVal *= MidiLevelToLinear( vNotes[J].eEnvelope.CurLevel(), m_sSettings.dEnvelopeInterpretation );
 						double dTremPhase;
 						double dTremAmnt = vNotes[J].tTremolo.Values( dTremPhase );
 						dVal = (dVal * (dTremAmnt * dTremPhase + 1.0)) / (1.0 + dTremAmnt);
@@ -1456,7 +1456,7 @@ namespace ns4 {
 						dVal *= CWavLib::Pow( MidiLevelToLinear( vNotes[J].liVolumeInterpolator.Value() / 127.0, m_sSettings.dMainVolumeInterpretation ), m_sSettings.dTrackVolPow );
 						dVal *= MidiLevelToLinear( liMasterVol.Value() / 127.0, m_sSettings.dMasterLevelInterpretation );
 						dVal *= MidiLevelToLinear( msState.ui8State[NS4_TRACK_MASTER_VOL] / 255.0 );
-						dVal *= MidiLevelToLinear( vNotes[J].ui8Vel );
+						dVal *= MidiLevelToLinear( vNotes[J].ui8Vel, m_sSettings.dVelocityInterpretation );
 						dVal *= MidiLevelToLinear( vNotes[J].psSoundbankSample->ui8Vol );
 						dVal *= CWavLib::Pow( liLinearVolScale.Value() / 128.0, m_sSettings.dLinearVolPow );
 						

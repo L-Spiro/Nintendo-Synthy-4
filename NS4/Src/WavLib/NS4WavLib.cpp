@@ -1065,14 +1065,18 @@ namespace ns4 {
 	 * \param _pcName Name of the song to log.
 	 * \param _dFadeStart The fade-start time.
 	 * \param _dScale The amount by which the song has been scaled.
+	 * \param _dNextBeat The time of the next beat following the last note-off
 	 * \return Returns a log line.
 	 */
-	std::string CWavLib::LogNoLooped( uint32_t _ui32Number, const char * _pcName, double _dFadeStart, double _dScale ) {
+	std::string CWavLib::LogNoLooped( uint32_t _ui32Number, const char * _pcName, double _dFadeStart, double _dScale,
+		double _dNextBeat ) {
 		char szBuffer[128];
 		std::sprintf( szBuffer, "%+.17f dB (%.17f)", std::log10( 1.0 / _dScale ) * 20.0, 1.0 / _dScale );
 		return std::string( "#" ) + std::to_string( _ui32Number ) +  std::string( ": " ) + _pcName + std::string( "\n" ) +
 			szBuffer + std::string( "\n" ) +
-			std::string( "Last Sound: " ) + ToTimestamp( _dFadeStart ) + std::string( "\n\n" );
+			std::string( "Last Note-Off: " ) + ToTimestamp( _dFadeStart ) + std::string( "\n" ) +
+			std::string( "Next Beat After Last Note-Off: " ) + ToTimestamp( _dNextBeat ) + std::string( "\n" ) +
+			std::string( "\n" );
 	}
 
 	/**

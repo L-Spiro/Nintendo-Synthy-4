@@ -25,6 +25,7 @@
 #define NS4_USE_CHAN_PAN_WEIGHTING			true
 //#define NS4_PREMULTIPLY_MASTER				true
 #define NS4_MAIN_VOL_CURVE					20.0
+#define NS4_ENVELOPE_VOL_CURVE				20.0
 
 
 { u8"Super Mario 64 (U) 00000003 007B0860 Bob-omb Battlefield (Main Theme).mid", u8"Super Mario 64 (U) 00000003 007B0860 Bob-omb Battlefield (Main Theme).mid TrackParseDebug.txt", u8"A Familiar Place", 0x10,

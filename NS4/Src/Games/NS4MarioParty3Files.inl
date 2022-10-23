@@ -1,5 +1,5 @@
 ﻿#define NS4_GAME							u8"Mario Party 3"
-#define NS4_COMPOSERS						u8"Hironao Yamamoto, Shohei Bando, and Kazuhiko Sawaguchi"
+#define NS4_COMPOSERS						u8"Ichiro Shimakura"
 #define NS4_YEAR							u8"2000"
 #define NS4_FOLDER							u8"Mario Party 3"
 //#define NS4_BANK							u8""

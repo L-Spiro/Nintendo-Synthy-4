@@ -27,6 +27,9 @@
 #define NS4_USE_CHAN_PAN_WEIGHTING			true
 //#define NS4_PREMULTIPLY_MASTER				true
 #define NS4_MAIN_VOL_CURVE					20.0
+#define NS4_ENVELOPE_VOL_CURVE				20.0
+#define NS4_MAIN_VOL_POW					2.0
+#define NS4_LINEAR_VOL_POW					2.0
 //#define NS4_OVERSAMPLING					(1 << 0)
 #define NS4_REVERB_OPTIONS					ns4::CMidiFile::NS4_OVER_127_SWAP_L_AND_R
 //#define NS4_CHANNEL_IDX_DETERMINES_PROGRAM	true

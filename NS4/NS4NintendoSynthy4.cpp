@@ -72,16 +72,16 @@
 
 #define NS4_BULK
 
-//#define NS4_SINGLE_TRACK								5
+//#define NS4_SINGLE_TRACK								1
 //#define NS4_NO_NORMALIZE
 // 
 //#define NS4_NO_OUTPUT									// Used to quickly print information in the MIDI files without actually generating WAV content.
 //#define NS4_PRINT_BEST_BANK
 
 #ifdef NS4_BULK
-//#define NS4_ONE_OFF								(27-1)
+#define NS4_ONE_OFF								(32-1)
 //#define NS4_EXPORT_SOME
-//#define NS4_EPORT_FROM								(12-1)
+//#define NS4_EPORT_FROM								(86-1)
 #else
 #define NS4_FOLDER								u8"Super Smash Bros"
 #define NS4_FILE								u8"01 Super Smash Bros. (U) 00000021 00B413A4 Intro"
@@ -555,6 +555,12 @@ int main() {
 #ifdef NS4_MAIN_VOL_CURVE
 		ns4::CMidiFile::m_sSettings.dMainVolumeInterpretation = NS4_MAIN_VOL_CURVE;
 #endif	// NS4_MAIN_VOL_CURVE
+#ifdef NS4_ENVELOPE_VOL_CURVE
+		ns4::CMidiFile::m_sSettings.dEnvelopeInterpretation = NS4_ENVELOPE_VOL_CURVE;
+#endif	// NS4_ENVELOPE_VOL_CURVE
+#ifdef NS4_VELOCITY_VOL_CURVE
+		ns4::CMidiFile::m_sSettings.dVelocityInterpretation = NS4_VELOCITY_VOL_CURVE;
+#endif	// NS4_VELOCITY_VOL_CURVE
 #ifdef NS4_PREMULTIPLY_MASTER
 		ns4::CMidiFile::m_sSettings.bPremultiplyMasterVolume = NS4_PREMULTIPLY_MASTER;
 #endif	// NS4_PREMULTIPLY_MASTER
@@ -1198,7 +1204,10 @@ int main() {
 				sThisLog = ns4::CWavLib::LogLooped( static_cast<uint32_t>(stIdx), reinterpret_cast<const char *>(mfFiles[F].pcOutputFile), dFadeTime, dLoopTime, sMax );
 			}
 			else {
-				sThisLog = ns4::CWavLib::LogNoLooped( static_cast<uint32_t>(stIdx), reinterpret_cast<const char *>(mfFiles[F].pcOutputFile), dFadeTime - dPreFade, sMax );
+				uint64_t ui64Tick = mfMidi.GetTickAtTime( dFadeTime - dPreFade );
+				uint64_t ui64NextTick = (ui64Tick + (mfMidi.Header().ui16Division - 1)) / mfMidi.Header().ui16Division * mfMidi.Header().ui16Division;
+				double dNextMeasureTime = mfMidi.GetTimeAtTick( ui64NextTick );
+				sThisLog = ns4::CWavLib::LogNoLooped( static_cast<uint32_t>(stIdx), reinterpret_cast<const char *>(mfFiles[F].pcOutputFile), dFadeTime - dPreFade, sMax, dNextMeasureTime );
 			}
 			::OutputDebugStringA( sThisLog.c_str() );
 			sLog += sThisLog;

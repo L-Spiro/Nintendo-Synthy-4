@@ -449,6 +449,13 @@ namespace ns4 {
 		void							Reset();
 
 		/**
+		 * Gets the MIDI header.
+		 *
+		 * \return Returns the MIDI header.
+		 */
+		const NS4_HEADER &				Header() const { return m_hHeader; }
+
+		/**
 		 * Gathers all referenced instruments into a set.
 		 *
 		 * \param _sInstruments Holds the returned set of instruments/patch changes in the MIDI file.  This set includes all instruments referenced by the file, even if the render might stop before all of them are actually used.
@@ -1289,8 +1296,8 @@ namespace ns4 {
 		 * \return Returns the ADSR value converted to time.
 		 */
 		static double					AdsrReleaseRateToTime( uint8_t _ui8Rate, uint32_t _ui32Freq ) {
-			//if ( !_ui8Rate ) { return -1.0; }
-			_ui8Rate = _ui8Rate == 0 ? 1 : _ui8Rate;
+			if ( !_ui8Rate ) { return -1.0; }
+			//_ui8Rate = _ui8Rate == 0 ? 1 : _ui8Rate;
 			const int32_t i32SampsPerFrame = ((_ui32Freq / 60) + 0xF) & ~0xF;
 			const int32_t i32UpsPerFrame = i32SampsPerFrame / 160 + 1;
 			double dTime = 0x8000 / (((_ui8Rate * 24.0)) * i32UpsPerFrame) / 60.0;
@@ -1309,6 +1316,12 @@ namespace ns4 {
 
 			/** Specifies the interpretation of track volume (NS4_C_MAIN_VOLUME). Defaults to 0.0, meaning dLevelInterpretation is used for the curve. */
 			double						dMainVolumeInterpretation = 0.0;
+
+			/** Specifies the interpretation of envelopes. Defaults to 0.0, meaning dLevelInterpretation is used for the curve. */
+			double						dEnvelopeInterpretation = 0.0;
+
+			/** Specifies the interpretation of note velocities. Defaults to 0.0, meaning dLevelInterpretation is used for the curve. */
+			double						dVelocityInterpretation = 0.0;
 
 			/** Specifies the pow() factor to apply to the track volume. */
 			double						dTrackVolPow = 1.0;

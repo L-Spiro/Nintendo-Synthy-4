@@ -22,8 +22,8 @@
 #define NS4_REVERB_MASK						0xFF
 #define NS4_REVERB_NORMALIZE				255.0
 #define NS4_USE_CHAN_PAN_WEIGHTING			true
-//#define NS4_PREMULTIPLY_MASTER				true
 #define NS4_MAIN_VOL_CURVE					20.0
+#define NS4_ENVELOPE_VOL_CURVE				20.0
 #define NS4_MAIN_VOL_POW					2.0
 #define NS4_LINEAR_VOL_POW					2.0
 #define NS4_MASTER_VOL_CONTROL				21		// Just for sequencing.
