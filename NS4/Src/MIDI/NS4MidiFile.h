@@ -238,6 +238,7 @@ namespace ns4 {
 			NS4_E_GLOBAL_SET_DEFAULT_REL_RATE,					/**< Sets the starting release rate on all tracks (EAD only).  The release rate can be changed with a NS4_CHN_RELEASE_RATE command. */
 			NS4_E_GLOBAL_SET_MAX_HZ,							/**< Sets the maximum sample-playback Hz (dOperandDouble0). */
 			NS4_E_GLOBAL_SET_GAME_HZ,							/**< Sets the game Hz (dOperandDouble0) for a given track. */
+			NS4_E_GLOBAL_SET_IGNORE_REVERB,						/**< Reverb is ignored for the current track if ui32Operand0 is set to non-0. */
 			
 
 		};

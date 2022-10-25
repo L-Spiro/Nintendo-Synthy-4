@@ -72,14 +72,14 @@
 
 #define NS4_BULK
 
-//#define NS4_SINGLE_TRACK								1
+//#define NS4_SINGLE_TRACK								5
 //#define NS4_NO_NORMALIZE
 // 
 //#define NS4_NO_OUTPUT									// Used to quickly print information in the MIDI files without actually generating WAV content.
 //#define NS4_PRINT_BEST_BANK
 
 #ifdef NS4_BULK
-//#define NS4_ONE_OFF								(32-1)
+//#define NS4_ONE_OFF								(22-1)
 //#define NS4_EXPORT_SOME
 //#define NS4_EPORT_FROM								(86-1)
 #else
@@ -703,6 +703,13 @@ int main() {
 		const ns4::CMidiFile::NS4_MODIFIER * pmThis = ns4::CMidiFile::FindGlobalMod( ns4::CMidiFile::NS4_E_GLOBAL_SET_DEFAULT_REL_RATE, troOptions.ui32TotalMods, troOptions.pmMods );
 		if ( pmThis ) {
 			ns4::CMidiFile::m_sSettings.ui32EadReleaseRateForceDefault = uint8_t( pmThis->ui32Channel );
+		}
+	}
+
+	{
+		const ns4::CMidiFile::NS4_MODIFIER * pmThis = ns4::CMidiFile::FindGlobalMod( ns4::CMidiFile::NS4_E_GLOBAL_SET_IGNORE_REVERB, troOptions.ui32TotalMods, troOptions.pmMods );
+		if ( pmThis ) {
+			ns4::CMidiFile::m_sSettings.bIgnoreReverb = pmThis->ui32Operand0 != 0;
 		}
 	}
 

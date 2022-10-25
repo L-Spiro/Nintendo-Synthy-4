@@ -915,11 +915,14 @@ namespace ns4 {
 		uint64_t ui64LoopStartTick = uint64_t( -1 );
 		uint64_t ui64LoopEndTick = uint64_t( -1 );
 		std::set<std::string> sSampleNames;
+		//double dTestTime = GetTimeAtTick( CubaseToTick( 9, 1, 1, 0 ) );
 		while ( tbWavTime.CurTick() < _troOptions.uiMaxSamples ) {
 			double dTime = tbWavTime.Time();
 			while ( stTriggeredEvents < vUnrolled.size() && vUnrolled[stTriggeredEvents].dRealTime <= dTime ) { ++stTriggeredEvents; }
 
-			
+			/*if ( dTime >= dTestTime ) {
+				volatile int ghg = 0;
+			}*/
 
 
 			// Trigger events from stLastTriggeredEvents until stTriggeredEvents.
@@ -934,6 +937,7 @@ namespace ns4 {
 				uint32_t ui32Channel = GetEventChannel( teEvent );
 				uint32_t ui32Inst = msState.ui8Program + (msState.ui8State[NS4_C_LSB] * 128);
 				uint32_t ui32Bank = (ui32Inst == m_sSettings.i32PercBank) || (m_sSettings.i32PercChannel == ui32Channel) ? 127 : m_sSettings.ui32Bank;
+				
 				if ( ui32Bank != 127 ) {
 					if ( m_sSettings.bChannelDeterinesInstrument ) {
 						ui32Inst = ui32Channel;
@@ -952,6 +956,9 @@ namespace ns4 {
 				
 				bool bUpdateLpf = false;
 				if ( IsNoteOn( teEvent ) ) {
+					/*if ( ui32Inst != ui32Channel ) {
+						::OutputDebugStringA( "WE GOT NELSON HERE.\r\n" );
+					}*/
 					uint8_t ui8Note = GetNote( teEvent );
 					uint8_t ui8Vel = GetNoteVel( teEvent );
 					std::vector<const CSoundBank::NS4_SAMPLE *> vTriggered = _sbSoundBank.GatherSamples( ui32Bank,
@@ -1267,9 +1274,14 @@ namespace ns4 {
 								m_sSettings.bProgChangeSetsVolAndPanAlways || !m_sSettings.bProgChangeSetsVolAndPan) ||
 						!m_sSettings.ui8PitchRangeControl;
 					if ( bUpdatePitchBend ) {
-						uint32_t ui32Range;
-						if ( _sbSoundBank.InstPitchBendRange( ui32Bank, ui32Inst, ui32Range ) ) {
-							msState.ui16PitchBendRange = uint16_t( ui32Range );
+						if ( m_sSettings.ui32PitchRangeOverride ) {
+							msState.ui16PitchBendRange = uint16_t( m_sSettings.ui32PitchRangeOverride );
+						}
+						else {
+							uint32_t ui32Range;
+							if ( _sbSoundBank.InstPitchBendRange( ui32Bank, ui32Inst, ui32Range ) ) {
+								msState.ui16PitchBendRange = uint16_t( ui32Range );
+							}
 						}
 					}
 					if ( m_sSettings.ui32EadReleaseRateForceDefault == uint32_t( -1 ) ) {

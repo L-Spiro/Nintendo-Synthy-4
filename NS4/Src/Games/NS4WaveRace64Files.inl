@@ -13,7 +13,7 @@
 #define NS4_WET_FILTER_FREQ					0.0//(NS4_ORIG_HZ / std::pow( 2.0, 3.0 ))
 #define NS4_ENV_MULTIPLIER					(1.0)
 #define NS4_PITCH_RANGE						1200
-//#define NS4_REL_MULTIPLIER					1.0
+#define NS4_REL_MULTIPLIER					1.75
 #define NS4_PERC_INST						127
 #define NS4_ADSR_PERC_RELEASE				10
 #define NS4_NO_PROGRAM_CHANGE_SORT			true
@@ -25,9 +25,10 @@
 #define NS4_USE_CHAN_PAN_WEIGHTING			true
 //#define NS4_PREMULTIPLY_MASTER				true
 #define NS4_MAIN_VOL_CURVE					20.0
-#define NS4_ENVELOPE_VOL_CURVE				20.0
+//#define NS4_ENVELOPE_VOL_CURVE				20.0
 #define NS4_SND_BNK_FORCE_SAMPLE_RATE		32000
 #define NS4_REVERB_OPTIONS					ns4::CMidiFile::NS4_OVER_127_FF_MAPS_TO_00 | ns4::CMidiFile::NS4_OVER_127_INVERT
+#define NS4_CHANNEL_DETERMINES_PROGRAM		true
 
 
 
@@ -47,7 +48,11 @@
 	},
 },
 { u8"Wave Race 64 (U) (V1.1) 00000005 007AE8B0.mid", u8"Wave Race 64 (U) (V1.1) 00000005 007AE8B0.mid TrackParseDebug.txt", u8"Map Demo", 0x0A },
-{ u8"Wave Race 64 (U) (V1.1) 00000006 007AE8B0.mid", u8"Wave Race 64 (U) (V1.1) 00000006 007AE8B0.mid TrackParseDebug.txt", u8"Dolphin Park", 0x15 },
+{ u8"Wave Race 64 (U) (V1.1) 00000006 007AE8B0.mid", u8"Wave Race 64 (U) (V1.1) 00000006 007AE8B0.mid TrackParseDebug.txt", u8"Dolphin Park", 0x15,
+	1, {
+		{ ns4::CMidiFile::NS4_ES_MASTER, ns4::CMidiFile::NS4_E_GLOBAL_SET_REVERB, 0, ns4::CReverb::NS4_T_DELAY_0200_3FFF },
+	},
+},
 { u8"Wave Race 64 (U) (V1.1) 00000019 007AE8B0.mid", u8"Wave Race 64 (U) (V1.1) 00000019 007AE8B0.mid TrackParseDebug.txt", u8"Tournament Opening", 0x1F },
 { u8"Wave Race 64 (U) (V1.1) 00000007 007AE8B0.mid", u8"Wave Race 64 (U) (V1.1) 00000007 007AE8B0.mid TrackParseDebug.txt", u8"Sandy Beach", 0x16,
 	2, {
@@ -67,11 +72,26 @@
 		{ ns4::CMidiFile::NS4_ES_MASTER, ns4::CMidiFile::NS4_E_GLOBAL_SET_GAME_HZ, NS4_DOUBLE_OP( 0, 26896.0 ) },
 	},
 },
-{ u8"Wave Race 64 (U) (V1.1) 00000009 007AE8B0.mid", u8"Wave Race 64 (U) (V1.1) 00000009 007AE8B0.mid TrackParseDebug.txt", u8"Marine Fortress", 0x18 },
-{ u8"Wave Race 64 (U) (V1.1) 0000000B 007AE8B0.mid", u8"Wave Race 64 (U) (V1.1) 0000000B 007AE8B0.mid TrackParseDebug.txt", u8"Port Pirates", 0x1A },
-{ u8"Wave Race 64 (U) (V1.1) 0000000C 007AE8B0.mid", u8"Wave Race 64 (U) (V1.1) 0000000C 007AE8B0.mid TrackParseDebug.txt", u8"Castle City", 0x1B },
-{ u8"Wave Race 64 (U) (V1.1) 0000000E 007AE8B0.mid", u8"Wave Race 64 (U) (V1.1) 0000000E 007AE8B0.mid TrackParseDebug.txt", u8"Cool Wave", 0x1D },
-{ u8"Wave Race 64 (U) (V1.1) 0000000D 007AE8B0.mid", u8"Wave Race 64 (U) (V1.1) 0000000D 007AE8B0.mid TrackParseDebug.txt", u8"Southern Island", 0x1C },
+{ u8"Wave Race 64 (U) (V1.1) 00000009 007AE8B0.mid", u8"Wave Race 64 (U) (V1.1) 00000009 007AE8B0.mid TrackParseDebug.txt", u8"Marine Fortress", 0x18,
+	2, {
+		{ ns4::CMidiFile::NS4_ES_MASTER, ns4::CMidiFile::NS4_E_GLOBAL_SET_REVERB, 0, ns4::CReverb::NS4_T_DELAY_0200_3FFF },
+		{ ns4::CMidiFile::NS4_ES_MASTER, ns4::CMidiFile::NS4_E_GLOBAL_SET_GAME_HZ, NS4_DOUBLE_OP( 0, 26896.0 ) },
+	},
+},
+{ u8"Wave Race 64 (U) (V1.1) 0000000B 007AE8B0.mid", u8"Wave Race 64 (U) (V1.1) 0000000B 007AE8B0.mid TrackParseDebug.txt", u8"Port Blue", 0x1A,
+	2, {
+		{ ns4::CMidiFile::NS4_ES_MASTER, ns4::CMidiFile::NS4_E_GLOBAL_SET_REVERB, 0, ns4::CReverb::NS4_T_DELAY_0200_3FFF },
+		{ ns4::CMidiFile::NS4_ES_MASTER, ns4::CMidiFile::NS4_E_GLOBAL_SET_GAME_HZ, NS4_DOUBLE_OP( 0, 26896.0 ) },
+	},
+},
+{ u8"Wave Race 64 (U) (V1.1) 0000000C 007AE8B0.mid", u8"Wave Race 64 (U) (V1.1) 0000000C 007AE8B0.mid TrackParseDebug.txt", u8"Twighlight City", 0x1B },
+{ u8"Wave Race 64 (U) (V1.1) 0000000E 007AE8B0.mid", u8"Wave Race 64 (U) (V1.1) 0000000E 007AE8B0.mid TrackParseDebug.txt", u8"Glacier Coast", 0x1D },
+{ u8"Wave Race 64 (U) (V1.1) 0000000D 007AE8B0.mid", u8"Wave Race 64 (U) (V1.1) 0000000D 007AE8B0.mid TrackParseDebug.txt", u8"Southern Island", 0x1C,
+	2, {
+		{ ns4::CMidiFile::NS4_ES_MASTER, ns4::CMidiFile::NS4_E_GLOBAL_SET_REVERB, 0, ns4::CReverb::NS4_T_DELAY_0200_3FFF },
+		{ ns4::CMidiFile::NS4_ES_MASTER, ns4::CMidiFile::NS4_E_GLOBAL_SET_GAME_HZ, NS4_DOUBLE_OP( 0, 26896.0 ) },
+	},
+},
 { u8"Wave Race 64 (U) (V1.1) 0000000F 007AE8B0.mid", u8"Wave Race 64 (U) (V1.1) 0000000F 007AE8B0.mid TrackParseDebug.txt", u8"1st Place", 0x0C,
 	2, {
 		{ ns4::CMidiFile::NS4_ES_MASTER, ns4::CMidiFile::NS4_E_GLOBAL_SET_REVERB, 0, ns4::CReverb::NS4_T_DELAY_0200_3FFF },
@@ -109,7 +129,12 @@
 	},
 },
 { u8"Wave Race 64 (U) (V1.1) 00000017 007AE8B0.mid", u8"Wave Race 64 (U) (V1.1) 00000017 007AE8B0.mid TrackParseDebug.txt", u8"Game Over", 0x13 },
-{ u8"Wave Race 64 (U) (V1.1) 00000016 007AE8B0.mid", u8"Wave Race 64 (U) (V1.1) 00000016 007AE8B0.mid TrackParseDebug.txt", u8"Score", 0x21 },
+{ u8"Wave Race 64 (U) (V1.1) 00000016 007AE8B0.mid", u8"Wave Race 64 (U) (V1.1) 00000016 007AE8B0.mid TrackParseDebug.txt", u8"Score", 0x21,
+	2, {
+		{ ns4::CMidiFile::NS4_ES_MASTER, ns4::CMidiFile::NS4_E_GLOBAL_SET_GAME_HZ, NS4_DOUBLE_OP( 0, 26896.0 ) },
+		{ ns4::CMidiFile::NS4_ES_MASTER, ns4::CMidiFile::NS4_E_GLOBAL_SET_IGNORE_REVERB, 0, true },
+	},
+},
 { u8"Wave Race 64 (U) (V1.1) 00000015 007AE8B0.mid", u8"Wave Race 64 (U) (V1.1) 00000015 007AE8B0.mid TrackParseDebug.txt", u8"VS Mode Goal", 0x12 },
 { u8"Wave Race 64 (U) (V1.1) 00000014 007AE8B0.mid", u8"Wave Race 64 (U) (V1.1) 00000014 007AE8B0.mid TrackParseDebug.txt", u8"Time Attack, Score Attack Goal", 0x11,
 	2, {
