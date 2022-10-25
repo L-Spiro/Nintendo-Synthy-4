@@ -48,18 +48,18 @@ namespace ns4 {
 			NS4_T_WONDER_PROJECT_J2_0			= 33,
 			NS4_T_ZOOR_MAJOU_TSUKAI_DENSETSU_0	= 34,
 			NS4_T_STAR_FOX_64_0					= 35,
-			NS4_T_THE_LEGEND_OF_ZELDA_OCARINA_OF_TIME_0_0C00_2FFF		= 36,
+			NS4_T_DELAY_0200_3FFF				= 36,
 			NS4_T_MARIO_KART_64_0				= 37,
 			NS4_T_MARIO_KART_64_1				= 38,
 			NS4_T_MARIO_KART_64_2				= 39,
-			NS4_T_SUPER_MARIO_64_0				= 40,
-			NS4_T_SUPER_MARIO_64_1				= 41,
-			NS4_T_SUPER_MARIO_64_2				= 42,
-			NS4_T_SUPER_MARIO_64_3				= 43,
-			NS4_T_SUPER_MARIO_64_4				= 44,
-			NS4_T_SUPER_MARIO_64_5				= 45,
-			NS4_T_SUPER_MARIO_64_6				= 46,
-			NS4_T_SUPER_MARIO_64_7				= 47,
+			NS4_T_DELAY_0C00_2FFF				= 40,
+			NS4_T_DELAY_0A00_47FF				= 41,
+			NS4_T_DELAY_1000_2FFF				= 42,
+			NS4_T_DELAY_0E00_3FFF				= 43,
+			NS4_T_DELAY_0C00_4FFF				= 44,
+			NS4_T_DELAY_0200_4FFF				= 45,
+			NS4_T_DELAY_0400_4FFF				= 46,
+			NS4_T_DELAY_0800_37FF				= 47,
 			NS4_T_BOMBERMAN_HERO_0				= 48,
 			NS4_T_SNOWBOARD_KIDS_0				= 49,
 			NS4_T_BATTLEZONE_RISE_OF_THE_BLACK_DOGS_0		= 50,
@@ -106,7 +106,7 @@ namespace ns4 {
 			NS4_T_DORAEMON_NOBITA_DELAY_0		= 91,
 			NS4_T_DUAL_HEROES_DELAY_0			= 92,
 			NS4_T_DUAL_HEROES_0					= 93,
-			NS4_T_THE_LEGEND_OF_ZELDA_OCARINA_OF_TIME_1_0C00_4FFF		= 94,
+			NS4_T_DELAY_0A00_2FFF				= 94,
 			NS4_T_IGGYS_RECKIN_BALLS_DELAY_0	= 95,
 			NS4_T_IGGYS_RECKIN_BALLS_0			= 96,
 			NS4_T_MICKEYS_SPEEDWAY_USA_DELAY_0	= 97,
@@ -148,7 +148,10 @@ namespace ns4 {
 			NS4_T_TOON_PANIC_0					= 133,
 			NS4_T_ALL_STAR_BASEBALL_99_DELAY_0	= 134,
 			NS4_T_ALL_STAR_BASEBALL_99_0		= 135,
-			NS4_T_THE_LEGEND_OF_ZELDA_OCARINA_OF_TIME_2_0C00_2CFF		= 136,
+			NS4_T_DELAY_0800_4FFF				= 136,
+			NS4_T_DELAY_1400_2FFF				= 137,
+			NS4_T_DELAY_180C_4FFF				= 138,
+			
 		};
 
 
@@ -370,10 +373,10 @@ namespace ns4 {
 		static NS4_REVERB_DELAY_LINE			m_rdlStarFox640[];
 
 		/** Delay lines for The Legend of Zelda: Ocarina of Time set. */
-		static NS4_REVERB_DELAY_LINE			m_rdlTheLegendOfZeldaOcarinaOfTime0[];
+		static NS4_REVERB_DELAY_LINE			m_rdlDelay0200_3FFF[];
 
 		/** Delay lines for The Legend of Zelda: Ocarina of Time set. */
-		static NS4_REVERB_DELAY_LINE			m_rdlTheLegendOfZeldaOcarinaOfTime1[];
+		static NS4_REVERB_DELAY_LINE			m_rdlDelay0A00_2FFF[];
 
 		/** Delay lines for The Legend of Zelda: Ocarina of Time set. */
 		static NS4_REVERB_DELAY_LINE			m_rdlTheLegendOfZeldaOcarinaOfTime2[];
@@ -659,6 +662,12 @@ namespace ns4 {
 
 		/** The comb filter delay lines for All-Star Baseball ‘99. */
 		static NS4_DELAY_N64					m_dn64AllStarBaseball990[];
+
+		/** Delay line: 1400/2FFF. */
+		static NS4_REVERB_DELAY_LINE			m_rdlDelay1400_2FFF[];
+
+		/** Delay line: 180C/4FFF. */
+		static NS4_REVERB_DELAY_LINE			m_rdlDelay180C_4FFF[];
 
 
 		// == Functions.

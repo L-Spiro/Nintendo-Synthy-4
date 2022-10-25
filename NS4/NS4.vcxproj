@@ -309,6 +309,7 @@
     <None Include="Src\Games\NS4SpaceStationSiliconValleyFiles.inl" />
     <None Include="Src\Games\NS4Starfox64Files.inl" />
     <None Include="Src\Games\NS4Starfox64HeadphonesFiles.inl" />
+    <None Include="Src\Games\NS4Starfox64UncompressedFiles.inl" />
     <None Include="Src\Games\NS4StarshotSpaceCircusFeverFiles.inl" />
     <None Include="Src\Games\NS4StarSoldierVanishingEarthFiles.inl" />
     <None Include="Src\Games\NS4StarSoldierVanishingEarthOverSampledFiles.inl" />
@@ -332,6 +333,7 @@
     <None Include="Src\Games\NS4TurokDinosaurHunterFiles.inl" />
     <None Include="Src\Games\NS4TurokRageWars.inl" />
     <None Include="Src\Games\NS4WarGodsFiles.inl" />
+    <None Include="Src\Games\NS4WaveRace64Files.inl" />
     <None Include="Src\Games\NS4WcwBackstageAssaultFiles.inl" />
     <None Include="Src\Games\NS4WCWvsnWoWorldTourFiles.inl" />
     <None Include="Src\Games\NS4WonderProjectJFiles.inl" />

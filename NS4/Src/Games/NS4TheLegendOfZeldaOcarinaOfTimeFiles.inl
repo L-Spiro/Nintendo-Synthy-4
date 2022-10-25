@@ -5,7 +5,7 @@
 #define NS4_FOLDER							u8"The Legend of Zelda Ocarina of Time"
 #define NS4_COMMENT							u8"HD Restore by L. Spiro; Special Thanks to punk7890"
 #define NS4_REVERB_TRACKS					2
-#define NS4_REVERB							ns4::CReverb::NS4_T_THE_LEGEND_OF_ZELDA_OCARINA_OF_TIME_0_0C00_2FFF
+#define NS4_REVERB							ns4::CReverb::NS4_T_DELAY_0C00_2FFF
 #define NS4_ORIG_HZ							32006
 #define NS4_CURVE							40.0
 //#define NS4_MASTER_CURVE					40.0
@@ -47,26 +47,26 @@
 		{ ns4::CMidiFile::NS4_ES_POST_SUPPLEMENTAL, ns4::CMidiFile::NS4_E_SET_INST, 0xD, 0xD, 0, { 1, 1, 1, 0 } },
 		{ ns4::CMidiFile::NS4_ES_POST_SUPPLEMENTAL, ns4::CMidiFile::NS4_E_SET_INST, 0xE, 0xE, 0, { 1, 1, 1, 0 } },
 		{ ns4::CMidiFile::NS4_ES_POST_SUPPLEMENTAL, ns4::CMidiFile::NS4_E_START_AT_TICK, 0, 0, 0, { 2, 1, 1, 0 } },
-		{ ns4::CMidiFile::NS4_ES_MASTER, ns4::CMidiFile::NS4_E_GLOBAL_SET_REVERB, 0, ns4::CReverb::NS4_T_THE_LEGEND_OF_ZELDA_OCARINA_OF_TIME_0_0C00_2FFF },
+		{ ns4::CMidiFile::NS4_ES_MASTER, ns4::CMidiFile::NS4_E_GLOBAL_SET_REVERB, 0, ns4::CReverb::NS4_T_DELAY_0C00_2FFF },
 	}
 },
 { u8"Legend of Zelda, The - Ocarina of Time (U) (V1.2) 00000028 00A62D40 Fairy Fountain.mid", u8"Legend of Zelda, The - Ocarina of Time (U) (V1.2) 00000028 00A62D40 Fairy Fountain.mid TrackParseDebug.txt", u8"File Menu", 0x09,
 	1 + 1 + 1, {
 		{ ns4::CMidiFile::NS4_ES_POST_SUPPLEMENTAL, ns4::CMidiFile::NS4_E_START_AT_TICK, 0, 0, 0, { 1, 4, 1, 0 } },
-		{ ns4::CMidiFile::NS4_ES_MASTER, ns4::CMidiFile::NS4_E_GLOBAL_SET_REVERB, 0, ns4::CReverb::NS4_T_THE_LEGEND_OF_ZELDA_OCARINA_OF_TIME_0_0C00_2FFF },
+		{ ns4::CMidiFile::NS4_ES_MASTER, ns4::CMidiFile::NS4_E_GLOBAL_SET_REVERB, 0, ns4::CReverb::NS4_T_DELAY_0C00_2FFF },
 		{ ns4::CMidiFile::NS4_ES_POST_SUPPLEMENTAL, ns4::CMidiFile::NS4_E_SET_ENV_REL_MULTIPLIER, NS4_DOUBLE_OP( 0, NS4_REL_MULTIPLIER * 2.0 ) },
 	},
 },
 { u8"Legend of Zelda, The - Ocarina of Time (U) (V1.2) 00000023 00A62D40 Ganondorf.mid", u8"Legend of Zelda, The - Ocarina of Time (U) (V1.2) 00000023 00A62D40 Ganondorf.mid TrackParseDebug.txt", u8"Enter Ganondorf", 0x03,
 	1, {
-		{ ns4::CMidiFile::NS4_ES_MASTER, ns4::CMidiFile::NS4_E_GLOBAL_SET_REVERB, 0, ns4::CReverb::NS4_T_THE_LEGEND_OF_ZELDA_OCARINA_OF_TIME_0_0C00_2FFF },
+		{ ns4::CMidiFile::NS4_ES_MASTER, ns4::CMidiFile::NS4_E_GLOBAL_SET_REVERB, 0, ns4::CReverb::NS4_T_DELAY_0C00_2FFF },
 	},
 },
 { u8"Legend of Zelda, The - Ocarina of Time (U) (V1.2) 0000004B 00A62D40 Deku Tree's Words.mid", u8"Legend of Zelda, The - Ocarina of Time (U) (V1.2) 0000004B 00A62D40 Deku Tree's Words.mid TrackParseDebug.txt", u8"Deku Tree", 0x09 },
 { u8"Legend of Zelda, The - Ocarina of Time (U) (V1.2) 0000004A 00A62D40 Navi's Flying Around.mid", u8"Legend of Zelda, The - Ocarina of Time (U) (V1.2) 0000004A 00A62D40 Navi's Flying Around.mid TrackParseDebug.txt", u8"Fairy Flying", 0x03 },
 { u8"Legend of Zelda, The - Ocarina of Time (U) (V1.2) 0000001F 00A62D40 Inside My Home.mid", u8"Legend of Zelda, The - Ocarina of Time (U) (V1.2) 0000001F 00A62D40 Inside My Home.mid TrackParseDebug.txt", u8"House", 0x03,
 	1, {
-		{ ns4::CMidiFile::NS4_ES_MASTER, ns4::CMidiFile::NS4_E_GLOBAL_SET_REVERB, 0, ns4::CReverb::NS4_T_THE_LEGEND_OF_ZELDA_OCARINA_OF_TIME_0_0C00_2FFF },	// Guess.
+		{ ns4::CMidiFile::NS4_ES_MASTER, ns4::CMidiFile::NS4_E_GLOBAL_SET_REVERB, 0, ns4::CReverb::NS4_T_DELAY_0C00_2FFF },	// Guess.
 	},
 },
 { u8"Legend of Zelda, The - Ocarina of Time (U) (V1.2) 0000003C 00A62D40 Kokiri Forest.mid", u8"Legend of Zelda, The - Ocarina of Time (U) (V1.2) 0000003C 00A62D40 Kokiri Forest.mid TrackParseDebug.txt", u8"Kokiri Forest", 0x0F,
@@ -74,7 +74,7 @@
 		{ ns4::CMidiFile::NS4_ES_POST_SUPPLEMENTAL, ns4::CMidiFile::NS4_E_REMOVE_ALL_EVENTS_FROM_TICK, 0, 0, 0, { 110, 1, 1, 0 } },
 		{ ns4::CMidiFile::NS4_ES_POST_SUPPLEMENTAL, ns4::CMidiFile::NS4_E_SET_LOOP_POINTS_ALL_TRACKS, 0, 0, 0, { 84, 1, 1, 0 }, { 110, 1, 1, 0 } },
 		{ ns4::CMidiFile::NS4_ES_POST_SUPPLEMENTAL, ns4::CMidiFile::NS4_E_START_AT_TICK, 0, 0, 0, { 79, 1, 1, 0 } },
-		{ ns4::CMidiFile::NS4_ES_MASTER, ns4::CMidiFile::NS4_E_GLOBAL_SET_REVERB, 0, ns4::CReverb::NS4_T_THE_LEGEND_OF_ZELDA_OCARINA_OF_TIME_0_0C00_2FFF },
+		{ ns4::CMidiFile::NS4_ES_MASTER, ns4::CMidiFile::NS4_E_GLOBAL_SET_REVERB, 0, ns4::CReverb::NS4_T_DELAY_0C00_2FFF },
 	},
 },
 { u8"Legend of Zelda, The - Ocarina of Time (U) (V1.2) 0000002B 00A62D40 Opening the Chest.mid", u8"Legend of Zelda, The - Ocarina of Time (U) (V1.2) 0000002B 00A62D40 Opening the Chest.mid TrackParseDebug.txt", u8"Open Treasure Box", 0x03 },
@@ -82,14 +82,14 @@
 { u8"Legend of Zelda, The - Ocarina of Time (U) (V1.2) 00000039 00A62D40 Congratulations!.mid", u8"Legend of Zelda, The - Ocarina of Time (U) (V1.2) 00000039 00A62D40 Congratulations!.mid TrackParseDebug.txt", u8"Small Item Catch", 0x23 },
 { u8"Legend of Zelda, The - Ocarina of Time (U) (V1.2) 00000055 00A62D40 Shop 'Til You Drop.mid", u8"Legend of Zelda, The - Ocarina of Time (U) (V1.2) 00000055 00A62D40 Shop 'Til You Drop.mid TrackParseDebug.txt", u8"Shop", 0x16,
 	1 + 1, {
-		{ ns4::CMidiFile::NS4_ES_MASTER, ns4::CMidiFile::NS4_E_GLOBAL_SET_REVERB, 0, ns4::CReverb::NS4_T_THE_LEGEND_OF_ZELDA_OCARINA_OF_TIME_0_0C00_2FFF },
+		{ ns4::CMidiFile::NS4_ES_MASTER, ns4::CMidiFile::NS4_E_GLOBAL_SET_REVERB, 0, ns4::CReverb::NS4_T_DELAY_0C00_2FFF },
 		{ ns4::CMidiFile::NS4_ES_POST_SUPPLEMENTAL, ns4::CMidiFile::NS4_E_SET_ENV_REL_MULTIPLIER, NS4_DOUBLE_OP( 0, NS4_REL_MULTIPLIER * 0.5 ) },
 	},
 },
 { u8"Legend of Zelda, The - Ocarina of Time (U) (V1.2) 0000001A 00A62D40 An Enemy Is Near.mid", u8"Legend of Zelda, The - Ocarina of Time (U) (V1.2) 0000001A 00A62D40 An Enemy Is Near.mid TrackParseDebug.txt", u8"Battle", 0x03 },
 { u8"Legend of Zelda, The - Ocarina of Time (U) (V1.2) 0000001C 00A62D40 Deku Tree & Underground.mid", u8"Legend of Zelda, The - Ocarina of Time (U) (V1.2) 0000001C 00A62D40 Deku Tree & Underground.mid TrackParseDebug.txt", u8"Inside the Deku Tree", 0x04,
 	1 + 1, {
-		{ ns4::CMidiFile::NS4_ES_MASTER, ns4::CMidiFile::NS4_E_GLOBAL_SET_REVERB, 0, ns4::CReverb::NS4_T_THE_LEGEND_OF_ZELDA_OCARINA_OF_TIME_0_0C00_2FFF },
+		{ ns4::CMidiFile::NS4_ES_MASTER, ns4::CMidiFile::NS4_E_GLOBAL_SET_REVERB, 0, ns4::CReverb::NS4_T_DELAY_0C00_2FFF },
 		{ ns4::CMidiFile::NS4_ES_POST_SUPPLEMENTAL, ns4::CMidiFile::NS4_E_SET_ENV_REL_MULTIPLIER, NS4_DOUBLE_OP( 0, NS4_REL_MULTIPLIER * 6 ) },
 	},
 },
@@ -98,7 +98,7 @@
 { u8"Legend of Zelda, The - Ocarina of Time (U) (V1.2) 00000024 00A62D40 Power Up.mid", u8"Legend of Zelda, The - Ocarina of Time (U) (V1.2) 00000024 00A62D40 Power Up.mid TrackParseDebug.txt", u8"Heart Container Get", 0x23 },
 { u8"Legend of Zelda, The - Ocarina of Time (U) (V1.2) 0000004D 00A62D40 Flight of the Goddesses.mid", u8"Legend of Zelda, The - Ocarina of Time (U) (V1.2) 0000004D 00A62D40 Flight of the Goddesses.mid TrackParseDebug.txt", u8"Legend of Hyrule", 0x13,
 	1 + 1, {
-		{ ns4::CMidiFile::NS4_ES_MASTER, ns4::CMidiFile::NS4_E_GLOBAL_SET_REVERB, 0, ns4::CReverb::NS4_T_THE_LEGEND_OF_ZELDA_OCARINA_OF_TIME_0_0C00_2FFF },
+		{ ns4::CMidiFile::NS4_ES_MASTER, ns4::CMidiFile::NS4_E_GLOBAL_SET_REVERB, 0, ns4::CReverb::NS4_T_DELAY_0C00_2FFF },
 		{ ns4::CMidiFile::NS4_ES_POST_SUPPLEMENTAL, ns4::CMidiFile::NS4_E_SET_ENV_REL_MULTIPLIER, NS4_DOUBLE_OP( 0, NS4_REL_MULTIPLIER * 2 ) },
 	},
 },
@@ -107,72 +107,72 @@
 
 { u8"Legend of Zelda, The - Ocarina of Time (U) (V1.2) 0000005A 00A62D40 The Owl Speaks.mid", u8"Legend of Zelda, The - Ocarina of Time (U) (V1.2) 0000005A 00A62D40 The Owl Speaks.mid TrackParseDebug.txt", u8"Kepora Gebora’s Theme", 0x24,
 	1 + 1, {
-		{ ns4::CMidiFile::NS4_ES_MASTER, ns4::CMidiFile::NS4_E_GLOBAL_SET_REVERB, 0, ns4::CReverb::NS4_T_THE_LEGEND_OF_ZELDA_OCARINA_OF_TIME_0_0C00_2FFF },
+		{ ns4::CMidiFile::NS4_ES_MASTER, ns4::CMidiFile::NS4_E_GLOBAL_SET_REVERB, 0, ns4::CReverb::NS4_T_DELAY_0C00_2FFF },
 		{ ns4::CMidiFile::NS4_ES_POST_SUPPLEMENTAL, ns4::CMidiFile::NS4_E_SET_ENV_REL_MULTIPLIER, NS4_DOUBLE_OP( 0, NS4_REL_MULTIPLIER * 0.75 ) },
 	},
 },
 { u8"Legend of Zelda, The - Ocarina of Time (U) (V1.2) 0000001D 00A62D40 Market.mid", u8"Legend of Zelda, The - Ocarina of Time (U) (V1.2) 0000001D 00A62D40 Market.mid TrackParseDebug.txt", u8"Market", 0x05,
 	1 + 1, {
-		{ ns4::CMidiFile::NS4_ES_MASTER, ns4::CMidiFile::NS4_E_GLOBAL_SET_REVERB, 0, ns4::CReverb::NS4_T_THE_LEGEND_OF_ZELDA_OCARINA_OF_TIME_0_0C00_2FFF },	// Guess.
+		{ ns4::CMidiFile::NS4_ES_MASTER, ns4::CMidiFile::NS4_E_GLOBAL_SET_REVERB, 0, ns4::CReverb::NS4_T_DELAY_0C00_2FFF },	// Guess.
 		{ ns4::CMidiFile::NS4_ES_POST_SUPPLEMENTAL, ns4::CMidiFile::NS4_E_SET_ENV_REL_MULTIPLIER, NS4_DOUBLE_OP( 0, NS4_REL_MULTIPLIER * 2 ) },
 	},
 },
 { u8"Legend of Zelda, The - Ocarina of Time (U) (V1.2) 0000004E 00A62D40 Games 'n' Fun.mid", u8"Legend of Zelda, The - Ocarina of Time (U) (V1.2) 0000004E 00A62D40 Games 'n' Fun.mid TrackParseDebug.txt", u8"Shooting Gallery", 0x14,
 	1, {
-		{ ns4::CMidiFile::NS4_ES_MASTER, ns4::CMidiFile::NS4_E_GLOBAL_SET_REVERB, 0, ns4::CReverb::NS4_T_THE_LEGEND_OF_ZELDA_OCARINA_OF_TIME_0_0C00_2FFF },
+		{ ns4::CMidiFile::NS4_ES_MASTER, ns4::CMidiFile::NS4_E_GLOBAL_SET_REVERB, 0, ns4::CReverb::NS4_T_DELAY_0C00_2FFF },
 	},
 },
 { u8"Legend of Zelda, The - Ocarina of Time (U) (V1.2) 0000002D 00A62D40 Sneaking Through the Castle.mid", u8"Legend of Zelda, The - Ocarina of Time (U) (V1.2) 0000002D 00A62D40 Sneaking Through the Castle.mid TrackParseDebug.txt", u8"Hyrule Castle Courtyard", 0x03,
 	1, {
-		{ ns4::CMidiFile::NS4_ES_MASTER, ns4::CMidiFile::NS4_E_GLOBAL_SET_REVERB, 0, ns4::CReverb::NS4_T_THE_LEGEND_OF_ZELDA_OCARINA_OF_TIME_0_0C00_2FFF }, // Guess.
+		{ ns4::CMidiFile::NS4_ES_MASTER, ns4::CMidiFile::NS4_E_GLOBAL_SET_REVERB, 0, ns4::CReverb::NS4_T_DELAY_0C00_2FFF }, // Guess.
 	},
 },
 { u8"Legend of Zelda, The - Ocarina of Time (U) (V1.2) 00000051 00A62D40 And It's....mid", u8"Legend of Zelda, The - Ocarina of Time (U) (V1.2) 00000051 00A62D40 And It's....mid TrackParseDebug.txt", u8"Enter Zelda", 0x03 },
 { u8"Legend of Zelda, The - Ocarina of Time (U) (V1.2) 00000046 00A62D40 Zelda's Lullaby.mid", u8"Legend of Zelda, The - Ocarina of Time (U) (V1.2) 00000046 00A62D40 Zelda's Lullaby.mid TrackParseDebug.txt", u8"Ocarina “Zelda’s Lullaby”", 0x00 },
 { u8"Legend of Zelda, The - Ocarina of Time (U) (V1.2) 00000029 00A62D40 Zelda's Courtyard.mid", u8"Legend of Zelda, The - Ocarina of Time (U) (V1.2) 00000029 00A62D40 Zelda's Courtyard.mid TrackParseDebug.txt", u8"Zelda’s Theme", 0x09,
 	1, {
-		{ ns4::CMidiFile::NS4_ES_MASTER, ns4::CMidiFile::NS4_E_GLOBAL_SET_REVERB, 0, ns4::CReverb::NS4_T_THE_LEGEND_OF_ZELDA_OCARINA_OF_TIME_0_0C00_2FFF }, // Guess.
+		{ ns4::CMidiFile::NS4_ES_MASTER, ns4::CMidiFile::NS4_E_GLOBAL_SET_REVERB, 0, ns4::CReverb::NS4_T_DELAY_0C00_2FFF }, // Guess.
 	},
 },
 { u8"Legend of Zelda, The - Ocarina of Time (U) (V1.2) 00000045 00A62D40 Epona's Song.mid", u8"Legend of Zelda, The - Ocarina of Time (U) (V1.2) 00000045 00A62D40 Epona's Song.mid TrackParseDebug.txt", u8"Ocarina “Epona’s Song”", 0x00 },
 { u8"Legend of Zelda, The - Ocarina of Time (U) (V1.2) 0000002F 00A62D40 Lon Lon Ranch.mid", u8"Legend of Zelda, The - Ocarina of Time (U) (V1.2) 0000002F 00A62D40 Lon Lon Ranch.mid TrackParseDebug.txt", u8"Lon Lon Ranch", 0x0D,
 	2, {
 		{ ns4::CMidiFile::NS4_ES_POST_SUPPLEMENTAL, ns4::CMidiFile::NS4_E_SET_ADSR_VIBRATO_MAPPING, 0, ns4::CMidiFile::NS4_AVM_TREMOLO },
-		{ ns4::CMidiFile::NS4_ES_MASTER, ns4::CMidiFile::NS4_E_GLOBAL_SET_REVERB, 0, ns4::CReverb::NS4_T_THE_LEGEND_OF_ZELDA_OCARINA_OF_TIME_0_0C00_2FFF }, // Guess.
+		{ ns4::CMidiFile::NS4_ES_MASTER, ns4::CMidiFile::NS4_E_GLOBAL_SET_REVERB, 0, ns4::CReverb::NS4_T_DELAY_0C00_2FFF }, // Guess.
 	},
 },
 { u8"Legend of Zelda, The - Ocarina of Time (U) (V1.2) 0000006C 00A62D40 Gotta Catch 'Em All.mid", u8"Legend of Zelda, The - Ocarina of Time (U) (V1.2) 0000006C 00A62D40 Gotta Catch 'Em All.mid TrackParseDebug.txt", u8"Mini-Game", 0x03,
 	1, {
-		{ ns4::CMidiFile::NS4_ES_MASTER, ns4::CMidiFile::NS4_E_GLOBAL_SET_REVERB, 0, ns4::CReverb::NS4_T_THE_LEGEND_OF_ZELDA_OCARINA_OF_TIME_0_0C00_2FFF },	// Guess.
+		{ ns4::CMidiFile::NS4_ES_MASTER, ns4::CMidiFile::NS4_E_GLOBAL_SET_REVERB, 0, ns4::CReverb::NS4_T_DELAY_0C00_2FFF },	// Guess.
 	},
 },
 { u8"Legend of Zelda, The - Ocarina of Time (U) (V1.2) 00000027 00A62D40 Kakariko Village (Guitar).mid", u8"Legend of Zelda, The - Ocarina of Time (U) (V1.2) 00000027 00A62D40 Kakariko Village (Guitar).mid TrackParseDebug.txt", u8"Kakariko Village", 0x08,
 	2, {
 		{ ns4::CMidiFile::NS4_ES_POST_SUPPLEMENTAL, ns4::CMidiFile::NS4_E_START_AT_TICK, 0, 0, 0, { 12, 2, 1, 0 } },
-		{ ns4::CMidiFile::NS4_ES_MASTER, ns4::CMidiFile::NS4_E_GLOBAL_SET_REVERB, 0, ns4::CReverb::NS4_T_THE_LEGEND_OF_ZELDA_OCARINA_OF_TIME_0_0C00_2FFF },
+		{ ns4::CMidiFile::NS4_ES_MASTER, ns4::CMidiFile::NS4_E_GLOBAL_SET_REVERB, 0, ns4::CReverb::NS4_T_DELAY_0C00_2FFF },
 	},
 },
 { u8"Legend of Zelda, The - Ocarina of Time (U) (V1.2) 00000047 00A62D40 Sun Song.mid", u8"Legend of Zelda, The - Ocarina of Time (U) (V1.2) 00000047 00A62D40 Sun Song.mid TrackParseDebug.txt", u8"Ocarina “Sun’s Song”", 0x00 },
 { u8"Legend of Zelda, The - Ocarina of Time (U) (V1.2) 00000031 00A62D40 Hyrule Field.mid", u8"Legend of Zelda, The - Ocarina of Time (U) (V1.2) 00000031 00A62D40 Hyrule Field.mid TrackParseDebug.txt", u8"Hyrule Field Morning Theme", 0x03,
 	1, {
-		{ ns4::CMidiFile::NS4_ES_MASTER, ns4::CMidiFile::NS4_E_GLOBAL_SET_REVERB, 0, ns4::CReverb::NS4_T_THE_LEGEND_OF_ZELDA_OCARINA_OF_TIME_0_0C00_2FFF },
+		{ ns4::CMidiFile::NS4_ES_MASTER, ns4::CMidiFile::NS4_E_GLOBAL_SET_REVERB, 0, ns4::CReverb::NS4_T_DELAY_0C00_2FFF },
 	},
 },
 { u8"Legend of Zelda, The - Ocarina of Time (U) (V1.2) 00000030 00A62D40 Goron City.mid", u8"Legend of Zelda, The - Ocarina of Time (U) (V1.2) 00000030 00A62D40 Goron City.mid TrackParseDebug.txt", u8"Goron City", 0x0E },
 { u8"Legend of Zelda, The - Ocarina of Time (U) (V1.2) 00000044 00A62D40 Saria's Song.mid", u8"Legend of Zelda, The - Ocarina of Time (U) (V1.2) 00000044 00A62D40 Saria's Song.mid TrackParseDebug.txt", u8"Ocarina “Saria’s Song”", 0x00 },
 { u8"Legend of Zelda, The - Ocarina of Time (U) (V1.2) 0000003E 00A62D40 Lost Woods.mid", u8"Legend of Zelda, The - Ocarina of Time (U) (V1.2) 0000003E 00A62D40 Lost Woods.mid TrackParseDebug.txt", u8"Lost Woods", 0x05,
 	1, {
-		{ ns4::CMidiFile::NS4_ES_MASTER, ns4::CMidiFile::NS4_E_GLOBAL_SET_REVERB, 0, ns4::CReverb::NS4_T_THE_LEGEND_OF_ZELDA_OCARINA_OF_TIME_0_0C00_2FFF },
+		{ ns4::CMidiFile::NS4_ES_MASTER, ns4::CMidiFile::NS4_E_GLOBAL_SET_REVERB, 0, ns4::CReverb::NS4_T_DELAY_0C00_2FFF },
 	},
 },
 { u8"Legend of Zelda, The - Ocarina of Time (U) (V1.2) 00000018 00A62D40 Dungeon.mid", u8"Legend of Zelda, The - Ocarina of Time (U) (V1.2) 00000018 00A62D40 Dungeon.mid TrackParseDebug.txt", u8"Dodongo’s Cavern", 0x0B,
 	1, {
-		{ ns4::CMidiFile::NS4_ES_MASTER, ns4::CMidiFile::NS4_E_GLOBAL_SET_REVERB, 0, ns4::CReverb::NS4_T_THE_LEGEND_OF_ZELDA_OCARINA_OF_TIME_0_0C00_2FFF },
+		{ ns4::CMidiFile::NS4_ES_MASTER, ns4::CMidiFile::NS4_E_GLOBAL_SET_REVERB, 0, ns4::CReverb::NS4_T_DELAY_0C00_2FFF },
 	},
 },
 { u8"Legend of Zelda, The - Ocarina of Time (U) (V1.2) 00000038 00A62D40 The Mini-Boss.mid", u8"Legend of Zelda, The - Ocarina of Time (U) (V1.2) 00000038 00A62D40 The Mini-Boss.mid TrackParseDebug.txt", u8"Middle Boss Battle", 0x03,
 	1, {
-		{ ns4::CMidiFile::NS4_ES_MASTER, ns4::CMidiFile::NS4_E_GLOBAL_SET_REVERB, 0, ns4::CReverb::NS4_T_THE_LEGEND_OF_ZELDA_OCARINA_OF_TIME_0_0C00_2FFF },
+		{ ns4::CMidiFile::NS4_ES_MASTER, ns4::CMidiFile::NS4_E_GLOBAL_SET_REVERB, 0, ns4::CReverb::NS4_T_DELAY_0C00_2FFF },
 	},
 },
 { u8"Legend of Zelda, The - Ocarina of Time (U) (V1.2) 0000006B 00A62D40 Ganondorf Attacks.mid", u8"Legend of Zelda, The - Ocarina of Time (U) (V1.2) 0000006B 00A62D40 Ganondorf Attacks.mid TrackParseDebug.txt", u8"Dodongo Boss Battle", 0x20 },
@@ -182,18 +182,18 @@
 		{ ns4::CMidiFile::NS4_ES_POST_SUPPLEMENTAL, ns4::CMidiFile::NS4_E_SET_LOOP_POINTS_ALL_TRACKS, 0, 0, 0, { 127, 4, 3, 0 }, { 175, 4, 3, 0 } },
 		{ ns4::CMidiFile::NS4_ES_POST_SUPPLEMENTAL, ns4::CMidiFile::NS4_E_START_AT_TICK, 0, 0, 0, { 121, 1, 1, 0 } },
 		//{ ns4::CMidiFile::NS4_ES_POST_SUPPLEMENTAL, ns4::CMidiFile::NS4_E_COPY_CONTROL_TO_TICK, 2-1, ns4::CMidiFile::NS4_C_EFX_1_DEPTH, 0, { 9, 1, 1, 0 }, { 127, 4, 3, 0 } },
-		{ ns4::CMidiFile::NS4_ES_MASTER, ns4::CMidiFile::NS4_E_GLOBAL_SET_REVERB, 0, ns4::CReverb::NS4_T_THE_LEGEND_OF_ZELDA_OCARINA_OF_TIME_0_0C00_2FFF },
+		{ ns4::CMidiFile::NS4_ES_MASTER, ns4::CMidiFile::NS4_E_GLOBAL_SET_REVERB, 0, ns4::CReverb::NS4_T_DELAY_0C00_2FFF },
 	},
 },
 { u8"Legend of Zelda, The - Ocarina of Time (U) (V1.2) 00000028 00A62D40 Fairy Fountain.mid", u8"Legend of Zelda, The - Ocarina of Time (U) (V1.2) 00000028 00A62D40 Fairy Fountain.mid TrackParseDebug.txt", u8"Great Fairy’s Fountain", 0x09,
 	1 + 1, {
-		{ ns4::CMidiFile::NS4_ES_MASTER, ns4::CMidiFile::NS4_E_GLOBAL_SET_REVERB, 0, ns4::CReverb::NS4_T_THE_LEGEND_OF_ZELDA_OCARINA_OF_TIME_0_0C00_2FFF },
+		{ ns4::CMidiFile::NS4_ES_MASTER, ns4::CMidiFile::NS4_E_GLOBAL_SET_REVERB, 0, ns4::CReverb::NS4_T_DELAY_0C00_2FFF },
 		{ ns4::CMidiFile::NS4_ES_POST_SUPPLEMENTAL, ns4::CMidiFile::NS4_E_SET_ENV_REL_MULTIPLIER, NS4_DOUBLE_OP( 0, NS4_REL_MULTIPLIER * 2.0 ) },
 	},
 },
 { u8"Legend of Zelda, The - Ocarina of Time (U) (V1.2) 00000060 00A62D40 The Hag's Shop.mid", u8"Legend of Zelda, The - Ocarina of Time (U) (V1.2) 00000060 00A62D40 The Hag's Shop.mid TrackParseDebug.txt", u8"Potion Shop", 0x1C,
 	1, {
-		{ ns4::CMidiFile::NS4_ES_MASTER, ns4::CMidiFile::NS4_E_GLOBAL_SET_REVERB, 0, ns4::CReverb::NS4_T_THE_LEGEND_OF_ZELDA_OCARINA_OF_TIME_0_0C00_2FFF },
+		{ ns4::CMidiFile::NS4_ES_MASTER, ns4::CMidiFile::NS4_E_GLOBAL_SET_REVERB, 0, ns4::CReverb::NS4_T_DELAY_0C00_2FFF },
 	},
 },
 { u8"Legend of Zelda, The - Ocarina of Time (U) (V1.2) 00000026 00A62D40 Jabu-Jabu's Belly.mid", u8"Legend of Zelda, The - Ocarina of Time (U) (V1.2) 00000026 00A62D40 Jabu-Jabu's Belly.mid TrackParseDebug.txt", u8"Inside Jabu-Jabu’s Belly", 0x07 },
@@ -213,7 +213,7 @@
 { u8"Legend of Zelda, The - Ocarina of Time (U) (V1.2) 00000049 00A62D40 Song of Storms.mid", u8"Legend of Zelda, The - Ocarina of Time (U) (V1.2) 00000049 00A62D40 Song of Storms.mid TrackParseDebug.txt", u8"Ocarina “Song of Storms”", 0x00 },
 { u8"Legend of Zelda, The - Ocarina of Time (U) (V1.2) 0000004C 00A62D40 Inside the Windmill.mid", u8"Legend of Zelda, The - Ocarina of Time (U) (V1.2) 0000004C 00A62D40 Inside the Windmill.mid TrackParseDebug.txt", u8"Windmill Hut", 0x08,
 	1, {
-		{ ns4::CMidiFile::NS4_ES_MASTER, ns4::CMidiFile::NS4_E_GLOBAL_SET_REVERB, 0, ns4::CReverb::NS4_T_THE_LEGEND_OF_ZELDA_OCARINA_OF_TIME_0_0C00_2FFF }, // Guess.
+		{ ns4::CMidiFile::NS4_ES_MASTER, ns4::CMidiFile::NS4_E_GLOBAL_SET_REVERB, 0, ns4::CReverb::NS4_T_DELAY_0C00_2FFF }, // Guess.
 	},
 },
 { u8"Legend of Zelda, The - Ocarina of Time (U) (V1.2) 00000034 00A62D40 Minuet of Forest.mid", u8"Legend of Zelda, The - Ocarina of Time (U) (V1.2) 00000034 00A62D40 Minuet of Forest.mid TrackParseDebug.txt", u8"Minuet of Woods", 0x12 },
@@ -222,7 +222,7 @@
 { u8"Legend of Zelda, The - Ocarina of Time (U) (V1.2) 0000002A 00A62D40 Fire Temple.mid", u8"Legend of Zelda, The - Ocarina of Time (U) (V1.2) 0000002A 00A62D40 Fire Temple.mid TrackParseDebug.txt", u8"Fire Temple", 0x0A },
 { u8"Legend of Zelda, The - Ocarina of Time (U) (V1.2) 00000058 00A62D40 Ice Cavern.mid", u8"Legend of Zelda, The - Ocarina of Time (U) (V1.2) 00000058 00A62D40 Ice Cavern.mid TrackParseDebug.txt", u8"Ice Cavern", 0x17,
 	1, {
-		{ ns4::CMidiFile::NS4_ES_MASTER, ns4::CMidiFile::NS4_E_GLOBAL_SET_REVERB, 0, ns4::CReverb::NS4_T_THE_LEGEND_OF_ZELDA_OCARINA_OF_TIME_0_0C00_2FFF },
+		{ ns4::CMidiFile::NS4_ES_MASTER, ns4::CMidiFile::NS4_E_GLOBAL_SET_REVERB, 0, ns4::CReverb::NS4_T_DELAY_0C00_2FFF },
 	},
 },
 { u8"Legend of Zelda, The - Ocarina of Time (U) (V1.2) 00000035 00A62D40 Serenade of Water.mid", u8"Legend of Zelda, The - Ocarina of Time (U) (V1.2) 00000035 00A62D40 Serenade of Water.mid TrackParseDebug.txt", u8"Serenade of Water", 0x12 },
@@ -232,7 +232,7 @@
 { u8"Legend of Zelda, The - Ocarina of Time (U) (V1.2) 0000005B 00A62D40 Shadow Temple.mid", u8"Legend of Zelda, The - Ocarina of Time (U) (V1.2) 0000005B 00A62D40 Shadow Temple.mid TrackParseDebug.txt", u8"Shadow Temple", 0x18 },
 { u8"Legend of Zelda, The - Ocarina of Time (U) (V1.2) 0000005F 00A62D40 Gerudo Valley.mid", u8"Legend of Zelda, The - Ocarina of Time (U) (V1.2) 0000005F 00A62D40 Gerudo Valley.mid TrackParseDebug.txt", u8"Gerudo Valley", 0x1B,
 	1 + 2, {
-		{ ns4::CMidiFile::NS4_ES_MASTER, ns4::CMidiFile::NS4_E_GLOBAL_SET_REVERB, 0, ns4::CReverb::NS4_T_THE_LEGEND_OF_ZELDA_OCARINA_OF_TIME_0_0C00_2FFF },
+		{ ns4::CMidiFile::NS4_ES_MASTER, ns4::CMidiFile::NS4_E_GLOBAL_SET_REVERB, 0, ns4::CReverb::NS4_T_DELAY_0C00_2FFF },
 
 		{ ns4::CMidiFile::NS4_ES_POST_SUPPLEMENTAL, ns4::CMidiFile::NS4_E_START_AT_TICK, 0, 0, 0, { 176, 1, 1, 0 } },
 		{ ns4::CMidiFile::NS4_ES_POST_SUPPLEMENTAL, ns4::CMidiFile::NS4_E_SET_LOOP_POINTS_ALL_TRACKS, 0, 0, 0, { 183, 1, 1, 0 }, { 219, 1, 1, 0 } },
@@ -242,7 +242,7 @@
 { u8"Legend of Zelda, The - Ocarina of Time (U) (V1.2) 00000036 00A62D40 Requiem of Spirit.mid", u8"Legend of Zelda, The - Ocarina of Time (U) (V1.2) 00000036 00A62D40 Requiem of Spirit.mid TrackParseDebug.txt", u8"Requiem of Spirit", 0x12 },
 { u8"Legend of Zelda, The - Ocarina of Time (U) (V1.2) 00000061 00A62D40 Kotake and Koume.mid", u8"Legend of Zelda, The - Ocarina of Time (U) (V1.2) 00000061 00A62D40 Kotake and Koume.mid TrackParseDebug.txt", u8"Kotake & Koume’s Theme", 0x1D,
 	1, {
-		{ ns4::CMidiFile::NS4_ES_MASTER, ns4::CMidiFile::NS4_E_GLOBAL_SET_REVERB, 0, ns4::CReverb::NS4_T_THE_LEGEND_OF_ZELDA_OCARINA_OF_TIME_0_0C00_2FFF }, // Guess.
+		{ ns4::CMidiFile::NS4_ES_MASTER, ns4::CMidiFile::NS4_E_GLOBAL_SET_REVERB, 0, ns4::CReverb::NS4_T_DELAY_0C00_2FFF }, // Guess.
 	},
 },
 { u8"Legend of Zelda, The - Ocarina of Time (U) (V1.2) 00000052 00A62D40 Zelda in the Sky.mid", u8"Legend of Zelda, The - Ocarina of Time (U) (V1.2) 00000052 00A62D40 Zelda in the Sky.mid TrackParseDebug.txt", u8"Meet Again Zelda", 0x03 },
@@ -250,19 +250,19 @@
 { u8"Legend of Zelda, The - Ocarina of Time (U) (V1.2) 0000005D 00A62D40 The Goddesses Depart.mid", u8"Legend of Zelda, The - Ocarina of Time (U) (V1.2) 0000005D 00A62D40 The Goddesses Depart.mid TrackParseDebug.txt", u8"Ganon’s Castle Bridge", 0x13 },
 { u8"Legend of Zelda, The - Ocarina of Time (U) (V1.2) 00000063 00A62D40 Ganon's Castle.mid", u8"Legend of Zelda, The - Ocarina of Time (U) (V1.2) 00000063 00A62D40 Ganon's Castle.mid TrackParseDebug.txt", u8"Ganon’s Castle Underground", 0x1F,
 	1, {
-		{ ns4::CMidiFile::NS4_ES_MASTER, ns4::CMidiFile::NS4_E_GLOBAL_SET_REVERB, 0, ns4::CReverb::NS4_T_THE_LEGEND_OF_ZELDA_OCARINA_OF_TIME_0_0C00_2FFF },
+		{ ns4::CMidiFile::NS4_ES_MASTER, ns4::CMidiFile::NS4_E_GLOBAL_SET_REVERB, 0, ns4::CReverb::NS4_T_DELAY_0C00_2FFF },
 	},
 },
 { u8"Legend of Zelda, The - Ocarina of Time (U) (V1.2) 0000002E 00A62D40 Ganon's Organ.mid", u8"Legend of Zelda, The - Ocarina of Time (U) (V1.2) 0000002E 00A62D40 Ganon's Organ.mid TrackParseDebug.txt", u8"Inside Ganon’s Castle", 0x1E },
 { u8"Legend of Zelda, The - Ocarina of Time (U) (V1.2) 00000064 00A62D40 Ganon Attacks.mid", u8"Legend of Zelda, The - Ocarina of Time (U) (V1.2) 00000064 00A62D40 Ganon Attacks.mid TrackParseDebug.txt", u8"Ganondorf Battle", 0x20,
 	1, {
-		{ ns4::CMidiFile::NS4_ES_MASTER, ns4::CMidiFile::NS4_E_GLOBAL_SET_REVERB, 0, ns4::CReverb::NS4_T_THE_LEGEND_OF_ZELDA_OCARINA_OF_TIME_0_0C00_2FFF },
+		{ ns4::CMidiFile::NS4_ES_MASTER, ns4::CMidiFile::NS4_E_GLOBAL_SET_REVERB, 0, ns4::CReverb::NS4_T_DELAY_0C00_2FFF },
 	},
 },
 { u8"Legend of Zelda, The - Ocarina of Time (U) (V1.2) 00000062 00A62D40 The Castle is Falling!.mid", u8"Legend of Zelda, The - Ocarina of Time (U) (V1.2) 00000062 00A62D40 The Castle is Falling!.mid TrackParseDebug.txt", u8"Escape From Ganon’s Castle", 0x03 },
 { u8"Legend of Zelda, The - Ocarina of Time (U) (V1.2) 00000065 00A62D40 Ganon's Transformation.mid", u8"Legend of Zelda, The - Ocarina of Time (U) (V1.2) 00000065 00A62D40 Ganon's Transformation.mid TrackParseDebug.txt", u8"Last Battle", 0x20,
 	1, {
-		{ ns4::CMidiFile::NS4_ES_MASTER, ns4::CMidiFile::NS4_E_GLOBAL_SET_REVERB, 0, ns4::CReverb::NS4_T_THE_LEGEND_OF_ZELDA_OCARINA_OF_TIME_0_0C00_2FFF },
+		{ ns4::CMidiFile::NS4_ES_MASTER, ns4::CMidiFile::NS4_E_GLOBAL_SET_REVERB, 0, ns4::CReverb::NS4_T_DELAY_0C00_2FFF },
 	},
 },
 { u8"Legend of Zelda, The - Ocarina of Time (U) (V1.2) 0000005E 00A62D40 The Sages Unite.mid", u8"Legend of Zelda, The - Ocarina of Time (U) (V1.2) 0000005E 00A62D40 The Sages Unite.mid TrackParseDebug.txt", u8"Seal of Six Sages", 0x20 },
@@ -275,107 +275,107 @@
 
 { u8"Legend of Zelda, The - Ocarina of Time (U) (V1.2) 00000003 00A62D40 Overworld.mid", u8"Legend of Zelda, The - Ocarina of Time (U) (V1.2) 00000003 00A62D40 Overworld.mid TrackParseDebug.txt", u8"Hyrule Field 1", 0x03,
 	1, {
-		{ ns4::CMidiFile::NS4_ES_MASTER, ns4::CMidiFile::NS4_E_GLOBAL_SET_REVERB, 0, ns4::CReverb::NS4_T_THE_LEGEND_OF_ZELDA_OCARINA_OF_TIME_0_0C00_2FFF },
+		{ ns4::CMidiFile::NS4_ES_MASTER, ns4::CMidiFile::NS4_E_GLOBAL_SET_REVERB, 0, ns4::CReverb::NS4_T_DELAY_0C00_2FFF },
 	},
 },
 { u8"Legend of Zelda, The - Ocarina of Time (U) (V1.2) 00000004 00A62D40 Overworld.mid", u8"Legend of Zelda, The - Ocarina of Time (U) (V1.2) 00000004 00A62D40 Overworld.mid TrackParseDebug.txt", u8"Hyrule Field 2", 0x03,
 	1, {
-		{ ns4::CMidiFile::NS4_ES_MASTER, ns4::CMidiFile::NS4_E_GLOBAL_SET_REVERB, 0, ns4::CReverb::NS4_T_THE_LEGEND_OF_ZELDA_OCARINA_OF_TIME_0_0C00_2FFF },
+		{ ns4::CMidiFile::NS4_ES_MASTER, ns4::CMidiFile::NS4_E_GLOBAL_SET_REVERB, 0, ns4::CReverb::NS4_T_DELAY_0C00_2FFF },
 	},
 },
 { u8"Legend of Zelda, The - Ocarina of Time (U) (V1.2) 00000005 00A62D40 Overworld.mid", u8"Legend of Zelda, The - Ocarina of Time (U) (V1.2) 00000005 00A62D40 Overworld.mid TrackParseDebug.txt", u8"Hyrule Field 3", 0x03,
 	1, {
-		{ ns4::CMidiFile::NS4_ES_MASTER, ns4::CMidiFile::NS4_E_GLOBAL_SET_REVERB, 0, ns4::CReverb::NS4_T_THE_LEGEND_OF_ZELDA_OCARINA_OF_TIME_0_0C00_2FFF },
+		{ ns4::CMidiFile::NS4_ES_MASTER, ns4::CMidiFile::NS4_E_GLOBAL_SET_REVERB, 0, ns4::CReverb::NS4_T_DELAY_0C00_2FFF },
 	},
 },
 { u8"Legend of Zelda, The - Ocarina of Time (U) (V1.2) 00000006 00A62D40 Overworld.mid", u8"Legend of Zelda, The - Ocarina of Time (U) (V1.2) 00000006 00A62D40 Overworld.mid TrackParseDebug.txt", u8"Hyrule Field 4", 0x03,
 	1, {
-		{ ns4::CMidiFile::NS4_ES_MASTER, ns4::CMidiFile::NS4_E_GLOBAL_SET_REVERB, 0, ns4::CReverb::NS4_T_THE_LEGEND_OF_ZELDA_OCARINA_OF_TIME_0_0C00_2FFF },
+		{ ns4::CMidiFile::NS4_ES_MASTER, ns4::CMidiFile::NS4_E_GLOBAL_SET_REVERB, 0, ns4::CReverb::NS4_T_DELAY_0C00_2FFF },
 	},
 },
 { u8"Legend of Zelda, The - Ocarina of Time (U) (V1.2) 00000007 00A62D40 Overworld.mid", u8"Legend of Zelda, The - Ocarina of Time (U) (V1.2) 00000007 00A62D40 Overworld.mid TrackParseDebug.txt", u8"Hyrule Field 5", 0x03,
 	1, {
-		{ ns4::CMidiFile::NS4_ES_MASTER, ns4::CMidiFile::NS4_E_GLOBAL_SET_REVERB, 0, ns4::CReverb::NS4_T_THE_LEGEND_OF_ZELDA_OCARINA_OF_TIME_0_0C00_2FFF },
+		{ ns4::CMidiFile::NS4_ES_MASTER, ns4::CMidiFile::NS4_E_GLOBAL_SET_REVERB, 0, ns4::CReverb::NS4_T_DELAY_0C00_2FFF },
 	},
 },
 { u8"Legend of Zelda, The - Ocarina of Time (U) (V1.2) 00000008 00A62D40 Overworld.mid", u8"Legend of Zelda, The - Ocarina of Time (U) (V1.2) 00000008 00A62D40 Overworld.mid TrackParseDebug.txt", u8"Hyrule Field 6", 0x03,
 	1, {
-		{ ns4::CMidiFile::NS4_ES_MASTER, ns4::CMidiFile::NS4_E_GLOBAL_SET_REVERB, 0, ns4::CReverb::NS4_T_THE_LEGEND_OF_ZELDA_OCARINA_OF_TIME_0_0C00_2FFF },
+		{ ns4::CMidiFile::NS4_ES_MASTER, ns4::CMidiFile::NS4_E_GLOBAL_SET_REVERB, 0, ns4::CReverb::NS4_T_DELAY_0C00_2FFF },
 	},
 },
 { u8"Legend of Zelda, The - Ocarina of Time (U) (V1.2) 00000009 00A62D40 Overworld.mid", u8"Legend of Zelda, The - Ocarina of Time (U) (V1.2) 00000009 00A62D40 Overworld.mid TrackParseDebug.txt", u8"Hyrule Field 7", 0x03,
 	1, {
-		{ ns4::CMidiFile::NS4_ES_MASTER, ns4::CMidiFile::NS4_E_GLOBAL_SET_REVERB, 0, ns4::CReverb::NS4_T_THE_LEGEND_OF_ZELDA_OCARINA_OF_TIME_0_0C00_2FFF },
+		{ ns4::CMidiFile::NS4_ES_MASTER, ns4::CMidiFile::NS4_E_GLOBAL_SET_REVERB, 0, ns4::CReverb::NS4_T_DELAY_0C00_2FFF },
 	},
 },
 { u8"Legend of Zelda, The - Ocarina of Time (U) (V1.2) 0000000A 00A62D40 Overworld.mid", u8"Legend of Zelda, The - Ocarina of Time (U) (V1.2) 0000000A 00A62D40 Overworld.mid TrackParseDebug.txt", u8"Hyrule Field 8", 0x03,
 	1, {
-		{ ns4::CMidiFile::NS4_ES_MASTER, ns4::CMidiFile::NS4_E_GLOBAL_SET_REVERB, 0, ns4::CReverb::NS4_T_THE_LEGEND_OF_ZELDA_OCARINA_OF_TIME_0_0C00_2FFF },
+		{ ns4::CMidiFile::NS4_ES_MASTER, ns4::CMidiFile::NS4_E_GLOBAL_SET_REVERB, 0, ns4::CReverb::NS4_T_DELAY_0C00_2FFF },
 	},
 },
 { u8"Legend of Zelda, The - Ocarina of Time (U) (V1.2) 0000000B 00A62D40 Overworld.mid", u8"Legend of Zelda, The - Ocarina of Time (U) (V1.2) 0000000B 00A62D40 Overworld.mid TrackParseDebug.txt", u8"Hyrule Field 9", 0x03,
 	1, {
-		{ ns4::CMidiFile::NS4_ES_MASTER, ns4::CMidiFile::NS4_E_GLOBAL_SET_REVERB, 0, ns4::CReverb::NS4_T_THE_LEGEND_OF_ZELDA_OCARINA_OF_TIME_0_0C00_2FFF },
+		{ ns4::CMidiFile::NS4_ES_MASTER, ns4::CMidiFile::NS4_E_GLOBAL_SET_REVERB, 0, ns4::CReverb::NS4_T_DELAY_0C00_2FFF },
 	},
 },
 { u8"Legend of Zelda, The - Ocarina of Time (U) (V1.2) 0000000C 00A62D40 Overworld.mid", u8"Legend of Zelda, The - Ocarina of Time (U) (V1.2) 0000000C 00A62D40 Overworld.mid TrackParseDebug.txt", u8"Hyrule Field 10", 0x03,
 	1, {
-		{ ns4::CMidiFile::NS4_ES_MASTER, ns4::CMidiFile::NS4_E_GLOBAL_SET_REVERB, 0, ns4::CReverb::NS4_T_THE_LEGEND_OF_ZELDA_OCARINA_OF_TIME_0_0C00_2FFF },
+		{ ns4::CMidiFile::NS4_ES_MASTER, ns4::CMidiFile::NS4_E_GLOBAL_SET_REVERB, 0, ns4::CReverb::NS4_T_DELAY_0C00_2FFF },
 	},
 },
 { u8"Legend of Zelda, The - Ocarina of Time (U) (V1.2) 0000000D 00A62D40 Overworld.mid", u8"Legend of Zelda, The - Ocarina of Time (U) (V1.2) 0000000D 00A62D40 Overworld.mid TrackParseDebug.txt", u8"Hyrule Field 11", 0x03,
 	1, {
-		{ ns4::CMidiFile::NS4_ES_MASTER, ns4::CMidiFile::NS4_E_GLOBAL_SET_REVERB, 0, ns4::CReverb::NS4_T_THE_LEGEND_OF_ZELDA_OCARINA_OF_TIME_0_0C00_2FFF },
+		{ ns4::CMidiFile::NS4_ES_MASTER, ns4::CMidiFile::NS4_E_GLOBAL_SET_REVERB, 0, ns4::CReverb::NS4_T_DELAY_0C00_2FFF },
 	},
 },
 { u8"Legend of Zelda, The - Ocarina of Time (U) (V1.2) 0000000E 00A62D40 Overworld.mid", u8"Legend of Zelda, The - Ocarina of Time (U) (V1.2) 0000000E 00A62D40 Overworld.mid TrackParseDebug.txt", u8"Hyrule Field 12", 0x03,
 	1, {
-		{ ns4::CMidiFile::NS4_ES_MASTER, ns4::CMidiFile::NS4_E_GLOBAL_SET_REVERB, 0, ns4::CReverb::NS4_T_THE_LEGEND_OF_ZELDA_OCARINA_OF_TIME_0_0C00_2FFF },
+		{ ns4::CMidiFile::NS4_ES_MASTER, ns4::CMidiFile::NS4_E_GLOBAL_SET_REVERB, 0, ns4::CReverb::NS4_T_DELAY_0C00_2FFF },
 	},
 },
 { u8"Legend of Zelda, The - Ocarina of Time (U) (V1.2) 0000000F 00A62D40 Overworld.mid", u8"Legend of Zelda, The - Ocarina of Time (U) (V1.2) 0000000F 00A62D40 Overworld.mid TrackParseDebug.txt", u8"Hyrule Field 13", 0x03,
 	1, {
-		{ ns4::CMidiFile::NS4_ES_MASTER, ns4::CMidiFile::NS4_E_GLOBAL_SET_REVERB, 0, ns4::CReverb::NS4_T_THE_LEGEND_OF_ZELDA_OCARINA_OF_TIME_0_0C00_2FFF },
+		{ ns4::CMidiFile::NS4_ES_MASTER, ns4::CMidiFile::NS4_E_GLOBAL_SET_REVERB, 0, ns4::CReverb::NS4_T_DELAY_0C00_2FFF },
 	},
 },
 { u8"Legend of Zelda, The - Ocarina of Time (U) (V1.2) 00000010 00A62D40 Overworld.mid", u8"Legend of Zelda, The - Ocarina of Time (U) (V1.2) 00000010 00A62D40 Overworld.mid TrackParseDebug.txt", u8"Hyrule Field 14", 0x03,
 	1, {
-		{ ns4::CMidiFile::NS4_ES_MASTER, ns4::CMidiFile::NS4_E_GLOBAL_SET_REVERB, 0, ns4::CReverb::NS4_T_THE_LEGEND_OF_ZELDA_OCARINA_OF_TIME_0_0C00_2FFF },
+		{ ns4::CMidiFile::NS4_ES_MASTER, ns4::CMidiFile::NS4_E_GLOBAL_SET_REVERB, 0, ns4::CReverb::NS4_T_DELAY_0C00_2FFF },
 	},
 },
 { u8"Legend of Zelda, The - Ocarina of Time (U) (V1.2) 00000011 00A62D40 Overworld.mid", u8"Legend of Zelda, The - Ocarina of Time (U) (V1.2) 00000011 00A62D40 Overworld.mid TrackParseDebug.txt", u8"Hyrule Field 15", 0x03,
 	1, {
-		{ ns4::CMidiFile::NS4_ES_MASTER, ns4::CMidiFile::NS4_E_GLOBAL_SET_REVERB, 0, ns4::CReverb::NS4_T_THE_LEGEND_OF_ZELDA_OCARINA_OF_TIME_0_0C00_2FFF },
+		{ ns4::CMidiFile::NS4_ES_MASTER, ns4::CMidiFile::NS4_E_GLOBAL_SET_REVERB, 0, ns4::CReverb::NS4_T_DELAY_0C00_2FFF },
 	},
 },
 { u8"Legend of Zelda, The - Ocarina of Time (U) (V1.2) 00000012 00A62D40 Overworld.mid", u8"Legend of Zelda, The - Ocarina of Time (U) (V1.2) 00000012 00A62D40 Overworld.mid TrackParseDebug.txt", u8"Hyrule Field 16", 0x03,
 	1, {
-		{ ns4::CMidiFile::NS4_ES_MASTER, ns4::CMidiFile::NS4_E_GLOBAL_SET_REVERB, 0, ns4::CReverb::NS4_T_THE_LEGEND_OF_ZELDA_OCARINA_OF_TIME_0_0C00_2FFF },
+		{ ns4::CMidiFile::NS4_ES_MASTER, ns4::CMidiFile::NS4_E_GLOBAL_SET_REVERB, 0, ns4::CReverb::NS4_T_DELAY_0C00_2FFF },
 	},
 },
 { u8"Legend of Zelda, The - Ocarina of Time (U) (V1.2) 00000013 00A62D40 Overworld.mid", u8"Legend of Zelda, The - Ocarina of Time (U) (V1.2) 00000013 00A62D40 Overworld.mid TrackParseDebug.txt", u8"Hyrule Field 17", 0x03,
 	1, {
-		{ ns4::CMidiFile::NS4_ES_MASTER, ns4::CMidiFile::NS4_E_GLOBAL_SET_REVERB, 0, ns4::CReverb::NS4_T_THE_LEGEND_OF_ZELDA_OCARINA_OF_TIME_0_0C00_2FFF },
+		{ ns4::CMidiFile::NS4_ES_MASTER, ns4::CMidiFile::NS4_E_GLOBAL_SET_REVERB, 0, ns4::CReverb::NS4_T_DELAY_0C00_2FFF },
 	},
 },
 { u8"Legend of Zelda, The - Ocarina of Time (U) (V1.2) 00000014 00A62D40 Overworld.mid", u8"Legend of Zelda, The - Ocarina of Time (U) (V1.2) 00000014 00A62D40 Overworld.mid TrackParseDebug.txt", u8"Hyrule Field 18", 0x03,
 	1, {
-		{ ns4::CMidiFile::NS4_ES_MASTER, ns4::CMidiFile::NS4_E_GLOBAL_SET_REVERB, 0, ns4::CReverb::NS4_T_THE_LEGEND_OF_ZELDA_OCARINA_OF_TIME_0_0C00_2FFF },
+		{ ns4::CMidiFile::NS4_ES_MASTER, ns4::CMidiFile::NS4_E_GLOBAL_SET_REVERB, 0, ns4::CReverb::NS4_T_DELAY_0C00_2FFF },
 	},
 },
 { u8"Legend of Zelda, The - Ocarina of Time (U) (V1.2) 00000015 00A62D40 Overworld.mid", u8"Legend of Zelda, The - Ocarina of Time (U) (V1.2) 00000015 00A62D40 Overworld.mid TrackParseDebug.txt", u8"Hyrule Field 19", 0x03,
 	1, {
-		{ ns4::CMidiFile::NS4_ES_MASTER, ns4::CMidiFile::NS4_E_GLOBAL_SET_REVERB, 0, ns4::CReverb::NS4_T_THE_LEGEND_OF_ZELDA_OCARINA_OF_TIME_0_0C00_2FFF },
+		{ ns4::CMidiFile::NS4_ES_MASTER, ns4::CMidiFile::NS4_E_GLOBAL_SET_REVERB, 0, ns4::CReverb::NS4_T_DELAY_0C00_2FFF },
 	},
 },
 { u8"Legend of Zelda, The - Ocarina of Time (U) (V1.2) 00000016 00A62D40 Overworld.mid", u8"Legend of Zelda, The - Ocarina of Time (U) (V1.2) 00000016 00A62D40 Overworld.mid TrackParseDebug.txt", u8"Hyrule Field 20", 0x03,
 	1, {
-		{ ns4::CMidiFile::NS4_ES_MASTER, ns4::CMidiFile::NS4_E_GLOBAL_SET_REVERB, 0, ns4::CReverb::NS4_T_THE_LEGEND_OF_ZELDA_OCARINA_OF_TIME_0_0C00_2FFF },
+		{ ns4::CMidiFile::NS4_ES_MASTER, ns4::CMidiFile::NS4_E_GLOBAL_SET_REVERB, 0, ns4::CReverb::NS4_T_DELAY_0C00_2FFF },
 	},
 },
 { u8"Legend of Zelda, The - Ocarina of Time (U) (V1.2) 00000017 00A62D40 Overworld.mid", u8"Legend of Zelda, The - Ocarina of Time (U) (V1.2) 00000017 00A62D40 Overworld.mid TrackParseDebug.txt", u8"Hyrule Field 21", 0x03,
 	1, {
-		{ ns4::CMidiFile::NS4_ES_MASTER, ns4::CMidiFile::NS4_E_GLOBAL_SET_REVERB, 0, ns4::CReverb::NS4_T_THE_LEGEND_OF_ZELDA_OCARINA_OF_TIME_0_0C00_2FFF },
+		{ ns4::CMidiFile::NS4_ES_MASTER, ns4::CMidiFile::NS4_E_GLOBAL_SET_REVERB, 0, ns4::CReverb::NS4_T_DELAY_0C00_2FFF },
 	},
 },
 //{ u8"Legend of Zelda, The - Ocarina of Time (U) (V1.2) 00000000 00A62D40 SFX.mid", u8"Legend of Zelda, The - Ocarina of Time (U) (V1.2) 00000000 00A62D40 SFX.mid TrackParseDebug.txt", u8"00000000 00A62D40 SFX", 0 },

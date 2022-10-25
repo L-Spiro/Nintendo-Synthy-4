@@ -4,7 +4,7 @@
 #define NS4_TITLE_POSTFIX					u8" (Source)"
 #define NS4_FOLDER							u8"Super Mario 64"
 #define NS4_REVERB_TRACKS					2
-#define NS4_REVERB							ns4::CReverb::NS4_T_SUPER_MARIO_64_0
+#define NS4_REVERB							ns4::CReverb::NS4_T_DELAY_0C00_2FFF
 #define NS4_ORIG_HZ							32006
 #define NS4_CURVE							40.0
 //#define NS4_MASTER_CURVE					40.0
@@ -109,7 +109,7 @@
 
 { u8"Super Mario 64 (U) 00000005 007B0860 Water Theme (all parts).mid", u8"Super Mario 64 (U) 00000005 007B0860 Water Theme (all parts).mid TrackParseDebug.txt", u8"Dire, Dire Docks (Tines)", 0x13,
 	1 + 3, {
-		{ ns4::CMidiFile::NS4_ES_MASTER, ns4::CMidiFile::NS4_E_GLOBAL_SET_REVERB, 0, ns4::CReverb::NS4_T_SUPER_MARIO_64_3 },
+		{ ns4::CMidiFile::NS4_ES_MASTER, ns4::CMidiFile::NS4_E_GLOBAL_SET_REVERB, 0, ns4::CReverb::NS4_T_DELAY_0E00_3FFF },
 
 		{ ns4::CMidiFile::NS4_ES_POST_SUPPLEMENTAL, ns4::CMidiFile::NS4_E_TAG_TRACK_BY_CHNL, 15-1 },
 		{ ns4::CMidiFile::NS4_ES_POST_SUPPLEMENTAL, ns4::CMidiFile::NS4_E_TAG_TRACK_BY_CHNL, 16-1 },
@@ -118,7 +118,7 @@
 },
 { u8"Super Mario 64 (U) 00000005 007B0860 Water Theme (all parts).mid", u8"Super Mario 64 (U) 00000005 007B0860 Water Theme (all parts).mid TrackParseDebug.txt", u8"Dire, Dire Docks (Strings)", 0x13,
 	1 + 3, {
-		{ ns4::CMidiFile::NS4_ES_MASTER, ns4::CMidiFile::NS4_E_GLOBAL_SET_REVERB, 0, ns4::CReverb::NS4_T_SUPER_MARIO_64_3 },
+		{ ns4::CMidiFile::NS4_ES_MASTER, ns4::CMidiFile::NS4_E_GLOBAL_SET_REVERB, 0, ns4::CReverb::NS4_T_DELAY_0E00_3FFF },
 
 		{ ns4::CMidiFile::NS4_ES_POST_SUPPLEMENTAL, ns4::CMidiFile::NS4_E_TAG_TRACK_BY_CHNL, 1-1 },
 		{ ns4::CMidiFile::NS4_ES_POST_SUPPLEMENTAL, ns4::CMidiFile::NS4_E_TAG_TRACK_BY_CHNL, 2-1 },
@@ -127,7 +127,7 @@
 },
 { u8"Super Mario 64 (U) 00000005 007B0860 Water Theme (all parts).mid", u8"Super Mario 64 (U) 00000005 007B0860 Water Theme (all parts).mid TrackParseDebug.txt", u8"Dire, Dire Docks (Bass & Percussion)", 0x13,
 	1 + 5, {
-		{ ns4::CMidiFile::NS4_ES_MASTER, ns4::CMidiFile::NS4_E_GLOBAL_SET_REVERB, 0, ns4::CReverb::NS4_T_SUPER_MARIO_64_3 },
+		{ ns4::CMidiFile::NS4_ES_MASTER, ns4::CMidiFile::NS4_E_GLOBAL_SET_REVERB, 0, ns4::CReverb::NS4_T_DELAY_0E00_3FFF },
 
 		{ ns4::CMidiFile::NS4_ES_POST_SUPPLEMENTAL, ns4::CMidiFile::NS4_E_TAG_TRACK_BY_CHNL, 7-1 },
 		{ ns4::CMidiFile::NS4_ES_POST_SUPPLEMENTAL, ns4::CMidiFile::NS4_E_TAG_TRACK_BY_CHNL, 10-1 },

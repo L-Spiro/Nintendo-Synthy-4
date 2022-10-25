@@ -4,7 +4,7 @@
 #define NS4_TITLE_POSTFIX					u8" (Surround)"
 #define NS4_FOLDER							u8"Super Mario 64"
 #define NS4_REVERB_TRACKS					2
-#define NS4_REVERB							ns4::CReverb::NS4_T_SUPER_MARIO_64_0
+#define NS4_REVERB							ns4::CReverb::NS4_T_DELAY_0C00_2FFF
 #define NS4_ORIG_HZ							32006
 #define NS4_CURVE							40.0
 //#define NS4_MASTER_CURVE					40.0
@@ -54,7 +54,7 @@
 },
 { u8"Super Mario 64 (U) 0000000B 007B0860 Piranha Plant's Lullaby.mid", u8"Super Mario 64 (U) 0000000B 007B0860 Piranha Plant's Lullaby.mid TrackParseDebug.txt", u8"Black Room", 0x13,
 	1 + 5, {
-		{ ns4::CMidiFile::NS4_ES_MASTER, ns4::CMidiFile::NS4_E_GLOBAL_SET_REVERB, 0, ns4::CReverb::NS4_T_SUPER_MARIO_64_5 },
+		{ ns4::CMidiFile::NS4_ES_MASTER, ns4::CMidiFile::NS4_E_GLOBAL_SET_REVERB, 0, ns4::CReverb::NS4_T_DELAY_0C00_2FFF },
 		{ ns4::CMidiFile::NS4_ES_POST_UNROLL, ns4::CMidiFile::NS4_E_REPLACE_INST, 0, 0, 0 },
 		{ ns4::CMidiFile::NS4_ES_POST_UNROLL, ns4::CMidiFile::NS4_E_REPLACE_INST, 0, 1, 0 },
 		{ ns4::CMidiFile::NS4_ES_POST_UNROLL, ns4::CMidiFile::NS4_E_REPLACE_INST, 0, 2, 0 },

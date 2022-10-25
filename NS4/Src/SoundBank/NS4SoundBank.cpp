@@ -215,7 +215,7 @@ namespace ns4 {
 			}
 			m_vSamples[I].ui32Crc = CCrc::GetCrc( reinterpret_cast<const uint8_t *>(m_vSamples[I].sSample.GetOriginalSampleBuffer()), m_vSamples[I].sSample.GetOriginalTotalSamples() * sizeof( lwsample ) );
 			
-			/*if ( m_vSamples[I].sSampleName == "B25P14" ) {
+			/*if ( m_vSamples[I].sSampleName == "B15I03S00" ) {
 				char szBuffer[64];
 				std::sprintf( szBuffer, "0x%.8X\r\n", m_vSamples[I].ui32Crc );
 				::OutputDebugStringA( szBuffer );

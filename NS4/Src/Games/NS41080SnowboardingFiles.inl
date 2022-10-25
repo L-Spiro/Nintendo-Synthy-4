@@ -4,7 +4,7 @@
 #define NS4_TITLE_POSTFIX					u8" (JP) (Surround)"
 #define NS4_FOLDER							u8"1080 Snowboarding"
 #define NS4_REVERB_TRACKS					2
-#define NS4_REVERB							ns4::CReverb::NS4_T_THE_LEGEND_OF_ZELDA_OCARINA_OF_TIME_1_0C00_4FFF
+#define NS4_REVERB							ns4::CReverb::NS4_T_DELAY_0C00_4FFF
 #define NS4_ORIG_HZ							32006
 #define NS4_CURVE							40.0
 //#define NS4_MASTER_CURVE					40.0

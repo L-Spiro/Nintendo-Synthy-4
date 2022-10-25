@@ -79,7 +79,7 @@
 //#define NS4_PRINT_BEST_BANK
 
 #ifdef NS4_BULK
-#define NS4_ONE_OFF								(32-1)
+//#define NS4_ONE_OFF								(32-1)
 //#define NS4_EXPORT_SOME
 //#define NS4_EPORT_FROM								(86-1)
 #else
@@ -327,12 +327,14 @@ int main() {
 //#include "Src/Games/NS4SuperMario64ModFiles.inl"
 //#include "Src/Games/NS4Starfox64Files.inl"
 //#include "Src/Games/NS4Starfox64HeadphonesFiles.inl"
-#include "Src/Games/NS4TheLegendOfZeldaOcarinaOfTimeFiles.inl"
+//#include "Src/Games/NS4Starfox64UncompressedFiles.inl"
+//#include "Src/Games/NS4TheLegendOfZeldaOcarinaOfTimeFiles.inl"
 //#include "Src/Games/NS4TheLegendOfZeldaMajorasMaskFiles.inl"
 //#include "Src/Games/NS4YoshisStoryFiles.inl"
 //#include "Src/Games/NS4MarioKart64Files.inl"
 //#include "Src/Games/NS4MarioKart64HeadphonesFiles.inl"
 //#include "Src/Games/NS41080SnowboardingFiles.inl"
+#include "Src/Games/NS4WaveRace64Files.inl"
 
 //#include "Src/Games/NS4JetForceGeminiKioskFiles.inl"
 //#include "Src/Games/NS4BattlezoneRiseOfTheBlackDogsFiles.inl"
@@ -797,6 +799,13 @@ int main() {
 		ns4::CMidiFile::m_sSettings.dLpfFreqMax = NS4_ORIG_HZ;
 		ns4::CMidiFile::m_sSettings.dGameFreq = NS4_ORIG_HZ;
 #endif	// NS4_ORIG_HZ
+
+	{
+		const ns4::CMidiFile::NS4_MODIFIER * pmThis = ns4::CMidiFile::FindGlobalMod( ns4::CMidiFile::NS4_E_GLOBAL_SET_GAME_HZ, troOptions.ui32TotalMods, troOptions.pmMods );
+		if ( pmThis ) {
+			ns4::CMidiFile::m_sSettings.dGameFreq = ns4::CMidiFile::m_sSettings.dLpfFreqMax = pmThis->dOperandDouble0;
+		}
+	}
 
 #ifdef NS4_PREFADE_DUR
 	double dPreFade = double( NS4_PREFADE_DUR );

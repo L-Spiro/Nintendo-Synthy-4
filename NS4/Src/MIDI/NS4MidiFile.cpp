@@ -464,8 +464,8 @@ namespace ns4 {
 					// CHN 00000187 Time: 0000000A CMD:      E0 ? 20 (32)
 					if ( std::sscanf( sLine.c_str(), "CHN %X Time: %X CMD:      E0 ? %X (%u)", &ui32Tmp0, &ui32Tmp1, &ui32Tmp2, &ui32Tmp3 ) == 4 ) {
 						if ( ui32Track != uint32_t( -1 ) ) {
-							::OutputDebugStringA( sLine.c_str() );
-							::OutputDebugStringA( " Vol Scale\r\n" );
+							/*::OutputDebugStringA( sLine.c_str() );
+							::OutputDebugStringA( " Vol Scale\r\n" );*/
 
 							InsertEvent( m_vTracks[ui32Track].vEvents, NS4_CHN_LINEAR_VOL_SCALE, uint8_t( ui32Tmp2 ), uint8_t( ui32Channel ), ui32Tmp1, nullptr );
 						}
@@ -481,10 +481,10 @@ namespace ns4 {
 					// CHN 00000187 Time: 0000000A CMD:      DD Pan 20 (32)
 					if ( std::sscanf( sLine.c_str(), "CHN %X Time: %X CMD:      DD Pan %X (%u)", &ui32Tmp0, &ui32Tmp1, &ui32Tmp2, &ui32Tmp3 ) == 4 ) {
 						if ( ui32Track != uint32_t( -1 ) ) {
-							if ( ui32Tmp2 >= 0x80 ) {
+							/*if ( ui32Tmp2 >= 0x80 ) {
 								::OutputDebugStringA( sLine.c_str() );
 								::OutputDebugStringA( " Chan Pan\r\n" );
-							}
+							}*/
 
 							InsertEvent( m_vTracks[ui32Track].vEvents, NS4_C_PAN, uint8_t( ui32Tmp2 ), uint8_t( ui32Channel ), ui32Tmp1, nullptr );
 						}
@@ -493,10 +493,10 @@ namespace ns4 {
 					// CHN 00000219 Time: 00000000 CMD:      DC ? 00 (0)
 					if ( std::sscanf( sLine.c_str(), "CHN %X Time: %X CMD:      DC ? %X (%u)", &ui32Tmp0, &ui32Tmp1, &ui32Tmp2, &ui32Tmp3 ) == 4 ) {
 						if ( ui32Track != uint32_t( -1 ) ) {
-							if ( ui32Tmp2 != 0x00 ) {
+							/*if ( ui32Tmp2 != 0x00 ) {
 								::OutputDebugStringA( sLine.c_str() );
 								::OutputDebugStringA( " Chan Pan Weight\r\n" );
-							}
+							}*/
 
 							InsertEvent( m_vTracks[ui32Track].vEvents, NS4_CHN_PAN_WEIGHT, uint8_t( ui32Tmp2 ), uint8_t( ui32Channel ), ui32Tmp1, nullptr );
 						}
@@ -515,8 +515,8 @@ namespace ns4 {
 					// CHN 0000166A Time: 00001F10 CMD:      D8 Vibrato 03 (3)
 					if ( std::sscanf( sLine.c_str(), "CHN %X Time: %X CMD:      D8 Vibrato %X (%u)", &ui32Tmp0, &ui32Tmp1, &ui32Tmp2, &ui32Tmp3 ) == 4 ) {
 						if ( ui32Track != uint32_t( -1 ) ) {
-							::OutputDebugStringA( sLine.c_str() );
-							::OutputDebugStringA( " Vibrato Depth\r\n" );
+							/*::OutputDebugStringA( sLine.c_str() );
+							::OutputDebugStringA( " Vibrato Depth\r\n" );*/
 
 							InsertEvent( m_vTracks[ui32Track].vEvents, NS4_CHN_VIB_DEPTH, uint8_t( ui32Tmp2 ), uint8_t( ui32Channel ), ui32Tmp1, nullptr );
 						}
@@ -1211,6 +1211,10 @@ namespace ns4 {
 						
 						if ( m_sSettings.bAdditiveReverb ) {
 							dWetLevel = ui8Val / m_sSettings.dReverbNormalizationFactor;
+
+							if ( bWetIsOver127 && (m_sSettings.ui32ExReverbOptions & NS4_OVER_127_FF_MAPS_TO_00) ) {
+								dWetLevel = 1.0 - dWetLevel;
+							}
 						}
 						else {
 							// Avoid issues with any sin/cos routines that don't exactly map to [0..1].
@@ -1500,6 +1504,7 @@ namespace ns4 {
 						}
 
 						if ( _paWet ) {
+							
 							if ( dVal * dWetLevel ) {
 								// The reverb buffer is optionally clamped because the game operates on 16-bit PCM samples,
 								//	limiting the range to [-1..1].  This gives it some of that Nintendo 64 feel,
@@ -1513,7 +1518,6 @@ namespace ns4 {
 									if ( m_sSettings.bClampReverb ) {
 										(*_paWet)[0][tbWavTime.CurTick()] = std::clamp( (*_paWet)[0][tbWavTime.CurTick()], -1.0, 1.0 );
 									}
-								
 								}
 								else if ( _paWet->size() == 2 ) {
 									if ( (*_paWet)[0].size() <= tbWavTime.CurTick() ) {
@@ -1526,6 +1530,10 @@ namespace ns4 {
 									double dWetR = dVal * dWetLevel * dR;
 									if ( bWetIsOver127 && (m_sSettings.ui32ExReverbOptions & NS4_OVER_127_SWAP_L_AND_R) ) {
 										std::swap( dWetL, dWetR );
+									}
+									if ( bWetIsOver127 && (m_sSettings.ui32ExReverbOptions & NS4_OVER_127_INVERT) ) {
+										dWetL = -dWetL;
+										dWetR = -dWetR;
 									}
 
 									(*_paWet)[0][tbWavTime.CurTick()] += dWetL;

@@ -237,6 +237,7 @@ namespace ns4 {
 			NS4_E_GLOBAL_SET_AS_BONUS,							/**< When alternative numbering is used, this marks a track as a bonus track. */
 			NS4_E_GLOBAL_SET_DEFAULT_REL_RATE,					/**< Sets the starting release rate on all tracks (EAD only).  The release rate can be changed with a NS4_CHN_RELEASE_RATE command. */
 			NS4_E_GLOBAL_SET_MAX_HZ,							/**< Sets the maximum sample-playback Hz (dOperandDouble0). */
+			NS4_E_GLOBAL_SET_GAME_HZ,							/**< Sets the game Hz (dOperandDouble0) for a given track. */
 			
 
 		};
@@ -381,6 +382,7 @@ namespace ns4 {
 		enum NS4_REVERB_OPTIONS {
 			NS4_OVER_127_SWAP_L_AND_R							= (1 << 0),
 			NS4_OVER_127_INVERT									= (1 << 1),
+			NS4_OVER_127_FF_MAPS_TO_00							= (1 << 2),
 		};
 
 		/** A track-render set of options. */
@@ -2308,6 +2310,10 @@ namespace ns4 {
 		static double					MidiLevelToLinear( uint8_t _ui8Volume, double _dCurve ) {
 			if ( _dCurve == 0.0 ) { _dCurve = m_sSettings.dLevelInterpretation; }
 			if ( _dCurve == 20.0 ) { return _ui8Volume / 127.0; }	// Allows us to retain a few digits of accuracy.
+			if ( _dCurve == 40.0 ) {
+				double dVal = _ui8Volume / 127.0;
+				return dVal * dVal;
+			}
 			double dDb = std::log10( _ui8Volume / 127.0 ) * _dCurve;
 			return std::pow( 10.0, dDb / 20.0 );
 		}

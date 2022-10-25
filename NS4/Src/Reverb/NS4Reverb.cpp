@@ -358,10 +358,21 @@ namespace ns4 {
 	};
 
 	/** Delay lines for The Legend of Zelda: Ocarina of Time set. */
-	NS4_REVERB_DELAY_LINE CReverb::m_rdlTheLegendOfZeldaOcarinaOfTime0[] = {
+	NS4_REVERB_DELAY_LINE CReverb::m_rdlDelay0200_3FFF[] = {
 		{
-			0x0C00,																	// ui32Delay
-			0x0C00,																	// ui32FeedbackDelay
+			0x0200,																	// ui32Delay
+			0x0200,																	// ui32FeedbackDelay
+			1.0,																	// dVol
+			0x3FFF / double( 0x7FFF ),												// dFeedback
+			1.0 / 0x7FFF															// dMinLevel
+		},
+	};
+
+	/** Delay lines for The Legend of Zelda: Ocarina of Time set. */
+	NS4_REVERB_DELAY_LINE CReverb::m_rdlDelay0A00_2FFF[] = {
+		{
+			0x0A00,																	// ui32Delay
+			0x0A00,																	// ui32FeedbackDelay
 			1.0,																	// dVol
 			0x2FFF / double( 0x7FFF ),												// dFeedback
 			1.0 / 0x7FFF															// dMinLevel
@@ -369,23 +380,12 @@ namespace ns4 {
 	};
 
 	/** Delay lines for The Legend of Zelda: Ocarina of Time set. */
-	NS4_REVERB_DELAY_LINE CReverb::m_rdlTheLegendOfZeldaOcarinaOfTime1[] = {
-		{
-			0x0C00,																	// ui32Delay
-			0x0C00,																	// ui32FeedbackDelay
-			1.0,																	// dVol
-			0x4FFF / double( 0x7FFF ),												// dFeedback
-			1.0 / 0x7FFF															// dMinLevel
-		},
-	};
-
-	/** Delay lines for The Legend of Zelda: Ocarina of Time set. */
 	NS4_REVERB_DELAY_LINE CReverb::m_rdlTheLegendOfZeldaOcarinaOfTime2[] = {
 		{
-			0x0C00,																	// ui32Delay
-			0x0C00,																	// ui32FeedbackDelay
+			0x0800,																	// ui32Delay
+			0x0800,																	// ui32FeedbackDelay
 			1.0,																	// dVol
-			0x2CFF / double( 0x7FFF ),												// dFeedback
+			0x4FFF / double( 0x7FFF ),												// dFeedback
 			1.0 / 0x7FFF															// dMinLevel
 		},
 	};
@@ -481,10 +481,10 @@ namespace ns4 {
 	/** Delay lines for Super Mario 64 set. */
 	NS4_REVERB_DELAY_LINE CReverb::m_rdlSuperMario645[] = {
 		{
-			0x0C00,
-			0x0C00,																	// ui32FeedbackDelay
+			0x0200,
+			0x0200,																	// ui32FeedbackDelay
 			1.0,																	// dVol
-			0x2FFF / double( 0x7FFF ),												// dFeedback
+			0x4FFF / double( 0x7FFF ),												// dFeedback
 			1.0 / 0x7FFF															// dMinLevel
 		},
 	};
@@ -492,10 +492,10 @@ namespace ns4 {
 	/** Delay lines for Super Mario 64 set. */
 	NS4_REVERB_DELAY_LINE CReverb::m_rdlSuperMario646[] = {
 		{
-			0x0A00,
-			0x0A00,																	// ui32FeedbackDelay
+			0x0400,
+			0x0400,																	// ui32FeedbackDelay
 			1.0,																	// dVol
-			0x47FF / double( 0x7FFF ),												// dFeedback
+			0x4FFF / double( 0x7FFF ),												// dFeedback
 			1.0 / 0x7FFF															// dMinLevel
 		},
 	};
@@ -1278,6 +1278,28 @@ namespace ns4 {
 		{        64,	      6192,	   +20384,		       +0,	      22015,		                      0,	                      0,		        +0,		                      0,	/*0xDFECC000*/   13695 },
 	};
 
+	/** Delay line: 1400/2FFF. */
+	NS4_REVERB_DELAY_LINE CReverb::m_rdlDelay1400_2FFF[] = {
+		{
+			0x1400,
+			0x1400,																	// ui32FeedbackDelay
+			1.0,																	// dVol
+			0x2FFF / double( 0x7FFF ),												// dFeedback
+			1.0 / 0x7FFF															// dMinLevel
+		},
+	};
+
+	/** Delay line: 180C/4FFF. */
+	NS4_REVERB_DELAY_LINE CReverb::m_rdlDelay180C_4FFF[] = {
+		{
+			0x180C,
+			0x180C,																	// ui32FeedbackDelay
+			1.0,																	// dVol
+			0x4FFF / double( 0x7FFF ),												// dFeedback
+			1.0 / 0x7FFF															// dMinLevel
+		},
+	};
+
 }	// namespace ns4
 
 namespace ns4 {
@@ -1614,7 +1636,7 @@ namespace ns4 {
 			0,																		// i64TapOffset
 			NS4_NO_FADE,															// dTime
 			NS4_NO_LPF,																// dLpfFactor
-			NS4_DELAY( m_rdlTheLegendOfZeldaOcarinaOfTime0, (double( 0x7FFF ) / double( 0x7FFF )) ),	// dDelayVol
+			NS4_DELAY( m_rdlDelay0200_3FFF, (double( 0x7FFF ) / double( 0x7FFF )) ),	// dDelayVol
 		},	// 36
 		// Mario Kart 64.
 		{
@@ -1986,7 +2008,7 @@ namespace ns4 {
 			0,																		// i64TapOffset
 			NS4_NO_FADE,															// dTime
 			NS4_NO_LPF,																// dLpfFactor
-			NS4_DELAY( m_rdlTheLegendOfZeldaOcarinaOfTime1, (double( 0x7FFF ) / double( 0x7FFF )) ),	// dDelayVol
+			NS4_DELAY( m_rdlDelay0A00_2FFF, (double( 0x7FFF ) / double( 0x7FFF )) ),// dDelayVol
 		},	// 94
 		// Iggy’s Reckin’ Balls.
 		{
@@ -2266,6 +2288,24 @@ namespace ns4 {
 			NS4_NO_LPF,																// dLpfFactor
 			NS4_DELAY( m_rdlTheLegendOfZeldaOcarinaOfTime2, (double( 0x7FFF ) / double( 0x7FFF )) ),	// dDelayVol
 		},	// 136
+		// Delay line: 1400/2FFF.
+		{
+			NS4_NO_TAPS,															// prtTable
+			0.0,																	// dTapVol
+			0,																		// i64TapOffset
+			NS4_NO_FADE,															// dTime
+			NS4_NO_LPF,																// dLpfFactor
+			NS4_DELAY( m_rdlDelay1400_2FFF, (double( 0x7FFF ) / double( 0x7FFF )) ),// dDelayVol
+		},	// 137
+		// Delay line: 180C/4FFF.
+		{
+			NS4_NO_TAPS,															// prtTable
+			0.0,																	// dTapVol
+			0,																		// i64TapOffset
+			NS4_NO_FADE,															// dTime
+			NS4_NO_LPF,																// dLpfFactor
+			NS4_DELAY( m_rdlDelay180C_4FFF, (double( 0x7FFF ) / double( 0x7FFF )) ),// dDelayVol
+		},	// 138
 	};
 
 
