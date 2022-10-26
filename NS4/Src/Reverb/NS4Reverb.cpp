@@ -1300,6 +1300,17 @@ namespace ns4 {
 		},
 	};
 
+	/** Delay line: 0400/3FFF. */
+	NS4_REVERB_DELAY_LINE CReverb::m_rdlDelay0400_3FFF[] = {
+		{
+			0x0400,
+			0x0400,																	// ui32FeedbackDelay
+			1.0,																	// dVol
+			0x3FFF / double( 0x7FFF ),												// dFeedback
+			1.0 / 0x7FFF															// dMinLevel
+		},
+	};
+
 }	// namespace ns4
 
 namespace ns4 {
@@ -2305,6 +2316,15 @@ namespace ns4 {
 			NS4_NO_FADE,															// dTime
 			NS4_NO_LPF,																// dLpfFactor
 			NS4_DELAY( m_rdlDelay180C_4FFF, (double( 0x7FFF ) / double( 0x7FFF )) ),// dDelayVol
+		},	// 138
+		// Delay line: 0400/3FFF.
+		{
+			NS4_NO_TAPS,															// prtTable
+			0.0,																	// dTapVol
+			0,																		// i64TapOffset
+			NS4_NO_FADE,															// dTime
+			NS4_NO_LPF,																// dLpfFactor
+			NS4_DELAY( m_rdlDelay0400_3FFF, (double( 0x7FFF ) / double( 0x7FFF )) ),// dDelayVol
 		},	// 138
 	};
 

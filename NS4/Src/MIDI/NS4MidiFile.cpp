@@ -265,6 +265,11 @@ namespace ns4 {
 							case NS4_ME_NOTE_AFTERTOUCH : {}
 							case NS4_ME_CONTROLLER : {}
 							case NS4_ME_PITCH_BEND : {
+								/*if ( (teEvent.ui8Event & 0xF) == 0xA ) {
+									if ( m_vTracks.size() > 0xA && m_vTracks[0xA].vEvents.size() == 0x41 ) {
+										volatile int gjg  = 0;
+									}
+								}*/
 								
 								NS4_READ_8( teEvent.u.sMidi.ui8Parm0 );
 								NS4_READ_8( teEvent.u.sMidi.ui8Parm1 );
@@ -300,6 +305,9 @@ namespace ns4 {
 					if ( m_hHeader.ui16Type == 0 ) {
 						// All events on one track.
 						int32_t iTrack = GetEventChannel( teEvent );
+						/*if ( iTrack == 0xA ) {
+							volatile int gjg = 0;
+						}*/
 						if ( iTrack == -1 ) {
 							m_vTracks[0].vEvents.push_back( teEvent );
 						}
@@ -1937,10 +1945,7 @@ namespace ns4 {
 					case NS4_E_REMOVE_ALL_EVENTS_FROM_TICK : {
 						uint64_t ui64Start = CubaseToTick( _pmMods[I].tsTime0.ui32M, _pmMods[I].tsTime0.ui32B, _pmMods[I].tsTime0.ui32T, _pmMods[I].tsTime0.ui32S );
 						for ( auto K = m_vTracks.size(); K--; ) {
-							for ( auto J = m_vTracks[K].vEvents.size(); J--; ) {
-								if ( m_vTracks[K].vEvents[J].ui64Time < ui64Start ) { break; }
-								m_vTracks[K].vEvents.pop_back();
-							}
+							RemoveAllAfterTick( m_vTracks[K].vEvents, ui64Start, false, nullptr, true );
 						}
 						break;
 					}
@@ -2843,9 +2848,10 @@ namespace ns4 {
 	 * \param _ui64FromTick The tick from which to begin removing notes.
 	 * \param _bCloseNotes If true, notes that cross over the given tick are note-off'd at the given tick.
 	 * \param _ptbTimeBlock If not nullptr, this is used to set dRealTime.
+	 * \param _bRemoveNormalEventsToo if false, only note events are removed, otherwise other events are removed as well.
 	 */
 	void CMidiFile::RemoveAllAfterTick( std::vector<NS4_TRACK_EVENT> &_vTrack, uint64_t _ui64FromTick, bool _bCloseNotes,
-		const std::vector<CTimeBlock> * _ptbTimeBlock ) {
+		const std::vector<CTimeBlock> * _ptbTimeBlock, bool _bRemoveNormalEventsToo ) {
 		NS4_MIDI_STATE msState;
 		msState.MakeDefault();
 		size_t stNoteOffIdx = size_t( -1 );
@@ -2879,6 +2885,10 @@ namespace ns4 {
 						_vTrack.insert( _vTrack.begin() + stNoteOffIdx++, teCopy );
 						continue;
 					}
+				}
+				else if ( _bRemoveNormalEventsToo ) {
+					_vTrack.erase( _vTrack.begin() + I-- );
+					continue;
 				}
 			}
 			msState.AdvanceMidiState( teThis );
@@ -4098,12 +4108,7 @@ namespace ns4 {
 					}
 					case NS4_E_REMOVE_ALL_EVENTS_FROM_TICK : {
 						uint64_t ui64Start = CubaseToTick( _pmMods[I].tsTime0.ui32M, _pmMods[I].tsTime0.ui32B, _pmMods[I].tsTime0.ui32T, _pmMods[I].tsTime0.ui32S );
-						for ( auto K = m_vTracks.size(); K--; ) {
-							for ( auto J = _vTrack.size(); J--; ) {
-								if ( _vTrack[J].ui64Time < ui64Start ) { break; }
-								_vTrack.pop_back();
-							}
-						}
+						RemoveAllAfterTick( _vTrack, ui64Start, false, &_tbTimeBlock, true );
 						break;
 					}
 					case NS4_E_REPLACE_INST : {

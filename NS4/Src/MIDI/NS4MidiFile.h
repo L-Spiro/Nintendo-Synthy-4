@@ -810,9 +810,10 @@ namespace ns4 {
 		 * \param _ui64FromTick The tick from which to begin removing notes.
 		 * \param _bCloseNotes If true, notes that cross over the given tick are note-off'd at the given tick.
 		 * \param _ptbTimeBlock If not nullptr, this is used to set dRealTime.
+		 * \param _bRemoveNormalEventsToo if false, only note events are removed, otherwise other events are removed as well.
 		 */
 		static void						RemoveAllAfterTick( std::vector<NS4_TRACK_EVENT> &_vTrack, uint64_t _ui64FromTick, bool _bCloseNotes,
-			const std::vector<CTimeBlock> * _ptbTimeBlock );
+			const std::vector<CTimeBlock> * _ptbTimeBlock, bool _bRemoveNormalEventsToo = false );
 
 		/**
 		 * Gets the channel of an event or -1 if it is metadata etc.

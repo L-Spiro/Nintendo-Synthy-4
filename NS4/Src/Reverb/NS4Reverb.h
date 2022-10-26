@@ -151,6 +151,7 @@ namespace ns4 {
 			NS4_T_DELAY_0800_4FFF				= 136,
 			NS4_T_DELAY_1400_2FFF				= 137,
 			NS4_T_DELAY_180C_4FFF				= 138,
+			NS4_T_DELAY_0400_3FFF				= 139,
 			
 		};
 
@@ -668,6 +669,9 @@ namespace ns4 {
 
 		/** Delay line: 180C/4FFF. */
 		static NS4_REVERB_DELAY_LINE			m_rdlDelay180C_4FFF[];
+
+		/** Delay line: 0400/3FFF. */
+		static NS4_REVERB_DELAY_LINE			m_rdlDelay0400_3FFF[];
 
 
 		// == Functions.
