@@ -22,7 +22,6 @@
 #define NS4_REVERB_MASK						0xFF
 #define NS4_REVERB_NORMALIZE				255.0
 #define NS4_USE_CHAN_PAN_WEIGHTING			true
-//#define NS4_PREMULTIPLY_MASTER				true
 #define NS4_MAIN_VOL_CURVE					20.0
 #define NS4_ENVELOPE_VOL_CURVE				20.0
 #define NS4_MAIN_VOL_POW					2.0
@@ -35,7 +34,11 @@
 
 
 { u8"1 Mario Kart 64 (U) 00000001 00000001 Main Theme.mid", u8"Mario Kart 64 (U) 00000001 00BC5F60 Mario Kart 64 Theme.mid TrackParseDebug.txt", u8"Main Theme", 0x01 },
-{ u8"2 Mario Kart 64 (U) 00000002 00000002 Setup and Kart Select.mid", u8"Mario Kart 64 (U) 00000002 00BC5F60 Setup and Kart Select.mid TrackParseDebug.txt", u8"Setup and Kart Select", 0x02 },
+{ u8"2 Mario Kart 64 (U) 00000002 00000002 Setup and Kart Select.mid", u8"Mario Kart 64 (U) 00000002 00BC5F60 Setup and Kart Select.mid TrackParseDebug.txt", u8"Setup and Kart Select", 0x02,
+	1, {
+		{ ns4::CMidiFile::NS4_ES_MASTER, ns4::CMidiFile::NS4_E_GLOBAL_SET_IGNORE_REVERB, 0, true },
+	},
+},
 { u8"3 Mario Kart 64 (U) 00000003 00000003 3 Raceways, Wario Stadium.mid", u8"Mario Kart 64 (U) 00000003 00BC5F60 3 Raceways, Wario Stadium.mid TrackParseDebug.txt", u8"3 Raceways, Wario Stadium", 0x03,
 	1, {
 		{ ns4::CMidiFile::NS4_ES_MASTER, ns4::CMidiFile::NS4_E_GLOBAL_SET_REVERB, 0, ns4::CReverb::NS4_T_MARIO_KART_64_1 },

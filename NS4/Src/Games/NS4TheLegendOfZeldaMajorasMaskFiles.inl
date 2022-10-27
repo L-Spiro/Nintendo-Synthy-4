@@ -18,7 +18,6 @@
 #define NS4_PERC_DEC_MULTIPLIER				(1.0)
 #define NS4_REL_MULTIPLIER					10.0
 #define NS4_PITCH_RANGE						1200
-//#define NS4_PERC_ATK_MULTIPLIER				(1.0)
 #define NS4_PERC_INST						127
 #define NS4_ADSR_PERC_RELEASE				10
 #define NS4_NO_PROGRAM_CHANGE_SORT			true
@@ -27,7 +26,7 @@
 #define NS4_DEFAULT_MASTER_VOL				127
 //#define NS4_VIB_SCALE						20.0
 #define NS4_REVERB_MASK						0x7F
-#define NS4_REVERB_NORMALIZE				127.5
+#define NS4_REVERB_NORMALIZE				128.0
 #define NS4_USE_CHAN_PAN_WEIGHTING			true
 //#define NS4_PREMULTIPLY_MASTER				true
 #define NS4_MAIN_VOL_CURVE					20.0

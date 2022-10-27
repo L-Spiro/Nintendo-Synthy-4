@@ -72,16 +72,16 @@
 
 #define NS4_BULK
 
-//#define NS4_SINGLE_TRACK								11
+//#define NS4_SINGLE_TRACK								1
 //#define NS4_NO_NORMALIZE
 // 
 //#define NS4_NO_OUTPUT									// Used to quickly print information in the MIDI files without actually generating WAV content.
 //#define NS4_PRINT_BEST_BANK
 
 #ifdef NS4_BULK
-//#define NS4_ONE_OFF								(7-1)
+//#define NS4_ONE_OFF								(2-1)
 //#define NS4_EXPORT_SOME
-//#define NS4_EPORT_FROM								(86-1)
+//#define NS4_EPORT_FROM								(20-1)
 #else
 #define NS4_FOLDER								u8"Super Smash Bros"
 #define NS4_FILE								u8"01 Super Smash Bros. (U) 00000021 00B413A4 Intro"
@@ -328,10 +328,10 @@ int main() {
 //#include "Src/Games/NS4Starfox64Files.inl"
 //#include "Src/Games/NS4Starfox64HeadphonesFiles.inl"
 //#include "Src/Games/NS4Starfox64UncompressedFiles.inl"
-#include "Src/Games/NS4TheLegendOfZeldaOcarinaOfTimeFiles.inl"
+//#include "Src/Games/NS4TheLegendOfZeldaOcarinaOfTimeFiles.inl"
 //#include "Src/Games/NS4TheLegendOfZeldaMajorasMaskFiles.inl"
 //#include "Src/Games/NS4YoshisStoryFiles.inl"
-//#include "Src/Games/NS4MarioKart64Files.inl"
+#include "Src/Games/NS4MarioKart64Files.inl"
 //#include "Src/Games/NS4MarioKart64HeadphonesFiles.inl"
 //#include "Src/Games/NS41080SnowboardingFiles.inl"
 //#include "Src/Games/NS4WaveRace64Files.inl"
