@@ -1196,9 +1196,10 @@ namespace ns4 {
 		 * \param _ui16Val The value to convert.
 		 * \param _dFreqOffset Offsets to the frequency based on pitch-bend and fine-tuning.
 		 * \param _dBaseFrequency The base frequency used by the game.  Usually 22047.0 or 22018.0, regardless of the final output we are generating.
+		 * \param _dQMod A multiplier for Q.  Will be 1 unless the frequency goes over the Nyquist limit.
 		 * \return Returns the converted value as a freqency.
 		 */
-		static double					LpfControlToFrequency( int16_t _ui16Val, double _dFreqOffset, double _dBaseFrequency );
+		static double					LpfControlToFrequency( int16_t _ui16Val, double _dFreqOffset, double _dBaseFrequency, double &_dQMod );
 
 		/**
 		 * Takes the game's Q value and returns a Q fit for our filtering implementation.

@@ -1161,14 +1161,15 @@ namespace ns4 {
 							nNote.bLpf = bLpfActive;
 							if ( bLpfActive ) {
 								int32_t iOffset = int8_t( nNote.ui8Note ) - int8_t( nNote.i32Base );
+								double dModQ;
 								double dFreq = LpfControlToFrequency( int8_t( msState.ui8State[m_sSettings.ui8LpfControl] ) + iOffset,
 									(msState.dPitch * (nNote.ui16PitchBendRange / 100.0)) +
 										(int8_t( nNote.psSoundbankSample->ui8FineTune ) / 100.0),
-									m_sSettings.dLpfFreqMax );
+									m_sSettings.dLpfFreqMax, dModQ );
 								//double dFreqAlt = LpfControlToFrequency( uint8_t( msState.ui8State[m_ui8LpfControl] + iOffset ), m_dLpfFreqMax );
 #ifdef NS4_USE_NEW_LPF
 								CWavLib::BiQuadLpf_Coefficients( dFreq,
-									GameQToQ( msState.ui8State[m_sSettings.ui8QControl] ),
+									GameQToQ( msState.ui8State[m_sSettings.ui8QControl] ) * dModQ,
 									_troOptions.uiSampleRate, nNote.dA0, nNote.dA1, nNote.dA2,
 									nNote.dB0, nNote.dB1, nNote.dB2 );
 #else
@@ -1419,13 +1420,14 @@ namespace ns4 {
 								if ( vNotes[J].psSoundbankSample ) {
 									int32_t iOffset = int8_t( vNotes[J].ui8Note ) - int8_t( vNotes[J].i32Base );
 									//double dFreq = LpfControlToFrequency( int8_t( msState.ui8State[m_ui8LpfControl] ) + iOffset, m_dLpfFreqMax );
+									double dModQ;
 									double dFreq = LpfControlToFrequency( int8_t( msState.ui8State[m_sSettings.ui8LpfControl] ) + iOffset,
 										(msState.dPitch * (vNotes[J].psSoundbankSample->ui32BendRange / 100.0)) +
 											(int8_t( vNotes[J].psSoundbankSample->ui8FineTune ) / 100.0),
-										m_sSettings.dLpfFreqMax );
+										m_sSettings.dLpfFreqMax, dModQ );
 #ifdef NS4_USE_NEW_LPF
 									CWavLib::BiQuadLpf_Coefficients( dFreq,
-										GameQToQ( msState.ui8State[m_sSettings.ui8QControl] ),
+										GameQToQ( msState.ui8State[m_sSettings.ui8QControl] ) * dModQ,
 										_troOptions.uiSampleRate, vNotes[J].dA0, vNotes[J].dA1, vNotes[J].dA2,
 										vNotes[J].dB0, vNotes[J].dB1, vNotes[J].dB2 );
 #else
@@ -2919,15 +2921,24 @@ namespace ns4 {
 	 * \param _ui16Val The value to convert.
 	 * \param _dFreqOffset Offsets to the frequency based on pitch-bend and fine-tuning.
 	 * \param _dBaseFrequency The base frequency used by the game.  Usually 22047.0 or 22018.0, regardless of the final output we are generating.
+	 * \param _dQMod A multiplier for Q.  Will be 1 unless the frequency goes over the Nyquist limit.
 	 * \return Returns the converted value as a freqency.
 	 */
-	double CMidiFile::LpfControlToFrequency( int16_t _ui16Val, double _dFreqOffset, double _dBaseFrequency ) {
+	double CMidiFile::LpfControlToFrequency( int16_t _ui16Val, double _dFreqOffset, double _dBaseFrequency, double &_dQMod ) {
 		int16_t i16Key = int16_t( _ui16Val - 64 );
 		double dRes = std::pow( 2.0, (i16Key + _dFreqOffset) / 12.0 ) * m_sSettings.dLpfBase;
 		dRes = static_cast<int16_t>(dRes);
 		dRes += m_sSettings.dLpfOffset;
 		dRes *= m_sSettings.dLpfScalar;
 		dRes = min( dRes, _dBaseFrequency - 200.0 );
+		double dLyqist = _dBaseFrequency / 2.0;
+		if ( dRes > dLyqist ) {
+			dRes = dLyqist / (dRes / dLyqist);
+			_dQMod = 4.0;
+		}
+		else {
+			_dQMod = 1.0;
+		}
 		return dRes;
 	}
 

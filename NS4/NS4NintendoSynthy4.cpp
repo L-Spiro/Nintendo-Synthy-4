@@ -72,14 +72,14 @@
 
 #define NS4_BULK
 
-//#define NS4_SINGLE_TRACK								1
+//#define NS4_SINGLE_TRACK								4
 //#define NS4_NO_NORMALIZE
 // 
 //#define NS4_NO_OUTPUT									// Used to quickly print information in the MIDI files without actually generating WAV content.
 //#define NS4_PRINT_BEST_BANK
 
 #ifdef NS4_BULK
-//#define NS4_ONE_OFF								(2-1)
+//#define NS4_ONE_OFF								(57-1)
 //#define NS4_EXPORT_SOME
 //#define NS4_EPORT_FROM								(20-1)
 #else
@@ -267,7 +267,7 @@ int main() {
 #ifdef NS4_BULK
 //#include "Src/Games/NS4ConkersBadFurDayFiles.inl"
 //#include "Src/Games/NS4JetForceGeminiFiles.inl"
-//#include "Src/Games/NS4JetForceGemini2Files.inl"
+#include "Src/Games/NS4JetForceGemini2Files.inl"
 //#include "Src/Games/NS4PerfectDarkFiles.inl"
 //#include "Src/Games/NS4PerfectDarkOverSamplingFiles.inl"
 //#include "Src/Games/NS4GoldenEye007Files.inl"
@@ -331,7 +331,7 @@ int main() {
 //#include "Src/Games/NS4TheLegendOfZeldaOcarinaOfTimeFiles.inl"
 //#include "Src/Games/NS4TheLegendOfZeldaMajorasMaskFiles.inl"
 //#include "Src/Games/NS4YoshisStoryFiles.inl"
-#include "Src/Games/NS4MarioKart64Files.inl"
+//#include "Src/Games/NS4MarioKart64Files.inl"
 //#include "Src/Games/NS4MarioKart64HeadphonesFiles.inl"
 //#include "Src/Games/NS41080SnowboardingFiles.inl"
 //#include "Src/Games/NS4WaveRace64Files.inl"
