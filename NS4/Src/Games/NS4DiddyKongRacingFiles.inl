@@ -10,6 +10,10 @@
 #define NS4_OUT_DIRECTORY					u8"F:\\N64OST\\Diddy Kong Racing\\"
 #define NS4_OUT_DIRECTORY_NUMBERS			NS4_OUT_DIRECTORY u8"Numbered\\"
 #define NS4_WET_FILTER_FREQ					4736.0//(NS4_ORIG_HZ / 2.0)
+#define NS4_ENV_MULTIPLIER					(1.0 / 3.0)
+//#define NS4_REL_MULTIPLIER					(1.0 / 3.0)
+/*#define NS4_ENVELOPE_VOL_CURVE				20.0
+#define NS4_ENVELOPE_POINT_CURVE			40.0*/
 
 
 
@@ -32,7 +36,7 @@
 		{ ns4::CMidiFile::NS4_ES_PRE_UNROLL, ns4::CMidiFile::NS4_E_MUTE_TRACK, 14 - 1 },
 		{ ns4::CMidiFile::NS4_ES_PRE_UNROLL, ns4::CMidiFile::NS4_E_MUTE_TRACK, 16 - 1 },
 	   } },
-{ u8"05 Diddy Kong Racing (U) (M2) (V1.0) 00000018 00A7C464 Lobby Theme Tune.mid", u8"Diddy Kong Racing (U) (M2) (V1.1) 00000018 00A88054 selct_2b.mid TrackParseDebug.txt", u8"Options, Level Selection", 0 },
+{ u8"05 Diddy Kong Racing (U) (M2) (V1.0) 00000018 00A7C464 Lobby Theme Tune.mid", u8"Diddy Kong Racing (U) (M2) (V1.1) 00000018 00A88054 selct_2b.mid TrackParseDebug.txt", u8"Options, Level Selection 2", 0 },
 { u8"02 Diddy Kong Racing (U) (M2) (V1.0) 0000001A 00A7DA04 Character Select.mid", u8"Diddy Kong Racing (U) (M2) (V1.1) 0000001A 00A895F4 slt_dk6.mid TrackParseDebug.txt", u8"Character Select (Krunch)", 0,
 	11, {
 		
@@ -305,7 +309,7 @@
 { u8"32 Diddy Kong Racing (U) (M2) (V1.0) 00000027 00A8DCF4 Star City.mid", u8"Diddy Kong Racing (U) (M2) (V1.1) 00000027 00A998E4 u_cstle3.mid TrackParseDebug.txt", u8"Spacedust Alley, Star City", 0 },
 { u8"34 Diddy Kong Racing (U) (M2) (V1.0) 0000002A 00A9102C Spaceport Alpha.mid", u8"Diddy Kong Racing (U) (M2) (V1.1) 0000002A 00A9CC1C space_25.mid TrackParseDebug.txt", u8"Spaceport Alpha", 0 },
 { u8"33 Diddy Kong Racing (U) (M2) (V1.0) 00000008 00A60BF4 Darkmoon Caverns.mid", u8"Diddy Kong Racing (U) (M2) (V1.1) 00000008 00A6C7E4 space_4.mid TrackParseDebug.txt", u8"Darkmoon Caverns, Credits", 0 },
-{ u8"13 Diddy Kong Racing (U) (M2) (V1.0) 00000022 00A869B0 Boss Challenge I.mid", u8"Diddy Kong Racing (U) (M2) (V1.1) 00000022 00A925A0 wtr_btle.mid TrackParseDebug.txt", u8"Darkwater Beach, Fire Mountain, Icicle​ Pyramid, Smokey Castle", 0 },
+{ u8"13 Diddy Kong Racing (U) (M2) (V1.0) 00000022 00A869B0 Boss Challenge I.mid", u8"Diddy Kong Racing (U) (M2) (V1.1) 00000022 00A925A0 wtr_btle.mid TrackParseDebug.txt", u8"Darkwater Beach, Fire Mountain, Icicle Pyramid, Smokey Castle", 0 },
 { u8"40 Diddy Kong Racing (U) (M2) (V1.0) 00000015 00A758A4 Think You've Won.mid", u8"Diddy Kong Racing (U) (M2) (V1.1) 00000015 00A81494 party_1a.mid TrackParseDebug.txt", u8"Think You’ve Won?", 0 },
 { u8"00 Diddy Kong Racing (U) (M2) (V1.0) 00000017 00A79B50 Wizpig Attacks.mid", u8"Diddy Kong Racing (U) (M2) (V1.1) 00000017 00A85740 suprise3.mid TrackParseDebug.txt", u8"Wizpig Attacks", 0 },
 { u8"00 Diddy Kong Racing (U) (M2) (V1.0) 00000033 00A936D8 Wizpig's Terror.mid", u8"Diddy Kong Racing (U) (M2) (V1.1) 00000033 00A9F2C8 big_dr2.mid TrackParseDebug.txt", u8"Wizpig’s Terror", 0 },

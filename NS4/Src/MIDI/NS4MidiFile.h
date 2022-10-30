@@ -1309,6 +1309,62 @@ namespace ns4 {
 			return dTime;
 		}
 
+		/**
+		 * Converts from a MIDI value to a linear volume, applying _dCurve.
+		 *
+		 * \param _ui8Volume The MIDI volume level to convert to linear.
+		 * \param _dCurve The curve to apply.  If 0, m_dLevelInterpretation is used.
+		 * \return Returns the given value converted to linear using _dCurve.
+		 */
+		static double					MidiLevelToLinear( uint8_t _ui8Volume, double _dCurve ) {
+			if ( _dCurve == 0.0 ) { _dCurve = m_sSettings.dLevelInterpretation; }
+			if ( _dCurve == 20.0 ) { return _ui8Volume / 127.0; }	// Allows us to retain a few digits of accuracy.
+			if ( _dCurve == 40.0 ) {
+				double dVal = _ui8Volume / 127.0;
+				return dVal * dVal;
+			}
+			double dDb = std::log10( _ui8Volume / 127.0 ) * _dCurve;
+			return std::pow( 10.0, dDb / 20.0 );
+		}
+
+		/**
+		 * Converts from a MIDI value to a linear volume, applying m_dLevelInterpretation.
+		 *
+		 * \param _ui8Volume The MIDI volume level to convert to linear.
+		 * \return Returns the given value converted to linear using m_dLevelInterpretation.
+		 */
+		static double					MidiLevelToLinear( uint8_t _ui8Volume ) {
+			return MidiLevelToLinear( _ui8Volume, m_sSettings.dLevelInterpretation );
+		}
+
+		/**
+		 * Converts from a MIDI value to a linear volume, applying _dCurve.
+		 *
+		 * \param _ui8Volume The MIDI volume level to convert to linear.
+		 * \param _dCurve The curve to apply.  If 0, m_dLevelInterpretation is used.
+		 * \return Returns the given value converted to linear using _dCurve.
+		 */
+		static double					MidiLevelToLinear( double _dVolume, double _dCurve ) {
+			if ( _dCurve == 0.0 ) { _dCurve = m_sSettings.dLevelInterpretation; }
+			if ( _dCurve == 20.0 ) { return _dVolume; }	// Allows us to retain a few digits of accuracy.
+			if ( _dVolume < 0.0 ) {
+				double dDb = std::log10( -_dVolume ) * _dCurve;
+				return -std::pow( 10.0, dDb / 20.0 );
+			}
+			double dDb = std::log10( _dVolume ) * _dCurve;
+			return std::pow( 10.0, dDb / 20.0 );
+		}
+
+		/**
+		 * Converts from a MIDI value to a linear volume, applying m_dLevelInterpretation.
+		 *
+		 * \param _ui8Volume The MIDI volume level to convert to linear.
+		 * \return Returns the given value converted to linear using m_dLevelInterpretation.
+		 */
+		static double					MidiLevelToLinear( double _dVolume ) {
+			return MidiLevelToLinear( _dVolume , m_sSettings.dLevelInterpretation );
+		}
+
 
 		// == Members.
 		/** Various settings. */
@@ -1324,6 +1380,9 @@ namespace ns4 {
 
 			/** Specifies the interpretation of envelopes. Defaults to 0.0, meaning dLevelInterpretation is used for the curve. */
 			double						dEnvelopeInterpretation = 0.0;
+
+			/** Specifies the interpretation of envelope end points. Defaults to 0.0, meaning dLevelInterpretation is used for the curve. */
+			double						dEnvelopeEndPointInterpretation = 0.0;
 
 			/** Specifies the interpretation of note velocities. Defaults to 0.0, meaning dLevelInterpretation is used for the curve. */
 			double						dVelocityInterpretation = 0.0;
@@ -2303,62 +2362,6 @@ namespace ns4 {
 		 */
 		void							ApplyTremoloToNote( NS4_NOTE &_nNote, uint8_t _ui8Type, uint8_t _ui8Rate, uint8_t _ui16Depth, uint8_t _ui8Delay, uint32_t _ui32SampleRate, const NS4_MIDI_STATE &_msState ) const;
 		
-		/**
-		 * Converts from a MIDI value to a linear volume, applying _dCurve.
-		 *
-		 * \param _ui8Volume The MIDI volume level to convert to linear.
-		 * \param _dCurve The curve to apply.  If 0, m_dLevelInterpretation is used.
-		 * \return Returns the given value converted to linear using _dCurve.
-		 */
-		static double					MidiLevelToLinear( uint8_t _ui8Volume, double _dCurve ) {
-			if ( _dCurve == 0.0 ) { _dCurve = m_sSettings.dLevelInterpretation; }
-			if ( _dCurve == 20.0 ) { return _ui8Volume / 127.0; }	// Allows us to retain a few digits of accuracy.
-			if ( _dCurve == 40.0 ) {
-				double dVal = _ui8Volume / 127.0;
-				return dVal * dVal;
-			}
-			double dDb = std::log10( _ui8Volume / 127.0 ) * _dCurve;
-			return std::pow( 10.0, dDb / 20.0 );
-		}
-
-		/**
-		 * Converts from a MIDI value to a linear volume, applying m_dLevelInterpretation.
-		 *
-		 * \param _ui8Volume The MIDI volume level to convert to linear.
-		 * \return Returns the given value converted to linear using m_dLevelInterpretation.
-		 */
-		static double					MidiLevelToLinear( uint8_t _ui8Volume ) {
-			return MidiLevelToLinear( _ui8Volume, m_sSettings.dLevelInterpretation );
-		}
-
-		/**
-		 * Converts from a MIDI value to a linear volume, applying _dCurve.
-		 *
-		 * \param _ui8Volume The MIDI volume level to convert to linear.
-		 * \param _dCurve The curve to apply.  If 0, m_dLevelInterpretation is used.
-		 * \return Returns the given value converted to linear using _dCurve.
-		 */
-		static double					MidiLevelToLinear( double _dVolume, double _dCurve ) {
-			if ( _dCurve == 0.0 ) { _dCurve = m_sSettings.dLevelInterpretation; }
-			if ( _dCurve == 20.0 ) { return _dVolume; }	// Allows us to retain a few digits of accuracy.
-			if ( _dVolume < 0.0 ) {
-				double dDb = std::log10( -_dVolume ) * _dCurve;
-				return -std::pow( 10.0, dDb / 20.0 );
-			}
-			double dDb = std::log10( _dVolume ) * _dCurve;
-			return std::pow( 10.0, dDb / 20.0 );
-		}
-
-		/**
-		 * Converts from a MIDI value to a linear volume, applying m_dLevelInterpretation.
-		 *
-		 * \param _ui8Volume The MIDI volume level to convert to linear.
-		 * \return Returns the given value converted to linear using m_dLevelInterpretation.
-		 */
-		static double					MidiLevelToLinear( double _dVolume ) {
-			return MidiLevelToLinear( _dVolume , m_sSettings.dLevelInterpretation );
-		}
-
 		/**
 		 * Is the given index in a track the last instance of a given control?
 		 *

@@ -12,6 +12,10 @@
 //#define NS4_MASTER_REVERB_VOLUME			(2.0)
 #define NS4_WET_FILTER_FREQ					4736.0//(NS4_ORIG_HZ / std::pow( 2.0, 2.5 ))
 #define NS4_WET_FILTER_ORDER				NS4_FILTER_DB_TO_ORDER( 6 )
+#define NS4_ENV_MULTIPLIER					(1.0 / 3.0)
+//#define NS4_REL_MULTIPLIER					(1.0 / 3.0)
+#define NS4_ENVELOPE_VOL_CURVE				20.0
+#define NS4_ENVELOPE_POINT_CURVE			40.0
 #define NS4_PREFADE_DUR						1.0
 #define NS4_FADE_FILE						u8"F:\\N64OST\\StudioFadeCD.wav"
 

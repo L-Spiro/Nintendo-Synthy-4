@@ -10,6 +10,7 @@
 #define NS4_OUT_DIRECTORY					u8"T:\\N64OST\\Banjo-Kazooie\\"
 #define NS4_OUT_DIRECTORY_NUMBERS			NS4_OUT_DIRECTORY u8"Numbered\\"
 #define NS4_WET_FILTER_FREQ					4736.0//8832.0//(NS4_ORIG_HZ / std::pow( 2.0, 1.75 ))
+#define NS4_ENV_MULTIPLIER					(1.0 / 3.0)
 
 
 

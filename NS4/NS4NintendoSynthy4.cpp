@@ -72,16 +72,16 @@
 
 #define NS4_BULK
 
-//#define NS4_SINGLE_TRACK								4
+//#define NS4_SINGLE_TRACK								5
 //#define NS4_NO_NORMALIZE
 // 
 //#define NS4_NO_OUTPUT									// Used to quickly print information in the MIDI files without actually generating WAV content.
 //#define NS4_PRINT_BEST_BANK
 
 #ifdef NS4_BULK
-//#define NS4_ONE_OFF								(57-1)
+//#define NS4_ONE_OFF								(72-1)
 //#define NS4_EXPORT_SOME
-//#define NS4_EPORT_FROM								(20-1)
+//#define NS4_EPORT_FROM								(40-1)
 #else
 #define NS4_FOLDER								u8"Super Smash Bros"
 #define NS4_FILE								u8"01 Super Smash Bros. (U) 00000021 00B413A4 Intro"
@@ -267,8 +267,8 @@ int main() {
 #ifdef NS4_BULK
 //#include "Src/Games/NS4ConkersBadFurDayFiles.inl"
 //#include "Src/Games/NS4JetForceGeminiFiles.inl"
-#include "Src/Games/NS4JetForceGemini2Files.inl"
-//#include "Src/Games/NS4PerfectDarkFiles.inl"
+//#include "Src/Games/NS4JetForceGemini2Files.inl"
+#include "Src/Games/NS4PerfectDarkFiles.inl"
 //#include "Src/Games/NS4PerfectDarkOverSamplingFiles.inl"
 //#include "Src/Games/NS4GoldenEye007Files.inl"
 //#include "Src/Games/NS4GoldenEye007OstFiles.inl"
@@ -537,7 +537,7 @@ int main() {
 
 
 #ifdef NS4_SIDE_DUR
-		ns4::CWavLib::m_sSettings.dSideMaxDur = double( NS4_SIDE_DUR );
+		ns4::CWavLib::m_dSideMaxDur = double( NS4_SIDE_DUR );
 #endif	// NS4_SIDE_DUR
 #ifdef NS4_PERC_INST
 		ns4::CMidiFile::m_sSettings.i32PercBank = NS4_PERC_INST;
@@ -560,6 +560,12 @@ int main() {
 #ifdef NS4_ENVELOPE_VOL_CURVE
 		ns4::CMidiFile::m_sSettings.dEnvelopeInterpretation = NS4_ENVELOPE_VOL_CURVE;
 #endif	// NS4_ENVELOPE_VOL_CURVE
+
+		ns4::CMidiFile::m_sSettings.dEnvelopeEndPointInterpretation = ns4::CMidiFile::m_sSettings.dEnvelopeInterpretation;
+#ifdef NS4_ENVELOPE_POINT_CURVE
+		ns4::CMidiFile::m_sSettings.dEnvelopeEndPointInterpretation = NS4_ENVELOPE_POINT_CURVE;
+#endif	// NS4_ENVELOPE_POINT_CURVE
+
 #ifdef NS4_VELOCITY_VOL_CURVE
 		ns4::CMidiFile::m_sSettings.dVelocityInterpretation = NS4_VELOCITY_VOL_CURVE;
 #endif	// NS4_VELOCITY_VOL_CURVE

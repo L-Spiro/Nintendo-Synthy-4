@@ -71,7 +71,7 @@
 	1
 },
 { u8"26 Mario Kart 64 (U) 00000018 00000018 Losing Results.mid", u8"Mario Kart 64 (U) 00000018 00BC5F60 Losing Results.mid TrackParseDebug.txt", u8"Losing Results", 0x0C },
-{ u8"15 Mario Kart 64 (U) 00000017 00000017 Time Trials Results.mid", u8"Mario Kart 64 (U) 00000017 00BC5F60 Versus Match Results.mid TrackParseDebug.txt", u8"Time Trials Results", 0x0D },
+{ u8"15 Mario Kart 64 (U) 00000017 00000017 Time Trials Results.mid", u8"Mario Kart 64 (U) 00000017 00BC5F60 Versus Match Results.mid TrackParseDebug.txt", u8"Battle Results", 0x0D },
 
 { u8"18 Mario Kart 64 (U) 0000000B 0000000B Starting Race (First).mid", u8"Mario Kart 64 (U) 0000000B 00BC5F60 Starting Race (First).mid TrackParseDebug.txt", u8"Starting Race (First)", 0x0B },
 { u8"25 Mario Kart 64 (U) 00000016 00000016 Starting Race (Versus).mid", u8"Mario Kart 64 (U) 00000016 00BC5F60 Starting Race 3.mid TrackParseDebug.txt", u8"Starting Race (Versus)", 0x0B },

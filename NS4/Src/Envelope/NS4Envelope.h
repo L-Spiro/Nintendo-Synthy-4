@@ -136,16 +136,16 @@ namespace ns4 {
 			}
 			if ( !m_vBlocks.size() ) { return 1.0; }
 			if ( m_stCur >= m_vBlocks.size() ) {
-				return m_vBlocks[m_vBlocks.size()-1].ui16EndLevel / m_dLevelDiv;
+				return EndPointLevel( m_vBlocks[m_vBlocks.size()-1].ui16EndLevel );
 			}
 			if ( m_vBlocks[m_stCur].tType == NS4_T_STARTVALUE ) {
-				return m_vBlocks[m_vBlocks.size()-1].ui16StartLevel / m_dLevelDiv;
+				return EndPointLevel( m_vBlocks[m_vBlocks.size()-1].ui16StartLevel );
 			}
 
 			double dFrac = m_uiTick / double( m_vBlocks[m_stCur].ui32Samples );
-			double dEnd = double( m_vBlocks[m_stCur].ui16EndLevel );
-			double dStart = double( m_vBlocks[m_stCur].ui16StartLevel );
-			return ((dEnd - dStart) * dFrac + dStart) / m_dLevelDiv;
+			double dEnd = EndPointLevel( m_vBlocks[m_stCur].ui16EndLevel );
+			double dStart = EndPointLevel( m_vBlocks[m_stCur].ui16StartLevel );
+			return ((dEnd - dStart) * dFrac + dStart);
 		}
 
 		/**
@@ -164,6 +164,14 @@ namespace ns4 {
 		 * \return Returns true if the release is infinite.
 		 */
 		bool						InfiniteRelease() const { return m_dReleaseTime < 0.0; }
+
+		/**
+		 * Gets an end-point volume level.
+		 *
+		 * \param _ui16Point The level to convert.
+		 * \return Returns the end-point volume level.
+		 */
+		double						EndPointLevel( uint16_t _ui16Point ) const;
 
 
 	protected :

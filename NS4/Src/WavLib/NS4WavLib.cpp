@@ -3946,7 +3946,7 @@ namespace ns4 {
 		// Method #1: Count out a specific number of zero crossings.
 		double dTimeAtXZeroCrossings = 0.0;
 		size_t sZeroCrossings = 0;
-		const size_t sX = 30;
+		const size_t sX = 500;
 		bool bHasCrossedThresh = false;
 
 		double dMaxNew = MaxSample( aNew[0] );

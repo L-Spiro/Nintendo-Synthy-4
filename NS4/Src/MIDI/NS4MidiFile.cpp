@@ -2935,6 +2935,7 @@ namespace ns4 {
 		if ( dRes > dLyqist ) {
 			dRes = dLyqist / (dRes / dLyqist);
 			_dQMod = 4.0;
+			::OutputDebugStringA( "BIPPITY BOOP.\r\n" );
 		}
 		else {
 			_dQMod = 1.0;
