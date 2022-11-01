@@ -14,7 +14,7 @@
 #define NS4_VIB_SCALE						2.0
 #define NS4_REMAP_ATK_0_TO_7F				true
 //#define NS4_MASTER_REVERB_VOLUME			(4.0)
-
+#define NS4_ENV_MULTIPLIER					(1.0 / 3.0)
 
 
 

@@ -13,6 +13,7 @@
 #define NS4_WET_FILTER_FREQ					0.0//(NS4_ORIG_HZ / std::pow( 2.0, 1.125 ))
 //#define NS4_MASTER_REVERB_VOLUME			2.0
 #define NS4_VIB_SCALE						2.0
+#define NS4_ENV_MULTIPLIER					(1.0 / 3.0)
 
 
 
@@ -408,7 +409,8 @@
 	1,
 	{
 		{ NS4_SET_COMPOSER( u8"Graeme Norgate and Grant Kirkhope" ) },
-	}
+	},
+	1
 },
 { u8"17 Perfect Dark (U) (V1.1) 0000004D 00EBDAD6 Deep Sea Nullify Threat Special Virus!.mid", u8"Perfect Dark (U) (V1.1) 0000004D 00EBDAD6 Deep Sea Special.mid TrackParseDebug.txt", u8"Deep Sea: Nullify Threat Special: Virus!", 0,
 	1,
@@ -605,21 +607,7 @@
         
         
 
-{ u8"3 Perfect Dark (U) (V1.1) 00000022 00E9C150 Enter the Dark.mid", u8"Perfect Dark (U) (V1.1) 00000022 00E9C150 Defection intro without sound effects.mid TrackParseDebug.txt", u8"Enter the Dark (With SFX)", 0,
-	2,
-	{
-		{ NS4_SET_COMPOSER( u8"David Clynick" ) },
-		{ NS4_STORE_RESULT, },
-	}
-},
-{ u8"3 Perfect Dark (U) (V1.1) 0000000B 00E8AB14 Enter the Dark SFX.mid", u8"Perfect Dark (U) (V1.1) 0000000B 00E8AB14 Sound effects from Defection intro.mid TrackParseDebug.txt", u8"Enter the Dark (With SFX)", 0,
-	1,
-	{
-		{ NS4_SET_COMPOSER( u8"David Clynick" ) },
-	}
-},
-
-{ u8"4 Perfect Dark (U) (V1.1) 00000009 00E88974 dataDyne Central Defection.mid", u8"Perfect Dark (U) (V1.1) 00000009 00E88974 Defection.mid TrackParseDebug.txt", u8"dataDyne Central: Defection Beta", 0,
+{ u8"4 Perfect Dark (U) (V1.1) 00000009 00E88974 dataDyne Central Defection.mid", u8"Perfect Dark (U) (V1.1) 00000009 00E88974 Defection.mid TrackParseDebug.txt", u8"dataDyne Central: Defection: Beta", 0,
 	2 + 1, {
 		{ ns4::CMidiFile::NS4_ES_POST_UNROLL, ns4::CMidiFile::NS4_E_REPLACE_INST, 0, 10, 0x7E },
 		{ ns4::CMidiFile::NS4_ES_POST_UNROLL, ns4::CMidiFile::NS4_E_REPLACE_INST, 0, 109, 0x7F },
@@ -627,12 +615,19 @@
 	   } },
 
 
-{ u8"00 Perfect Dark (U) (V1.1) 00000015 00E92502 Beta Combat Simulator Fail.mid", u8"Perfect Dark (U) (V1.1) 00000015 00E92502 BETA Combat Simulator death soundtrack.mid TrackParseDebug.txt", u8"Combat Simulator Fail Beta", 0,
+{ u8"00 Perfect Dark (U) (V1.1) 00000015 00E92502 Beta Combat Simulator Fail.mid", u8"Perfect Dark (U) (V1.1) 00000015 00E92502 BETA Combat Simulator death soundtrack.mid TrackParseDebug.txt", u8"Combat Simulator Fail: Beta", 0,
 	1,
 	{
 		{ NS4_SET_COMPOSER( u8"Grant Kirkhope" ) },
 	}
 },
+
+{ u8"4 Perfect Dark (U) (V1.1) 00000009 00E88974 dataDyne Central Defection.mid", u8"Perfect Dark (U) (V1.1) 00000009 00E88974 Defection.mid TrackParseDebug.txt", u8"dataDyne Central: Defection: CD Version", 0,
+	1 + 1, {
+		//{ ns4::CMidiFile::NS4_ES_POST_UNROLL, ns4::CMidiFile::NS4_E_REPLACE_INST, 0, 10, 0x7E },
+		{ ns4::CMidiFile::NS4_ES_POST_UNROLL, ns4::CMidiFile::NS4_E_REPLACE_INST, 0, 109, 0x7F },
+		{ NS4_SET_COMPOSER( u8"Graeme Norgate" ) },
+	   } },
 
 { u8"00 Perfect Dark (U) (V1.1) 0000006C 00ED6DE0 Perfect Menu Intro.mid", u8"Perfect Dark (U) (V1.1) 0000006C 00ED6DE0 Joanna using PC cut-scene.mid TrackParseDebug.txt", u8"Institute Menu Intro Full", 0,
 	1,
@@ -640,14 +635,19 @@
 		{ NS4_SET_COMPOSER( u8"Grant Kirkhope" ) },
 	}
 },
-
-{ u8"4 Perfect Dark (U) (V1.1) 00000009 00E88974 dataDyne Central Defection.mid", u8"Perfect Dark (U) (V1.1) 00000009 00E88974 Defection.mid TrackParseDebug.txt", u8"dataDyne Central: Defection (CD Version)", 0,
-	1 + 1, {
-		//{ ns4::CMidiFile::NS4_ES_POST_UNROLL, ns4::CMidiFile::NS4_E_REPLACE_INST, 0, 10, 0x7E },
-		{ ns4::CMidiFile::NS4_ES_POST_UNROLL, ns4::CMidiFile::NS4_E_REPLACE_INST, 0, 109, 0x7F },
-		{ NS4_SET_COMPOSER( u8"Graeme Norgate" ) },
-	   } },
-
+{ u8"3 Perfect Dark (U) (V1.1) 00000022 00E9C150 Enter the Dark.mid", u8"Perfect Dark (U) (V1.1) 00000022 00E9C150 Defection intro without sound effects.mid TrackParseDebug.txt", u8"Enter the Dark (with SFX)", 0,
+	2,
+	{
+		{ NS4_SET_COMPOSER( u8"David Clynick" ) },
+		{ NS4_STORE_RESULT, },
+	}
+},
+{ u8"3 Perfect Dark (U) (V1.1) 0000000B 00E8AB14 Enter the Dark SFX.mid", u8"Perfect Dark (U) (V1.1) 0000000B 00E8AB14 Sound effects from Defection intro.mid TrackParseDebug.txt", u8"Enter the Dark (with SFX)", 0,
+	1,
+	{
+		{ NS4_SET_COMPOSER( u8"David Clynick" ) },
+	}
+},
 
 { u8"6 Perfect Dark (U) (V1.1) 0000002C 00EA183C dataDyne Central Extraction Outro Going Somewhere.mid", u8"Perfect Dark (U) (V1.1) 0000002C 00EA183C Extraction outro.mid TrackParseDebug.txt", u8"dataDyne Central: Extraction Outro: Going Somewhere? (Sans SFX)", 0,
 	1 + 4,

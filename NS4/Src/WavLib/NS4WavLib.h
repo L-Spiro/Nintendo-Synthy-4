@@ -211,7 +211,7 @@ namespace ns4 {
 		 * \param _dScale The scale to apply to _tAddMe.
 		 * \param _iOffset The offset to apply to _tAddMe.
 		 */
-		static void											AddSamples( lwtrack &_tSrcAndDst, const lwtrack &_tAddMe, double _dScale, int32_t _iOffset );
+		static void											AddSamples( lwtrack & __restrict _tSrcAndDst, const lwtrack & __restrict _tAddMe, double _dScale, int32_t _iOffset );
 
 		/**
 		 * Adds a series of samples into another buffer, applying a scale and offset.
@@ -221,7 +221,7 @@ namespace ns4 {
 		 * \param _dScale The scale to apply to _tAddMe.
 		 * \param _iOffset The offset to apply to _tAddMe.
 		 */
-		static void											AddSamples( lwaudio &_aSrcAndDst, const lwaudio &_tAddMe, double _dScale, int32_t _iOffset ) {
+		static void											AddSamples( lwaudio & __restrict _aSrcAndDst, const lwaudio & __restrict _tAddMe, double _dScale, int32_t _iOffset ) {
 			for ( auto I = _aSrcAndDst.size(); I--; ) {
 				AddSamples( _aSrcAndDst[I], _tAddMe[I], _dScale, _iOffset );
 			}
@@ -237,7 +237,7 @@ namespace ns4 {
 		 * \param _dScale The scale to apply to _tAddMe.
 		 * \param _iOffset The offset to apply to _tAddMe.
 		 */
-		static void											MixAndAddSamples( lwtrack &_tSrcAndDst, const lwtrack &_tSrc0, const lwtrack &_tSrc1, double _dFrac, double _dScale, int32_t _iOffset );
+		static void											MixAndAddSamples( lwtrack & __restrict _tSrcAndDst, const lwtrack & __restrict _tSrc0, const lwtrack & __restrict _tSrc1, double _dFrac, double _dScale, int32_t _iOffset );
 
 		/**
 		 * Scales all samples by a given amount.
@@ -556,8 +556,8 @@ namespace ns4 {
 		 */
 		static lwsample										BiQuadFilter6_Recursive_Step( lwsample _sSample, double _dA0, double _dA1, double _dA2,
 			double _dB0, double _dB1, double _dB2,
-			lwsample * _psStateSamplesB,
-			lwsample * _psStateSamplesA );
+			lwsample * __restrict _psStateSamplesB,
+			lwsample * __restrict _psStateSamplesA );
 
 		/**
 		 * Normalizes a frequency (w0 = 2PI * (Freq\FreqS).
