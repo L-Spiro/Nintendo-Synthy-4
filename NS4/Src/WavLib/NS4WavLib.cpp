@@ -265,15 +265,61 @@ namespace ns4 {
 	 * \param _iOffset The offset to apply to _tAddMe.
 	 */
 	void CWavLib::AddSamples( lwtrack & __restrict _tSrcAndDst, const lwtrack & __restrict _tAddMe, double _dScale, int32_t _iOffset ) {
-		for ( auto I = _tAddMe.size(); I--; ) {
-			size_t sTargetIdx = I + _iOffset;
-			if ( static_cast<int32_t>(sTargetIdx) >= 0 ) {
-				if ( sTargetIdx >= _tSrcAndDst.size() ) {
-					_tSrcAndDst.resize( sTargetIdx + 1 );
+		int64_t i64FinalSize = _tAddMe.size() + _iOffset;
+		if ( i64FinalSize > 0 ) {
+			if ( i64FinalSize > _tSrcAndDst.size() ) {
+				_tSrcAndDst.resize( size_t( i64FinalSize ) );
+			}
+			if ( _dScale == 0.0 ) { return; }
+
+			/*for ( auto I = _tAddMe.size(); I--; ) {
+				size_t sTargetIdx = I + _iOffset;
+				if ( static_cast<int32_t>(sTargetIdx) >= 0 ) {
+					_tSrcAndDst[sTargetIdx] += _tAddMe[I] * _dScale;
 				}
-				_tSrcAndDst[sTargetIdx] += _tAddMe[I] * _dScale;
+			}
+			return;*/
+			int64_t I;
+			if ( _dScale == 1.0 ) {
+				__m128d dAddMe, dToMe, dRes;
+				
+				for ( I = max( 0, _iOffset ); I < i64FinalSize; I += 2 ) {
+					size_t sSrcIdx = size_t( I - _iOffset );
+
+					dAddMe = _mm_loadu_pd( &_tAddMe[sSrcIdx] );
+					dToMe = _mm_loadu_pd( &_tSrcAndDst[size_t(I)] );
+					dRes = _mm_add_pd( dAddMe, dToMe );
+					_mm_storeu_pd( &_tSrcAndDst[I], dRes );
+				}
+			}
+			else {
+				__m128d dScale = _mm_load1_pd( &_dScale );
+				__m128d dAddMe, dToMe, dRes;
+				
+				for ( I = max( 0, _iOffset ); I < i64FinalSize; I += 2 ) {
+					size_t sSrcIdx = size_t( I - _iOffset );
+
+					dAddMe = _mm_loadu_pd( &_tAddMe[sSrcIdx] );
+					dAddMe = _mm_mul_pd( dAddMe, dScale );
+					dToMe = _mm_loadu_pd( &_tSrcAndDst[size_t(I)] );
+					dRes = _mm_add_pd( dAddMe, dToMe );
+					_mm_storeu_pd( &_tSrcAndDst[I], dRes );
+				}
+			}
+			if ( I > i64FinalSize ) {
+				I -= 2;
+				size_t sSrcIdx = size_t( I - _iOffset );
+				_tSrcAndDst[I] += _tAddMe[sSrcIdx] * _dScale;
 			}
 		}
+		
+
+		/*for ( auto I = _tAddMe.size(); I--; ) {
+			size_t sTargetIdx = I + _iOffset;
+			if ( static_cast<int32_t>(sTargetIdx) >= 0 ) {
+				_tSrcAndDst[sTargetIdx] += _tAddMe[I] * _dScale;
+			}
+		}*/
 	}
 
 	/**

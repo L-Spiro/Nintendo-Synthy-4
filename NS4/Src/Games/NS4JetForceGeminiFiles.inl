@@ -72,7 +72,7 @@
 { u8"049 Jet Force Gemini (U) 00000056 01DEE2B8 Mizar's Racetrack.mid", u8"Jet Force Gemini (U) 00000056 01DEE2B8.mid TrackParseDebug.txt", u8"Mizar’s Racetrack", 0, },
 { u8"050 Jet Force Gemini (U) 00000058 01DF0758 Racetrack Lose.mid", u8"Jet Force Gemini (U) 00000058 01DF0758.mid TrackParseDebug.txt", u8"Racetrack Lose", 0, },
 { u8"051 Jet Force Gemini (U) 00000057 01DF03E4 Racetrack Win.mid", u8"Jet Force Gemini (U) 00000057 01DF03E4.mid TrackParseDebug.txt", u8"Racetrack Win", 0, },
-{ u8"052 071 Jet Force Gemini (U) 0000003C 01DCAA08 Funky Disco.mid", u8"Jet Force Gemini (U) (U) 0000003C 01DCAA08.mid TrackParseDebug.txt", u8"Big Bug Fun Club 1", 0, },
+{ u8"052 071 Jet Force Gemini (U) 0000003C 01DCAA08 Funky Disco.mid", u8"Jet Force Gemini (U) 0000003C 01DCAA08.mid TrackParseDebug.txt", u8"Big Bug Fun Club 1", 0, },
 { u8"053 Jet Force Gemini (U) 0000003D 01DCAC44 Something with a Beat.mid", u8"Jet Force Gemini (U) 0000003D 01DCAC44.mid TrackParseDebug.txt", u8"Big Bug Fun Club 2", 0, },
 { u8"054 Jet Force Gemini (U) 0000003E 01DCB6E0 Something Faster.mid", u8"Jet Force Gemini (U) 0000003E 01DCB6E0.mid TrackParseDebug.txt", u8"Big Bug Fun Club 3", 0, },
 { u8"055 Jet Force Gemini (U) 00000041 01DCE674 Soothing Rhythms.mid", u8"Jet Force Gemini (U) 00000041 01DCE674.mid TrackParseDebug.txt", u8"Big Bug Fun Club 4", 0, },

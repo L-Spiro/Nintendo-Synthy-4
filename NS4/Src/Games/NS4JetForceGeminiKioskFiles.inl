@@ -9,7 +9,7 @@
 #define NS4_ORIG_HZ							22018
 #define NS4_Q_MIN							10.0
 #define NS4_CURVE							20.0
-#define NS4_OUT_DIRECTORY					u8"T:\\N64OST\\Jet Force Gemini Kiosk\\"
+#define NS4_OUT_DIRECTORY					u8"T:\\N64OST\\Jet Force Gemini Kiosk Stereo\\"
 #define NS4_OUT_DIRECTORY_NUMBERS			NS4_OUT_DIRECTORY u8"Numbered\\"
 #define NS4_WET_FILTER_FREQ					0.0//(NS4_ORIG_HZ / 2.0)
 //#define NS4_MASTER_REVERB_VOLUME			(1.075 * 2.0)

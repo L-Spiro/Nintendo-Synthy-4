@@ -267,7 +267,8 @@ int main() {
 #ifdef NS4_BULK
 //#include "Src/Games/NS4ConkersBadFurDayFiles.inl"
 //#include "Src/Games/NS4JetForceGeminiFiles.inl"
-#include "Src/Games/NS4JetForceGemini2Files.inl"
+//#include "Src/Games/NS4JetForceGemini2Files.inl"
+#include "Src/Games/NS4JetForceGeminiKioskFiles.inl"
 //#include "Src/Games/NS4PerfectDarkFiles.inl"
 //#include "Src/Games/NS4PerfectDarkOverSamplingFiles.inl"
 //#include "Src/Games/NS4GoldenEye007Files.inl"
@@ -336,7 +337,6 @@ int main() {
 //#include "Src/Games/NS41080SnowboardingFiles.inl"
 //#include "Src/Games/NS4WaveRace64Files.inl"
 
-//#include "Src/Games/NS4JetForceGeminiKioskFiles.inl"
 //#include "Src/Games/NS4BattlezoneRiseOfTheBlackDogsFiles.inl"
 //#include "Src/Games/NS4AutomobiliLamborghiniFiles.inl"
 //#include "Src/Games/NS4SupermanFiles.inl"
