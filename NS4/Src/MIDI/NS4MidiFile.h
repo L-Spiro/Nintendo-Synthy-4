@@ -216,6 +216,7 @@ namespace ns4 {
 			NS4_E_IGNORE_TEMPO_LOOPS,							/**< Ignore loop points when creating timelines.  Allows creating a set of tempo changes that are not repeated in loops.  Only useful in the pre-unroll or post-supplemental stages. */
 			NS4_E_STOP_AT_TICK,									/**< Stops a MIDI file at the given tick.  Unlike other forms of muting, this adds note-off events to close off any open notes at the given tick. */
 			NS4_E_STOP_AT_TIME,									/**< Stops a MIDI file at the given time (dOperandDouble0).  Unlike other forms of muting, this adds note-off events to close off any open notes at the given tick. */
+			NS4_E_SET_Q_REFLECTION,								/**< Sets whether or not the Q factor should reflect over the Nyquist frequency of the game (ui32Operand0). */
 			NS4_E_MERGE_TRACKS_BY_INDEX,						/**< Merges one track (ui32Operand0) into another (ui32Operand1).  The first track is then muted.  Only useful in the pre-unroll or post-supplemental stages. */
 			NS4_E_START_AT_TICK,								/**< Starts playback at the given tick. */
 			NS4_E_PLAY_SAMPLE,									/**< Plays a given sample at the given tick. */
@@ -1560,6 +1561,9 @@ namespace ns4 {
 
 			/** If true, the NS4_C_LSB control is always set to 0. */
 			bool						bIgnoreBankSelectLsb = false;
+
+			/** If true, the Q factor reflects over the Nyquist frequency of the track. */
+			bool						bReflectQ = false;
 
 			/** If not 0, specifies the control to be interpreted as LPF.  Is usually set to 34. */
 			uint8_t						ui8LpfControl = 0;

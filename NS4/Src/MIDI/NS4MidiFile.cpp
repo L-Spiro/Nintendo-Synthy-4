@@ -1613,6 +1613,7 @@ namespace ns4 {
 			m_sSettings.avmAdsrVibMap = NS4_AVM_VIBRATO;
 			m_sSettings.ui64StartingTick = 0;
 			m_sSettings.i32ChanOffset = 0;
+			m_sSettings.bReflectQ = false;
 		}
 		for ( uint32_t I = 0; I < _ui32Total; ++I ) {
 			if ( _pmMods[I].esStage == _esStage ) {
@@ -2166,6 +2167,10 @@ namespace ns4 {
 						for ( auto K = m_vTracks.size(); K--; ) {
 							RemoveAllAfterTick( m_vTracks[K].vEvents, ui64Tick, true, nullptr );
 						}
+						break;
+					}
+					case NS4_E_SET_Q_REFLECTION : {
+						m_sSettings.bReflectQ = !!_pmMods[I].ui32Operand0;
 						break;
 					}
 					case NS4_E_MERGE_TRACKS_BY_INDEX : {
@@ -2932,10 +2937,10 @@ namespace ns4 {
 		dRes *= m_sSettings.dLpfScalar;
 		dRes = min( dRes, _dBaseFrequency - 200.0 );
 		double dLyqist = _dBaseFrequency / 2.0;
-		if ( dRes > dLyqist ) {
+		if ( dRes > dLyqist && m_sSettings.bReflectQ ) {
 			dRes = dLyqist / (dRes / dLyqist);
 			_dQMod = 4.0;
-			::OutputDebugStringA( "BIPPITY BOOP.\r\n" );
+			//::OutputDebugStringA( "BIPPITY BOOP.\r\n" );
 		}
 		else {
 			_dQMod = 1.0;

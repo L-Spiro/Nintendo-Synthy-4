@@ -79,9 +79,9 @@
 //#define NS4_PRINT_BEST_BANK
 
 #ifdef NS4_BULK
-//#define NS4_ONE_OFF								(72-1)
+//#define NS4_ONE_OFF								(2-1)
 //#define NS4_EXPORT_SOME
-//#define NS4_EPORT_FROM								(40-1)
+//#define NS4_EPORT_FROM								(26-1)
 #else
 #define NS4_FOLDER								u8"Super Smash Bros"
 #define NS4_FILE								u8"01 Super Smash Bros. (U) 00000021 00B413A4 Intro"
@@ -267,8 +267,8 @@ int main() {
 #ifdef NS4_BULK
 //#include "Src/Games/NS4ConkersBadFurDayFiles.inl"
 //#include "Src/Games/NS4JetForceGeminiFiles.inl"
-//#include "Src/Games/NS4JetForceGemini2Files.inl"
-#include "Src/Games/NS4PerfectDarkFiles.inl"
+#include "Src/Games/NS4JetForceGemini2Files.inl"
+//#include "Src/Games/NS4PerfectDarkFiles.inl"
 //#include "Src/Games/NS4PerfectDarkOverSamplingFiles.inl"
 //#include "Src/Games/NS4GoldenEye007Files.inl"
 //#include "Src/Games/NS4GoldenEye007OstFiles.inl"

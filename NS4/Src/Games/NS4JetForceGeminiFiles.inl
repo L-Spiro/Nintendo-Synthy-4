@@ -9,11 +9,12 @@
 #define NS4_ORIG_HZ							22018
 #define NS4_Q_MIN							10.0
 #define NS4_CURVE							20.0
-#define NS4_OUT_DIRECTORY					u8"T:\\N64OST\\Jet FOrce Gemini Surround\\"
+#define NS4_OUT_DIRECTORY					u8"T:\\N64OST\\Jet Force Gemini Surround\\"
 #define NS4_OUT_DIRECTORY_NUMBERS			NS4_OUT_DIRECTORY u8"Numbered\\"
 #define NS4_WET_FILTER_FREQ					0.0//(NS4_ORIG_HZ / 2.0)
 //#define NS4_MASTER_REVERB_VOLUME			(1.075 * 2.0)
 #define NS4_VIB_SCALE						2.0
+#define NS4_ENV_MULTIPLIER					(1.0 / 3.0)
 
 
 
@@ -75,8 +76,10 @@
 { u8"053 Jet Force Gemini (U) 0000003D 01DCAC44 Something with a Beat.mid", u8"Jet Force Gemini (U) 0000003D 01DCAC44.mid TrackParseDebug.txt", u8"Big Bug Fun Club 2", 0, },
 { u8"054 Jet Force Gemini (U) 0000003E 01DCB6E0 Something Faster.mid", u8"Jet Force Gemini (U) 0000003E 01DCB6E0.mid TrackParseDebug.txt", u8"Big Bug Fun Club 3", 0, },
 { u8"055 Jet Force Gemini (U) 00000041 01DCE674 Soothing Rhythms.mid", u8"Jet Force Gemini (U) 00000041 01DCE674.mid TrackParseDebug.txt", u8"Big Bug Fun Club 4", 0, },
-{ u8"056 Jet Force Gemini (U) 0000004C 01DDA510 Jeff & Barry Racing.mid", u8"Jet Force Gemini (U) 0000004C 01DDA510.mid TrackParseDebug.txt", u8"Jeff & Barry Racing", 0, },
-{ u8"057 Jet Force Gemini (U) 0000004E 01DE1B9C Arcade Complete.mid", u8"Jet Force Gemini (U) 0000004E 01DE1B9C.mid TrackParseDebug.txt", u8"Arcade Complete", 0, },
+{ u8"056 Jet Force Gemini (U) 0000004C 01DDA510 Jeff & Barry Racing.mid", u8"Jet Force Gemini (U) 0000004C 01DDA510.mid TrackParseDebug.txt", u8"Jeff & Barry Racing", 0,
+	1, { ns4::CMidiFile::NS4_ES_PRE_UNROLL, ns4::CMidiFile::NS4_E_SET_Q_REFLECTION, 0, true } },
+{ u8"057 Jet Force Gemini (U) 0000004E 01DE1B9C Arcade Complete.mid", u8"Jet Force Gemini (U) 0000004E 01DE1B9C.mid TrackParseDebug.txt", u8"Arcade Complete", 0,
+	1, { ns4::CMidiFile::NS4_ES_PRE_UNROLL, ns4::CMidiFile::NS4_E_SET_Q_REFLECTION, 0, true } },
 { u8"059 Jet Force Gemini (U) 00000043 01DD158C Mizar's Death.mid", u8"Jet Force Gemini (U) 00000043 01DD158C.mid TrackParseDebug.txt", u8"Mizar’s Death", 0, },
 { u8"060 Jet Force Gemini (U) 00000052 01DE78FC Destroying the Asteroid.mid", u8"Jet Force Gemini (U) 00000052 01DE78FC.mid TrackParseDebug.txt", u8"Destroying the Asteroid", 0, },
 { u8"061 Jet Force Gemini (U) 00000053 01DE8D48 Medal Ceremony.mid", u8"Jet Force Gemini (U) 00000053 01DE8D48.mid TrackParseDebug.txt", u8"Award Ceremony", 0, },

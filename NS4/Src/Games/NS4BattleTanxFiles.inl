@@ -11,7 +11,9 @@
 #define NS4_OUT_DIRECTORY_NUMBERS			NS4_OUT_DIRECTORY u8"Numbered\\"
 #define NS4_IGNORE_REVERB					true
 #define NS4_NO_PROGRAM_CHANGE_SORT			true
-#define NS4_ENV_MULTIPLIER					(1.0)
+#define NS4_ENV_MULTIPLIER					(1.0 / 3.0)
+#define NS4_ENVELOPE_VOL_CURVE				20.0
+#define NS4_ENVELOPE_POINT_CURVE			40.0
 #define NS4_MAX_RATE						44100
 //#define NS4_OVERSAMPLING_BW					500.0
 //#define NS4_PROG_CHANGE_SETS_VOL_PAN		false

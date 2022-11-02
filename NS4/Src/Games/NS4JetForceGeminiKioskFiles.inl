@@ -14,6 +14,7 @@
 #define NS4_WET_FILTER_FREQ					0.0//(NS4_ORIG_HZ / 2.0)
 //#define NS4_MASTER_REVERB_VOLUME			(1.075 * 2.0)
 #define NS4_VIB_SCALE						2.0
+#define NS4_ENV_MULTIPLIER					(1.0 / 3.0)
 
 
 
@@ -67,8 +68,10 @@
 { u8"Jet Force Gemini (U) (Kiosk Demo) 0000003D 0197E5F4.mid", u8"Jet Force Gemini (U) (Kiosk Demo) 0000003D 0197E5F4.mid TrackParseDebug.txt", u8"Big Bug Fun Club 2", 0 },
 { u8"Jet Force Gemini (U) (Kiosk Demo) 0000003E 0197F090.mid", u8"Jet Force Gemini (U) (Kiosk Demo) 0000003E 0197F090.mid TrackParseDebug.txt", u8"Big Bug Fun Club 3", 0 },
 { u8"Jet Force Gemini (U) (Kiosk Demo) 00000041 01982024.mid", u8"Jet Force Gemini (U) (Kiosk Demo) 00000041 01982024.mid TrackParseDebug.txt", u8"Big Bug Fun Club 4", 0 },
-{ u8"Jet Force Gemini (U) (Kiosk Demo) 0000004C 0198DEC0.mid", u8"Jet Force Gemini (U) (Kiosk Demo) 0000004C 0198DEC0.mid TrackParseDebug.txt", u8"Jeff & Barry Racing", 0 },
-{ u8"Jet Force Gemini (U) (Kiosk Demo) 0000004E 0199554C.mid", u8"Jet Force Gemini (U) (Kiosk Demo) 0000004E 0199554C.mid TrackParseDebug.txt", u8"Arcade Complete", 0 },
+{ u8"Jet Force Gemini (U) (Kiosk Demo) 0000004C 0198DEC0.mid", u8"Jet Force Gemini (U) (Kiosk Demo) 0000004C 0198DEC0.mid TrackParseDebug.txt", u8"Jeff & Barry Racing", 0,
+	1, { ns4::CMidiFile::NS4_ES_PRE_UNROLL, ns4::CMidiFile::NS4_E_SET_Q_REFLECTION, 0, true } },
+{ u8"Jet Force Gemini (U) (Kiosk Demo) 0000004E 0199554C.mid", u8"Jet Force Gemini (U) (Kiosk Demo) 0000004E 0199554C.mid TrackParseDebug.txt", u8"Arcade Complete", 0,
+	1, { ns4::CMidiFile::NS4_ES_PRE_UNROLL, ns4::CMidiFile::NS4_E_SET_Q_REFLECTION, 0, true } },
 { u8"Jet Force Gemini (U) (Kiosk Demo) 00000043 01984F3C.mid", u8"Jet Force Gemini (U) (Kiosk Demo) 00000043 01984F3C.mid TrackParseDebug.txt", u8"Mizar’s Death", 0 },
 { u8"Jet Force Gemini (U) (Kiosk Demo) 0000000F 0192FE1C.mid", u8"Jet Force Gemini (U) (Kiosk Demo) 0000000F 0192FE1C.mid TrackParseDebug.txt", u8"Gold Bar", 0 },
 { u8"Jet Force Gemini (U) (Kiosk Demo) 0000002B 019589C4.mid", u8"Jet Force Gemini (U) (Kiosk Demo) 0000002B 019589C4.mid TrackParseDebug.txt", u8"Medal", 0 },

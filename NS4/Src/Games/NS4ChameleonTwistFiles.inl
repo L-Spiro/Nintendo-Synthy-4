@@ -7,12 +7,16 @@
 #define NS4_REVERB							ns4::CReverb::NS4_T_CHAMELEON_TWIST_0
 #define NS4_ORIG_HZ							44095
 #define NS4_CURVE							40.0
-#define NS4_OUT_DIRECTORY					u8"F:\\N64OST\\Chameleon Twist\\"
+#define NS4_OUT_DIRECTORY					u8"T:\\N64OST\\Chameleon Twist\\"
 #define NS4_OUT_DIRECTORY_NUMBERS			NS4_OUT_DIRECTORY u8"Numbered\\"
 #define NS4_PERC_CHANNEL					9
 #define NS4_WET_FILTER_FREQ					0.0//(NS4_ORIG_HZ / 2.0)
 #define NS4_PERC_ROOT_OFFSET				-12
 //#define NS4_MASTER_REVERB_VOLUME			NS4_INV_QRT_0_5
+#define NS4_ENV_MULTIPLIER					(1.0 / 4.0)		// Can't verify.
+//#define NS4_REL_MULTIPLIER					(1.0 / 3.0)
+#define NS4_ENVELOPE_VOL_CURVE				20.0
+#define NS4_ENVELOPE_POINT_CURVE			40.0
 
 { u8"Chameleon Twist (U) 00000019 002B45D4 Main Menu.mid", u8"Chameleon Twist (U) 00000019 002B45D4.mid TrackParseDebug.txt", u8"Main Menu", 0 },
 { u8"Chameleon Twist (U) 00000017 002B3B0C Character Select.mid", u8"Chameleon Twist (U) 00000017 002B3B0C.mid TrackParseDebug.txt", u8"Character Select", 0 },
