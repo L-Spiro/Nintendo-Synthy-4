@@ -11,7 +11,7 @@
 #define NS4_OUT_DIRECTORY_NUMBERS			NS4_OUT_DIRECTORY u8"Numbered\\"
 #define NS4_WET_FILTER_FREQ					0.0//(NS4_ORIG_HZ / 2.0)
 #define NS4_VIB_SCALE						2.0
-//#define NS4_MASTER_REVERB_VOLUME			(2.2 / 4.0)
+#define NS4_ENV_MULTIPLIER					(1.0 / 3.0)
 
 
 { u8"Donkey Kong 64 (U) 000000AD 001520AC Prelude.mid", u8"Donkey Kong 64 (U) 000000AD 001520AC.mid TrackParseDebug.txt", u8"Prelude", 0 },

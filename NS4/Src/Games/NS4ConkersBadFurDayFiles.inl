@@ -14,6 +14,7 @@
 #define NS4_WET_FILTER_ORDER				NS4_FILTER_DB_TO_ORDER( 6 )
 #define NS4_VIB_SCALE						2.0
 //#define NS4_OVERSAMPLING_BW					3500.0
+#define NS4_ENV_MULTIPLIER					(1.0 / 3.0)
 
 
 

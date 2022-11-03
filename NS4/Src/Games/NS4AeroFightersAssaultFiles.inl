@@ -12,6 +12,10 @@
 //#define NS4_PERC_INST						127
 #define NS4_WET_FILTER_FREQ					0.0//(NS4_ORIG_HZ / 2.0)
 //#define NS4_ENV_MULTIPLIER					(2.0)
+#define NS4_ENV_MULTIPLIER					(1.0 / 3.0)
+//#define NS4_REL_MULTIPLIER					(1.0 / 3.0)
+#define NS4_ENVELOPE_VOL_CURVE				20.0
+#define NS4_ENVELOPE_POINT_CURVE			40.0
 
 
 { u8"AeroFighters Assault (U) 00000006 006617F0.mid", u8"AeroFighters Assault (U) 00000006 006617F0.mid TrackParseDebug.txt", u8"Title", 0 },

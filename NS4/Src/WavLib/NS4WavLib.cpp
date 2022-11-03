@@ -267,7 +267,7 @@ namespace ns4 {
 	void CWavLib::AddSamples( lwtrack & __restrict _tSrcAndDst, const lwtrack & __restrict _tAddMe, double _dScale, int32_t _iOffset ) {
 		int64_t i64FinalSize = _tAddMe.size() + _iOffset;
 		if ( i64FinalSize > 0 ) {
-			if ( i64FinalSize > _tSrcAndDst.size() ) {
+			if ( i64FinalSize > static_cast<int64_t>(_tSrcAndDst.size()) ) {
 				_tSrcAndDst.resize( size_t( i64FinalSize ) );
 			}
 			if ( _dScale == 0.0 ) { return; }
@@ -279,31 +279,59 @@ namespace ns4 {
 				}
 			}
 			return;*/
+			int64_t i64Start = max( 0, _iOffset );
 			int64_t I;
 			if ( _dScale == 1.0 ) {
 				__m128d dAddMe, dToMe, dRes;
-				
-				for ( I = max( 0, _iOffset ); I < i64FinalSize; I += 2 ) {
-					size_t sSrcIdx = size_t( I - _iOffset );
+				if ( (reinterpret_cast<uint32_t>(&_tSrcAndDst[i64Start]) & 0xF) == 0 && (reinterpret_cast<uint32_t>(&_tAddMe[i64Start-_iOffset]) & 0xF) == 0 ) {
+					// 16-byte aliged, no scale.
+					for ( I = i64Start; I < i64FinalSize; I += 2 ) {
+						size_t sSrcIdx = size_t( I - _iOffset );
 
-					dAddMe = _mm_loadu_pd( &_tAddMe[sSrcIdx] );
-					dToMe = _mm_loadu_pd( &_tSrcAndDst[size_t(I)] );
-					dRes = _mm_add_pd( dAddMe, dToMe );
-					_mm_storeu_pd( &_tSrcAndDst[I], dRes );
+						dAddMe = _mm_load_pd( &_tAddMe[sSrcIdx] );
+						dToMe = _mm_load_pd( &_tSrcAndDst[size_t(I)] );
+						dRes = _mm_add_pd( dAddMe, dToMe );
+						_mm_store_pd( &_tSrcAndDst[I], dRes );
+					}
+				}
+				else {
+					// Misaliged, no scale.
+					for ( I = i64Start; I < i64FinalSize; I += 2 ) {
+						size_t sSrcIdx = size_t( I - _iOffset );
+
+						dAddMe = _mm_loadu_pd( &_tAddMe[sSrcIdx] );
+						dToMe = _mm_loadu_pd( &_tSrcAndDst[size_t(I)] );
+						dRes = _mm_add_pd( dAddMe, dToMe );
+						_mm_storeu_pd( &_tSrcAndDst[I], dRes );
+					}
 				}
 			}
 			else {
 				__m128d dScale = _mm_load1_pd( &_dScale );
 				__m128d dAddMe, dToMe, dRes;
-				
-				for ( I = max( 0, _iOffset ); I < i64FinalSize; I += 2 ) {
-					size_t sSrcIdx = size_t( I - _iOffset );
+				if ( (reinterpret_cast<uint32_t>(&_tSrcAndDst[i64Start]) & 0xF) == 0 && (reinterpret_cast<uint32_t>(&_tAddMe[i64Start-_iOffset]) & 0xF) == 0 ) {
+					// 16-byte aliged, scaled.
+					for ( I = i64Start; I < i64FinalSize; I += 2 ) {
+						size_t sSrcIdx = size_t( I - _iOffset );
 
-					dAddMe = _mm_loadu_pd( &_tAddMe[sSrcIdx] );
-					dAddMe = _mm_mul_pd( dAddMe, dScale );
-					dToMe = _mm_loadu_pd( &_tSrcAndDst[size_t(I)] );
-					dRes = _mm_add_pd( dAddMe, dToMe );
-					_mm_storeu_pd( &_tSrcAndDst[I], dRes );
+						dAddMe = _mm_load_pd( &_tAddMe[sSrcIdx] );
+						dAddMe = _mm_mul_pd( dAddMe, dScale );
+						dToMe = _mm_load_pd( &_tSrcAndDst[size_t(I)] );
+						dRes = _mm_add_pd( dAddMe, dToMe );
+						_mm_store_pd( &_tSrcAndDst[I], dRes );
+					}
+				}
+				else {
+					// Misaligned, scaled.
+					for ( I = i64Start; I < i64FinalSize; I += 2 ) {
+						size_t sSrcIdx = size_t( I - _iOffset );
+
+						dAddMe = _mm_loadu_pd( &_tAddMe[sSrcIdx] );
+						dAddMe = _mm_mul_pd( dAddMe, dScale );
+						dToMe = _mm_loadu_pd( &_tSrcAndDst[size_t(I)] );
+						dRes = _mm_add_pd( dAddMe, dToMe );
+						_mm_storeu_pd( &_tSrcAndDst[I], dRes );
+					}
 				}
 			}
 			if ( I > i64FinalSize ) {

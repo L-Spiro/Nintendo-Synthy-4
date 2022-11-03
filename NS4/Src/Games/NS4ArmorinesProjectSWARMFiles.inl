@@ -11,8 +11,10 @@
 #define NS4_OUT_DIRECTORY_NUMBERS			NS4_OUT_DIRECTORY u8"Numbered\\"
 #define NS4_WET_FILTER_FREQ					8191.0
 #define NS4_ROOT_OFFSET						12
-//#define NS4_ENV_MULTIPLIER					(2.0)
-//#define NS4_MASTER_REVERB_VOLUME			(2.0)
+#define NS4_ENV_MULTIPLIER					(1.0 / 3.0)
+//#define NS4_REL_MULTIPLIER					(1.0 / 3.0)
+#define NS4_ENVELOPE_VOL_CURVE				20.0
+#define NS4_ENVELOPE_POINT_CURVE			40.0
 
 { u8"Armorines - Project S.W.A.R.M. (U) 00000002 004E7D9C.mid", u8"Armorines - Project S.W.A.R.M. (U) 00000002 004E7D9C.mid TrackParseDebug.txt", u8"Main Menu", 0 },
 { u8"Armorines - Project S.W.A.R.M. (U) 0000001D 004F2184.mid", u8"Armorines - Project S.W.A.R.M. (U) 0000001D 004F2184.mid TrackParseDebug.txt", u8"Siberia: Mission 1 Intro", 0 },
