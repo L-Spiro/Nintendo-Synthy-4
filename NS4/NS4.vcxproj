@@ -247,6 +247,7 @@
     <None Include="Src\Games\NS4DiddyKongRacingFiles.inl" />
     <None Include="Src\Games\NS4DonaldDuckGoinQuakersFiles.inl" />
     <None Include="Src\Games\NS4DonkeyKong64Files.inl" />
+    <None Include="Src\Games\NS4DonkeyKong64KioskFiles.inl" />
     <None Include="Src\Games\NS4Doom64Files.inl" />
     <None Include="Src\Games\NS4Doraemon2NobitaFiles.inl" />
     <None Include="Src\Games\NS4DoraemonNobitaFiles.inl" />
