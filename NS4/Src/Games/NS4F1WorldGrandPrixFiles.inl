@@ -7,11 +7,14 @@
 #define NS4_REVERB							ns4::CReverb::NS4_T_F1_WORLD_GRAND_PRIX_0
 #define NS4_ORIG_HZ							22047
 #define NS4_CURVE							40.0
-#define NS4_OUT_DIRECTORY					u8"F:\\N64OST\\F-1 World Grand Prix\\"
+#define NS4_OUT_DIRECTORY					u8"T:\\N64OST\\F-1 World Grand Prix\\"
 #define NS4_OUT_DIRECTORY_NUMBERS			NS4_OUT_DIRECTORY u8"Numbered\\"
 #define NS4_PERC_CHANNEL					9
 #define NS4_WET_FILTER_FREQ					0.0//(NS4_ORIG_HZ / 2.0)
-//#define NS4_MASTER_REVERB_VOLUME			NS4_INV_QRT_0_5
+#define NS4_ENV_MULTIPLIER					(1.0 / 3.0)
+//#define NS4_REL_MULTIPLIER					(1.0 / 3.0)
+#define NS4_ENVELOPE_VOL_CURVE				20.0
+#define NS4_ENVELOPE_POINT_CURVE			40.0
 
 
 { u8"F-1 World Grand Prix (U) 0000001E 00A3BB90.mid", u8"F-1 World Grand Prix (U) 0000001E 00A3BB90.mid TrackParseDebug.txt", u8"Intro", 0,

@@ -11,8 +11,10 @@
 #define NS4_OUT_DIRECTORY_NUMBERS			NS4_OUT_DIRECTORY u8"Numbered\\"
 #define NS4_PERC_CHANNEL					9
 #define NS4_WET_FILTER_FREQ					0.0//(NS4_ORIG_HZ / 2.0)
-//#define NS4_ENV_MULTIPLIER					(2.0)
-//#define NS4_MASTER_REVERB_VOLUME			(6.5 / 2.0)
+#define NS4_ENV_MULTIPLIER					(1.0 / 3.0)
+//#define NS4_REL_MULTIPLIER					(1.0 / 3.0)
+#define NS4_ENVELOPE_VOL_CURVE				20.0
+#define NS4_ENVELOPE_POINT_CURVE			40.0
 
 
 { u8"Clay Fighter 63 1-3 (U) 00000000 00AD5F70 Title Screen.mid", u8"Clay Fighter 63 1-3 (U) 00000000 00AD5F70.mid TrackParseDebug.txt", u8"Title Screen", 0 },

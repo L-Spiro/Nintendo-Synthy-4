@@ -13,6 +13,9 @@
 #define NS4_NO_PROGRAM_CHANGE_SORT			true
 #define NS4_ENV_MULTIPLIER					(1.0)
 #define NS4_ROOT_OFFSET						12
+//#define NS4_REL_MULTIPLIER					(1.0 / 3.0)
+#define NS4_ENVELOPE_VOL_CURVE				20.0
+#define NS4_ENVELOPE_POINT_CURVE			40.0
 //#define NS4_OVERSAMPLING_BW					500.0
 //#define NS4_PERC_CHANNEL					9
 #define NS4_WET_FILTER_FREQ					0.0//(NS4_ORIG_HZ / 2.0)

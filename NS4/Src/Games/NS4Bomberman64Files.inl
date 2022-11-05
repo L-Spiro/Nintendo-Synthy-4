@@ -11,6 +11,10 @@
 #define NS4_OUT_DIRECTORY					u8"T:\\N64OST\\Bomberman 64\\"
 #define NS4_OUT_DIRECTORY_NUMBERS			NS4_OUT_DIRECTORY u8"Numbered\\"
 #define NS4_WET_FILTER_FREQ					8191.0//(NS4_ORIG_HZ / std::pow( 2.0, 5.0 ))
+#define NS4_ENV_MULTIPLIER					(1.0 / 3.0)
+//#define NS4_REL_MULTIPLIER					(1.0 / 3.0)
+#define NS4_ENVELOPE_VOL_CURVE				20.0
+#define NS4_ENVELOPE_POINT_CURVE			40.0
 
 
 { u8"Bomberman 64 (U) 00000016 003FF440.mid", u8"Bomberman 64 (U) 00000016 003FF440.mid TrackParseDebug.txt", u8"Advertise", 0 },

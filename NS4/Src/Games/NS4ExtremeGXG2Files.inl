@@ -7,8 +7,12 @@
 #define NS4_REVERB							ns4::CReverb::NS4_T_EXTREME_G_2_0
 #define NS4_ORIG_HZ							22047
 #define NS4_CURVE							40.0
-#define NS4_OUT_DIRECTORY					u8"F:\\N64OST\\Extreme G XG2\\"
+#define NS4_OUT_DIRECTORY					u8"T:\\N64OST\\Extreme G XG2\\"
 #define NS4_OUT_DIRECTORY_NUMBERS			NS4_OUT_DIRECTORY u8"Numbered\\"
+#define NS4_ENV_MULTIPLIER					(1.0 / 3.0)
+//#define NS4_REL_MULTIPLIER					(1.0 / 3.0)
+#define NS4_ENVELOPE_VOL_CURVE				20.0
+#define NS4_ENVELOPE_POINT_CURVE			40.0
 
 
 { u8"Extreme-G XG2 (U) 00000011 00A45A70.mid", u8"Extreme-G XG2 (U) 00000011 00A45A70.mid TrackParseDebug.txt", u8"Introduction", 0 },
