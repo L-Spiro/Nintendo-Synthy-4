@@ -10,8 +10,10 @@
 #define NS4_OUT_DIRECTORY					u8"T:\\N64OST\\Turok 2 Seeds of Evil\\"
 #define NS4_OUT_DIRECTORY_NUMBERS			NS4_OUT_DIRECTORY u8"Numbered\\"
 #define NS4_WET_FILTER_FREQ					10879.0//(NS4_ORIG_HZ / std::pow( 2.0, 3.5 ))
-//#define NS4_MASTER_REVERB_VOLUME			2.0//(NS4_INV_QRT_0_5 * 2.0)
-//#define NS4_WET_FILTER_ORDER				NS4_FILTER_DB_TO_ORDER( 54 )
+#define NS4_ENV_MULTIPLIER					(1.0 / 3.0)
+//#define NS4_REL_MULTIPLIER					(1.0 / 3.0)
+#define NS4_ENVELOPE_VOL_CURVE				20.0
+#define NS4_ENVELOPE_POINT_CURVE			40.0
 
 
 { u8"Turok 2 - Seeds of Evil (U) 00000012 00C28AAC Introduction.mid", u8"Turok 2 - Seeds of Evil (U) 00000012 00C28AAC.mid TrackParseDebug.txt", u8"Introduction", 0 },

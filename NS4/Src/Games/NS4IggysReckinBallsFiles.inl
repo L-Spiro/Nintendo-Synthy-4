@@ -11,7 +11,10 @@
 #define NS4_OUT_DIRECTORY_NUMBERS			NS4_OUT_DIRECTORY u8"Numbered\\"
 #define NS4_WET_FILTER_FREQ					8191.0 / 4.0
 #define NS4_ROOT_OFFSET						12
-//#define NS4_ENV_MULTIPLIER					(0.25)
+#define NS4_ENV_MULTIPLIER					(1.0 / 3.0)
+//#define NS4_REL_MULTIPLIER					(1.0 / 3.0)
+#define NS4_ENVELOPE_VOL_CURVE				20.0
+#define NS4_ENVELOPE_POINT_CURVE			40.0
 
 
 { u8"Iggy's Reckin' Balls (U) 0000000F 00111EA8.mid", u8"Iggy's Reckin' Balls (U) 0000000F 00111EA8.mid TrackParseDebug.txt", u8"Acclaim Logo", 0 },

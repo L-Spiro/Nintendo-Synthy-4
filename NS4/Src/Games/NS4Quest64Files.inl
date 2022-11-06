@@ -3,7 +3,7 @@
 #define NS4_YEAR							u8"1998"
 #define NS4_FOLDER							u8"Quest 64"
 #define NS4_BANK							u8"00"
-#define NS4_REVERB_TRACKS					1
+#define NS4_REVERB_TRACKS					0
 #define NS4_REVERB							ns4::CReverb::NS4_T_SUPER_ROBOT_SPIRITS_0
 #define NS4_ORIG_HZ							22047
 #define NS4_CURVE							40.0
@@ -11,6 +11,10 @@
 #define NS4_OUT_DIRECTORY_NUMBERS			NS4_OUT_DIRECTORY u8"Numbered\\"
 //#define NS4_IGNORE_REVERB					true
 //#define NS4_OVERSAMPLING_BW					2500.0
+#define NS4_ENV_MULTIPLIER					(1.0 / 3.0)
+//#define NS4_REL_MULTIPLIER					(1.0 / 3.0)
+#define NS4_ENVELOPE_VOL_CURVE				20.0
+#define NS4_ENVELOPE_POINT_CURVE			40.0
 
 
 { u8"Quest 64 (U) 0000001B 00ED2B1C.mid", u8"Quest 64 (U) 0000001B 00ED2B1C.mid TrackParseDebug.txt", u8"Holy Magic Century", 0 },

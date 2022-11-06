@@ -11,6 +11,10 @@
 #define NS4_OUT_DIRECTORY_NUMBERS			NS4_OUT_DIRECTORY u8"Numbered\\"
 #define NS4_WET_FILTER_FREQ					0.0
 #define NS4_PERC_CHANNEL					9
+#define NS4_ENV_MULTIPLIER					(1.0 / 3.0)
+//#define NS4_REL_MULTIPLIER					(1.0 / 3.0)
+#define NS4_ENVELOPE_VOL_CURVE				20.0
+#define NS4_ENVELOPE_POINT_CURVE			40.0
 
 
 { u8"Transformers - Beast Wars Transmetal (U) 00000000 00D0AE14.mid", u8"Transformers - Beast Wars Transmetal (U) 00000000 00D0AE14.mid TrackParseDebug.txt", u8"Overview", 0 },

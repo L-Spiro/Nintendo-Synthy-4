@@ -10,7 +10,10 @@
 #define NS4_OUT_DIRECTORY					u8"T:\\N64OST\\Turok Rage Wars\\"
 #define NS4_OUT_DIRECTORY_NUMBERS			NS4_OUT_DIRECTORY u8"Numbered\\"
 #define NS4_WET_FILTER_FREQ					10879.0//(NS4_ORIG_HZ / std::pow( 2.0, 3.5 ))
-//#define NS4_ROOT_OFFSET						12
+#define NS4_ENV_MULTIPLIER					(1.0 / 3.0)
+//#define NS4_REL_MULTIPLIER					(1.0 / 3.0)
+#define NS4_ENVELOPE_VOL_CURVE				20.0
+#define NS4_ENVELOPE_POINT_CURVE			40.0
 
 
 { u8"1 Turok - Rage Wars (U) 00000002 00508410 Rage.mid", u8"Turok - Rage Wars (U) 00000002 00508410.mid TrackParseDebug.txt", u8"Rage", 0 },

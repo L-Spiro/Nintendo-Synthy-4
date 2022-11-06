@@ -12,6 +12,10 @@
 #define NS4_WET_FILTER_FREQ					10240.0//(NS4_ORIG_HZ / std::pow( 2.0, 3.5 ))
 //#define NS4_ENV_MULTIPLIER					(2.0)
 //#define NS4_MASTER_REVERB_VOLUME			NS4_INV_QRT_0_5
+#define NS4_ENV_MULTIPLIER					(1.0 / 3.0)
+//#define NS4_REL_MULTIPLIER					(1.0 / 3.0)
+#define NS4_ENVELOPE_VOL_CURVE				20.0
+#define NS4_ENVELOPE_POINT_CURVE			40.0
 
 { u8"Space Station Silicon Valley (U) 00000011 004252E4 Introduction.mid", u8"Space Station Silicon Valley (U) 00000011 004252E4.mid TrackParseDebug.txt", u8"Introduction", 0 },
 { u8"Space Station Silicon Valley (U) 00000012 00425AB0 Title Screen.mid", u8"Space Station Silicon Valley (U) 00000012 00425AB0.mid TrackParseDebug.txt", u8"Title Screen", 0 },

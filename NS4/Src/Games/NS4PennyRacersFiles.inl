@@ -10,6 +10,10 @@
 #define NS4_OUT_DIRECTORY_NUMBERS			NS4_OUT_DIRECTORY u8"Numbered\\"
 #define NS4_IGNORE_REVERB					true
 #define NS4_PERC_CHANNEL					9
+#define NS4_ENV_MULTIPLIER					(1.0 / 3.0)
+//#define NS4_REL_MULTIPLIER					(1.0 / 3.0)
+#define NS4_ENVELOPE_VOL_CURVE				20.0
+#define NS4_ENVELOPE_POINT_CURVE			40.0
 
 
 { u8"Penny Racers (U) 00000000 005759A4.mid", u8"Penny Racers (U) 00000000 005759A4.mid TrackParseDebug.txt", u8"Title Screen", 0 },

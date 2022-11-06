@@ -10,9 +10,10 @@
 #define NS4_OUT_DIRECTORY					u8"T:\\N64OST\\Toon Panic\\"
 #define NS4_OUT_DIRECTORY_NUMBERS			NS4_OUT_DIRECTORY u8"Numbered\\"
 #define NS4_SND_BNK_FORCE_SAMPLE_RATE		22050
-//#define NS4_WET_FILTER_FREQ					4736.0//(NS4_ORIG_HZ / std::pow( 2.0, 3.0 ))
-//#define NS4_ENV_MULTIPLIER					(2.0)
-//#define NS4_MASTER_REVERB_VOLUME			(2.0)
+#define NS4_ENV_MULTIPLIER					(1.0 / 3.0)
+//#define NS4_REL_MULTIPLIER					(1.0 / 3.0)
+#define NS4_ENVELOPE_VOL_CURVE				20.0
+#define NS4_ENVELOPE_POINT_CURVE			40.0
 
 
 { u8"Toon Panic (JP) (Proto) 00000000 006FBB94.mid", u8"Toon Panic (JP) (Proto) 00000000 006FBB94.mid TrackParseDebug.txt", u8"SELECT1", 0 },
