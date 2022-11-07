@@ -12,12 +12,15 @@
 #define NS4_DEFAULT_PAN						0x31
 #define NS4_PROG_CHANGE_SETS_VOL_PAN		false
 #define NS4_DEFAULT_MASTER_VOL				100
-#define NS4_ENV_MULTIPLIER					1.0
+//#define NS4_ENV_MULTIPLIER					1.0
 #define NS4_IGNORE_VIBRATO					true
 #define NS4_WET_FILTER_FREQ					0.0
 #define NS4_PITCH_RANGE_CONTROL				20
 //#define NS4_MAX_RATE						(32000 * 2)
-//#define NS4_MASTER_REVERB_VOLUME			NS4_INV_QRT_0_5
+#define NS4_ENV_MULTIPLIER					(2.0)
+#define NS4_REL_MULTIPLIER					(1.0)
+#define NS4_ENVELOPE_VOL_CURVE				20.0
+#define NS4_ENVELOPE_POINT_CURVE			40.0
 
 
 

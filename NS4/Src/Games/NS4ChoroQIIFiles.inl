@@ -10,9 +10,11 @@
 #define NS4_OUT_DIRECTORY_NUMBERS			NS4_OUT_DIRECTORY u8"Numbered\\"
 #define NS4_IGNORE_REVERB					true
 #define NS4_PERC_CHANNEL					9
+//#define NS4_ENV_MULTIPLIER					(1.0)
 #define NS4_ENV_MULTIPLIER					(1.0)
-//#define NS4_OVERSAMPLING					(1 << 6)
-//#define NS4_OVERSAMPLING_BW					2500.0
+//#define NS4_REL_MULTIPLIER					(1.0)
+#define NS4_ENVELOPE_VOL_CURVE				20.0
+#define NS4_ENVELOPE_POINT_CURVE			40.0
 
 { u8"Choro Q 64 II - Hacha Mecha Grand Prix Race (J) 00000009 006AD938.mid", u8"Choro Q 64 II - Hacha Mecha Grand Prix Race (J) 00000009 006AD938.mid TrackParseDebug.txt", u8"イントロ画面 (Intro Screen)", 0 },
 { u8"Choro Q 64 II - Hacha Mecha Grand Prix Race (J) 0000000A 006AED58.mid", u8"Choro Q 64 II - Hacha Mecha Grand Prix Race (J) 0000000A 006AED58.mid TrackParseDebug.txt", u8"モードせんたく (Mode Selection)", 0 },

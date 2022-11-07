@@ -10,6 +10,9 @@
 #define NS4_IGNORE_REVERB					true
 #define NS4_NO_PROGRAM_CHANGE_SORT			true
 #define NS4_ENV_MULTIPLIER					(1.0)
+//#define NS4_REL_MULTIPLIER					(1.0)
+#define NS4_ENVELOPE_VOL_CURVE				20.0
+#define NS4_ENVELOPE_POINT_CURVE			40.0
 
 { u8"Rush 2 - Extreme Racing USA (U) 0000000B 00977C10 Title.mid", u8"", u8"Title", 0,
 	1, {

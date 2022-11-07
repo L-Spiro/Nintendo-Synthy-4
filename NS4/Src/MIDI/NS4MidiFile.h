@@ -183,6 +183,7 @@ namespace ns4 {
 			NS4_E_INSERT_CONTROL_LINE_TO_TIME,					/**< Inserts an array of controls to a given value from its current value starting from a given time (dOperandDouble0) and taking dOperandDouble1 seconds to complete. */
 			NS4_E_INSERT_CONTROL_LINE_TO_TICK_OVER_TIME,		/**< Inserts an array of controls to a given value from its current value ending at a given time (tsTime0) and taking dOperandDouble0 seconds to arrive at the given tick. */
 			NS4_E_COPY_CONTROL_TO_TICK,							/**< Copies the value of a given control (ui32Operand0) at the given tick (tsTime0) to another tick (tsTime1). */
+			NS4_E_SET_ALL_CONTROL_OF_TYPE_TO_VALUE,				/**< Sets all controls of a given type (ui32Operand0) to a specific value (ui32Operand1). */
 			NS4_E_INSERT_FADE,									/**< The same as NS4_E_INSERT_CONTROL_LINE_TO_TIME except that it is applied to all tracks. */
 			NS4_E_INSERT_TIME_FADE_AT_TIME,						/**< The same as NS4_E_INSERT_FADE except that the fade begins at the given time (dOperandDouble0) and lasts the given duration in seconds (dOperandDouble1). */
 			NS4_E_INSERT_TIME_FADE_AT_TICK,						/**< The same as NS4_E_INSERT_FADE except that the fade begins at the given tick and lasts the given duration in seconds (dOperandDouble0). */
@@ -973,6 +974,16 @@ namespace ns4 {
 		 */
 		static bool						IsControllerOfType( const NS4_TRACK_EVENT &_teEvent, uint8_t _ui8Type ) {
 			return (_teEvent.ui8Event >> 4) == NS4_ME_CONTROLLER && _teEvent.u.sMidi.ui8Parm0 == _ui8Type;
+		}
+
+		/**
+		 * Sets the controller value.
+		 *
+		 * \param _teEvent The event to inspect.
+		 * \param _ui8Value The value to set.
+		 */
+		static void						SetControllerValue( NS4_TRACK_EVENT &_teEvent, uint8_t _ui8Value ) {
+			_teEvent.u.sMidi.ui8Parm1 = _ui8Value;
 		}
 
 		/**

@@ -72,14 +72,14 @@
 
 #define NS4_BULK
 
-//#define NS4_SINGLE_TRACK								5
+//#define NS4_SINGLE_TRACK								0
 //#define NS4_NO_NORMALIZE
 // 
 //#define NS4_NO_OUTPUT									// Used to quickly print information in the MIDI files without actually generating WAV content.
 //#define NS4_PRINT_BEST_BANK
 
 #ifdef NS4_BULK
-//#define NS4_ONE_OFF								(2-1)
+//#define NS4_ONE_OFF										(36-1)
 //#define NS4_EXPORT_SOME
 //#define NS4_EPORT_FROM								(26-1)
 #else
@@ -284,7 +284,7 @@ int main() {
 //#include "Src/Games/NS4DonkeyKong64Files.inl"
 //#include "Src/Games/NS4DonkeyKong64KioskFiles.inl"
 //#include "Src/Games/NS4Turok3ShadowOfOblivion.inl"
-#include "Src/Games/NS4Turok2SeedsOfEvilFiles.inl"
+//#include "Src/Games/NS4Turok2SeedsOfEvilFiles.inl"
 //#include "Src/Games/NS4TurokRageWars.inl"
 //#include "Src/Games/NS4KillerInstinctGoldFiles.inl"
 //#include "Src/Games/NS4KillerInstinctGold2Files.inl"
@@ -353,7 +353,7 @@ int main() {
 //#include "Src/Games/NS4MickeysSpeedwayUsaFiles.inl"
 //#include "Src/Games/NS4MickeysSpeedwayUsaStereoFiles.inl"
 //#include "Src/Games/NS4DenshaDeGo!64Files.inl"
-//#include "Src/Games/NS4MaceTheDarkAgesFiles.inl"
+#include "Src/Games/NS4MaceTheDarkAgesFiles.inl"
 //#include "Src/Games/NS4Bomberman64Files.inl"
 //#include "Src/Games/NS4Bomberman64EFiles.inl"
 //#include "Src/Games/NS4Bomberman64TheSecondAttackFiles.inl"

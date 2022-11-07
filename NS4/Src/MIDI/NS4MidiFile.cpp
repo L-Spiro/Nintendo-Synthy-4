@@ -1793,6 +1793,16 @@ namespace ns4 {
 						}
 						break;
 					}
+					case NS4_E_SET_ALL_CONTROL_OF_TYPE_TO_VALUE : {
+						if ( iTrackByChan >= 0 && iTrackByChan < m_vTracks.size() ) {
+							for ( size_t K = 0; K < m_vTracks[iTrackByChan].vEvents.size(); ++K ) {
+								if ( IsControllerOfType( m_vTracks[iTrackByChan].vEvents[K], uint8_t( _pmMods[I].ui32Operand0 ) ) ) {
+									SetControllerValue( m_vTracks[iTrackByChan].vEvents[K], uint8_t( _pmMods[I].ui32Operand1 ) );
+								}
+							}
+						}
+						break;
+					}
 					case NS4_E_INSERT_FADE : {
 						for ( auto K = m_vTracks.size(); K--; ) {
 							int32_t iChan = GetTrackChannel( m_vTracks[K].vEvents );

@@ -9,9 +9,10 @@
 #define NS4_CURVE							40.0
 #define NS4_OUT_DIRECTORY					u8"T:\\N64OST\\F-1 Pole Position 64\\"
 #define NS4_OUT_DIRECTORY_NUMBERS			NS4_OUT_DIRECTORY u8"Numbered\\"
-//#define NS4_WET_FILTER_FREQ					8191.0 / 4.0
-//#define NS4_ROOT_OFFSET						12
-//#define NS4_ENV_MULTIPLIER					(0.25)
+#define NS4_ENV_MULTIPLIER					(1.0 / 3.0)
+//#define NS4_REL_MULTIPLIER					(1.0 / 3.0)
+#define NS4_ENVELOPE_VOL_CURVE				20.0
+#define NS4_ENVELOPE_POINT_CURVE			40.0
 
 { u8"F-1 Pole Position 64 (U) (M3) 00000008 0074F458.mid", u8"F-1 Pole Position 64 (U) (M3) 00000008 0074F458.mid TrackParseDebug.txt", u8"Intro", 0 },
 { u8"F-1 Pole Position 64 (U) (M3) 00000005 0074BDF0.mid", u8"F-1 Pole Position 64 (U) (M3) 00000005 0074BDF0.mid TrackParseDebug.txt", u8"Main Menu", 0 },

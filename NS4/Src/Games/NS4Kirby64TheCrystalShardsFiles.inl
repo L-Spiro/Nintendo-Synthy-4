@@ -12,8 +12,8 @@
 #define NS4_DEFAULT_PAN						0x3F
 #define NS4_PROG_CHANGE_SETS_VOL_PAN		false
 #define NS4_DEFAULT_MASTER_VOL				100
-#define NS4_ENV_MULTIPLIER					(1.0)
-#define NS4_REL_MULTIPLIER					(2.0)
+//#define NS4_ENV_MULTIPLIER					(1.0)
+//#define NS4_REL_MULTIPLIER					(2.0)
 #define NS4_VIB_SCALE						2.0
 //#define NS4_IGNORE_VIBRATO					true
 #define NS4_WET_FILTER_FREQ					0.0
@@ -24,7 +24,10 @@
 #define NS4_DEFAULT_VIBRATO_TREM_LEVEL		0.0
 #define NS4_AFTERTOUCH_MODS_VIB_TREM		true
 //#define NS4_MAX_RATE						(32000 * 2)
-//#define NS4_MASTER_REVERB_VOLUME			NS4_INV_QRT_0_5
+#define NS4_ENV_MULTIPLIER					(2.0)
+#define NS4_REL_MULTIPLIER					(1.0)
+#define NS4_ENVELOPE_VOL_CURVE				20.0
+#define NS4_ENVELOPE_POINT_CURVE			40.0
 
 
 { u8"Kirby 64 - The Crystal Shards (U) 0000002D 002968E0.mid", u8"Kirby 64 - The Crystal Shards (U) 0000002D 002968E0.mid TrackParseDebug.txt", u8"Opening", 0 },
