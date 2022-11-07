@@ -12,6 +12,10 @@
 #define NS4_PERC_CHANNEL					9
 //#define NS4_ROOT_OFFSET						-12
 #define NS4_PERC_ROOT_OFFSET				-6
+#define NS4_ENV_MULTIPLIER					(1.0 / 3.0)
+//#define NS4_REL_MULTIPLIER					(1.0 / 3.0)
+#define NS4_ENVELOPE_VOL_CURVE				20.0
+#define NS4_ENVELOPE_POINT_CURVE			40.0
 
 
 
