@@ -72,14 +72,14 @@
 
 #define NS4_BULK
 
-//#define NS4_SINGLE_TRACK								0
+//#define NS4_SINGLE_TRACK								6
 //#define NS4_NO_NORMALIZE
 // 
 //#define NS4_NO_OUTPUT									// Used to quickly print information in the MIDI files without actually generating WAV content.
 //#define NS4_PRINT_BEST_BANK
 
 #ifdef NS4_BULK
-//#define NS4_ONE_OFF										(36-1)
+//#define NS4_ONE_OFF										(3-1)
 //#define NS4_EXPORT_SOME
 //#define NS4_EPORT_FROM								(26-1)
 #else
@@ -321,7 +321,7 @@ int main() {
 //#include "Src/Games/NS4SnowboardKidsFiles.inl"
 //#include "Src/Games/NS4WarGodsFiles.inl"
 //#include "Src/Games/NS4WCWvsnWoWorldTourFiles.inl"
-//#include "Src/Games/NS4WonderProjectJFiles.inl"
+#include "Src/Games/NS4WonderProjectJFiles.inl"
 //#include "Src/Games/NS4ZoorFiles.inl"
 
 //#include "Src/Games/NS4SuperMario64Files.inl"
@@ -360,7 +360,7 @@ int main() {
 //#include "Src/Games/NS4Bomberman64TheSecondAttackFiles.inl"
 //#include "Src/Games/NS4ArmorinesProjectSWARMFiles.inl"
 //#include "Src/Games/NS4DoraemonNobitaFiles.inl"
-#include "Src/Games/NS4Doraemon2NobitaFiles.inl"
+//#include "Src/Games/NS4Doraemon2NobitaFiles.inl"
 //#include "Src/Games/NS4DualHeroesFiles.inl"
 //#include "Src/Games/NS4IggysReckinBallsFiles.inl"
 //#include "Src/Games/NS4RoadstersTrophyFiles.inl"

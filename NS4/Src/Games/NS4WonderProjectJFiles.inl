@@ -9,9 +9,13 @@
 #define NS4_CURVE							40.0
 #define NS4_OUT_DIRECTORY					u8"F:\\N64OST\\Wonder Project J2\\"
 #define NS4_OUT_DIRECTORY_NUMBERS			NS4_OUT_DIRECTORY u8"Numbered\\"
-#define NS4_ENV_MULTIPLIER					(0.5)
+//#define NS4_ENV_MULTIPLIER					(0.5)
 //#define NS4_REL_MULTIPLIER					(10.0)
 #define NS4_MIN_RELEASE_TIME				0.1
+#define NS4_ENV_MULTIPLIER					(1.0 / 3.0)
+//#define NS4_REL_MULTIPLIER					(1.0 / 3.0)
+#define NS4_ENVELOPE_VOL_CURVE				20.0
+#define NS4_ENVELOPE_POINT_CURVE			40.0
 
 
 
