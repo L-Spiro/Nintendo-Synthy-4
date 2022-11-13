@@ -321,7 +321,7 @@ int main() {
 //#include "Src/Games/NS4SnowboardKidsFiles.inl"
 //#include "Src/Games/NS4WarGodsFiles.inl"
 //#include "Src/Games/NS4WCWvsnWoWorldTourFiles.inl"
-#include "Src/Games/NS4WonderProjectJFiles.inl"
+//#include "Src/Games/NS4WonderProjectJFiles.inl"
 //#include "Src/Games/NS4ZoorFiles.inl"
 
 //#include "Src/Games/NS4SuperMario64Files.inl"
@@ -346,7 +346,7 @@ int main() {
 //#include "Src/Games/NS4TonicTroubleFiles.inl"
 //#include "Src/Games/NS4BattleTanxFiles.inl"
 //#include "Src/Games/NS4CaliforniaSpeedFiles.inl"
-//#include "Src/Games/NS4CruisnWorldFiles.inl"
+#include "Src/Games/NS4CruisnWorldFiles.inl"
 //#include "Src/Games/NS4CruisnExoticaFiles.inl"
 //#include "Src/Games/NS4CruisnUsaFiles.inl"
 //#include "Src/Games/NS4Rush2Files.inl"
