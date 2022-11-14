@@ -4,10 +4,17 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 VisualStudioVersion = 17.1.32210.238
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "NS4", "NS4\NS4.vcxproj", "{A5BB72C5-5031-4636-87B6-1A46683A0F83}"
+	ProjectSection(ProjectDependencies) = postProject
+		{642C4506-75EB-41EB-8F87-CF92DE64BA4E} = {642C4506-75EB-41EB-8F87-CF92DE64BA4E}
+		{85310519-9B48-46F1-A3E5-FBFFB2BD7FB3} = {85310519-9B48-46F1-A3E5-FBFFB2BD7FB3}
+	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "LSWindows", "LSWindows", "{95DA0949-734D-46E5-B66E-CA7A05D2CAFA}"
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "LSWindows", "NS4\Libraries\LSWindows\LSWindows.vcxproj", "{85310519-9B48-46F1-A3E5-FBFFB2BD7FB3}"
+	ProjectSection(ProjectDependencies) = postProject
+		{642C4506-75EB-41EB-8F87-CF92DE64BA4E} = {642C4506-75EB-41EB-8F87-CF92DE64BA4E}
+	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "ExpressionEvaluator", "ExpressionEvaluator", "{F30D8C4B-06ED-4E98-8C0F-78C144F93747}"
 EndProject

@@ -96,7 +96,7 @@
       <AdditionalIncludeDirectories>.\Libraries\ExpressionEvaluator\Src;.\Libraries\LSWindows\Src;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
-      <SubSystem>Console</SubSystem>
+      <SubSystem>Windows</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <StackCommitSize>1048576</StackCommitSize>
       <AdditionalDependencies>$(SolutionDir)$(Platform)\$(Configuration)\ExpressionEvaluator.lib;$(SolutionDir)$(Platform)\$(Configuration)\LSWindows.lib;%(AdditionalDependencies)</AdditionalDependencies>
@@ -116,7 +116,7 @@
       <AdditionalIncludeDirectories>.\Libraries\ExpressionEvaluator\Src;.\Libraries\LSWindows\Src;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
-      <SubSystem>Console</SubSystem>
+      <SubSystem>Windows</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <StackCommitSize>1048576</StackCommitSize>
       <AdditionalDependencies>$(SolutionDir)$(Platform)\$(Configuration)\ExpressionEvaluator.lib;$(SolutionDir)$(Platform)\$(Configuration)\LSWindows.lib;%(AdditionalDependencies)</AdditionalDependencies>
@@ -138,7 +138,7 @@
       <AdditionalIncludeDirectories>.\Libraries\ExpressionEvaluator\Src;.\Libraries\LSWindows\Src;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
-      <SubSystem>Console</SubSystem>
+      <SubSystem>Windows</SubSystem>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
       <GenerateDebugInformation>true</GenerateDebugInformation>
@@ -162,7 +162,7 @@
       <AdditionalIncludeDirectories>.\Libraries\ExpressionEvaluator\Src;.\Libraries\LSWindows\Src;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
-      <SubSystem>Console</SubSystem>
+      <SubSystem>Windows</SubSystem>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
       <GenerateDebugInformation>true</GenerateDebugInformation>
@@ -186,6 +186,7 @@
     <ClCompile Include="Src\Time\NS4TimeBlock.cpp" />
     <ClCompile Include="Src\WavFile\NS4WavFile.cpp" />
     <ClCompile Include="Src\WavLib\NS4WavLib.cpp" />
+    <ClCompile Include="Src\Windows\Layout\NS4LayoutManager.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Src\Crc\NS4Crc.h" />
@@ -213,6 +214,7 @@
     <ClInclude Include="Src\Time\NS4TimeBlock.h" />
     <ClInclude Include="Src\WavFile\NS4WavFile.h" />
     <ClInclude Include="Src\WavLib\NS4WavLib.h" />
+    <ClInclude Include="Src\Windows\Layout\NS4LayoutManager.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Src\Games\NS41080SnowboardingFiles.inl" />

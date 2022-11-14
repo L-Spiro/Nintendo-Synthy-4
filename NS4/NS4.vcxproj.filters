@@ -91,6 +91,18 @@
     <Filter Include="Source Files\Crc">
       <UniqueIdentifier>{b462f3c7-a3f7-43ea-9608-cebe6e79c59e}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\Windows">
+      <UniqueIdentifier>{4b0d8a4c-5447-4ba2-8643-3aa9b4ed0cb5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Windows">
+      <UniqueIdentifier>{7d8f8269-3175-4803-98c6-6c56a4b1b951}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Windows\Layout">
+      <UniqueIdentifier>{ae323f15-3dea-4684-a149-93c5e3c9915e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Windows\Layout">
+      <UniqueIdentifier>{6b248ac2-1813-42dd-8df2-8dac4cad036a}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Src\Reverb\NS4Reverb.cpp">
@@ -132,11 +144,14 @@
     <ClCompile Include="Src\WavLib\NS4WavLib.cpp">
       <Filter>Source Files\WavLib</Filter>
     </ClCompile>
+    <ClCompile Include="Src\Crc\NS4Crc.cpp">
+      <Filter>Source Files\Crc</Filter>
+    </ClCompile>
     <ClCompile Include="NS4NintendoSynthy4.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Src\Crc\NS4Crc.cpp">
-      <Filter>Source Files\Crc</Filter>
+    <ClCompile Include="Src\Windows\Layout\NS4LayoutManager.cpp">
+      <Filter>Source Files\Windows\Layout</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -214,6 +229,9 @@
     </ClInclude>
     <ClInclude Include="Src\Crc\NS4Crc.h">
       <Filter>Header Files\Crc</Filter>
+    </ClInclude>
+    <ClInclude Include="Src\Windows\Layout\NS4LayoutManager.h">
+      <Filter>Header Files\Windows\Layout</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
