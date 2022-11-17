@@ -1185,7 +1185,7 @@ namespace lsw {
 								}
 							}
 						}
-						LSW_RET( 1, TRUE );
+						LSW_RET( CDRF_DODEFAULT, CDRF_DODEFAULT );
 					}
 					case NM_DBLCLK : {
 						HWND hFrom = lpHdr->hwndFrom;
