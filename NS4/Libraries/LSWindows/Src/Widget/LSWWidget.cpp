@@ -182,7 +182,7 @@ namespace lsw {
 	// Gets the window text in UTF-8.
 	std::string CWidget::GetTextUTF8() const {
 		std::wstring wText = GetTextW();
-		return ee::WStringToString( wText );
+		return ee::CExpEval::WStringToString( wText );
 	}
 
 	// Get the value of the text as an expression.
@@ -336,7 +336,7 @@ namespace lsw {
 
 	// Translate a child's tooltip text.
 	std::wstring CWidget::TranslateTooltip( const std::string &_sText ) { 
-		return ee::ToUtf16( _sText );
+		return ee::CExpEval::ToUtf16( _sText );
 	}
 
 	// Sets a given font on all children of a window.
@@ -1152,6 +1152,9 @@ namespace lsw {
 							plvView->GetDispInfoNotify( plvdiInfo );
 						}
 						LSW_RET( 1, TRUE );
+					}
+					case LVN_ODSTATECHANGED : {
+						break;
 					}
 					case NM_CUSTOMDRAW : {
 						LPNMCUSTOMDRAW pcdCustomDraw = reinterpret_cast<LPNMCUSTOMDRAW>(_lParam);
