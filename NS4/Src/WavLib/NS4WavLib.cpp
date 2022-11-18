@@ -265,6 +265,7 @@ namespace ns4 {
 	 * \param _iOffset The offset to apply to _tAddMe.
 	 */
 	void CWavLib::AddSamples( lwtrack & __restrict _tSrcAndDst, const lwtrack & __restrict _tAddMe, double _dScale, int32_t _iOffset ) {
+		if ( !_tAddMe.size() ) { return; }
 		int64_t i64FinalSize = _tAddMe.size() + _iOffset;
 		if ( i64FinalSize > 0 ) {
 			if ( i64FinalSize > static_cast<int64_t>(_tSrcAndDst.size()) ) {

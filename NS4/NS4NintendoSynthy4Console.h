@@ -39,36 +39,6 @@
 #include <cmath>
 #include <fstream>
 
-//#define NS4_6POINT_5ORDER
-//#define NS4_6POINT_BSPLINE
-//#define NS4_6POINT_OSCIL
-#define NS4_6POINT_HERMITE
-//#define NS4_LINEAR
-//#define NS4_4POINT_PARABOLA
-//#define NS4_4POINT_WATTE
-//#define NS4_4POINT_BSPLINE
-
-
-#ifdef NS4_6POINT_5ORDER
-#define NS4_SAMPLE							aMixed[0][I] = ns4::CWavLib::Sample_6Point_5thOrder_32X_Z( &sSamples[+2], std::fmod( dIdx, 1.0 ) )
-#elif defined( NS4_6POINT_BSPLINE )
-#define NS4_SAMPLE							aMixed[0][I] = ns4::CWavLib::Sample_6Point_5thOrder_BSpline_X( &sSamples[+2], std::fmod( dIdx, 1.0 ) )
-#elif defined( NS4_6POINT_OSCIL )
-#define NS4_SAMPLE							aMixed[0][I] = ns4::CWavLib::Sample_6Point_5thOrder_2ndOrderOsculating_Z( &sSamples[+2], std::fmod( dIdx, 1.0 ) )
-#elif defined( NS4_6POINT_HERMITE )
-#define NS4_SAMPLE							aMixed[0][I] = ns4::CWavLib::Sample_6Point_5thOrder_Hermite_Z( &sSamples[+2], std::fmod( dIdx, 1.0 ) )
-#elif defined( NS4_LINEAR )
-#define NS4_SAMPLE							aMixed[0][I] = ns4::CWavLib::Sample_LinearInterpolation( &sSamples[2+2], std::fmod( dIdx, 1.0 ) )
-#elif defined( NS4_4POINT_PARABOLA )
-#define NS4_SAMPLE							aMixed[0][I] = ns4::CWavLib::Sample_4Point_2ndOrder_Parabolic_2X_Z( &sSamples[1+2], std::fmod( dIdx, 1.0 ) )
-#elif defined( NS4_4POINT_WATTE )
-#define NS4_SAMPLE							aMixed[0][I] = ns4::CWavLib::Sample_4Point_2ndOrder_WatteTriLinear_Z( &sSamples[1+2], std::fmod( dIdx, 1.0 ) )
-#elif defined( NS4_4POINT_BSPLINE )
-#define NS4_SAMPLE							aMixed[0][I] = ns4::CWavLib::Sample_4Point_3rdOrder_BSpline_X( &sSamples[1+2], std::fmod( dIdx, 1.0 ) )
-#else
-#define NS4_SAMPLE							aMixed[0][I] = ns4::CWavLib::Sample_6Point_5thOrder_32X_Z( &sSamples[+2], std::fmod( dIdx, 1.0 ) )
-#endif
-
 
 #define NS4_BULK
 
@@ -79,9 +49,9 @@
 //#define NS4_PRINT_BEST_BANK
 
 #ifdef NS4_BULK
-//#define NS4_ONE_OFF										(3-1)
+//#define NS4_ONE_OFF										(20-1)
 //#define NS4_EXPORT_SOME
-//#define NS4_EPORT_FROM								(26-1)
+#define NS4_EPORT_FROM								(71-1)
 #else
 #define NS4_FOLDER								u8"Super Smash Bros"
 #define NS4_FILE								u8"01 Super Smash Bros. (U) 00000021 00B413A4 Intro"
@@ -91,7 +61,8 @@
 #endif
 
 
-int main() {
+int oldmain() {
+//int wWinMain( _In_ HINSTANCE /*_hInstance*/, _In_opt_ HINSTANCE /*_hPrevInstance*/, _In_ LPWSTR /*_lpCmdLine*/, _In_ int /*_nCmdShow*/ ) {
 
 
 #if 0
@@ -179,7 +150,8 @@ int main() {
 		//ns4::CReverb::HarvestUnfilteredMonoTaps( u8"J:\\My Projects\\Nintendo Synthy-4\\NS4\\Src\\Reverb\\Research\\BM64TSA HD.wav", -1, 1, 0, 0, 0 );
 		//ns4::CReverb::HarvestUnfilteredMonoTaps( u8"J:\\My Projects\\Nintendo Synthy-4\\NS4\\Src\\Reverb\\Research\\HYP HD.wav", -1, 1, 0, 0, 0 );
 		//ns4::CReverb::HarvestUnfilteredMonoTaps( u8"J:\\My Projects\\Nintendo Synthy-4\\NS4\\Src\\Reverb\\Research\\MRC HD.wav", -1, 1, 0, 0, 0 );
-		ns4::CReverb::HarvestUnfilteredMonoTaps( u8"J:\\My Projects\\Nintendo Synthy-4\\NS4\\Src\\Reverb\\Research\\ASB99 HD.wav", -1, 1, 0, 0, 0 );
+		//ns4::CReverb::HarvestUnfilteredMonoTaps( u8"J:\\My Projects\\Nintendo Synthy-4\\NS4\\Src\\Reverb\\Research\\ASB99 HD.wav", -1, 1, 0, 0, 0 );
+		ns4::CReverb::HarvestUnfilteredMonoTaps( u8"J:\\My Projects\\Nintendo Synthy-4\\NS4\\Src\\Reverb\\Research\\FightersDestiny HD.wav", -1, 1, 0, 0, 0 );
 	}
 	{
 		ns4::CWavLib::DetermineLevelsStereo( u8"J:\\My Projects\\Nintendo Synthy-4\\NS4\\Src\\Reverb\\Research\\MM V 127 R 0 P 56 NF.wav",
@@ -223,11 +195,11 @@ int main() {
 
 #if 0
 	{
-		const uint32_t ui32SampRate = 22047;
+		const uint32_t ui32SampRate = 22049;
 		
 		ns4::lwaudio aWet = ns4::CWavLib::AllocateSamples( 1, ui32SampRate * 30 );
 		aWet[0][0] = 1.0;
-		ns4::lwaudio aAccum = ns4::CReverb::CreateReverb( ns4::CReverb::NS4_T_ALL_STAR_BASEBALL_99_DELAY_0, aWet, ui32SampRate, ui32SampRate, 0.0, 0 );
+		ns4::lwaudio aAccum = ns4::CReverb::CreateReverb( ns4::CReverb::NS4_T_FIGHTERS_DESTINY_DELAY_0, aWet, ui32SampRate, ui32SampRate, 0.0, 0 );
 		ns4::lwsample sFirst = aWet[0][0];
 		if ( sFirst == 0.0 ) {
 			::OutputDebugStringA( "Measles.\r\n" );
@@ -339,6 +311,7 @@ int main() {
 //#include "Src/Games/NS4MarioKart64HeadphonesFiles.inl"
 //#include "Src/Games/NS41080SnowboardingFiles.inl"
 //#include "Src/Games/NS4WaveRace64Files.inl"
+#include "Src/Games/NS4PokemonStadium2Files.inl"
 
 //#include "Src/Games/NS4BattlezoneRiseOfTheBlackDogsFiles.inl"
 //#include "Src/Games/NS4AutomobiliLamborghiniFiles.inl"
@@ -346,7 +319,7 @@ int main() {
 //#include "Src/Games/NS4TonicTroubleFiles.inl"
 //#include "Src/Games/NS4BattleTanxFiles.inl"
 //#include "Src/Games/NS4CaliforniaSpeedFiles.inl"
-#include "Src/Games/NS4CruisnWorldFiles.inl"
+//#include "Src/Games/NS4CruisnWorldFiles.inl"
 //#include "Src/Games/NS4CruisnExoticaFiles.inl"
 //#include "Src/Games/NS4CruisnUsaFiles.inl"
 //#include "Src/Games/NS4Rush2Files.inl"
@@ -402,6 +375,7 @@ int main() {
 //#include "Src/Games/NS4AeroGaugeOverSamplingFiles.inl"
 //#include "Src/Games/NS4AllStarBaseball99Files.inl"
 //#include "Src/Games/NS4StarshotSpaceCircusFeverFiles.inl"
+//#include "Src/Games/NS4FightersDestinyFiles.inl"
 #else
 		{}
 #endif

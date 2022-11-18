@@ -1311,6 +1311,20 @@ namespace ns4 {
 		},
 	};
 
+	/** Taps harvested from Fighters Destiny. */
+	NS4_REVERB_TAP CReverb::m_rtFightersDestiny0[] = {
+#include "Taps/NS4ReverbFightersDestiny0.inl"
+	};
+
+	/** The comb filter delay lines for Fighters Destiny. */
+	NS4_DELAY_N64 CReverb::m_dn64FightersDestiny0[] = {
+		//ui32Input		ui32Output	i16FfCoef		i16FbCoef		i16Gain							 dRsInc						 dRsVal			i32RsDelta						dRsGain						ui16Fc
+		{         0,	      2640,	    +9830,		    -9830,	          0 },
+		{       880,	      2160,	    +3276,		    -3276,	      16383 },
+		{      2640,	      3640,	    +3276,		    -3276,	      16383 },
+		{         0,	      3760,	    +8000,		       +0,	          0,		                      0,	                      0,		        +0,		                      0,	/*0xE00EC900*/   10240 },
+	};
+
 }	// namespace ns4
 
 namespace ns4 {
@@ -2325,7 +2339,20 @@ namespace ns4 {
 			NS4_NO_FADE,															// dTime
 			NS4_NO_LPF,																// dLpfFactor
 			NS4_DELAY( m_rdlDelay0400_3FFF, (double( 0x7FFF ) / double( 0x7FFF )) ),// dDelayVol
-		},	// 138
+		},	// 139
+		// Fighters Destiny.
+		{
+			NS4_ONLY_COMB( 1.0, 0 ),
+			NS4_COMB( 4000, 320 / 2, m_dn64FightersDestiny0, 20.0 ),
+		},	// 140
+		// Fighters Destiny.
+		{
+			NS4_TAPS( m_rtFightersDestiny0 ),
+			NS4_SQRT_0_5,															// dTapVol
+			0,																		// i64TapOffset
+			NS4_NO_FADE,
+			NS4_NO_LPF,
+		},	// 141
 	};
 
 

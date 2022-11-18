@@ -152,6 +152,8 @@ namespace ns4 {
 			NS4_T_DELAY_1400_2FFF				= 137,
 			NS4_T_DELAY_180C_4FFF				= 138,
 			NS4_T_DELAY_0400_3FFF				= 139,
+			NS4_T_FIGHTERS_DESTINY_DELAY_0		= 140,
+			NS4_T_FIGHTERS_DESTINY_0			= 141,
 			
 		};
 
@@ -672,6 +674,12 @@ namespace ns4 {
 
 		/** Delay line: 0400/3FFF. */
 		static NS4_REVERB_DELAY_LINE			m_rdlDelay0400_3FFF[];
+
+		/** Taps harvested from Fighters Destiny. */
+		static NS4_REVERB_TAP					m_rtFightersDestiny0[];
+
+		/** The comb filter delay lines for Fighters Destiny. */
+		static NS4_DELAY_N64					m_dn64FightersDestiny0[];
 
 
 		// == Functions.

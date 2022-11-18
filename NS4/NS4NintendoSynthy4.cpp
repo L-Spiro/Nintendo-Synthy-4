@@ -29,7 +29,15 @@
 #include "Src/Windows/Layout/NS4LayoutManager.h"
 #include <Base/LSWBase.h>
 
+#define NS4_OLD_MAIN
+#ifdef NS4_OLD_MAIN
+#include "NS4NintendoSynthy4Console.h"
+#endif	// #ifdef NS4_OLD_MAIN
+
 int wWinMain( _In_ HINSTANCE _hInstance, _In_opt_ HINSTANCE /*_hPrevInstance*/, _In_ LPWSTR /*_lpCmdLine*/, _In_ int /*_nCmdShow*/ ) {
+#ifdef NS4_OLD_MAIN
+	return oldmain();
+#else
 	lsw::CBase::Initialize( _hInstance, new ns4::CLayoutManager(),
 		L"NS4DOCK",
 		L"NS4SPLITTER",
@@ -56,4 +64,5 @@ int wWinMain( _In_ HINSTANCE _hInstance, _In_opt_ HINSTANCE /*_hPrevInstance*/, 
 
 	lsw::CBase::ShutDown();
 	return static_cast<int>(mMsg.wParam);
+#endif	// #ifdef NS4_OLD_MAIN
 }

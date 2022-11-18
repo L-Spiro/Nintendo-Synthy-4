@@ -233,6 +233,9 @@
     <ClInclude Include="Src\Windows\Layout\NS4LayoutManager.h">
       <Filter>Header Files\Windows\Layout</Filter>
     </ClInclude>
+    <ClInclude Include="NS4NintendoSynthy4Console.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="Src\Games\NS4AeroFightersAssaultFiles.inl">
@@ -851,6 +854,15 @@
       <Filter>Header Files\Games</Filter>
     </None>
     <None Include="Src\Games\NS4DonkeyKong64KioskFiles.inl">
+      <Filter>Header Files\Games</Filter>
+    </None>
+    <None Include="Src\Games\NS4FightersDestinyFiles.inl">
+      <Filter>Header Files\Games</Filter>
+    </None>
+    <None Include="Src\Reverb\Taps\NS4ReverbFightersDestiny0.inl">
+      <Filter>Header Files\Reverb\Taps</Filter>
+    </None>
+    <None Include="Src\Games\NS4PokemonStadium2Files.inl">
       <Filter>Header Files\Games</Filter>
     </None>
   </ItemGroup>
