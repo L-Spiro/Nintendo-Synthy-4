@@ -154,6 +154,8 @@ namespace ns4 {
 			NS4_T_DELAY_0400_3FFF				= 139,
 			NS4_T_FIGHTERS_DESTINY_DELAY_0		= 140,
 			NS4_T_FIGHTERS_DESTINY_0			= 141,
+			NS4_T_PRO_MAHJONG_KIWAME_64_DELAY_0	= 142,
+			NS4_T_PRO_MAHJONG_KIWAME_64_0		= 143,
 			
 		};
 
@@ -680,6 +682,12 @@ namespace ns4 {
 
 		/** The comb filter delay lines for Fighters Destiny. */
 		static NS4_DELAY_N64					m_dn64FightersDestiny0[];
+
+		/** Taps harvested from Pro Mahjong Kiwame 64. */
+		static NS4_REVERB_TAP					m_rtProMahjongKiwame640[];
+
+		/** The comb filter delay lines for Pro Mahjong Kiwame 64. */
+		static NS4_DELAY_N64					m_dn64ProMahjongKiwame640[];
 
 
 		// == Functions.
