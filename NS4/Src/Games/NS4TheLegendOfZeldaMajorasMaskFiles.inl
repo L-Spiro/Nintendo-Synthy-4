@@ -502,7 +502,7 @@
 },
 { u8"Legend of Zelda, The - Majora's Mask (U) 0000004D 00A684D0 New wave bossa nova.mid", u8"Legend of Zelda, The - Majora's Mask (U) 0000004D 00A684D0 New wave bossa nova.mid TrackParseDebug.txt", u8"New Wave Bossa Nova Get", 0x13,
 	1 + 2, {
-		{ ns4::CMidiFile::NS4_ES_MASTER, ns4::CMidiFile::NS4_E_GLOBAL_SET_REVERB, 0, ns4::CReverb::NS4_T_DELAY_0C00_2FFF },	// Guess.
+		{ ns4::CMidiFile::NS4_ES_MASTER, ns4::CMidiFile::NS4_E_GLOBAL_SET_REVERB, 0, ns4::CReverb::NS4_T_DELAY_0C00_2FFF },
 		{ ns4::CMidiFile::NS4_ES_PRE_UNROLL, ns4::CMidiFile::NS4_E_MUTE_TRACK, 14 - 1 },
 		{ ns4::CMidiFile::NS4_ES_PRE_UNROLL, ns4::CMidiFile::NS4_E_MUTE_TRACK, 15 - 1 },
 	},

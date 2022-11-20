@@ -1576,6 +1576,9 @@ namespace ns4 {
 			/** If true, the Q factor reflects over the Nyquist frequency of the track. */
 			bool						bReflectQ = false;
 
+			/** If true, envelopes use exponential multiplication to transition between points rather than linear or curved interpolation. */
+			bool						bExpEnvelopes = false;
+
 			/** If not 0, specifies the control to be interpreted as LPF.  Is usually set to 34. */
 			uint8_t						ui8LpfControl = 0;
 

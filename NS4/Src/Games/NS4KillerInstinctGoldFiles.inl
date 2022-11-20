@@ -10,11 +10,11 @@
 #define NS4_OUT_DIRECTORY					u8"F:\\N64OST\\Killer Instinct Gold\\"
 #define NS4_OUT_DIRECTORY_NUMBERS			NS4_OUT_DIRECTORY u8"Numbered\\"
 #define NS4_WET_FILTER_FREQ					4736.0//(NS4_ORIG_HZ / std::pow( 2.0, 3.75 ))
-//#define NS4_ENV_MULTIPLIER					(5.0 / 6.0 * 0.5)
-#define NS4_ENV_MULTIPLIER					(1.0 / 2.5)
+#define NS4_ENV_MULTIPLIER					(1.75)
 //#define NS4_REL_MULTIPLIER					(1.0 / 3.0)
-//#define NS4_ENVELOPE_VOL_CURVE				20.0
+#define NS4_ENVELOPE_VOL_CURVE				20.0
 #define NS4_ENVELOPE_POINT_CURVE			40.0
+#define NS4_EXPONENTIAL_ENVELOPE			true
 
 
 { u8"15 Killer Instinct Gold (U) (V1.2) 00000011 0099C164 Intro.mid", u8"Killer Instinct Gold (U) (V1.2) 00000011 0099C164.mid TrackParseDebug.txt", u8"Intro", 0, },

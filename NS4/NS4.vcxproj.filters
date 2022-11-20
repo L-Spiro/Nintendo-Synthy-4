@@ -871,5 +871,8 @@
     <None Include="Src\Reverb\Taps\NS4ReverbProMahjongKiwame640.inl">
       <Filter>Header Files\Reverb\Taps</Filter>
     </None>
+    <None Include="Src\Games\NS4DoubutsuNoMoriFiles.inl">
+      <Filter>Header Files\Games</Filter>
+    </None>
   </ItemGroup>
 </Project>

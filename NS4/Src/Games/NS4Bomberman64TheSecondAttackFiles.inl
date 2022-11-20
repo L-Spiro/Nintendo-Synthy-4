@@ -11,10 +11,11 @@
 #define NS4_OUT_DIRECTORY_NUMBERS			NS4_OUT_DIRECTORY u8"Numbered\\"
 #define NS4_WET_FILTER_FREQ					9502.0 / 2.0
 //#define NS4_WET_FILTER_ORDER				NS4_FILTER_DB_TO_ORDER( 24 )
-#define NS4_ENV_MULTIPLIER					(1.0 / 3.0)
+#define NS4_ENV_MULTIPLIER					(1.0 / 1.0)
 //#define NS4_REL_MULTIPLIER					(1.0 / 3.0)
 #define NS4_ENVELOPE_VOL_CURVE				20.0
 #define NS4_ENVELOPE_POINT_CURVE			40.0
+#define NS4_EXPONENTIAL_ENVELOPE			true
 
 //{ u8"Bomberman 64 - The Second Attack! (U) 00000000 003C6C10.mid", u8"Bomberman 64 - The Second Attack! (U) 00000000 003C6C10.mid TrackParseDebug.txt", u8"00000000 003C6C10", 1 },
 { u8"Bomberman 64 - The Second Attack! (U) 00000003 003CB408.mid", u8"Bomberman 64 - The Second Attack! (U) 00000003 003CB408.mid TrackParseDebug.txt", u8"Demo Loop", 0x03 },

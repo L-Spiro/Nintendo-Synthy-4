@@ -22,7 +22,8 @@ namespace ns4 {
 			m_dReleaseTime( 200.0 ),
 			m_bRelease( false ),
 			m_dReleaseLevel( 0.0 ),
-			m_bReleaseIsRate( false ) {
+			m_bReleaseIsRate( false ),
+			m_dExpMultiplier( 0.0 ) {
 		}
 		~CEnvelope() {
 		}
@@ -106,6 +107,7 @@ namespace ns4 {
 					if ( m_uiTick >= m_vBlocks[m_stCur].ui32Samples && m_vBlocks[m_stCur].tType != NS4_T_STARTVALUE ) {
 						m_uiTick = 0;
 						++m_stCur;
+						m_dExpMultiplier = 0.0;
 						while ( m_stCur < m_vBlocks.size() && m_vBlocks[m_stCur].ui32Samples == 0 ) {
 							++m_stCur;
 						}
@@ -128,25 +130,7 @@ namespace ns4 {
 		 *
 		 * \return Returns the current level space.
 		 */
-		double						CurLevel() const {
-			if ( m_bRelease ) {
-				if ( m_dReleaseTime < 0.0 ) { return m_dReleaseLevel; }
-				double dLevel = (m_dReleaseTime - m_uiTick) / m_dReleaseTime * m_dReleaseLevel;
-				return max( dLevel, 0.0 );
-			}
-			if ( !m_vBlocks.size() ) { return 1.0; }
-			if ( m_stCur >= m_vBlocks.size() ) {
-				return EndPointLevel( m_vBlocks[m_vBlocks.size()-1].ui16EndLevel );
-			}
-			if ( m_vBlocks[m_stCur].tType == NS4_T_STARTVALUE ) {
-				return EndPointLevel( m_vBlocks[m_vBlocks.size()-1].ui16StartLevel );
-			}
-
-			double dFrac = m_uiTick / double( m_vBlocks[m_stCur].ui32Samples );
-			double dEnd = EndPointLevel( m_vBlocks[m_stCur].ui16EndLevel );
-			double dStart = EndPointLevel( m_vBlocks[m_stCur].ui16StartLevel );
-			return ((dEnd - dStart) * dFrac + dStart);
-		}
+		double						CurLevel() const;
 
 		/**
 		 * Gets the in-release flag.
@@ -188,6 +172,8 @@ namespace ns4 {
 		double						m_dReleaseTime;
 		/** The release level. */
 		double						m_dReleaseLevel;
+		/** If exponential envelopes are used, this is the multiplier. */
+		mutable double				m_dExpMultiplier;
 		/** Are we in release? */
 		bool						m_bRelease;
 		/** Is the release time actually a release rate? */

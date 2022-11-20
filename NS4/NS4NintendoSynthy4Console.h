@@ -49,7 +49,7 @@
 //#define NS4_PRINT_BEST_BANK
 
 #ifdef NS4_BULK
-//#define NS4_ONE_OFF										(20-1)
+//#define NS4_ONE_OFF										(3-1)
 //#define NS4_EXPORT_SOME
 //#define NS4_EPORT_FROM								(71-1)
 #else
@@ -313,6 +313,7 @@ int oldmain() {
 //#include "Src/Games/NS41080SnowboardingFiles.inl"
 //#include "Src/Games/NS4WaveRace64Files.inl"
 //#include "Src/Games/NS4PokemonStadium2Files.inl"
+//#include "Src/Games/NS4DoubutsuNoMoriFiles.inl"
 
 //#include "Src/Games/NS4BattlezoneRiseOfTheBlackDogsFiles.inl"
 //#include "Src/Games/NS4AutomobiliLamborghiniFiles.inl"
@@ -331,7 +332,7 @@ int oldmain() {
 //#include "Src/Games/NS4MaceTheDarkAgesFiles.inl"
 //#include "Src/Games/NS4Bomberman64Files.inl"
 //#include "Src/Games/NS4Bomberman64EFiles.inl"
-//#include "Src/Games/NS4Bomberman64TheSecondAttackFiles.inl"
+#include "Src/Games/NS4Bomberman64TheSecondAttackFiles.inl"
 //#include "Src/Games/NS4ArmorinesProjectSWARMFiles.inl"
 //#include "Src/Games/NS4DoraemonNobitaFiles.inl"
 //#include "Src/Games/NS4Doraemon2NobitaFiles.inl"
@@ -377,7 +378,7 @@ int oldmain() {
 //#include "Src/Games/NS4AllStarBaseball99Files.inl"
 //#include "Src/Games/NS4StarshotSpaceCircusFeverFiles.inl"
 //#include "Src/Games/NS4FightersDestinyFiles.inl"
-#include "Src/Games/NS4ProMahjongKiwame64Files.inl"
+//#include "Src/Games/NS4ProMahjongKiwame64Files.inl"
 #else
 		{}
 #endif
@@ -543,6 +544,10 @@ int oldmain() {
 #ifdef NS4_ENVELOPE_POINT_CURVE
 		ns4::CMidiFile::m_sSettings.dEnvelopeEndPointInterpretation = NS4_ENVELOPE_POINT_CURVE;
 #endif	// NS4_ENVELOPE_POINT_CURVE
+
+#ifdef NS4_EXPONENTIAL_ENVELOPE
+		ns4::CMidiFile::m_sSettings.bExpEnvelopes = NS4_EXPONENTIAL_ENVELOPE;
+#endif	// NS4_EXPONENTIAL_ENVELOPE
 
 #ifdef NS4_VELOCITY_VOL_CURVE
 		ns4::CMidiFile::m_sSettings.dVelocityInterpretation = NS4_VELOCITY_VOL_CURVE;
