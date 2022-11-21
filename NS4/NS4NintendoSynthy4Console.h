@@ -42,14 +42,14 @@
 
 #define NS4_BULK
 
-//#define NS4_SINGLE_TRACK								6
+//#define NS4_SINGLE_TRACK								4
 //#define NS4_NO_NORMALIZE
 // 
 //#define NS4_NO_OUTPUT									// Used to quickly print information in the MIDI files without actually generating WAV content.
 //#define NS4_PRINT_BEST_BANK
 
 #ifdef NS4_BULK
-//#define NS4_ONE_OFF										(3-1)
+//#define NS4_ONE_OFF										(15-1)
 //#define NS4_EXPORT_SOME
 //#define NS4_EPORT_FROM								(71-1)
 #else
@@ -261,7 +261,7 @@ int oldmain() {
 //#include "Src/Games/NS4TurokRageWars.inl"
 //#include "Src/Games/NS4TurokDinosaurHunterFiles.inl"
 //#include "Src/Games/NS4KillerInstinctGoldFiles.inl"
-//#include "Src/Games/NS4KillerInstinctGold2Files.inl"
+#include "Src/Games/NS4KillerInstinctGold2Files.inl"
 //#include "Src/Games/NS4Pilotwings64Files.inl"
 //#include "Src/Games/NS4PuyoPuyoSun64Files.inl"
 //#include "Src/Games/NS4ExtremeGFiles.inl"
@@ -332,7 +332,7 @@ int oldmain() {
 //#include "Src/Games/NS4MaceTheDarkAgesFiles.inl"
 //#include "Src/Games/NS4Bomberman64Files.inl"
 //#include "Src/Games/NS4Bomberman64EFiles.inl"
-#include "Src/Games/NS4Bomberman64TheSecondAttackFiles.inl"
+//#include "Src/Games/NS4Bomberman64TheSecondAttackFiles.inl"
 //#include "Src/Games/NS4ArmorinesProjectSWARMFiles.inl"
 //#include "Src/Games/NS4DoraemonNobitaFiles.inl"
 //#include "Src/Games/NS4Doraemon2NobitaFiles.inl"
@@ -896,15 +896,16 @@ int oldmain() {
 		double dStartTime = 0.0;
 
 		uint64_t ui64LastSample = 0;
+		ns4::lwaudio aTrack0 = ns4::CWavLib::AllocateSamples( 2, troOptions.uiMaxSamples );
 #ifndef NS4_NO_OUTPUT
 #ifdef NS4_SINGLE_TRACK
-		ns4::lwaudio aTrack0 = mfMidi.RenderNotesToStereo( NS4_SINGLE_TRACK, troOptions, vBanks[ns4::CMidiFile::m_sSettings.ui32Bank], &aWet, &ui64LastSample, &dStartTime );
+		mfMidi.RenderNotesToStereo( aTrack0, NS4_SINGLE_TRACK, troOptions, vBanks[ns4::CMidiFile::m_sSettings.ui32Bank], &aWet, &ui64LastSample, &dStartTime );
 #else
-		ns4::lwaudio aTrack0 = mfMidi.RenderNotesToStereo( 0, troOptions, vBanks[ns4::CMidiFile::m_sSettings.ui32Bank], &aWet, &ui64LastSample, &dStartTime );
+		mfMidi.RenderNotesToStereo( aTrack0, 0, troOptions, vBanks[ns4::CMidiFile::m_sSettings.ui32Bank], &aWet, &ui64LastSample, &dStartTime );
 		for ( size_t K = 1; K < mfMidi.TotalTracks(); ++K ) {
-			ns4::lwaudio aTrack1 = mfMidi.RenderNotesToStereo( K, troOptions, vBanks[ns4::CMidiFile::m_sSettings.ui32Bank], &aWet, &ui64LastSample, &dStartTime );
+			mfMidi.RenderNotesToStereo( aTrack0, K, troOptions, vBanks[ns4::CMidiFile::m_sSettings.ui32Bank], &aWet, &ui64LastSample, &dStartTime );
 
-			ns4::CWavLib::AddSamples( aTrack0, aTrack1, 1.0, 0 );
+			//ns4::CWavLib::AddSamples( aTrack0, aTrack1, 1.0, 0 );
 		}
 #endif	// NS4_SINGLE_TRACK
 		{

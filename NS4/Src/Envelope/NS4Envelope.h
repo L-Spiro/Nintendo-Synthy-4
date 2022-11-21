@@ -87,6 +87,7 @@ namespace ns4 {
 					m_dReleaseTime *= m_dReleaseLevel;
 				}
 				m_uiTick = 0;
+				m_dExpMultiplier = 0.0;
 			}
 		}
 

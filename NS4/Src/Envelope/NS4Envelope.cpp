@@ -13,6 +13,17 @@ namespace ns4 {
 	double CEnvelope::CurLevel() const {
 		if ( m_bRelease ) {
 			if ( m_dReleaseTime < 0.0 ) { return m_dReleaseLevel; }
+			
+
+			if ( CMidiFile::m_sSettings.bExpEnvelopes ) {
+				if ( m_uiTick >= m_dReleaseTime ) { return 0.0; }
+				double dStart = max( m_dReleaseLevel, 1.0 / 0x7FFF );
+				const double dEnd = 1.0 / 0x7FFF;
+				if ( m_dExpMultiplier == 0.0 ) {
+					m_dExpMultiplier = std::pow( dEnd / dStart, 1.0 / m_dReleaseTime );
+				}
+				return std::pow( m_dExpMultiplier, m_uiTick ) * dStart;
+			}
 			double dLevel = (m_dReleaseTime - m_uiTick) / m_dReleaseTime * m_dReleaseLevel;
 			return max( dLevel, 0.0 );
 		}
@@ -28,8 +39,9 @@ namespace ns4 {
 		double dEnd = EndPointLevel( m_vBlocks[m_stCur].ui16EndLevel );
 		double dStart = EndPointLevel( m_vBlocks[m_stCur].ui16StartLevel );
 
-		if ( CMidiFile::m_sSettings.bExpEnvelopes && dStart != 0.0 ) {
-			dEnd = max( dEnd, FLT_EPSILON );
+		if ( CMidiFile::m_sSettings.bExpEnvelopes ) {
+			dStart = max( dStart, 1.0 / 0x7FFF );
+			dEnd = max( dEnd, 1.0 / 0x7FFF );
 			if ( m_dExpMultiplier == 0.0 ) {
 				m_dExpMultiplier = std::pow( dEnd / dStart, 1.0 / m_vBlocks[m_stCur].ui32Samples );
 			}

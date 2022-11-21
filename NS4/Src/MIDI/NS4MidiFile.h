@@ -470,6 +470,7 @@ namespace ns4 {
 		/**
 		 * Renders a track to stereo audio at the given sample rate and other parameters.
 		 *
+		 * \param _aResult The resulting render.
 		 * \param _stTrack The track to render.
 		 * \param _troOptions The options for rendering the audio.
 		 * \param _sbSoundBank The soundbank.
@@ -478,7 +479,7 @@ namespace ns4 {
 		 * \param _pdStartTime If not nullptr, the start time of playback.
 		 * \return Returns the rendered audio.
 		 */
-		lwaudio							RenderNotesToStereo( size_t _stTrack, const NS4_TRACK_RENDER_OPTIONS &_troOptions, const CSoundBank &_sbSoundBank,
+		lwaudio &						RenderNotesToStereo( lwaudio &_aResult, size_t _stTrack, const NS4_TRACK_RENDER_OPTIONS &_troOptions, const CSoundBank &_sbSoundBank,
 			lwaudio * _paWet,
 			uint64_t * _pui64TimeOfLastSound,
 			double * _pdStartTime ) const;
@@ -2460,9 +2461,11 @@ namespace ns4 {
 		 * \param _ui32Bank The bank, for choosing which env-modifier to apply (percussion or normal).
 		 * \param _ui32GameSampleRate The game's sample rate.
 		 * \param _ui32SampleRate The output sample rate.
+		 * \param _dRateMultiplier The rate multiplier
 		 * \return Returns an envelope block made from the given ADSR values.
 		 */
-		static CEnvelope::NS4_BLOCK		MakeAdsrEnvBlock( int16_t _ui16A, int16_t _ui16B, int16_t _ui16PrevLevel, uint32_t _ui32Bank, uint32_t _ui32GameSampleRate, uint32_t _ui32SampleRate ) {
+		static CEnvelope::NS4_BLOCK		MakeAdsrEnvBlock( int16_t _ui16A, int16_t _ui16B, int16_t _ui16PrevLevel, uint32_t _ui32Bank, uint32_t _ui32GameSampleRate, uint32_t _ui32SampleRate,
+			double _dRateMultiplier ) {
 			CEnvelope::NS4_BLOCK bThis;
 			switch ( int16_t( _ui16A ) ) {
 				case -1 : {
@@ -2483,12 +2486,20 @@ namespace ns4 {
 					bThis.ui32Samples = 1;	// Ignored, except it can't be 0.
 					return bThis;
 				}
+				case -4 : {	// Temporary do-nothing implementation
+					bThis.ui16StartLevel = _ui16PrevLevel;
+					bThis.ui16EndLevel = _ui16B;
+					bThis.tType = CEnvelope::NS4_T_LINEAR;
+					double dTime = 0.0;	// Causes this envelope block to be skipped immediately.
+					bThis.ui32Samples = static_cast<uint32_t>(std::round( dTime * _ui32SampleRate ));						
+					return bThis;
+				}
 				default : {
 					bThis.ui16StartLevel = _ui16PrevLevel;
 					bThis.ui16EndLevel = _ui16B;
 					bThis.tType = CEnvelope::NS4_T_LINEAR;
-					double dDecFactor = (_ui32Bank == 127 && m_sSettings.dPercEnvDecayMultiplier) ? m_sSettings.dPercEnvDecayMultiplier : m_sSettings.dEnvDecayMultiplier;
-					double dTime = AdsrTime( _ui16A, uint32_t( m_sSettings.dGameFreq ) ) * dDecFactor;
+					//double dDecFactor = (_ui32Bank == 127 && m_sSettings.dPercEnvDecayMultiplier) ? m_sSettings.dPercEnvDecayMultiplier : m_sSettings.dEnvDecayMultiplier;
+					double dTime = AdsrTime( _ui16A, uint32_t( m_sSettings.dGameFreq ) ) * _dRateMultiplier;
 					bThis.ui32Samples = static_cast<uint32_t>(std::round( dTime * _ui32SampleRate ));						
 					return bThis;
 				}

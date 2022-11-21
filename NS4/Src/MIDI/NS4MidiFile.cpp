@@ -846,12 +846,12 @@ namespace ns4 {
 	 * \param _pdStartTime If not nullptr, the start time of playback.
 	 * \return Returns the rendered audio.
 	 */
-	lwaudio CMidiFile::RenderNotesToStereo( size_t _stTrack, const NS4_TRACK_RENDER_OPTIONS &_troOptions, const CSoundBank &_sbSoundBank,
+	lwaudio & CMidiFile::RenderNotesToStereo( lwaudio &_aResult, size_t _stTrack, const NS4_TRACK_RENDER_OPTIONS &_troOptions, const CSoundBank &_sbSoundBank,
 		lwaudio * _paWet,
 		uint64_t * _pui64TimeOfLastSound,
 		double * _pdStartTime ) const {
-		if ( _stTrack >= m_vTracks.size() ) { return lwaudio(); }
-		lwaudio aResult = CWavLib::AllocateSamples( 2, _troOptions.uiMaxSamples );
+		if ( _stTrack >= m_vTracks.size() ) { return _aResult; }
+		//lwaudio aResult = CWavLib::AllocateSamples( 2, _troOptions.uiMaxSamples );
 		CTimeBlock tbWavTime( _troOptions.uiSampleRate );
 
 		//const double _dMinTime = CSoundBank::CentsToGameTime( 0x80000000 );
@@ -1087,18 +1087,23 @@ namespace ns4 {
 						else {
 							nNote.eEnvelope.SetLevelDivisor( double( 0x7FFF ) );
 							bThis.tType = CEnvelope::NS4_T_LINEAR;
-							bThis.ui16StartLevel = 0;
+							bThis.ui16StartLevel = bThis.ui16EndLevel = 0;
+							/*bThis.ui16StartLevel = 0;
 							bThis.ui16EndLevel = vTriggered[J]->ui32Adsr1;
 							double dAtkFactor = (ui32Bank == 127 && m_sSettings.dPercEnvAttackMultiplier) ? m_sSettings.dPercEnvAttackMultiplier : m_sSettings.dEnvAttackMultiplier;
 							double dAtkTime = AdsrTime( vTriggered[J]->ui32Adsr0, uint32_t( m_sSettings.dGameFreq ) ) * dAtkFactor;
-							bThis.ui32Samples = static_cast<uint32_t>(std::round( max( m_sSettings.dMinAttack, dAtkTime ) * _troOptions.uiSampleRate ));						
+							bThis.ui32Samples = static_cast<uint32_t>(std::round( max( m_sSettings.dMinAttack, dAtkTime ) * _troOptions.uiSampleRate ));*/
+							bThis = MakeAdsrEnvBlock( vTriggered[J]->ui32Adsr0, vTriggered[J]->ui32Adsr1, bThis.ui16EndLevel, ui32Bank, uint32_t( m_sSettings.dGameFreq ), _troOptions.uiSampleRate,
+								(ui32Bank == 127 && m_sSettings.dPercEnvAttackMultiplier) ? m_sSettings.dPercEnvAttackMultiplier : m_sSettings.dEnvAttackMultiplier );
 							nNote.eEnvelope.AddBlock( bThis );
-
-							bThis = MakeAdsrEnvBlock( vTriggered[J]->ui32Adsr2, vTriggered[J]->ui32Adsr3, bThis.ui16EndLevel, ui32Bank, uint32_t( m_sSettings.dGameFreq ), _troOptions.uiSampleRate );
+							bThis = MakeAdsrEnvBlock( vTriggered[J]->ui32Adsr2, vTriggered[J]->ui32Adsr3, bThis.ui16EndLevel, ui32Bank, uint32_t( m_sSettings.dGameFreq ), _troOptions.uiSampleRate,
+								(ui32Bank == 127 && m_sSettings.dPercEnvDecayMultiplier) ? m_sSettings.dPercEnvDecayMultiplier : m_sSettings.dEnvDecayMultiplier );
 							nNote.eEnvelope.AddBlock( bThis );
-							bThis = MakeAdsrEnvBlock( vTriggered[J]->ui32Adsr4, vTriggered[J]->ui32Adsr5, bThis.ui16EndLevel, ui32Bank, uint32_t( m_sSettings.dGameFreq ), _troOptions.uiSampleRate );
+							bThis = MakeAdsrEnvBlock( vTriggered[J]->ui32Adsr4, vTriggered[J]->ui32Adsr5, bThis.ui16EndLevel, ui32Bank, uint32_t( m_sSettings.dGameFreq ), _troOptions.uiSampleRate,
+								(ui32Bank == 127 && m_sSettings.dPercEnvDecayMultiplier) ? m_sSettings.dPercEnvDecayMultiplier : m_sSettings.dEnvDecayMultiplier );
 							nNote.eEnvelope.AddBlock( bThis );
-							bThis = MakeAdsrEnvBlock( vTriggered[J]->ui32Adsr6, vTriggered[J]->ui32Adsr7, bThis.ui16EndLevel, ui32Bank, uint32_t( m_sSettings.dGameFreq ), _troOptions.uiSampleRate );
+							bThis = MakeAdsrEnvBlock( vTriggered[J]->ui32Adsr6, vTriggered[J]->ui32Adsr7, bThis.ui16EndLevel, ui32Bank, uint32_t( m_sSettings.dGameFreq ), _troOptions.uiSampleRate,
+								(ui32Bank == 127 && m_sSettings.dPercEnvDecayMultiplier) ? m_sSettings.dPercEnvDecayMultiplier : m_sSettings.dEnvDecayMultiplier );
 							nNote.eEnvelope.AddBlock( bThis );
 
 							double dReleaseFactor = (ui32Bank == 127 && m_sSettings.dPercEnvReleaseMultiplier) ? m_sSettings.dPercEnvReleaseMultiplier : m_sSettings.dEnvReleaseMultiplier;
@@ -1573,8 +1578,8 @@ namespace ns4 {
 							dL = -dL;
 						}
 
-						aResult[0][tbWavTime.CurTick()] += dL * dVal;
-						aResult[1][tbWavTime.CurTick()] += dR * dVal;
+						_aResult[0][tbWavTime.CurTick()] += dL * dVal;
+						_aResult[1][tbWavTime.CurTick()] += dR * dVal;
 					}
 				}
 				else {
@@ -1595,7 +1600,7 @@ namespace ns4 {
 		}
 
 
-		return aResult;
+		return _aResult;
 	}
 
 	/**
