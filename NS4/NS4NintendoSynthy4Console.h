@@ -49,7 +49,7 @@
 //#define NS4_PRINT_BEST_BANK
 
 #ifdef NS4_BULK
-//#define NS4_ONE_OFF										(15-1)
+//#define NS4_ONE_OFF										(8-1)
 //#define NS4_EXPORT_SOME
 //#define NS4_EPORT_FROM								(71-1)
 #else
@@ -261,7 +261,7 @@ int oldmain() {
 //#include "Src/Games/NS4TurokRageWars.inl"
 //#include "Src/Games/NS4TurokDinosaurHunterFiles.inl"
 //#include "Src/Games/NS4KillerInstinctGoldFiles.inl"
-#include "Src/Games/NS4KillerInstinctGold2Files.inl"
+//#include "Src/Games/NS4KillerInstinctGold2Files.inl"
 //#include "Src/Games/NS4Pilotwings64Files.inl"
 //#include "Src/Games/NS4PuyoPuyoSun64Files.inl"
 //#include "Src/Games/NS4ExtremeGFiles.inl"
@@ -282,7 +282,7 @@ int oldmain() {
 //#include "Src/Games/NS4PokemonSnapFiles.inl"
 //#include "Src/Games/NS4ClayFighter63_3rdFiles.inl"
 //#include "Src/Games/NS4ClayFighterSculptorsCutFiles.inl"
-//#include "Src/Games/NS4MarioPartyFiles.inl"
+#include "Src/Games/NS4MarioPartyFiles.inl"
 //#include "Src/Games/NS4MarioParty2Files.inl"
 //#include "Src/Games/NS4MarioParty3Files.inl"
 //#include "Src/Games/NS4BustAMove2ArcadeEditionFiles.inl"

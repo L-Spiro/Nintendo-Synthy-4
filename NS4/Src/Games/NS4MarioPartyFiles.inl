@@ -22,10 +22,11 @@
 //#define NS4_TREM_RATE_SCALE					0.5
 #define NS4_TREM_DELAY_SCALE				0.5
 #define NS4_VIB_OFFSET						0.5
-#define NS4_ENV_MULTIPLIER					(1.0 / 3.0)
-//#define NS4_REL_MULTIPLIER					(1.0 / 3.0)
+#define NS4_ENV_MULTIPLIER					(1.0)
+#define NS4_REL_MULTIPLIER					1.0
 #define NS4_ENVELOPE_VOL_CURVE				20.0
 #define NS4_ENVELOPE_POINT_CURVE			40.0
+#define NS4_EXPONENTIAL_ENVELOPE			true
 
 
 //{ u8"Mario Party (U) 00000000 017473B0 Two Beeps.mid", u8"Mario Party (U) 00000000 017473B0 Two Beeps.mid TrackParseDebug.txt", u8"Two Beeps", 0 },
