@@ -42,7 +42,7 @@
 
 #define NS4_BULK
 
-//#define NS4_SINGLE_TRACK								0
+//#define NS4_SINGLE_TRACK								2
 //#define NS4_NO_NORMALIZE
 // 
 //#define NS4_NO_OUTPUT									// Used to quickly print information in the MIDI files without actually generating WAV content.
@@ -293,7 +293,7 @@ int oldmain() {
 //#include "Src/Games/NS4SpaceStationSiliconValleyFiles.inl"
 //#include "Src/Games/NS4SnowboardKidsFiles.inl"
 //#include "Src/Games/NS4WarGodsFiles.inl"
-#include "Src/Games/NS4WarGodsOstFiles.inl"
+//#include "Src/Games/NS4WarGodsOstFiles.inl"
 //#include "Src/Games/NS4WCWvsnWoWorldTourFiles.inl"
 //#include "Src/Games/NS4WonderProjectJFiles.inl"
 //#include "Src/Games/NS4ZoorFiles.inl"
@@ -308,7 +308,7 @@ int oldmain() {
 //#include "Src/Games/NS4Starfox64UncompressedFiles.inl"
 //#include "Src/Games/NS4TheLegendOfZeldaOcarinaOfTimeFiles.inl"
 //#include "Src/Games/NS4TheLegendOfZeldaMajorasMaskFiles.inl"
-//#include "Src/Games/NS4YoshisStoryFiles.inl"
+#include "Src/Games/NS4YoshisStoryFiles.inl"
 //#include "Src/Games/NS4MarioKart64Files.inl"
 //#include "Src/Games/NS4MarioKart64HeadphonesFiles.inl"
 //#include "Src/Games/NS41080SnowboardingFiles.inl"

@@ -1394,8 +1394,8 @@ namespace ns4 {
 			/** Specifies the interpretation of envelopes. Defaults to 0.0, meaning dLevelInterpretation is used for the curve. */
 			double						dEnvelopeInterpretation = 0.0;
 
-			/** Specifies the interpretation of envelope end points. Defaults to 0.0, meaning dLevelInterpretation is used for the curve. */
-			double						dEnvelopeEndPointInterpretation = 0.0;
+			/** Specifies the interpretation of envelope end points. Defaults to 20.0. */
+			double						dEnvelopeEndPointInterpretation = 20.0;
 
 			/** Specifies the interpretation of note velocities. Defaults to 0.0, meaning dLevelInterpretation is used for the curve. */
 			double						dVelocityInterpretation = 0.0;
