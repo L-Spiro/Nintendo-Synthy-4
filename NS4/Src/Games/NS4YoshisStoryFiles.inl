@@ -1,6 +1,6 @@
 ﻿#define NS4_GAME							u8"Yoshi’s Story"
 #define NS4_COMPOSERS						u8"Kazumi Totaka"
-#define NS4_YEAR							u8"1997"
+#define NS4_YEAR							u8"1998"
 #define NS4_TITLE_POSTFIX					u8" (Surround)"
 #define NS4_FOLDER							u8"Yoshi's Story"
 #define NS4_REVERB_TRACKS					2
@@ -121,7 +121,7 @@
 		{ ns4::CMidiFile::NS4_ES_PRE_UNROLL, ns4::CMidiFile::NS4_E_TAG_TRACK_BY_CHNL, 14 - 1 },
 		{ ns4::CMidiFile::NS4_ES_PRE_UNROLL, ns4::CMidiFile::NS4_E_MUTE_UNTAGGED_TRACKS },
 	   } },
-{ u8"Yoshi's Story (U) (M2) 00000008 000B5460 The Yoshi Rap.mid", u8"Yoshi's Story (U) (M2) 00000008 000B5460 The Yoshi Rap.mid TrackParseDebug.txt", u8"Yo-Yo Yoshi (The Yoshi Rap)", 0x0B,
+{ u8"Yoshi's Story (U) (M2) 00000008 000B5460 The Yoshi Rap.mid", u8"Yoshi's Story (U) (M2) 00000008 000B5460 The Yoshi Rap.mid TrackParseDebug.txt", u8"Yo-Yo-Yoshi (The Yoshi Rap)", 0x0B,
 	4 + 1, {
 		{ ns4::CMidiFile::NS4_ES_PRE_UNROLL, ns4::CMidiFile::NS4_E_TAG_TRACK_BY_CHNL, 12 - 1 },
 		{ ns4::CMidiFile::NS4_ES_PRE_UNROLL, ns4::CMidiFile::NS4_E_TAG_TRACK_BY_CHNL, 13 - 1 },
@@ -129,7 +129,7 @@
 		{ ns4::CMidiFile::NS4_ES_PRE_UNROLL, ns4::CMidiFile::NS4_E_TAG_TRACK_BY_CHNL, 15 - 1 },
 		{ ns4::CMidiFile::NS4_ES_PRE_UNROLL, ns4::CMidiFile::NS4_E_MUTE_TAGGED_TRACKS },
 	   } },
-{ u8"Yoshi's Story (U) (M2) 00000008 000B5460 The Yoshi Rap.mid", u8"Yoshi's Story (U) (M2) 00000008 000B5460 The Yoshi Rap.mid TrackParseDebug.txt", u8"Yo-Yo Yoshi (The Yoshi Rap) (Super Happy)", 0x0B,
+{ u8"Yoshi's Story (U) (M2) 00000008 000B5460 The Yoshi Rap.mid", u8"Yoshi's Story (U) (M2) 00000008 000B5460 The Yoshi Rap.mid TrackParseDebug.txt", u8"Yo-Yo-Yoshi (The Yoshi Rap) (Super Happy)", 0x0B,
 	4 + 1, {
 		{ ns4::CMidiFile::NS4_ES_PRE_UNROLL, ns4::CMidiFile::NS4_E_TAG_TRACK_BY_CHNL, 12 - 1 },
 		{ ns4::CMidiFile::NS4_ES_PRE_UNROLL, ns4::CMidiFile::NS4_E_TAG_TRACK_BY_CHNL, 13 - 1 },

@@ -541,7 +541,6 @@ int oldmain() {
 		ns4::CMidiFile::m_sSettings.dEnvelopeInterpretation = NS4_ENVELOPE_VOL_CURVE;
 #endif	// NS4_ENVELOPE_VOL_CURVE
 
-		ns4::CMidiFile::m_sSettings.dEnvelopeEndPointInterpretation = ns4::CMidiFile::m_sSettings.dEnvelopeInterpretation;
 #ifdef NS4_ENVELOPE_POINT_CURVE
 		ns4::CMidiFile::m_sSettings.dEnvelopeEndPointInterpretation = NS4_ENVELOPE_POINT_CURVE;
 #endif	// NS4_ENVELOPE_POINT_CURVE
