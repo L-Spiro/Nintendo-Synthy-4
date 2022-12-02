@@ -11,12 +11,11 @@
 #define NS4_OUT_DIRECTORY_NUMBERS			NS4_OUT_DIRECTORY u8"Numbered\\"
 #define NS4_PERC_CHANNEL					9
 #define NS4_WET_FILTER_FREQ					0.0//(NS4_ORIG_HZ / 2.0)
-//#define NS4_ENV_MULTIPLIER					(2.0)
-//#define NS4_MASTER_REVERB_VOLUME			(6.5 / 2.0)
-#define NS4_ENV_MULTIPLIER					(1.0 / 3.0)
-//#define NS4_REL_MULTIPLIER					(1.0 / 3.0)
+#define NS4_ENV_MULTIPLIER					(1.0 / 1.0)
+#define NS4_REL_MULTIPLIER					(1.0 / 1.0)
 #define NS4_ENVELOPE_VOL_CURVE				20.0
 #define NS4_ENVELOPE_POINT_CURVE			40.0
+#define NS4_EXPONENTIAL_ENVELOPE			true
 
 { u8"Clay Fighter - Sculptor's Cut (U) 0000002A 00F026E0.mid", u8"Clay Fighter - Sculptor's Cut (U) 0000002A 00F026E0.mid TrackParseDebug.txt", u8"Title Screen", 0 },
 { u8"Clay Fighter - Sculptor's Cut (U) 00000000 00EC44A0.mid", u8"Clay Fighter - Sculptor's Cut (U) 00000000 00EC44A0.mid TrackParseDebug.txt", u8"Title Screen (ClayFighter 63⅓)", 0 },

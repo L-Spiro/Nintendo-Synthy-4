@@ -42,14 +42,14 @@
 
 #define NS4_BULK
 
-//#define NS4_SINGLE_TRACK								2
+//#define NS4_SINGLE_TRACK								6
 //#define NS4_NO_NORMALIZE
 // 
 //#define NS4_NO_OUTPUT									// Used to quickly print information in the MIDI files without actually generating WAV content.
 //#define NS4_PRINT_BEST_BANK
 
 #ifdef NS4_BULK
-//#define NS4_ONE_OFF										(1-1)
+//#define NS4_ONE_OFF										(17-1)
 //#define NS4_EXPORT_SOME
 //#define NS4_EPORT_FROM								(71-1)
 #else
@@ -263,7 +263,7 @@ int oldmain() {
 //#include "Src/Games/NS4KillerInstinctGoldFiles.inl"
 //#include "Src/Games/NS4KillerInstinctGold2Files.inl"
 //#include "Src/Games/NS4Pilotwings64Files.inl"
-//#include "Src/Games/NS4PuyoPuyoSun64Files.inl"
+//#include "Src/Games/NS4PuyoPuyoSun64Files.//inl"
 //#include "Src/Games/NS4ExtremeGFiles.inl"
 //#include "Src/Games/NS4ExtremeGXG2Files.inl"
 //#include "Src/Games/NS4ChopperAttackFiles.inl"
@@ -280,7 +280,7 @@ int oldmain() {
 //#include "Src/Games/NS4ChameleonTwist2Files.inl"
 //#include "Src/Games/NS4BombermanHeroFiles.inl"
 //#include "Src/Games/NS4PokemonSnapFiles.inl"
-//#include "Src/Games/NS4ClayFighter63_3rdFiles.inl"
+#include "Src/Games/NS4ClayFighter63_3rdFiles.inl"
 //#include "Src/Games/NS4ClayFighterSculptorsCutFiles.inl"
 //#include "Src/Games/NS4MarioPartyFiles.inl"
 //#include "Src/Games/NS4MarioParty2Files.inl"
@@ -308,7 +308,7 @@ int oldmain() {
 //#include "Src/Games/NS4Starfox64UncompressedFiles.inl"
 //#include "Src/Games/NS4TheLegendOfZeldaOcarinaOfTimeFiles.inl"
 //#include "Src/Games/NS4TheLegendOfZeldaMajorasMaskFiles.inl"
-#include "Src/Games/NS4YoshisStoryFiles.inl"
+//#include "Src/Games/NS4YoshisStoryFiles.inl"
 //#include "Src/Games/NS4MarioKart64Files.inl"
 //#include "Src/Games/NS4MarioKart64HeadphonesFiles.inl"
 //#include "Src/Games/NS41080SnowboardingFiles.inl"
