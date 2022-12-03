@@ -856,5 +856,8 @@
     <None Include="Src\Games\NS4WarGodsOstFiles.inl">
       <Filter>Header Files\Games</Filter>
     </None>
+    <None Include="Src\Games\NS4PokemonStadium2Files.inl">
+      <Filter>Header Files\Games</Filter>
+    </None>
   </ItemGroup>
 </Project>

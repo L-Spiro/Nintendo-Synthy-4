@@ -307,6 +307,7 @@
     <None Include="Src\Games\NS4PerfectDarkOverSamplingFiles.inl" />
     <None Include="Src\Games\NS4Pilotwings64Files.inl" />
     <None Include="Src\Games\NS4PokemonSnapFiles.inl" />
+    <None Include="Src\Games\NS4PokemonStadium2Files.inl" />
     <None Include="Src\Games\NS4PokemonStadiumFiles.inl" />
     <None Include="Src\Games\NS4PuyoPuyoSun64Files.inl" />
     <None Include="Src\Games\NS4Quest64Files.inl" />

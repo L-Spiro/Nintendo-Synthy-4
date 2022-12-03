@@ -42,14 +42,14 @@
 
 #define NS4_BULK
 
-//#define NS4_SINGLE_TRACK								6
+//#define NS4_SINGLE_TRACK								2
 //#define NS4_NO_NORMALIZE
 // 
 //#define NS4_NO_OUTPUT									// Used to quickly print information in the MIDI files without actually generating WAV content.
 //#define NS4_PRINT_BEST_BANK
 
 #ifdef NS4_BULK
-//#define NS4_ONE_OFF										(17-1)
+//#define NS4_ONE_OFF										(1-1)
 //#define NS4_EXPORT_SOME
 //#define NS4_EPORT_FROM								(71-1)
 #else
@@ -280,7 +280,7 @@ int oldmain() {
 //#include "Src/Games/NS4ChameleonTwist2Files.inl"
 //#include "Src/Games/NS4BombermanHeroFiles.inl"
 //#include "Src/Games/NS4PokemonSnapFiles.inl"
-#include "Src/Games/NS4ClayFighter63_3rdFiles.inl"
+//#include "Src/Games/NS4ClayFighter63_3rdFiles.inl"
 //#include "Src/Games/NS4ClayFighterSculptorsCutFiles.inl"
 //#include "Src/Games/NS4MarioPartyFiles.inl"
 //#include "Src/Games/NS4MarioParty2Files.inl"
@@ -316,7 +316,7 @@ int oldmain() {
 //#include "Src/Games/NS4PokemonStadium2Files.inl"
 //#include "Src/Games/NS4DoubutsuNoMoriFiles.inl"
 
-//#include "Src/Games/NS4BattlezoneRiseOfTheBlackDogsFiles.inl"
+#include "Src/Games/NS4BattlezoneRiseOfTheBlackDogsFiles.inl"
 //#include "Src/Games/NS4AutomobiliLamborghiniFiles.inl"
 //#include "Src/Games/NS4SupermanFiles.inl"
 //#include "Src/Games/NS4TonicTroubleFiles.inl"
