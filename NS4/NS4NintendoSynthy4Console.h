@@ -42,14 +42,14 @@
 
 #define NS4_BULK
 
-//#define NS4_SINGLE_TRACK								3
+//#define NS4_SINGLE_TRACK								9
 //#define NS4_NO_NORMALIZE
 // 
 //#define NS4_NO_OUTPUT									// Used to quickly print information in the MIDI files without actually generating WAV content.
 //#define NS4_PRINT_BEST_BANK
 
 #ifdef NS4_BULK
-//#define NS4_ONE_OFF										(11-1)
+//#define NS4_ONE_OFF										(1-1)
 //#define NS4_EXPORT_SOME
 //#define NS4_EPORT_FROM								(71-1)
 #else
@@ -249,7 +249,7 @@ int oldmain() {
 //#include "Src/Games/NS4DiddyKongRacingFiles.inl"
 //#include "Src/Games/NS4SuperSmashBrosFiles.inl"
 //#include "Src/Games/NS4Kirby64TheCrystalShardsFiles.inl"
-//#include "Src/Games/NS4SuperRobotSpiritsFiles.inl"
+#include "Src/Games/NS4SuperRobotSpiritsFiles.inl"
 //#include "Src/Games/NS4SuperRobotSpiritsOverSampledFiles.inl"
 //#include "Src/Games/NS4PennyRacersFiles.inl"
 //#include "Src/Games/NS4PennyRacersOverSamplingFiles.inl"
@@ -355,7 +355,7 @@ int oldmain() {
 //#include "Src/Games/NS4F1RacingChampionshipFiles.inl"
 //#include "Src/Games/NS4FlyingDragonFiles.inl"
 //#include "Src/Games/NS4Quest64Files.inl"
-#include "Src/Games/NS4JLeagueSoccer64Files.inl"
+//#include "Src/Games/NS4JLeagueSoccer64Files.inl"
 //#include "Src/Games/NS4SCARSFiles.inl"
 //#include "Src/Games/NS4PokemonStadiumFiles.inl"
 //#include "Src/Games/NS4StarSoldierVanishingEarthFiles.inl"
