@@ -42,14 +42,14 @@
 
 #define NS4_BULK
 
-//#define NS4_SINGLE_TRACK								2
+//#define NS4_SINGLE_TRACK								0
 //#define NS4_NO_NORMALIZE
 // 
 //#define NS4_NO_OUTPUT									// Used to quickly print information in the MIDI files without actually generating WAV content.
 //#define NS4_PRINT_BEST_BANK
 
 #ifdef NS4_BULK
-#define NS4_ONE_OFF										(1-1)
+//#define NS4_ONE_OFF										(5-1)
 //#define NS4_EXPORT_SOME
 //#define NS4_EPORT_FROM								(71-1)
 #else
@@ -353,7 +353,7 @@ int oldmain() {
 //#include "Src/Games/NS4HarvestMoonFiles.inl"
 //#include "Src/Games/NS4DrMario64Files.inl"
 //#include "Src/Games/NS4F1RacingChampionshipFiles.inl"
-//#include "Src/Games/NS4FlyingDragonFiles.inl"
+#include "Src/Games/NS4FlyingDragonFiles.inl"
 //#include "Src/Games/NS4Quest64Files.inl"
 //#include "Src/Games/NS4JLeagueSoccer64Files.inl"
 //#include "Src/Games/NS4SCARSFiles.inl"
@@ -371,7 +371,7 @@ int oldmain() {
 //#include "Src/Games/NS4EikouNoStAndrewsFiles.inl"
 //#include "Src/Games/NS4NeonGenesisEvangelionFiles.inl"
 //#include "Src/Games/NS4SimCity2000Files.inl"
-#include "Src/Games/NS4SuperBDamonBattlePhoenix64Files.inl"
+//#include "Src/Games/NS4SuperBDamonBattlePhoenix64Files.inl"
 //#include "Src/Games/NS4ToonPanicFiles.inl"
 //#include "Src/Games/NS4ToonPanicOverSampledFiles.inl"
 //#include "Src/Games/NS4AeroGaugeFiles.inl"
