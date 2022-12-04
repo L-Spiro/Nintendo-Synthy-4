@@ -965,7 +965,7 @@ namespace ns4 {
 				bool bUpdateLpf = false;
 				if ( IsNoteOn( teEvent ) ) {
 					/*if ( ui32Inst != ui32Channel ) {
-						::OutputDebugStringA( "WE GOT NELSON HERE.\r\n" );
+						::OutputDebugStringA( "WE GOT DATSUN HERE.\r\n" );
 					}*/
 					uint8_t ui8Note = GetNote( teEvent );
 					uint8_t ui8Vel = GetNoteVel( teEvent );

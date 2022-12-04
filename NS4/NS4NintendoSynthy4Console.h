@@ -49,7 +49,7 @@
 //#define NS4_PRINT_BEST_BANK
 
 #ifdef NS4_BULK
-//#define NS4_ONE_OFF										(1-1)
+#define NS4_ONE_OFF										(1-1)
 //#define NS4_EXPORT_SOME
 //#define NS4_EPORT_FROM								(71-1)
 #else
@@ -316,7 +316,7 @@ int oldmain() {
 //#include "Src/Games/NS4PokemonStadium2Files.inl"
 //#include "Src/Games/NS4DoubutsuNoMoriFiles.inl"
 
-#include "Src/Games/NS4BattlezoneRiseOfTheBlackDogsFiles.inl"
+//#include "Src/Games/NS4BattlezoneRiseOfTheBlackDogsFiles.inl"
 //#include "Src/Games/NS4AutomobiliLamborghiniFiles.inl"
 //#include "Src/Games/NS4SupermanFiles.inl"
 //#include "Src/Games/NS4TonicTroubleFiles.inl"
@@ -371,7 +371,7 @@ int oldmain() {
 //#include "Src/Games/NS4EikouNoStAndrewsFiles.inl"
 //#include "Src/Games/NS4NeonGenesisEvangelionFiles.inl"
 //#include "Src/Games/NS4SimCity2000Files.inl"
-//#include "Src/Games/NS4SuperBDamonBattlePhoenix64Files.inl"
+#include "Src/Games/NS4SuperBDamonBattlePhoenix64Files.inl"
 //#include "Src/Games/NS4ToonPanicFiles.inl"
 //#include "Src/Games/NS4ToonPanicOverSampledFiles.inl"
 //#include "Src/Games/NS4AeroGaugeFiles.inl"
@@ -655,11 +655,15 @@ int oldmain() {
 #ifdef NS4_PRINT_BEST_BANK
 		sReferencedInsts.clear();
 		mfMidi.GatherInstruments( sReferencedInsts );
-		for ( auto S = vBanks.size(); --S; ) {
+		for ( auto S = vBanks.size(); S--; ) {
 			bool bTotalsMatch;
 			double dSuitability = vBanks[S].SuitabilityWithInstrumentSet( sReferencedInsts, bTotalsMatch );
 			if ( dSuitability == 1.0 ) {
-				std::printf( "Suitable Bank: %.2X  Totals Match: %s\r\n", static_cast<uint32_t>(S), bTotalsMatch ? "true" : "false" );
+				char szBuffer[128];
+				std::sprintf( szBuffer, "Suitable Bank: %.2X  Totals Match: %s\r\n", static_cast<uint32_t>(S), bTotalsMatch ? "true" : "false" );
+				std::printf( "%s", szBuffer );
+				::OutputDebugStringA( szBuffer );
+				//std::printf( "Suitable Bank: %.2X  Totals Match: %s\r\n", static_cast<uint32_t>(S), bTotalsMatch ? "true" : "false" );
 			}
 		}
 #endif	// NS4_PRINT_BEST_BANK
