@@ -10,10 +10,15 @@
 #define NS4_OUT_DIRECTORY					u8"T:\\N64OST\\Star Soldier - Vanishing Earth\\"
 #define NS4_OUT_DIRECTORY_NUMBERS			NS4_OUT_DIRECTORY u8"Numbered\\"
 #define NS4_WET_FILTER_FREQ					2457.0 * 2.0
-#define NS4_ENV_MULTIPLIER					(1.0 / 3.0)
-//#define NS4_REL_MULTIPLIER					(1.0 / 3.0)
+#define NS4_ENV_MULTIPLIER					(1.0)
+#define NS4_REL_MULTIPLIER					(1.0)
 #define NS4_ENVELOPE_VOL_CURVE				20.0
 #define NS4_ENVELOPE_POINT_CURVE			40.0
+#define NS4_EXPONENTIAL_ENVELOPE			true
+//#define NS4_ENV_MULTIPLIER					(1.0 / 2.0)
+////#define NS4_REL_MULTIPLIER					(1.0 / 3.0)
+//#define NS4_ENVELOPE_VOL_CURVE				20.0
+//#define NS4_ENVELOPE_POINT_CURVE			40.0
 
 { u8"Star Soldier - Vanishing Earth (U) 0000000C 001F1568.mid", u8"Star Soldier - Vanishing Earth (U) 0000000C 001F1568.mid TrackParseDebug.txt", u8"OPENING", 0x0C },
 { u8"Star Soldier - Vanishing Earth (U) 0000000D 001F3478.mid", u8"Star Soldier - Vanishing Earth (U) 0000000D 001F3478.mid TrackParseDebug.txt", u8"SELECT", 0x0D },
