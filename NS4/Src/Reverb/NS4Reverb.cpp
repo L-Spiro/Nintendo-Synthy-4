@@ -2564,6 +2564,7 @@ namespace ns4 {
 
 		if ( _ptThread->_trReverb.fCombReverb.ui8DelayLines && _ptThread->_trReverb.fCombReverb.pdDelays && _ptThread->_trReverb.fCombReverb.i32SegmentSize && _ptThread->_trReverb.fCombReverb.ui32Length ) {
 #define NS4_TRACK_LPF
+#define NS4_LPF_OFFSETS
 			ns4::lwtrack tWorkBuffer;
 			tWorkBuffer.resize( _ptThread->_trReverb.fCombReverb.ui32Length );
 #ifdef NS4_TRACK_LPF
@@ -2572,6 +2573,25 @@ namespace ns4 {
 			std::vector<uint16_t> vLpfOut;
 			vLpfOut.resize( _ptThread->_tSrc.size() );
 #endif	// #ifdef NS4_TRACK_LPF
+
+#ifdef NS4_LPF_OFFSETS
+			struct NS4_LPF_BUFFER {
+				double						dLpfBuffer[8];
+				size_t						stIdx = 0;
+
+				NS4_LPF_BUFFER() {
+					std::memset( dLpfBuffer, 0, sizeof( dLpfBuffer ) );
+				}
+			};
+			std::vector<NS4_LPF_BUFFER> vLpfBuffers;
+			for ( size_t J = 0; J < _ptThread->_trReverb.fCombReverb.ui8DelayLines; ++J ) {
+				const NS4_DELAY_N64 & dThis = _ptThread->_trReverb.fCombReverb.pdDelays[J];
+				if ( dThis.ui16Fc ) {
+					vLpfBuffers.push_back( NS4_LPF_BUFFER() );
+				}
+			}
+
+#endif	// #ifdef NS4_LPF_OFFSETS
 			
 			
 			ns4::lwtrack aOut;
@@ -2586,6 +2606,7 @@ namespace ns4 {
 				lwsample					sFilterSamplesA[2];
 			};
 			std::vector<NS4_LPF> vLpfs;
+
 			for ( size_t J = 0; J < _ptThread->_trReverb.fCombReverb.ui8DelayLines; ++J ) {
 				const NS4_DELAY_N64 & dThis = _ptThread->_trReverb.fCombReverb.pdDelays[J];
 				if ( dThis.ui16Fc ) {
@@ -2601,6 +2622,7 @@ namespace ns4 {
 			}
 			
 #define NS4_SANE_IDX( IDX )			((int32_t( IDX ) < 0 ? (tWorkBuffer.size() + (IDX)) : (IDX)) % tWorkBuffer.size())
+
 			while ( stInputPtr < _ptThread->_tSrc.size() ) {
 				size_t stLpfIdx = 0;
 				size_t sWorkPtr = stInputPtr % tWorkBuffer.size();
@@ -2684,6 +2706,15 @@ namespace ns4 {
 							/*double dThisGain = (0x4000 - dThis.ui16Fc) / double( 0x7FFF );
 							dD *= dThisGain * 1.0;*/
 						}
+#ifdef NS4_LPF_OFFSETS
+						size_t & stIdx = vLpfBuffers[stLpfIdx].stIdx;
+						double dCopy = dD;
+						dD = vLpfBuffers[stLpfIdx].dLpfBuffer[stIdx];
+						vLpfBuffers[stLpfIdx].dLpfBuffer[stIdx++] = dCopy;
+						stIdx %= sizeof( vLpfBuffers[stLpfIdx].dLpfBuffer ) / sizeof( vLpfBuffers[stLpfIdx].dLpfBuffer[0] );
+						
+#endif	// #ifdef NS4_LPF_OFFSETS
+
 						++stLpfIdx;
 						
 					}
@@ -2731,6 +2762,10 @@ namespace ns4 {
 			wfReverb.SaveAsPcm( "J:\\TmpAudio\\", "ReverbTest aOut.wav", aTmp, &sdSaveData );
 			volatile int gjhg  =0;
 #endif
+
+#ifdef NS4_LPF_OFFSETS
+#undef NS4_LPF_OFFSETS
+#endif #ifdef NS4_LPF_OFFSETS
 #ifdef NS4_TRACK_LPF
 #undef NS4_TRACK_LPF
 #undef NS4_SANE_LPF

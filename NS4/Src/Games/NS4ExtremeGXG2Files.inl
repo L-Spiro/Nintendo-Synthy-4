@@ -9,10 +9,16 @@
 #define NS4_CURVE							40.0
 #define NS4_OUT_DIRECTORY					u8"T:\\N64OST\\Extreme G XG2\\"
 #define NS4_OUT_DIRECTORY_NUMBERS			NS4_OUT_DIRECTORY u8"Numbered\\"
-#define NS4_ENV_MULTIPLIER					(1.0 / 3.0)
-//#define NS4_REL_MULTIPLIER					(1.0 / 3.0)
+//#define NS4_MAX_RATE						(22050 * 2)
+#define NS4_ENV_MULTIPLIER					(1.125 / 1.0)
+#define NS4_REL_MULTIPLIER					(1.0 / 1.0)
 #define NS4_ENVELOPE_VOL_CURVE				20.0
 #define NS4_ENVELOPE_POINT_CURVE			40.0
+#define NS4_EXPONENTIAL_ENVELOPE			true
+/*#define NS4_ENV_MULTIPLIER					(1.0 / 3.0)
+//#define NS4_REL_MULTIPLIER					(1.0 / 3.0)
+#define NS4_ENVELOPE_VOL_CURVE				20.0
+#define NS4_ENVELOPE_POINT_CURVE			40.0*/
 
 
 { u8"Extreme-G XG2 (U) 00000011 00A45A70.mid", u8"Extreme-G XG2 (U) 00000011 00A45A70.mid TrackParseDebug.txt", u8"Introduction", 0 },
@@ -39,5 +45,15 @@
 { u8"Extreme-G XG2 (U) 00000007 00A32648.mid", u8"Extreme-G XG2 (U) 00000007 00A32648.mid TrackParseDebug.txt", u8"Sindrome", 0 },
 { u8"Extreme-G XG2 (U) 00000012 00A45F90.mid", u8"Extreme-G XG2 (U) 00000012 00A45F90.mid TrackParseDebug.txt", u8"Multiplayer", 0 },
 
-
-
+{ u8"Extreme-G XG2 (U) 00000000 00A2B5A8.mid", u8"Extreme-G XG2 (U) 00000000 00A2B5A8.mid TrackParseDebug.txt", u8"Aquanor (Game Version)", 0,
+	1, {
+		{ ns4::CMidiFile::NS4_ES_MASTER, ns4::CMidiFile::NS4_E_GLOBAL_SET_MAX_HZ, NS4_DOUBLE_OP( 0, 22050 * 2.0 ) }
+	   } },
+{ u8"Extreme-G XG2 (U) 0000000E 00A3FEB0.mid", u8"Extreme-G XG2 (U) 0000000E 00A3FEB0.mid TrackParseDebug.txt", u8"Anville (Game Version)", 0,
+	1, {
+		{ ns4::CMidiFile::NS4_ES_MASTER, ns4::CMidiFile::NS4_E_GLOBAL_SET_MAX_HZ, NS4_DOUBLE_OP( 0, 22050 * 2.0 ) }
+	   } },
+{ u8"Extreme-G XG2 (U) 00000001 00A2D708.mid", u8"Extreme-G XG2 (U) 00000001 00A2D708.mid TrackParseDebug.txt", u8"Hydra Prime (Game Version)", 0,
+	1, {
+		{ ns4::CMidiFile::NS4_ES_MASTER, ns4::CMidiFile::NS4_E_GLOBAL_SET_MAX_HZ, NS4_DOUBLE_OP( 0, 22050 * 2.0 ) }
+	   } },

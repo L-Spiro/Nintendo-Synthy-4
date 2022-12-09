@@ -42,14 +42,14 @@
 
 #define NS4_BULK
 
-//#define NS4_SINGLE_TRACK								3
+//#define NS4_SINGLE_TRACK								1
 //#define NS4_NO_NORMALIZE
 // 
 //#define NS4_NO_OUTPUT									// Used to quickly print information in the MIDI files without actually generating WAV content.
 //#define NS4_PRINT_BEST_BANK
 
 #ifdef NS4_BULK
-//#define NS4_ONE_OFF										(2-1)
+//#define NS4_ONE_OFF										(23-1)
 //#define NS4_EXPORT_SOME
 //#define NS4_EPORT_FROM								(71-1)
 #else
@@ -194,13 +194,13 @@ int oldmain() {
 	}
 #endif
 
-#if 0
+#if 1
 	{
 		const uint32_t ui32SampRate = 22047;
 		
 		ns4::lwaudio aWet = ns4::CWavLib::AllocateSamples( 1, ui32SampRate * 30 );
 		aWet[0][0] = 1.0;
-		ns4::lwaudio aAccum = ns4::CReverb::CreateReverb( ns4::CReverb::NS4_T_PRO_MAHJONG_KIWAME_64_DELAY_0, aWet, ui32SampRate, ui32SampRate, 0.0, 0 );
+		ns4::lwaudio aAccum = ns4::CReverb::CreateReverb( ns4::CReverb::NS4_T_BLAST_CORPS_DELAY_0, aWet, ui32SampRate, ui32SampRate, 0.0, 0 );
 		ns4::lwsample sFirst = aWet[0][0];
 		if ( sFirst == 0.0 ) {
 			::OutputDebugStringA( "Measles.\r\n" );
@@ -279,7 +279,7 @@ int oldmain() {
 //#include "Src/Games/NS4ChameleonTwistFiles.inl"
 //#include "Src/Games/NS4ChameleonTwist2Files.inl"
 //#include "Src/Games/NS4BombermanHeroFiles.inl"
-//#include "Src/Games/NS4PokemonSnapFiles.inl"
+#include "Src/Games/NS4PokemonSnapFiles.inl"
 //#include "Src/Games/NS4ClayFighter63_3rdFiles.inl"
 //#include "Src/Games/NS4ClayFighterSculptorsCutFiles.inl"
 //#include "Src/Games/NS4MarioPartyFiles.inl"
@@ -380,7 +380,7 @@ int oldmain() {
 //#include "Src/Games/NS4StarshotSpaceCircusFeverFiles.inl"
 //#include "Src/Games/NS4FightersDestinyFiles.inl"
 //#include "Src/Games/NS4ProMahjongKiwame64Files.inl"
-#include "Src/Games/NS4HybridHeavenFiles.inl"
+//#include "Src/Games/NS4HybridHeavenFiles.inl"
 #else
 		{}
 #endif
