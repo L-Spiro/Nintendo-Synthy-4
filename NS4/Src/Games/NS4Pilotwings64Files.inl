@@ -13,10 +13,11 @@
 #define NS4_PERC_CHANNEL					9
 #define NS4_WET_FILTER_FREQ					(NS4_ORIG_HZ / std::pow( 2.0, 1.0 ))
 //#define NS4_MASTER_REVERB_VOLUME			NS4_INV_QRT_0_5
-#define NS4_ENV_MULTIPLIER					(1.0 / 3.0)
-//#define NS4_REL_MULTIPLIER					(1.0 / 3.0)
+#define NS4_ENV_MULTIPLIER					(1.0)
+#define NS4_REL_MULTIPLIER					1.0
 #define NS4_ENVELOPE_VOL_CURVE				20.0
 #define NS4_ENVELOPE_POINT_CURVE			40.0
+#define NS4_EXPONENTIAL_ENVELOPE			true
 
 
 { u8"01 Pilotwings 64 (U) 00000000 00618C6C Opening Theme.mid", u8"Pilotwings 64 (U) 00000000 00618C6C.mid TrackParseDebug.txt", u8"Opening Theme", 0 },
