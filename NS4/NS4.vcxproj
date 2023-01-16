@@ -283,6 +283,7 @@
     <None Include="Src\Games\NS4JetForceGeminiFiles.inl" />
     <None Include="Src\Games\NS4JetForceGeminiKioskFiles.inl" />
     <None Include="Src\Games\NS4JLeagueSoccer64Files.inl" />
+    <None Include="Src\Games\NS4JTacticsSoccer64Files.inl" />
     <None Include="Src\Games\NS4KillerInstinctGold2Files.inl" />
     <None Include="Src\Games\NS4KillerInstinctGoldFiles.inl" />
     <None Include="Src\Games\NS4Kirby64TheCrystalShardsFiles.inl" />
