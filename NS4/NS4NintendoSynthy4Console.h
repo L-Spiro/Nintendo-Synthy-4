@@ -42,7 +42,7 @@
 
 #define NS4_BULK
 
-//#define NS4_SINGLE_TRACK								2
+//#define NS4_SINGLE_TRACK								8
 //#define NS4_NO_NORMALIZE
 // 
 //#define NS4_NO_OUTPUT									// Used to quickly print information in the MIDI files without actually generating WAV content.
@@ -273,7 +273,7 @@ int oldmain() {
 //#include "Src/Games/NS4BeetAdventureRacing!Files.inl"
 //#include "Src/Games/NS4AeroFightersAssaultFiles.inl"
 //#include "Src/Games/NS4AeroFightersAssaultOverSamplingFiles.inl"
-//#include "Src/Games/NS4F1WorldGrandPrixFiles.inl"
+#include "Src/Games/NS4F1WorldGrandPrixFiles.inl"
 //#include "Src/Games/NS4BodyHarvestFiles.inl"
 //#include "Src/Games/NS4MischiefMakersFiles.inl"
 //#include "Src/Games/NS4ChameleonTwistFiles.inl"
@@ -289,7 +289,7 @@ int oldmain() {
 //#include "Src/Games/NS4TransformersBeastWarsTransmetalsFiles.inl"
 //#include "Src/Games/NS4BustAMove99Files.inl"
 //#include "Src/Games/NS4Rayman2TheGreatEscapeFiles.inl"
-#include "Src/Games/NS4SpaceStationSiliconValleyFiles.inl"
+//#include "Src/Games/NS4SpaceStationSiliconValleyFiles.inl"
 //#include "Src/Games/NS4SnowboardKidsFiles.inl"
 //#include "Src/Games/NS4WarGodsFiles.inl"
 //#include "Src/Games/NS4WarGodsOstFiles.inl"
