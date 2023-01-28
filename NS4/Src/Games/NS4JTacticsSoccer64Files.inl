@@ -9,10 +9,12 @@
 #define NS4_CURVE							40.0
 #define NS4_OUT_DIRECTORY					u8"T:\\N64OST\\J-League Tactics Soccer 64\\"
 #define NS4_OUT_DIRECTORY_NUMBERS			NS4_OUT_DIRECTORY u8"Numbered\\"
-#define NS4_ENV_MULTIPLIER					(1.0)
-#define NS4_REL_MULTIPLIER					(1.0)
+
+#define NS4_ENV_MULTIPLIER					(1.125)
+#define NS4_REL_MULTIPLIER					(1.125)
 #define NS4_ENVELOPE_VOL_CURVE				20.0
 #define NS4_ENVELOPE_POINT_CURVE			40.0
+#define NS4_EXPONENTIAL_ENVELOPE			true
 
 
 

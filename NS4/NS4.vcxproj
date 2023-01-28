@@ -247,6 +247,7 @@
     <None Include="Src\Games\NS4ChopperAttackFiles.inl" />
     <None Include="Src\Games\NS4ChopperAttackOverSampledFiles.inl" />
     <None Include="Src\Games\NS4ChoroQIIFiles.inl" />
+    <None Include="Src\Games\NS4ChouKuukanNightProYakyuuKingFiles.inl" />
     <None Include="Src\Games\NS4ClayFighter63_3rdFiles.inl" />
     <None Include="Src\Games\NS4ClayFighterSculptorsCutFiles.inl" />
     <None Include="Src\Games\NS4ConkersBadFurDayFiles.inl" />

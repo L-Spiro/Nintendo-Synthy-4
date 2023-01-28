@@ -865,5 +865,8 @@
     <None Include="Src\Games\NS4JTacticsSoccer64Files.inl">
       <Filter>Header Files\Games</Filter>
     </None>
+    <None Include="Src\Games\NS4ChouKuukanNightProYakyuuKingFiles.inl">
+      <Filter>Header Files\Games</Filter>
+    </None>
   </ItemGroup>
 </Project>
