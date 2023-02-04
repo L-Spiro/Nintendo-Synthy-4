@@ -11,7 +11,13 @@
 #define NS4_OUT_DIRECTORY_NUMBERS			NS4_OUT_DIRECTORY u8"Numbered\\"
 #define NS4_WET_FILTER_FREQ					0.0//(NS4_ORIG_HZ / std::pow( 2.0, 2.5 ))
 #define NS4_WET_FILTER_ORDER				NS4_FILTER_DB_TO_ORDER( 6 )
+#define NS4_MASTER_VOL						double( 0x2BFF ) / 0x7FFF
+//#define NS4_ENV_MULTIPLIER					(1.0)
 #define NS4_ENV_MULTIPLIER					(1.0)
+#define NS4_REL_MULTIPLIER					(1.0)
+#define NS4_ENVELOPE_VOL_CURVE				20.0
+#define NS4_ENVELOPE_POINT_CURVE			40.0
+//#define NS4_EXPONENTIAL_ENVELOPE			true
 
 
 
@@ -19,6 +25,12 @@
 { u8"Zool - Majou Tsukai Densetsu (J) 00000052 00251E78.mid", u8"Zool - Majou Tsukai Densetsu (J) 00000052 00251E78.mid TrackParseDebug.txt", u8"Imagineer Logo", 0 },
 { u8"Zool - Majou Tsukai Densetsu (J) 00000051 00251B14.mid", u8"Zool - Majou Tsukai Densetsu (J) 00000051 00251B14.mid TrackParseDebug.txt", u8"Pandora Box Logo", 0 },
 { u8"Zool - Majou Tsukai Densetsu (J) 00000002 0021FDDC.mid", u8"Zool - Majou Tsukai Densetsu (J) 00000002 0021FDDC.mid TrackParseDebug.txt", u8"Title", 0 },
+/*{ u8"Zool - Majou Tsukai Densetsu (J) 00000002 0021FDDC.mid", u8"Zool - Majou Tsukai Densetsu (J) 00000002 0021FDDC.mid TrackParseDebug.txt", u8"Title 2 Rev", 0,
+	1, {
+		{ ns4::CMidiFile::NS4_ES_POST_UNROLL, ns4::CMidiFile::NS4_E_INSERT_CONTROL_ALL_TRACKS, 0, ns4::CMidiFile::NS4_C_EFX_1_DEPTH, 127, { 1, 1, 2, 0 } },
+	},
+	1
+},*/
 { u8"Zool - Majou Tsukai Densetsu (J) 00000001 0021D68C.mid", u8"Zool - Majou Tsukai Densetsu (J) 00000001 0021D68C.mid TrackParseDebug.txt", u8"Opening", 0 },
 { u8"Zool - Majou Tsukai Densetsu (J) 00000003 00220670.mid", u8"Zool - Majou Tsukai Densetsu (J) 00000003 00220670.mid TrackParseDebug.txt", u8"House of Children", 0 },
 { u8"Zool - Majou Tsukai Densetsu (J) 00000006 00223250.mid", u8"Zool - Majou Tsukai Densetsu (J) 00000006 00223250.mid TrackParseDebug.txt", u8"Matt and Mitt", 0 },

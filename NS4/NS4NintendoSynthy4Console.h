@@ -42,14 +42,14 @@
 
 #define NS4_BULK
 
-//#define NS4_SINGLE_TRACK								9
+//#define NS4_SINGLE_TRACK								5
 //#define NS4_NO_NORMALIZE
 // 
 //#define NS4_NO_OUTPUT									// Used to quickly print information in the MIDI files without actually generating WAV content.
 //#define NS4_PRINT_BEST_BANK
 
 #ifdef NS4_BULK
-//#define NS4_ONE_OFF										(2-1)
+//#define NS4_ONE_OFF										(3-1)
 //#define NS4_EXPORT_SOME
 //#define NS4_EPORT_FROM								(71-1)
 #else
@@ -295,7 +295,7 @@ int oldmain() {
 //#include "Src/Games/NS4WarGodsOstFiles.inl"
 //#include "Src/Games/NS4WCWvsnWoWorldTourFiles.inl"
 //#include "Src/Games/NS4WonderProjectJFiles.inl"
-//#include "Src/Games/NS4ZoorFiles.inl"
+#include "Src/Games/NS4ZoorFiles.inl"
 
 //#include "Src/Games/NS4SuperMario64Files.inl"
 //#include "Src/Games/NS4SuperMario64SourceFiles.inl"
@@ -356,7 +356,7 @@ int oldmain() {
 //#include "Src/Games/NS4Quest64Files.inl"
 //#include "Src/Games/NS4JLeagueSoccer64Files.inl"
 //#include "Src/Games/NS4JTacticsSoccer64Files.inl"
-#include "Src/Games/NS4ChouKuukanNightProYakyuuKingFiles.inl"
+//#include "Src/Games/NS4ChouKuukanNightProYakyuuKingFiles.inl"
 //#include "Src/Games/NS4SCARSFiles.inl"
 //#include "Src/Games/NS4PokemonStadiumFiles.inl"
 //#include "Src/Games/NS4StarSoldierVanishingEarthFiles.inl"
@@ -426,6 +426,12 @@ int oldmain() {
 #endif
 	const double dMasterHighCutoff = 20000.0;
 	const uint32_t uiMasterCutOffRate = 4;
+
+#ifdef LSN_MASTER_VOL
+	const double dMasterVol = double( LSN_MASTER_VOL );
+#else
+	const double dMasterVol = 1.0;
+#endif	// LSN_MASTER_VOL
 
 #ifdef NS4_OVERSAMPLING
 	ns4::CSoundBank::m_ui32OverSample = uint32_t( NS4_OVERSAMPLING );
@@ -1076,6 +1082,11 @@ int oldmain() {
 			}
 		}
 #endif	// #ifndef NS4_NO_OUTPUT
+
+		if ( dMasterVol != 1.0 ) {
+			ns4::CWavLib::ScaleSamples( aTrack0, dMasterVol );
+			ns4::CWavLib::ScaleSamples( aWet, dMasterVol );
+		}
 
 	
 		ns4::lwsample sMax = ns4::CWavLib::MaxSample( aTrack0 );

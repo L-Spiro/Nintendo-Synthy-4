@@ -1651,10 +1651,10 @@ namespace ns4 {
 		// Zoor: Majū Tsukai Densetsu.
 		{
 			NS4_TAPS( m_rtZoor0 ),
-			1.5 / 2.0,																	// dTapVol
+			NS4_SQRT_0_5,															// dTapVol
 			0,																		// i64TapOffset
 			NS4_FADE( 2.0, 0.1, 1.5 ),												// dTime
-			22077.0 / std::pow( 2.0, 2.5 ), 1.0, 2.0, NS4_FILTER_DB_TO_ORDER( 6 ),	// dLpfFactor
+			NS4_LPF( 15000.0, 0.1, 2.0, NS4_FILTER_DB_TO_ORDER( 6 ) ),				// dLpfFactor
 			NS4_NO_DELAY,															// dDelayVol
 			NS4_NO_EXT,																// bSwapSrcReverb
 		},	// 34
