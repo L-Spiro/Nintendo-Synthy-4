@@ -233,6 +233,7 @@
     <None Include="Src\Games\NS4BattlezoneRiseOfTheBlackDogsFiles.inl" />
     <None Include="Src\Games\NS4BeetAdventureRacing!Files.inl" />
     <None Include="Src\Games\NS4BlastCorpsFiles.inl" />
+    <None Include="Src\Games\NS4BlastCorpsPALFiles.inl" />
     <None Include="Src\Games\NS4BodyHarvestFiles.inl" />
     <None Include="Src\Games\NS4Bomberman64EFiles.inl" />
     <None Include="Src\Games\NS4Bomberman64Files.inl" />
@@ -272,6 +273,7 @@
     <None Include="Src\Games\NS4F1RacingChampionshipFiles.inl" />
     <None Include="Src\Games\NS4F1WorldGrandPrixFiles.inl" />
     <None Include="Src\Games\NS4FlyingDragonFiles.inl" />
+    <None Include="Src\Games\NS4GauntletLegendsFiles.inl" />
     <None Include="Src\Games\NS4Gex3DeepCoverGeckoFiles.inl" />
     <None Include="Src\Games\NS4GloverFiles.inl" />
     <None Include="Src\Games\NS4GoldenEye007Files.inl" />

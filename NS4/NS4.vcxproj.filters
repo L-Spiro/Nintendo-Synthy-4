@@ -37,9 +37,6 @@
     <Filter Include="Source Files\Filter">
       <UniqueIdentifier>{ab6d24a7-deb2-47cc-bec5-a3abd67a9ff8}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Header Files\MIDI">
-      <UniqueIdentifier>{950bb169-614f-4436-a830-7138fc5480d0}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Source Files\MIDI">
       <UniqueIdentifier>{9bbbcbf4-a0a3-4df1-bec0-89a36e9631a3}</UniqueIdentifier>
     </Filter>
@@ -102,6 +99,9 @@
     </Filter>
     <Filter Include="Source Files\Windows\Layout">
       <UniqueIdentifier>{6b248ac2-1813-42dd-8df2-8dac4cad036a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\MIDI">
+      <UniqueIdentifier>{950bb169-614f-4436-a830-7138fc5480d0}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -866,6 +866,12 @@
       <Filter>Header Files\Games</Filter>
     </None>
     <None Include="Src\Games\NS4ChouKuukanNightProYakyuuKingFiles.inl">
+      <Filter>Header Files\Games</Filter>
+    </None>
+    <None Include="Src\Games\NS4GauntletLegendsFiles.inl">
+      <Filter>Header Files\Games</Filter>
+    </None>
+    <None Include="Src\Games\NS4BlastCorpsPALFiles.inl">
       <Filter>Header Files\Games</Filter>
     </None>
   </ItemGroup>

@@ -224,6 +224,51 @@ int oldmain() {
 	double dDiff = ns4::CWavLib::GetPitchDiffByZeroCrossings( u8"J:\\My Projects\\MIDIWorks\\Exports\\Super Mario 64\\Samples\\difpiano.wav", u8"J:\\My Projects\\MIDIWorks\\Exports\\Super Mario 64\\Samples\\B15I05S00.wav" );
 #endif
 
+#if 0
+	// Tools somehow stopped being able to load .n64 files due to not automatically byte-swapping them.
+#define LSN_SWAP_ME			L"Blast Corps (Europe) (En,De)"
+#define LSN_SWAP_ME_DIR		L"C:\\My Projects\\N64\\Roms\\"
+	{
+		const wchar_t * pu16ByteswapMe = LSN_SWAP_ME_DIR LSN_SWAP_ME L".n64";
+		const wchar_t * pu16ByteswapMeOut = LSN_SWAP_ME_DIR LSN_SWAP_ME L".v64";
+		HANDLE hFileIn = ::CreateFileW( pu16ByteswapMe,
+			true ? GENERIC_READ : GENERIC_WRITE,
+			true ? FILE_SHARE_READ : FILE_SHARE_WRITE,
+			NULL,
+			OPEN_EXISTING,
+			FILE_ATTRIBUTE_NORMAL,
+			NULL ); 
+		if ( hFileIn != INVALID_HANDLE_VALUE ) {
+			HANDLE hFileOut = ::CreateFileW( pu16ByteswapMeOut,
+				FILE_APPEND_DATA,
+				FILE_SHARE_READ,
+				NULL,
+				/*_bFailIfExists*/true ? CREATE_NEW : CREATE_ALWAYS,
+				FILE_ATTRIBUTE_NORMAL,
+				NULL );
+
+			if ( hFileOut != INVALID_HANDLE_VALUE ) {
+				LARGE_INTEGER liInt;
+				if ( ::GetFileSizeEx( hFileIn, &liInt ) ) {
+					//liInt.QuadPart;
+					std::vector< uint8_t> vBuffer;
+					vBuffer.resize( size_t( liInt.QuadPart ) );
+					::ReadFile( hFileIn, vBuffer.data(), vBuffer.size(), NULL, NULL );
+					uint16_t * pui16Data = reinterpret_cast<uint16_t *>(vBuffer.data());
+					for ( size_t I = vBuffer.size() / sizeof( uint16_t ); I--; ) {
+						pui16Data[I] = _byteswap_ushort( pui16Data[I] );
+					}
+					::WriteFile( hFileOut, vBuffer.data(), vBuffer.size(), NULL, NULL );
+				}
+
+				::CloseHandle( hFileOut );
+			}
+
+			::CloseHandle( hFileIn );
+		}
+	}
+#endif
+
 	std::string sLog;
 
 	struct NS4_MIDI_FILE {
@@ -270,6 +315,7 @@ int oldmain() {
 //#include "Src/Games/NS4ChopperAttackOverSampledFiles.inl"
 //#include "Src/Games/NS4BanjoKazooieFiles.inl"
 //#include "Src/Games/NS4BlastCorpsFiles.inl"
+#include "Src/Games/NS4BlastCorpsPALFiles.inl"
 //#include "Src/Games/NS4BeetAdventureRacing!Files.inl"
 //#include "Src/Games/NS4AeroFightersAssaultFiles.inl"
 //#include "Src/Games/NS4AeroFightersAssaultOverSamplingFiles.inl"
@@ -295,7 +341,7 @@ int oldmain() {
 //#include "Src/Games/NS4WarGodsOstFiles.inl"
 //#include "Src/Games/NS4WCWvsnWoWorldTourFiles.inl"
 //#include "Src/Games/NS4WonderProjectJFiles.inl"
-#include "Src/Games/NS4ZoorFiles.inl"
+//#include "Src/Games/NS4ZoorFiles.inl"
 
 //#include "Src/Games/NS4SuperMario64Files.inl"
 //#include "Src/Games/NS4SuperMario64SourceFiles.inl"
@@ -382,6 +428,7 @@ int oldmain() {
 //#include "Src/Games/NS4FightersDestinyFiles.inl"
 //#include "Src/Games/NS4ProMahjongKiwame64Files.inl"
 //#include "Src/Games/NS4HybridHeavenFiles.inl"
+//#include "Src/Games/NS4GauntletLegendsFiles.inl"
 #else
 		{}
 #endif
@@ -460,12 +507,17 @@ int oldmain() {
 	std::set<uint32_t> sReferencedInsts;
 #endif	// NS4_PRINT_BEST_BANK
 
+//#define NS4_ROOT_FOLDER					u8"J:\\My Projects\\MIDIWorks\\Exports\\"
+#define NS4_ROOT_FOLDER					u8"C:\\My Projects\\MIDIWorks\\Exports\\"
 	for ( uint32_t B = 0; B < 0xFF; ++B ) {
 		char szBuffer[1024];	// Trying not to rely too much on platform-specific macros such as MAX_PATH.  This should be enough for the path regardless of the platform.
-		std::sprintf( szBuffer, reinterpret_cast<const char *>(u8"J:\\My Projects\\MIDIWorks\\Exports\\" NS4_FOLDER "\\SoundBankExports\\ExtractedSoundbank_%.2X.dlsDebug.txt"), B );
+		std::sprintf( szBuffer, reinterpret_cast<const char *>(
+			NS4_ROOT_FOLDER
+			NS4_FOLDER "\\SoundBankExports\\ExtractedSoundbank_%.2X.dlsDebug.txt"), B );
 		bool bBank = vBanks[B].LoadSubDragDebug( szBuffer );
 		if ( bBank ) {
-			bool bBankSamples = vBanks[B].LoadSamples( reinterpret_cast<const char *>(u8"J:\\My Projects\\MIDIWorks\\Exports\\" NS4_FOLDER "\\Samples\\"),
+			bool bBankSamples = vBanks[B].LoadSamples( reinterpret_cast<const char *>(
+				NS4_ROOT_FOLDER NS4_FOLDER "\\Samples\\"),
 				stReps, srReplacements );
 		}
 	}
@@ -645,7 +697,7 @@ int oldmain() {
 		troOptions.pmMods = nullptr;
 #endif
 
-		const char * pcMidiFolder = reinterpret_cast<const char *>(u8"J:\\My Projects\\MIDIWorks\\Exports\\" NS4_FOLDER "\\");
+		const char * pcMidiFolder = reinterpret_cast<const char *>(NS4_ROOT_FOLDER NS4_FOLDER "\\");
 
 		std::string sFile = std::string( pcMidiFolder ) + reinterpret_cast<const char *>(mfFiles[F].pcMidiFile);
 		bool bMidi = mfMidi.Open( sFile.c_str() );
@@ -680,16 +732,16 @@ int oldmain() {
 		mfMidi.ApplyPreUnrollMods( mfFiles[F].ui32Modifiers, mfFiles[F].mModifiers, ns4::CMidiFile::NS4_ES_PRE_UNROLL, pcMidiFolder );
 		ns4::CMidiFile::m_sSettings.bIgnoreLoops = ns4::CMidiFile::FindGlobalMod( ns4::CMidiFile::NS4_E_GLOBAL_IGNORE_LOOPS, troOptions.ui32TotalMods, troOptions.pmMods ) != nullptr;
 		if ( mfFiles[F].pcDbgFile && mfFiles[F].pcDbgFile[0] ) {
-			bool bMidiDbg = mfMidi.AddDebug_Standard( (std::string( reinterpret_cast<const char *>(u8"J:\\My Projects\\MIDIWorks\\Exports\\" NS4_FOLDER "\\DBG\\") ) + reinterpret_cast<const char *>(mfFiles[F].pcDbgFile)).c_str() );
+			bool bMidiDbg = mfMidi.AddDebug_Standard( (std::string( reinterpret_cast<const char *>(NS4_ROOT_FOLDER NS4_FOLDER "\\DBG\\") ) + reinterpret_cast<const char *>(mfFiles[F].pcDbgFile)).c_str() );
 		}
 		mfMidi.ApplyPreUnrollMods( mfFiles[F].ui32Modifiers, mfFiles[F].mModifiers, ns4::CMidiFile::NS4_ES_POST_SUPPLEMENTAL, pcMidiFolder );
 		std::printf( "Loaded: %s\r\n", sFile.c_str() );
 		
 
 #else
-		bool bMidi = mfMidi.Open( u8"J:\\My Projects\\MIDIWorks\\Exports\\" NS4_FOLDER "\\" NS4_FILE ".mid" );
+		bool bMidi = mfMidi.Open( NS4_ROOT_FOLDER NS4_FOLDER "\\" NS4_FILE ".mid" );
 #ifdef NS4_DBG
-		bool bMidiDbg = mfMidi.AddDebug_Standard( u8"J:\\My Projects\\MIDIWorks\\Exports\\" NS4_FOLDER "\\DBG\\" NS4_DBG ".txt" );
+		bool bMidiDbg = mfMidi.AddDebug_Standard( NS4_ROOT_FOLDER NS4_FOLDER "\\DBG\\" NS4_DBG ".txt" );
 #endif	// NS4_DBG
 #endif
 
@@ -837,7 +889,8 @@ int oldmain() {
 #ifdef NS4_FADE_FILE
 		const char * pcFadeFile = reinterpret_cast<const char *>(NS4_FADE_FILE);
 #else
-		const char * pcFadeFile = reinterpret_cast<const char *>(u8"F:\\N64OST\\StudioFade.wav");
+		//const char * pcFadeFile = reinterpret_cast<const char *>(u8"F:\\N64OST\\StudioFade.wav");
+		const char * pcFadeFile = reinterpret_cast<const char *>(u8"C:\\My Projects\\Nintendo-Synthy-4\\Fades\\StudioFade.wav");
 #endif	// NS4_FADE_FILE
 
 		
