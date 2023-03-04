@@ -7,15 +7,22 @@
 #define NS4_REVERB							ns4::CReverb::NS4_T_BODY_HARVEST_0
 #define NS4_ORIG_HZ							32006
 #define NS4_CURVE							40.0
-#define NS4_OUT_DIRECTORY					u8"F:\\N64OST\\Body Harvest\\"
+#define NS4_OUT_DIRECTORY					u8"C:\\N64OST\\Body Harvest\\"
 #define NS4_OUT_DIRECTORY_NUMBERS			NS4_OUT_DIRECTORY u8"Numbered\\"
 #define NS4_ROOT_OFFSET						6
 #define NS4_WET_FILTER_FREQ					(NS4_ORIG_HZ / 2.0)
-//#define NS4_OVERSAMPLING_BW					500.0
-#define NS4_ENV_MULTIPLIER					(1.0 / 3.0)
-//#define NS4_REL_MULTIPLIER					(1.0 / 3.0)
+
+#define NS4_ENV_MULTIPLIER					(1.25)
+//#define NS4_REL_MULTIPLIER					1.0
 #define NS4_ENVELOPE_VOL_CURVE				20.0
 #define NS4_ENVELOPE_POINT_CURVE			40.0
+#define NS4_EXPONENTIAL_ENVELOPE			true
+//#define NS4_OVERSAMPLING_BW					500.0
+
+/*#define NS4_ENV_MULTIPLIER					(1.0 / 2.0)
+//#define NS4_REL_MULTIPLIER					(1.0 / 3.0)
+#define NS4_ENVELOPE_VOL_CURVE				20.0
+#define NS4_ENVELOPE_POINT_CURVE			40.0*/
 
 { u8"Body Harvest (U) 00000050 00BD8A50.mid", u8"Body Harvest (U) 00000050 00BD8A50.mid TrackParseDebug.txt", u8"Prologue", 0 },
 { u8"Body Harvest (U) 0000004E 00BD7810.mid", u8"Body Harvest (U) 0000004E 00BD7810.mid TrackParseDebug.txt", u8"Main Menu", 0 },
