@@ -42,14 +42,14 @@
 
 #define NS4_BULK
 
-//#define NS4_SINGLE_TRACK								5
+//#define NS4_SINGLE_TRACK								0
 //#define NS4_NO_NORMALIZE
 // 
 //#define NS4_NO_OUTPUT									// Used to quickly print information in the MIDI files without actually generating WAV content.
 //#define NS4_PRINT_BEST_BANK
 
 #ifdef NS4_BULK
-//#define NS4_ONE_OFF										(3-1)
+//#define NS4_ONE_OFF										(18-1)
 //#define NS4_EXPORT_SOME
 //#define NS4_EPORT_FROM								(71-1)
 #else
@@ -226,7 +226,7 @@ int oldmain() {
 
 #if 0
 	// Tools somehow stopped being able to load .n64 files due to not automatically byte-swapping them.
-#define LSN_SWAP_ME			L"Blast Corps (Europe) (En,De)"
+#define LSN_SWAP_ME			L"Doraemon - Mittsu no Seireiseki (J) [!]"
 #define LSN_SWAP_ME_DIR		L"C:\\My Projects\\N64\\Roms\\"
 	{
 		const wchar_t * pu16ByteswapMe = LSN_SWAP_ME_DIR LSN_SWAP_ME L".n64";
@@ -352,7 +352,7 @@ int oldmain() {
 //#include "Src/Games/NS4Starfox64HeadphonesFiles.inl"
 //#include "Src/Games/NS4Starfox64UncompressedFiles.inl"
 //#include "Src/Games/NS4TheLegendOfZeldaOcarinaOfTimeFiles.inl"
-//#include "Src/Games/NS4TheLegendOfZeldaMajorasMaskFiles.inl"
+#include "Src/Games/NS4TheLegendOfZeldaMajorasMaskFiles.inl"
 //#include "Src/Games/NS4YoshisStoryFiles.inl"
 //#include "Src/Games/NS4MarioKart64Files.inl"
 //#include "Src/Games/NS4MarioKart64HeadphonesFiles.inl"
@@ -383,7 +383,7 @@ int oldmain() {
 //#include "Src/Games/NS4DoraemonNobitaFiles.inl"
 //#include "Src/Games/NS4Doraemon2NobitaFiles.inl"
 //#include "Src/Games/NS4DualHeroesFiles.inl"
-#include "Src/Games/NS4IggysReckinBallsFiles.inl"
+//#include "Src/Games/NS4IggysReckinBallsFiles.inl"
 //#include "Src/Games/NS4RoadstersTrophyFiles.inl"
 //#include "Src/Games/NS4WcwBackstageAssaultFiles.inl"
 //#include "Src/Games/NS4MissionImpossibleFiles.inl"
