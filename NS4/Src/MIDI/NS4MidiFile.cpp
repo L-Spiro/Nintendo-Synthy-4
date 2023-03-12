@@ -4230,11 +4230,12 @@ namespace ns4 {
 			nullptr );
 		nNote.msInitialState = msState;
 		nNote.ui8Note = NS4_GET_NOTE( _mMod );
+		nNote.i32Base = NS4_GET_TUNING_BASENOTE( _mMod );
 		nNote.ui8Vel = 0x7F;
 		nNote.dPitchBend = 0.0;
 		nNote.ui8Channel = 0xFF;
 		nNote.ui16PitchBendRange = msState.ui16PitchBendRange;
-		nNote.dLinearPitchScale = NS4_GET_LINEAR_PITCH_SCALE( _mMod );
+		nNote.dLinearPitchScale = msState.dState[NS4_TRACK_PITCH_SCALE] = NS4_GET_LINEAR_PITCH_SCALE( _mMod );
 		nNote.ui32Hz = psSample->Hz();
 
 
