@@ -6,11 +6,16 @@
 #define NS4_REVERB_TRACKS					0
 #define NS4_ORIG_HZ							22047
 #define NS4_CURVE							40.0
-#define NS4_OUT_DIRECTORY					u8"T:\\N64OST\\AeroGauge\\"
+#define NS4_OUT_DIRECTORY					u8"C:\\N64OST\\AeroGauge\\"
 #define NS4_OUT_DIRECTORY_NUMBERS			NS4_OUT_DIRECTORY u8"Numbered\\"
 #define NS4_IGNORE_REVERB					true
 #define NS4_PERC_CHANNEL					9
-#define NS4_ENV_MULTIPLIER					0.75
+//#define NS4_ENV_MULTIPLIER					0.75
+#define NS4_ENV_MULTIPLIER					(1.0 / 1.0)
+//#define NS4_REL_MULTIPLIER					(1.0 / 1.0)
+#define NS4_ENVELOPE_VOL_CURVE				20.0
+#define NS4_ENVELOPE_POINT_CURVE			40.0
+#define NS4_EXPONENTIAL_ENVELOPE			true
 //#define NS4_REL_MULTIPLIER					1.0
 //#define NS4_PERC_ATK_MULTIPLIER				1.0
 #define NS4_PERC_DEC_MULTIPLIER				1000000.0

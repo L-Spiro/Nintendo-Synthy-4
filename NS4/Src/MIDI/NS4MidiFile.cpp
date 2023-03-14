@@ -1460,6 +1460,10 @@ namespace ns4 {
 				if ( vNotes[J].bActive || (vNotes[J].eEnvelope.InRelease() && vNotes[J].psSoundbankSample && !vNotes[J].eEnvelope.InfiniteRelease()) || vNotes[J].ui32DustSettle ) {
 					if ( vNotes[J].psSoundbankSample ) {
 						double dVal = vNotes[J].sSampler.Sample();
+						double dEnvLevel = vNotes[J].eEnvelope.CurLevel();
+						/*if ( dEnvLevel < 0.62000124000248003 && vNotes[J].eEnvelope.InRelease() == false ) {
+							volatile int gjhg = 0;
+						}*/
 						dVal *= MidiLevelToLinear( vNotes[J].eEnvelope.CurLevel(), m_sSettings.dEnvelopeInterpretation );
 						double dTremPhase;
 						double dTremAmnt = vNotes[J].tTremolo.Values( dTremPhase );

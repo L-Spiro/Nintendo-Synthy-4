@@ -49,7 +49,7 @@
 //#define NS4_PRINT_BEST_BANK
 
 #ifdef NS4_BULK
-//#define NS4_ONE_OFF										(44-1)
+//#define NS4_ONE_OFF										(6-1)
 //#define NS4_EXPORT_SOME
 //#define NS4_EPORT_FROM								(71-1)
 #else
@@ -392,7 +392,7 @@ int oldmain() {
 //#include "Src/Games/NS4GloverFiles.inl"
 //#include "Src/Games/NS4ArmyMenAirCombatFiles.inl"
 //#include "Src/Games/NS4ArmyMenSargesHeroesFiles.inl"
-#include "Src/Games/NS4Gex3DeepCoverGeckoFiles.inl"
+//#include "Src/Games/NS4Gex3DeepCoverGeckoFiles.inl"
 //#include "Src/Games/NS4MonopolyFiles.inl"
 //#include "Src/Games/NS4BuckBumbleFiles.inl"
 //#include "Src/Games/NS4HarvestMoonFiles.inl"
@@ -421,7 +421,7 @@ int oldmain() {
 //#include "Src/Games/NS4SuperBDamonBattlePhoenix64Files.inl"
 //#include "Src/Games/NS4ToonPanicFiles.inl"
 //#include "Src/Games/NS4ToonPanicOverSampledFiles.inl"
-//#include "Src/Games/NS4AeroGaugeFiles.inl"
+#include "Src/Games/NS4AeroGaugeFiles.inl"
 //#include "Src/Games/NS4AeroGaugeOverSamplingFiles.inl"
 //#include "Src/Games/NS4AllStarBaseball99Files.inl"
 //#include "Src/Games/NS4StarshotSpaceCircusFeverFiles.inl"
