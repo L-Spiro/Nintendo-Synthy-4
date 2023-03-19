@@ -874,5 +874,14 @@
     <None Include="Src\Games\NS4BlastCorpsPALFiles.inl">
       <Filter>Header Files\Games</Filter>
     </None>
+    <None Include="Src\Games\NS464DeHakkenTamagotchiMinnaDaTamagotchiWorldFiles.inl">
+      <Filter>Header Files\Games</Filter>
+    </None>
+    <None Include="Src\Games\NS464TrumpCollectionFiles.inl">
+      <Filter>Header Files\Games</Filter>
+    </None>
+    <None Include="Src\Games\NS4CentreCourtTennisFiles.inl">
+      <Filter>Header Files\Games</Filter>
+    </None>
   </ItemGroup>
 </Project>

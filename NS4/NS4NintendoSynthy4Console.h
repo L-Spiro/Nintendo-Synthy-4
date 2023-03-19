@@ -42,14 +42,14 @@
 
 #define NS4_BULK
 
-//#define NS4_SINGLE_TRACK								2
+//#define NS4_SINGLE_TRACK								4
 //#define NS4_NO_NORMALIZE
 // 
 //#define NS4_NO_OUTPUT									// Used to quickly print information in the MIDI files without actually generating WAV content.
 //#define NS4_PRINT_BEST_BANK
 
 #ifdef NS4_BULK
-//#define NS4_ONE_OFF										(6-1)
+//#define NS4_ONE_OFF										(7-1)
 //#define NS4_EXPORT_SOME
 //#define NS4_EPORT_FROM								(71-1)
 #else
@@ -226,7 +226,7 @@ int oldmain() {
 
 #if 0
 	// Tools somehow stopped being able to load .n64 files due to not automatically byte-swapping them.
-#define LSN_SWAP_ME			L"Doraemon - Mittsu no Seireiseki (J) [!]"
+#define LSN_SWAP_ME			L"Centre Court Tennis (Europe)"
 #define LSN_SWAP_ME_DIR		L"C:\\My Projects\\N64\\Roms\\"
 	{
 		const wchar_t * pu16ByteswapMe = LSN_SWAP_ME_DIR LSN_SWAP_ME L".n64";
@@ -421,7 +421,7 @@ int oldmain() {
 //#include "Src/Games/NS4SuperBDamonBattlePhoenix64Files.inl"
 //#include "Src/Games/NS4ToonPanicFiles.inl"
 //#include "Src/Games/NS4ToonPanicOverSampledFiles.inl"
-#include "Src/Games/NS4AeroGaugeFiles.inl"
+//#include "Src/Games/NS4AeroGaugeFiles.inl"
 //#include "Src/Games/NS4AeroGaugeOverSamplingFiles.inl"
 //#include "Src/Games/NS4AllStarBaseball99Files.inl"
 //#include "Src/Games/NS4StarshotSpaceCircusFeverFiles.inl"
@@ -429,6 +429,9 @@ int oldmain() {
 //#include "Src/Games/NS4ProMahjongKiwame64Files.inl"
 //#include "Src/Games/NS4HybridHeavenFiles.inl"
 //#include "Src/Games/NS4GauntletLegendsFiles.inl"
+//#include "Src/Games/NS464DeHakkenTamagotchiMinnaDaTamagotchiWorldFiles.inl"
+//#include "Src/Games/NS464TrumpCollectionFiles.inl"
+#include "Src/Games/NS4CentreCourtTennisFiles.inl"
 #else
 		{}
 #endif

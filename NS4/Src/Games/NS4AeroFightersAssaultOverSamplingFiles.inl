@@ -12,6 +12,8 @@
 //#define NS4_PERC_INST						127
 #define NS4_WET_FILTER_FREQ					0.0//(NS4_ORIG_HZ / 2.0)
 //#define NS4_ENV_MULTIPLIER					(2.0)
+#define NS4_ENV_MULTIPLIER					(1.0 / 3.0)
+//#define NS4_REL_MULTIPLIER					(1.0 / 3.0)
 #define NS4_OVERSAMPLING					(1 << 4)
 #define NS4_OVERSAMPLING_BW					500.0
 

@@ -218,6 +218,8 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Src\Games\NS41080SnowboardingFiles.inl" />
+    <None Include="Src\Games\NS464DeHakkenTamagotchiMinnaDaTamagotchiWorldFiles.inl" />
+    <None Include="Src\Games\NS464TrumpCollectionFiles.inl" />
     <None Include="Src\Games\NS4AeroFightersAssaultFiles.inl" />
     <None Include="Src\Games\NS4AeroFightersAssaultOverSamplingFiles.inl" />
     <None Include="Src\Games\NS4AeroGaugeFiles.inl" />
@@ -243,6 +245,7 @@
     <None Include="Src\Games\NS4BustAMove2ArcadeEditionFiles.inl" />
     <None Include="Src\Games\NS4BustAMove99Files.inl" />
     <None Include="Src\Games\NS4CaliforniaSpeedFiles.inl" />
+    <None Include="Src\Games\NS4CentreCourtTennisFiles.inl" />
     <None Include="Src\Games\NS4ChameleonTwist2Files.inl" />
     <None Include="Src\Games\NS4ChameleonTwistFiles.inl" />
     <None Include="Src\Games\NS4ChopperAttackFiles.inl" />
