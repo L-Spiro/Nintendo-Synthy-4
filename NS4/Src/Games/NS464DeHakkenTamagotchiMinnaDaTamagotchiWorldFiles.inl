@@ -5,7 +5,7 @@
 #define NS4_BANK							u8"00"
 #define NS4_REVERB_TRACKS					1
 #define NS4_REVERB							ns4::CReverb::NS4_T_DUAL_HEROES_0	// Not a mistake.
-#define NS4_ORIG_HZ							22047
+#define NS4_ORIG_HZ							32006
 #define NS4_CURVE							40.0
 #define NS4_OUT_DIRECTORY					u8"C:\\N64OST\\64 de Hakken!! Tamagotchi Minna de Tamagotchi World\\"
 #define NS4_OUT_DIRECTORY_NUMBERS			NS4_OUT_DIRECTORY u8"Numbered\\"

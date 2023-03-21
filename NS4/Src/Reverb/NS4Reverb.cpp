@@ -1338,6 +1338,19 @@ namespace ns4 {
 		{         0,	      4480,	   +10000,		       +0,	          0,		                      0,	                      0,		        +0,		                      0,	/*0xDFEA1050*/    5000 },
 	};
 
+	/** Taps harvested from Centre Court Tennis. */
+	NS4_REVERB_TAP CReverb::m_rtCentreCourtTennis0[] = {
+#include "Taps/NS4ReverbCentreCourtTennis0.inl"
+	};
+
+	/** The comb filter delay lines for Centre Court Tennis. */
+	NS4_DELAY_N64 CReverb::m_dn64CentreCourtTennis0[] = {
+		//ui32Input		ui32Output	i16FfCoef		i16FbCoef		i16Gain							 dRsInc						 dRsVal			i32RsDelta						dRsGain						ui16Fc
+		{       448,	      1376,	   +10813,		   -10813,	      16383,		                      0,	                      0,		        +0,		                      0,	/*0xE016B350*/    4095 },
+		{      1728,	      2816,	   +10813,		   -10813,	      16383,		                      0,	                      0,		        +0,		                      0,	/*0xE016B390*/    4095 },
+		{         0,	      3072,	   +16383,		       +0,	      16383,		                      0,	                      0,		        +0,		                      0,	/*0xE016B3D0*/    4095 },
+	};
+
 }	// namespace ns4
 
 namespace ns4 {
@@ -2366,12 +2379,12 @@ namespace ns4 {
 			NS4_NO_FADE,
 			NS4_NO_LPF,
 		},	// 141
-		// Pro Mahjong Kiwame 64.
+		// Pro Mahjong Kiwame 64.			// TODO.
 		{
 			NS4_ONLY_COMB( 1.0, 0 ),
-			NS4_COMB( 4800, 320 / 2, m_dn64ProMahjongKiwame640, 20.0 ),
+			NS4_COMB( 6464, 320 / 2, m_dn64ProMahjongKiwame640, 20.0 ),
 		},	// 142
-		// Pro Mahjong Kiwame 64.
+		// Pro Mahjong Kiwame 64.			// TODO.
 		{
 			NS4_TAPS( m_rtProMahjongKiwame640 ),
 			NS4_SQRT_0_5,															// dTapVol
@@ -2379,6 +2392,19 @@ namespace ns4 {
 			NS4_NO_FADE,
 			NS4_NO_LPF,
 		},	// 143
+		// Centre Court Tennis.
+		{
+			NS4_ONLY_COMB( 1.0, 0 ),
+			NS4_COMB( 6464, 320 / 2, m_dn64CentreCourtTennis0, 20.0 ),
+		},	// 144
+		// Centre Court Tennis.
+		{
+			NS4_TAPS( m_rtCentreCourtTennis0 ),
+			NS4_SQRT_0_5,															// dTapVol
+			0,																		// i64TapOffset
+			NS4_NO_FADE,
+			NS4_NO_LPF,
+		},	// 145
 	};
 
 
@@ -2753,13 +2779,13 @@ namespace ns4 {
 			}
 #if 1
 			ns4::CWavFile wfReverb;
-			wfReverb.Open( "J:\\TmpAudio\\ReverbTest.wav" );
+			wfReverb.Open( "C:\\My Projects\\Nintendo-Synthy-4\\NS4\\Src\\Reverb\\Research\\SBDBP64 Hz Test.wav" );
 			ns4::lwaudio aTmp = ns4::CWavLib::AllocateSamples( 1, uint32_t( aOut.size() ) );
 			aTmp[0] = aOut;
 			ns4::CWavFile::NS4_SAVE_DATA sdSaveData;
 			sdSaveData.uiBitsPerSample = 32;
 			sdSaveData.uiHz = _ptThread->_ui32FinalHz;
-			wfReverb.SaveAsPcm( "J:\\TmpAudio\\", "ReverbTest aOut.wav", aTmp, &sdSaveData );
+			wfReverb.SaveAsPcm( "C:\\My Projects\\Nintendo-Synthy-4\\NS4\\Src\\Reverb\\Research\\", "ReverbTest aOut.wav", aTmp, &sdSaveData );
 			volatile int gjhg  =0;
 #endif
 

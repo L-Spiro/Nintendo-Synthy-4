@@ -375,6 +375,7 @@
     <None Include="Src\Reverb\Taps\NS4ReverbBodyHarvest0.inl" />
     <None Include="Src\Reverb\Taps\NS4ReverbBomberman640.inl" />
     <None Include="Src\Reverb\Taps\NS4ReverbBomberman64TheSecondAttack0.inl" />
+    <None Include="Src\Reverb\Taps\NS4ReverbCentreCourtTennis0.inl" />
     <None Include="Src\Reverb\Taps\NS4ReverbChameleonTwist20.inl" />
     <None Include="Src\Reverb\Taps\NS4ReverbClayFighter0.inl" />
     <None Include="Src\Reverb\Taps\NS4ReverbConkersBadFurDay0.inl" />
