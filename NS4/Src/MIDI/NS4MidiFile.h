@@ -1872,11 +1872,11 @@ namespace ns4 {
 			 * \param _ui8Delay The delay.
 			 * \param _uiMasterSamplingRate The master output sampling rate.
 			 */
-			void						Set( uint8_t _ui8Rate, uint8_t _ui16Depth, uint8_t _ui8Delay, uint32_t _uiMasterSamplingRate ) {
-				dDepth = _ui16Depth / 256.0;
+			void						Set( uint8_t _ui8Rate, uint8_t _ui16Depth, uint8_t _ui8Delay, uint32_t _uiMasterSamplingRate, double _dFinalRateMultiplier = 1.0, double _dFinalDepthMultiplier = 1.0, double _dFinalDelayMultiplier = 1.0 ) {
+				dDepth = _ui16Depth / 256.0 * _dFinalDepthMultiplier;
 
-				tbDelay.SetRate( ((1.0 / 30.0 / 2.0) * int32_t( _ui8Delay * m_sSettings.dTremDelayScale )) * _uiMasterSamplingRate );
-				tbRate.SetRate( ((1.0 / 30.0 / 2.0) * int32_t( (259 - _ui8Rate) * m_sSettings.dTremRateScale )) * _uiMasterSamplingRate );
+				tbDelay.SetRate( _dFinalDelayMultiplier * ((1.0 / 30.0 / 2.0) * int32_t( _ui8Delay * m_sSettings.dTremDelayScale )) * _uiMasterSamplingRate );
+				tbRate.SetRate( _dFinalRateMultiplier * ((1.0 / 30.0 / 2.0) * int32_t( (259 - _ui8Rate) * m_sSettings.dTremRateScale )) * _uiMasterSamplingRate );
 			}
 			double						dDepth;
 			CTimeBlock					tbDelay;

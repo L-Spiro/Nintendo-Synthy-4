@@ -1278,6 +1278,19 @@ namespace ns4 {
 		{        64,	      6192,	   +20384,		       +0,	      22015,		                      0,	                      0,		        +0,		                      0,	/*0xDFECC000*/   13695 },
 	};
 
+	/** Taps harvested from Getter Love!!: Cho Renai Party Game Tanjo. */
+	NS4_REVERB_TAP CReverb::m_rtGetterLove0[] = {
+#include "Taps/NS4ReverbGetterLove0.inl"
+	};
+
+	/** The comb filter delay lines for Getter Love!!: Cho Renai Party Game Tanjo. */
+	NS4_DELAY_N64 CReverb::m_dn64GetterLove0[] = {
+		//ui32Input		ui32Output	i16FfCoef		i16FbCoef		i16Gain							 dRsInc						 dRsVal			i32RsDelta						dRsGain						ui16Fc
+		{       896,	      2752,	   +10813,		   -10813,	      12451,		                      0,	                      0,		        +0,		                      0,	/*0xDFF641D0*/    4095 },
+		{      3456,	      5632,	   +10813,		   -10813,	      12451,		                      0,	                      0,		        +0,		                      0,	/*0xDFF64210*/    4095 },
+		{         0,	      6144,	   +12451,		       +0,	      12451,		                      0,	                      0,		        +0,		                      0,	/*0xDFF64250*/    4095 },
+	};
+
 	/** Delay line: 1400/2FFF. */
 	NS4_REVERB_DELAY_LINE CReverb::m_rdlDelay1400_2FFF[] = {
 		{
@@ -2379,12 +2392,12 @@ namespace ns4 {
 			NS4_NO_FADE,
 			NS4_NO_LPF,
 		},	// 141
-		// Pro Mahjong Kiwame 64.			// TODO.
+		// Pro Mahjong Kiwame 64.
 		{
 			NS4_ONLY_COMB( 1.0, 0 ),
-			NS4_COMB( 6464, 320 / 2, m_dn64ProMahjongKiwame640, 20.0 ),
+			NS4_COMB( 4800, 320 / 2, m_dn64ProMahjongKiwame640, 20.0 ),
 		},	// 142
-		// Pro Mahjong Kiwame 64.			// TODO.
+		// Pro Mahjong Kiwame 64.
 		{
 			NS4_TAPS( m_rtProMahjongKiwame640 ),
 			NS4_SQRT_0_5,															// dTapVol
@@ -2395,7 +2408,7 @@ namespace ns4 {
 		// Centre Court Tennis.
 		{
 			NS4_ONLY_COMB( 1.0, 0 ),
-			NS4_COMB( 6464, 320 / 2, m_dn64CentreCourtTennis0, 20.0 ),
+			NS4_COMB( 3232, 320 / 2, m_dn64CentreCourtTennis0, 20.0 ),
 		},	// 144
 		// Centre Court Tennis.
 		{
@@ -2405,6 +2418,19 @@ namespace ns4 {
 			NS4_NO_FADE,
 			NS4_NO_LPF,
 		},	// 145
+		// Getter Love!!: Cho Renai Party Game Tanjo.
+		{
+			NS4_ONLY_COMB( 1.0, 0 ),
+			NS4_COMB( 6400, 320 / 2, m_dn64GetterLove0, 20.0 ),
+		},	// 146
+		// Getter Love!!: Cho Renai Party Game Tanjo.
+		{
+			NS4_TAPS( m_rtGetterLove0 ),
+			NS4_SQRT_0_5,															// dTapVol
+			0,																		// i64TapOffset
+			NS4_NO_FADE,
+			NS4_NO_LPF,
+		},	// 147
 	};
 
 

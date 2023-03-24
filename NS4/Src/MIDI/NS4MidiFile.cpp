@@ -1597,9 +1597,9 @@ namespace ns4 {
 			liMasterVol.Tick();
 			liLinearVolScale.Tick();
 			//7485556
-			if ( tbWavTime.CurTick() == 6527875 ) {
+			/*if ( tbWavTime.CurTick() == 6527875 ) {
 				volatile int kdhfkjhf = 0;
-			}
+			}*/
 			//if ( tbWavTime.CurTick() == 48000 * (60 * 3 + 40) ) { break; }
 		}
 
@@ -4471,6 +4471,15 @@ namespace ns4 {
 				_ui8Depth,
 				_ui8Delay / 2,
 				_ui32SampleRate );
+		}
+		else if ( _ui8Type == 0x08 ) {	// Tremolo.
+			_nNote.tTremolo.Set( uint8_t( _ui8Rate ),
+				min( _ui8Depth * 1, 255 ),
+				uint8_t( _ui8Delay ),
+				_ui32SampleRate,
+				0.4148120437482,
+				1.0,
+				0.5 );
 		}
 	}
 

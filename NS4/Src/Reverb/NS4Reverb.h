@@ -158,6 +158,8 @@ namespace ns4 {
 			NS4_T_PRO_MAHJONG_KIWAME_64_0		= 143,
 			NS4_T_CENTRE_COURT_TENNIS_DELAY_0	= 144,
 			NS4_T_CENTRE_COURT_TENNIS_0			= 145,
+			NS4_T_GETTER_LOVE_DELAY_0			= 146,
+			NS4_T_GETTER_LOVE_0					= 147,
 			
 		};
 
@@ -696,6 +698,12 @@ namespace ns4 {
 
 		/** The comb filter delay lines for Centre Court Tennis. */
 		static NS4_DELAY_N64					m_dn64CentreCourtTennis0[];
+
+		/** Taps harvested from Getter Love!!: Cho Renai Party Game Tanjo. */
+		static NS4_REVERB_TAP					m_rtGetterLove0[];
+
+		/** The comb filter delay lines for Getter Love!!: Cho Renai Party Game Tanjo. */
+		static NS4_DELAY_N64					m_dn64GetterLove0[];
 
 
 		// == Functions.

@@ -277,6 +277,7 @@
     <None Include="Src\Games\NS4F1WorldGrandPrixFiles.inl" />
     <None Include="Src\Games\NS4FlyingDragonFiles.inl" />
     <None Include="Src\Games\NS4GauntletLegendsFiles.inl" />
+    <None Include="Src\Games\NS4GetterLoveFiles.inl" />
     <None Include="Src\Games\NS4Gex3DeepCoverGeckoFiles.inl" />
     <None Include="Src\Games\NS4GloverFiles.inl" />
     <None Include="Src\Games\NS4GoldenEye007Files.inl" />
@@ -317,6 +318,7 @@
     <None Include="Src\Games\NS4PokemonSnapFiles.inl" />
     <None Include="Src\Games\NS4PokemonStadium2Files.inl" />
     <None Include="Src\Games\NS4PokemonStadiumFiles.inl" />
+    <None Include="Src\Games\NS4ProMahjongKiwame64Files.inl" />
     <None Include="Src\Games\NS4PuyoPuyoSun64Files.inl" />
     <None Include="Src\Games\NS4Quest64Files.inl" />
     <None Include="Src\Games\NS4Rayman2TheGreatEscapeFiles.inl" />
@@ -395,6 +397,7 @@
     <None Include="Src\Reverb\Taps\NS4ReverbF1WorldGrandPrix6.inl" />
     <None Include="Src\Reverb\Taps\NS4ReverbFlyingDragon0.inl" />
     <None Include="Src\Reverb\Taps\NS4ReverbGE0070.inl" />
+    <None Include="Src\Reverb\Taps\NS4ReverbGetterLove0.inl" />
     <None Include="Src\Reverb\Taps\NS4ReverbHeyYouPikachu0.inl" />
     <None Include="Src\Reverb\Taps\NS4ReverbIggysReckinBalls0.inl" />
     <None Include="Src\Reverb\Taps\NS4ReverbJetForceGeminiLeft0.inl" />
@@ -417,6 +420,7 @@
     <None Include="Src\Reverb\Taps\NS4ReverbPilotwings640.inl" />
     <None Include="Src\Reverb\Taps\NS4ReverbPokemonSnap0.inl" />
     <None Include="Src\Reverb\Taps\NS4ReverbPokemonSnap1.inl" />
+    <None Include="Src\Reverb\Taps\NS4ReverbProMahjongKiwame640.inl" />
     <None Include="Src\Reverb\Taps\NS4ReverbSCARS0.inl" />
     <None Include="Src\Reverb\Taps\NS4ReverbSnowboardKids0.inl" />
     <None Include="Src\Reverb\Taps\NS4ReverbSpaceStationSiliconValley0.inl" />
