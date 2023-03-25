@@ -898,5 +898,8 @@
     <None Include="Src\Reverb\Taps\NS4ReverbGetterLove0.inl">
       <Filter>Header Files\Reverb\Taps</Filter>
     </None>
+    <None Include="Src\Games\NS4JLeagueElevenBeat1997Files.inl">
+      <Filter>Header Files\Games</Filter>
+    </None>
   </ItemGroup>
 </Project>
