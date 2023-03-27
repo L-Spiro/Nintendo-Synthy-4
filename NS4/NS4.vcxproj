@@ -327,6 +327,7 @@
     <None Include="Src\Games\NS4Rush2Files.inl" />
     <None Include="Src\Games\NS4SanFranciscoRushFiles.inl" />
     <None Include="Src\Games\NS4SCARSFiles.inl" />
+    <None Include="Src\Games\NS4ShinNihonProWrestlingToukonRoadBraveSpiritsFiles.inl" />
     <None Include="Src\Games\NS4SimCity2000Files.inl" />
     <None Include="Src\Games\NS4SnowboardKidsFiles.inl" />
     <None Include="Src\Games\NS4SpaceStationSiliconValleyFiles.inl" />

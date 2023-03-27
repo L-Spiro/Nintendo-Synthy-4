@@ -7,7 +7,7 @@
 #define NS4_REVERB							ns4::CReverb::NS4_T_SUPER_ROBOT_SPIRITS_0
 #define NS4_ORIG_HZ							22047
 #define NS4_CURVE							40.0
-#define NS4_OUT_DIRECTORY					u8"F:\\N64OST\\Rayman 2 - The Great Escape\\"
+#define NS4_OUT_DIRECTORY					u8"C:\\N64OST\\Rayman 2 - The Great Escape\\"
 #define NS4_OUT_DIRECTORY_NUMBERS			NS4_OUT_DIRECTORY u8"Numbered\\"
 #define NS4_IGNORE_REVERB					true
 #define NS4_PERC_CHANNEL					9
