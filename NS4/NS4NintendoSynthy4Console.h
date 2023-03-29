@@ -228,7 +228,7 @@ int oldmain() {
 
 #if 0
 	// Tools somehow stopped being able to load .n64 files due to not automatically byte-swapping them.
-#define LSN_SWAP_ME			L"Shin Nihon Pro Wrestling Toukon Road 2 - The Next Generation (Japan)"
+#define LSN_SWAP_ME			L"Pro Mahjong Tsuwamono 64 - Jansou Battle ni Chousen (Japan)"
 #define LSN_SWAP_ME_DIR		L"C:\\My Projects\\N64\\Roms\\"
 	{
 		const wchar_t * pu16ByteswapMe = LSN_SWAP_ME_DIR LSN_SWAP_ME L".n64";
@@ -430,13 +430,14 @@ int oldmain() {
 //#include "Src/Games/NS4StarshotSpaceCircusFeverFiles.inl"
 //#include "Src/Games/NS4FightersDestinyFiles.inl"
 //#include "Src/Games/NS4ProMahjongKiwame64Files.inl"
+#include "Src/Games/NS4ProMahjongTsuwamono64JansouBattleNiChousenFiles.inl"
 //#include "Src/Games/NS4HybridHeavenFiles.inl"
 //#include "Src/Games/NS4GauntletLegendsFiles.inl"
 //#include "Src/Games/NS464DeHakkenTamagotchiMinnaDaTamagotchiWorldFiles.inl"
 //#include "Src/Games/NS464TrumpCollectionFiles.inl"
 //#include "Src/Games/NS4CentreCourtTennisFiles.inl"
 //#include "Src/Games/NS4GetterLoveFiles.inl"
-#include "Src/Games/NS4ShinNihonProWrestlingToukonRoadBraveSpiritsFiles.inl"
+//#include "Src/Games/NS4ShinNihonProWrestlingToukonRoadBraveSpiritsFiles.inl"
 #else
 		{}
 #endif

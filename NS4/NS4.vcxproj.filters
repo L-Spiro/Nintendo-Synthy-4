@@ -904,5 +904,8 @@
     <None Include="Src\Games\NS4ShinNihonProWrestlingToukonRoadBraveSpiritsFiles.inl">
       <Filter>Header Files\Games</Filter>
     </None>
+    <None Include="Src\Games\NS4ProMahjongTsuwamono64JansouBattleNiChousenFiles.inl">
+      <Filter>Header Files\Games</Filter>
+    </None>
   </ItemGroup>
 </Project>
