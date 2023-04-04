@@ -160,6 +160,8 @@ namespace ns4 {
 			NS4_T_CENTRE_COURT_TENNIS_0			= 145,
 			NS4_T_GETTER_LOVE_DELAY_0			= 146,
 			NS4_T_GETTER_LOVE_0					= 147,
+			NS4_T_RAYMAN_2_DELAY_0				= 148,
+			NS4_T_RAYMAN_2_0					= 149,
 			
 		};
 
@@ -704,6 +706,12 @@ namespace ns4 {
 
 		/** The comb filter delay lines for Getter Love!!: Cho Renai Party Game Tanjo. */
 		static NS4_DELAY_N64					m_dn64GetterLove0[];
+
+		/** Taps harvested from Rayman 2: The Great Escape. */
+		static NS4_REVERB_TAP					m_rtRayman20[];
+
+		/** The comb filter delay lines for Rayman 2: The Great Escape. */
+		static NS4_DELAY_N64					m_dn64Rayman20[];
 
 
 		// == Functions.

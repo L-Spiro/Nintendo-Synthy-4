@@ -1364,6 +1364,26 @@ namespace ns4 {
 		{         0,	      3072,	   +16383,		       +0,	      16383,		                      0,	                      0,		        +0,		                      0,	/*0xE016B3D0*/    4095 },
 	};
 
+	/** Taps harvested from Rayman 2: The Great Escape. */
+	NS4_REVERB_TAP CReverb::m_rtRayman20[] = {
+//#include "Taps/NS4ReverbRayman20.inl"
+		#include "Taps/NS4ReverbCentreCourtTennis0.inl"
+	};
+
+	/** The comb filter delay lines for Rayman 2: The Great Escape. */
+	NS4_DELAY_N64 CReverb::m_dn64Rayman20[] = {
+		//ui32Input		ui32Output	i16FfCoef		i16FbCoef		i16Gain							 dRsInc						 dRsVal			i32RsDelta						dRsGain						ui16Fc
+		{         0,	       128,	    +9830,		    -9830,	          0,		                      0,	                      0,		        +0,		                      0,	/*0xDFFBE230*/       0 },
+		{       128,	       192,	    +9830,		    -9830,	       4587,		                      0,	                      0,		        +0,		                      0,	/*0xDFFBE2D0*/    6400 },
+		{       656,	      2048,	   +16384,		   -16384,	       4587,		                      0,	                      0,		        +0,		                      0,	/*0xDFFBE370*/       0 },
+		{       720,	      1648,	    +8192,		    -8192,	          0,		                      0,	                      0,		        +0,		                      0,	/*0xDFFBE410*/       0 },
+		{      2592,	      4512,	   +16384,		   -16384,	       4587,		                      0,	                      0,		        +0,		                      0,	/*0xDFFBE4B0*/    9216 },
+		{      2656,	      3808,	    +8192,		    -8192,	          0,		                      0,	                      0,		        +0,		                      0,	/*0xDFFBE550*/       0 },
+		{      3808,	      4288,	    +8192,		    -8192,	          0,		                      0,	                      0,		        +0,		                      0,	/*0xDFFBE5F0*/       0 },
+		{         0,	      4784,	       +0,		       +0,	          0,		                      0,	                      0,		        +0,		                      0,	/*0xDFFBE690*/   12544 },
+
+	};
+
 }	// namespace ns4
 
 namespace ns4 {
@@ -2431,6 +2451,20 @@ namespace ns4 {
 			NS4_NO_FADE,
 			NS4_NO_LPF,
 		},	// 147
+
+		// Rayman 2: The Great Escape.
+		{
+			NS4_ONLY_COMB( 1.0, 0 ),
+			NS4_COMB( 4800, 320 / 2, m_dn64Rayman20, 20.0 ),
+		},	// 148
+// Rayman 2: The Great Escape.
+		{
+			NS4_TAPS( m_rtRayman20 ),
+			NS4_SQRT_0_5,															// dTapVol
+			0,																		// i64TapOffset
+			NS4_NO_FADE,
+			NS4_NO_LPF,
+		},	// 149
 	};
 
 

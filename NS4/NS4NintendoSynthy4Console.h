@@ -42,7 +42,7 @@
 
 #define NS4_BULK
 
-//#define NS4_SINGLE_TRACK								6
+//#define NS4_SINGLE_TRACK								4
 //#define NS4_NO_NORMALIZE
 // 
 //#define NS4_NO_OUTPUT									// Used to quickly print information in the MIDI files without actually generating WAV content.
@@ -196,13 +196,13 @@ int oldmain() {
 	}
 #endif
 
-#if 0
+#if 1
 	{
-		const uint32_t ui32SampRate = 32006;
+		const uint32_t ui32SampRate = 22047;
 		
 		ns4::lwaudio aWet = ns4::CWavLib::AllocateSamples( 1, ui32SampRate * 30 );
 		aWet[0][0] = 1.0;
-		ns4::lwaudio aAccum = ns4::CReverb::CreateReverb( ns4::CReverb::NS4_T_GETTER_LOVE_DELAY_0, aWet, ui32SampRate, ui32SampRate, 0.0, 0 );
+		ns4::lwaudio aAccum = ns4::CReverb::CreateReverb( ns4::CReverb::NS4_T_RAYMAN_2_DELAY_0, aWet, ui32SampRate, ui32SampRate, 0.0, 0 );
 		ns4::lwsample sFirst = aWet[0][0];
 		if ( sFirst == 0.0 ) {
 			::OutputDebugStringA( "Measles.\r\n" );
@@ -228,7 +228,7 @@ int oldmain() {
 
 #if 0
 	// Tools somehow stopped being able to load .n64 files due to not automatically byte-swapping them.
-#define LSN_SWAP_ME			L"Pro Mahjong Tsuwamono 64 - Jansou Battle ni Chousen (Japan)"
+#define LSN_SWAP_ME			L"Hamster Monogatari 64 (Japan)"
 #define LSN_SWAP_ME_DIR		L"C:\\My Projects\\N64\\Roms\\"
 	{
 		const wchar_t * pu16ByteswapMe = LSN_SWAP_ME_DIR LSN_SWAP_ME L".n64";
@@ -430,7 +430,7 @@ int oldmain() {
 //#include "Src/Games/NS4StarshotSpaceCircusFeverFiles.inl"
 //#include "Src/Games/NS4FightersDestinyFiles.inl"
 //#include "Src/Games/NS4ProMahjongKiwame64Files.inl"
-#include "Src/Games/NS4ProMahjongTsuwamono64JansouBattleNiChousenFiles.inl"
+//#include "Src/Games/NS4ProMahjongTsuwamono64JansouBattleNiChousenFiles.inl"
 //#include "Src/Games/NS4HybridHeavenFiles.inl"
 //#include "Src/Games/NS4GauntletLegendsFiles.inl"
 //#include "Src/Games/NS464DeHakkenTamagotchiMinnaDaTamagotchiWorldFiles.inl"
@@ -438,6 +438,7 @@ int oldmain() {
 //#include "Src/Games/NS4CentreCourtTennisFiles.inl"
 //#include "Src/Games/NS4GetterLoveFiles.inl"
 //#include "Src/Games/NS4ShinNihonProWrestlingToukonRoadBraveSpiritsFiles.inl"
+#include "Src/Games/NS4HamsterMonogatari64Files.inl"
 #else
 		{}
 #endif
