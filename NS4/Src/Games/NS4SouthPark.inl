@@ -38,7 +38,7 @@
 { u8"South Park (U) 0000000E 008E8474.mid", u8"South Park (U) 0000000E 008E8474.mid TrackParseDebug.txt", u8"Iguana Entertainment (Game Version)", 0,
 	2, {
 		{ ns4::CMidiFile::NS4_ES_PRE_UNROLL, ns4::CMidiFile::NS4_E_TAG_TRACK_BY_CHNL, 3 - 1 },
-		{ ns4::CMidiFile::NS4_ES_PRE_UNROLL, ns4::CMidiFile::NS4_E_MUTE_UNTAGGED_TRACKS },
+		{ ns4::CMidiFile::NS4_ES_PRE_UNROLL, ns4::CMidiFile::NS4_E_MUTE_TAGGED_TRACKS },
 	   } },
 { u8"South Park (U) 00000000 008D5504.mid", u8"South Park (U) 00000000 008D5504.mid TrackParseDebug.txt", u8"Operation: Turkey Butt 1, A Clone of Your Own 1, 2, 3, Close Encounters of the Bovine Kind 1, 2 (Game Version)", 0,
 	2, {
