@@ -1367,7 +1367,7 @@ namespace ns4 {
 	/** Taps harvested from Rayman 2: The Great Escape. */
 	NS4_REVERB_TAP CReverb::m_rtRayman20[] = {
 //#include "Taps/NS4ReverbRayman20.inl"
-		#include "Taps/NS4ReverbCentreCourtTennis0.inl"
+		#include "Taps/NS4ReverbRayman2TheGreatEscape0.inl"
 	};
 
 	/** The comb filter delay lines for Rayman 2: The Great Escape. */
@@ -1381,7 +1381,22 @@ namespace ns4 {
 		{      2656,	      3808,	    +8192,		    -8192,	          0,		                      0,	                      0,		        +0,		                      0,	/*0xDFFBE550*/       0 },
 		{      3808,	      4288,	    +8192,		    -8192,	          0,		                      0,	                      0,		        +0,		                      0,	/*0xDFFBE5F0*/       0 },
 		{         0,	      4784,	       +0,		       +0,	          0,		                      0,	                      0,		        +0,		                      0,	/*0xDFFBE690*/   12544 },
+	};
 
+	/** Taps harvested from South Park. */
+	NS4_REVERB_TAP CReverb::m_rtSouthPark0[] = {
+#include "Taps/NS4ReverbSouthPark0.inl"
+	};
+
+	/** The comb filter delay lines for South Park. */
+	NS4_DELAY_N64 CReverb::m_dn64SouthPark0[] = {
+		//ui32Input		ui32Output	i16FfCoef		i16FbCoef		i16Gain							 dRsInc						 dRsVal			i32RsDelta						dRsGain						ui16Fc
+		{       160,	       944,	    +9830,		    -9830,	       2815,		                      0,	                      0,		        +0,		                      0,	/*0xE0597800*/    4095 },
+		{       416,	       768,	   +13107,		   -13107,	          0 },
+		{       784,	       912,	   +19660,		   -19660,	          0 },
+		{      1664,	      2864,	   +13107,		   -13107,	       2719,		                      0,	                      0,		        +0,		                      0,	/*0xE0597840*/    4095 },
+		{      1984,	      2496,	   +14107,		   -14107,	          0 },
+		{        64,	      4592,	   +19384,		       +0,	      20479,		                      0,	                      0,		        +0,		                      0,	/*0xE0597880*/    7223 },
 	};
 
 }	// namespace ns4
@@ -2457,7 +2472,7 @@ namespace ns4 {
 			NS4_ONLY_COMB( 1.0, 0 ),
 			NS4_COMB( 4800, 320 / 2, m_dn64Rayman20, 20.0 ),
 		},	// 148
-// Rayman 2: The Great Escape.
+		// Rayman 2: The Great Escape.
 		{
 			NS4_TAPS( m_rtRayman20 ),
 			NS4_SQRT_0_5,															// dTapVol
@@ -2465,6 +2480,19 @@ namespace ns4 {
 			NS4_NO_FADE,
 			NS4_NO_LPF,
 		},	// 149
+		// South Park.
+		{
+			NS4_ONLY_COMB( 1.0, 0 ),
+			NS4_COMB( 4800, 320 / 2, m_dn64SouthPark0, 20.0 ),
+		},	// 150
+		// South Park.
+		{
+			NS4_TAPS( m_rtSouthPark0 ),
+			NS4_SQRT_0_5,															// dTapVol
+			0,																		// i64TapOffset
+			NS4_NO_FADE,
+			NS4_LPF( 4095.0 / 1.0, 0.00725722320497120, 2.0, NS4_FILTER_DB_TO_ORDER( 6 ) ),
+		},	// 151
 	};
 
 

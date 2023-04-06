@@ -46,7 +46,7 @@
 //#define NS4_NO_NORMALIZE
 // 
 //#define NS4_NO_OUTPUT									// Used to quickly print information in the MIDI files without actually generating WAV content.
-//#define NS4_PRINT_BEST_BANK
+#define NS4_PRINT_BEST_BANK
 
 #ifdef NS4_BULK
 //#define NS4_ONE_OFF										(1-1)
@@ -154,7 +154,10 @@ int oldmain() {
 		//ns4::CReverb::HarvestUnfilteredMonoTaps( u8"J:\\My Projects\\Nintendo Synthy-4\\NS4\\Src\\Reverb\\Research\\FightersDestiny HD.wav", -1, 1, 0, 0, 0 );
 		//ns4::CReverb::HarvestUnfilteredMonoTaps( u8"J:\\My Projects\\Nintendo Synthy-4\\NS4\\Src\\Reverb\\Research\\PMK64 HD.wav", -1, 1, 0, 0, 0 );
 		//ns4::CReverb::HarvestUnfilteredMonoTaps( u8"C:\\My Projects\\Nintendo-Synthy-4\\NS4\\Src\\Reverb\\Research\\CCT HD.wav", -1, 1, 0, 0, 0 );
-		ns4::CReverb::HarvestUnfilteredMonoTaps( u8"C:\\My Projects\\Nintendo-Synthy-4\\NS4\\Src\\Reverb\\Research\\GL HD.wav", -1, 1, 0, 0, 0 );
+		//ns4::CReverb::HarvestUnfilteredMonoTaps( u8"C:\\My Projects\\Nintendo-Synthy-4\\NS4\\Src\\Reverb\\Research\\GL HD.wav", -1, 1, 0, 0, 0 );
+		//ns4::CReverb::HarvestUnfilteredMonoTaps( u8"C:\\My Projects\\Nintendo-Synthy-4\\NS4\\Src\\Reverb\\Research\\R2TGE HD.wav", -1, 1, 0, 0, 0 );
+		ns4::CReverb::HarvestUnfilteredMonoTaps( u8"C:\\My Projects\\Nintendo-Synthy-4\\NS4\\Src\\Reverb\\Research\\SP HD.wav", -1, 1, 0, 0, 0 );
+		
 	}
 	{
 		ns4::CWavLib::DetermineLevelsStereo( u8"J:\\My Projects\\Nintendo Synthy-4\\NS4\\Src\\Reverb\\Research\\MM V 127 R 0 P 56 NF.wav",
@@ -196,13 +199,13 @@ int oldmain() {
 	}
 #endif
 
-#if 1
+#if 0
 	{
 		const uint32_t ui32SampRate = 22047;
 		
 		ns4::lwaudio aWet = ns4::CWavLib::AllocateSamples( 1, ui32SampRate * 30 );
 		aWet[0][0] = 1.0;
-		ns4::lwaudio aAccum = ns4::CReverb::CreateReverb( ns4::CReverb::NS4_T_RAYMAN_2_DELAY_0, aWet, ui32SampRate, ui32SampRate, 0.0, 0 );
+		ns4::lwaudio aAccum = ns4::CReverb::CreateReverb( ns4::CReverb::NS4_T_SOUTH_PARK_DELAY_0, aWet, ui32SampRate, ui32SampRate, 0.0, 0 );
 		ns4::lwsample sFirst = aWet[0][0];
 		if ( sFirst == 0.0 ) {
 			::OutputDebugStringA( "Measles.\r\n" );
@@ -438,7 +441,8 @@ int oldmain() {
 //#include "Src/Games/NS4CentreCourtTennisFiles.inl"
 //#include "Src/Games/NS4GetterLoveFiles.inl"
 //#include "Src/Games/NS4ShinNihonProWrestlingToukonRoadBraveSpiritsFiles.inl"
-#include "Src/Games/NS4HamsterMonogatari64Files.inl"
+//#include "Src/Games/NS4HamsterMonogatari64Files.inl"
+#include "Src/Games/NS4SouthPark.inl"
 #else
 		{}
 #endif

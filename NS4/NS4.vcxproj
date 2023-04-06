@@ -332,6 +332,7 @@
     <None Include="Src\Games\NS4ShinNihonProWrestlingToukonRoadBraveSpiritsFiles.inl" />
     <None Include="Src\Games\NS4SimCity2000Files.inl" />
     <None Include="Src\Games\NS4SnowboardKidsFiles.inl" />
+    <None Include="Src\Games\NS4SouthPark.inl" />
     <None Include="Src\Games\NS4SpaceStationSiliconValleyFiles.inl" />
     <None Include="Src\Games\NS4Starfox64Files.inl" />
     <None Include="Src\Games\NS4Starfox64HeadphonesFiles.inl" />
@@ -425,8 +426,10 @@
     <None Include="Src\Reverb\Taps\NS4ReverbPokemonSnap0.inl" />
     <None Include="Src\Reverb\Taps\NS4ReverbPokemonSnap1.inl" />
     <None Include="Src\Reverb\Taps\NS4ReverbProMahjongKiwame640.inl" />
+    <None Include="Src\Reverb\Taps\NS4ReverbRayman2TheGreatEscape0.inl" />
     <None Include="Src\Reverb\Taps\NS4ReverbSCARS0.inl" />
     <None Include="Src\Reverb\Taps\NS4ReverbSnowboardKids0.inl" />
+    <None Include="Src\Reverb\Taps\NS4ReverbSouthPark0.inl" />
     <None Include="Src\Reverb\Taps\NS4ReverbSpaceStationSiliconValley0.inl" />
     <None Include="Src\Reverb\Taps\NS4ReverbStarSoldierVanishingEarth0.inl" />
     <None Include="Src\Reverb\Taps\NS4ReverbSuperBDamonBattlePhoenix640.inl" />

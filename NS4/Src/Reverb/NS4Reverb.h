@@ -162,6 +162,8 @@ namespace ns4 {
 			NS4_T_GETTER_LOVE_0					= 147,
 			NS4_T_RAYMAN_2_DELAY_0				= 148,
 			NS4_T_RAYMAN_2_0					= 149,
+			NS4_T_SOUTH_PARK_DELAY_0			= 150,
+			NS4_T_SOUTH_PARK_0					= 151,
 			
 		};
 
@@ -712,6 +714,12 @@ namespace ns4 {
 
 		/** The comb filter delay lines for Rayman 2: The Great Escape. */
 		static NS4_DELAY_N64					m_dn64Rayman20[];
+
+		/** Taps harvested from South Park. */
+		static NS4_REVERB_TAP					m_rtSouthPark0[];
+
+		/** The comb filter delay lines for South Park. */
+		static NS4_DELAY_N64					m_dn64SouthPark0[];
 
 
 		// == Functions.
