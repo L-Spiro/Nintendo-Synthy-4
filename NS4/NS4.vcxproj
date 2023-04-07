@@ -348,6 +348,7 @@
     <None Include="Src\Games\NS4SuperMario64SourceFiles.inl" />
     <None Include="Src\Games\NS4SuperRobotSpiritsFiles.inl" />
     <None Include="Src\Games\NS4SuperRobotSpiritsOverSampledFiles.inl" />
+    <None Include="Src\Games\NS4SuperRobotWars64Files.inl" />
     <None Include="Src\Games\NS4SuperSmashBrosFiles.inl" />
     <None Include="Src\Games\NS4TheLegendOfZeldaMajorasMaskFiles.inl" />
     <None Include="Src\Games\NS4TheLegendOfZeldaOcarinaOfTimeFiles.inl" />
@@ -434,6 +435,7 @@
     <None Include="Src\Reverb\Taps\NS4ReverbStarSoldierVanishingEarth0.inl" />
     <None Include="Src\Reverb\Taps\NS4ReverbSuperBDamonBattlePhoenix640.inl" />
     <None Include="Src\Reverb\Taps\NS4ReverbSuperRobotSpirits0.inl" />
+    <None Include="Src\Reverb\Taps\NS4ReverbSuperRobotWars640.inl" />
     <None Include="Src\Reverb\Taps\NS4ReverbSuperSmashBros0.inl" />
     <None Include="Src\Reverb\Taps\NS4ReverbTonicTrouble0.inl" />
     <None Include="Src\Reverb\Taps\NS4ReverbToonPanic0.inl" />

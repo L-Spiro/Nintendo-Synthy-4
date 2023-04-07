@@ -1399,6 +1399,19 @@ namespace ns4 {
 		{        64,	      4592,	   +19384,		       +0,	      20479,		                      0,	                      0,		        +0,		                      0,	/*0xE0597880*/    7223 },
 	};
 
+	/** Taps harvested from Super Robot Wars 64. */
+	NS4_REVERB_TAP CReverb::m_rtSuperRobotWars640[] = {
+#include "Taps/NS4ReverbSuperRobotWars640.inl"
+	};
+
+	/** The comb filter delay lines for Super Robot Wars 64. */
+	NS4_DELAY_N64 CReverb::m_dn64SuperRobotWars640[] = {
+		//ui32Input		ui32Output	i16FfCoef		i16FbCoef		i16Gain							 dRsInc						 dRsVal			i32RsDelta						dRsGain						ui16Fc
+		{      1120,	      3440,	   +10813,		   -10813,	      12451,		                      0,	                      0,		        +0,		                      0,	/*0xDFF53830*/    4095 },
+		{      4320,	      7040,	   +10813,		   -10813,	      12451,		                      0,	                      0,		        +0,		                      0,	/*0xDFF53870*/    4095 },
+		{         0,	      7680,	   +12451,		       +0,	      12451,		                      0,	                      0,		        +0,		                      0,	/*0xDFF538B0*/    4095 },
+	};
+
 }	// namespace ns4
 
 namespace ns4 {
@@ -2493,6 +2506,19 @@ namespace ns4 {
 			NS4_NO_FADE,
 			NS4_LPF( 4095.0 / 1.0, 0.00725722320497120, 2.0, NS4_FILTER_DB_TO_ORDER( 6 ) ),
 		},	// 151
+		// Super Robot Wars 64.
+		{
+			NS4_ONLY_COMB( 1.0, 0 ),
+			NS4_COMB( 8000, 320 / 2, m_dn64SuperRobotWars640, 20.0 ),
+		},	// 152
+		// Super Robot Wars 64.
+		{
+			NS4_TAPS( m_rtSuperRobotWars640 ),
+			NS4_SQRT_0_5,															// dTapVol
+			0,																		// i64TapOffset
+			NS4_NO_FADE,
+			NS4_LPF( 4095.0 / 1.0, 0.00725722320497120, 0.5, NS4_FILTER_DB_TO_ORDER( 6 ) ),
+		},	// 153
 	};
 
 

@@ -164,6 +164,8 @@ namespace ns4 {
 			NS4_T_RAYMAN_2_0					= 149,
 			NS4_T_SOUTH_PARK_DELAY_0			= 150,
 			NS4_T_SOUTH_PARK_0					= 151,
+			NS4_T_SUPER_ROBOT_WARS_64_DELAY_0	= 152,
+			NS4_T_SUPER_ROBOT_WARS_64_0			= 153,
 			
 		};
 
@@ -720,6 +722,12 @@ namespace ns4 {
 
 		/** The comb filter delay lines for South Park. */
 		static NS4_DELAY_N64					m_dn64SouthPark0[];
+
+		/** Taps harvested from Super Robot Wars 64. */
+		static NS4_REVERB_TAP					m_rtSuperRobotWars640[];
+
+		/** The comb filter delay lines for Super Robot Wars 64. */
+		static NS4_DELAY_N64					m_dn64SuperRobotWars640[];
 
 
 		// == Functions.

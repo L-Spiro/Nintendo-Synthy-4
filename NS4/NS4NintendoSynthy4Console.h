@@ -42,14 +42,14 @@
 
 #define NS4_BULK
 
-//#define NS4_SINGLE_TRACK								4
+//#define NS4_SINGLE_TRACK								0
 //#define NS4_NO_NORMALIZE
 // 
 //#define NS4_NO_OUTPUT									// Used to quickly print information in the MIDI files without actually generating WAV content.
 #define NS4_PRINT_BEST_BANK
 
 #ifdef NS4_BULK
-//#define NS4_ONE_OFF										(1-1)
+#define NS4_ONE_OFF										(1-1)
 //#define NS4_EXPORT_SOME
 //#define NS4_EPORT_FROM								(71-1)
 #else
@@ -156,7 +156,8 @@ int oldmain() {
 		//ns4::CReverb::HarvestUnfilteredMonoTaps( u8"C:\\My Projects\\Nintendo-Synthy-4\\NS4\\Src\\Reverb\\Research\\CCT HD.wav", -1, 1, 0, 0, 0 );
 		//ns4::CReverb::HarvestUnfilteredMonoTaps( u8"C:\\My Projects\\Nintendo-Synthy-4\\NS4\\Src\\Reverb\\Research\\GL HD.wav", -1, 1, 0, 0, 0 );
 		//ns4::CReverb::HarvestUnfilteredMonoTaps( u8"C:\\My Projects\\Nintendo-Synthy-4\\NS4\\Src\\Reverb\\Research\\R2TGE HD.wav", -1, 1, 0, 0, 0 );
-		ns4::CReverb::HarvestUnfilteredMonoTaps( u8"C:\\My Projects\\Nintendo-Synthy-4\\NS4\\Src\\Reverb\\Research\\SP HD.wav", -1, 1, 0, 0, 0 );
+		//ns4::CReverb::HarvestUnfilteredMonoTaps( u8"C:\\My Projects\\Nintendo-Synthy-4\\NS4\\Src\\Reverb\\Research\\SP HD.wav", -1, 1, 0, 0, 0 );
+		ns4::CReverb::HarvestUnfilteredMonoTaps( u8"C:\\My Projects\\Nintendo-Synthy-4\\NS4\\Src\\Reverb\\Research\\SRW64 HD.wav", -1, 1, 0, 0, 0 );
 		
 	}
 	{
@@ -201,11 +202,11 @@ int oldmain() {
 
 #if 0
 	{
-		const uint32_t ui32SampRate = 22047;
+		const uint32_t ui32SampRate = 44095;
 		
 		ns4::lwaudio aWet = ns4::CWavLib::AllocateSamples( 1, ui32SampRate * 30 );
 		aWet[0][0] = 1.0;
-		ns4::lwaudio aAccum = ns4::CReverb::CreateReverb( ns4::CReverb::NS4_T_SOUTH_PARK_DELAY_0, aWet, ui32SampRate, ui32SampRate, 0.0, 0 );
+		ns4::lwaudio aAccum = ns4::CReverb::CreateReverb( ns4::CReverb::NS4_T_SUPER_ROBOT_WARS_64_DELAY_0, aWet, ui32SampRate, ui32SampRate, 0.0, 0 );
 		ns4::lwsample sFirst = aWet[0][0];
 		if ( sFirst == 0.0 ) {
 			::OutputDebugStringA( "Measles.\r\n" );
@@ -231,7 +232,7 @@ int oldmain() {
 
 #if 0
 	// Tools somehow stopped being able to load .n64 files due to not automatically byte-swapping them.
-#define LSN_SWAP_ME			L"Hamster Monogatari 64 (Japan)"
+#define LSN_SWAP_ME			L"Super Robot Taisen 64 (Japan)"
 #define LSN_SWAP_ME_DIR		L"C:\\My Projects\\N64\\Roms\\"
 	{
 		const wchar_t * pu16ByteswapMe = LSN_SWAP_ME_DIR LSN_SWAP_ME L".n64";
@@ -301,6 +302,7 @@ int oldmain() {
 //#include "Src/Games/NS4Kirby64TheCrystalShardsFiles.inl"
 //#include "Src/Games/NS4SuperRobotSpiritsFiles.inl"
 //#include "Src/Games/NS4SuperRobotSpiritsOverSampledFiles.inl"
+#include "Src/Games/NS4SuperRobotWars64Files.inl"
 //#include "Src/Games/NS4PennyRacersFiles.inl"
 //#include "Src/Games/NS4PennyRacersOverSamplingFiles.inl"
 //#include "Src/Games/NS4BanjoTooieFiles.inl"
@@ -442,7 +444,7 @@ int oldmain() {
 //#include "Src/Games/NS4GetterLoveFiles.inl"
 //#include "Src/Games/NS4ShinNihonProWrestlingToukonRoadBraveSpiritsFiles.inl"
 //#include "Src/Games/NS4HamsterMonogatari64Files.inl"
-#include "Src/Games/NS4SouthPark.inl"
+//#include "Src/Games/NS4SouthPark.inl"
 #else
 		{}
 #endif
