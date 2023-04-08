@@ -293,6 +293,7 @@
     <None Include="Src\Games\NS4JLeagueElevenBeat1997Files.inl" />
     <None Include="Src\Games\NS4JLeagueSoccer64Files.inl" />
     <None Include="Src\Games\NS4JTacticsSoccer64Files.inl" />
+    <None Include="Src\Games\NS4KenGriffeyJrsSlugfestFiles.inl" />
     <None Include="Src\Games\NS4KillerInstinctGold2Files.inl" />
     <None Include="Src\Games\NS4KillerInstinctGoldFiles.inl" />
     <None Include="Src\Games\NS4Kirby64TheCrystalShardsFiles.inl" />
@@ -410,6 +411,7 @@
     <None Include="Src\Reverb\Taps\NS4ReverbJetForceGeminiRight0.inl" />
     <None Include="Src\Reverb\Taps\NS4ReverbJetForceGeminiStereo0.inl" />
     <None Include="Src\Reverb\Taps\NS4ReverbJLeagueDynamiteSoccer640.inl" />
+    <None Include="Src\Reverb\Taps\NS4ReverbKenGriffeyJrsSlugfest0.inl" />
     <None Include="Src\Reverb\Taps\NS4ReverbKillerInstinctGold0.inl" />
     <None Include="Src\Reverb\Taps\NS4ReverbKirby64TheCrystalShards0.inl" />
     <None Include="Src\Reverb\Taps\NS4ReverbLastLegionUx0.inl" />

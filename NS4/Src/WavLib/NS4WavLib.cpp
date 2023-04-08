@@ -3907,7 +3907,7 @@ namespace ns4 {
 			size_t stSizeMax = max( aReverb[0].size(), aReverb[1].size() );
 			aReverb[0].resize( stSizeMax );
 			aReverb[1].resize( stSizeMax );
-			wfReverb.SaveAsPcm( "J:\\TmpAudio", "DetermineLevelsStereo.wav", aReverb );
+			wfReverb.SaveAsPcm( "C:\\TmpAudio", "DetermineLevelsStereo.wav", aReverb );
 			return;
 		}
 		else {

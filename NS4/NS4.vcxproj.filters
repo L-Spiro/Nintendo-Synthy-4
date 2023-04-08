@@ -925,5 +925,11 @@
     <None Include="Src\Games\NS4SuperRobotWars64Files.inl">
       <Filter>Header Files\Games</Filter>
     </None>
+    <None Include="Src\Games\NS4KenGriffeyJrsSlugfestFiles.inl">
+      <Filter>Header Files\Games</Filter>
+    </None>
+    <None Include="Src\Reverb\Taps\NS4ReverbKenGriffeyJrsSlugfest0.inl">
+      <Filter>Header Files\Reverb\Taps</Filter>
+    </None>
   </ItemGroup>
 </Project>

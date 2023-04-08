@@ -1412,6 +1412,19 @@ namespace ns4 {
 		{         0,	      7680,	   +12451,		       +0,	      12451,		                      0,	                      0,		        +0,		                      0,	/*0xDFF538B0*/    4095 },
 	};
 
+	/** Taps harvested from Ken Griffey Jr.’s Slugfest. */
+	NS4_REVERB_TAP CReverb::m_rtKenGriffeyJrsSlugfest0[] = {
+#include "Taps/NS4ReverbKenGriffeyJrsSlugfest0.inl"
+	};
+
+	/** The comb filter delay lines for Ken Griffey Jr.’s Slugfest. */
+	NS4_DELAY_N64 CReverb::m_dn64KenGriffeyJrsSlugfest0[] = {
+		//ui32Input		ui32Output	i16FfCoef		i16FbCoef		i16Gain							 dRsInc						 dRsVal			i32RsDelta						dRsGain						ui16Fc
+		{         0,	      2160,	    +9830,		    -9830,	          0 },
+		{       760,	      1520,	    +3276,		    -3276,	      16383 },
+		{         0,	      2400,	    +5000,		       +0,	          0,		                      0,	                      0,		        +0,		                      0,	/*0xDFEEF660*/    6400 },
+	};
+
 }	// namespace ns4
 
 namespace ns4 {
@@ -2519,6 +2532,19 @@ namespace ns4 {
 			NS4_NO_FADE,
 			NS4_LPF( 4095.0 / 1.0, 0.00725722320497120, 0.5, NS4_FILTER_DB_TO_ORDER( 6 ) ),
 		},	// 153
+		// Ken Griffey Jr.’s Slugfest.
+		{
+			NS4_ONLY_COMB( 1.0, 0 ),
+			NS4_COMB( 4000, 320 / 2, m_dn64KenGriffeyJrsSlugfest0, 20.0 ),
+		},	// 154
+		// Ken Griffey Jr.’s Slugfest.
+		{
+			NS4_TAPS( m_rtKenGriffeyJrsSlugfest0 ),
+			NS4_SQRT_0_5 * 1.0,															// dTapVol
+			0,																		// i64TapOffset
+			NS4_NO_FADE,
+			NS4_NO_LPF,
+		},	// 155
 	};
 
 

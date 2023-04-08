@@ -166,6 +166,8 @@ namespace ns4 {
 			NS4_T_SOUTH_PARK_0					= 151,
 			NS4_T_SUPER_ROBOT_WARS_64_DELAY_0	= 152,
 			NS4_T_SUPER_ROBOT_WARS_64_0			= 153,
+			NS4_T_KEN_GRIFFY_JRS_SLUGFEST_DELAY_0	= 154,
+			NS4_T_KEN_GRIFFY_JRS_SLUGFEST_0			= 155,
 			
 		};
 
@@ -729,6 +731,11 @@ namespace ns4 {
 		/** The comb filter delay lines for Super Robot Wars 64. */
 		static NS4_DELAY_N64					m_dn64SuperRobotWars640[];
 
+		/** Taps harvested from Ken Griffey Jr.’s Slugfest. */
+		static NS4_REVERB_TAP					m_rtKenGriffeyJrsSlugfest0[];
+
+		/** The comb filter delay lines for Ken Griffey Jr.’s Slugfest. */
+		static NS4_DELAY_N64					m_dn64KenGriffeyJrsSlugfest0[];
 
 		// == Functions.
 		/**
