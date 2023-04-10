@@ -7,7 +7,7 @@
 #define NS4_REVERB							ns4::CReverb::NS4_T_LAST_LEGION_UX_0
 #define NS4_ORIG_HZ							22047
 #define NS4_CURVE							40.0
-#define NS4_OUT_DIRECTORY					u8"T:\\N64OST\\Last Legion UX\\"
+#define NS4_OUT_DIRECTORY					u8"C:\\N64OST\\Last Legion UX\\"
 #define NS4_OUT_DIRECTORY_NUMBERS			NS4_OUT_DIRECTORY u8"Numbered\\"
 #define NS4_REL_MULTIPLIER					(10.0)
 

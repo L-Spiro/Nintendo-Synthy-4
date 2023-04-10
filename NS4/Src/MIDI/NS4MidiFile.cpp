@@ -4191,6 +4191,26 @@ namespace ns4 {
 
 				psSample->SetHz( wfWavFile.Hz() );
 				m_vSampleForManualRender.push_back( psSample );
+
+
+				uint32_t ui32LoopStart = UINT32_MAX;
+				uint32_t ui32LoopEnd = UINT32_MAX;
+
+				if ( ui32LoopStart != UINT32_MAX && ui32LoopEnd != UINT32_MAX ) {
+					psSample->SetLoopPoints( ui32LoopStart,
+						ui32LoopEnd,
+						0 );
+					psSample->SetLoopCount( UINT32_MAX );
+					psSample->SetLoopType( CWavLib::NS4_LT_NORMAL );
+				}
+				else if ( wfWavFile.Loops().size() ) {
+					psSample->SetLoopPoints( wfWavFile.Loops()[0].uiStart,
+						wfWavFile.Loops()[0].uiEnd,
+						wfWavFile.Loops()[0].uiFraction );
+					psSample->SetLoopCount( wfWavFile.Loops()[0].uiPlayCount );
+					//psSample->SetLoopCount( UINT32_MAX );
+					psSample->SetLoopType( static_cast<CWavLib::NS4_LOOP_TYPES>(wfWavFile.Loops()[0].uiType) );
+				}
 			}
 			catch ( const std::bad_alloc & /*_eE*/ ) {
 				std::printf( "RENDERSAMPLE: Loaded but unable to store sample: %s\r\n", sPath.c_str() );
@@ -4393,8 +4413,13 @@ namespace ns4 {
 				_aAudio[0][tbWavTime.CurTick()] += dL * dVal;
 				_aAudio[1][tbWavTime.CurTick()] += dR * dVal;
 			}
-			if ( nNote.sSampler.OutOfRange() ) { break; }
+			if ( nNote.sSampler.OutOfRange() ) {
+				break;
+			}
 			tbWavTime.Tick();
+			if ( _troOptions.uiMaxSamples <= tbWavTime.CurTick() ) {
+				break;
+			}
 		}
 		
 	}

@@ -48,6 +48,7 @@
 
 { u8"Ken Griffey Jr.'s Slugfest (U) 00000000 00016F44.mid", u8"Ken Griffey Jr.'s Slugfest (U) 00000000 00016F44.mid TrackParseDebug.txt", u8"Mid 7th", 0 },
 { u8"Ken Griffey Jr.'s Slugfest (U) 0000002F 0001F5A0.mid", u8"Ken Griffey Jr.'s Slugfest (U) 0000002F 0001F5A0.mid TrackParseDebug.txt", u8"Results", 0 },
+{ u8"Ken Griffey Jr.'s Slugfest (U) 00000035 00023EFC.mid", u8"Ken Griffey Jr.'s Slugfest (U) 00000035 00023EFC.mid TrackParseDebug.txt", u8"Stadium Fly-Through", 0 },
 { u8"Ken Griffey Jr.'s Slugfest (U) 00000008 0001863C.mid", u8"Ken Griffey Jr.'s Slugfest (U) 00000008 0001863C.mid TrackParseDebug.txt", u8"Home Run Derby", 0 },
 { u8"Ken Griffey Jr.'s Slugfest (U) 00000018 0001ACC8.mid", u8"Ken Griffey Jr.'s Slugfest (U) 00000018 0001ACC8.mid TrackParseDebug.txt", u8"Champion", 0 },
 { u8"Ken Griffey Jr.'s Slugfest (U) 00000034 00022DA0.mid", u8"Ken Griffey Jr.'s Slugfest (U) 00000034 00022DA0.mid TrackParseDebug.txt", u8"Credits", 0 },
@@ -77,4 +78,4 @@
 { u8"Ken Griffey Jr.'s Slugfest (U) 00000002 00017BA0.mid", u8"Ken Griffey Jr.'s Slugfest (U) 00000002 00017BA0.mid TrackParseDebug.txt", u8"Chant 1", 0 },
 { u8"Ken Griffey Jr.'s Slugfest (U) 00000009 00018E48.mid", u8"Ken Griffey Jr.'s Slugfest (U) 00000009 00018E48.mid TrackParseDebug.txt", u8"Chant 2", 0 },
 
-{ u8"Ken Griffey Jr.'s Slugfest (U) 00000035 00023EFC.mid", u8"Ken Griffey Jr.'s Slugfest (U) 00000035 00023EFC.mid TrackParseDebug.txt", u8"Unknown", 0 },
+

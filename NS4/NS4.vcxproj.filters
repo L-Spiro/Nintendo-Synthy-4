@@ -931,5 +931,11 @@
     <None Include="Src\Reverb\Taps\NS4ReverbKenGriffeyJrsSlugfest0.inl">
       <Filter>Header Files\Reverb\Taps</Filter>
     </None>
+    <None Include="Src\Games\NS4DukeNukemZer0H0urFiles.inl">
+      <Filter>Header Files\Games</Filter>
+    </None>
+    <None Include="Src\Games\NS4DukeNukem64Files.inl">
+      <Filter>Header Files\Games</Filter>
+    </None>
   </ItemGroup>
 </Project>

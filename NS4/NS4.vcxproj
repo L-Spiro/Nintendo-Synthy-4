@@ -269,6 +269,8 @@
     <None Include="Src\Games\NS4DrMario64Files.inl" />
     <None Include="Src\Games\NS4DryDryDocks64Files.inl" />
     <None Include="Src\Games\NS4DualHeroesFiles.inl" />
+    <None Include="Src\Games\NS4DukeNukem64Files.inl" />
+    <None Include="Src\Games\NS4DukeNukemZer0H0urFiles.inl" />
     <None Include="Src\Games\NS4EikouNoStAndrewsFiles.inl" />
     <None Include="Src\Games\NS4ExtremeGFiles.inl" />
     <None Include="Src\Games\NS4ExtremeGXG2Files.inl" />
