@@ -233,7 +233,7 @@ int oldmain() {
 
 #if 0
 	// Tools somehow stopped being able to load .n64 files due to not automatically byte-swapping them.
-#define LSN_SWAP_ME			L"Duke Nukem - Zero Hour (USA)"
+#define LSN_SWAP_ME			L"Mike Piazza's StrikeZone (USA)"
 #define LSN_SWAP_ME_DIR		L"C:\\My Projects\\N64\\Roms\\"
 	{
 		const wchar_t * pu16ByteswapMe = LSN_SWAP_ME_DIR LSN_SWAP_ME L".n64";
@@ -449,7 +449,8 @@ int oldmain() {
 //#include "Src/Games/NS4KenGriffeyJrsSlugfestFiles.inl"
 //#include "Src/Games/NS4DukeNukemZer0H0urFiles.inl"
 //#include "Src/Games/NS4DukeNukem64Files.inl"
-#include "Src/Games/NS4Forsaken.inl"
+//#include "Src/Games/NS4Forsaken.inl"
+#include "Src/Games/NS4MikePiazzasStrikeZoneFiles.inl"
 #else
 		{}
 #endif

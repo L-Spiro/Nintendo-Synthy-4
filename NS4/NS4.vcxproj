@@ -311,6 +311,7 @@
     <None Include="Src\Games\NS4MickeysSpeedwayUsaFiles.inl" />
     <None Include="Src\Games\NS4MickeysSpeedwayUsaStereoFiles.inl" />
     <None Include="Src\Games\NS4MicroMachines64TurboFiles.inl" />
+    <None Include="Src\Games\NS4MikePiazzasStrikeZoneFiles.inl" />
     <None Include="Src\Games\NS4MischiefMakersFiles.inl" />
     <None Include="Src\Games\NS4MissionImpossibleFiles.inl" />
     <None Include="Src\Games\NS4MonacoGrandPrixFiles.inl" />
@@ -424,6 +425,7 @@
     <None Include="Src\Reverb\Taps\NS4ReverbMarioParty30.inl" />
     <None Include="Src\Reverb\Taps\NS4ReverbMickeysSpeedwayUsaLeft0.inl" />
     <None Include="Src\Reverb\Taps\NS4ReverbMickeysSpeedwayUsaRight0.inl" />
+    <None Include="Src\Reverb\Taps\NS4ReverbMikePiazzasStrikeZone0.inl" />
     <None Include="Src\Reverb\Taps\NS4ReverbMischiefMakers0.inl" />
     <None Include="Src\Reverb\Taps\NS4ReverbMissionImpossible0.inl" />
     <None Include="Src\Reverb\Taps\NS4ReverbMrcMultiRacingChampionship0.inl" />
