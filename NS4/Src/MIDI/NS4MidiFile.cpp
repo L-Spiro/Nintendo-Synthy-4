@@ -1515,6 +1515,10 @@ namespace ns4 {
 									dR = NS4_SQRT_0_5;
 									break;
 								}
+								case NS4_EPT_STEREO : {
+									dL = m_fStereoPanTable[ui8Pan];
+									dR = m_fStereoPanTable[127-ui8Pan];
+								}
 								default : {
 									dL = m_fStdPanTable[ui8Pan];
 									dR = m_fStdPanTable[127-ui8Pan];
@@ -1522,10 +1526,32 @@ namespace ns4 {
 							}
 						}
 						else {
-							int32_t i32Pan = int32_t( (std::round( vNotes[J].liPanInterpolator.Value() ) - 0x40) + int32_t( vNotes[J].psSoundbankSample->ui8Pan ) );
-							i32Pan = std::clamp( i32Pan - 1, 0, 126 );
-							dL = CWavLib::Cos( (i32Pan / 126.0) * NS4_HALF_PI );
-							dR = CWavLib::Sin( (i32Pan / 126.0) * NS4_HALF_PI );
+							switch ( m_sSettings.eptEadPanning ) {
+								case NS4_EPT_HEADPHONES : {
+									double dPan = (std::round( vNotes[J].liPanInterpolator.Value() ) - 0x40) + int32_t( vNotes[J].psSoundbankSample->ui8Pan );
+									uint8_t ui8Pan = uint8_t( std::round( std::clamp( dPan, 0.0, 127.0 ) ) );
+									dL = m_fHeadphonesPanTable[ui8Pan];
+									dR = m_fHeadphonesPanTable[127-ui8Pan];
+									break;
+								}
+								case NS4_EPT_MONO : {
+									dL = NS4_SQRT_0_5;
+									dR = NS4_SQRT_0_5;
+									break;
+								}
+								case NS4_EPT_STEREO : {
+									double dPan = (std::round( vNotes[J].liPanInterpolator.Value() ) - 0x40) + int32_t( vNotes[J].psSoundbankSample->ui8Pan );
+									uint8_t ui8Pan = uint8_t( std::round( std::clamp( dPan, 0.0, 127.0 ) ) );
+									dL = m_fStereoPanTable[ui8Pan];
+									dR = m_fStereoPanTable[127-ui8Pan];
+								}
+								default : {
+									int32_t i32Pan = int32_t( (std::round( vNotes[J].liPanInterpolator.Value() ) - 0x40) + int32_t( vNotes[J].psSoundbankSample->ui8Pan ) );
+									i32Pan = std::clamp( i32Pan - 1, 0, 126 );
+									dL = CWavLib::Cos( (i32Pan / 126.0) * NS4_HALF_PI );
+									dR = CWavLib::Sin( (i32Pan / 126.0) * NS4_HALF_PI );
+								}
+							}
 						}
 
 						
@@ -4330,6 +4356,10 @@ namespace ns4 {
 						dR = NS4_SQRT_0_5;
 						break;
 					}
+					case NS4_EPT_STEREO : {
+						dL = m_fStereoPanTable[ui8Pan];
+						dR = m_fStereoPanTable[127-ui8Pan];
+					}
 					default : {
 						dL = m_fStdPanTable[ui8Pan];
 						dR = m_fStdPanTable[127-ui8Pan];
@@ -4337,20 +4367,31 @@ namespace ns4 {
 				}
 			}
 			else {
-				int32_t i32Pan = int32_t( (std::round( nNote.liPanInterpolator.Value() ) - 0x40) + int32_t( ui8InstPan ) );
-				i32Pan = std::clamp( i32Pan - 1, 0, 126 );
-				// Take care of the minor inaccuracies in sin/cos near 1 and 0.
-				if ( i32Pan == 0 ) {
-					dL = 1.0;
-					dR = 0.0;
-				}
-				else if ( i32Pan == 126 ) {
-					dL = 0.0;
-					dR = 1.0;
-				}
-				else {
-					dL = CWavLib::Cos( (i32Pan / 126.0) * NS4_HALF_PI );
-					dR = CWavLib::Sin( (i32Pan / 126.0) * NS4_HALF_PI );
+				switch ( m_sSettings.eptEadPanning ) {
+					case NS4_EPT_HEADPHONES : {
+						double dPan = (std::round( nNote.liPanInterpolator.Value() ) - 0x40) + int32_t( ui8InstPan );
+						uint8_t ui8Pan = uint8_t( std::round( std::clamp( dPan, 0.0, 127.0 ) ) );
+						dL = m_fHeadphonesPanTable[ui8Pan];
+						dR = m_fHeadphonesPanTable[127-ui8Pan];
+						break;
+					}
+					case NS4_EPT_MONO : {
+						dL = NS4_SQRT_0_5;
+						dR = NS4_SQRT_0_5;
+						break;
+					}
+					case NS4_EPT_STEREO : {
+						double dPan = (std::round( nNote.liPanInterpolator.Value() ) - 0x40) + int32_t( ui8InstPan );
+						uint8_t ui8Pan = uint8_t( std::round( std::clamp( dPan, 0.0, 127.0 ) ) );
+						dL = m_fStereoPanTable[ui8Pan];
+						dR = m_fStereoPanTable[127-ui8Pan];
+					}
+					default : {
+						int32_t i32Pan = int32_t( (std::round( nNote.liPanInterpolator.Value() ) - 0x40) + int32_t( ui8InstPan ) );
+						i32Pan = std::clamp( i32Pan - 1, 0, 126 );
+						dL = CWavLib::Cos( (i32Pan / 126.0) * NS4_HALF_PI );
+						dR = CWavLib::Sin( (i32Pan / 126.0) * NS4_HALF_PI );
+					}
 				}
 			}
 
