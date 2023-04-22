@@ -7,7 +7,7 @@
 #define NS4_REVERB							ns4::CReverb::NS4_T_HEY_YOU_PIKACHU_0
 #define NS4_ORIG_HZ							32006
 #define NS4_CURVE							40.0
-#define NS4_OUT_DIRECTORY					u8"T:\\N64OST\\Hey You, Pikachu!\\"
+#define NS4_OUT_DIRECTORY					u8"C:\\N64OST\\Hey You, Pikachu!\\"
 #define NS4_OUT_DIRECTORY_NUMBERS			NS4_OUT_DIRECTORY u8"Numbered\\"
 #define NS4_NO_PROGRAM_CHANGE_SORT			true
 #define NS4_ENV_MULTIPLIER					(1.0)

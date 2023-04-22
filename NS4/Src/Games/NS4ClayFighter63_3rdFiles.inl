@@ -7,7 +7,7 @@
 #define NS4_REVERB							ns4::CReverb::NS4_T_CLAYFIGHTER_0
 #define NS4_ORIG_HZ							22047
 #define NS4_CURVE							40.0
-#define NS4_OUT_DIRECTORY					u8"F:\\N64OST\\Clay Fighter 63-1rd\\"
+#define NS4_OUT_DIRECTORY					u8"C:\\N64OST\\ClayFighter 63⅓\\"
 #define NS4_OUT_DIRECTORY_NUMBERS			NS4_OUT_DIRECTORY u8"Numbered\\"
 #define NS4_PERC_CHANNEL					9
 #define NS4_WET_FILTER_FREQ					0.0//(NS4_ORIG_HZ / 2.0)
@@ -20,8 +20,8 @@
 
 { u8"Clay Fighter 63 1-3 (U) 00000000 00AD5F70 Title Screen.mid", u8"Clay Fighter 63 1-3 (U) 00000000 00AD5F70.mid TrackParseDebug.txt", u8"Title Screen", 0 },
 { u8"Clay Fighter 63 1-3 (U) 00000001 00AD7520 Character Select.mid", u8"Clay Fighter 63 1-3 (U) 00000001 00AD7520.mid TrackParseDebug.txt", u8"Character Select", 0 },
-{ u8"Clay Fighter 63 1-3 (U) 00000007 00AE7140 Character Select (Scultor's Cut).mid", u8"Clay Fighter 63 1-3 (U) 00000007 00AE7140.mid TrackParseDebug.txt", u8"Character Select (Scultor’s Cut)", 0 },
-{ u8"Clay Fighter 63 1-3 (U) 00000017 00B106A0 (Character Select (Scultor's Cut) Finale).mid", u8"Clay Fighter 63 1-3 (U) 00000017 00B106A0.mid TrackParseDebug.txt", u8"Character Select (Scultor’s Cut) Finale", 0 },
+{ u8"Clay Fighter 63 1-3 (U) 00000007 00AE7140 Character Select (Scultor's Cut).mid", u8"Clay Fighter 63 1-3 (U) 00000007 00AE7140.mid TrackParseDebug.txt", u8"Character Select (Sculptor’s Cut)", 0 },
+{ u8"Clay Fighter 63 1-3 (U) 00000017 00B106A0 (Character Select (Scultor's Cut) Finale).mid", u8"Clay Fighter 63 1-3 (U) 00000017 00B106A0.mid TrackParseDebug.txt", u8"Character Select (Sculptor’s Cut) Finale", 0 },
 { u8"Clay Fighter 63 1-3 (U) 0000000A 00AF0510 Aquadome.mid", u8"Clay Fighter 63 1-3 (U) 0000000A 00AF0510.mid TrackParseDebug.txt", u8"The Aquadome", 0 },
 { u8"Clay Fighter 63 1-3 (U) 0000001A 00B10ED0 The Aquadome Finale.mid", u8"Clay Fighter 63 1-3 (U) 0000001A 00B10ED0.mid TrackParseDebug.txt", u8"The Aquadome Finale", 0 },
 { u8"Clay Fighter 63 1-3 (U) 00000008 00AEA690 Boogerhenge, Tureen Toilet.mid", u8"Clay Fighter 63 1-3 (U) 00000008 00AEA690.mid TrackParseDebug.txt", u8"Boogerhenge, Tureen Toilet", 0 },
