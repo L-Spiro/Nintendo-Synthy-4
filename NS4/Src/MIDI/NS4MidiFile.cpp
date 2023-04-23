@@ -4357,10 +4357,11 @@ namespace ns4 {
 
 
 			double dL, dR;
+			uint8_t ui8Pan;
 			if ( m_sSettings.bUseChanPanWeighting ) {
 				double dWeight = msState.ui8State[NS4_CHN_PAN_WEIGHT] / 128.0;
 				double dPan = (nNote.liPanInterpolator.Value() * dWeight) + (ui8InstPan * (1.0 - dWeight));
-				uint8_t ui8Pan = uint8_t( std::round( std::clamp( dPan, 0.0, 127.0 ) ) );
+				ui8Pan = uint8_t( std::round( std::clamp( dPan, 0.0, 127.0 ) ) );
 				switch ( m_sSettings.eptEadPanning ) {
 					case NS4_EPT_HEADPHONES : {
 						dL = m_fHeadphonesPanTable[ui8Pan];
@@ -4375,6 +4376,7 @@ namespace ns4 {
 					case NS4_EPT_STEREO : {
 						dL = m_fStereoPanTable[ui8Pan];
 						dR = m_fStereoPanTable[127-ui8Pan];
+						break;
 					}
 					default : {
 						dL = m_fStdPanTable[ui8Pan];
@@ -4386,7 +4388,7 @@ namespace ns4 {
 				switch ( m_sSettings.eptEadPanning ) {
 					case NS4_EPT_HEADPHONES : {
 						double dPan = (std::round( nNote.liPanInterpolator.Value() ) - 0x40) + int32_t( ui8InstPan );
-						uint8_t ui8Pan = uint8_t( std::round( std::clamp( dPan, 0.0, 127.0 ) ) );
+						ui8Pan = uint8_t( std::round( std::clamp( dPan, 0.0, 127.0 ) ) );
 						dL = m_fHeadphonesPanTable[ui8Pan];
 						dR = m_fHeadphonesPanTable[127-ui8Pan];
 						break;
@@ -4401,12 +4403,13 @@ namespace ns4 {
 						uint8_t ui8Pan = uint8_t( std::round( std::clamp( dPan, 0.0, 127.0 ) ) );
 						dL = m_fStereoPanTable[ui8Pan];
 						dR = m_fStereoPanTable[127-ui8Pan];
+						break;
 					}
 					default : {
 						int32_t i32Pan = int32_t( (std::round( nNote.liPanInterpolator.Value() ) - 0x40) + int32_t( ui8InstPan ) );
-						i32Pan = std::clamp( i32Pan - 1, 0, 126 );
-						dL = CWavLib::Cos( (i32Pan / 126.0) * NS4_HALF_PI );
-						dR = CWavLib::Sin( (i32Pan / 126.0) * NS4_HALF_PI );
+						ui8Pan = uint8_t( std::clamp( i32Pan - 1, 0, 126 ) );
+						dL = CWavLib::Cos( (ui8Pan / 126.0) * NS4_HALF_PI );
+						dR = CWavLib::Sin( (ui8Pan / 126.0) * NS4_HALF_PI );
 					}
 				}
 			}
@@ -4460,6 +4463,14 @@ namespace ns4 {
 			}
 			if ( ui16Flags & NS4_NRF_INVERT_RIGHT ) {
 				dR = -dR;
+			}
+			if ( m_sSettings.eptEadPanning == NS4_EPT_STEREO ) {
+				if ( ui8Pan < 32 ) {
+					dR = -dR;
+				}
+				else if ( ui8Pan > (127 - 32) ) {
+					dL = -dL;
+				}
 			}
 
 			if ( _aAudio[0].size() <= tbWavTime.CurTick() ) {
