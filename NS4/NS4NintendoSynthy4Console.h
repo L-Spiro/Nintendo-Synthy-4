@@ -419,7 +419,7 @@ int oldmain() {
 //#include "Src/Games/NS4Doom64Files.inl"
 //#include "Src/Games/NS4LastLegionUxFiles.inl"
 //#include "Src/Games/NS4DonaldDuckGoinQuakersFiles.inl"
-#include "Src/Games/NS4HeyYouPikachuFiles.inl"
+//#include "Src/Games/NS4HeyYouPikachuFiles.inl"
 //#include "Src/Games/NS4MonacoGrandPrixFiles.inl"
 //#include "Src/Games/NS4MRCMultiRacingChampionshipFiles.inl"
 //#include "Src/Games/NS4F1PolePositionFiles.inl"
@@ -451,6 +451,8 @@ int oldmain() {
 //#include "Src/Games/NS4DukeNukem64Files.inl"
 //#include "Src/Games/NS4Forsaken.inl"
 //#include "Src/Games/NS4MikePiazzasStrikeZoneFiles.inl"
+//#include "Src/Games/NS4MortalKombatTrilogyFiles.inl"
+#include "Src/Games/NS4WayneGretzkys3DHockeyFiles.inl"
 #else
 		{}
 #endif

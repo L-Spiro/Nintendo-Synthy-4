@@ -316,6 +316,7 @@
     <None Include="Src\Games\NS4MissionImpossibleFiles.inl" />
     <None Include="Src\Games\NS4MonacoGrandPrixFiles.inl" />
     <None Include="Src\Games\NS4MonopolyFiles.inl" />
+    <None Include="Src\Games\NS4MortalKombatTrilogyFiles.inl" />
     <None Include="Src\Games\NS4MRCMultiRacingChampionshipFiles.inl" />
     <None Include="Src\Games\NS4NeonGenesisEvangelionFiles.inl" />
     <None Include="Src\Games\NS4PennyRacersFiles.inl" />
@@ -369,6 +370,7 @@
     <None Include="Src\Games\NS4WarGodsFiles.inl" />
     <None Include="Src\Games\NS4WarGodsOstFiles.inl" />
     <None Include="Src\Games\NS4WaveRace64Files.inl" />
+    <None Include="Src\Games\NS4WayneGretzkys3DHockeyFiles.inl" />
     <None Include="Src\Games\NS4WcwBackstageAssaultFiles.inl" />
     <None Include="Src\Games\NS4WCWvsnWoWorldTourFiles.inl" />
     <None Include="Src\Games\NS4WonderProjectJFiles.inl" />

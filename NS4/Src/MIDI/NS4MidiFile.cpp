@@ -4400,7 +4400,7 @@ namespace ns4 {
 					}
 					case NS4_EPT_STEREO : {
 						double dPan = (std::round( nNote.liPanInterpolator.Value() ) - 0x40) + int32_t( ui8InstPan );
-						uint8_t ui8Pan = uint8_t( std::round( std::clamp( dPan, 0.0, 127.0 ) ) );
+						ui8Pan = uint8_t( std::round( std::clamp( dPan, 0.0, 127.0 ) ) );
 						dL = m_fStereoPanTable[ui8Pan];
 						dR = m_fStereoPanTable[127-ui8Pan];
 						break;

@@ -949,5 +949,11 @@
     <None Include="Src\Reverb\Taps\NS4ReverbMikePiazzasStrikeZone0.inl">
       <Filter>Header Files\Reverb\Taps</Filter>
     </None>
+    <None Include="Src\Games\NS4MortalKombatTrilogyFiles.inl">
+      <Filter>Header Files\Games</Filter>
+    </None>
+    <None Include="Src\Games\NS4WayneGretzkys3DHockeyFiles.inl">
+      <Filter>Header Files\Games</Filter>
+    </None>
   </ItemGroup>
 </Project>
