@@ -1439,6 +1439,24 @@ namespace ns4 {
 		{         0,	      3760,	    +8000,		       +0,	          0,		                      0,	                      0,		        +0,		                      0,	/*0xDFF4EAF0*/    6400 },
 	};
 
+	/** Taps harvested from F-1 World Grand Prix II. */
+	NS4_REVERB_TAP CReverb::m_rtF1WorldGrandPrixIi0[] = {
+#include "Taps/NS4ReverbF1WorldGrandPrixIi0.inl"
+	};
+
+/** The comb filter delay lines for F-1 World Grand Prix II. */
+	NS4_DELAY_N64 CReverb::m_dn64F1WorldGrandPrixIi0[] = {
+		//ui32Input		ui32Output	i16FfCoef		i16FbCoef		i16Gain							 dRsInc						 dRsVal			i32RsDelta						dRsGain						ui16Fc
+		{         0,	      1600,	    +9830,		    -9830,	       2400 },
+		{        64,	      3600,	    +9830,		    -9830,	       3600,		                      0,	                      0,		        +0,		                      0,	/*0xDFE9D910*/    6400 },
+		{       656,	      2048,	   +16384,		   -16384,	       2400 },
+		{       720,	      1648,	    +8192,		    -8192,	       4400 },
+		{      2592,	      4512,	   +16384,		   -16384,	       4820,		                      0,	                      0,		        +0,		                      0,	/*0xDFE9D950*/    9216 },
+		{      2656,	      3808,	    +8192,		    -8192,	       5760 },
+		{      3808,	      4288,	    +8192,		    -8192,	       6000 },
+		{         0,	      4784,	       +0,		       +0,	       6400 },
+	};
+
 }	// namespace ns4
 
 namespace ns4 {
@@ -2563,7 +2581,7 @@ namespace ns4 {
 		{
 			NS4_ONLY_COMB( 1.0, 0 ),
 			NS4_COMB( 4000, 320 / 2, m_dn64MikePiazzasStrikeZone0, 20.0 ),
-		},	// XXX
+		},	// 156
 		// Mike Piazza's Strike Zone.
 		{
 			NS4_TAPS( m_rtMikePiazzasStrikeZone0 ),
@@ -2571,7 +2589,20 @@ namespace ns4 {
 			0,																		// i64TapOffset
 			NS4_NO_FADE,
 			NS4_NO_LPF,
-		},	// XXX
+		},	// 157
+		// F-1 World Grand Prix II.
+		{
+			NS4_ONLY_COMB( 1.0, 0 ),
+			NS4_COMB( 5200, 320 / 2, m_dn64F1WorldGrandPrixIi0, 20.0 ),
+		},	// 158
+		// F-1 World Grand Prix II.
+		{
+			NS4_TAPS( m_rtF1WorldGrandPrixIi0 ),
+			NS4_SQRT_0_5,															// dTapVol
+			0,																		// i64TapOffset
+			NS4_FADE( 1.0, 1.1, 4.4 ),												// dTime
+			NS4_NO_LPF,
+		},	// 159
 	};
 
 

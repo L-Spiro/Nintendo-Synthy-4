@@ -277,6 +277,7 @@
     <None Include="Src\Games\NS4F1PolePositionFiles.inl" />
     <None Include="Src\Games\NS4F1RacingChampionshipFiles.inl" />
     <None Include="Src\Games\NS4F1WorldGrandPrixFiles.inl" />
+    <None Include="Src\Games\NS4F1WorldGrandPrixIiFiles.inl" />
     <None Include="Src\Games\NS4FightersDestinyFiles.inl" />
     <None Include="Src\Games\NS4FlyingDragonFiles.inl" />
     <None Include="Src\Games\NS4Forsaken.inl" />
@@ -367,6 +368,7 @@
     <None Include="Src\Games\NS4Turok3ShadowOfOblivion.inl" />
     <None Include="Src\Games\NS4TurokDinosaurHunterFiles.inl" />
     <None Include="Src\Games\NS4TurokRageWars.inl" />
+    <None Include="Src\Games\NS4VirtualChess64Files.inl" />
     <None Include="Src\Games\NS4WarGodsFiles.inl" />
     <None Include="Src\Games\NS4WarGodsOstFiles.inl" />
     <None Include="Src\Games\NS4WaveRace64Files.inl" />
@@ -409,6 +411,7 @@
     <None Include="Src\Reverb\Taps\NS4ReverbF1WorldGrandPrix4.inl" />
     <None Include="Src\Reverb\Taps\NS4ReverbF1WorldGrandPrix5.inl" />
     <None Include="Src\Reverb\Taps\NS4ReverbF1WorldGrandPrix6.inl" />
+    <None Include="Src\Reverb\Taps\NS4ReverbF1WorldGrandPrixIi0.inl" />
     <None Include="Src\Reverb\Taps\NS4ReverbFlyingDragon0.inl" />
     <None Include="Src\Reverb\Taps\NS4ReverbGE0070.inl" />
     <None Include="Src\Reverb\Taps\NS4ReverbGetterLove0.inl" />

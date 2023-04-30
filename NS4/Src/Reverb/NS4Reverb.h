@@ -170,6 +170,9 @@ namespace ns4 {
 			NS4_T_KEN_GRIFFY_JRS_SLUGFEST_0			= 155,
 			NS4_T_MIKE_PIAZZAS_STRIKE_ZONE_DELAY_0	= 156,
 			NS4_T_MIKE_PIAZZAS_STRIKE_ZONE_0		= 157,
+
+			NS4_T_F1_WORLD_GRAND_PRIX_II_DELAY_0= 158,
+			NS4_T_F1_WORLD_GRAND_PRIX_II_0		= 159,
 			
 		};
 
@@ -744,6 +747,12 @@ namespace ns4 {
 
 		/** The comb filter delay lines for Mike Piazza's Strike Zone. */
 		static NS4_DELAY_N64					m_dn64MikePiazzasStrikeZone0[];
+
+		/** Taps harvested from F-1 World Grand Prix II. */
+		static NS4_REVERB_TAP					m_rtF1WorldGrandPrixIi0[];
+
+		/** The comb filter delay lines for F-1 World Grand Prix II. */
+		static NS4_DELAY_N64					m_dn64F1WorldGrandPrixIi0[];
 
 		// == Functions.
 		/**

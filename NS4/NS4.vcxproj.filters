@@ -955,5 +955,14 @@
     <None Include="Src\Games\NS4WayneGretzkys3DHockeyFiles.inl">
       <Filter>Header Files\Games</Filter>
     </None>
+    <None Include="Src\Games\NS4VirtualChess64Files.inl">
+      <Filter>Header Files\Games</Filter>
+    </None>
+    <None Include="Src\Games\NS4F1WorldGrandPrixIiFiles.inl">
+      <Filter>Header Files\Games</Filter>
+    </None>
+    <None Include="Src\Reverb\Taps\NS4ReverbF1WorldGrandPrixIi0.inl">
+      <Filter>Header Files\Reverb\Taps</Filter>
+    </None>
   </ItemGroup>
 </Project>

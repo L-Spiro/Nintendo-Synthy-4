@@ -159,6 +159,7 @@ int oldmain() {
 		//ns4::CReverb::HarvestUnfilteredMonoTaps( u8"C:\\My Projects\\Nintendo-Synthy-4\\NS4\\Src\\Reverb\\Research\\SP HD.wav", -1, 1, 0, 0, 0 );
 		//ns4::CReverb::HarvestUnfilteredMonoTaps( u8"C:\\My Projects\\Nintendo-Synthy-4\\NS4\\Src\\Reverb\\Research\\SRW64 HD.wav", -1, 1, 0, 0, 0 );
 		//ns4::CReverb::HarvestUnfilteredMonoTaps( u8"C:\\My Projects\\Nintendo-Synthy-4\\NS4\\Src\\Reverb\\Research\\KGJS HD.wav", -1, 1, 0, 0, 0 );
+		ns4::CReverb::HarvestUnfilteredMonoTaps( u8"C:\\My Projects\\Nintendo-Synthy-4\\NS4\\Src\\Reverb\\Research\\F1WGP2 HD.wav", -1, 1, 0, 0, 0 );
 		
 	}
 	{
@@ -203,11 +204,11 @@ int oldmain() {
 
 #if 0
 	{
-		const uint32_t ui32SampRate = 22047;
+		const uint32_t ui32SampRate = 22049;
 		
 		ns4::lwaudio aWet = ns4::CWavLib::AllocateSamples( 1, ui32SampRate * 30 );
 		aWet[0][0] = 1.0;
-		ns4::lwaudio aAccum = ns4::CReverb::CreateReverb( ns4::CReverb::NS4_T_KEN_GRIFFY_JRS_SLUGFEST_DELAY_0, aWet, ui32SampRate, ui32SampRate, 0.0, 0 );
+		ns4::lwaudio aAccum = ns4::CReverb::CreateReverb( ns4::CReverb::NS4_T_F1_WORLD_GRAND_PRIX_II_DELAY_0, aWet, ui32SampRate, ui32SampRate, 0.0, 0 );
 		ns4::lwsample sFirst = aWet[0][0];
 		if ( sFirst == 0.0 ) {
 			::OutputDebugStringA( "Measles.\r\n" );
@@ -233,7 +234,7 @@ int oldmain() {
 
 #if 0
 	// Tools somehow stopped being able to load .n64 files due to not automatically byte-swapping them.
-#define LSN_SWAP_ME			L"Mike Piazza's StrikeZone (USA)"
+#define LSN_SWAP_ME			L"F-1 World Grand Prix II (Europe) (En,Fr,De,Es)"
 #define LSN_SWAP_ME_DIR		L"C:\\My Projects\\N64\\Roms\\"
 	{
 		const wchar_t * pu16ByteswapMe = LSN_SWAP_ME_DIR LSN_SWAP_ME L".n64";
@@ -324,7 +325,7 @@ int oldmain() {
 //#include "Src/Games/NS4BanjoKazooieFiles.inl"
 //#include "Src/Games/NS4BlastCorpsFiles.inl"
 //#include "Src/Games/NS4BlastCorpsPALFiles.inl"
-//#include "Src/Games/NS4BeetAdventureRacing!Files.inl"
+#include "Src/Games/NS4BeetAdventureRacing!Files.inl"
 //#include "Src/Games/NS4AeroFightersAssaultFiles.inl"
 //#include "Src/Games/NS4AeroFightersAssaultOverSamplingFiles.inl"
 //#include "Src/Games/NS4F1WorldGrandPrixFiles.inl"
@@ -452,7 +453,9 @@ int oldmain() {
 //#include "Src/Games/NS4Forsaken.inl"
 //#include "Src/Games/NS4MikePiazzasStrikeZoneFiles.inl"
 //#include "Src/Games/NS4MortalKombatTrilogyFiles.inl"
-#include "Src/Games/NS4WayneGretzkys3DHockeyFiles.inl"
+//#include "Src/Games/NS4WayneGretzkys3DHockeyFiles.inl"
+//#include "Src/Games/NS4VirtualChess64Files.inl"
+//#include "Src/Games/NS4F1WorldGrandPrixIiFiles.inl"
 #else
 		{}
 #endif
