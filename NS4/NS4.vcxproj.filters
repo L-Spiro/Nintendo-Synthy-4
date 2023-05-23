@@ -964,5 +964,11 @@
     <None Include="Src\Reverb\Taps\NS4ReverbF1WorldGrandPrixIi0.inl">
       <Filter>Header Files\Reverb\Taps</Filter>
     </None>
+    <None Include="Src\Games\NS4MajorLeagueBaseballFeaturingKenGriffeyJrFiles.inl">
+      <Filter>Header Files\Games</Filter>
+    </None>
+    <None Include="Src\Games\NS4ShinNihonProWrestlingToukonRoad2TheNextGenerationFiles.inl">
+      <Filter>Header Files\Games</Filter>
+    </None>
   </ItemGroup>
 </Project>

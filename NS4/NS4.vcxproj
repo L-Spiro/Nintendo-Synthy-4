@@ -304,6 +304,7 @@
     <None Include="Src\Games\NS4Kirby64TheCrystalShardsFiles.inl" />
     <None Include="Src\Games\NS4LastLegionUxFiles.inl" />
     <None Include="Src\Games\NS4MaceTheDarkAgesFiles.inl" />
+    <None Include="Src\Games\NS4MajorLeagueBaseballFeaturingKenGriffeyJrFiles.inl" />
     <None Include="Src\Games\NS4MarioKart64Files.inl" />
     <None Include="Src\Games\NS4MarioKart64HeadphonesFiles.inl" />
     <None Include="Src\Games\NS4MarioParty2Files.inl" />
@@ -337,6 +338,7 @@
     <None Include="Src\Games\NS4Rush2Files.inl" />
     <None Include="Src\Games\NS4SanFranciscoRushFiles.inl" />
     <None Include="Src\Games\NS4SCARSFiles.inl" />
+    <None Include="Src\Games\NS4ShinNihonProWrestlingToukonRoad2TheNextGenerationFiles.inl" />
     <None Include="Src\Games\NS4ShinNihonProWrestlingToukonRoadBraveSpiritsFiles.inl" />
     <None Include="Src\Games\NS4SimCity2000Files.inl" />
     <None Include="Src\Games\NS4SnowboardKidsFiles.inl" />

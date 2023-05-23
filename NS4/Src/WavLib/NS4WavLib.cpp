@@ -612,7 +612,7 @@ namespace ns4 {
 	/**
 	 *  6-point, 5th-order Hermite Z-form sampling.
 	 *
-	 * \param _pdsSamples The array of 6 input samples, indices 2, -1, 0, 1, 2, and 3.
+	 * \param _pdsSamples The array of 6 input samples, indices -2, -1, 0, 1, 2, and 3.
 	 * \param _dFrac The interpolation amount.
 	 * \return Returns the interpolated point.
 	 */
@@ -634,7 +634,7 @@ namespace ns4 {
 	/**
 	 *  6-point, 5th-order B-spline x-form sampling.
 	 *
-	 * \param _pdsSamples The array of 6 input samples, indices 2, -1, 0, 1, 2, and 3.
+	 * \param _pdsSamples The array of 6 input samples, indices -2, -1, 0, 1, 2, and 3.
 	 * \param _dFrac The interpolation amount.
 	 * \return Returns the interpolated point.
 	 */
@@ -656,7 +656,7 @@ namespace ns4 {
 	/**
 	 * 6-point, 5th-order 2nd-order-osculating Z-form sampling.
 	 *
-	 * \param _pdsSamples The array of 6 input samples, indices 2, -1, 0, 1, 2, and 3.
+	 * \param _pdsSamples The array of 6 input samples, indices -2, -1, 0, 1, 2, and 3.
 	 * \param _dFrac The interpolation amount.
 	 * \return Returns the interpolated point.
 	 */
@@ -678,7 +678,7 @@ namespace ns4 {
 	/**
 	 * 6-point, 5th-order optimal 2x Z-form sampling.
 	 *
-	 * \param _pdsSamples The array of 6 input samples, indices 2, -1, 0, 1, 2, and 3.
+	 * \param _pdsSamples The array of 6 input samples, indices -2, -1, 0, 1, 2, and 3.
 	 * \param _dFrac The interpolation amount.
 	 * \param _dPreEmphHzInRadians The pre-emphasis x value.
 	 * \return Returns the interpolated point.
@@ -707,7 +707,7 @@ namespace ns4 {
 	/**
 	 * 6-point, 5th-order optimal 4x z-form sampling.
 	 *
-	 * \param _pdsSamples The array of 6 input samples, indices 2, -1, 0, 1, 2, and 3.
+	 * \param _pdsSamples The array of 6 input samples, indices -2, -1, 0, 1, 2, and 3.
 	 * \param _dFrac The interpolation amount.
 	 * \param _dPreEmphHzInRadians The pre-emphasis x value.
 	 * \return Returns the interpolated point.
@@ -736,7 +736,7 @@ namespace ns4 {
 	/**
 	 * 6-point, 5th-order optimal 8x Z-form sampling.
 	 *
-	 * \param _pdsSamples The array of 6 input samples, indices 2, -1, 0, 1, 2, and 3.
+	 * \param _pdsSamples The array of 6 input samples, indices -2, -1, 0, 1, 2, and 3.
 	 * \param _dFrac The interpolation amount.
 	 * \param _dPreEmphHzInRadians The pre-emphasis x value.
 	 * \return Returns the interpolated point.
@@ -765,7 +765,7 @@ namespace ns4 {
 	/**
 	 * 6-point, 5th-order optimal 16x Z-form sampling.
 	 *
-	 * \param _pdsSamples The array of 6 input samples, indices 2, -1, 0, 1, 2, and 3.
+	 * \param _pdsSamples The array of 6 input samples, indices -2, -1, 0, 1, 2, and 3.
 	 * \param _dFrac The interpolation amount.
 	 * \param _dPreEmphHzInRadians The pre-emphasis x value.
 	 * \return Returns the interpolated point.
