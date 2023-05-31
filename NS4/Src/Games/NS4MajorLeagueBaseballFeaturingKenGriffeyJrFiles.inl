@@ -38,50 +38,46 @@
 { u8"Major League Baseball Featuring Ken Griffey Jr. (U) 00000013 0001E7B0.mid", u8"Major League Baseball Featuring Ken Griffey Jr. (U) 00000013 0001E7B0.mid TrackParseDebug.txt", u8"Charge! (2)", 0 },	// Charge! (2)
 { u8"Major League Baseball Featuring Ken Griffey Jr. (U) 00000014 0001E87C.mid", u8"Major League Baseball Featuring Ken Griffey Jr. (U) 00000014 0001E87C.mid TrackParseDebug.txt", u8"Charge! (3)", 0 },	// Charge! (3)
 { u8"Major League Baseball Featuring Ken Griffey Jr. (U) 0000001A 0001F0FC.mid", u8"Major League Baseball Featuring Ken Griffey Jr. (U) 0000001A 0001F0FC.mid TrackParseDebug.txt", u8"Kalinka", 0 },	// Kalinka
-{ u8"Major League Baseball Featuring Ken Griffey Jr. (U) 0000001B 0001F8BC.mid", u8"Major League Baseball Featuring Ken Griffey Jr. (U) 0000001B 0001F8BC.mid TrackParseDebug.txt", u8"0000001B 0001F8BC", 0 },
+{ u8"Major League Baseball Featuring Ken Griffey Jr. (U) 0000001B 0001F8BC.mid", u8"Major League Baseball Featuring Ken Griffey Jr. (U) 0000001B 0001F8BC.mid TrackParseDebug.txt", u8"Organ (Unknown)", 0 },
 { u8"Major League Baseball Featuring Ken Griffey Jr. (U) 0000001C 0001FE70.mid", u8"Major League Baseball Featuring Ken Griffey Jr. (U) 0000001C 0001FE70.mid TrackParseDebug.txt", u8"Charge! 2", 0 },	// Charge! 2
-{ u8"Major League Baseball Featuring Ken Griffey Jr. (U) 0000001D 0001FFFC.mid", u8"Major League Baseball Featuring Ken Griffey Jr. (U) 0000001D 0001FFFC.mid TrackParseDebug.txt", u8"Gypsy Spain 2.", 0 },	// Gypsy Spain 2.
-{ u8"Major League Baseball Featuring Ken Griffey Jr. (U) 0000001E 00020264.mid", u8"Major League Baseball Featuring Ken Griffey Jr. (U) 0000001E 00020264.mid TrackParseDebug.txt", u8"Super Mario Bros. Theme.", 0 },	// Super Mario Bros. Theme.
+{ u8"Major League Baseball Featuring Ken Griffey Jr. (U) 0000001D 0001FFFC.mid", u8"Major League Baseball Featuring Ken Griffey Jr. (U) 0000001D 0001FFFC.mid TrackParseDebug.txt", u8"Gypsy Spain 2", 0 },	// Gypsy Spain 2.
+{ u8"Major League Baseball Featuring Ken Griffey Jr. (U) 0000001E 00020264.mid", u8"Major League Baseball Featuring Ken Griffey Jr. (U) 0000001E 00020264.mid TrackParseDebug.txt", u8"Super Mario Bros. Theme", 0 },	// Super Mario Bros. Theme.
 { u8"Major League Baseball Featuring Ken Griffey Jr. (U) 00000036 0002501C.mid", u8"Major League Baseball Featuring Ken Griffey Jr. (U) 00000036 0002501C.mid TrackParseDebug.txt", u8"The Star-Spangled Banner", 0 },	// The Star-Spangled Banner
 { u8"Major League Baseball Featuring Ken Griffey Jr. (U) 00000037 000257A0.mid", u8"Major League Baseball Featuring Ken Griffey Jr. (U) 00000037 000257A0.mid TrackParseDebug.txt", u8"O Canada", 0 },	// O Canada
 
-{ u8"Major League Baseball Featuring Ken Griffey Jr. (U) 00000007 00019AF0.mid", u8"Major League Baseball Featuring Ken Griffey Jr. (U) 00000007 00019AF0.mid TrackParseDebug.txt", u8"Unknown 1", 0 },
-{ u8"Major League Baseball Featuring Ken Griffey Jr. (U) 00000008 00019F5C.mid", u8"Major League Baseball Featuring Ken Griffey Jr. (U) 00000008 00019F5C.mid TrackParseDebug.txt", u8"Unknown 2", 0 },
-{ u8"Major League Baseball Featuring Ken Griffey Jr. (U) 0000000F 0001DCBC.mid", u8"Major League Baseball Featuring Ken Griffey Jr. (U) 0000000F 0001DCBC.mid TrackParseDebug.txt", u8"Unknown 3", 0 },
+{ u8"Major League Baseball Featuring Ken Griffey Jr. (U) 00000007 00019AF0.mid", u8"Major League Baseball Featuring Ken Griffey Jr. (U) 00000007 00019AF0.mid TrackParseDebug.txt", u8"Bottom of Inning", 0 },
+{ u8"Major League Baseball Featuring Ken Griffey Jr. (U) 00000008 00019F5C.mid", u8"Major League Baseball Featuring Ken Griffey Jr. (U) 00000008 00019F5C.mid TrackParseDebug.txt", u8"Top of Inning", 0 },
+{ u8"Major League Baseball Featuring Ken Griffey Jr. (U) 0000000F 0001DCBC.mid", u8"Major League Baseball Featuring Ken Griffey Jr. (U) 0000000F 0001DCBC.mid TrackParseDebug.txt", u8"Unknown 1", 0 },
 
 
+{ u8"Major League Baseball Featuring Ken Griffey Jr. (U) 0000001F 0002036C.mid", u8"Major League Baseball Featuring Ken Griffey Jr. (U) 0000001F 0002036C.mid TrackParseDebug.txt", u8"Getting Ready", 0 },
 
 
-{ u8"Major League Baseball Featuring Ken Griffey Jr. (U) 0000000E 0001DC18.mid", u8"Major League Baseball Featuring Ken Griffey Jr. (U) 0000000E 0001DC18.mid TrackParseDebug.txt", u8"0000000E 0001DC18", 0 },
+{ u8"Major League Baseball Featuring Ken Griffey Jr. (U) 00000022 00022324.mid", u8"Major League Baseball Featuring Ken Griffey Jr. (U) 00000022 00022324.mid TrackParseDebug.txt", u8"Game Event 1", 0 },
+{ u8"Major League Baseball Featuring Ken Griffey Jr. (U) 00000023 000224CC.mid", u8"Major League Baseball Featuring Ken Griffey Jr. (U) 00000023 000224CC.mid TrackParseDebug.txt", u8"Game Event 2", 0 },
+{ u8"Major League Baseball Featuring Ken Griffey Jr. (U) 00000024 000226DC.mid", u8"Major League Baseball Featuring Ken Griffey Jr. (U) 00000024 000226DC.mid TrackParseDebug.txt", u8"Game Event 3", 0 },
+{ u8"Major League Baseball Featuring Ken Griffey Jr. (U) 00000025 00022930.mid", u8"Major League Baseball Featuring Ken Griffey Jr. (U) 00000025 00022930.mid TrackParseDebug.txt", u8"Game Event 4", 0 },
+{ u8"Major League Baseball Featuring Ken Griffey Jr. (U) 00000026 00022B40.mid", u8"Major League Baseball Featuring Ken Griffey Jr. (U) 00000026 00022B40.mid TrackParseDebug.txt", u8"Game Event 5", 0 },
+{ u8"Major League Baseball Featuring Ken Griffey Jr. (U) 00000027 00022DF4.mid", u8"Major League Baseball Featuring Ken Griffey Jr. (U) 00000027 00022DF4.mid TrackParseDebug.txt", u8"Game Event 6", 0 },
+{ u8"Major League Baseball Featuring Ken Griffey Jr. (U) 00000028 000230AC.mid", u8"Major League Baseball Featuring Ken Griffey Jr. (U) 00000028 000230AC.mid TrackParseDebug.txt", u8"Game Event 7", 0 },
+{ u8"Major League Baseball Featuring Ken Griffey Jr. (U) 00000029 000232C4.mid", u8"Major League Baseball Featuring Ken Griffey Jr. (U) 00000029 000232C4.mid TrackParseDebug.txt", u8"Game Event 8", 0 },
+{ u8"Major League Baseball Featuring Ken Griffey Jr. (U) 0000002A 000234B4.mid", u8"Major League Baseball Featuring Ken Griffey Jr. (U) 0000002A 000234B4.mid TrackParseDebug.txt", u8"Game Event 9", 0 },
+{ u8"Major League Baseball Featuring Ken Griffey Jr. (U) 0000002B 0002364C.mid", u8"Major League Baseball Featuring Ken Griffey Jr. (U) 0000002B 0002364C.mid TrackParseDebug.txt", u8"Game Event 10", 0 },
+{ u8"Major League Baseball Featuring Ken Griffey Jr. (U) 0000002C 0002376C.mid", u8"Major League Baseball Featuring Ken Griffey Jr. (U) 0000002C 0002376C.mid TrackParseDebug.txt", u8"Game Event 11", 0 },
+{ u8"Major League Baseball Featuring Ken Griffey Jr. (U) 0000002D 00023984.mid", u8"Major League Baseball Featuring Ken Griffey Jr. (U) 0000002D 00023984.mid TrackParseDebug.txt", u8"Game Event 12", 0 },
+{ u8"Major League Baseball Featuring Ken Griffey Jr. (U) 0000002E 00023C40.mid", u8"Major League Baseball Featuring Ken Griffey Jr. (U) 0000002E 00023C40.mid TrackParseDebug.txt", u8"Game Event 13", 0 },
+{ u8"Major League Baseball Featuring Ken Griffey Jr. (U) 0000002F 00023F3C.mid", u8"Major League Baseball Featuring Ken Griffey Jr. (U) 0000002F 00023F3C.mid TrackParseDebug.txt", u8"Game Event 14", 0 },
+{ u8"Major League Baseball Featuring Ken Griffey Jr. (U) 00000030 000241D4.mid", u8"Major League Baseball Featuring Ken Griffey Jr. (U) 00000030 000241D4.mid TrackParseDebug.txt", u8"Game Event 15", 0 },
+{ u8"Major League Baseball Featuring Ken Griffey Jr. (U) 00000031 00024538.mid", u8"Major League Baseball Featuring Ken Griffey Jr. (U) 00000031 00024538.mid TrackParseDebug.txt", u8"Game Event 16", 0 },
+{ u8"Major League Baseball Featuring Ken Griffey Jr. (U) 00000032 000247F8.mid", u8"Major League Baseball Featuring Ken Griffey Jr. (U) 00000032 000247F8.mid TrackParseDebug.txt", u8"Game Event 17", 0 },
+{ u8"Major League Baseball Featuring Ken Griffey Jr. (U) 00000033 000249F4.mid", u8"Major League Baseball Featuring Ken Griffey Jr. (U) 00000033 000249F4.mid TrackParseDebug.txt", u8"Game Event 18", 0 },
+{ u8"Major League Baseball Featuring Ken Griffey Jr. (U) 00000034 00024BD0.mid", u8"Major League Baseball Featuring Ken Griffey Jr. (U) 00000034 00024BD0.mid TrackParseDebug.txt", u8"Game Event 19", 0 },
+{ u8"Major League Baseball Featuring Ken Griffey Jr. (U) 00000035 00024D90.mid", u8"Major League Baseball Featuring Ken Griffey Jr. (U) 00000035 00024D90.mid TrackParseDebug.txt", u8"Game Event 20", 0 },
 
+{ u8"Major League Baseball Featuring Ken Griffey Jr. (U) 00000015 0001E948.mid", u8"Major League Baseball Featuring Ken Griffey Jr. (U) 00000015 0001E948.mid TrackParseDebug.txt", u8"Incidental 1", 0 },
+{ u8"Major League Baseball Featuring Ken Griffey Jr. (U) 00000016 0001EC0C.mid", u8"Major League Baseball Featuring Ken Griffey Jr. (U) 00000016 0001EC0C.mid TrackParseDebug.txt", u8"Incidental 2", 0 },
+{ u8"Major League Baseball Featuring Ken Griffey Jr. (U) 00000017 0001ECD0.mid", u8"Major League Baseball Featuring Ken Griffey Jr. (U) 00000017 0001ECD0.mid TrackParseDebug.txt", u8"Incidental 3", 0 },
+{ u8"Major League Baseball Featuring Ken Griffey Jr. (U) 00000018 0001EDFC.mid", u8"Major League Baseball Featuring Ken Griffey Jr. (U) 00000018 0001EDFC.mid TrackParseDebug.txt", u8"Incidental 4", 0 },
 
-{ u8"Major League Baseball Featuring Ken Griffey Jr. (U) 00000015 0001E948.mid", u8"Major League Baseball Featuring Ken Griffey Jr. (U) 00000015 0001E948.mid TrackParseDebug.txt", u8"00000015 0001E948", 0 },
-{ u8"Major League Baseball Featuring Ken Griffey Jr. (U) 00000016 0001EC0C.mid", u8"Major League Baseball Featuring Ken Griffey Jr. (U) 00000016 0001EC0C.mid TrackParseDebug.txt", u8"00000016 0001EC0C", 0 },
-{ u8"Major League Baseball Featuring Ken Griffey Jr. (U) 00000017 0001ECD0.mid", u8"Major League Baseball Featuring Ken Griffey Jr. (U) 00000017 0001ECD0.mid TrackParseDebug.txt", u8"00000017 0001ECD0", 0 },
-{ u8"Major League Baseball Featuring Ken Griffey Jr. (U) 00000018 0001EDFC.mid", u8"Major League Baseball Featuring Ken Griffey Jr. (U) 00000018 0001EDFC.mid TrackParseDebug.txt", u8"00000018 0001EDFC", 0 },
-{ u8"Major League Baseball Featuring Ken Griffey Jr. (U) 00000019 0001F028.mid", u8"Major League Baseball Featuring Ken Griffey Jr. (U) 00000019 0001F028.mid TrackParseDebug.txt", u8"00000019 0001F028", 0 },
-
-{ u8"Major League Baseball Featuring Ken Griffey Jr. (U) 0000001F 0002036C.mid", u8"Major League Baseball Featuring Ken Griffey Jr. (U) 0000001F 0002036C.mid TrackParseDebug.txt", u8"0000001F 0002036C", 0 },
-
-
-{ u8"Major League Baseball Featuring Ken Griffey Jr. (U) 00000022 00022324.mid", u8"Major League Baseball Featuring Ken Griffey Jr. (U) 00000022 00022324.mid TrackParseDebug.txt", u8"00000022 00022324", 0 },
-{ u8"Major League Baseball Featuring Ken Griffey Jr. (U) 00000023 000224CC.mid", u8"Major League Baseball Featuring Ken Griffey Jr. (U) 00000023 000224CC.mid TrackParseDebug.txt", u8"00000023 000224CC", 0 },
-{ u8"Major League Baseball Featuring Ken Griffey Jr. (U) 00000024 000226DC.mid", u8"Major League Baseball Featuring Ken Griffey Jr. (U) 00000024 000226DC.mid TrackParseDebug.txt", u8"00000024 000226DC", 0 },
-{ u8"Major League Baseball Featuring Ken Griffey Jr. (U) 00000025 00022930.mid", u8"Major League Baseball Featuring Ken Griffey Jr. (U) 00000025 00022930.mid TrackParseDebug.txt", u8"00000025 00022930", 0 },
-{ u8"Major League Baseball Featuring Ken Griffey Jr. (U) 00000026 00022B40.mid", u8"Major League Baseball Featuring Ken Griffey Jr. (U) 00000026 00022B40.mid TrackParseDebug.txt", u8"00000026 00022B40", 0 },
-{ u8"Major League Baseball Featuring Ken Griffey Jr. (U) 00000027 00022DF4.mid", u8"Major League Baseball Featuring Ken Griffey Jr. (U) 00000027 00022DF4.mid TrackParseDebug.txt", u8"00000027 00022DF4", 0 },
-{ u8"Major League Baseball Featuring Ken Griffey Jr. (U) 00000028 000230AC.mid", u8"Major League Baseball Featuring Ken Griffey Jr. (U) 00000028 000230AC.mid TrackParseDebug.txt", u8"00000028 000230AC", 0 },
-{ u8"Major League Baseball Featuring Ken Griffey Jr. (U) 00000029 000232C4.mid", u8"Major League Baseball Featuring Ken Griffey Jr. (U) 00000029 000232C4.mid TrackParseDebug.txt", u8"00000029 000232C4", 0 },
-{ u8"Major League Baseball Featuring Ken Griffey Jr. (U) 0000002A 000234B4.mid", u8"Major League Baseball Featuring Ken Griffey Jr. (U) 0000002A 000234B4.mid TrackParseDebug.txt", u8"0000002A 000234B4", 0 },
-{ u8"Major League Baseball Featuring Ken Griffey Jr. (U) 0000002B 0002364C.mid", u8"Major League Baseball Featuring Ken Griffey Jr. (U) 0000002B 0002364C.mid TrackParseDebug.txt", u8"0000002B 0002364C", 0 },
-{ u8"Major League Baseball Featuring Ken Griffey Jr. (U) 0000002C 0002376C.mid", u8"Major League Baseball Featuring Ken Griffey Jr. (U) 0000002C 0002376C.mid TrackParseDebug.txt", u8"0000002C 0002376C", 0 },
-{ u8"Major League Baseball Featuring Ken Griffey Jr. (U) 0000002D 00023984.mid", u8"Major League Baseball Featuring Ken Griffey Jr. (U) 0000002D 00023984.mid TrackParseDebug.txt", u8"0000002D 00023984", 0 },
-{ u8"Major League Baseball Featuring Ken Griffey Jr. (U) 0000002E 00023C40.mid", u8"Major League Baseball Featuring Ken Griffey Jr. (U) 0000002E 00023C40.mid TrackParseDebug.txt", u8"0000002E 00023C40", 0 },
-{ u8"Major League Baseball Featuring Ken Griffey Jr. (U) 0000002F 00023F3C.mid", u8"Major League Baseball Featuring Ken Griffey Jr. (U) 0000002F 00023F3C.mid TrackParseDebug.txt", u8"0000002F 00023F3C", 0 },
-{ u8"Major League Baseball Featuring Ken Griffey Jr. (U) 00000030 000241D4.mid", u8"Major League Baseball Featuring Ken Griffey Jr. (U) 00000030 000241D4.mid TrackParseDebug.txt", u8"00000030 000241D4", 0 },
-{ u8"Major League Baseball Featuring Ken Griffey Jr. (U) 00000031 00024538.mid", u8"Major League Baseball Featuring Ken Griffey Jr. (U) 00000031 00024538.mid TrackParseDebug.txt", u8"00000031 00024538", 0 },
-{ u8"Major League Baseball Featuring Ken Griffey Jr. (U) 00000032 000247F8.mid", u8"Major League Baseball Featuring Ken Griffey Jr. (U) 00000032 000247F8.mid TrackParseDebug.txt", u8"00000032 000247F8", 0 },
-{ u8"Major League Baseball Featuring Ken Griffey Jr. (U) 00000033 000249F4.mid", u8"Major League Baseball Featuring Ken Griffey Jr. (U) 00000033 000249F4.mid TrackParseDebug.txt", u8"00000033 000249F4", 0 },
-{ u8"Major League Baseball Featuring Ken Griffey Jr. (U) 00000034 00024BD0.mid", u8"Major League Baseball Featuring Ken Griffey Jr. (U) 00000034 00024BD0.mid TrackParseDebug.txt", u8"00000034 00024BD0", 0 },
-{ u8"Major League Baseball Featuring Ken Griffey Jr. (U) 00000035 00024D90.mid", u8"Major League Baseball Featuring Ken Griffey Jr. (U) 00000035 00024D90.mid TrackParseDebug.txt", u8"00000035 00024D90", 0 },
-
+{ u8"Major League Baseball Featuring Ken Griffey Jr. (U) 0000000E 0001DC18.mid", u8"Major League Baseball Featuring Ken Griffey Jr. (U) 0000000E 0001DC18.mid TrackParseDebug.txt", u8"Substitute", 0 },
+{ u8"Major League Baseball Featuring Ken Griffey Jr. (U) 00000019 0001F028.mid", u8"Major League Baseball Featuring Ken Griffey Jr. (U) 00000019 0001F028.mid TrackParseDebug.txt", u8"Bad Catch", 0 },
