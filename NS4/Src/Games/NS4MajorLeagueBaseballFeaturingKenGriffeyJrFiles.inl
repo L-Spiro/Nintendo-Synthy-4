@@ -9,7 +9,7 @@
 #define NS4_CURVE							40.0
 #define NS4_OUT_DIRECTORY					u8"C:\\N64OST\\Major League Baseball Featuring Ken Griffey Jr\\"
 #define NS4_OUT_DIRECTORY_NUMBERS			NS4_OUT_DIRECTORY u8"Numbered\\"
-#define NS4_PERC_CHANNEL					9
+//#define NS4_PERC_CHANNEL					9
 #define NS4_WET_FILTER_FREQ					0.0//(NS4_ORIG_HZ / 2.0)
 #define NS4_ENV_MULTIPLIER					(1.0 / 1.0)
 #define NS4_REL_MULTIPLIER					(1.0 / 1.0)
@@ -47,7 +47,7 @@
 
 { u8"Major League Baseball Featuring Ken Griffey Jr. (U) 00000007 00019AF0.mid", u8"Major League Baseball Featuring Ken Griffey Jr. (U) 00000007 00019AF0.mid TrackParseDebug.txt", u8"Bottom of Inning", 0 },
 { u8"Major League Baseball Featuring Ken Griffey Jr. (U) 00000008 00019F5C.mid", u8"Major League Baseball Featuring Ken Griffey Jr. (U) 00000008 00019F5C.mid TrackParseDebug.txt", u8"Top of Inning", 0 },
-{ u8"Major League Baseball Featuring Ken Griffey Jr. (U) 0000000F 0001DCBC.mid", u8"Major League Baseball Featuring Ken Griffey Jr. (U) 0000000F 0001DCBC.mid TrackParseDebug.txt", u8"Unknown 1", 0 },
+{ u8"Major League Baseball Featuring Ken Griffey Jr. (U) 0000000F 0001DCBC.mid", u8"Major League Baseball Featuring Ken Griffey Jr. (U) 0000000F 0001DCBC.mid TrackParseDebug.txt", u8"Home Run Derby", 0 },
 
 
 { u8"Major League Baseball Featuring Ken Griffey Jr. (U) 0000001F 0002036C.mid", u8"Major League Baseball Featuring Ken Griffey Jr. (U) 0000001F 0002036C.mid TrackParseDebug.txt", u8"Getting Ready", 0 },

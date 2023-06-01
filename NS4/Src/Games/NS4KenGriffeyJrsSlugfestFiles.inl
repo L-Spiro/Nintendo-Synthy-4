@@ -9,7 +9,7 @@
 #define NS4_CURVE							40.0
 #define NS4_OUT_DIRECTORY					u8"C:\\N64OST\\Ken Griffey Jr.'s Slugfest\\"
 #define NS4_OUT_DIRECTORY_NUMBERS			NS4_OUT_DIRECTORY u8"Numbered\\"
-#define NS4_PERC_CHANNEL					9
+//#define NS4_PERC_CHANNEL					9
 #define NS4_WET_FILTER_FREQ					0.0//(NS4_ORIG_HZ / 2.0)
 #define NS4_ENV_MULTIPLIER					(1.0 / 1.0)
 #define NS4_REL_MULTIPLIER					(1.0 / 1.0)
