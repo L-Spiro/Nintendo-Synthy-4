@@ -189,6 +189,10 @@ namespace ns4 {
 			
 			if ( !m_vSamples[I].wfFile.GetAllSamples( aTmp ) ) { return false; }
 
+			/*if ( m_vSamples[I].ui32Inst == 0x30 ) {
+				m_vSamples[I].ui8DecayLevel = 0x00;
+				m_vSamples[I].dDecay = 2.0;
+			}*/
 //			if ( m_vSamples[I].sSampleName != "B25P32" ) {
 //				CWavLib::ScaleSamples( aTmp[0], 0.0 );
 //			}

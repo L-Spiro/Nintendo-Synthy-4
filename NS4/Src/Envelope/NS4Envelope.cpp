@@ -19,10 +19,14 @@ namespace ns4 {
 				if ( m_uiTick >= m_dReleaseTime ) { return 0.0; }
 				double dStart = max( m_dReleaseLevel, 1.0 / 0x7FFF );
 				const double dEnd = 1.0 / 0x7FFF;
+				//double dStart = m_dReleaseLevel;//max( m_dReleaseLevel, 1.0 / 0x7FFF );
+				//const double dEnd = 0.0;//1.0 / 0x7FFF;
 				if ( m_dExpMultiplier == 0.0 ) {
 					m_dExpMultiplier = std::pow( dEnd / dStart, 1.0 / m_dReleaseTime );
+					//m_dExpMultiplier = std::pow( DBL_EPSILON, 1.0 / m_vBlocks[m_stCur].ui32Samples );
 				}
 				return std::pow( m_dExpMultiplier, m_uiTick ) * dStart;
+				//return std::pow( m_dExpMultiplier, m_uiTick ) * dStart;
 			}
 			double dLevel = (m_dReleaseTime - m_uiTick) / m_dReleaseTime * m_dReleaseLevel;
 			return max( dLevel, 0.0 );
@@ -40,12 +44,14 @@ namespace ns4 {
 		double dStart = EndPointLevel( m_vBlocks[m_stCur].ui16StartLevel );
 
 		if ( CMidiFile::m_sSettings.bExpEnvelopes ) {
-			dStart = max( dStart, 1.0 / 0x7FFF );
-			dEnd = max( dEnd, 1.0 / 0x7FFF );
+			dStart = max( dStart, 16.0 / 0x7FFF );
+			dEnd = max( dEnd, 16.0 / 0x7FFF );
 			if ( m_dExpMultiplier == 0.0 ) {
 				m_dExpMultiplier = std::pow( dEnd / dStart, 1.0 / m_vBlocks[m_stCur].ui32Samples );
+				//m_dExpMultiplier = std::pow( 1.0 / 0x7FFF, 1.0 / m_vBlocks[m_stCur].ui32Samples );
 			}
 			return std::pow( m_dExpMultiplier, dFrac * m_vBlocks[m_stCur].ui32Samples ) * dStart;
+			//return std::pow( m_dExpMultiplier, dFrac * m_vBlocks[m_stCur].ui32Samples ) * (dStart - dEnd) + dEnd;
 		}
 		return ((dEnd - dStart) * dFrac + dStart);
 	}
