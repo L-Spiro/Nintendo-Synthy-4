@@ -334,6 +334,7 @@
     <None Include="Src\Games\NS4PuyoPuyoSun64Files.inl" />
     <None Include="Src\Games\NS4Quest64Files.inl" />
     <None Include="Src\Games\NS4Rayman2TheGreatEscapeFiles.inl" />
+    <None Include="Src\Games\NS4ReVoltFiles.inl" />
     <None Include="Src\Games\NS4RoadstersTrophyFiles.inl" />
     <None Include="Src\Games\NS4Rush2Files.inl" />
     <None Include="Src\Games\NS4SanFranciscoRushFiles.inl" />

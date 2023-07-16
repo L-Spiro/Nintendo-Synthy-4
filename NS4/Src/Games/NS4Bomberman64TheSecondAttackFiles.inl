@@ -7,11 +7,11 @@
 #define NS4_REVERB							ns4::CReverb::NS4_T_BOMBERMAN_64_THE_SECOND_ATTACK_0
 #define NS4_ORIG_HZ							32006
 #define NS4_CURVE							40.0
-#define NS4_OUT_DIRECTORY					u8"T:\\N64OST\\Bomberman 64 The Second Attack!\\"
+#define NS4_OUT_DIRECTORY					u8"C:\\N64OST\\Bomberman 64 The Second Attack!\\"
 #define NS4_OUT_DIRECTORY_NUMBERS			NS4_OUT_DIRECTORY u8"Numbered\\"
 #define NS4_WET_FILTER_FREQ					9502.0 / 2.0
 //#define NS4_WET_FILTER_ORDER				NS4_FILTER_DB_TO_ORDER( 24 )
-#define NS4_ENV_MULTIPLIER					(1.0 / 1.0)
+#define NS4_ENV_MULTIPLIER					(1.0 - (1.0 / 8.0))
 #define NS4_REL_MULTIPLIER					1.0
 #define NS4_ENVELOPE_VOL_CURVE				20.0
 #define NS4_ENVELOPE_POINT_CURVE			40.0

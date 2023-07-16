@@ -1581,7 +1581,7 @@ namespace ns4 {
 			1.4233116569397695 / 2.0,//NS4_SQRT_0_5,															// dTapVol
 			0,																		// i64TapOffset
 			//NS4_NO_FADE,//NS4_FADE( 3.0, 0.25, 5.0 ),
-			NS4_FADE( 2.0, 0.25, 5.0 ),
+			NS4_FADE( 1.0, 0.95, 5.5 ),
 			NS4_NO_LPF,//NS4_LPF( 21998.0 / std::pow( 2.0, 3.5 ), 3.5, 2.0, NS4_FILTER_DB_TO_ORDER( 12 ) ),				// dLpfFreq
 		},	// 12
 		// Blast Corps.

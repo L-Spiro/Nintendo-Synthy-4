@@ -42,14 +42,14 @@
 
 #define NS4_BULK
 
-//#define NS4_SINGLE_TRACK								4
+//#define NS4_SINGLE_TRACK								14
 //#define NS4_NO_NORMALIZE
 // 
 //#define NS4_NO_OUTPUT									// Used to quickly print information in the MIDI files without actually generating WAV content.
 //#define NS4_PRINT_BEST_BANK
 
 #ifdef NS4_BULK
-//#define NS4_ONE_OFF										(9-1)
+//#define NS4_ONE_OFF										(1-1)
 //#define NS4_EXPORT_SOME
 //#define NS4_EPORT_FROM								(71-1)
 #else
@@ -159,12 +159,12 @@ int oldmain() {
 		//ns4::CReverb::HarvestUnfilteredMonoTaps( u8"C:\\My Projects\\Nintendo-Synthy-4\\NS4\\Src\\Reverb\\Research\\SP HD.wav", -1, 1, 0, 0, 0 );
 		//ns4::CReverb::HarvestUnfilteredMonoTaps( u8"C:\\My Projects\\Nintendo-Synthy-4\\NS4\\Src\\Reverb\\Research\\SRW64 HD.wav", -1, 1, 0, 0, 0 );
 		//ns4::CReverb::HarvestUnfilteredMonoTaps( u8"C:\\My Projects\\Nintendo-Synthy-4\\NS4\\Src\\Reverb\\Research\\KGJS HD.wav", -1, 1, 0, 0, 0 );
-		ns4::CReverb::HarvestUnfilteredMonoTaps( u8"C:\\My Projects\\Nintendo-Synthy-4\\NS4\\Src\\Reverb\\Research\\F1WGP2 HD.wav", -1, 1, 0, 0, 0 );
+		//ns4::CReverb::HarvestUnfilteredMonoTaps( u8"C:\\My Projects\\Nintendo-Synthy-4\\NS4\\Src\\Reverb\\Research\\F1WGP2 HD.wav", -1, 1, 0, 0, 0 );
 		
 	}
 	{
-		ns4::CWavLib::DetermineLevelsStereo( u8"C:\\My Projects\\Nintendo-Synthy-4\\NS4\\Src\\Reverb\\Research\\KGJS V 127 R 0 P 95 NF.wav",
-			u8"C:\\My Projects\\Nintendo-Synthy-4\\NS4\\Src\\Reverb\\Research\\KGJS V 127 R 127 P 95 NF.wav", 2122, size_t( -1 ), 1.0, 0, ns4::CReverb::m_rtKenGriffeyJrsSlugfest0, 239 );
+		ns4::CWavLib::DetermineLevelsStereo( u8"C:\\My Projects\\Nintendo-Synthy-4\\NS4\\Src\\Reverb\\Research\\BK V 127 R 0 P 64.wav",
+			u8"C:\\My Projects\\Nintendo-Synthy-4\\NS4\\Src\\Reverb\\Research\\BK V 127 R 127 P 64.wav", 4417, size_t( -1 ), 1.0, 0, ns4::CReverb::m_rtBanjoKazooie0, 1370 );
 	}
 #endif
 
@@ -234,7 +234,7 @@ int oldmain() {
 
 #if 0
 	// Tools somehow stopped being able to load .n64 files due to not automatically byte-swapping them.
-#define LSN_SWAP_ME			L"F-1 World Grand Prix II (Europe) (En,Fr,De,Es)"
+#define LSN_SWAP_ME			L"Razor Freestyle Scooter (USA)"
 #define LSN_SWAP_ME_DIR		L"C:\\My Projects\\N64\\Roms\\"
 	{
 		const wchar_t * pu16ByteswapMe = LSN_SWAP_ME_DIR LSN_SWAP_ME L".n64";
@@ -314,6 +314,7 @@ int oldmain() {
 //#include "Src/Games/NS4Turok2SeedsOfEvilFiles.inl"
 //#include "Src/Games/NS4TurokRageWars.inl"
 //#include "Src/Games/NS4TurokDinosaurHunterFiles.inl"
+#include "Src/Games/NS4ReVoltFiles.inl"
 //#include "Src/Games/NS4KillerInstinctGoldFiles.inl"
 //#include "Src/Games/NS4KillerInstinctGold2Files.inl"
 //#include "Src/Games/NS4Pilotwings64Files.inl"
@@ -334,6 +335,9 @@ int oldmain() {
 //#include "Src/Games/NS4ChameleonTwistFiles.inl"
 //#include "Src/Games/NS4ChameleonTwist2Files.inl"
 //#include "Src/Games/NS4BombermanHeroFiles.inl"
+//#include "Src/Games/NS4Bomberman64Files.inl"
+//#include "Src/Games/NS4Bomberman64EFiles.inl"
+//#include "Src/Games/NS4Bomberman64TheSecondAttackFiles.inl"
 //#include "Src/Games/NS4PokemonSnapFiles.inl"
 //#include "Src/Games/NS4ClayFighter63_3rdFiles.inl"
 //#include "Src/Games/NS4ClayFighterSculptorsCutFiles.inl"
@@ -385,9 +389,6 @@ int oldmain() {
 //#include "Src/Games/NS4MickeysSpeedwayUsaStereoFiles.inl"
 //#include "Src/Games/NS4DenshaDeGo!64Files.inl"
 //#include "Src/Games/NS4MaceTheDarkAgesFiles.inl"
-//#include "Src/Games/NS4Bomberman64Files.inl"
-//#include "Src/Games/NS4Bomberman64EFiles.inl"
-//#include "Src/Games/NS4Bomberman64TheSecondAttackFiles.inl"
 //#include "Src/Games/NS4ArmorinesProjectSWARMFiles.inl"
 //#include "Src/Games/NS4DoraemonNobitaFiles.inl"
 //#include "Src/Games/NS4Doraemon2NobitaFiles.inl"
@@ -440,7 +441,7 @@ int oldmain() {
 //#include "Src/Games/NS4ProMahjongTsuwamono64JansouBattleNiChousenFiles.inl"
 //#include "Src/Games/NS4HybridHeavenFiles.inl"
 //#include "Src/Games/NS4GauntletLegendsFiles.inl"
-#include "Src/Games/NS464DeHakkenTamagotchiMinnaDaTamagotchiWorldFiles.inl"
+//#include "Src/Games/NS464DeHakkenTamagotchiMinnaDaTamagotchiWorldFiles.inl"
 //#include "Src/Games/NS464TrumpCollectionFiles.inl"
 //#include "Src/Games/NS4CentreCourtTennisFiles.inl"
 //#include "Src/Games/NS4GetterLoveFiles.inl"
@@ -838,6 +839,9 @@ int oldmain() {
 #ifdef NS4_VIB_OFFSET
 		ns4::CMidiFile::m_sSettings.dVibOffset = NS4_VIB_OFFSET;
 #endif	// NS4_VIB_OFFSET
+#ifdef NS4_MAP_VIB_80_TO_VIB_AND_TREM
+		ns4::CMidiFile::m_sSettings.bMap80ToVibAndTrem = NS4_MAP_VIB_80_TO_VIB_AND_TREM;
+#endif	// NS4_MAP_VIB_80_TO_VIB_AND_TREM
 #ifdef NS4_TREM_RATE_SCALE
 		ns4::CMidiFile::m_sSettings.dTremRateScale = NS4_TREM_RATE_SCALE;
 #endif	// NS4_TREM_RATE_SCALE
