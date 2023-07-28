@@ -173,6 +173,14 @@ namespace ns4 {
 
 			NS4_T_F1_WORLD_GRAND_PRIX_II_DELAY_0= 158,
 			NS4_T_F1_WORLD_GRAND_PRIX_II_0		= 159,
+
+			NS4_T_DINOSAUR_PLANET_DELAY_0		= 160,
+			NS4_T_DINOSAUR_PLANET_0				= 161,
+
+			NS4_T_ALL_STAR_BASEBALL_2000_DELAY_0= 162,
+			NS4_T_ALL_STAR_BASEBALL_2000_0		= 163,
+
+			NS4_T_FIRE_ELECTRIC_PEN_0			= 164,
 			
 		};
 
@@ -390,6 +398,9 @@ namespace ns4 {
 
 		/** Delay lines for Bomberman Hero set. */
 		static NS4_REVERB_DELAY_LINE			m_rdlBombermanHeroDelays0[];
+
+		/** Delay lines for Ucchannanchan no Honō no Challenger: Denryū Iraira Bō (ウッチャンナンチャンの炎のチャレンジャー 電流イライラ棒) (Fire Electric Pen) (Ucchannanchan's Flaming Challenger: Irritating Electric Stick) set. */
+		static NS4_REVERB_DELAY_LINE			m_rdlFireElectricPenDelays0[];
 
 		/** Delay lines for Star Fox 64 set. */
 		static NS4_REVERB_DELAY_LINE			m_rdlStarFox640[];
@@ -753,6 +764,18 @@ namespace ns4 {
 
 		/** The comb filter delay lines for F-1 World Grand Prix II. */
 		static NS4_DELAY_N64					m_dn64F1WorldGrandPrixIi0[];
+
+		/** Taps harvested from Dinosaur Planet. */
+		static NS4_REVERB_TAP					m_rtDinosaurPlanet0[];
+
+		/** The comb filter delay lines for Dinosaur Planet. */
+		static NS4_DELAY_N64					m_dn64DinosaurPlanet0[];
+
+		/** Taps harvested from All-Star Baseball 2000. */
+		static NS4_REVERB_TAP					m_rtAllStarBaseball20000[];
+
+		/** The comb filter delay lines for All-Star Baseball 2000. */
+		static NS4_DELAY_N64					m_dn64AllStarBaseball20000[];
 
 		// == Functions.
 		/**

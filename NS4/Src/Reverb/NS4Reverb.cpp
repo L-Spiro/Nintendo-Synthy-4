@@ -346,6 +346,17 @@ namespace ns4 {
 		},
 	};
 
+	/** Delay lines for Ucchannanchan no Honō no Challenger: Denryū Iraira Bō (ウッチャンナンチャンの炎のチャレンジャー 電流イライラ棒) (Fire Electric Pen) (Ucchannanchan's Flaming Challenger: Irritating Electric Stick) set. */
+	NS4_REVERB_DELAY_LINE CReverb::m_rdlFireElectricPenDelays0[] = {
+		{
+			7160,																	// ui32Delay
+			7160,																	// ui32FeedbackDelay
+			(32767.0 / double( 0x7FFF )) * NS4_SQRT_0_5,							// dVol
+			12000.0 / double( 0x7FFF ),												// dFeedback
+			1.0 / 0x7FFF															// dMinLevel
+		},
+	};
+
 	/** Delay lines for Star Fox 64 set. */
 	NS4_REVERB_DELAY_LINE CReverb::m_rdlStarFox640[] = {
 		{
@@ -1455,6 +1466,38 @@ namespace ns4 {
 		{      2656,	      3808,	    +8192,		    -8192,	       5760 },
 		{      3808,	      4288,	    +8192,		    -8192,	       6000 },
 		{         0,	      4784,	       +0,		       +0,	       6400 },
+	};
+
+	/** Taps harvested from Dinosaur Planet. */
+	NS4_REVERB_TAP CReverb::m_rtDinosaurPlanet0[] = {
+#include "Taps/NS4ReverbDinosaurPlanet0.inl"
+	};
+
+	/** The comb filter delay lines for Dinosaur Planet. */
+	NS4_DELAY_N64 CReverb::m_dn64DinosaurPlanet0[] = {
+		//ui32Input		ui32Output	i16FfCoef		i16FbCoef		i16Gain							 dRsInc						 dRsVal			i32RsDelta						dRsGain						ui16Fc
+		{         0,	       352,	    +9830,		    -9830,	          0 },
+		{       392,	      1600,	    +9054,		    -9830,	       2000,		                      0,	                      0,		        +0,		                      0,	/*0xDFF1CE80*/    1509 },
+		{       792,	      2552,	   +16384,		   -16384,	       4000,		                      0,	                      0,		        +0,		                      0,	/*0xDFF1CF20*/    2371 },
+		{      3192,	      5592,	   +21018,		   -16384,	       8000,		                      0,	                      0,		        +0,		                      0,	/*0xDFF1CFD0*/    2856 },
+		{      3368,	      4800,	    +8515,		    -8192,	      12000,		                      0,	                      0,		        +0,		                      0,	/*0xDFF1D070*/    4419 },
+		{         0,	      5920,	   +13000,		   -13000,	          0,		                      0,	                      0,		        +0,		                      0,	/*0xDFF1D120*/    8832 },
+	};
+
+	/** Taps harvested from All-Star Baseball 2000. */
+	NS4_REVERB_TAP CReverb::m_rtAllStarBaseball20000[] = {
+#include "Taps/NS4ReverbAllStarBaseball20000.inl"
+	};
+
+	/** The comb filter delay lines for All-Star Baseball 2000. */
+	NS4_DELAY_N64 CReverb::m_dn64AllStarBaseball20000[] = {
+		//ui32Input		ui32Output	i16FfCoef		i16FbCoef		i16Gain							 dRsInc						 dRsVal			i32RsDelta						dRsGain						ui16Fc
+		{       160,	       944,	    +9830,		    -9830,	       2815,		                      0,	                      0,		        +0,		                      0,	/*0xDFEC6520*/    4095 },
+		{       416,	       768,	   +13107,		   -13107,	          0 },
+		{       784,	       912,	   +19660,		   -19660,	          0 },
+		{      1664,	      2864,	   +13107,		   -13107,	       2719,		                      0,	                      0,		        +0,		                      0,	/*0xDFEC6560*/    4095 },
+		{      1984,	      2496,	   +14107,		   -14107,	          0 },
+		{        64,	      6192,	   +20384,		       +0,	      22015,		                      0,	                      0,		        +0,		                      0,	/*0xDFEC65A0*/   11447 },
 	};
 
 }	// namespace ns4
@@ -2593,7 +2636,7 @@ namespace ns4 {
 		// F-1 World Grand Prix II.
 		{
 			NS4_ONLY_COMB( 1.0, 0 ),
-			NS4_COMB( 5200, 320 / 2, m_dn64F1WorldGrandPrixIi0, 20.0 ),
+			NS4_COMB( 6712, 320 / 2, m_dn64F1WorldGrandPrixIi0, 20.0 ),
 		},	// 158
 		// F-1 World Grand Prix II.
 		{
@@ -2603,6 +2646,48 @@ namespace ns4 {
 			NS4_FADE( 1.0, 1.1, 4.4 ),												// dTime
 			NS4_NO_LPF,
 		},	// 159
+		// Dinosaur Planet.
+		{
+			NS4_ONLY_COMB( 1.0, 0 ),
+			NS4_COMB( 6712, 368 / 2, m_dn64DinosaurPlanet0, 20.0 ),
+		},	// 160
+		// Dinosaur Planet.
+		{
+			NS4_TAPS( m_rtDinosaurPlanet0 ),
+			NS4_SQRT_0_5,//0.56470172114050299,													// dTapVol
+			0,																		// i64TapOffset
+			NS4_FADE( 1.0, 1.1, 5.4 ),
+			NS4_LPF( 1509.0 /*22018.0 / std::pow( 2.0, 4.0 )*/, 10552.0 / 22018.0, 0.5, NS4_FILTER_DB_TO_ORDER( 6 ) ),														// dLpfFactor
+			NS4_NO_DELAY,															// dDelayVol
+			nullptr,																// ptrSepReverb
+			false,																	// bSwapSrcChannels
+			false,																	// bSwapDstChannels
+			false,																	// bSwapSrcReverb
+			//true,																	// bRChanIsInvertLChan
+		},	// 161
+		// All-Star Baseball 2000.
+		{
+			NS4_ONLY_COMB( 1.0, 0 ),
+			NS4_COMB( 6400, 320 / 2, m_dn64AllStarBaseball20000, 20.0 ),
+		},	// 162
+		// All-Star Baseball 2000.
+		{
+			NS4_TAPS( m_rtAllStarBaseball20000 ),
+			NS4_SQRT_0_5,															// dTapVol
+			0,																		// i64TapOffset
+			NS4_LPF( 4095.0 /*22018.0 / std::pow( 2.0, 4.0 )*/, 168.0 / 22047.0, 0.5, NS4_FILTER_DB_TO_ORDER( 6 ) ),														// dLpfFactor
+			NS4_NO_LPF,
+		},	// 163
+
+		// Ucchannanchan no Honō no Challenger: Denryū Iraira Bō (ウッチャンナンチャンの炎のチャレンジャー 電流イライラ棒) (Fire Electric Pen) (Ucchannanchan's Flaming Challenger: Irritating Electric Stick).
+		{
+			NS4_NO_TAPS,															// prtTable
+			0.0,																	// dTapVol
+			0,																		// i64TapOffset
+			NS4_NO_FADE,															// dTime
+			NS4_NO_LPF,																// dLpfFactor
+			NS4_DELAY( m_rdlFireElectricPenDelays0, 1.0 ),							// dDelayVol
+		},	// 164
 	};
 
 

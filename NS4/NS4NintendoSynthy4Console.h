@@ -42,14 +42,14 @@
 
 #define NS4_BULK
 
-//#define NS4_SINGLE_TRACK								14
+//#define NS4_SINGLE_TRACK								1
 //#define NS4_NO_NORMALIZE
 // 
 //#define NS4_NO_OUTPUT									// Used to quickly print information in the MIDI files without actually generating WAV content.
 //#define NS4_PRINT_BEST_BANK
 
 #ifdef NS4_BULK
-//#define NS4_ONE_OFF										(1-1)
+//#define NS4_ONE_OFF										(25-1)
 //#define NS4_EXPORT_SOME
 //#define NS4_EPORT_FROM								(71-1)
 #else
@@ -160,6 +160,8 @@ int oldmain() {
 		//ns4::CReverb::HarvestUnfilteredMonoTaps( u8"C:\\My Projects\\Nintendo-Synthy-4\\NS4\\Src\\Reverb\\Research\\SRW64 HD.wav", -1, 1, 0, 0, 0 );
 		//ns4::CReverb::HarvestUnfilteredMonoTaps( u8"C:\\My Projects\\Nintendo-Synthy-4\\NS4\\Src\\Reverb\\Research\\KGJS HD.wav", -1, 1, 0, 0, 0 );
 		//ns4::CReverb::HarvestUnfilteredMonoTaps( u8"C:\\My Projects\\Nintendo-Synthy-4\\NS4\\Src\\Reverb\\Research\\F1WGP2 HD.wav", -1, 1, 0, 0, 0 );
+		//ns4::CReverb::HarvestUnfilteredMonoTaps( u8"C:\\My Projects\\Nintendo-Synthy-4\\NS4\\Src\\Reverb\\Research\\DP HD.wav", -1, 1, 0, 0, 0 );
+		ns4::CReverb::HarvestUnfilteredMonoTaps( u8"C:\\My Projects\\Nintendo-Synthy-4\\NS4\\Src\\Reverb\\Research\\ASB2000 HD.wav", -1, 1, 0, 0, 0 );
 		
 	}
 	{
@@ -204,11 +206,11 @@ int oldmain() {
 
 #if 0
 	{
-		const uint32_t ui32SampRate = 22049;
+		const uint32_t ui32SampRate = 22047;
 		
 		ns4::lwaudio aWet = ns4::CWavLib::AllocateSamples( 1, ui32SampRate * 30 );
 		aWet[0][0] = 1.0;
-		ns4::lwaudio aAccum = ns4::CReverb::CreateReverb( ns4::CReverb::NS4_T_F1_WORLD_GRAND_PRIX_II_DELAY_0, aWet, ui32SampRate, ui32SampRate, 0.0, 0 );
+		ns4::lwaudio aAccum = ns4::CReverb::CreateReverb( ns4::CReverb::NS4_T_ALL_STAR_BASEBALL_2000_DELAY_0, aWet, ui32SampRate, ui32SampRate, 0.0, 0 );
 		ns4::lwsample sFirst = aWet[0][0];
 		if ( sFirst == 0.0 ) {
 			::OutputDebugStringA( "Measles.\r\n" );
@@ -234,7 +236,7 @@ int oldmain() {
 
 #if 0
 	// Tools somehow stopped being able to load .n64 files due to not automatically byte-swapping them.
-#define LSN_SWAP_ME			L"Razor Freestyle Scooter (USA)"
+#define LSN_SWAP_ME			L"Utchan Nanchan no Hono no Challenger - Denryuu Ira Ira Bou (Japan)"
 #define LSN_SWAP_ME_DIR		L"C:\\My Projects\\N64\\Roms\\"
 	{
 		const wchar_t * pu16ByteswapMe = LSN_SWAP_ME_DIR LSN_SWAP_ME L".n64";
@@ -261,12 +263,12 @@ int oldmain() {
 					//liInt.QuadPart;
 					std::vector< uint8_t> vBuffer;
 					vBuffer.resize( size_t( liInt.QuadPart ) );
-					::ReadFile( hFileIn, vBuffer.data(), vBuffer.size(), NULL, NULL );
+					::ReadFile( hFileIn, vBuffer.data(), static_cast<DWORD>(vBuffer.size()), NULL, NULL );
 					uint16_t * pui16Data = reinterpret_cast<uint16_t *>(vBuffer.data());
 					for ( size_t I = vBuffer.size() / sizeof( uint16_t ); I--; ) {
 						pui16Data[I] = _byteswap_ushort( pui16Data[I] );
 					}
-					::WriteFile( hFileOut, vBuffer.data(), vBuffer.size(), NULL, NULL );
+					::WriteFile( hFileOut, vBuffer.data(), static_cast<DWORD>(vBuffer.size()), NULL, NULL );
 				}
 
 				::CloseHandle( hFileOut );
@@ -292,6 +294,7 @@ int oldmain() {
 	static const NS4_MIDI_FILE mfFiles[] = {
 #ifdef NS4_BULK
 //#include "Src/Games/NS4ConkersBadFurDayFiles.inl"
+//#include "Src/Games/NS4DinosaurPlanetFiles.inl"
 //#include "Src/Games/NS4JetForceGeminiFiles.inl"
 //#include "Src/Games/NS4JetForceGemini2Files.inl"
 //#include "Src/Games/NS4JetForceGeminiKioskFiles.inl"
@@ -314,7 +317,7 @@ int oldmain() {
 //#include "Src/Games/NS4Turok2SeedsOfEvilFiles.inl"
 //#include "Src/Games/NS4TurokRageWars.inl"
 //#include "Src/Games/NS4TurokDinosaurHunterFiles.inl"
-#include "Src/Games/NS4ReVoltFiles.inl"
+//#include "Src/Games/NS4ReVoltFiles.inl"
 //#include "Src/Games/NS4KillerInstinctGoldFiles.inl"
 //#include "Src/Games/NS4KillerInstinctGold2Files.inl"
 //#include "Src/Games/NS4Pilotwings64Files.inl"
@@ -435,6 +438,7 @@ int oldmain() {
 //#include "Src/Games/NS4AeroGaugeFiles.inl"
 //#include "Src/Games/NS4AeroGaugeOverSamplingFiles.inl"
 //#include "Src/Games/NS4AllStarBaseball99Files.inl"
+//#include "Src/Games/NS4AllStarBaseball2000Files.inl"
 //#include "Src/Games/NS4StarshotSpaceCircusFeverFiles.inl"
 //#include "Src/Games/NS4FightersDestinyFiles.inl"
 //#include "Src/Games/NS4ProMahjongKiwame64Files.inl"
@@ -459,6 +463,10 @@ int oldmain() {
 //#include "Src/Games/NS4WayneGretzkys3DHockeyFiles.inl"
 //#include "Src/Games/NS4VirtualChess64Files.inl"
 //#include "Src/Games/NS4F1WorldGrandPrixIiFiles.inl"
+//#include "Src/Games/NS4RazorFreestyleScooterFiles.inl"
+//#include "Src/Games/NS4ToyStory2Files.inl"
+//#include "Src/Games/NS4Wipeout64Files.inl"
+#include "Src/Games/NS4FireElectricPenFiles.inl"
 #else
 		{}
 #endif

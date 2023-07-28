@@ -224,6 +224,7 @@
     <None Include="Src\Games\NS4AeroFightersAssaultOverSamplingFiles.inl" />
     <None Include="Src\Games\NS4AeroGaugeFiles.inl" />
     <None Include="Src\Games\NS4AeroGaugeOverSamplingFiles.inl" />
+    <None Include="Src\Games\NS4AllStarBaseball2000Files.inl" />
     <None Include="Src\Games\NS4AllStarBaseball99Files.inl" />
     <None Include="Src\Games\NS4ArmorinesProjectSWARMFiles.inl" />
     <None Include="Src\Games\NS4ArmyMenAirCombatFiles.inl" />
@@ -260,6 +261,7 @@
     <None Include="Src\Games\NS4CruisnWorldFiles.inl" />
     <None Include="Src\Games\NS4DenshaDeGo!64Files.inl" />
     <None Include="Src\Games\NS4DiddyKongRacingFiles.inl" />
+    <None Include="Src\Games\NS4DinosaurPlanetFiles.inl" />
     <None Include="Src\Games\NS4DonaldDuckGoinQuakersFiles.inl" />
     <None Include="Src\Games\NS4DonkeyKong64Files.inl" />
     <None Include="Src\Games\NS4DonkeyKong64KioskFiles.inl" />
@@ -279,6 +281,7 @@
     <None Include="Src\Games\NS4F1WorldGrandPrixFiles.inl" />
     <None Include="Src\Games\NS4F1WorldGrandPrixIiFiles.inl" />
     <None Include="Src\Games\NS4FightersDestinyFiles.inl" />
+    <None Include="Src\Games\NS4FireElectricPenFiles.inl" />
     <None Include="Src\Games\NS4FlyingDragonFiles.inl" />
     <None Include="Src\Games\NS4Forsaken.inl" />
     <None Include="Src\Games\NS4GauntletLegendsFiles.inl" />
@@ -334,6 +337,7 @@
     <None Include="Src\Games\NS4PuyoPuyoSun64Files.inl" />
     <None Include="Src\Games\NS4Quest64Files.inl" />
     <None Include="Src\Games\NS4Rayman2TheGreatEscapeFiles.inl" />
+    <None Include="Src\Games\NS4RazorFreestyleScooterFiles.inl" />
     <None Include="Src\Games\NS4ReVoltFiles.inl" />
     <None Include="Src\Games\NS4RoadstersTrophyFiles.inl" />
     <None Include="Src\Games\NS4Rush2Files.inl" />
@@ -366,6 +370,7 @@
     <None Include="Src\Games\NS4TonicTroubleFiles.inl" />
     <None Include="Src\Games\NS4ToonPanicFiles.inl" />
     <None Include="Src\Games\NS4ToonPanicOverSampledFiles.inl" />
+    <None Include="Src\Games\NS4ToyStory2Files.inl" />
     <None Include="Src\Games\NS4TransformersBeastWarsTransmetalsFiles.inl" />
     <None Include="Src\Games\NS4Turok2SeedsOfEvilFiles.inl" />
     <None Include="Src\Games\NS4Turok3ShadowOfOblivion.inl" />
@@ -378,6 +383,7 @@
     <None Include="Src\Games\NS4WayneGretzkys3DHockeyFiles.inl" />
     <None Include="Src\Games\NS4WcwBackstageAssaultFiles.inl" />
     <None Include="Src\Games\NS4WCWvsnWoWorldTourFiles.inl" />
+    <None Include="Src\Games\NS4Wipeout64Files.inl" />
     <None Include="Src\Games\NS4WonderProjectJFiles.inl" />
     <None Include="Src\Games\NS4WormsArmageddonFiles.inl" />
     <None Include="Src\Games\NS4YoshisStoryFiles.inl" />
@@ -386,6 +392,7 @@
     <None Include="Src\Reverb\Taps\NS4PerfectDark1.inl" />
     <None Include="Src\Reverb\Taps\NS4Reverb0.inl" />
     <None Include="Src\Reverb\Taps\NS4ReverbAeroFightersAssault0.inl" />
+    <None Include="Src\Reverb\Taps\NS4ReverbAllStarBaseball20000.inl" />
     <None Include="Src\Reverb\Taps\NS4ReverbAllStarBaseball990.inl" />
     <None Include="Src\Reverb\Taps\NS4ReverbArmorinesProjectSwarm0.inl" />
     <None Include="Src\Reverb\Taps\NS4ReverbBanjoKazooie0.inl" />
@@ -401,6 +408,7 @@
     <None Include="Src\Reverb\Taps\NS4ReverbClayFighter0.inl" />
     <None Include="Src\Reverb\Taps\NS4ReverbConkersBadFurDay0.inl" />
     <None Include="Src\Reverb\Taps\NS4ReverbDiddyKongRacing0.inl" />
+    <None Include="Src\Reverb\Taps\NS4ReverbDinosaurPlanet0.inl" />
     <None Include="Src\Reverb\Taps\NS4ReverbDonkeyKong64Left0.inl" />
     <None Include="Src\Reverb\Taps\NS4ReverbDonkeyKong64Right0.inl" />
     <None Include="Src\Reverb\Taps\NS4ReverbDoraemonNobita0.inl" />

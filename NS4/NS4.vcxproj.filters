@@ -973,5 +973,29 @@
     <None Include="Src\Games\NS4ReVoltFiles.inl">
       <Filter>Header Files\Games</Filter>
     </None>
+    <None Include="Src\Games\NS4RazorFreestyleScooterFiles.inl">
+      <Filter>Header Files\Games</Filter>
+    </None>
+    <None Include="Src\Games\NS4DinosaurPlanetFiles.inl">
+      <Filter>Header Files\Games</Filter>
+    </None>
+    <None Include="Src\Reverb\Taps\NS4ReverbDinosaurPlanet0.inl">
+      <Filter>Header Files\Reverb\Taps</Filter>
+    </None>
+    <None Include="Src\Games\NS4ToyStory2Files.inl">
+      <Filter>Header Files\Games</Filter>
+    </None>
+    <None Include="Src\Games\NS4Wipeout64Files.inl">
+      <Filter>Header Files\Games</Filter>
+    </None>
+    <None Include="Src\Games\NS4AllStarBaseball2000Files.inl">
+      <Filter>Header Files\Games</Filter>
+    </None>
+    <None Include="Src\Reverb\Taps\NS4ReverbAllStarBaseball20000.inl">
+      <Filter>Header Files\Reverb\Taps</Filter>
+    </None>
+    <None Include="Src\Games\NS4FireElectricPenFiles.inl">
+      <Filter>Header Files\Games</Filter>
+    </None>
   </ItemGroup>
 </Project>

@@ -1465,6 +1465,9 @@ namespace ns4 {
 				if ( vNotes[J].bActive || (vNotes[J].eEnvelope.InRelease() && vNotes[J].psSoundbankSample && !vNotes[J].eEnvelope.InfiniteRelease()) || vNotes[J].ui32DustSettle ) {
 					if ( vNotes[J].psSoundbankSample ) {
 						double dVal = vNotes[J].sSampler.Sample();
+						if ( dVal ) {
+							volatile int gjhg = 0;
+						}
 						double dEnvLevel = vNotes[J].eEnvelope.CurLevel();
 						/*if ( dEnvLevel < 0.62000124000248003 && vNotes[J].eEnvelope.InRelease() == false ) {
 							volatile int gjhg = 0;
