@@ -1,5 +1,5 @@
 #define NS4_GAME							u8"Transformers: Beast Wars Transmetals"
-#define NS4_COMPOSERS						u8""
+#define NS4_COMPOSERS						u8"Kazuhisa Kamifuji"
 #define NS4_YEAR							u8"1999"
 #define NS4_FOLDER							u8"Transformers Beast Wars Transmetals"
 #define NS4_BANK							u8"00"
@@ -7,11 +7,11 @@
 #define NS4_REVERB							ns4::CReverb::NS4_T_TRANSFORMERS_BEAST_WARS_0
 #define NS4_ORIG_HZ							22047
 #define NS4_CURVE							40.0
-#define NS4_OUT_DIRECTORY					u8"F:\\N64OST\\Transformers Beast Wars Transmetals\\"
+#define NS4_OUT_DIRECTORY					u8"C:\\N64OST\\Transformers Beast Wars Transmetals\\"
 #define NS4_OUT_DIRECTORY_NUMBERS			NS4_OUT_DIRECTORY u8"Numbered\\"
 #define NS4_WET_FILTER_FREQ					0.0
 #define NS4_PERC_CHANNEL					9
-#define NS4_ENV_MULTIPLIER					(1.0 / 3.0)
+#define NS4_ENV_MULTIPLIER					(1.0 / 3.0)	// Verified.
 //#define NS4_REL_MULTIPLIER					(1.0 / 3.0)
 #define NS4_ENVELOPE_VOL_CURVE				20.0
 #define NS4_ENVELOPE_POINT_CURVE			40.0

@@ -997,5 +997,14 @@
     <None Include="Src\Games\NS4FireElectricPenFiles.inl">
       <Filter>Header Files\Games</Filter>
     </None>
+    <None Include="Src\Games\NS4JinseiGame64Files.inl">
+      <Filter>Header Files\Games</Filter>
+    </None>
+    <None Include="Src\Games\NS4RobotPonkotsu64Files.inl">
+      <Filter>Header Files\Games</Filter>
+    </None>
+    <None Include="Src\Reverb\Taps\NS4ReverbRobotPonkottsu640.inl">
+      <Filter>Header Files\Reverb\Taps</Filter>
+    </None>
   </ItemGroup>
 </Project>

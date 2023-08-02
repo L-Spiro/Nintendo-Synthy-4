@@ -181,6 +181,9 @@ namespace ns4 {
 			NS4_T_ALL_STAR_BASEBALL_2000_0		= 163,
 
 			NS4_T_FIRE_ELECTRIC_PEN_0			= 164,
+
+			NS4_T_ROBOT_PONKOTSU_64_DELAY_0		= 165,
+			NS4_T_ROBOT_PONKOTSU_64_0			= 166,
 			
 		};
 
@@ -776,6 +779,12 @@ namespace ns4 {
 
 		/** The comb filter delay lines for All-Star Baseball 2000. */
 		static NS4_DELAY_N64					m_dn64AllStarBaseball20000[];
+
+		/** Taps harvested from Robot Ponkottsu 64: Nanatsu no Umi no Caramel. */
+		static NS4_REVERB_TAP					m_rtRobotPonkottsu640[];
+
+		/** The comb filter delay lines for Robot Ponkottsu 64: Nanatsu no Umi no Caramel. */
+		static NS4_DELAY_N64					m_dn64RobotPonkottsu640[];
 
 		// == Functions.
 		/**
