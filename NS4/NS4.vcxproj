@@ -305,6 +305,7 @@
     <None Include="Src\Games\NS4KenGriffeyJrsSlugfestFiles.inl" />
     <None Include="Src\Games\NS4KillerInstinctGold2Files.inl" />
     <None Include="Src\Games\NS4KillerInstinctGoldFiles.inl" />
+    <None Include="Src\Games\NS4KirattoKaiketsu64TanteidanFiles.inl" />
     <None Include="Src\Games\NS4Kirby64TheCrystalShardsFiles.inl" />
     <None Include="Src\Games\NS4LastLegionUxFiles.inl" />
     <None Include="Src\Games\NS4MaceTheDarkAgesFiles.inl" />
@@ -436,6 +437,7 @@
     <None Include="Src\Reverb\Taps\NS4ReverbJLeagueDynamiteSoccer640.inl" />
     <None Include="Src\Reverb\Taps\NS4ReverbKenGriffeyJrsSlugfest0.inl" />
     <None Include="Src\Reverb\Taps\NS4ReverbKillerInstinctGold0.inl" />
+    <None Include="Src\Reverb\Taps\NS4ReverbKiraToKaiketsu64Tanteidan0.inl" />
     <None Include="Src\Reverb\Taps\NS4ReverbKirby64TheCrystalShards0.inl" />
     <None Include="Src\Reverb\Taps\NS4ReverbLastLegionUx0.inl" />
     <None Include="Src\Reverb\Taps\NS4ReverbMarioParty0.inl" />

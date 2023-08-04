@@ -1006,5 +1006,11 @@
     <None Include="Src\Reverb\Taps\NS4ReverbRobotPonkottsu640.inl">
       <Filter>Header Files\Reverb\Taps</Filter>
     </None>
+    <None Include="Src\Games\NS4KirattoKaiketsu64TanteidanFiles.inl">
+      <Filter>Header Files\Games</Filter>
+    </None>
+    <None Include="Src\Reverb\Taps\NS4ReverbKiraToKaiketsu64Tanteidan0.inl">
+      <Filter>Header Files\Reverb\Taps</Filter>
+    </None>
   </ItemGroup>
 </Project>

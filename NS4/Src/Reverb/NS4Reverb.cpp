@@ -1514,6 +1514,23 @@ namespace ns4 {
 		{         0,	      3760,	    +8000,		       +0,	          0,		                      0,	                      0,		        +0,		                      0,	/*0xE016F130*/    6400 },
 	};
 
+	/** Taps harvested from Kira to Kaiketsu! 64 Tanteidan. */
+	NS4_REVERB_TAP CReverb::m_rtKiraToKaiketsu64Tanteidan0[] = {
+#include "Taps/NS4ReverbKiraToKaiketsu64Tanteidan0.inl"
+	};
+
+	/** The comb filter delay lines for Kira to Kaiketsu! 64 Tanteidan. */
+	NS4_DELAY_N64 CReverb::m_dn64KiraToKaiketsu64Tanteidan0[] = {
+		//ui32Input		ui32Output	i16FfCoef		i16FbCoef		i16Gain							 dRsInc						 dRsVal			i32RsDelta						dRsGain						ui16Fc
+		{         0,	       864,	    +5000,		    -5000,	          0 },
+		{       304,	       608,	    +2200,		    -2200,	       8000 },
+		{         0,	      1152,	    +2200,		    -2200,	          0 },
+		{       384,	       768,	    +1400,		    -1400,	       4000 },
+		{         0,	      1536,	    +2000,		    -2000,	          0,		                      0,	                      0,		        +0,		                      0,	/*0xDFF77860*/    2197 },
+		{       512,	      1024,	    +1000,		    -1000,	       4005 },
+		{         0,	      2864,	    +9000,		       +0,	      12000,		                      0,	                      0,		        +0,		                      0,	/*0xDFF778A0*/   11962 },
+	};
+
 }	// namespace ns4
 
 namespace ns4 {
@@ -2715,6 +2732,20 @@ namespace ns4 {
 			NS4_NO_FADE,
 			NS4_NO_LPF,
 		},	// 166
+
+		// Kira to Kaiketsu! 64 Tanteidan.
+		{
+			NS4_ONLY_COMB( 1.0, 0 ),
+			NS4_COMB( 3520, 320 / 2, m_dn64KiraToKaiketsu64Tanteidan0, 20.0 ),
+		},	// 167
+		// Kira to Kaiketsu! 64 Tanteidan.
+		{
+			NS4_TAPS( m_rtKiraToKaiketsu64Tanteidan0 ),
+			NS4_SQRT_0_5,															// dTapVol
+			0,																		// i64TapOffset
+			NS4_NO_FADE,
+			NS4_NO_LPF,
+		},	// 168
 	};
 
 

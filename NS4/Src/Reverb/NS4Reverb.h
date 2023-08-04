@@ -184,7 +184,9 @@ namespace ns4 {
 
 			NS4_T_ROBOT_PONKOTSU_64_DELAY_0		= 165,
 			NS4_T_ROBOT_PONKOTSU_64_0			= 166,
-			
+
+			NS4_T_KIRA_TO_KAIKETSU_64_TANTEIDAN_DELAY_0		= 167,
+			NS4_T_KIRA_TO_KAIKETSU_64_TANTEIDAN_0			= 168,
 		};
 
 
@@ -785,6 +787,12 @@ namespace ns4 {
 
 		/** The comb filter delay lines for Robot Ponkottsu 64: Nanatsu no Umi no Caramel. */
 		static NS4_DELAY_N64					m_dn64RobotPonkottsu640[];
+
+		/** Taps harvested from Kira to Kaiketsu! 64 Tanteidan. */
+		static NS4_REVERB_TAP					m_rtKiraToKaiketsu64Tanteidan0[];
+
+		/** The comb filter delay lines for Kira to Kaiketsu! 64 Tanteidan. */
+		static NS4_DELAY_N64					m_dn64KiraToKaiketsu64Tanteidan0[];
 
 		// == Functions.
 		/**
