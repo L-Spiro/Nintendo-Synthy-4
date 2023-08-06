@@ -38,7 +38,7 @@
 { u8"Kira to Kaiketsu! 64 Tanteidan (J) 0000000D 0032A504.mid", u8"Kira to Kaiketsu! 64 Tanteidan (J) 0000000D 0032A504.mid TrackParseDebug.txt", u8"Track 0D", 0 },
 { u8"Kira to Kaiketsu! 64 Tanteidan (J) 0000000E 0032C8E4.mid", u8"Kira to Kaiketsu! 64 Tanteidan (J) 0000000E 0032C8E4.mid TrackParseDebug.txt", u8"Track 0E", 0 },
 { u8"Kira to Kaiketsu! 64 Tanteidan (J) 0000000F 0032EB24.mid", u8"Kira to Kaiketsu! 64 Tanteidan (J) 0000000F 0032EB24.mid TrackParseDebug.txt", u8"Track 0F", 0 },
-{ u8"Kira to Kaiketsu! 64 Tanteidan (J) 00000010 0032FEF8.mid", u8"Kira to Kaiketsu! 64 Tanteidan (J) 00000010 0032FEF8.mid TrackParseDebug.txt", u8"Track 10", 0 },
+//{ u8"Kira to Kaiketsu! 64 Tanteidan (J) 00000010 0032FEF8.mid", u8"Kira to Kaiketsu! 64 Tanteidan (J) 00000010 0032FEF8.mid TrackParseDebug.txt", u8"Track 10", 0 },
 { u8"Kira to Kaiketsu! 64 Tanteidan (J) 00000011 0032FF50.mid", u8"Kira to Kaiketsu! 64 Tanteidan (J) 00000011 0032FF50.mid TrackParseDebug.txt", u8"Track 11", 0 },
 { u8"Kira to Kaiketsu! 64 Tanteidan (J) 00000012 00331ABC.mid", u8"Kira to Kaiketsu! 64 Tanteidan (J) 00000012 00331ABC.mid TrackParseDebug.txt", u8"Track 12", 0 },
 { u8"Kira to Kaiketsu! 64 Tanteidan (J) 00000013 00332CB4.mid", u8"Kira to Kaiketsu! 64 Tanteidan (J) 00000013 00332CB4.mid TrackParseDebug.txt", u8"Track 13", 0 },
