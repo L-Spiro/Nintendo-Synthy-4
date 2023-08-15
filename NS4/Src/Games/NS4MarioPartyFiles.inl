@@ -7,7 +7,7 @@
 #define NS4_REVERB							ns4::CReverb::NS4_T_MARIO_PARTY_0
 #define NS4_ORIG_HZ							32006
 #define NS4_CURVE							40.0
-#define NS4_OUT_DIRECTORY					u8"T:\\N64OST\\Mario Party\\"
+#define NS4_OUT_DIRECTORY					u8"C:\\N64OST\\Mario Party\\"
 #define NS4_OUT_DIRECTORY_NUMBERS			NS4_OUT_DIRECTORY u8"Numbered\\"
 //#define NS4_PERC_INST						127
 /*#define NS4_DEFAULT_MAIN_VOLUME				100
