@@ -4,7 +4,7 @@
 #define NS4_FOLDER							u8"Beetle Adventure Racing!"
 #define NS4_BANK							u8"01"
 #define NS4_REVERB_TRACKS					1
-#define NS4_REVERB							ns4::CReverb::NS4_T_BLAST_CORPS_0
+#define NS4_REVERB							ns4::CReverb::NS4_T_BEETLE_ADVENTURE_RACING_0
 #define NS4_ORIG_HZ							22047
 #define NS4_CURVE							40.0
 #define NS4_OUT_DIRECTORY					u8"C:\\N64OST\\Beetle Adventure Racing!\\"

@@ -1531,6 +1531,24 @@ namespace ns4 {
 		{         0,	      2864,	    +9000,		       +0,	      12000,		                      0,	                      0,		        +0,		                      0,	/*0xDFF778A0*/   11962 },
 	};
 
+	/** Taps harvested from Beetle Adventure Racing!. */
+	NS4_REVERB_TAP CReverb::m_rtBeetleAdventureRacing0[] = {
+#include "Taps/NS4ReverbBeetleAdventureRacing0.inl"
+	};
+
+	/** The comb filter delay lines for Beetle Adventure Racing!. */
+	NS4_DELAY_N64 CReverb::m_dn64BeetleAdventureRacing0[] = {
+		//ui32Input		ui32Output	i16FfCoef		i16FbCoef		i16Gain							 dRsInc						 dRsVal			i32RsDelta						dRsGain						ui16Fc
+		{         0,	      1600,	    +9830,		    -9830,	       2400 },
+		{        64,	      3600,	    +9830,		    -9830,	       3600,		                      0,	                      0,		        +0,		                      0,	/*0xDFEA3500*/    6400 },
+		{       656,	      2048,	   +16384,		   -16384,	       2400 },
+		{       720,	      1648,	    +8192,		    -8192,	       4400 },
+		{      2592,	      4512,	   +16384,		   -16384,	       4820,		                      0,	                      0,		        +0,		                      0,	/*0xDFEA3540*/    9216 },
+		{      2656,	      3808,	    +8192,		    -8192,	       5760 },
+		{      3808,	      4288,	    +8192,		    -8192,	       6000 },
+		{         0,	      4784,	       +0,		       +0,	       6400 },
+	};
+
 }	// namespace ns4
 
 namespace ns4 {
@@ -1680,7 +1698,7 @@ namespace ns4 {
 			0.52755670985578773 / 2.0,												// dTapVol
 			0,																		// i64TapOffset
 			NS4_FADE( 2.0, 0.1, 4.4 ),
-			NS4_LPF( 10240.0, 0.15530457658638364, 0.5, 0 ),
+			NS4_LPF( 6400, 0.15530457658638364, 0.5, 0 ),
 		},	// 15
 		// F-1 World Grand Prix (Course Preview).
 		{
@@ -2746,6 +2764,19 @@ namespace ns4 {
 			NS4_NO_FADE,
 			NS4_NO_LPF,
 		},	// 168
+		// Beetle Adventure Racing!.
+		{
+			NS4_ONLY_COMB( 1.0, 0 ),
+			NS4_COMB( 5200, 320 / 2, m_dn64BeetleAdventureRacing0, 20.0 ),
+		},	// 169
+		// Beetle Adventure Racing!.
+		{
+			NS4_TAPS( m_rtBeetleAdventureRacing0 ),
+			NS4_SQRT_0_5,															// dTapVol
+			0,																		// i64TapOffset
+			NS4_FADE( 1.0, 2.2, 4.4 ),
+			NS4_LPF( 6400, 0.41801605660634100, 1.0, 0 ),
+		},	// 170
 	};
 
 

@@ -403,6 +403,7 @@
     <None Include="Src\Reverb\Taps\NS4ReverbBanjoTooie0.inl" />
     <None Include="Src\Reverb\Taps\NS4ReverbBanjoTooie1.inl" />
     <None Include="Src\Reverb\Taps\NS4ReverbBattlezoneRiseOfTheBlackDogs0.inl" />
+    <None Include="Src\Reverb\Taps\NS4ReverbBeetleAdventureRacing0.inl" />
     <None Include="Src\Reverb\Taps\NS4ReverbBlastCorps0.inl" />
     <None Include="Src\Reverb\Taps\NS4ReverbBodyHarvest0.inl" />
     <None Include="Src\Reverb\Taps\NS4ReverbBomberman640.inl" />

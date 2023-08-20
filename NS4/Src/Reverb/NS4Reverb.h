@@ -187,6 +187,9 @@ namespace ns4 {
 
 			NS4_T_KIRA_TO_KAIKETSU_64_TANTEIDAN_DELAY_0		= 167,
 			NS4_T_KIRA_TO_KAIKETSU_64_TANTEIDAN_0			= 168,
+
+			NS4_T_BEETLE_ADVENTURE_RACING_DELAY_0	= 169,
+			NS4_T_BEETLE_ADVENTURE_RACING_0			= 170,
 		};
 
 
@@ -793,6 +796,12 @@ namespace ns4 {
 
 		/** The comb filter delay lines for Kira to Kaiketsu! 64 Tanteidan. */
 		static NS4_DELAY_N64					m_dn64KiraToKaiketsu64Tanteidan0[];
+
+		/** Taps harvested from Beetle Adventure Racing!. */
+		static NS4_REVERB_TAP					m_rtBeetleAdventureRacing0[];
+
+		/** The comb filter delay lines for Beetle Adventure Racing!. */
+		static NS4_DELAY_N64					m_dn64BeetleAdventureRacing0[];
 
 		// == Functions.
 		/**
