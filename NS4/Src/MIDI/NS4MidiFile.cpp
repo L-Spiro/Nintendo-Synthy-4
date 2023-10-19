@@ -652,13 +652,13 @@ namespace ns4 {
 					}
 					// 00000CA6 Time: 00000000 Command: 95  Loop Start FF (255)
 					if ( std::sscanf( sLine.c_str(), "%X Time: %X Command: %X  Loop Start %X (%u)", &ui32Tmp0, &ui32Tmp1, &ui32Tmp2, &ui32Tmp3, &ui32Tmp4 ) == 5 ) {
-						if ( i32OffsetTrack > 0 && i32OffsetTrack < m_vTracks.size() ) {
+						if ( i32OffsetTrack >= 0 && i32OffsetTrack < m_vTracks.size() ) {
 							InsertEvent( m_vTracks[i32OffsetTrack].vEvents, NS4_LOOP_START, 0, i32Chan, ui32Tmp1, nullptr );
 						}
 					}
 					// 00000CB1 Time: 00002B80 Command: 96  Loop Back
 					if ( std::sscanf( sLine.c_str(), "%X Time: %X Command: %X  Loop Back", &ui32Tmp0, &ui32Tmp1, &ui32Tmp2 ) == 3 && ui32Tmp2 == 0x96 ) {
-						if ( i32OffsetTrack > 0 && i32OffsetTrack < m_vTracks.size() ) {
+						if ( i32OffsetTrack >= 0 && i32OffsetTrack < m_vTracks.size() ) {
 							InsertEvent( m_vTracks[i32OffsetTrack].vEvents, NS4_LOOP_END, 0, i32Chan, ui32Tmp1, nullptr );
 						}
 					}

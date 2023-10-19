@@ -22,6 +22,9 @@ namespace ns4 {
 		std::vector<double> vTaps;
 		vTaps.resize( stN );
 		size_t stL = stM / 2;								// The center sample is the latency.  Can use either stM or stN for this calculation.
+		for ( auto I = vTaps.size(); I--; ) {
+			vTaps[I] = 1.0;
+		}
 		// Create window.
 		_pfSynthFunc( vTaps );
 
@@ -69,30 +72,30 @@ namespace ns4 {
 		std::vector<double> vTmp;
 		vTmp.resize( _vIn.size() + sShift );
 
-		std::vector<double> vRing;
-		vRing.resize( _iIr.GetTaps().size() );
+		//std::vector<double> vRing;
+		const_cast<CIr &>(_iIr).RingBuffer().resize( _iIr.GetTaps().size() );
 
 		size_t stRingIndex = 0;
 		int64_t i64Len = int64_t( _vIn.size() + _iIr.GetLatency() );
 		const int64_t i64Offset = _iIr.GetLatency() - sShift;
 		for ( int64_t I = 0; I < i64Len; ++I ) {
-			vRing[stRingIndex] = I >= int64_t( _vIn.size() ) ? 0.0 : _vIn[I];
-			stRingIndex %= vRing.size();
+			const_cast<CIr &>(_iIr).RingBuffer()[stRingIndex] = I >= int64_t( _vIn.size() ) ? 0.0 : _vIn[I];
+			stRingIndex %= const_cast<CIr &>(_iIr).RingBuffer().size();
 			double dY = 0.0;
 			size_t stTmpIdx = stRingIndex;
 			for ( int64_t J = 0; J < int64_t( _iIr.GetTaps().size() ); ++J ) {
-				dY += vRing[stTmpIdx--] * _iIr.GetTaps()[J];
+				dY += const_cast<CIr &>(_iIr).RingBuffer()[stTmpIdx--] * _iIr.GetTaps()[J];
 				if ( stTmpIdx == size_t( -1 ) ) {
-					stTmpIdx = vRing.size() - 1;
+					stTmpIdx = const_cast<CIr &>(_iIr).RingBuffer().size() - 1;
 				}
 			}
 			if ( I >= i64Offset ) {
 				vTmp[I-i64Offset] = dY;
 			}
-			//else { vRing[stRingIndex] = 0.0; }
+			//else { const_cast<CIr &>(_iIr).RingBuffer()[stRingIndex] = 0.0; }
 
 			++stRingIndex;
-			stRingIndex %= vRing.size();
+			stRingIndex %= const_cast<CIr &>(_iIr).RingBuffer().size();
 		}
 		_vOut = std::move( vTmp );
 	}

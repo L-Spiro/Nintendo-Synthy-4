@@ -11,6 +11,9 @@ namespace ns4 {
 			//m_vTaps( _vTaps ),
 			m_stLatency( _stL ) {
 			m_vTaps = std::move( _vTaps );
+			if ( m_vTaps.size() ) {
+				m_vRing.resize( m_vTaps.size() );
+			}
 		}
 
 
@@ -29,11 +32,20 @@ namespace ns4 {
 		 */
 		const std::vector<double> &			GetTaps() const { return m_vTaps; }
 
+		/**
+		 * Gets the ring buffer.
+		 *
+		 * \return Returns a constant reference to the filter taps.
+		 */
+		std::vector<double> &				RingBuffer() { return m_vRing; }
+
 
 	protected :
 		// == Members.
 		/** The impulse-response taps. */
 		std::vector<double>					m_vTaps;
+		/** The ring buffer. */
+		std::vector<double>					m_vRing;
 		/** The latency. */
 		size_t								m_stLatency;
 	};

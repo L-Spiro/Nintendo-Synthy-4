@@ -7,7 +7,7 @@
 #define NS4_REVERB							ns4::CReverb::NS4_T_MISSION_IMPOSSIBLE_0
 #define NS4_ORIG_HZ							22047
 #define NS4_CURVE							20.0
-#define NS4_OUT_DIRECTORY					u8"T:\\N64OST\\Monopoly\\"
+#define NS4_OUT_DIRECTORY					u8"C:\\N64OST\\Monopoly\\"
 #define NS4_OUT_DIRECTORY_NUMBERS			NS4_OUT_DIRECTORY u8"Numbered\\"
 #define NS4_NO_PROGRAM_CHANGE_SORT			true
 #define NS4_PROG_CHANGE_SETS_VOL_PAN		false
