@@ -2724,7 +2724,7 @@ namespace ns4 {
 			NS4_TAPS( m_rtAllStarBaseball20000 ),
 			NS4_SQRT_0_5,															// dTapVol
 			0,																		// i64TapOffset
-			NS4_LPF( 4095.0 /*22018.0 / std::pow( 2.0, 4.0 )*/, 168.0 / 22047.0, 0.5, NS4_FILTER_DB_TO_ORDER( 6 ) ),														// dLpfFactor
+			NS4_FADE( 4095.0 /*22018.0 / std::pow( 2.0, 4.0 )*/, 168.0 / 22047.0, 0.5, NS4_FILTER_DB_TO_ORDER( 6 ) ),														// dLpfFactor
 			NS4_NO_LPF,
 		},	// 163
 
