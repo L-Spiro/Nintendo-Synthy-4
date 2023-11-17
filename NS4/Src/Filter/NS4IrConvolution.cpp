@@ -29,7 +29,6 @@ namespace ns4 {
 		_pfSynthFunc( vTaps );
 
 		// Apply sinc function.
-		double dNorm = 1.0 / (vTaps.size() - 1);
 		double dFc2 = 2.0 * _dFc;
 		const double dTau = 2.0 * std::numbers::pi;
 		int64_t i64SignedL = int64_t( stL );
@@ -74,28 +73,29 @@ namespace ns4 {
 
 		//std::vector<double> vRing;
 		const_cast<CIr &>(_iIr).RingBuffer().resize( _iIr.GetTaps().size() );
+		for ( auto I = const_cast<CIr &>(_iIr).RingBuffer().size(); I--; ) {
+			const_cast<CIr &>(_iIr).RingBuffer()[I] = 0.0;
+		}
 
 		size_t stRingIndex = 0;
 		int64_t i64Len = int64_t( _vIn.size() + _iIr.GetLatency() );
 		const int64_t i64Offset = _iIr.GetLatency() - sShift;
 		for ( int64_t I = 0; I < i64Len; ++I ) {
 			const_cast<CIr &>(_iIr).RingBuffer()[stRingIndex] = I >= int64_t( _vIn.size() ) ? 0.0 : _vIn[I];
-			stRingIndex %= const_cast<CIr &>(_iIr).RingBuffer().size();
 			double dY = 0.0;
 			size_t stTmpIdx = stRingIndex;
 			for ( int64_t J = 0; J < int64_t( _iIr.GetTaps().size() ); ++J ) {
-				dY += const_cast<CIr &>(_iIr).RingBuffer()[stTmpIdx--] * _iIr.GetTaps()[J];
-				if ( stTmpIdx == size_t( -1 ) ) {
-					stTmpIdx = const_cast<CIr &>(_iIr).RingBuffer().size() - 1;
-				}
+				dY += const_cast<CIr &>(_iIr).RingBuffer()[(stRingIndex+J)%const_cast<CIr &>(_iIr).RingBuffer().size()] * _iIr.GetTaps()[J];
 			}
 			if ( I >= i64Offset ) {
 				vTmp[I-i64Offset] = dY;
 			}
 			//else { const_cast<CIr &>(_iIr).RingBuffer()[stRingIndex] = 0.0; }
 
-			++stRingIndex;
-			stRingIndex %= const_cast<CIr &>(_iIr).RingBuffer().size();
+			--stRingIndex;
+			if ( stRingIndex >= const_cast<CIr &>(_iIr).RingBuffer().size() ) {
+				stRingIndex += const_cast<CIr &>(_iIr).RingBuffer().size();
+			}
 		}
 		_vOut = std::move( vTmp );
 	}

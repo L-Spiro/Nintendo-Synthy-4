@@ -123,7 +123,7 @@ namespace ns4 {
 		
 		_ui32Factor >>= 1;
 		while ( _ui32Factor ) {
-			CIr iIr = CIrConvolution::CreateSincFilter( dFreq * 2.0, dFilterFreq + dBw / 2.0, dBw, CIrConvolution::SynthesizeBlackmanWindow );
+			CIr iIr = CIrConvolution::CreateSincFilter( dFreq * 2.0, dFilterFreq + dBw / 2.0, dBw, CIrConvolution::SynthesizeHammingWindow );
 
 			bool bFailed = true;
 			while ( bFailed ) {
