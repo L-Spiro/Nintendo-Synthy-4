@@ -313,17 +313,7 @@ basic_expr
 	| EE_FALSE												{ m_peecContainer->CreateNumber( 0, $$ ); }
 	| '(' exp ')'											{ $$ = $2; }
 	//| '[' exp ']'											{ m_peecContainer->CreateAddress( $2, EE_CT_UINT32, $$ ); }
-	| EE_OB_DWORD exp ']'									{ m_peecContainer->CreateAddress( $2, EE_CT_UINT32, $$ ); }
-	| EE_OB_BYTE exp ']'									{ m_peecContainer->CreateAddress( $2, EE_CT_UINT8, $$ ); }
-	| EE_OB_WORD exp ']'									{ m_peecContainer->CreateAddress( $2, EE_CT_UINT16, $$ ); }
-	| EE_OB_QWORD exp ']'									{ m_peecContainer->CreateAddress( $2, EE_CT_UINT64, $$ ); }
-	| EE_OB_SDWORD exp ']'									{ m_peecContainer->CreateAddress( $2, EE_CT_INT32, $$ ); }
-	| EE_OB_SBYTE exp ']'									{ m_peecContainer->CreateAddress( $2, EE_CT_INT8, $$ ); }
-	| EE_OB_SWORD exp ']'									{ m_peecContainer->CreateAddress( $2, EE_CT_INT16, $$ ); }
-	| EE_OB_SQWORD exp ']'									{ m_peecContainer->CreateAddress( $2, EE_CT_INT64, $$ ); }
-	| EE_OB_FLOAT exp ']'									{ m_peecContainer->CreateAddress( $2, EE_CT_FLOAT, $$ ); }
-	| EE_OB_FLOAT16 exp ']'									{ m_peecContainer->CreateAddress( $2, EE_CT_FLOAT16, $$ ); }
-	| EE_OB_DOUBLE exp ']'									{ m_peecContainer->CreateAddress( $2, EE_CT_DOUBLE, $$ ); }
+	| address_type exp ']'									{ m_peecContainer->CreateAddress( $2, static_cast<ee::EE_CAST_TYPES>($1), $$ ); }
 	| intrinsic												{ $$ = $1; }
 	;
 
@@ -555,21 +545,21 @@ assignment_exp
 	| identifier '=' assignment_exp							{ m_peecContainer->CreateAssignment( $1, $3, '=', false, $$ ); }
 	| EE_CONST identifier '=' assignment_exp				{ m_peecContainer->CreateAssignment( $2, $4, '=', true, $$ ); }
 	| array_var '[' exp ']' assignment_op assignment_exp	{ m_peecContainer->CreateArrayReAssignment( $1, $3, $6, $5, $$ ); }
-	| address_type exp ']' assignment_op assignment_exp		{ m_peecContainer->CreateAddressAssignment( $1, $2, $5, $4, $$ ); }
+	| address_type exp ']' assignment_op assignment_exp		{ m_peecContainer->CreateAddressAssignment( static_cast<ee::EE_CAST_TYPES>($1), $2, $5, $4, $$ ); }
 	;
 	
 address_type
-	: EE_OB_DWORD											{ $$ = EE_CT_UINT32; }
-	| EE_OB_BYTE											{ $$ = EE_CT_UINT8; }
-	| EE_OB_WORD											{ $$ = EE_CT_UINT16; }
-	| EE_OB_QWORD											{ $$ = EE_CT_UINT64; }
-	| EE_OB_SDWORD											{ $$ = EE_CT_INT32; }
-	| EE_OB_SBYTE											{ $$ = EE_CT_INT8; }
-	| EE_OB_SWORD											{ $$ = EE_CT_INT16; }
-	| EE_OB_SQWORD											{ $$ = EE_CT_INT64; }
-	| EE_OB_FLOAT											{ $$ = EE_CT_FLOAT; }
-	| EE_OB_FLOAT16 										{ $$ = EE_CT_FLOAT16; }
-	| EE_OB_DOUBLE											{ $$ = EE_CT_DOUBLE; }
+	: EE_OB_DWORD											{ $$ = ee::EE_CT_UINT32; }
+	| EE_OB_BYTE											{ $$ = ee::EE_CT_UINT8; }
+	| EE_OB_WORD											{ $$ = ee::EE_CT_UINT16; }
+	| EE_OB_QWORD											{ $$ = ee::EE_CT_UINT64; }
+	| EE_OB_SDWORD											{ $$ = ee::EE_CT_INT32; }
+	| EE_OB_SBYTE											{ $$ = ee::EE_CT_INT8; }
+	| EE_OB_SWORD											{ $$ = ee::EE_CT_INT16; }
+	| EE_OB_SQWORD											{ $$ = ee::EE_CT_INT64; }
+	| EE_OB_FLOAT											{ $$ = ee::EE_CT_FLOAT; }
+	| EE_OB_FLOAT16 										{ $$ = ee::EE_CT_FLOAT16; }
+	| EE_OB_DOUBLE											{ $$ = ee::EE_CT_DOUBLE; }
 	;
 
 backing_type
