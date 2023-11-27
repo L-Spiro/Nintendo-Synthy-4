@@ -2203,6 +2203,10 @@ namespace ns4 {
 						m_sSettings.dEnvReleaseMultiplier = _pmMods[I].dOperandDouble0;
 						break;
 					}
+					case NS4_E_SET_UPDATE_VOL_PAN_WITH_INST_CHANGE : {
+						m_sSettings.bProgChangeSetsVolAndPan = _pmMods[I].ui32Operand0 != 0;
+						break;
+					}
 					case NS4_E_SET_INST : {
 						if ( iTrackByChan >= 0 && iTrackByChan < m_vTracks.size() ) {
 							uint64_t ui64Tick = CubaseToTick( _pmMods[I].tsTime0.ui32M, _pmMods[I].tsTime0.ui32B, _pmMods[I].tsTime0.ui32T, _pmMods[I].tsTime0.ui32S );

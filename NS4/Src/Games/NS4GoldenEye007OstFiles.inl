@@ -7,7 +7,7 @@
 #define NS4_REVERB							ns4::CReverb::NS4_T_GOLDENEYE_007_0
 #define NS4_ORIG_HZ							22047
 #define NS4_CURVE							40.0
-#define NS4_OUT_DIRECTORY					u8"T:\\N64OST\\GoldenEye 007 OST\\"
+#define NS4_OUT_DIRECTORY					u8"C:\\N64OST\\GoldenEye 007 OST\\"
 #define NS4_OUT_DIRECTORY_NUMBERS			NS4_OUT_DIRECTORY u8"Numbered\\"
 //#define NS4_MASTER_REVERB_VOLUME			(2.0)
 #define NS4_WET_FILTER_FREQ					4736.0//(NS4_ORIG_HZ / std::pow( 2.0, 2.5 ))
@@ -17,7 +17,7 @@
 #define NS4_ENVELOPE_VOL_CURVE				20.0
 #define NS4_ENVELOPE_POINT_CURVE			40.0
 #define NS4_PREFADE_DUR						1.0
-#define NS4_FADE_FILE						u8"F:\\N64OST\\StudioFadeCD.wav"
+#define NS4_FADE_FILE						u8"C:\\My Projects\\Nintendo-Synthy-4\\Fades\\StudioFadeCD.wav"
 
 
 
@@ -573,3 +573,94 @@
 },
 
 //{ u8"00 GoldenEye 007 (U) 0000003B 0043787A Surface II X.mid", u8"GoldenEye 007 (U) 0000003B 0043787A Surface ii Beta X Track.mid TrackParseDebug.txt", u8"Surface II X", },
+
+{ u8"00 GoldenEye 007 (U) 0000002C 004310CE Heartbeat.mid", u8"GoldenEye 007 (U) 0000002C 004310CE Opening Logos K.I.A. Heartbeat.mid TrackParseDebug.txt", u8"Heartbeat", 0,
+	3 + 1 + 1,
+	{
+		{ NS4_STOP_AT_TIME( 296608.0 / NS4_ORIG_HZ ), },
+		{ NS4_SET_CURSOR_BY_TIME( 296608.0 / NS4_ORIG_HZ ), },
+		{ NS4_STORE_RESULT, },
+
+		{ NS4_SET_COMPOSER( u8"Graeme Norgate" ) },
+
+		{ ns4::CMidiFile::NS4_ES_POST_SUPPLEMENTAL, ns4::CMidiFile::NS4_E_SET_UPDATE_VOL_PAN_WITH_INST_CHANGE, 0, 0 },
+	}
+},
+{ u8"00 GoldenEye 007 (U) 00000002 00419B8C Main Theme.mid", u8"GoldenEye 007 (U) 00000002 00419B8C 007 Main Theme (Intro).mid TrackParseDebug.txt", u8"Opening (As Intended)", 0,
+	1,
+	{
+		{ NS4_SET_COMPOSER( u8"Graeme Norgate and Grant Kirkhope" ) },
+	},
+	1
+},
+
+
+{ u8"00 GoldenEye 007 (U) 00000003 0041A43A Train.mid", u8"GoldenEye 007 (U) 00000003 0041A43A Train Main Theme.mid TrackParseDebug.txt", u8"Train", 0,
+	3 + 1,
+	{
+		{ NS4_STOP_AT_TICK( 84 + (10 - 2), 1, 1, 0 ), },
+		{ NS4_SET_CURSOR_BY_TICK( 84 + (10 - 2), 1, 1, 0 ), },
+		{ NS4_STORE_RESULT, },
+
+		{ NS4_SET_COMPOSER( u8"Graeme Norgate" ) },
+	}
+},
+{ u8"00 GoldenEye 007 (U) 0000001D 0042B2BA Train X.mid", u8"GoldenEye 007 (U) 0000001D 0042B2BA Train X Track.mid TrackParseDebug.txt", u8"Train (As Intended)", 0,
+	2,
+	{
+		{ NS4_SET_COMPOSER( u8"Graeme Norgate" ) },
+
+		{ ns4::CMidiFile::NS4_ES_POST_SUPPLEMENTAL, ns4::CMidiFile::NS4_E_SET_UPDATE_VOL_PAN_WITH_INST_CHANGE, 0, 0 },
+	},
+	1
+},
+
+{ u8"00 GoldenEye 007 (U) 0000001A 00429372 Caverns.mid", u8"GoldenEye 007 (U) 0000001A 00429372 Caverns Main Theme.mid TrackParseDebug.txt", u8"Caverns", 0,
+	3 + 1 + 1,
+	{
+		{ NS4_STOP_AT_TICK( 103 + (13 - 1), 1, 1, 0 ), },
+		{ NS4_SET_CURSOR_BY_TICK( 103 + (13 - 1), 1, 1, 0 ), },
+		{ NS4_STORE_RESULT, },
+
+		{ NS4_SET_COMPOSER( u8"Graeme Norgate" ) },
+
+		{ ns4::CMidiFile::NS4_ES_POST_SUPPLEMENTAL, ns4::CMidiFile::NS4_E_SET_UPDATE_VOL_PAN_WITH_INST_CHANGE, 0, 0 },
+	}
+},
+{ u8"00 GoldenEye 007 (U) 00000022 0042D1E0 Caverns X.mid", u8"GoldenEye 007 (U) 00000022 0042D1E0 Caverns Beta X Track.mid TrackParseDebug.txt", u8"Caverns (As Intended)", 0,
+	1,
+	{
+		{ NS4_SET_COMPOSER( u8"Graeme Norgate" ) },
+	},
+	1
+},
+
+{ u8"00 GoldenEye 007 (U) 00000019 00428700 Aztec.mid", u8"GoldenEye 007 (U) 00000019 00428700 Aztec Main Theme.mid TrackParseDebug.txt", u8"Aztec", 0,
+	3 + 1 + 1,
+	{
+		{ NS4_STOP_AT_TICK( 79 + (8 - 8), 1, 1, 0 ), },
+		{ NS4_SET_CURSOR_BY_TICK( 79 + (8 - 8), 1, 1, 0 ), },
+		{ NS4_STORE_RESULT, },
+
+		{ NS4_SET_COMPOSER( u8"Graeme Norgate" ) },
+
+		{ ns4::CMidiFile::NS4_ES_POST_SUPPLEMENTAL, ns4::CMidiFile::NS4_E_SET_UPDATE_VOL_PAN_WITH_INST_CHANGE, 0, 0 },
+	}
+},
+{ u8"00 GoldenEye 007 (U) 0000002E 00431BB8 Aztec X.mid", u8"GoldenEye 007 (U) 0000002E 00431BB8 Aztec X Track.mid TrackParseDebug.txt", u8"Aztec (As Intended)", 0,
+	1,
+	{
+		{ NS4_SET_COMPOSER( u8"Graeme Norgate" ) },
+	},
+	1
+},
+
+{ u8"00 GoldenEye 007 (U) 0000002C 004310CE Heartbeat.mid", u8"GoldenEye 007 (U) 0000002C 004310CE Opening Logos K.I.A. Heartbeat.mid TrackParseDebug.txt", u8"Heartbeat (As Intended)", 0,
+	2,
+	{
+		{ NS4_SET_COMPOSER( u8"Graeme Norgate" ) },
+
+		{ ns4::CMidiFile::NS4_ES_POST_SUPPLEMENTAL, ns4::CMidiFile::NS4_E_SET_UPDATE_VOL_PAN_WITH_INST_CHANGE, 0, 0 },
+	},
+	1
+},

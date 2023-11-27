@@ -214,6 +214,7 @@ namespace ns4 {
 			NS4_E_SET_ENV_ATK_MULTIPLIER,						/**< Sets the envelope attack multiplier (dOperandDouble0).  Only useful in the pre-unroll or post-supplemental stages. */
 			NS4_E_SET_ENV_DEC_MULTIPLIER,						/**< Sets the envelope decay multiplier (dOperandDouble0).  Only useful in the pre-unroll or post-supplemental stages. */
 			NS4_E_SET_ENV_REL_MULTIPLIER,						/**< Sets the envelope release multiplier (dOperandDouble0).  Only useful in the pre-unroll or post-supplemental stages. */
+			NS4_E_SET_UPDATE_VOL_PAN_WITH_INST_CHANGE,			/**< Like NS4_PROG_CHANGE_SETS_VOL_PAN, determines if changing changing the instrument updates the track pan and volume (ui32Operand0).  NS4_PROG_CHANGE_SETS_VOL_PAN is used as the default for an OST while NS4_E_SET_UPDATE_VOL_PAN_WITH_INST_CHANGE allows changes from the default on a per-MIDI basis.  Only useful in the pre-unroll or post-supplemental stages. */
 			NS4_E_IGNORE_TEMPO_LOOPS,							/**< Ignore loop points when creating timelines.  Allows creating a set of tempo changes that are not repeated in loops.  Only useful in the pre-unroll or post-supplemental stages. */
 			NS4_E_STOP_AT_TICK,									/**< Stops a MIDI file at the given tick.  Unlike other forms of muting, this adds note-off events to close off any open notes at the given tick. */
 			NS4_E_STOP_AT_TIME,									/**< Stops a MIDI file at the given time (dOperandDouble0).  Unlike other forms of muting, this adds note-off events to close off any open notes at the given tick. */

@@ -7,7 +7,7 @@
 #define NS4_REVERB							ns4::CReverb::NS4_T_GOLDENEYE_007_0
 #define NS4_ORIG_HZ							22047
 #define NS4_CURVE							40.0
-#define NS4_OUT_DIRECTORY					u8"T:\\N64OST\\GoldenEye 007\\"
+#define NS4_OUT_DIRECTORY					u8"C:\\N64OST\\GoldenEye 007\\"
 #define NS4_OUT_DIRECTORY_NUMBERS			NS4_OUT_DIRECTORY u8"Numbered\\"
 //#define NS4_MASTER_REVERB_VOLUME			(2.0)
 #define NS4_WET_FILTER_FREQ					4736.0//(NS4_ORIG_HZ / std::pow( 2.0, 2.5 ))
@@ -369,3 +369,32 @@
 },
 
 //{ u8"00 GoldenEye 007 (U) 0000003B 0043787A Surface II X.mid", u8"GoldenEye 007 (U) 0000003B 0043787A Surface ii Beta X Track.mid TrackParseDebug.txt", u8"Surface II X", },
+
+{ u8"00 GoldenEye 007 (U) 00000003 0041A43A Train.mid", u8"GoldenEye 007 (U) 00000003 0041A43A Train Main Theme.mid TrackParseDebug.txt", u8"Train (As Intended)", 0,
+	2,
+	{
+		{ NS4_SET_COMPOSER( u8"Graeme Norgate" ) },
+		{ ns4::CMidiFile::NS4_ES_POST_SUPPLEMENTAL, ns4::CMidiFile::NS4_E_SET_UPDATE_VOL_PAN_WITH_INST_CHANGE, 0, 0 },
+	}
+},
+{ u8"00 GoldenEye 007 (U) 00000022 0042D1E0 Caverns X.mid", u8"GoldenEye 007 (U) 00000022 0042D1E0 Caverns Beta X Track.mid TrackParseDebug.txt", u8"Caverns X (As Intended)", 0,
+	2,
+	{
+		{ NS4_SET_COMPOSER( u8"Graeme Norgate" ) },
+		{ ns4::CMidiFile::NS4_ES_POST_SUPPLEMENTAL, ns4::CMidiFile::NS4_E_SET_UPDATE_VOL_PAN_WITH_INST_CHANGE, 0, 0 },
+	}
+},
+{ u8"00 GoldenEye 007 (U) 0000002E 00431BB8 Aztec X.mid", u8"GoldenEye 007 (U) 0000002E 00431BB8 Aztec X Track.mid TrackParseDebug.txt", u8"Aztec X (As Intended)", 0,
+	2,
+	{
+		{ NS4_SET_COMPOSER( u8"Graeme Norgate" ) },
+		{ ns4::CMidiFile::NS4_ES_POST_SUPPLEMENTAL, ns4::CMidiFile::NS4_E_SET_UPDATE_VOL_PAN_WITH_INST_CHANGE, 0, 0 },
+	}
+},
+{ u8"00 GoldenEye 007 (U) 0000002C 004310CE Heartbeat.mid", u8"GoldenEye 007 (U) 0000002C 004310CE Opening Logos K.I.A. Heartbeat.mid TrackParseDebug.txt", u8"Heartbeat (As Intended)", 0,
+	2,
+	{
+		{ NS4_SET_COMPOSER( u8"Graeme Norgate" ) },
+		{ ns4::CMidiFile::NS4_ES_POST_SUPPLEMENTAL, ns4::CMidiFile::NS4_E_SET_UPDATE_VOL_PAN_WITH_INST_CHANGE, 0, 0 },
+	}
+},
