@@ -238,7 +238,7 @@ int oldmain() {
 
 #if 0
 	// Tools somehow stopped being able to load .n64 files due to not automatically byte-swapping them.
-#define LSN_SWAP_ME			L"Nintama Rantarou 64 Game Gallery (Japan)"
+#define LSN_SWAP_ME			L"Famista 64 (Japan)"
 #define LSN_SWAP_ME_DIR		L"C:\\My Projects\\N64\\Roms\\"
 	{
 		const wchar_t * pu16ByteswapMe = LSN_SWAP_ME_DIR LSN_SWAP_ME L".n64";
@@ -338,7 +338,7 @@ int oldmain() {
 //#include "Src/Games/NS4F1WorldGrandPrixFiles.inl"
 //#include "Src/Games/NS4BodyHarvestFiles.inl"
 //#include "Src/Games/NS4MischiefMakersFiles.inl"
-#include "Src/Games/NS4ChameleonTwistFiles.inl"
+//#include "Src/Games/NS4ChameleonTwistFiles.inl"
 //#include "Src/Games/NS4ChameleonTwist2Files.inl"
 //#include "Src/Games/NS4BombermanHeroFiles.inl"
 //#include "Src/Games/NS4Bomberman64Files.inl"
@@ -473,6 +473,7 @@ int oldmain() {
 //#include "Src/Games/NS4RobotPonkotsu64Files.inl"
 //#include "Src/Games/NS4KirattoKaiketsu64TanteidanFiles.inl"
 //#include "Src/Games/NS4NintamaRantarou64GameGalleryFiles.inl"
+#include "Src/Games/NS4Famista64Files.inl"
 #else
 		{}
 #endif

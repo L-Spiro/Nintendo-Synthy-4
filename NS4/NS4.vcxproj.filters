@@ -1018,5 +1018,8 @@
     <None Include="Src\Reverb\Taps\NS4ReverbBeetleAdventureRacing0.inl">
       <Filter>Header Files\Reverb\Taps</Filter>
     </None>
+    <None Include="Src\Games\NS4Famista64Files.inl">
+      <Filter>Header Files\Games</Filter>
+    </None>
   </ItemGroup>
 </Project>

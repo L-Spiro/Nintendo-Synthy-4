@@ -280,6 +280,7 @@
     <None Include="Src\Games\NS4F1RacingChampionshipFiles.inl" />
     <None Include="Src\Games\NS4F1WorldGrandPrixFiles.inl" />
     <None Include="Src\Games\NS4F1WorldGrandPrixIiFiles.inl" />
+    <None Include="Src\Games\NS4Famista64Files.inl" />
     <None Include="Src\Games\NS4FightersDestinyFiles.inl" />
     <None Include="Src\Games\NS4FireElectricPenFiles.inl" />
     <None Include="Src\Games\NS4FlyingDragonFiles.inl" />
