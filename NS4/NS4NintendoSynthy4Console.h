@@ -49,7 +49,7 @@
 //#define NS4_PRINT_BEST_BANK
 
 #ifdef NS4_BULK
-//#define NS4_ONE_OFF										(1-1)
+//#define NS4_ONE_OFF										(7-1)
 //#define NS4_EXPORT_SOME
 //#define NS4_EPORT_FROM								(71-1)
 #else
@@ -236,9 +236,9 @@ int oldmain() {
 	double dDiff = ns4::CWavLib::GetPitchDiffByZeroCrossings( u8"J:\\My Projects\\MIDIWorks\\Exports\\Super Mario 64\\Samples\\difpiano.wav", u8"J:\\My Projects\\MIDIWorks\\Exports\\Super Mario 64\\Samples\\B15I05S00.wav" );
 #endif
 
-#if 0
+#if 1
 	// Tools somehow stopped being able to load .n64 files due to not automatically byte-swapping them.
-#define LSN_SWAP_ME			L"Famista 64 (Japan)"
+#define LSN_SWAP_ME			L"Itoi Shigesato no Bass Tsuri No. 1 Kettei Ban! (Japan)"
 #define LSN_SWAP_ME_DIR		L"C:\\My Projects\\N64\\Roms\\"
 	{
 		const wchar_t * pu16ByteswapMe = LSN_SWAP_ME_DIR LSN_SWAP_ME L".n64";
@@ -473,7 +473,9 @@ int oldmain() {
 //#include "Src/Games/NS4RobotPonkotsu64Files.inl"
 //#include "Src/Games/NS4KirattoKaiketsu64TanteidanFiles.inl"
 //#include "Src/Games/NS4NintamaRantarou64GameGalleryFiles.inl"
-#include "Src/Games/NS4Famista64Files.inl"
+//#include "Src/Games/NS4Famista64Files.inl"
+//#include "Src/Games/NS4PowerLeague64Files.inl"
+#include "Src/Games/NS4SaikyoHaboShogiFiles.inl"
 #else
 		{}
 #endif

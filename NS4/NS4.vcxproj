@@ -336,6 +336,7 @@
     <None Include="Src\Games\NS4PokemonSnapFiles.inl" />
     <None Include="Src\Games\NS4PokemonStadium2Files.inl" />
     <None Include="Src\Games\NS4PokemonStadiumFiles.inl" />
+    <None Include="Src\Games\NS4PowerLeague64Files.inl" />
     <None Include="Src\Games\NS4ProMahjongKiwame64Files.inl" />
     <None Include="Src\Games\NS4ProMahjongTsuwamono64JansouBattleNiChousenFiles.inl" />
     <None Include="Src\Games\NS4PuyoPuyoSun64Files.inl" />
@@ -346,6 +347,7 @@
     <None Include="Src\Games\NS4RoadstersTrophyFiles.inl" />
     <None Include="Src\Games\NS4RobotPonkotsu64Files.inl" />
     <None Include="Src\Games\NS4Rush2Files.inl" />
+    <None Include="Src\Games\NS4SaikyoHaboShogiFiles.inl" />
     <None Include="Src\Games\NS4SanFranciscoRushFiles.inl" />
     <None Include="Src\Games\NS4SCARSFiles.inl" />
     <None Include="Src\Games\NS4ShinNihonProWrestlingToukonRoad2TheNextGenerationFiles.inl" />

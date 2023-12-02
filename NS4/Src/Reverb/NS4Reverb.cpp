@@ -1178,12 +1178,12 @@ namespace ns4 {
 	NS4_DELAY_N64 CReverb::m_dn64MischiefMakers0[] = {
 		// Custom stuff in the reverb.  The cut-offs are probably wrong and not used.
 		//ui32Input		ui32Output	i16FfCoef		i16FbCoef		i16Gain							 dRsInc						 dRsVal			i32RsDelta						dRsGain						ui16Fc
-		{         0,	         0,	    +4276,		    -4276,	      12582,		                      0,	                      0,		        +0,		                      0,	/*0xDFF96450*/    2000 },
+		{         0,	         0,	    +4276,		    -4276,	      12582,		                      0,	                      0,		        +0,		                      0,	/*0xDFF96450*/     244 },
 		{         0,	      1584,	   +15702,		       +0,	      20498 },
 		{        16,	       608,	    +3128,		    -3128,	      16424 },
-		{         0,	       864,	       +0,		    -5432,	       7990,		                      0,	                      0,		        +0,		                      0,	/*0xDFF964D0*/    4064 },
-		{        32,	      3840,	    +9830,		    -9830,	      28694,		                      0,	                      0,		        +0,		                      0,	/*0xDFF96550*/   12297 },
-		{         0,	         0,	   +27251,		    +8307,	          0,		-1.3675383817223036e-039,	2.0178697886277366e-043,		       +17,		                      0 },
+		{         0,	       864,	       +0,		    -5432,	       7990,		                      0,	                      0,		        +0,		                      0,	/*0xDFF964D0*/    1008 },
+		{        32,	      3840,	    +9830,		    -9830,	      28694,		                      0,	                      0,		        +0,		                      0,	/*0xDFF96550*/    9229 },
+		{         0,	         0,	   +27251,		    +8307,	          0 },
 	};
 
 	/** Taps harvested from Bomberman 64: The Second Attack!. */
