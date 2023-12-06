@@ -1549,6 +1549,30 @@ namespace ns4 {
 		{         0,	      4784,	       +0,		       +0,	       6400 },
 	};
 
+	/** Taps harvested from Itoi Shigesato no Bass Tsuri No. 1. */
+	NS4_REVERB_TAP CReverb::m_rtItoiShigesatoNoBassTsuriNo10[] = {
+#include "Taps/NS4ReverbItoiShigesatoNoBassTsuriNo10.inl"
+	};
+
+	/** The comb filter delay lines for Itoi Shigesato no Bass Tsuri No. 1. */
+	NS4_DELAY_N64 CReverb::m_dn64ItoiShigesatoNoBassTsuriNo10[] = {
+		//ui32Input		ui32Output	i16FfCoef		i16FbCoef		i16Gain							 dRsInc						 dRsVal			i32RsDelta						dRsGain						ui16Fc
+		{         0,	       640,	    +9830,		    -9830,	          0 },
+		{       960,	      1280,	    +3276,		    -3276,	       8191 },
+		{      1920,	      2560,	    +3276,		    -3276,	       5631 },
+		{      2560,	      3520,	    +3276,		    -3276,	       4351 },
+		{      3200,	      4800,	    +3276,		    -3276,	       4351 },
+		{      3840,	      6400,	    +3276,		    -3276,	       4095 },
+		{      5760,	      7680,	    +3276,		    -3276,	       4095 },
+		{      8000,	      9600,	    +3276,		    -3276,	       2559 },
+		{      9600,	     11200,	    +3276,		    -3276,	       2559 },
+		{     11200,	     12800,	    +3276,		    -3276,	       1535 },
+		{     12800,	     14400,	    +3276,		    -3276,	       1535 },
+		{     14400,	     16000,	    +3276,		    -3276,	        255 },
+		{     16000,	     17600,	    +3276,		    -3276,	        255 },
+		{         0,	      9600,	    +5000,		       +0,	          0,		                      0,	                      0,		        +0,		                      0,	/*0xDFEC1D20*/    6400 },
+	};
+
 }	// namespace ns4
 
 namespace ns4 {
@@ -2777,6 +2801,19 @@ namespace ns4 {
 			NS4_FADE( 1.0, 2.2, 4.4 ),
 			NS4_LPF( 6400, 0.41801605660634100, 1.0, 0 ),
 		},	// 170
+		// Itoi Shigesato no Bass Tsuri No. 1.
+		{
+			NS4_ONLY_COMB( 1.0, 0 ),
+			NS4_COMB( 17600, 320 / 2, m_dn64ItoiShigesatoNoBassTsuriNo10, 20.0 ),
+		},	// 171
+		// Itoi Shigesato no Bass Tsuri No. 1.
+		{
+			NS4_TAPS( m_rtItoiShigesatoNoBassTsuriNo10 ),
+			NS4_SQRT_0_5,															// dTapVol
+			0,																		// i64TapOffset
+			NS4_NO_FADE,
+			NS4_NO_LPF,
+		},	// 172
 	};
 
 

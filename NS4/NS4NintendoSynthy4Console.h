@@ -164,7 +164,8 @@ int oldmain() {
 		//ns4::CReverb::HarvestUnfilteredMonoTaps( u8"C:\\My Projects\\Nintendo-Synthy-4\\NS4\\Src\\Reverb\\Research\\ASB2000 HD.wav", -1, 1, 0, 0, 0 );
 		//ns4::CReverb::HarvestUnfilteredMonoTaps( u8"C:\\My Projects\\Nintendo-Synthy-4\\NS4\\Src\\Reverb\\Research\\RP64 HD.wav", -1, 1, 0, 0, 0 );
 		//ns4::CReverb::HarvestUnfilteredMonoTaps( u8"C:\\My Projects\\Nintendo-Synthy-4\\NS4\\Src\\Reverb\\Research\\KK64T HD.wav", -1, 1, 0, 0, 0 );
-		ns4::CReverb::HarvestUnfilteredMonoTaps( u8"C:\\My Projects\\Nintendo-Synthy-4\\NS4\\Src\\Reverb\\Research\\BAR HD.wav", -1, 1, 0, 0, 0 );
+		//ns4::CReverb::HarvestUnfilteredMonoTaps( u8"C:\\My Projects\\Nintendo-Synthy-4\\NS4\\Src\\Reverb\\Research\\BAR HD.wav", -1, 1, 0, 0, 0 );
+		ns4::CReverb::HarvestUnfilteredMonoTaps( u8"C:\\My Projects\\Nintendo-Synthy-4\\NS4\\Src\\Reverb\\Research\\ISBTN1 HD.wav", -1, 1, 0, 0, 0 );
 	}
 	{
 		ns4::CWavLib::DetermineLevelsStereo( u8"C:\\My Projects\\Nintendo-Synthy-4\\NS4\\Src\\Reverb\\Research\\BK V 127 R 0 P 64.wav",
@@ -208,11 +209,11 @@ int oldmain() {
 
 #if 0
 	{
-		const uint32_t ui32SampRate = 22047;
+		const uint32_t ui32SampRate = 32006;
 		
 		ns4::lwaudio aWet = ns4::CWavLib::AllocateSamples( 1, ui32SampRate * 30 );
 		aWet[0][0] = 1.0;
-		ns4::lwaudio aAccum = ns4::CReverb::CreateReverb( ns4::CReverb::NS4_T_BEETLE_ADVENTURE_RACING_DELAY_0, aWet, ui32SampRate, ui32SampRate, 0.0, 0 );
+		ns4::lwaudio aAccum = ns4::CReverb::CreateReverb( ns4::CReverb::NS4_T_ITOI_SHIGESATO_NO_BASS_TSURI_NO_1_DELAY_0, aWet, ui32SampRate, ui32SampRate, 0.0, 0 );
 		ns4::lwsample sFirst = aWet[0][0];
 		if ( sFirst == 0.0 ) {
 			::OutputDebugStringA( "Measles.\r\n" );
@@ -236,7 +237,7 @@ int oldmain() {
 	double dDiff = ns4::CWavLib::GetPitchDiffByZeroCrossings( u8"J:\\My Projects\\MIDIWorks\\Exports\\Super Mario 64\\Samples\\difpiano.wav", u8"J:\\My Projects\\MIDIWorks\\Exports\\Super Mario 64\\Samples\\B15I05S00.wav" );
 #endif
 
-#if 1
+#if 0
 	// Tools somehow stopped being able to load .n64 files due to not automatically byte-swapping them.
 #define LSN_SWAP_ME			L"Itoi Shigesato no Bass Tsuri No. 1 Kettei Ban! (Japan)"
 #define LSN_SWAP_ME_DIR		L"C:\\My Projects\\N64\\Roms\\"
@@ -475,7 +476,8 @@ int oldmain() {
 //#include "Src/Games/NS4NintamaRantarou64GameGalleryFiles.inl"
 //#include "Src/Games/NS4Famista64Files.inl"
 //#include "Src/Games/NS4PowerLeague64Files.inl"
-#include "Src/Games/NS4SaikyoHaboShogiFiles.inl"
+//#include "Src/Games/NS4SaikyoHaboShogiFiles.inl"
+#include "Src/Games/NS4ItoiShigesatoNoBassTsuriNo1Files.inl"
 #else
 		{}
 #endif

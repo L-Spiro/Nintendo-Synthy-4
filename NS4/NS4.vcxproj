@@ -296,6 +296,7 @@
     <None Include="Src\Games\NS4HeyYouPikachuFiles.inl" />
     <None Include="Src\Games\NS4HybridHeavenFiles.inl" />
     <None Include="Src\Games\NS4IggysReckinBallsFiles.inl" />
+    <None Include="Src\Games\NS4ItoiShigesatoNoBassTsuriNo1Files.inl" />
     <None Include="Src\Games\NS4JetForceGemini2Files.inl" />
     <None Include="Src\Games\NS4JetForceGeminiFiles.inl" />
     <None Include="Src\Games\NS4JetForceGeminiKioskFiles.inl" />
@@ -436,6 +437,7 @@
     <None Include="Src\Reverb\Taps\NS4ReverbGetterLove0.inl" />
     <None Include="Src\Reverb\Taps\NS4ReverbHeyYouPikachu0.inl" />
     <None Include="Src\Reverb\Taps\NS4ReverbIggysReckinBalls0.inl" />
+    <None Include="Src\Reverb\Taps\NS4ReverbItoiShigesatoNoBassTsuriNo10.inl" />
     <None Include="Src\Reverb\Taps\NS4ReverbJetForceGeminiLeft0.inl" />
     <None Include="Src\Reverb\Taps\NS4ReverbJetForceGeminiRight0.inl" />
     <None Include="Src\Reverb\Taps\NS4ReverbJetForceGeminiStereo0.inl" />

@@ -190,6 +190,9 @@ namespace ns4 {
 
 			NS4_T_BEETLE_ADVENTURE_RACING_DELAY_0	= 169,
 			NS4_T_BEETLE_ADVENTURE_RACING_0			= 170,
+
+			NS4_T_ITOI_SHIGESATO_NO_BASS_TSURI_NO_1_DELAY_0		= 171,
+			NS4_T_ITOI_SHIGESATO_NO_BASS_TSURI_NO_1_0			= 172,
 		};
 
 
@@ -802,6 +805,12 @@ namespace ns4 {
 
 		/** The comb filter delay lines for Beetle Adventure Racing!. */
 		static NS4_DELAY_N64					m_dn64BeetleAdventureRacing0[];
+
+		/** Taps harvested from Itoi Shigesato no Bass Tsuri No. 1. */
+		static NS4_REVERB_TAP					m_rtItoiShigesatoNoBassTsuriNo10[];
+
+		/** The comb filter delay lines for Itoi Shigesato no Bass Tsuri No. 1. */
+		static NS4_DELAY_N64					m_dn64ItoiShigesatoNoBassTsuriNo10[];
 
 		// == Functions.
 		/**
