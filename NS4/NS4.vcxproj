@@ -373,6 +373,7 @@
     <None Include="Src\Games\NS4SuperRobotSpiritsOverSampledFiles.inl" />
     <None Include="Src\Games\NS4SuperRobotWars64Files.inl" />
     <None Include="Src\Games\NS4SuperSmashBrosFiles.inl" />
+    <None Include="Src\Games\NS4TamiyaRacing64ProtoFiles.inl" />
     <None Include="Src\Games\NS4TheLegendOfZeldaMajorasMaskFiles.inl" />
     <None Include="Src\Games\NS4TheLegendOfZeldaOcarinaOfTimeFiles.inl" />
     <None Include="Src\Games\NS4TonicTroubleFiles.inl" />

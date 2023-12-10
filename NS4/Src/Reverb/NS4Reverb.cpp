@@ -620,9 +620,9 @@ namespace ns4 {
 
 	/** The comb filter delay lines for Mario Party. */
 	NS4_DELAY_N64 CReverb::m_dn64MarioPartyComb0[] = {
-		//ui32Input		ui32Output	i16FfCoef		i16FbCoef		i16Gain			dRsInc						dRsVal						i32RsDelta		dRsGain
-		{ 0,		2560,		16383,		-16383,		2949,	},
-		{ 0,		5760,		16383,		-16383,		16383,	},
+		//ui32Input		ui32Output	i16FfCoef		i16FbCoef		i16Gain							 dRsInc						 dRsVal			i32RsDelta						dRsGain						ui16Fc
+		{         0,	      2560,	   +16383,		   -16383,	       2949,		                      0,	                      0,		        +0,		                      0,	/*0xE0124240*/    5510 },
+		{         0,	      5760,	   +16383,		   -16383,	      16383,		                      0,	                      0,		        +0,		                      0,	/*0xE0124280*/    5510 },
 	};
 
 	/** The comb filter delay lines for Aero Fighters Assault. */
@@ -1852,7 +1852,7 @@ namespace ns4 {
 			NS4_TAPS( m_rtMarioParty0 ),
 			1.4236377651161767 / 2.0,
 			0,
-			NS4_FADE( 2.0, 0.1, 5.0 ),												// dTime
+			NS4_FADE( 2.0, 0.5, 5.0 ),												// dTime
 			NS4_NO_LPF//32006.0 / std::pow( 2.0, 4.25 ), 2.5, 2.0, NS4_FILTER_DB_TO_ORDER( 18 ),	// dLpfFactor
 #else
 			NS4_ONLY_COMB( 1.0, 0 ),

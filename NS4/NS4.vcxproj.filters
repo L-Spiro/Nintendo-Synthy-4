@@ -1033,5 +1033,8 @@
     <None Include="Src\Games\NS4ItoiShigesatoNoBassTsuriNo1Files.inl">
       <Filter>Header Files\Games</Filter>
     </None>
+    <None Include="Src\Games\NS4TamiyaRacing64ProtoFiles.inl">
+      <Filter>Header Files\Games</Filter>
+    </None>
   </ItemGroup>
 </Project>

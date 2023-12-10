@@ -12,8 +12,8 @@
 //#define NS4_PERC_INST						127
 /*#define NS4_DEFAULT_MAIN_VOLUME				100
 #define NS4_PROG_CHANGE_SETS_VOL_PAN		false*/
-#define NS4_WET_FILTER_FREQ					9502.0//(NS4_ORIG_HZ / std::pow( 2.0, 5.0 ))
-#define NS4_WET_FILTER_ORDER				NS4_FILTER_DB_TO_ORDER( 12 )
+#define NS4_WET_FILTER_FREQ					5510.0 / 2.0//(NS4_ORIG_HZ / std::pow( 2.0, 5.0 ))
+#define NS4_WET_FILTER_ORDER				NS4_FILTER_DB_TO_ORDER( 6 )
 //#define NS4_ENV_MULTIPLIER					(2.0)
 /*#define NS4_VIB_RATE_SCALE					0.5
 #define NS4_TREM_RATE_SCALE					0.5*/
@@ -22,8 +22,8 @@
 //#define NS4_TREM_RATE_SCALE					0.5
 #define NS4_TREM_DELAY_SCALE				0.5
 #define NS4_VIB_OFFSET						0.5
-#define NS4_ENV_MULTIPLIER					(1.0)
-#define NS4_REL_MULTIPLIER					1.0
+#define NS4_ENV_MULTIPLIER					(1.0 - (1.0 / 6.0))
+//#define NS4_REL_MULTIPLIER					1.0
 #define NS4_ENVELOPE_VOL_CURVE				20.0
 #define NS4_ENVELOPE_POINT_CURVE			40.0
 #define NS4_EXPONENTIAL_ENVELOPE			true
