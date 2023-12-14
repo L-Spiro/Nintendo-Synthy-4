@@ -386,6 +386,7 @@
     <None Include="Src\Games\NS4TurokDinosaurHunterFiles.inl" />
     <None Include="Src\Games\NS4TurokRageWars.inl" />
     <None Include="Src\Games\NS4VirtualChess64Files.inl" />
+    <None Include="Src\Games\NS4VirtualProWrestling64Files.inl" />
     <None Include="Src\Games\NS4WarGodsFiles.inl" />
     <None Include="Src\Games\NS4WarGodsOstFiles.inl" />
     <None Include="Src\Games\NS4WaveRace64Files.inl" />
