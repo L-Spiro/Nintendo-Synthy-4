@@ -14,7 +14,7 @@
 #define NS4_BC_FILTER			NS4_LPF( 4736.0 / 1.0, (6800.0 / 22047.0) / 4.0, 2.0, NS4_FILTER_DB_TO_ORDER( 6 ) )
 #define NS4_PD_FADE				NS4_FADE( 2.0, 0.1, 4.4 )
 #define NS4_PD_FILTER			NS4_NO_LPF//NS4_LPF( 22018.0 / std::pow( 2.0, 2.5 ), 2.5, 2.0, 0 )
-#define NS4_DK64_FADE			NS4_FADE( 2.0, 0.1, 5.5 )
+#define NS4_DK64_FADE			NS4_FADE( 1.0, 0.25, 5.5 )
 #define NS4_DK64_FILTER			NS4_NO_LPF//NS4_LPF( 22047.0 / std::pow( 2.0, 1.5 ), 1.25, 2.75, 0 )
 #define NS4_KIG_FADE			NS4_FADE( 2.0, 0.1, 6.0 )
 #define NS4_KIG_FILTER			NS4_LPF( 4736.0 / 1.0, 0.3, 2.0, NS4_FILTER_DB_TO_ORDER( 6 ) )//NS4_LPF( 22047.0 / std::pow( 2.0, 4.25 ), 3.0, 1.0, 0 )
@@ -25,7 +25,7 @@
 #define NS4_JFG_FADE			NS4_FADE( 2.0, 0.1, 5.5 )
 #define NS4_JFG_FILTER			NS4_NO_LPF//NS4_LPF( 22018.0 / std::pow( 2.0, 2.5 ), 0.25, 1.5, 0 )
 
-#define NS4_BT_FADE				NS4_FADE( 1.5, 0.1, 5.5 )
+#define NS4_BT_FADE				NS4_FADE( 1.0, 0.25, 5.5 )
 #define NS4_BT_FILTER			NS4_NO_LPF//NS4_LPF( 22047.0 / std::pow( 2.0, 2.25 ), 0.75, 0.25, NS4_FILTER_DB_TO_ORDER( 6 ) )
 
 
@@ -2688,7 +2688,7 @@ namespace ns4 {
 		// Ken Griffey Jr.’s Slugfest.
 		{
 			NS4_TAPS( m_rtKenGriffeyJrsSlugfest0 ),
-			NS4_SQRT_0_5 * 1.0,															// dTapVol
+			NS4_SQRT_0_5 * 1.0,														// dTapVol
 			0,																		// i64TapOffset
 			NS4_NO_FADE,
 			NS4_NO_LPF,

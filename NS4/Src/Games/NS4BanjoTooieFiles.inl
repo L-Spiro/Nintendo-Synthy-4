@@ -7,7 +7,7 @@
 #define NS4_REVERB							ns4::CReverb::NS4_T_BANJO_TOOIE_0
 #define NS4_ORIG_HZ							22047
 #define NS4_CURVE							20.0
-#define NS4_OUT_DIRECTORY					u8"T:\\N64OST\\Banjo-Tooie\\"
+#define NS4_OUT_DIRECTORY					u8"C:\\N64OST\\Banjo-Tooie\\"
 #define NS4_OUT_DIRECTORY_NUMBERS			NS4_OUT_DIRECTORY u8"Numbered\\"
 #define NS4_WET_FILTER_FREQ					0.0//(NS4_ORIG_HZ / std::pow( 2.0, 1.0 ))
 //#define NS4_WET_FILTER_ORDER				NS4_FILTER_DB_TO_ORDER( 48 )
@@ -783,7 +783,6 @@
 	   } },
 { u8"104 Banjo-Tooie (U) 00000032 013505C4 Hailfire Peaks (Lava Side).mid", u8"", u8"Hailfire Peaks (Inside the Colosseum)", 0,
 	9 + 1 + 1, {
-		{ ns4::CMidiFile::NS4_ES_PRE_UNROLL, ns4::CMidiFile::NS4_E_TAG_TRACK_BY_IDX, 2 - 1 },
 		{ ns4::CMidiFile::NS4_ES_PRE_UNROLL, ns4::CMidiFile::NS4_E_TAG_TRACK_BY_IDX, 7 - 1 },
 		{ ns4::CMidiFile::NS4_ES_PRE_UNROLL, ns4::CMidiFile::NS4_E_TAG_TRACK_BY_IDX, 10 - 1 },
 		{ ns4::CMidiFile::NS4_ES_PRE_UNROLL, ns4::CMidiFile::NS4_E_TAG_TRACK_BY_IDX, 11 - 1 },
@@ -792,6 +791,7 @@
 		{ ns4::CMidiFile::NS4_ES_PRE_UNROLL, ns4::CMidiFile::NS4_E_TAG_TRACK_BY_IDX, 14 - 1 },
 		{ ns4::CMidiFile::NS4_ES_PRE_UNROLL, ns4::CMidiFile::NS4_E_TAG_TRACK_BY_IDX, 15 - 1 },
 		{ ns4::CMidiFile::NS4_ES_PRE_UNROLL, ns4::CMidiFile::NS4_E_TAG_TRACK_BY_IDX, 16 - 1 },
+		{ ns4::CMidiFile::NS4_ES_PRE_UNROLL, ns4::CMidiFile::NS4_E_TAG_TRACK_BY_IDX, 18 - 1 },
 
 		{ ns4::CMidiFile::NS4_ES_PRE_UNROLL, ns4::CMidiFile::NS4_E_SET_TEMPO_BY_MPQN, 0, 631578 },	// 95.000143
 
@@ -1108,12 +1108,12 @@
 	   } },
 { u8"104 Banjo-Tooie (U) 00000032 013505C4 Hailfire Peaks (Lava Side).mid", u8"", u8"Hailfire Peaks (Inside the Colosseum Sans SFX)", 0,
 	6 + 1 + 1, {
-		{ ns4::CMidiFile::NS4_ES_PRE_UNROLL, ns4::CMidiFile::NS4_E_TAG_TRACK_BY_IDX, 2 - 1 },
 		{ ns4::CMidiFile::NS4_ES_PRE_UNROLL, ns4::CMidiFile::NS4_E_TAG_TRACK_BY_IDX, 7 - 1 },
 		{ ns4::CMidiFile::NS4_ES_PRE_UNROLL, ns4::CMidiFile::NS4_E_TAG_TRACK_BY_IDX, 13 - 1 },
 		{ ns4::CMidiFile::NS4_ES_PRE_UNROLL, ns4::CMidiFile::NS4_E_TAG_TRACK_BY_IDX, 14 - 1 },
 		{ ns4::CMidiFile::NS4_ES_PRE_UNROLL, ns4::CMidiFile::NS4_E_TAG_TRACK_BY_IDX, 15 - 1 },
 		{ ns4::CMidiFile::NS4_ES_PRE_UNROLL, ns4::CMidiFile::NS4_E_TAG_TRACK_BY_IDX, 16 - 1 },
+		{ ns4::CMidiFile::NS4_ES_PRE_UNROLL, ns4::CMidiFile::NS4_E_TAG_TRACK_BY_IDX, 18 - 1 },
 
 		{ ns4::CMidiFile::NS4_ES_PRE_UNROLL, ns4::CMidiFile::NS4_E_SET_TEMPO_BY_MPQN, 0, 631578 },	// 95.000143
 
