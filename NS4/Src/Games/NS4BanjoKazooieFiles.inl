@@ -7,9 +7,9 @@
 #define NS4_REVERB							ns4::CReverb::NS4_T_BANJO_KAZOOIE_0
 #define NS4_ORIG_HZ							21998
 #define NS4_CURVE							20.0
-#define NS4_OUT_DIRECTORY					u8"T:\\N64OST\\Banjo-Kazooie\\"
+#define NS4_OUT_DIRECTORY					u8"C:\\N64OST\\Banjo-Kazooie\\"
 #define NS4_OUT_DIRECTORY_NUMBERS			NS4_OUT_DIRECTORY u8"Numbered\\"
-#define NS4_WET_FILTER_FREQ					4736.0//8832.0//(NS4_ORIG_HZ / std::pow( 2.0, 1.75 ))
+#define NS4_WET_FILTER_FREQ					8832.0//8832.0//(NS4_ORIG_HZ / std::pow( 2.0, 1.75 ))
 #define NS4_ENV_MULTIPLIER					(1.0 / 3.0)
 
 
@@ -594,6 +594,15 @@
 
 		{ ns4::CMidiFile::NS4_ES_PRE_UNROLL, ns4::CMidiFile::NS4_E_MUTE_UNTAGGED_TRACKS },
 	   } },
+/*{ u8"108 Banjo-Kazooie (U) (V1.0) 00000062 00D6D6E8 Gruntilda's Lair (Click Clock Wood).mid", u8"Banjo-Kazooie (U) (V1.0) 00000062 00D6D6E8 Grunty's Lair - Click Clock Wood and Furnace Fun.mid TrackParseDebug.txt", u8"Gruntilda’s Lair (Click Clock Wood Jigsaw Puzzle)", 0,
+	4 + 1, {
+		{ ns4::CMidiFile::NS4_ES_PRE_UNROLL, ns4::CMidiFile::NS4_E_TAG_TRACK_BY_CHNL, 10 - 1 },
+		{ ns4::CMidiFile::NS4_ES_PRE_UNROLL, ns4::CMidiFile::NS4_E_TAG_TRACK_BY_CHNL, 11 - 1 },
+		{ ns4::CMidiFile::NS4_ES_PRE_UNROLL, ns4::CMidiFile::NS4_E_TAG_TRACK_BY_CHNL, 13 - 1 },
+		{ ns4::CMidiFile::NS4_ES_PRE_UNROLL, ns4::CMidiFile::NS4_E_TAG_TRACK_BY_CHNL, 16 - 1 },
+
+		{ ns4::CMidiFile::NS4_ES_PRE_UNROLL, ns4::CMidiFile::NS4_E_MUTE_UNTAGGED_TRACKS },
+	   } },*/
 { u8"109 Banjo-Kazooie (U) (V1.0) 0000002F 00D4A3D8 Click Clock Wood (Lobby).mid", u8"Banjo-Kazooie (U) (V1.0) 0000002F 00D4A3D8 Click Clock Wood - Lobby.mid TrackParseDebug.txt", u8"Click Clock Wood Lobby (Summer)", 0,
 	6 + 1, {
 		{ ns4::CMidiFile::NS4_ES_PRE_UNROLL, ns4::CMidiFile::NS4_E_TAG_TRACK_BY_CHNL, 1 - 1 },
@@ -844,7 +853,26 @@
 
 		{ ns4::CMidiFile::NS4_ES_PRE_UNROLL, ns4::CMidiFile::NS4_E_MUTE_TAGGED_TRACKS },
 	   } },
+{ u8"19 Banjo-Kazooie (U) (V1.0) 0000001E 00D3B4A8 Gruntilda's Lair (Mumbo's Mountain).mid", u8"Banjo-Kazooie (U) (V1.0) 0000001E 00D3B4A8 Grunty's Lair - Mumbo's Mountain.mid TrackParseDebug.txt", u8"Gruntilda’s Lair (Sans SFX)", 0,
+	5 + 1, {
+		{ ns4::CMidiFile::NS4_ES_PRE_UNROLL, ns4::CMidiFile::NS4_E_TAG_TRACK_BY_CHNL, 11 - 1 },
+		{ ns4::CMidiFile::NS4_ES_PRE_UNROLL, ns4::CMidiFile::NS4_E_TAG_TRACK_BY_CHNL, 12 - 1 },
+		{ ns4::CMidiFile::NS4_ES_PRE_UNROLL, ns4::CMidiFile::NS4_E_TAG_TRACK_BY_CHNL, 13 - 1 },
+		{ ns4::CMidiFile::NS4_ES_PRE_UNROLL, ns4::CMidiFile::NS4_E_TAG_TRACK_BY_CHNL, 14 - 1 },
+		{ ns4::CMidiFile::NS4_ES_PRE_UNROLL, ns4::CMidiFile::NS4_E_TAG_TRACK_BY_CHNL, 15 - 1 },
 
+		{ ns4::CMidiFile::NS4_ES_PRE_UNROLL, ns4::CMidiFile::NS4_E_MUTE_TAGGED_TRACKS },
+	   } },
+{ u8"19 Banjo-Kazooie (U) (V1.0) 0000001E 00D3B4A8 Gruntilda's Lair (Mumbo's Mountain).mid", u8"Banjo-Kazooie (U) (V1.0) 0000001E 00D3B4A8 Grunty's Lair - Mumbo's Mountain.mid TrackParseDebug.txt", u8"Gruntilda’s Lair (Mumbo’s Mountain Sans SFX)", 0,
+	4 + 1, {
+		{ ns4::CMidiFile::NS4_ES_PRE_UNROLL, ns4::CMidiFile::NS4_E_TAG_TRACK_BY_CHNL, 11 - 1 },
+		{ ns4::CMidiFile::NS4_ES_PRE_UNROLL, ns4::CMidiFile::NS4_E_TAG_TRACK_BY_CHNL, 12 - 1 },
+		{ ns4::CMidiFile::NS4_ES_PRE_UNROLL, ns4::CMidiFile::NS4_E_TAG_TRACK_BY_CHNL, 13 - 1 },
+		{ ns4::CMidiFile::NS4_ES_PRE_UNROLL, ns4::CMidiFile::NS4_E_TAG_TRACK_BY_CHNL, 14 - 1 },
+		//{ ns4::CMidiFile::NS4_ES_PRE_UNROLL, ns4::CMidiFile::NS4_E_TAG_TRACK_BY_CHNL, 15 - 1 },
+
+		{ ns4::CMidiFile::NS4_ES_PRE_UNROLL, ns4::CMidiFile::NS4_E_MUTE_UNTAGGED_TRACKS },
+	   } },
 { u8"20 Banjo-Kazooie (U) (V1.0) 00000002 00D28170 Mumbo's Mountain.mid", u8"Banjo-Kazooie (U) (V1.0) 00000002 00D28170 Mumbo's Mountain.mid TrackParseDebug.txt", u8"Mumbo’s Mountain (Sans SFX)", 0,
 	6 + 1, {
 		{ ns4::CMidiFile::NS4_ES_PRE_UNROLL, ns4::CMidiFile::NS4_E_TAG_TRACK_BY_CHNL, 1 - 1 },
@@ -887,6 +915,14 @@
 
 		{ ns4::CMidiFile::NS4_ES_PRE_UNROLL, ns4::CMidiFile::NS4_E_MUTE_UNTAGGED_TRACKS },
 	   } },
+{ u8"37 Banjo-Kazooie (U) (V1.0) 0000004F 00D58D60 Gruntilda's Lair (Treasure Trove Cove).mid", u8"Banjo-Kazooie (U) (V1.0) 0000004F 00D58D60 Grunty's Lair - Treasure Trove Cove and Clanker's Cavern.mid TrackParseDebug.txt", u8"Gruntilda’s Lair (Treasure Trove Cove Sans SFX)", 0,
+	3 + 1, {
+		{ ns4::CMidiFile::NS4_ES_PRE_UNROLL, ns4::CMidiFile::NS4_E_TAG_TRACK_BY_CHNL, 7 - 1 },
+		{ ns4::CMidiFile::NS4_ES_PRE_UNROLL, ns4::CMidiFile::NS4_E_TAG_TRACK_BY_CHNL, 13 - 1 },
+		{ ns4::CMidiFile::NS4_ES_PRE_UNROLL, ns4::CMidiFile::NS4_E_TAG_TRACK_BY_CHNL, 16 - 1 },
+
+		{ ns4::CMidiFile::NS4_ES_PRE_UNROLL, ns4::CMidiFile::NS4_E_MUTE_UNTAGGED_TRACKS },
+	   } },
 { u8"37 Banjo-Kazooie (U) (V1.0) 0000004F 00D58D60 Gruntilda's Lair (Treasure Trove Cove).mid", u8"Banjo-Kazooie (U) (V1.0) 0000004F 00D58D60 Grunty's Lair - Treasure Trove Cove and Clanker's Cavern.mid TrackParseDebug.txt", u8"Gruntilda’s Lair (In the Waterworks)", 0,
 	10 + 1, {
 		{ ns4::CMidiFile::NS4_ES_PRE_UNROLL, ns4::CMidiFile::NS4_E_TAG_TRACK_BY_CHNL, 1 - 1 },
@@ -902,11 +938,11 @@
 
 		{ ns4::CMidiFile::NS4_ES_PRE_UNROLL, ns4::CMidiFile::NS4_E_MUTE_UNTAGGED_TRACKS },
 	   } },
-{ u8"37 Banjo-Kazooie (U) (V1.0) 0000004F 00D58D60 Gruntilda's Lair (Treasure Trove Cove).mid", u8"Banjo-Kazooie (U) (V1.0) 0000004F 00D58D60 Grunty's Lair - Treasure Trove Cove and Clanker's Cavern.mid TrackParseDebug.txt", u8"Gruntilda’s Lair (Treasure Trove Cove Sans SFX)", 0,
-	3 + 1, {
+{ u8"37 Banjo-Kazooie (U) (V1.0) 0000004F 00D58D60 Gruntilda's Lair (Treasure Trove Cove).mid", u8"Banjo-Kazooie (U) (V1.0) 0000004F 00D58D60 Grunty's Lair - Treasure Trove Cove and Clanker's Cavern.mid TrackParseDebug.txt", u8"Gruntilda’s Lair (Treasure Trove Cove Sans SFX 2)", 0,
+	2 + 1, {
 		{ ns4::CMidiFile::NS4_ES_PRE_UNROLL, ns4::CMidiFile::NS4_E_TAG_TRACK_BY_CHNL, 7 - 1 },
 		{ ns4::CMidiFile::NS4_ES_PRE_UNROLL, ns4::CMidiFile::NS4_E_TAG_TRACK_BY_CHNL, 13 - 1 },
-		{ ns4::CMidiFile::NS4_ES_PRE_UNROLL, ns4::CMidiFile::NS4_E_TAG_TRACK_BY_CHNL, 16 - 1 },
+		//{ ns4::CMidiFile::NS4_ES_PRE_UNROLL, ns4::CMidiFile::NS4_E_TAG_TRACK_BY_CHNL, 16 - 1 },
 
 		{ ns4::CMidiFile::NS4_ES_PRE_UNROLL, ns4::CMidiFile::NS4_E_MUTE_UNTAGGED_TRACKS },
 	   } },
@@ -951,6 +987,16 @@
 		{ ns4::CMidiFile::NS4_ES_PRE_UNROLL, ns4::CMidiFile::NS4_E_TAG_TRACK_BY_CHNL, 10 - 1 },
 		{ ns4::CMidiFile::NS4_ES_PRE_UNROLL, ns4::CMidiFile::NS4_E_TAG_TRACK_BY_CHNL, 11 - 1 },
 		{ ns4::CMidiFile::NS4_ES_PRE_UNROLL, ns4::CMidiFile::NS4_E_TAG_TRACK_BY_CHNL, 16 - 1 },
+
+		{ ns4::CMidiFile::NS4_ES_PRE_UNROLL, ns4::CMidiFile::NS4_E_MUTE_UNTAGGED_TRACKS },
+	   } },
+{ u8"49 Banjo-Kazooie (U) (V1.0) 00000051 00D5CA58 Gruntilda's Lair (Clanker's Cavern).mid", u8"Banjo-Kazooie (U) (V1.0) 00000051 00D5CA58 Grunty's Lair - Clanker's Cavern and Bubblegloop Swamp.mid TrackParseDebug.txt", u8"Gruntilda’s Lair (Clanker’s Cavern Sans SFX 2)", 0,
+	4 + 1, {
+		{ ns4::CMidiFile::NS4_ES_PRE_UNROLL, ns4::CMidiFile::NS4_E_TAG_TRACK_BY_CHNL, 1 - 1 },
+		{ ns4::CMidiFile::NS4_ES_PRE_UNROLL, ns4::CMidiFile::NS4_E_TAG_TRACK_BY_CHNL, 7 - 1 },
+		{ ns4::CMidiFile::NS4_ES_PRE_UNROLL, ns4::CMidiFile::NS4_E_TAG_TRACK_BY_CHNL, 10 - 1 },
+		{ ns4::CMidiFile::NS4_ES_PRE_UNROLL, ns4::CMidiFile::NS4_E_TAG_TRACK_BY_CHNL, 11 - 1 },
+		//{ ns4::CMidiFile::NS4_ES_PRE_UNROLL, ns4::CMidiFile::NS4_E_TAG_TRACK_BY_CHNL, 16 - 1 },
 
 		{ ns4::CMidiFile::NS4_ES_PRE_UNROLL, ns4::CMidiFile::NS4_E_MUTE_UNTAGGED_TRACKS },
 	   } },
@@ -1001,6 +1047,16 @@
 
 		{ ns4::CMidiFile::NS4_ES_PRE_UNROLL, ns4::CMidiFile::NS4_E_MUTE_UNTAGGED_TRACKS },
 	   } },
+{ u8"49 Banjo-Kazooie (U) (V1.0) 00000051 00D5CA58 Gruntilda's Lair (Clanker's Cavern).mid", u8"Banjo-Kazooie (U) (V1.0) 00000051 00D5CA58 Grunty's Lair - Clanker's Cavern and Bubblegloop Swamp.mid TrackParseDebug.txt", u8"Gruntilda’s Lair (Bubblegoop Swamp Sans SFX 2)", 0,
+	4 + 1, {
+		{ ns4::CMidiFile::NS4_ES_PRE_UNROLL, ns4::CMidiFile::NS4_E_TAG_TRACK_BY_CHNL, 1 - 1 },
+		{ ns4::CMidiFile::NS4_ES_PRE_UNROLL, ns4::CMidiFile::NS4_E_TAG_TRACK_BY_CHNL, 2 - 1 },
+		{ ns4::CMidiFile::NS4_ES_PRE_UNROLL, ns4::CMidiFile::NS4_E_TAG_TRACK_BY_CHNL, 3 - 1 },
+		{ ns4::CMidiFile::NS4_ES_PRE_UNROLL, ns4::CMidiFile::NS4_E_TAG_TRACK_BY_CHNL, 7 - 1 },
+		//{ ns4::CMidiFile::NS4_ES_PRE_UNROLL, ns4::CMidiFile::NS4_E_TAG_TRACK_BY_CHNL, 16 - 1 },
+
+		{ ns4::CMidiFile::NS4_ES_PRE_UNROLL, ns4::CMidiFile::NS4_E_MUTE_UNTAGGED_TRACKS },
+	   } },
 { u8"60 Banjo-Kazooie (U) (V1.0) 00000006 00D2E378 Bubblegloop Swamp.mid", u8"Banjo-Kazooie (U) (V1.0) 00000006 00D2E378 Bubblegloop Swamp.mid TrackParseDebug.txt", u8"Bubblegloop Swamp (Sans SFX)", 0,
 	2 + 1, {
 		{ ns4::CMidiFile::NS4_ES_PRE_UNROLL, ns4::CMidiFile::NS4_E_TAG_TRACK_BY_CHNL, 12 - 1 },
@@ -1008,11 +1064,33 @@
 
 		{ ns4::CMidiFile::NS4_ES_PRE_UNROLL, ns4::CMidiFile::NS4_E_MUTE_TAGGED_TRACKS },
 	   } },
+{ u8"65 Banjo-Kazooie (U) (V1.0) 00000058 00D63B20 Gruntilda's Lair (Freezeezy Peak).mid", u8"Banjo-Kazooie (U) (V1.0) 00000058 00D63B20 Grunty's Lair - Freezeezy Peak.mid TrackParseDebug.txt", u8"Gruntilda’s Lair 2 (Sans SFX)", 0,
+	8 + 1, {
+		{ ns4::CMidiFile::NS4_ES_PRE_UNROLL, ns4::CMidiFile::NS4_E_TAG_TRACK_BY_CHNL, 1 - 1 },
+		{ ns4::CMidiFile::NS4_ES_PRE_UNROLL, ns4::CMidiFile::NS4_E_TAG_TRACK_BY_CHNL, 2 - 1 },
+		{ ns4::CMidiFile::NS4_ES_PRE_UNROLL, ns4::CMidiFile::NS4_E_TAG_TRACK_BY_CHNL, 3 - 1 },
+		{ ns4::CMidiFile::NS4_ES_PRE_UNROLL, ns4::CMidiFile::NS4_E_TAG_TRACK_BY_CHNL, 4 - 1 },
+		{ ns4::CMidiFile::NS4_ES_PRE_UNROLL, ns4::CMidiFile::NS4_E_TAG_TRACK_BY_CHNL, 5 - 1 },
+		{ ns4::CMidiFile::NS4_ES_PRE_UNROLL, ns4::CMidiFile::NS4_E_TAG_TRACK_BY_CHNL, 6 - 1 },
+		{ ns4::CMidiFile::NS4_ES_PRE_UNROLL, ns4::CMidiFile::NS4_E_TAG_TRACK_BY_CHNL, 8 - 1 },
+		{ ns4::CMidiFile::NS4_ES_PRE_UNROLL, ns4::CMidiFile::NS4_E_TAG_TRACK_BY_CHNL, 9 - 1 },
+		//{ ns4::CMidiFile::NS4_ES_PRE_UNROLL, ns4::CMidiFile::NS4_E_TAG_TRACK_BY_CHNL, 16 - 1 },
+
+		{ ns4::CMidiFile::NS4_ES_PRE_UNROLL, ns4::CMidiFile::NS4_E_MUTE_UNTAGGED_TRACKS },
+	   } },
 { u8"65 Banjo-Kazooie (U) (V1.0) 00000058 00D63B20 Gruntilda's Lair (Freezeezy Peak).mid", u8"Banjo-Kazooie (U) (V1.0) 00000058 00D63B20 Grunty's Lair - Freezeezy Peak.mid TrackParseDebug.txt", u8"Gruntilda’s Lair (Freezeezy Peak Sans SFX)", 0,
 	3 + 1, {
 		{ ns4::CMidiFile::NS4_ES_PRE_UNROLL, ns4::CMidiFile::NS4_E_TAG_TRACK_BY_CHNL, 7 - 1 },
 		{ ns4::CMidiFile::NS4_ES_PRE_UNROLL, ns4::CMidiFile::NS4_E_TAG_TRACK_BY_CHNL, 15 - 1 },
 		{ ns4::CMidiFile::NS4_ES_PRE_UNROLL, ns4::CMidiFile::NS4_E_TAG_TRACK_BY_CHNL, 16 - 1 },
+
+		{ ns4::CMidiFile::NS4_ES_PRE_UNROLL, ns4::CMidiFile::NS4_E_MUTE_UNTAGGED_TRACKS },
+	   } },
+{ u8"65 Banjo-Kazooie (U) (V1.0) 00000058 00D63B20 Gruntilda's Lair (Freezeezy Peak).mid", u8"Banjo-Kazooie (U) (V1.0) 00000058 00D63B20 Grunty's Lair - Freezeezy Peak.mid TrackParseDebug.txt", u8"Gruntilda’s Lair (Freezeezy Peak Sans SFX 2)", 0,
+	2 + 1, {
+		{ ns4::CMidiFile::NS4_ES_PRE_UNROLL, ns4::CMidiFile::NS4_E_TAG_TRACK_BY_CHNL, 7 - 1 },
+		{ ns4::CMidiFile::NS4_ES_PRE_UNROLL, ns4::CMidiFile::NS4_E_TAG_TRACK_BY_CHNL, 15 - 1 },
+		//{ ns4::CMidiFile::NS4_ES_PRE_UNROLL, ns4::CMidiFile::NS4_E_TAG_TRACK_BY_CHNL, 16 - 1 },
 
 		{ ns4::CMidiFile::NS4_ES_PRE_UNROLL, ns4::CMidiFile::NS4_E_MUTE_UNTAGGED_TRACKS },
 	   } },
@@ -1069,6 +1147,16 @@
 
 		{ ns4::CMidiFile::NS4_ES_PRE_UNROLL, ns4::CMidiFile::NS4_E_MUTE_UNTAGGED_TRACKS },
 	   } },
+{ u8"78 Banjo-Kazooie (U) (V1.0) 00000053 00D602B8 Gruntilda's Lair (Gobi's Valley).mid", u8"Banjo-Kazooie (U) (V1.0) 00000053 00D602B8 Grunty's Lair - Gobi's Valley.mid TrackParseDebug.txt", u8"Gruntilda’s Lair (Gobi’s Valley Sans SFX 2)", 0,
+	4 + 1, {
+		{ ns4::CMidiFile::NS4_ES_PRE_UNROLL, ns4::CMidiFile::NS4_E_TAG_TRACK_BY_CHNL, 10 - 1 },
+		{ ns4::CMidiFile::NS4_ES_PRE_UNROLL, ns4::CMidiFile::NS4_E_TAG_TRACK_BY_CHNL, 11 - 1 },
+		{ ns4::CMidiFile::NS4_ES_PRE_UNROLL, ns4::CMidiFile::NS4_E_TAG_TRACK_BY_CHNL, 12 - 1 },
+		{ ns4::CMidiFile::NS4_ES_PRE_UNROLL, ns4::CMidiFile::NS4_E_TAG_TRACK_BY_CHNL, 13 - 1 },
+		//{ ns4::CMidiFile::NS4_ES_PRE_UNROLL, ns4::CMidiFile::NS4_E_TAG_TRACK_BY_CHNL, 16 - 1 },
+
+		{ ns4::CMidiFile::NS4_ES_PRE_UNROLL, ns4::CMidiFile::NS4_E_MUTE_UNTAGGED_TRACKS },
+	   } },
 { u8"79 Banjo-Kazooie (U) (V1.0) 00000020 00D3DAC0 Gobi's Valley.mid", u8"Banjo-Kazooie (U) (V1.0) 00000020 00D3DAC0 Gobi's Valley.mid TrackParseDebug.txt", u8"Gobi’s Valley (Sans SFX)", 0,
 	10 + 1, {
 		{ ns4::CMidiFile::NS4_ES_PRE_UNROLL, ns4::CMidiFile::NS4_E_TAG_TRACK_BY_CHNL, 2 - 1 },
@@ -1103,6 +1191,13 @@
 	2 + 1, {
 		{ ns4::CMidiFile::NS4_ES_PRE_UNROLL, ns4::CMidiFile::NS4_E_TAG_TRACK_BY_CHNL, 11 - 1 },
 		{ ns4::CMidiFile::NS4_ES_PRE_UNROLL, ns4::CMidiFile::NS4_E_TAG_TRACK_BY_CHNL, 16 - 1 },
+
+		{ ns4::CMidiFile::NS4_ES_PRE_UNROLL, ns4::CMidiFile::NS4_E_MUTE_UNTAGGED_TRACKS },
+	   } },
+{ u8"87 Banjo-Kazooie (U) (V1.0) 0000005D 00D679C0 Gruntilda's Lair (Mad Monster Mansion).mid", u8"Banjo-Kazooie (U) (V1.0) 0000005D 00D679C0 Grunty's Lair - Mad Monster Mansion and Rusty Bucket Bay.mid TrackParseDebug.txt", u8"Gruntilda’s Lair (Mad Monster Mansion Sans SFX 2)", 0,
+	1 + 1, {
+		{ ns4::CMidiFile::NS4_ES_PRE_UNROLL, ns4::CMidiFile::NS4_E_TAG_TRACK_BY_CHNL, 11 - 1 },
+		//{ ns4::CMidiFile::NS4_ES_PRE_UNROLL, ns4::CMidiFile::NS4_E_TAG_TRACK_BY_CHNL, 16 - 1 },
 
 		{ ns4::CMidiFile::NS4_ES_PRE_UNROLL, ns4::CMidiFile::NS4_E_MUTE_UNTAGGED_TRACKS },
 	   } },
@@ -1168,6 +1263,14 @@
 
 		{ ns4::CMidiFile::NS4_ES_PRE_UNROLL, ns4::CMidiFile::NS4_E_MUTE_UNTAGGED_TRACKS },
 	   } },
+{ u8"87 Banjo-Kazooie (U) (V1.0) 0000005D 00D679C0 Gruntilda's Lair (Mad Monster Mansion).mid", u8"Banjo-Kazooie (U) (V1.0) 0000005D 00D679C0 Grunty's Lair - Mad Monster Mansion and Rusty Bucket Bay.mid TrackParseDebug.txt", u8"Gruntilda’s Lair (Rusty Bucket Bay Sans SFX 2)", 0,
+	2 + 1, {
+		{ ns4::CMidiFile::NS4_ES_PRE_UNROLL, ns4::CMidiFile::NS4_E_TAG_TRACK_BY_CHNL, 14 - 1 },
+		{ ns4::CMidiFile::NS4_ES_PRE_UNROLL, ns4::CMidiFile::NS4_E_TAG_TRACK_BY_CHNL, 15 - 1 },
+		//{ ns4::CMidiFile::NS4_ES_PRE_UNROLL, ns4::CMidiFile::NS4_E_TAG_TRACK_BY_CHNL, 16 - 1 },
+
+		{ ns4::CMidiFile::NS4_ES_PRE_UNROLL, ns4::CMidiFile::NS4_E_MUTE_UNTAGGED_TRACKS },
+	   } },
 { u8"100 Banjo-Kazooie (U) (V1.0) 00000033 00D4BEC0 Rusty Bucket Bay.mid", u8"Banjo-Kazooie (U) (V1.0) 00000033 00D4BEC0 Rusty Bucket Bay.mid TrackParseDebug.txt", u8"Rusty Bucket Bay (Sans SFX)", 0,
 	4 + 1, {
 		{ ns4::CMidiFile::NS4_ES_PRE_UNROLL, ns4::CMidiFile::NS4_E_TAG_TRACK_BY_CHNL, 7 - 1 },
@@ -1199,6 +1302,15 @@
 		{ ns4::CMidiFile::NS4_ES_PRE_UNROLL, ns4::CMidiFile::NS4_E_TAG_TRACK_BY_CHNL, 11 - 1 },
 		{ ns4::CMidiFile::NS4_ES_PRE_UNROLL, ns4::CMidiFile::NS4_E_TAG_TRACK_BY_CHNL, 13 - 1 },
 		{ ns4::CMidiFile::NS4_ES_PRE_UNROLL, ns4::CMidiFile::NS4_E_TAG_TRACK_BY_CHNL, 16 - 1 },
+
+		{ ns4::CMidiFile::NS4_ES_PRE_UNROLL, ns4::CMidiFile::NS4_E_MUTE_UNTAGGED_TRACKS },
+	   } },
+{ u8"108 Banjo-Kazooie (U) (V1.0) 00000062 00D6D6E8 Gruntilda's Lair (Click Clock Wood).mid", u8"Banjo-Kazooie (U) (V1.0) 00000062 00D6D6E8 Grunty's Lair - Click Clock Wood and Furnace Fun.mid TrackParseDebug.txt", u8"Gruntilda’s Lair (Click Clock Wood Sans SFX 2)", 0,
+	3 + 1, {
+		{ ns4::CMidiFile::NS4_ES_PRE_UNROLL, ns4::CMidiFile::NS4_E_TAG_TRACK_BY_CHNL, 10 - 1 },
+		{ ns4::CMidiFile::NS4_ES_PRE_UNROLL, ns4::CMidiFile::NS4_E_TAG_TRACK_BY_CHNL, 11 - 1 },
+		{ ns4::CMidiFile::NS4_ES_PRE_UNROLL, ns4::CMidiFile::NS4_E_TAG_TRACK_BY_CHNL, 13 - 1 },
+		//{ ns4::CMidiFile::NS4_ES_PRE_UNROLL, ns4::CMidiFile::NS4_E_TAG_TRACK_BY_CHNL, 16 - 1 },
 
 		{ ns4::CMidiFile::NS4_ES_PRE_UNROLL, ns4::CMidiFile::NS4_E_MUTE_UNTAGGED_TRACKS },
 	   } },
@@ -1238,6 +1350,15 @@
 
 		{ ns4::CMidiFile::NS4_ES_PRE_UNROLL, ns4::CMidiFile::NS4_E_MUTE_UNTAGGED_TRACKS },
 	   } },
+/*{ u8"108 Banjo-Kazooie (U) (V1.0) 00000062 00D6D6E8 Gruntilda's Lair (Click Clock Wood).mid", u8"Banjo-Kazooie (U) (V1.0) 00000062 00D6D6E8 Grunty's Lair - Click Clock Wood and Furnace Fun.mid TrackParseDebug.txt", u8"Gruntilda’s Lair (Click Clock Wood Jigsaw Puzzle Sans SFX)", 0,
+	3 + 1, {
+		{ ns4::CMidiFile::NS4_ES_PRE_UNROLL, ns4::CMidiFile::NS4_E_TAG_TRACK_BY_CHNL, 10 - 1 },
+		{ ns4::CMidiFile::NS4_ES_PRE_UNROLL, ns4::CMidiFile::NS4_E_TAG_TRACK_BY_CHNL, 11 - 1 },
+		{ ns4::CMidiFile::NS4_ES_PRE_UNROLL, ns4::CMidiFile::NS4_E_TAG_TRACK_BY_CHNL, 13 - 1 },
+		//{ ns4::CMidiFile::NS4_ES_PRE_UNROLL, ns4::CMidiFile::NS4_E_TAG_TRACK_BY_CHNL, 16 - 1 },
+
+		{ ns4::CMidiFile::NS4_ES_PRE_UNROLL, ns4::CMidiFile::NS4_E_MUTE_UNTAGGED_TRACKS },
+	   } },*/
 { u8"115 Banjo-Kazooie (U) (V1.0) 00000029 00D45D78 Click Clock Wood (Summer).mid", u8"Banjo-Kazooie (U) (V1.0) 00000029 00D45D78 Click Clock Wood - Summer.mid TrackParseDebug.txt", u8"Click Clock Wood (Summer Sans SFX)", 0,
 	2 + 1, {
 		{ ns4::CMidiFile::NS4_ES_PRE_UNROLL, ns4::CMidiFile::NS4_E_TAG_TRACK_BY_CHNL, 13 - 1 },
@@ -1266,6 +1387,15 @@
 
 		{ ns4::CMidiFile::NS4_ES_PRE_UNROLL, ns4::CMidiFile::NS4_E_MUTE_TAGGED_TRACKS },
 	   } },
+{ u8"108 Banjo-Kazooie (U) (V1.0) 00000062 00D6D6E8 Gruntilda's Lair (Click Clock Wood).mid", u8"Banjo-Kazooie (U) (V1.0) 00000062 00D6D6E8 Grunty's Lair - Click Clock Wood and Furnace Fun.mid TrackParseDebug.txt", u8"Gruntilda’s Lair (Grunty’s Furnace Fun Sans SFX)", 0,
+	3 + 1, {
+		{ ns4::CMidiFile::NS4_ES_PRE_UNROLL, ns4::CMidiFile::NS4_E_TAG_TRACK_BY_CHNL, 7 - 1 },
+		{ ns4::CMidiFile::NS4_ES_PRE_UNROLL, ns4::CMidiFile::NS4_E_TAG_TRACK_BY_CHNL, 14 - 1 },
+		{ ns4::CMidiFile::NS4_ES_PRE_UNROLL, ns4::CMidiFile::NS4_E_TAG_TRACK_BY_CHNL, 15 - 1 },
+		//{ ns4::CMidiFile::NS4_ES_PRE_UNROLL, ns4::CMidiFile::NS4_E_TAG_TRACK_BY_CHNL, 16 - 1 },
+
+		{ ns4::CMidiFile::NS4_ES_PRE_UNROLL, ns4::CMidiFile::NS4_E_MUTE_UNTAGGED_TRACKS },
+	   } },
 { u8"131 Banjo-Kazooie (U) (V1.0) 00000070 00D75FC8 Grunty's Furnace Fun.mid", u8"Banjo-Kazooie (U) (V1.0) 00000070 00D75FC8 Grunty's Furnace Fun.mid TrackParseDebug.txt", u8"Grunty’s Furnace Fun (Sans SFX)", 0,
 	3 + 1, {
 		{ ns4::CMidiFile::NS4_ES_PRE_UNROLL, ns4::CMidiFile::NS4_E_TAG_TRACK_BY_CHNL, 10 - 1 },
@@ -1283,6 +1413,14 @@
 		{ ns4::CMidiFile::NS4_ES_PRE_UNROLL, ns4::CMidiFile::NS4_E_MUTE_TAGGED_TRACKS },
 	   } },
 { u8"135 Banjo-Kazooie (U) (V1.0) 00000073 00D77FE8 Top of the Lair.mid", u8"Banjo-Kazooie (U) (V1.0) 00000073 00D77FE8 Top of the Grunty's lair.mid TrackParseDebug.txt", u8"Gruntilda’s Lair (Tower Sans SFX)", 0,
+	2 + 1, {
+		{ ns4::CMidiFile::NS4_ES_PRE_UNROLL, ns4::CMidiFile::NS4_E_TAG_TRACK_BY_CHNL, 13 - 1 },
+		{ ns4::CMidiFile::NS4_ES_PRE_UNROLL, ns4::CMidiFile::NS4_E_TAG_TRACK_BY_CHNL, 14 - 1 },
+		//{ ns4::CMidiFile::NS4_ES_PRE_UNROLL, ns4::CMidiFile::NS4_E_TAG_TRACK_BY_CHNL, 15 - 1 },
+
+		{ ns4::CMidiFile::NS4_ES_PRE_UNROLL, ns4::CMidiFile::NS4_E_MUTE_TAGGED_TRACKS },
+	   } },
+{ u8"135 Banjo-Kazooie (U) (V1.0) 00000073 00D77FE8 Top of the Lair.mid", u8"Banjo-Kazooie (U) (V1.0) 00000073 00D77FE8 Top of the Grunty's lair.mid TrackParseDebug.txt", u8"Gruntilda’s Lair (Tower Sans SFX 2)", 0,
 	3 + 1, {
 		{ ns4::CMidiFile::NS4_ES_PRE_UNROLL, ns4::CMidiFile::NS4_E_TAG_TRACK_BY_CHNL, 13 - 1 },
 		{ ns4::CMidiFile::NS4_ES_PRE_UNROLL, ns4::CMidiFile::NS4_E_TAG_TRACK_BY_CHNL, 14 - 1 },

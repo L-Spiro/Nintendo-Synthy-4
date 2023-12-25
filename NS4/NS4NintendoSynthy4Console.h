@@ -49,7 +49,7 @@
 //#define NS4_PRINT_BEST_BANK
 
 #ifdef NS4_BULK
-//#define NS4_ONE_OFF										(206-1)
+//#define NS4_ONE_OFF										(133-1)
 //#define NS4_EXPORT_SOME
 //#define NS4_EPORT_FROM								(71-1)
 #else
@@ -315,7 +315,7 @@ int oldmain() {
 //#include "Src/Games/NS4PennyRacersOverSamplingFiles.inl"
 //#include "Src/Games/NS4JinseiGame64Files.inl"
 //#include "Src/Games/NS4BanjoTooieFiles.inl"
-#include "Src/Games/NS4DonkeyKong64Files.inl"
+//#include "Src/Games/NS4DonkeyKong64Files.inl"
 //#include "Src/Games/NS4DonkeyKong64KioskFiles.inl"
 //#include "Src/Games/NS4Turok3ShadowOfOblivion.inl"
 //#include "Src/Games/NS4Turok2SeedsOfEvilFiles.inl"
@@ -330,7 +330,7 @@ int oldmain() {
 //#include "Src/Games/NS4ExtremeGXG2Files.inl"
 //#include "Src/Games/NS4ChopperAttackFiles.inl"
 //#include "Src/Games/NS4ChopperAttackOverSampledFiles.inl"
-//#include "Src/Games/NS4BanjoKazooieFiles.inl"
+#include "Src/Games/NS4BanjoKazooieFiles.inl"
 //#include "Src/Games/NS4BlastCorpsFiles.inl"
 //#include "Src/Games/NS4BlastCorpsPALFiles.inl"
 //#include "Src/Games/NS4BeetAdventureRacing!Files.inl"
