@@ -4218,8 +4218,14 @@ namespace ns4 {
 	 * \param _paWet The wet output
 	 */
 	void CMidiFile::RenderSample( const NS4_TRACK_RENDER_OPTIONS &_troOptions, const NS4_MODIFIER &_mMod, lwaudio &_aAudio, lwaudio * _paWet ) {
-		uint64_t ui64Tick = CubaseToTick( _mMod.tsTime0.ui32M, _mMod.tsTime0.ui32B, _mMod.tsTime0.ui32T, _mMod.tsTime0.ui32S );
-		double dTime = GetTimeAtTick( ui64Tick );
+		double dTime = 0.0;
+		if ( _mMod.tsTime0.ui32M == ~0 ) {
+			dTime = _mMod.tsTime0.ui32B * 60.0 + _mMod.tsTime0.ui32T + (_mMod.tsTime0.ui32S / 1000000.0);
+		}
+		else {
+			uint64_t ui64Tick = CubaseToTick( _mMod.tsTime0.ui32M, _mMod.tsTime0.ui32B, _mMod.tsTime0.ui32T, _mMod.tsTime0.ui32S );
+			dTime = GetTimeAtTick( ui64Tick );
+		}
 		std::string sPath = _mMod.pcStringOp;
 		CWavFile wfWavFile;
 		CSample * psSample = nullptr;

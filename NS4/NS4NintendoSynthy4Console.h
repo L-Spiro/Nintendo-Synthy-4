@@ -239,7 +239,7 @@ int oldmain() {
 
 #if 0
 	// Tools somehow stopped being able to load .n64 files due to not automatically byte-swapping them.
-#define LSN_SWAP_ME			L"Virtual Pro Wrestling 64 (Japan)"
+#define LSN_SWAP_ME			L"Super Smash Bros. (USA)"
 #define LSN_SWAP_ME_DIR		L"C:\\My Projects\\N64\\Roms\\"
 	{
 		const wchar_t * pu16ByteswapMe = LSN_SWAP_ME_DIR LSN_SWAP_ME L".n64";
@@ -330,10 +330,11 @@ int oldmain() {
 //#include "Src/Games/NS4ExtremeGXG2Files.inl"
 //#include "Src/Games/NS4ChopperAttackFiles.inl"
 //#include "Src/Games/NS4ChopperAttackOverSampledFiles.inl"
-#include "Src/Games/NS4BanjoKazooieFiles.inl"
+//#include "Src/Games/NS4BanjoKazooieFiles.inl"
 //#include "Src/Games/NS4BlastCorpsFiles.inl"
 //#include "Src/Games/NS4BlastCorpsPALFiles.inl"
 //#include "Src/Games/NS4BeetAdventureRacing!Files.inl"
+#include "Src/Games/NS4BeetAdventureRacing!VinylFiles.inl"
 //#include "Src/Games/NS4AeroFightersAssaultFiles.inl"
 //#include "Src/Games/NS4AeroFightersAssaultOverSamplingFiles.inl"
 //#include "Src/Games/NS4F1WorldGrandPrixFiles.inl"

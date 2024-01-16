@@ -360,6 +360,12 @@ namespace ns4 {
 																	NS4_MAKE_VIB_TREM( TREMTYPE, TREMRATE, TREMDEPTH, TREMDELAY ), { W, X, Y, Z }, {},																							\
 																	NS4_MAKE_NOTE_INST( NOTE, SAMPLE_VOL, SAMPLE_PAN, REV ),																													\
 																	NS4_MAKE_PAN_AND_FLAGS( PAN, FLAGS ), double( LINEAR_VOL ), double( LINEAR_PITCH_SCALE ), reinterpret_cast<const char *>(SAMPLE)
+#define NS4_PLAY_SAMPLE_AT_TIME( SAMPLE, MIN, SEC, MICROS, NOTE, REV, LINEAR_VOL, PAN, FLAGS, BASENOTE, COURSETUNE, FINETUNE, SAMPLE_VOL, SAMPLE_PAN, LINEAR_PITCH_SCALE, VIBTYPE, VIBRATE, VIBDEPTH, VIBDELAY, TREMTYPE, TREMRATE, TREMDEPTH, TREMDELAY )	\
+																ns4::CMidiFile::NS4_ES_POST_SYNTHESIS, ns4::CMidiFile::NS4_E_PLAY_SAMPLE, NS4_MAKE_TUNING( BASENOTE, COURSETUNE, FINETUNE ),													\
+																	NS4_MAKE_VIB_TREM( VIBTYPE, VIBRATE, VIBDEPTH, VIBDELAY ),																													\
+																	NS4_MAKE_VIB_TREM( TREMTYPE, TREMRATE, TREMDEPTH, TREMDELAY ), { uint32_t( ~0 ), MIN, SEC, MICROS }, {},																							\
+																	NS4_MAKE_NOTE_INST( NOTE, SAMPLE_VOL, SAMPLE_PAN, REV ),																													\
+																	NS4_MAKE_PAN_AND_FLAGS( PAN, FLAGS ), double( LINEAR_VOL ), double( LINEAR_PITCH_SCALE ), reinterpret_cast<const char *>(SAMPLE)
 #define NS4_PLAY_SAMPLE_SIMPLE( SAMPLE, W, X, Y, Z, REV, LINEAR_VOL, PAN )																																										\
 																NS4_PLAY_SAMPLE( (SAMPLE), (W), (X), (Y), (Z), 0x3C, (REV), (LINEAR_VOL), (PAN), 0, 0x3C, 0, 0, 0x7F, 0x40, 1.0, 0, 0, 0, 0, 0, 0, 0, 0 )
 #define NS4_PLAY_SAMPLE_SIMPLE_FLAGS( SAMPLE, W, X, Y, Z, REV, LINEAR_VOL, PAN, FLAGS )																																										\

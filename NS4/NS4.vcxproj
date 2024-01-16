@@ -235,6 +235,7 @@
     <None Include="Src\Games\NS4BattleTanxFiles.inl" />
     <None Include="Src\Games\NS4BattlezoneRiseOfTheBlackDogsFiles.inl" />
     <None Include="Src\Games\NS4BeetAdventureRacing!Files.inl" />
+    <None Include="Src\Games\NS4BeetAdventureRacing!VinylFiles.inl" />
     <None Include="Src\Games\NS4BlastCorpsFiles.inl" />
     <None Include="Src\Games\NS4BlastCorpsPALFiles.inl" />
     <None Include="Src\Games\NS4BodyHarvestFiles.inl" />

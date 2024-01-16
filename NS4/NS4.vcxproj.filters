@@ -1039,5 +1039,8 @@
     <None Include="Src\Games\NS4VirtualProWrestling64Files.inl">
       <Filter>Header Files\Games</Filter>
     </None>
+    <None Include="Src\Games\NS4BeetAdventureRacing!VinylFiles.inl">
+      <Filter>Header Files\Games</Filter>
+    </None>
   </ItemGroup>
 </Project>
