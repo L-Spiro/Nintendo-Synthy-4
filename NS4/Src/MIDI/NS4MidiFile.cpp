@@ -2303,7 +2303,63 @@ namespace ns4 {
 						if ( aResult.size() == 0 ) {
 							aResult = CWavLib::AllocateSamples( 2, _troOptions.uiMaxSamples );
 						}
-						RenderSample( _troOptions, _pmMods[I], aResult, _paWet );
+						std::vector<NS4_SAMPLE_MODIFIER> vSampleMods;
+						for ( uint32_t J = I + 1; J < _ui32Total; ++J ) {
+							if ( _pmMods[J].esStage == NS4_ES_POST_SYNTHESIS ) {
+								switch ( _pmMods[J].eType ) {
+									case NS4_E_PLAY_SAMPLE : { J = _ui32Total; break; }
+									case NS4_E_SAMPLE_SET_CONTROL : {
+										double dTime = 0.0;
+										if ( _pmMods[J].tsTime0.ui32M == ~0 ) {
+											dTime = _pmMods[J].tsTime0.ui32B * 60.0 + _pmMods[J].tsTime0.ui32T + (_pmMods[J].tsTime0.ui32S / 1000000.0);
+										}
+										else {
+											uint64_t ui64Tick = CubaseToTick( _pmMods[J].tsTime0.ui32M, _pmMods[J].tsTime0.ui32B, _pmMods[J].tsTime0.ui32T, _pmMods[J].tsTime0.ui32S );
+											dTime = GetTimeAtTick( ui64Tick );
+										}
+										NS4_SAMPLE_MODIFIER smMod = {
+											.dTimeStart = dTime,
+											.dTimeEnd = dTime,
+											.seEvent = NS4_SE_SET_CONTROL,
+											.ui32Parm0 = _pmMods[J].ui32Operand0,	// Control.
+											.ui32Parm1 = _pmMods[J].ui32Operand1,	// Value.
+										};
+										vSampleMods.push_back( smMod );
+										break;
+									}
+									case NS4_E_SAMPLE_INSERT_CONTROL_LINE : {
+										double dTime = 0.0;
+										if ( _pmMods[J].tsTime0.ui32M == ~0 ) {
+											dTime = _pmMods[J].tsTime0.ui32B * 60.0 + _pmMods[J].tsTime0.ui32T + (_pmMods[J].tsTime0.ui32S / 1000000.0);
+										}
+										else {
+											uint64_t ui64Tick = CubaseToTick( _pmMods[J].tsTime0.ui32M, _pmMods[J].tsTime0.ui32B, _pmMods[J].tsTime0.ui32T, _pmMods[J].tsTime0.ui32S );
+											dTime = GetTimeAtTick( ui64Tick );
+										}
+
+										double dTimeEnd = 0.0;
+										if ( _pmMods[J].tsTime1.ui32M == ~0 ) {
+											dTimeEnd = _pmMods[J].tsTime1.ui32B * 60.0 + _pmMods[J].tsTime1.ui32T + (_pmMods[J].tsTime1.ui32S / 1000000.0);
+										}
+										else {
+											uint64_t ui64Tick = CubaseToTick( _pmMods[J].tsTime1.ui32M, _pmMods[J].tsTime1.ui32B, _pmMods[J].tsTime1.ui32T, _pmMods[J].tsTime1.ui32S );
+											dTimeEnd = GetTimeAtTick( ui64Tick );
+										}
+										NS4_SAMPLE_MODIFIER smMod = {
+											.dTimeStart = dTime,
+											.dTimeEnd = dTimeEnd,
+											.seEvent = NS4_SE_SET_CONTROL_LINE,
+											.ui32Parm0 = _pmMods[J].ui32Operand0,	// Control.
+											.ui32Parm1 = _pmMods[J].ui32Operand1,	// Value.
+										};
+										vSampleMods.push_back( smMod );
+										break;
+									}
+								}
+							}
+						}
+
+						RenderSample( _troOptions, _pmMods[I], aResult, _paWet, vSampleMods );
 						break;
 					}
 				}
@@ -4217,7 +4273,7 @@ namespace ns4 {
 	 * \param _aAudio The stereo audio to which to render the result.
 	 * \param _paWet The wet output
 	 */
-	void CMidiFile::RenderSample( const NS4_TRACK_RENDER_OPTIONS &_troOptions, const NS4_MODIFIER &_mMod, lwaudio &_aAudio, lwaudio * _paWet ) {
+	void CMidiFile::RenderSample( const NS4_TRACK_RENDER_OPTIONS &_troOptions, const NS4_MODIFIER &_mMod, lwaudio &_aAudio, lwaudio * _paWet, const std::vector<NS4_SAMPLE_MODIFIER> &_vMods ) {
 		double dTime = 0.0;
 		if ( _mMod.tsTime0.ui32M == ~0 ) {
 			dTime = _mMod.tsTime0.ui32B * 60.0 + _mMod.tsTime0.ui32T + (_mMod.tsTime0.ui32S / 1000000.0);
@@ -4351,7 +4407,33 @@ namespace ns4 {
 				_aAudio[K].resize( tbWavTime.CurTick() );
 			}
 		}
+		double dLastTime = -1.0;
+		bool bPlay = true;
+		double dOffTime = 0.0;
+		double dOffEnd = 0.0;
 		while ( true ) {
+			double dCurTime = tbWavTime.Time() / _troOptions.uiSampleRate;
+			for ( size_t I = 0; I < _vMods.size(); ++I ) {
+				switch ( _vMods[I].seEvent ) {
+					case NS4_SE_SET_CONTROL : {
+						if ( _vMods[I].dTimeStart > dLastTime && _vMods[I].dTimeStart <= dCurTime ) {
+							msState.ui8State[_vMods[I].ui32Parm0&0xFF] = uint8_t( _vMods[I].ui32Parm1 );
+							if ( NS4_C_MAIN_VOLUME == (_vMods[I].ui32Parm0 & 0xFF) ) {
+								nNote.liVolumeInterpolator.Set( (_vMods[I].ui32Parm0 & 0xFF) );
+							}
+						}
+						break;
+					}
+					case NS4_SE_END_SAMPLE : {
+						if ( bPlay ) {
+							dOffTime = _vMods[I].dParm0;
+							dOffEnd = _vMods[I].dParm1;
+							bPlay = false;
+						}
+						break;
+					}
+				}
+			}
 			nNote.Tick( msState, msState.dPitch );
 			
 			double dVal = nNote.sSampler.Sample();
@@ -4497,6 +4579,7 @@ namespace ns4 {
 			if ( nNote.sSampler.OutOfRange() ) {
 				break;
 			}
+			dLastTime = tbWavTime.Time() / _troOptions.uiSampleRate;
 			tbWavTime.Tick();
 			if ( _troOptions.uiMaxSamples <= tbWavTime.CurTick() ) {
 				break;

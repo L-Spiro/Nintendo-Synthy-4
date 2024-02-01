@@ -1603,10 +1603,10 @@ namespace ns4 {
 		// Diddy Kong Racing.
 		{
 			NS4_TAPS( m_rtDkr0 ),
-			1.5159152011755279 / 2.0,												// dTapVol
+			NS4_SQRT_0_5/*1.5159152011755279 / 2.0*/,												// dTapVol
 			0,																		// i64TapOffset
-			NS4_FADE( 2.0, 0.1, 4.4 ),												// dTime
-			NS4_LPF( 4736.0 / 1.0, 0.3, 2.0, NS4_FILTER_DB_TO_ORDER( 6 ) ),
+			NS4_FADE( 1.25, 1.75, 4.4 ),												// dTime
+			NS4_LPF( 4736.0 / 2.0, 6240.0 / 22047.0, 2.0, NS4_FILTER_DB_TO_ORDER( 6 ) ),
 		},	// 2
 		// Super Smash Bros.
 		{

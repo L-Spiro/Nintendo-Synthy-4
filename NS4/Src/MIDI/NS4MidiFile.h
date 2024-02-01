@@ -222,6 +222,8 @@ namespace ns4 {
 			NS4_E_MERGE_TRACKS_BY_INDEX,						/**< Merges one track (ui32Operand0) into another (ui32Operand1).  The first track is then muted.  Only useful in the pre-unroll or post-supplemental stages. */
 			NS4_E_START_AT_TICK,								/**< Starts playback at the given tick. */
 			NS4_E_PLAY_SAMPLE,									/**< Plays a given sample at the given tick. */
+			NS4_E_SAMPLE_SET_CONTROL,							/**< Sets a control at a given time to impact the last NS4_E_PLAY_SAMPLE playback. */
+			NS4_E_SAMPLE_INSERT_CONTROL_LINE,					/**< Inserts a series of controls at a given time to impact the last NS4_E_PLAY_SAMPLE playback. */
 			NS4_E_ADD_MIDI_FILE,								/**< Loads the given MIDI file (pcStringOp), appending it to the end of the current list of tracks.  If ui32Operand0 is non-zero, the first track of the loaded MIDI file is not appended. */
 			NS4_E_GLOBAL_SET_PERC_RELEASE_ADSR,					/**< Sets the ADSR percussion release rate for a given track. */
 			NS4_E_GLOBAL_SET_FADE_FROM_END,						/**< Sets the fade ending point to a number of seconds (dOperandDouble0) before the last note-off event in the non-looping MIDI file.  If the call to GetBestRunTime() sees loop points, this has no effect. */
@@ -244,6 +246,13 @@ namespace ns4 {
 			NS4_E_GLOBAL_SET_IGNORE_REVERB,						/**< Reverb is ignored for the current track if ui32Operand0 is set to non-0. */
 			
 
+		};
+
+		/** Sample-modification events. */
+		enum NS4_SAMPLE_EVENTS {
+			NS4_SE_SET_CONTROL,									/**< Sets a MIDI control to a value. */
+			NS4_SE_SET_CONTROL_LINE,							/**< Sets a MIDI control to values interpolated over time. */
+			NS4_SE_END_SAMPLE,									/**< Stops the sample. */
 		};
 
 		/** Manual note-render flags. */
@@ -311,6 +320,17 @@ namespace ns4 {
 			uint32_t					ui32B;
 			uint32_t					ui32T;
 			uint32_t					ui32S;
+		};
+
+		/** A sample modifier. */
+		struct NS4_SAMPLE_MODIFIER {
+			double						dTimeStart;
+			double						dTimeEnd;
+			NS4_SAMPLE_EVENTS			seEvent;
+			uint32_t					ui32Parm0;
+			uint32_t					ui32Parm1;
+			double						dParm0;
+			double						dParm1;
 		};
 
 		/** A modifier. */
@@ -391,9 +411,9 @@ namespace ns4 {
 
 		/** Oprions for special reverb. */
 		enum NS4_REVERB_OPTIONS {
-			NS4_OVER_127_SWAP_L_AND_R							= (1 << 0),
-			NS4_OVER_127_INVERT									= (1 << 1),
-			NS4_OVER_127_FF_MAPS_TO_00							= (1 << 2),
+			NS4_OVER_127_SWAP_L_AND_R	= (1 << 0),
+			NS4_OVER_127_INVERT			= (1 << 1),
+			NS4_OVER_127_FF_MAPS_TO_00	= (1 << 2),
 		};
 
 		/** A track-render set of options. */
@@ -2361,7 +2381,7 @@ namespace ns4 {
 		 * \param _aAudio The stereo audio to which to render the result.
 		 * \param _paWet The wet output
 		 */
-		void							RenderSample( const NS4_TRACK_RENDER_OPTIONS &_troOptions, const NS4_MODIFIER &_mMod, lwaudio &_aAudio, lwaudio * _paWet );
+		void							RenderSample( const NS4_TRACK_RENDER_OPTIONS &_troOptions, const NS4_MODIFIER &_mMod, lwaudio &_aAudio, lwaudio * _paWet, const std::vector<NS4_SAMPLE_MODIFIER> &_vMods );
 
 		/**
 		 * Prepares vibrato for a given note.

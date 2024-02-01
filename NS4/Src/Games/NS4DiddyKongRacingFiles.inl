@@ -7,7 +7,7 @@
 #define NS4_REVERB							ns4::CReverb::NS4_T_DIDDY_KONG_RACING_0
 #define NS4_ORIG_HZ							22047
 #define NS4_CURVE							20.0
-#define NS4_OUT_DIRECTORY					u8"F:\\N64OST\\Diddy Kong Racing\\"
+#define NS4_OUT_DIRECTORY					u8"C:\\N64OST\\Diddy Kong Racing\\"
 #define NS4_OUT_DIRECTORY_NUMBERS			NS4_OUT_DIRECTORY u8"Numbered\\"
 #define NS4_WET_FILTER_FREQ					4736.0//(NS4_ORIG_HZ / 2.0)
 #define NS4_ENV_MULTIPLIER					(1.0 / 3.0)
