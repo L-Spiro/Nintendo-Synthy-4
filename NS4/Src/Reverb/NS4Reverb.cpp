@@ -6,8 +6,8 @@
 #include <Windows.h>
 
 
-#define NS4_GE_FADE				NS4_FADE( 1.0, 0.1, 6.0 )
-#define NS4_GE_FILTER			NS4_LPF( 4736.0 / 1.0, 6400.0 / 22047.0, 2.0, NS4_FILTER_DB_TO_ORDER( 6 ) )
+#define NS4_GE_FADE				NS4_FADE( 1.0, 3.0, 6.0 )
+#define NS4_GE_FILTER			NS4_LPF( 4736.0 / 2.0, 6400.0 / 22047.0, 2.0, NS4_FILTER_DB_TO_ORDER( 6 ) )
 #define NS4_CBFD_FADE			NS4_FADE( 2.0, 0.1, 4.4 )
 #define NS4_CBFD_FILTER			NS4_LPF( 4736.0 /*22018.0 / std::pow( 2.0, 4.0 )*/, 0.18312289944590790, 0.5, NS4_FILTER_DB_TO_ORDER( 6 ) )
 #define NS4_BC_FADE				NS4_FADE( 1.5, 0.1, 5.3 )
@@ -1595,7 +1595,7 @@ namespace ns4 {
 		// GoldenEye 007.
 		{
 			NS4_TAPS( m_rtGe0070 ),
-			1.2981829984821243 / 2.0,												// dTapVol
+			NS4_SQRT_0_5/*1.2981829984821243 / 2.0*/,												// dTapVol
 			0,																		// i64TapOffset
 			NS4_GE_FADE,															// dTime
 			NS4_GE_FILTER,															// dLpfFactor
