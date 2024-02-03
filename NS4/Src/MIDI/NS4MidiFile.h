@@ -224,6 +224,7 @@ namespace ns4 {
 			NS4_E_PLAY_SAMPLE,									/**< Plays a given sample at the given tick. */
 			NS4_E_SAMPLE_SET_CONTROL,							/**< Sets a control at a given time to impact the last NS4_E_PLAY_SAMPLE playback. */
 			NS4_E_SAMPLE_INSERT_CONTROL_LINE,					/**< Inserts a series of controls at a given time to impact the last NS4_E_PLAY_SAMPLE playback. */
+			NS4_E_SAMPLE_END,									/**< Stops the playback of the current sample. */
 			NS4_E_ADD_MIDI_FILE,								/**< Loads the given MIDI file (pcStringOp), appending it to the end of the current list of tracks.  If ui32Operand0 is non-zero, the first track of the loaded MIDI file is not appended. */
 			NS4_E_GLOBAL_SET_PERC_RELEASE_ADSR,					/**< Sets the ADSR percussion release rate for a given track. */
 			NS4_E_GLOBAL_SET_FADE_FROM_END,						/**< Sets the fade ending point to a number of seconds (dOperandDouble0) before the last note-off event in the non-looping MIDI file.  If the call to GetBestRunTime() sees loop points, this has no effect. */
@@ -327,6 +328,7 @@ namespace ns4 {
 			double						dTimeStart;
 			double						dTimeEnd;
 			NS4_SAMPLE_EVENTS			seEvent;
+			uint8_t						ui8Ex;
 			uint32_t					ui32Parm0;
 			uint32_t					ui32Parm1;
 			double						dParm0;
@@ -355,12 +357,12 @@ namespace ns4 {
 #define NS4_DOUBLE_OP_4( CHAN, VAL1, VAL2, VAL3, VAL4 )			NS4_DOUBLE_OP_3( CHAN, VAL1, VAL2, VAL3 ), (VAL4)
 #define NS4_STRING_OP( STRING )									NS4_DOUBLE_OP_2( 0, 0.0, 0.0 ), reinterpret_cast<const char *>(STRING)
 #define NS4_SET_COMPOSER( STRING )								ns4::CMidiFile::NS4_ES_MASTER, ns4::CMidiFile::NS4_E_GLOBAL_SET_COMPOSER, NS4_STRING_OP( STRING )
-#define NS4_SET_CURSOR_BY_TICK( W, X, Y, Z )					ns4::CMidiFile::NS4_ES_MASTER, ns4::CMidiFile::NS4_E_GLOBAL_SET_CURSOR_BY_TICK, 0, 0, 0, { W, X, Y, Z }
+#define NS4_SET_CURSOR_BY_TICK( W, X, Y, Z )					ns4::CMidiFile::NS4_ES_MASTER, ns4::CMidiFile::NS4_E_GLOBAL_SET_CURSOR_BY_TICK, 0, 0, 0, { (W), (X), (Y), (Z) }
 #define NS4_SET_CURSOR_BY_TIME( TIME )							ns4::CMidiFile::NS4_ES_MASTER, ns4::CMidiFile::NS4_E_GLOBAL_SET_CURSOR_BY_TIME, 0, 0, 0, {}, {}, 0, 0, double( TIME )
 #define NS4_STORE_RESULT										ns4::CMidiFile::NS4_ES_MASTER, ns4::CMidiFile::NS4_E_GLOBAL_STORE_RESULT_WITH_CURSOR_TIME
-#define NS4_STOP_AT_TICK( W, X, Y, Z )							ns4::CMidiFile::NS4_ES_POST_UNROLL, ns4::CMidiFile::NS4_E_STOP_AT_TICK, 0, 0, 0, { W, X, Y, Z }
+#define NS4_STOP_AT_TICK( W, X, Y, Z )							ns4::CMidiFile::NS4_ES_POST_UNROLL, ns4::CMidiFile::NS4_E_STOP_AT_TICK, 0, 0, 0, { (W), (X), (Y), (Z) }
 #define NS4_STOP_AT_TIME( TIME )								ns4::CMidiFile::NS4_ES_POST_UNROLL, ns4::CMidiFile::NS4_E_STOP_AT_TIME, 0, 0, 0, {}, {}, 0, 0, double( TIME )
-#define NS4_FADE_FROM_TICK( W, X, Y, Z, DUR )					ns4::CMidiFile::NS4_ES_POST_UNROLL, ns4::CMidiFile::NS4_E_INSERT_TIME_FADE_AT_TICK, 0, NS4_TRACK_MASTER_VOL, 0, { W, X, Y, Z }, {}, 0, 0, double( DUR )
+#define NS4_FADE_FROM_TICK( W, X, Y, Z, DUR )					ns4::CMidiFile::NS4_ES_POST_UNROLL, ns4::CMidiFile::NS4_E_INSERT_TIME_FADE_AT_TICK, 0, NS4_TRACK_MASTER_VOL, 0, { (W), (X), (Y), (Z) }, {}, 0, 0, double( DUR )
 #define NS4_FADE_FROM_TIME( TIME, DUR )							ns4::CMidiFile::NS4_ES_POST_UNROLL, ns4::CMidiFile::NS4_E_INSERT_TIME_FADE_AT_TIME, 0, NS4_TRACK_MASTER_VOL, 0, {}, {}, 0, 0, double( TIME ), double( DUR )
 #define NS4_MASK_FADE_FROM_TICK( MASK, ENABLE_VAL, DISABLE_VAL, W, X, Y, Z, DUR )	ns4::CMidiFile::NS4_ES_POST_UNROLL, ns4::CMidiFile::NS4_E_INSERT_TIME_FADE_AT_TICK_TRACK_MASK, (MASK), NS4_TRACK_MASTER_VOL, (ENABLE_VAL), { W, X, Y, Z }, {}, (DISABLE_VAL), 0, double( DUR )
 #define NS4_FORCE_TRIM											ns4::CMidiFile::NS4_ES_MASTER, ns4::CMidiFile::NS4_E_GLOBAL_TRIM_ENDING_SILENCE
@@ -377,7 +379,7 @@ namespace ns4 {
 #define NS4_PLAY_SAMPLE( SAMPLE, W, X, Y, Z, NOTE, REV, LINEAR_VOL, PAN, FLAGS, BASENOTE, COURSETUNE, FINETUNE, SAMPLE_VOL, SAMPLE_PAN, LINEAR_PITCH_SCALE, VIBTYPE, VIBRATE, VIBDEPTH, VIBDELAY, TREMTYPE, TREMRATE, TREMDEPTH, TREMDELAY )	\
 																ns4::CMidiFile::NS4_ES_POST_SYNTHESIS, ns4::CMidiFile::NS4_E_PLAY_SAMPLE, NS4_MAKE_TUNING( BASENOTE, COURSETUNE, FINETUNE ),													\
 																	NS4_MAKE_VIB_TREM( VIBTYPE, VIBRATE, VIBDEPTH, VIBDELAY ),																													\
-																	NS4_MAKE_VIB_TREM( TREMTYPE, TREMRATE, TREMDEPTH, TREMDELAY ), { W, X, Y, Z }, {},																							\
+																	NS4_MAKE_VIB_TREM( TREMTYPE, TREMRATE, TREMDEPTH, TREMDELAY ), { (W), (X), (Y), (Z) }, {},																							\
 																	NS4_MAKE_NOTE_INST( NOTE, SAMPLE_VOL, SAMPLE_PAN, REV ),																													\
 																	NS4_MAKE_PAN_AND_FLAGS( PAN, FLAGS ), double( LINEAR_VOL ), double( LINEAR_PITCH_SCALE ), reinterpret_cast<const char *>(SAMPLE)
 #define NS4_PLAY_SAMPLE_AT_TIME( SAMPLE, MIN, SEC, MICROS, NOTE, REV, LINEAR_VOL, PAN, FLAGS, BASENOTE, COURSETUNE, FINETUNE, SAMPLE_VOL, SAMPLE_PAN, LINEAR_PITCH_SCALE, VIBTYPE, VIBRATE, VIBDEPTH, VIBDELAY, TREMTYPE, TREMRATE, TREMDEPTH, TREMDELAY )	\
@@ -390,6 +392,10 @@ namespace ns4 {
 																NS4_PLAY_SAMPLE( (SAMPLE), (W), (X), (Y), (Z), 0x3C, (REV), (LINEAR_VOL), (PAN), 0, 0x3C, 0, 0, 0x7F, 0x40, 1.0, 0, 0, 0, 0, 0, 0, 0, 0 )
 #define NS4_PLAY_SAMPLE_SIMPLE_FLAGS( SAMPLE, W, X, Y, Z, REV, LINEAR_VOL, PAN, FLAGS )																																										\
 																NS4_PLAY_SAMPLE( (SAMPLE), (W), (X), (Y), (Z), 0x3C, (REV), (LINEAR_VOL), (PAN), (FLAGS), 0x3C, 0, 0, 0x7F, 0x40, 1.0, 0, 0, 0, 0, 0, 0, 0, 0 )
+#define NS4_PLAY_SAMPLE_STOP( W, X, Y, Z, TIME_OFFSET, RELEASE_TIME )																																			\
+																ns4::CMidiFile::NS4_ES_POST_SYNTHESIS, ns4::CMidiFile::NS4_E_SAMPLE_END, 0, 0, 0, { (W), (X), (Y), (Z) }, { (W), (X), (Y), (Z) }, 0, 0, (TIME_OFFSET), (RELEASE_TIME)
+#define NS4_PLAY_SAMPLE_SET_CONTROL_LINE( W0, X0, Y0, Z0, W1, X1, Y1, Z1, CTL, START, STOP )																													\
+																ns4::CMidiFile::NS4_ES_POST_SYNTHESIS, ns4::CMidiFile::NS4_E_SAMPLE_INSERT_CONTROL_LINE, (CTL), (START), (STOP), { (W0), (X0), (Y0), (Z0) }, { (W1), (X1), (Y1), (Z1) }
 #define NS4_GET_TUNING_BASENOTE( MOD )							uint8_t( MOD.ui32Channel >> 24 )
 #define NS4_GET_TUNING_COURSE_TUNE( MOD )						uint8_t( MOD.ui32Channel >> 16 )
 #define NS4_GET_TUNING_FINE_TUNE( MOD )							uint16_t( MOD.ui32Channel >> 0 )

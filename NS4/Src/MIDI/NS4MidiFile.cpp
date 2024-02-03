@@ -2349,8 +2349,28 @@ namespace ns4 {
 											.dTimeStart = dTime,
 											.dTimeEnd = dTimeEnd,
 											.seEvent = NS4_SE_SET_CONTROL_LINE,
+											.ui8Ex = uint8_t( _pmMods[J].ui32Channel ),
 											.ui32Parm0 = _pmMods[J].ui32Operand0,	// Control.
 											.ui32Parm1 = _pmMods[J].ui32Operand1,	// Value.
+										};
+										vSampleMods.push_back( smMod );
+										break;
+									}
+									case NS4_E_SAMPLE_END : {
+										double dTime = 0.0;
+										if ( _pmMods[J].tsTime0.ui32M == ~0 ) {
+											dTime = _pmMods[J].tsTime0.ui32B * 60.0 + _pmMods[J].tsTime0.ui32T + (_pmMods[J].tsTime0.ui32S / 1000000.0);
+										}
+										else {
+											uint64_t ui64Tick = CubaseToTick( _pmMods[J].tsTime0.ui32M, _pmMods[J].tsTime0.ui32B, _pmMods[J].tsTime0.ui32T, _pmMods[J].tsTime0.ui32S );
+											dTime = GetTimeAtTick( ui64Tick );
+										}
+										NS4_SAMPLE_MODIFIER smMod = {
+											.dTimeStart = dTime,
+											.dTimeEnd = dTime,
+											.seEvent = NS4_SE_END_SAMPLE,
+											.dParm0 = _pmMods[J].dOperandDouble0,	// Release time offset (sample ends at dTime + _pmMods[J].dOperandDouble0).
+											.dParm1 = _pmMods[J].dOperandDouble1,	// Release time.
 										};
 										vSampleMods.push_back( smMod );
 										break;
@@ -4411,8 +4431,17 @@ namespace ns4 {
 		bool bPlay = true;
 		double dOffTime = 0.0;
 		double dOffEnd = 0.0;
+		struct NS4_CONTROL_LINE_STD {
+			double					dStart;
+			double					dEnd;
+			uint8_t					ui8Start;
+			uint8_t					ui8End;
+			uint8_t					ui8Control;
+			bool					bForce = true;
+		};
+		std::vector<NS4_CONTROL_LINE_STD> vControlLineStd;
 		while ( true ) {
-			double dCurTime = tbWavTime.Time() / _troOptions.uiSampleRate;
+			double dCurTime = tbWavTime.Time();
 			for ( size_t I = 0; I < _vMods.size(); ++I ) {
 				switch ( _vMods[I].seEvent ) {
 					case NS4_SE_SET_CONTROL : {
@@ -4424,16 +4453,69 @@ namespace ns4 {
 						}
 						break;
 					}
+					case NS4_SE_SET_CONTROL_LINE : {
+						if ( _vMods[I].dTimeStart > dLastTime && _vMods[I].dTimeStart <= dCurTime ) {
+							vControlLineStd.push_back( {
+								.dStart = _vMods[I].dTimeStart,
+								.dEnd = _vMods[I].dTimeEnd,
+								.ui8Start = uint8_t( _vMods[I].ui32Parm0 ),
+								.ui8End = uint8_t( _vMods[I].ui32Parm1 ),
+								.ui8Control = _vMods[I].ui8Ex,
+							} );
+						}
+						break;
+					}
 					case NS4_SE_END_SAMPLE : {
-						if ( bPlay ) {
-							dOffTime = _vMods[I].dParm0;
+						if ( bPlay && _vMods[I].dTimeStart > dLastTime && _vMods[I].dTimeStart <= dCurTime ) {
+							dOffTime = _vMods[I].dParm0 + dCurTime;
 							dOffEnd = _vMods[I].dParm1;
+							nNote.eEnvelope.SetReleaseSamples( uint32_t( dOffEnd * _troOptions.uiSampleRate ) );
 							bPlay = false;
 						}
 						break;
 					}
 				}
 			}
+
+			if ( !bPlay && nNote.bActive &&
+				dOffTime > dLastTime && dOffTime <= dCurTime ) {
+				nNote.bActive = false;
+				nNote.eEnvelope.Release();
+			}
+			for ( auto I = vControlLineStd.size(); I--; ) {
+				if ( dCurTime > vControlLineStd[I].dEnd ) {
+					msState.ui8State[vControlLineStd[I].ui8Control] = vControlLineStd[I].ui8End;
+					vControlLineStd.erase( vControlLineStd.begin() + I );
+					if ( vControlLineStd[I].ui8Control == NS4_C_MAIN_VOLUME ) {
+						if ( vControlLineStd[I].bForce ) {
+							nNote.liVolumeInterpolator.ForceSet( msState.ui8State[vControlLineStd[I].ui8Control] );
+						}
+						else {
+							if ( uint8_t( nNote.liVolumeInterpolator.TargetValue() ) != msState.ui8State[vControlLineStd[I].ui8Control] ) {
+								nNote.liVolumeInterpolator.Set( msState.ui8State[vControlLineStd[I].ui8Control] );
+							}
+						}
+					}
+				}
+				else {
+					msState.ui8State[vControlLineStd[I].ui8Control] = uint8_t( std::round( (double( vControlLineStd[I].ui8End ) -
+						double( vControlLineStd[I].ui8Start )) * ((dCurTime - vControlLineStd[I].dStart) / (vControlLineStd[I].dEnd - vControlLineStd[I].dStart)) +
+						vControlLineStd[I].ui8Start ) );
+					if ( vControlLineStd[I].ui8Control == NS4_C_MAIN_VOLUME ) {
+						if ( vControlLineStd[I].bForce ) {
+							nNote.liVolumeInterpolator.ForceSet( msState.ui8State[vControlLineStd[I].ui8Control] );
+							vControlLineStd[I].bForce = false;
+						}
+						else {
+							if ( uint8_t( nNote.liVolumeInterpolator.TargetValue() ) != msState.ui8State[vControlLineStd[I].ui8Control] ) {
+								nNote.liVolumeInterpolator.Set( msState.ui8State[vControlLineStd[I].ui8Control] );
+							}
+						}
+					}
+				}
+				
+			}
+
 			nNote.Tick( msState, msState.dPitch );
 			
 			double dVal = nNote.sSampler.Sample();
@@ -4579,7 +4661,10 @@ namespace ns4 {
 			if ( nNote.sSampler.OutOfRange() ) {
 				break;
 			}
-			dLastTime = tbWavTime.Time() / _troOptions.uiSampleRate;
+			if ( !nNote.bActive && !nNote.eEnvelope.InRelease() ) {
+				break;
+			}
+			dLastTime = dCurTime;
 			tbWavTime.Tick();
 			if ( _troOptions.uiMaxSamples <= tbWavTime.CurTick() ) {
 				break;

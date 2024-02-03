@@ -77,7 +77,7 @@
 { u8"Beetle Adventure Racing! (U) (M3) 00000000 00CEF002.mid", u8"Beetle Adventure Racing! (U) (M3) 00000000 00CEF002.mid TrackParseDebug.txt", u8"Menu", 0 },
 
 { u8"Beetle Adventure Racing! (U) (M3) 00000009 00CF14C2.mid", u8"Beetle Adventure Racing! (U) (M3) 00000009 00CF14C2.mid TrackParseDebug.txt", u8"Coventry Cove", 0,
-	6 + /*1 +*/ 4 + 3 + 2 + 2, {
+	6 + 2 + 4 + 4 + 3 + 2 + 2, {
 		{ NS4_PLAY_SAMPLE_AT_TIME( u8"C:\\My Projects\\MIDIWorks\\Exports\\Beetle Adventure Racing!\\SFX\\B00I73S00.wav",	// Welcome to Coventry Cove
 			0, 0, 0,
 			60, 0, 1.0, 64, 0, 60, 0, 0, 127, 64, 0.5, 0, 0, 0, 0, 0, 0, 0, 0 )
@@ -103,10 +103,11 @@
 			60, 0, 1.0, 64, 0, 60, 0, 0, 127, 64, 0.5, 0, 0, 0, 0, 0, 0, 0, 0 )
 		},
 
-		/*{ NS4_PLAY_SAMPLE_AT_TIME( u8"C:\\My Projects\\MIDIWorks\\Exports\\Beetle Adventure Racing!\\SFX\\B00I02S00.wav",	// Burning Rubber
+		{ NS4_PLAY_SAMPLE_AT_TIME( u8"C:\\My Projects\\MIDIWorks\\Exports\\Beetle Adventure Racing!\\SFX\\B00I02S00.wav",	// Burning Rubber
 			0, 16, uint32_t( 0.3 * 1000000.0 ),
 			60, 0, 1.0, 64, 0, 60, 0, 0, 127, 64, 1.0, 0, 0, 0, 0, 0, 0, 0, 0 )
-		},*/
+		},
+		{ NS4_PLAY_SAMPLE_STOP( uint32_t( ~0 ), 0, 16 + 1, uint32_t( (0.3 + 2.0 / 3.0) * 1000000.0 ), 0.0, 0.5 ) },
 
 		{ NS4_PLAY_SAMPLE_AT_TIME( u8"C:\\My Projects\\MIDIWorks\\Exports\\Beetle Adventure Racing!\\SFX\\B00I42S00.wav",	// Box Break 3
 			0, 40, uint32_t( 0.0 * 1000000.0 ),
@@ -125,6 +126,19 @@
 			0, 40, uint32_t( 0.85 * 1000000.0 ),
 			60, 0, 1.0, 64, 0, 60, 0, 0, 127, 64, 1.0, 0, 0, 0, 0, 0, 0, 0, 0 )
 		},
+
+#define NS4_BELL_END							64.77
+		{ NS4_PLAY_SAMPLE_AT_TIME( u8"C:\\My Projects\\MIDIWorks\\Exports\\Beetle Adventure Racing!\\SFX\\B00I64S00.wav",	// Track Bells
+			0, 58, uint32_t( 0.5 * 1000000.0 ),
+			60, 0, 1.0, 64, 0, 60, 0, 0, 127, 64, 1.0, 0, 0, 0, 0, 0, 0, 0, 0 )
+		},
+		{ NS4_PLAY_SAMPLE_STOP( uint32_t( ~0 ), 0, 0, uint32_t( NS4_BELL_END * 1000000.0 ), 0.3, 0.3 ) },
+
+		{ NS4_PLAY_SAMPLE_SET_CONTROL_LINE( uint32_t( ~0 ), 0, 58, uint32_t( 0.5 * 1000000.0 ), uint32_t( ~0 ), 0, 0, uint32_t( (58.5 + ((NS4_BELL_END - 58.5) / 2)) * 1000000.0 ),
+			ns4::CMidiFile::NS4_C_MAIN_VOLUME, 0, 127 ) },
+		{ NS4_PLAY_SAMPLE_SET_CONTROL_LINE( uint32_t( ~0 ), 0, 0, uint32_t( (58.5 + ((NS4_BELL_END - 58.5) / 2)) * 1000000.0 ), uint32_t( ~0 ), 0, 0, uint32_t( NS4_BELL_END * 1000000.0 ),
+			ns4::CMidiFile::NS4_C_MAIN_VOLUME, 127, 0 ) },
+#undef NS4_BELL_END
 
 		{ NS4_PLAY_SAMPLE_AT_TIME( u8"C:\\My Projects\\MIDIWorks\\Exports\\Beetle Adventure Racing!\\SFX\\B00I42S00.wav",	// Box Break 3
 			1, 30, uint32_t( 0.0 * 1000000.0 ),

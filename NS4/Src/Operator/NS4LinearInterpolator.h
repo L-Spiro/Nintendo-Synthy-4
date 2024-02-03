@@ -36,6 +36,15 @@ namespace ns4 {
 		}
 
 		/**
+		 * Gets the target value.
+		 *
+		 * \return Returns the current value.
+		 */
+		double								TargetValue() const {
+			return m_dTargetVal;
+		}
+
+		/**
 		 * Sets the new value.
 		 *
 		 * \param _dNew The new value being set.
