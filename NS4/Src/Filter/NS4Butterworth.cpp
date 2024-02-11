@@ -130,7 +130,7 @@ namespace ns4 {
 			uiNumFilters = _ui32FilterOrder;									// We have double the number of biquad sections.
 		}
     
-		_vCoeffs.resize(uiNumFilters);
+		_vCoeffs.resize( uiNumFilters );
 		for ( size_t I = 0; I < uiNumFilters; I++ ) {
 			(_vCoeffs)[I].DF2TBiquad( 1.0,						// b0.
 				m_vBa[4*I+1],									// b1.
