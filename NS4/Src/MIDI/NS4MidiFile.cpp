@@ -1,4 +1,5 @@
 #include "NS4MidiFile.h"
+
 #include <cassert>
 #include <fstream>
 #include <map>
@@ -2154,6 +2155,46 @@ namespace ns4 {
 						}
 						break;
 					}
+
+					case NS4_E_OFFSET_NOTE : {
+						if ( iTrackByChan >= 0 && iTrackByChan < m_vTracks.size() ) {
+							size_t stStart, stEnd;
+							if ( FindNoteByTimeAndCount( m_vTracks[iTrackByChan].vEvents,
+								_pmMods[I].tsTime0, _pmMods[I].ui32Operand0, uint8_t( _pmMods[I].ui32Operand3 ),
+								stStart, stEnd ) ) {
+								m_vTracks[iTrackByChan].vEvents[stStart].u.sMidi.ui8Parm0 = uint8_t( int16_t( m_vTracks[iTrackByChan].vEvents[stStart].u.sMidi.ui8Parm0 ) + int16_t( _pmMods[I].ui32Operand2 ) );
+								m_vTracks[iTrackByChan].vEvents[stEnd].u.sMidi.ui8Parm0 = uint8_t( int16_t( m_vTracks[iTrackByChan].vEvents[stEnd].u.sMidi.ui8Parm0 ) + int16_t( _pmMods[I].ui32Operand2 ) );
+							}
+						}
+						break;
+					}
+					case NS4_E_DELETE_NOTE : {
+						if ( iTrackByChan >= 0 && iTrackByChan < m_vTracks.size() ) {
+							size_t stStart, stEnd;
+							if ( FindNoteByTimeAndCount( m_vTracks[iTrackByChan].vEvents,
+								_pmMods[I].tsTime0, _pmMods[I].ui32Operand0, uint8_t( _pmMods[I].ui32Operand3 ),
+								stStart, stEnd ) ) {
+								m_vTracks[iTrackByChan].vEvents.erase( m_vTracks[iTrackByChan].vEvents.begin() + stEnd );
+								m_vTracks[iTrackByChan].vEvents.erase( m_vTracks[iTrackByChan].vEvents.begin() + stStart );
+							}
+						}
+						break;
+					}
+					case NS4_E_MOVE_NOTE_RELEASE : {
+						if ( iTrackByChan >= 0 && iTrackByChan < m_vTracks.size() ) {
+							size_t stStart, stEnd;
+							if ( FindNoteByTimeAndCount( m_vTracks[iTrackByChan].vEvents,
+								_pmMods[I].tsTime0, _pmMods[I].ui32Operand0, uint8_t( _pmMods[I].ui32Operand3 ),
+								stStart, stEnd ) ) {
+								auto aEvent = m_vTracks[iTrackByChan].vEvents[stEnd];
+								m_vTracks[iTrackByChan].vEvents.erase( m_vTracks[iTrackByChan].vEvents.begin() + stEnd );
+								aEvent.ui64Time = CubaseToTick( _pmMods[I].tsTime1.ui32M, _pmMods[I].tsTime1.ui32B, _pmMods[I].tsTime1.ui32T, _pmMods[I].tsTime1.ui32S );
+								InsertEvent( m_vTracks[iTrackByChan].vEvents, aEvent, nullptr );
+							}
+						}
+						break;
+					}
+
 					case NS4_E_SET_TEMPO : {
 						if ( m_vTracks.size() ) {
 							uint64_t ui64Tick = CubaseToTick( _pmMods[I].tsTime0.ui32M, _pmMods[I].tsTime0.ui32B, _pmMods[I].tsTime0.ui32T, _pmMods[I].tsTime0.ui32S );
@@ -2292,9 +2333,11 @@ namespace ns4 {
 	 * \param _troOptions The options for rendering the audio.
 	 * \param _ui32Total The total number of modifications being passed.
 	 * \param _pmMods The array of modifications.
+	 * \param _aRender The current render results.
 	 * \param _paWet If not nullptr, the wet "generator" is accumulated into it.  For mono results, only allocate 1 channel.
+	 * \param _fFade The fade-out object for manual fades.
 	 */
-	lwaudio CMidiFile::RenderPostSynthesis( const NS4_TRACK_RENDER_OPTIONS &_troOptions, uint32_t _ui32Total, const NS4_MODIFIER * _pmMods, lwaudio * _paWet ) {
+	lwaudio CMidiFile::RenderPostSynthesis( const NS4_TRACK_RENDER_OPTIONS &_troOptions, uint32_t _ui32Total, const NS4_MODIFIER * _pmMods, lwaudio &_aRender, lwaudio * _paWet, CFade &_fFade ) {
 		lwaudio aResult;
 		for ( uint32_t I = 0; I < _ui32Total; ++I ) {
 			if ( _pmMods[I].esStage == NS4_ES_POST_SYNTHESIS ) {
@@ -2380,6 +2423,26 @@ namespace ns4 {
 						}
 
 						RenderSample( _troOptions, _pmMods[I], aResult, _paWet, vSampleMods );
+						break;
+					}
+					case NS4_E_FADE_AT : {
+						double dTime = 0.0;
+						bool bHasLoops;
+						double dLoopTime;
+						if ( _pmMods[I].ui32Channel ) {
+							GetBestRunTime( _pmMods[I].ui32Channel, 0.0, _fFade.Time(), bHasLoops, dTime, dLoopTime );
+						}
+
+						if ( _pmMods[I].tsTime0.ui32M == ~0 ) {
+							dTime += _pmMods[I].tsTime0.ui32B * 60.0 + _pmMods[I].tsTime0.ui32T + (_pmMods[I].tsTime0.ui32S / 1000000.0);
+						}
+						else {
+							uint64_t ui64Tick = CubaseToTick( _pmMods[I].tsTime0.ui32M, _pmMods[I].tsTime0.ui32B, _pmMods[I].tsTime0.ui32T, _pmMods[I].tsTime0.ui32S );
+							dTime += GetTimeAtTick( ui64Tick );
+						}
+						dTime += _pmMods[I].dOperandDouble0;
+
+						_fFade.Apply( uint64_t( dTime * _troOptions.uiSampleRate ), double( _troOptions.uiSampleRate ), _aRender );
 						break;
 					}
 				}
@@ -4342,6 +4405,10 @@ namespace ns4 {
 					//psSample->SetLoopCount( UINT32_MAX );
 					psSample->SetLoopType( static_cast<CWavLib::NS4_LOOP_TYPES>(wfWavFile.Loops()[0].uiType) );
 				}
+
+				if ( ns4::CSoundBank::m_ui32OverSample > 1 && CSample::m_dOversamplingBw > 0.0 ) {
+					psSample->UpSampleTo( ns4::CSoundBank::m_ui32OverSample );
+				}
 			}
 			catch ( const std::bad_alloc & /*_eE*/ ) {
 				std::printf( "RENDERSAMPLE: Loaded but unable to store sample: %s\r\n", sPath.c_str() );
@@ -4755,6 +4822,39 @@ namespace ns4 {
 				1.0,
 				0.5 );
 		}
+	}
+
+	/**
+	 * Finds a note given a starting point, a count, and a note.  The note-on and note-off are returned if the function returns true.
+	 * 
+	 * \param _vEvents The track.
+	 * \param _tsStartTime The time at which to start searching for the given note.
+	 * \param _ui32NoteCnt Starting from _tsStartTime, the _ui32NoteCnt'th note _ui8Note will be found.
+	 * \param _ui8Note The note to find.
+	 * \param _stNoteOnIdx Holds the index of the note-on event, if found.
+	 * \param _stNoteOffIdx Holds the index of the note-off event, if found.
+	 * \return If true, _stNoteOnIdx and _stNoteOffIdx are set to the event indices of the note-on and note-off events.
+	 **/
+	bool CMidiFile::FindNoteByTimeAndCount( const std::vector<NS4_TRACK_EVENT> &_vEvents, const NS4_TIME_STAMP &_tsStartTime,
+		uint32_t _ui32NoteCnt, uint8_t _ui8Note,
+		size_t &_stNoteOnIdx, size_t &_stNoteOffIdx ) {
+		NS4_MIDI_STATE msState;
+		msState.MakeDefault();
+
+		uint64_t ui64Tick = CubaseToTick( _tsStartTime.ui32M, _tsStartTime.ui32B, _tsStartTime.ui32T, _tsStartTime.ui32S );
+
+
+		for ( size_t I = 0; I < _vEvents.size(); ++I ) {
+			msState.AdvanceMidiState( _vEvents[I] );
+			if ( IsNoteOn( _vEvents[I] ) && _vEvents[I].ui64Time >= ui64Tick && GetNote( _vEvents[I] ) == _ui8Note ) {
+				if ( !_ui32NoteCnt-- ) {
+					_stNoteOnIdx = I;
+					_stNoteOffIdx = GetMatchingNoteOff( _vEvents, _stNoteOnIdx, msState.ksKeyStates[_ui8Note].i32NoteCount );
+					return _stNoteOffIdx != size_t( -1 );
+				}
+			}
+		}
+		return false;
 	}
 
 	/**

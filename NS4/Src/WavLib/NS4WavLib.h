@@ -316,6 +316,21 @@ namespace ns4 {
 		}
 
 		/**
+		 * Generates an S-curve fade-out such that X <= 0 results in 1.0, X >= 1.0 results in 0.0, and 0 < X < 1 is an S-curve.
+		 * 
+		 * \param _dFrac The fraction along the S-curve (0-1).
+		 * \return Returns the clamped S-curve value given the input.
+		 **/
+		static double										SCurve( double _dFrac ) {
+			if ( _dFrac <= 0.0 ) { return 1.0; }
+			if ( _dFrac >= 1.0 ) { return 0.0; }
+			if ( _dFrac <= 0.5 ) {
+				return std::pow( 1.0 - _dFrac * 2.0, 1.0 / 2.0 ) / 2.0 + 0.5;
+			}
+			return 0.5 - std::pow( (_dFrac - 0.5) * 2.0, 1.0 / 2.0 ) / 2.0;
+		}
+
+		/**
 		 * Copies a given number of samples into a target buffer, writing 0's if the operating extends beyond the source buffer's range.
 		 *
 		 * \param _tSrc The ring buffer from which to copy.

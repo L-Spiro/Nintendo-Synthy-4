@@ -26,6 +26,7 @@
  *	accumulate every single cycle if we only added time slices over and over.
  */
 
+#include "Src/Fade/NS4Fade.h"
 #include "Src/Filter/NS4Butterworth.h"
 #include "Src/MIDI/NS4MidiFile.h"
 #include "Src/Reverb/NS4Reverb.h"
@@ -957,18 +958,13 @@ int oldmain() {
 		ns4::CMidiFile::m_sSettings.ui32Bank = mfFiles[F].ui32Bank;
 #endif	// NS4_BANK
 		
-		ns4::CWavFile wfFade;
-		wfFade.Open( pcFadeFile );
-		ns4::lwaudio aFadeOut;
-		wfFade.GetAllSamples( aFadeOut );
-		double dFadeDur = 0.0;
-		if ( aFadeOut.size() ) {
-			dFadeDur = aFadeOut[0].size() / double( wfFade.Hz() );
-		}
+		ns4::CFade fFade;
+		fFade.LoadTable( pcFadeFile );
+		
 		bool bHasLoops;
 		double dFadeTime, dLoopTime;
 
-		double dTime = mfMidi.GetBestRunTime( ui32FinalLoops, dPreFade, dFadeDur, bHasLoops, dFadeTime, dLoopTime ) + 1.0;
+		double dTime = mfMidi.GetBestRunTime( ui32FinalLoops, dPreFade, fFade.Time(), bHasLoops, dFadeTime, dLoopTime ) + 1.0;
 
 
 		
@@ -977,7 +973,7 @@ int oldmain() {
 			if ( pmThis ) {
 				dLoopTime = dFadeTime - dPreFade;
 				dFadeTime = pmThis->dOperandDouble0;
-				dTime = dFadeTime + dFadeDur + 1.0;
+				dTime = dFadeTime + fFade.Time() + 1.0;
 			}
 			//
 		}
@@ -987,8 +983,8 @@ int oldmain() {
 			if ( pmThis ) {
 				bHasLoops = true;
 				dLoopTime = dFadeTime - dPreFade;
-				dFadeTime = (dLoopTime - dFadeDur) + pmThis->dOperandDouble0;
-				dTime = dFadeTime + dFadeDur + 1.0;
+				dFadeTime = (dLoopTime - fFade.Time()) + pmThis->dOperandDouble0;
+				dTime = dFadeTime + fFade.Time() + 1.0;
 			}
 		}
 #ifdef NS4_NO_FADE_FILE
@@ -1029,7 +1025,7 @@ int oldmain() {
 		}
 #endif	// NS4_SINGLE_TRACK
 		{
-			ns4::lwaudio aTrack1 = mfMidi.RenderPostSynthesis( troOptions, troOptions.ui32TotalMods, troOptions.pmMods, &aWet );
+			ns4::lwaudio aTrack1 = mfMidi.RenderPostSynthesis( troOptions, troOptions.ui32TotalMods, troOptions.pmMods, aTrack0, &aWet, fFade );
 			if ( aTrack1.size() ) {
 				ns4::CWavLib::AddSamples( aTrack0, aTrack1, 1.0, 0 );
 			}
@@ -1101,7 +1097,7 @@ int oldmain() {
 					case ns4::CMidiFile::NS4_E_GLOBAL_SET_FADE_START_FROM_CURSOR : {
 						dLoopTime = dFadeTime - dPreFade;
 						dFadeTime = dCursor + troOptions.pmMods[W].dOperandDouble0;
-						dTime = dFadeTime + dFadeDur + 1.0;
+						dTime = dFadeTime + fFade.Time() + 1.0;
 						break;
 					}
 				}
@@ -1152,41 +1148,9 @@ int oldmain() {
 
 #ifndef NS4_NO_OUTPUT
 		{	// Fade-out.
-			if ( aFadeOut.size() && aFadeOut[0].size() && bHasLoops ) {
-				ns4::lwaudio aFiltered = ns4::CWavLib::AllocateSamples( uint16_t( aTrack0.size() ), aTrack0.size() ? uint32_t( aTrack0[0].size() ) : 0 );
-				const uint32_t uiOrder = 2;
-				ns4::CButterworthFilter bfFilter;
-				std::vector<ns4::CBiQuadFilter> vCoeffs;
-				double dGain = 1.0;
-				bfFilter.LoPass( dNewSampleRate, 100.0, uiOrder, vCoeffs, dGain );
-				ns4::CBiQuadFilterChain bqfcChain;
-				bqfcChain.SetOrder( static_cast<uint32_t>(vCoeffs.size()) );
-				for ( auto P = aTrack0.size(); P--; ) {
-					bqfcChain.MakeDefault();
-					bqfcChain.ProcessBiQuad( aTrack0[P], aFiltered[P], &vCoeffs[0] );
-					//ns4::CWavLib::ScaleSamples( aFiltered[P], dGain );
-				}
-
+			if ( fFade.Hz() && bHasLoops ) {
 				uint64_t ui64FadeStartSample = uint64_t( dFadeTime * dNewSampleRate );
-				for ( auto I = ui64FadeStartSample; true; ++I ) {
-					double dTime = (I - ui64FadeStartSample) / dNewSampleRate;
-					size_t stFadeIdx = size_t( dTime * wfFade.Hz() );
-					if ( stFadeIdx >= aFadeOut[0].size() ) {
-						// Cut the track here.
-						for ( auto J = aTrack0.size(); J--; ) {
-							aTrack0[J].resize( I );
-						}
-						break;
-					}
-					// Apply fade.
-					double dFadeVal = aFadeOut[0][stFadeIdx];
-					double dLFrac = std::sin( dFadeVal * NS4_HALF_PI );
-					double dRFrac = std::cos( dFadeVal * NS4_HALF_PI );
-					for ( auto J = aTrack0.size(); J--; ) {
-						aTrack0[J][I] = ((aTrack0[J][I] * dLFrac) + (aFiltered[J][I] * dRFrac * dGain)) * dFadeVal;
-						//aTrack0[J][I] *= dFadeVal;
-					}
-				}
+				fFade.Apply( ui64FadeStartSample, dNewSampleRate, aTrack0 );
 			}
 		}
 #endif	// #ifndef NS4_NO_OUTPUT

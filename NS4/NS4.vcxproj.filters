@@ -103,6 +103,12 @@
     <Filter Include="Header Files\MIDI">
       <UniqueIdentifier>{950bb169-614f-4436-a830-7138fc5480d0}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\Fade">
+      <UniqueIdentifier>{977e84d2-ce46-41f1-87ec-dc61a8b51654}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Fade">
+      <UniqueIdentifier>{b3154d3e-eabb-40a3-badf-68cfaa854235}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Src\Reverb\NS4Reverb.cpp">
@@ -232,6 +238,9 @@
     </ClInclude>
     <ClInclude Include="Src\Windows\Layout\NS4LayoutManager.h">
       <Filter>Header Files\Windows\Layout</Filter>
+    </ClInclude>
+    <ClInclude Include="Src\Fade\NS4Fade.h">
+      <Filter>Header Files\Fade</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

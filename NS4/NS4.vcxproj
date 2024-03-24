@@ -191,6 +191,7 @@
   <ItemGroup>
     <ClInclude Include="Src\Crc\NS4Crc.h" />
     <ClInclude Include="Src\Envelope\NS4Envelope.h" />
+    <ClInclude Include="Src\Fade\NS4Fade.h" />
     <ClInclude Include="Src\Filter\NS4Biquad.h" />
     <ClInclude Include="Src\Filter\NS4BiquadChain.h" />
     <ClInclude Include="Src\Filter\NS4Butterworth.h" />

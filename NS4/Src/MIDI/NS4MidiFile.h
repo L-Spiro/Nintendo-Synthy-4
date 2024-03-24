@@ -1,6 +1,7 @@
 #pragma once
 
 #include "../WavLib/NS4WavLib.h"
+#include "../Fade/NS4Fade.h"
 #include "../Envelope/NS4Envelope.h"
 #include "../Operator/NS4LinearInterpolator.h"
 #include "../Sample/NS4Sampler.h"
@@ -204,6 +205,11 @@ namespace ns4 {
 			NS4_E_AUTO_LOOP,									/**< Automatically inserts loop points at {1,1,1,0} and at the final MIDI event, rounding down if the event is within tsTime0 beyond the interval specified by (Midi.Resolution/ui32Operand0), up to the next (Midi.Resolution/ui32Operand0) tick otherwise.  If ui32Operand0 is 0, looping occurs at exactly the last event in the file. */
 			NS4_E_SET_LOOP_START_BY_FINDING_CONTROL,			/**< Find a given control (ui32Operand0) on a given channel (ui32Channel) and uses the timestamp of that event to add loop-starts to every track.  If the channel is -1, the whole MIDI file is search for the given control until found. */
 			NS4_E_SET_LOOP_END_BY_FINDING_CONTROL,				/**< Find a given control (ui32Operand0) on a given channel (ui32Channel) and uses the timestamp of that event to add loop-ends to every track.  If the channel is -1, the whole MIDI file is search for the given control until found. */
+
+			NS4_E_OFFSET_NOTE,									/**< Offsets a note (ui32Operand0) up or down by a given amount (ui32Operand1). */
+			NS4_E_DELETE_NOTE,									/**< Deletes a note (ui32Operand0). */
+			NS4_E_MOVE_NOTE_RELEASE,							/**< Moves the note's (ui32Operand0) release to a new tick (tsTime1). */
+
 			NS4_E_SET_TEMPO,									/**< Inserts a tempo-change event at the given tick.  Only useful in the pre-unroll or post-supplemental stages. */
 			NS4_E_SET_TEMPO_AT_TIME,							/**< Inserts a tempo-change event (dOperandDouble0) at the given time in seconds (dOperandDouble1).  Only useful in the pre-unroll or post-supplemental stages. */
 			NS4_E_SET_FORCE_TEMPO,								/**< Replaces all tempo events with the given tempo (dOperandDouble0) or inserts a tempo at tick=0 if no tempo events are found.  Only useful in the pre-unroll or post-supplemental stages. */
@@ -225,6 +231,7 @@ namespace ns4 {
 			NS4_E_SAMPLE_SET_CONTROL,							/**< Sets a control at a given time to impact the last NS4_E_PLAY_SAMPLE playback. */
 			NS4_E_SAMPLE_INSERT_CONTROL_LINE,					/**< Inserts a series of controls at a given time to impact the last NS4_E_PLAY_SAMPLE playback. */
 			NS4_E_SAMPLE_END,									/**< Stops the playback of the current sample. */
+			NS4_E_FADE_AT,										/**< Fades the rendered result at the given time.  Uses the same fade as the global fade, which will also be applied.  ui32Channel = number of loops, tsTime0 is an additional time offset, and dOperandDouble0 is an additional seconds offset. */
 			NS4_E_ADD_MIDI_FILE,								/**< Loads the given MIDI file (pcStringOp), appending it to the end of the current list of tracks.  If ui32Operand0 is non-zero, the first track of the loaded MIDI file is not appended. */
 			NS4_E_GLOBAL_SET_PERC_RELEASE_ADSR,					/**< Sets the ADSR percussion release rate for a given track. */
 			NS4_E_GLOBAL_SET_FADE_FROM_END,						/**< Sets the fade ending point to a number of seconds (dOperandDouble0) before the last note-off event in the non-looping MIDI file.  If the call to GetBestRunTime() sees loop points, this has no effect. */
@@ -396,6 +403,7 @@ namespace ns4 {
 																ns4::CMidiFile::NS4_ES_POST_SYNTHESIS, ns4::CMidiFile::NS4_E_SAMPLE_END, 0, 0, 0, { (W), (X), (Y), (Z) }, { (W), (X), (Y), (Z) }, 0, 0, (TIME_OFFSET), (RELEASE_TIME)
 #define NS4_PLAY_SAMPLE_SET_CONTROL_LINE( W0, X0, Y0, Z0, W1, X1, Y1, Z1, CTL, START, STOP )																													\
 																ns4::CMidiFile::NS4_ES_POST_SYNTHESIS, ns4::CMidiFile::NS4_E_SAMPLE_INSERT_CONTROL_LINE, (CTL), (START), (STOP), { (W0), (X0), (Y0), (Z0) }, { (W1), (X1), (Y1), (Z1) }
+
 #define NS4_GET_TUNING_BASENOTE( MOD )							uint8_t( MOD.ui32Channel >> 24 )
 #define NS4_GET_TUNING_COURSE_TUNE( MOD )						uint8_t( MOD.ui32Channel >> 16 )
 #define NS4_GET_TUNING_FINE_TUNE( MOD )							uint16_t( MOD.ui32Channel >> 0 )
@@ -411,6 +419,15 @@ namespace ns4 {
 #define NS4_GET_FLAGS( MOD )									uint16_t( MOD.ui32Operand3 )
 #define NS4_GET_LINEAR_VOL( MOD )								MOD.dOperandDouble0
 #define NS4_GET_LINEAR_PITCH_SCALE( MOD )						MOD.dOperandDouble1
+
+#define NS4_FADE_OUT( LOOPS, W, X, Y, Z, TIME_OFFSET )			ns4::CMidiFile::NS4_ES_POST_SYNTHESIS, ns4::CMidiFile::NS4_E_FADE_AT, (LOOPS), 0, 0, { (W), (X), (Y), (Z) }, {}, 0, 0, (TIME_OFFSET)
+
+#define NS4_ADJUSTNOTE( CMD, CHAN, W, X, Y, Z, CNT, NOTE, PARM0 )																																				\
+																ns4::CMidiFile::NS4_ES_PRE_UNROLL, ns4::CMidiFile::CMD, (CHAN), (PARM0), 0, { (W), (X), (Y), (Z) }, {}, (CNT), (NOTE)
+#define NS4_OFFSET_NOTE( CHAN, W, X, Y, Z, CNT, NOTE, PARM0 )	NS4_ADJUSTNOTE( NS4_E_OFFSET_NOTE, CHAN, W, X, Y, Z, CNT, NOTE, PARM0 )
+#define NS4_DELETE_NOTE( CHAN, W, X, Y, Z, CNT, NOTE )			NS4_ADJUSTNOTE( NS4_E_DELETE_NOTE, CHAN, W, X, Y, Z, CNT, NOTE, 0 )
+#define NS4_MOVE_NOTE_RELEASE( CHAN, W0, X0, Y0, Z0, W1, X1, Y1, Z1, CNT, NOTE )																																\
+																ns4::CMidiFile::NS4_ES_PRE_UNROLL, ns4::CMidiFile::NS4_E_MOVE_NOTE_RELEASE, (CHAN), 0, 0, { (W0), (X0), (Y0), (Z0) }, { (W1), (X1), (Y1), (Z1) }, (CNT), (NOTE)
 
 #define NS4_NO_CMDS												0, { { ns4::CMidiFile::NS4_ES_NONE, ns4::CMidiFile::NS4_E_NONE }, }
 		};
@@ -541,9 +558,11 @@ namespace ns4 {
 		 * \param _troOptions The options for rendering the audio.
 		 * \param _ui32Total The total number of modifications being passed.
 		 * \param _pmMods The array of modifications.
+		 * \param _aRender The current render results.
 		 * \param _paWet If not nullptr, the wet "generator" is accumulated into it.  For mono results, only allocate 1 channel.
+		 * \param _fFade The fade-out object for manual fades.
 		 */
-		lwaudio							RenderPostSynthesis( const NS4_TRACK_RENDER_OPTIONS &_troOptions, uint32_t _ui32Total, const NS4_MODIFIER * _pmMods, lwaudio * _paWet );
+		lwaudio							RenderPostSynthesis( const NS4_TRACK_RENDER_OPTIONS &_troOptions, uint32_t _ui32Total, const NS4_MODIFIER * _pmMods, lwaudio &_aRender, lwaudio * _paWet, CFade &_fFade );
 
 		/**
 		 * Determines if there is a global setting of the given type in the given array of modifiers.  Returns a pointer to the
@@ -2414,6 +2433,21 @@ namespace ns4 {
 		 * \param _msState The MIDI state.
 		 */
 		void							ApplyTremoloToNote( NS4_NOTE &_nNote, uint8_t _ui8Type, uint8_t _ui8Rate, uint8_t _ui16Depth, uint8_t _ui8Delay, uint32_t _ui32SampleRate, const NS4_MIDI_STATE &_msState ) const;
+
+		/**
+		 * Finds a note given a starting point, a count, and a note.  The note-on and note-off are returned if the function returns true.
+		 * 
+		 * \param _vEvents The track.
+		 * \param _tsStartTime The time at which to start searching for the given note.
+		 * \param _ui32NoteCnt Starting from _tsStartTime, the _ui32NoteCnt'th note _ui8Note will be found.
+		 * \param _ui8Note The note to find.
+		 * \param _stNoteOnIdx Holds the index of the note-on event, if found.
+		 * \param _stNoteOffIdx Holds the index of the note-off event, if found.
+		 * \return If true, _stNoteOnIdx and _stNoteOffIdx are set to the event indices of the note-on and note-off events.
+		 **/
+		bool							FindNoteByTimeAndCount( const std::vector<NS4_TRACK_EVENT> &_vEvents, const NS4_TIME_STAMP &_tsStartTime,
+			uint32_t _ui32NoteCnt, uint8_t _ui8Note,
+			size_t &_stNoteOnIdx, size_t &_stNoteOffIdx );
 		
 		/**
 		 * Is the given index in a track the last instance of a given control?
