@@ -2160,10 +2160,10 @@ namespace ns4 {
 						if ( iTrackByChan >= 0 && iTrackByChan < m_vTracks.size() ) {
 							size_t stStart, stEnd;
 							if ( FindNoteByTimeAndCount( m_vTracks[iTrackByChan].vEvents,
-								_pmMods[I].tsTime0, _pmMods[I].ui32Operand0, uint8_t( _pmMods[I].ui32Operand3 ),
+								_pmMods[I].tsTime0, _pmMods[I].ui32Operand2, uint8_t( _pmMods[I].ui32Operand3 ),
 								stStart, stEnd ) ) {
-								m_vTracks[iTrackByChan].vEvents[stStart].u.sMidi.ui8Parm0 = uint8_t( int16_t( m_vTracks[iTrackByChan].vEvents[stStart].u.sMidi.ui8Parm0 ) + int16_t( _pmMods[I].ui32Operand2 ) );
-								m_vTracks[iTrackByChan].vEvents[stEnd].u.sMidi.ui8Parm0 = uint8_t( int16_t( m_vTracks[iTrackByChan].vEvents[stEnd].u.sMidi.ui8Parm0 ) + int16_t( _pmMods[I].ui32Operand2 ) );
+								m_vTracks[iTrackByChan].vEvents[stStart].u.sMidi.ui8Parm0 = uint8_t( int16_t( m_vTracks[iTrackByChan].vEvents[stStart].u.sMidi.ui8Parm0 ) + int16_t( _pmMods[I].ui32Operand0 ) );
+								m_vTracks[iTrackByChan].vEvents[stEnd].u.sMidi.ui8Parm0 = uint8_t( int16_t( m_vTracks[iTrackByChan].vEvents[stEnd].u.sMidi.ui8Parm0 ) + int16_t( _pmMods[I].ui32Operand0 ) );
 							}
 						}
 						break;
@@ -2172,7 +2172,19 @@ namespace ns4 {
 						if ( iTrackByChan >= 0 && iTrackByChan < m_vTracks.size() ) {
 							size_t stStart, stEnd;
 							if ( FindNoteByTimeAndCount( m_vTracks[iTrackByChan].vEvents,
-								_pmMods[I].tsTime0, _pmMods[I].ui32Operand0, uint8_t( _pmMods[I].ui32Operand3 ),
+								_pmMods[I].tsTime0, _pmMods[I].ui32Operand2, uint8_t( _pmMods[I].ui32Operand3 ),
+								stStart, stEnd ) ) {
+								m_vTracks[iTrackByChan].vEvents.erase( m_vTracks[iTrackByChan].vEvents.begin() + stEnd );
+								m_vTracks[iTrackByChan].vEvents.erase( m_vTracks[iTrackByChan].vEvents.begin() + stStart );
+							}
+						}
+						break;
+					}
+					case NS4_E_DELETE_ALL_NOTES : {
+						if ( iTrackByChan >= 0 && iTrackByChan < m_vTracks.size() ) {
+							size_t stStart, stEnd;
+							while ( FindNoteByTimeAndCount( m_vTracks[iTrackByChan].vEvents,
+								_pmMods[I].tsTime0, 0, uint8_t( _pmMods[I].ui32Operand3 ),
 								stStart, stEnd ) ) {
 								m_vTracks[iTrackByChan].vEvents.erase( m_vTracks[iTrackByChan].vEvents.begin() + stEnd );
 								m_vTracks[iTrackByChan].vEvents.erase( m_vTracks[iTrackByChan].vEvents.begin() + stStart );
@@ -2184,7 +2196,7 @@ namespace ns4 {
 						if ( iTrackByChan >= 0 && iTrackByChan < m_vTracks.size() ) {
 							size_t stStart, stEnd;
 							if ( FindNoteByTimeAndCount( m_vTracks[iTrackByChan].vEvents,
-								_pmMods[I].tsTime0, _pmMods[I].ui32Operand0, uint8_t( _pmMods[I].ui32Operand3 ),
+								_pmMods[I].tsTime0, _pmMods[I].ui32Operand2, uint8_t( _pmMods[I].ui32Operand3 ),
 								stStart, stEnd ) ) {
 								auto aEvent = m_vTracks[iTrackByChan].vEvents[stEnd];
 								m_vTracks[iTrackByChan].vEvents.erase( m_vTracks[iTrackByChan].vEvents.begin() + stEnd );

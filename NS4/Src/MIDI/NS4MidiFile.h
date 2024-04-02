@@ -208,7 +208,9 @@ namespace ns4 {
 
 			NS4_E_OFFSET_NOTE,									/**< Offsets a note (ui32Operand0) up or down by a given amount (ui32Operand1). */
 			NS4_E_DELETE_NOTE,									/**< Deletes a note (ui32Operand0). */
+			NS4_E_DELETE_ALL_NOTES,								/**< Deletes all occurrences of a given note on a given track. */
 			NS4_E_MOVE_NOTE_RELEASE,							/**< Moves the note's (ui32Operand0) release to a new tick (tsTime1). */
+			NS4_E_COPY_NOTE,									/**< Copies a note to the given tick (tsTime1). */
 
 			NS4_E_SET_TEMPO,									/**< Inserts a tempo-change event at the given tick.  Only useful in the pre-unroll or post-supplemental stages. */
 			NS4_E_SET_TEMPO_AT_TIME,							/**< Inserts a tempo-change event (dOperandDouble0) at the given time in seconds (dOperandDouble1).  Only useful in the pre-unroll or post-supplemental stages. */
@@ -426,13 +428,18 @@ namespace ns4 {
 																ns4::CMidiFile::NS4_ES_PRE_UNROLL, ns4::CMidiFile::CMD, (CHAN), (PARM0), 0, { (W), (X), (Y), (Z) }, {}, (CNT), (NOTE)
 #define NS4_OFFSET_NOTE( CHAN, W, X, Y, Z, CNT, NOTE, PARM0 )	NS4_ADJUSTNOTE( NS4_E_OFFSET_NOTE, CHAN, W, X, Y, Z, CNT, NOTE, PARM0 )
 #define NS4_DELETE_NOTE( CHAN, W, X, Y, Z, CNT, NOTE )			NS4_ADJUSTNOTE( NS4_E_DELETE_NOTE, CHAN, W, X, Y, Z, CNT, NOTE, 0 )
+#define NS4_DELETE_ALL_NOTES( CHAN, W, X, Y, Z, NOTE )			NS4_ADJUSTNOTE( NS4_E_DELETE_ALL_NOTES, CHAN, W, X, Y, Z, 0, NOTE, 0 )
+			
 #define NS4_MOVE_NOTE_RELEASE( CHAN, W0, X0, Y0, Z0, W1, X1, Y1, Z1, CNT, NOTE )																																\
 																ns4::CMidiFile::NS4_ES_PRE_UNROLL, ns4::CMidiFile::NS4_E_MOVE_NOTE_RELEASE, (CHAN), 0, 0, { (W0), (X0), (Y0), (Z0) }, { (W1), (X1), (Y1), (Z1) }, (CNT), (NOTE)
+#define NS4_COPY_NOTE( CHAN, W0, X0, Y0, Z0, CNT, NOTE, W1, X1, Y1, Z1 )																																		\
+																ns4::CMidiFile::NS4_ES_PRE_UNROLL, ns4::CMidiFile::NS4_E_COPY_NOTE, (CHAN), 0, 0, { (W0), (X0), (Y0), (Z0) }, { (W1), (X1), (Y1), (Z1) }, (CNT), (NOTE)
+			
 
 #define NS4_NO_CMDS												0, { { ns4::CMidiFile::NS4_ES_NONE, ns4::CMidiFile::NS4_E_NONE }, }
 		};
 
-		/** Oprions for special reverb. */
+		/** Options for special reverb. */
 		enum NS4_REVERB_OPTIONS {
 			NS4_OVER_127_SWAP_L_AND_R	= (1 << 0),
 			NS4_OVER_127_INVERT			= (1 << 1),

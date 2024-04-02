@@ -292,7 +292,7 @@ int oldmain() {
 		uint32_t			ui32Bank;
 		uint32_t			ui32Modifiers;
 		ns4::CMidiFile::NS4_MODIFIER
-							mModifiers[200];
+							mModifiers[300];
 		uint32_t			ui32Loops;
 	};
 	static const NS4_MIDI_FILE mfFiles[] = {
@@ -334,8 +334,8 @@ int oldmain() {
 //#include "Src/Games/NS4BanjoKazooieFiles.inl"
 //#include "Src/Games/NS4BlastCorpsFiles.inl"
 //#include "Src/Games/NS4BlastCorpsPALFiles.inl"
-//#include "Src/Games/NS4BeetAdventureRacing!Files.inl"
-#include "Src/Games/NS4BeetAdventureRacing!VinylFiles.inl"
+#include "Src/Games/NS4BeetAdventureRacing!Files.inl"
+//#include "Src/Games/NS4BeetAdventureRacing!VinylFiles.inl"
 //#include "Src/Games/NS4AeroFightersAssaultFiles.inl"
 //#include "Src/Games/NS4AeroFightersAssaultOverSamplingFiles.inl"
 //#include "Src/Games/NS4F1WorldGrandPrixFiles.inl"
