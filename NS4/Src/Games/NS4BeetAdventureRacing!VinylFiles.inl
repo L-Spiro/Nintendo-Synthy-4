@@ -12,8 +12,7 @@
 #define NS4_OUT_DIRECTORY_NUMBERS			NS4_OUT_DIRECTORY u8"Numbered\\"
 #define NS4_IGNORE_REVERB					true
 #define NS4_WET_FILTER_FREQ					0.0//(NS4_ORIG_HZ / 2.0)
-#define NS4_ENV_MULTIPLIER					(1.0)
-#define NS4_REL_MULTIPLIER					1.0
+#define NS4_ENV_MULTIPLIER					(1.0 - (1.0 / 6.5))
 #define NS4_ENVELOPE_VOL_CURVE				20.0
 #define NS4_ENVELOPE_POINT_CURVE			40.0
 #define NS4_EXPONENTIAL_ENVELOPE			true
@@ -22,9 +21,14 @@
 #define NS4_SIDE_DUR						20.0 * 60.0
 #define NS4_COMMENT							u8"Vinyl by Walter Barbour. HD Restoration by Shawn (L. Spiro) Wilcoxen"
 
-#define NS4_OVERSAMPLING					(1 << 3)
+#define NS4_OVERSAMPLING					(1 << 2)
 #define NS4_OVERSAMPLING_BW					1500.0
 
+#define NS4_SFX_MOD0						106		// 70%.
+#define NS4_SFX_MOD1						98
+#define NS4_SFX_MOD2						94
+#define NS4_SFX_MOD3						75
+#define NS4_SFX_MOD4						114		// 80%.
 
 /*{ u8"Beetle Adventure Racing! (U) (M3) 00000006 00CF09A6.mid", u8"Beetle Adventure Racing! (U) (M3) 00000006 00CF09A6.mid TrackParseDebug.txt", u8"Intro (Full) _", 0,
 	2, {
@@ -37,8 +41,8 @@
 #if 1
 { u8"Beetle Adventure Racing! (U) (M3) 0000000B 00CF1846.mid", u8"Beetle Adventure Racing! (U) (M3) 0000000B 00CF1846.mid TrackParseDebug.txt", u8"Intro 1", 0,
 	3, {
-		{ NS4_STOP_AT_TIME( 285696.0 / NS4_ORIG_HZ ), },
-		{ NS4_SET_CURSOR_BY_TIME( 285696.0 / NS4_ORIG_HZ ), },
+		{ NS4_STOP_AT_TIME( 404376.0 / 44100.0 ), },
+		{ NS4_SET_CURSOR_BY_TIME( 404376.0 / 44100.0 ), },
 		{ NS4_STORE_RESULT, },
 		/*{ NS4_PLAY_SAMPLE_AT_TIME( u8"C:\\My Projects\\MIDIWorks\\Exports\\Beetle Adventure Racing!\\SFX\\B00I7AS00.wav",
 			0, 102/2, 520705,
@@ -47,37 +51,86 @@
 	},
 },
 { u8"Beetle Adventure Racing! (U) (M3) 0000000C 00CF18CA.mid", u8"Beetle Adventure Racing! (U) (M3) 0000000C 00CF18CA.mid TrackParseDebug.txt", u8"Intro 2", 0,
-	3, {
-		{ NS4_STOP_AT_TIME( (673280.0 - 285696.0) / NS4_ORIG_HZ ), },
-		{ NS4_SET_CURSOR_BY_TIME( (673280.0 - 285696.0) / NS4_ORIG_HZ ), },
+	(2+3 + 4+1+2) + 3, {
+		{ NS4_DELETE_NOTE( 0, 1, 1, 1, 0, 9, 61 ) },
+		{ NS4_DELETE_NOTE( 0, 1, 1, 1, 0, 1, 61 ) },
+
+		{ NS4_DELETE_NOTE( 0, 1, 1, 1, 0, 9, 62 ) },
+		{ NS4_DELETE_NOTE( 0, 1, 1, 1, 0, 5, 62 ) },
+		{ NS4_DELETE_NOTE( 0, 1, 1, 1, 0, 1, 62 ) },
+
+
+		{ NS4_DELETE_NOTE( 9, 1, 1, 1, 0, 22, 53 ) },
+		{ NS4_DELETE_NOTE( 9, 1, 1, 1, 0, 17, 53 ) },
+		{ NS4_DELETE_NOTE( 9, 1, 1, 1, 0, 9, 53 ) },
+		{ NS4_DELETE_NOTE( 9, 1, 1, 1, 0, 6, 53 ) },
+
+		{ NS4_DELETE_NOTE( 9, 1, 1, 1, 0, 4, 72 ) },
+
+		{ NS4_DELETE_NOTE( 9, 1, 1, 1, 0, 4, 77 ) },
+		{ NS4_DELETE_NOTE( 9, 1, 1, 1, 0, 2, 77 ) },
+
+		{ NS4_STOP_AT_TIME( 587973.0 / 44100.0 ), },
+		{ NS4_SET_CURSOR_BY_TIME( 587973.0 / 44100.0 ), },
 		{ NS4_STORE_RESULT, },
 	},
 },
 { u8"Beetle Adventure Racing! (U) (M3) 0000000E 00CF1AE6.mid", u8"Beetle Adventure Racing! (U) (M3) 0000000E 00CF1AE6.mid TrackParseDebug.txt", u8"Intro 4", 0,
 	3, {
-		{ NS4_STOP_AT_TIME( (1054464.0 - 673280.0) / NS4_ORIG_HZ ), },
-		{ NS4_SET_CURSOR_BY_TIME( (1054464.0 - 673280.0) / NS4_ORIG_HZ ), },
+		{ NS4_STOP_AT_TIME( 583270.0 / 44100.0 ), },
+		{ NS4_SET_CURSOR_BY_TIME( 583270.0 / 44100.0 ), },
 		{ NS4_STORE_RESULT, },
 	},
 },
 { u8"Beetle Adventure Racing! (U) (M3) 0000000C 00CF18CA.mid", u8"Beetle Adventure Racing! (U) (M3) 0000000C 00CF18CA.mid TrackParseDebug.txt", u8"Intro 2", 0,
-	3, {
-		{ NS4_STOP_AT_TIME( (1437504.0 - 1054464.0) / NS4_ORIG_HZ ), },
-		{ NS4_SET_CURSOR_BY_TIME( (1437504.0 - 1054464.0) / NS4_ORIG_HZ ), },
+	(2+3 + 4+1+2) + 3, {
+		{ NS4_DELETE_NOTE( 0, 1, 1, 1, 0, 9, 61 ) },
+		{ NS4_DELETE_NOTE( 0, 1, 1, 1, 0, 1, 61 ) },
+
+		{ NS4_DELETE_NOTE( 0, 1, 1, 1, 0, 9, 62 ) },
+		{ NS4_DELETE_NOTE( 0, 1, 1, 1, 0, 5, 62 ) },
+		{ NS4_DELETE_NOTE( 0, 1, 1, 1, 0, 1, 62 ) },
+
+
+		{ NS4_DELETE_NOTE( 9, 1, 1, 1, 0, 22, 53 ) },
+		{ NS4_DELETE_NOTE( 9, 1, 1, 1, 0, 17, 53 ) },
+		{ NS4_DELETE_NOTE( 9, 1, 1, 1, 0, 9, 53 ) },
+		{ NS4_DELETE_NOTE( 9, 1, 1, 1, 0, 6, 53 ) },
+
+		{ NS4_DELETE_NOTE( 9, 1, 1, 1, 0, 4, 72 ) },
+
+		{ NS4_DELETE_NOTE( 9, 1, 1, 1, 0, 4, 77 ) },
+		{ NS4_DELETE_NOTE( 9, 1, 1, 1, 0, 2, 77 ) },
+
+		{ NS4_STOP_AT_TIME( 585255.0 / 44100.0 ), },
+		{ NS4_SET_CURSOR_BY_TIME( 585255.0 / 44100.0 ), },
 		{ NS4_STORE_RESULT, },
 	},
 },
 { u8"Beetle Adventure Racing! (U) (M3) 0000000D 00CF19CE.mid", u8"Beetle Adventure Racing! (U) (M3) 0000000D 00CF19CE.mid TrackParseDebug.txt", u8"Intro 3", 0,
-	3, {
-		{ NS4_STOP_AT_TIME( (1821712.0 - 1437504.0) / NS4_ORIG_HZ ), },
-		{ NS4_SET_CURSOR_BY_TIME( (1821712.0 - 1437504.0) / NS4_ORIG_HZ ), },
+	(2+1 + 3+2) + 3, {
+		{ NS4_DELETE_NOTE( 0, 1, 1, 1, 0, 9, 61 ) },
+		{ NS4_DELETE_NOTE( 0, 1, 1, 1, 0, 5, 61 ) },
+
+		{ NS4_DELETE_NOTE( 0, 1, 1, 1, 0, 5, 62 ) },
+
+
+		{ NS4_DELETE_NOTE( 9, 1, 1, 1, 0, 18, 53 ) },
+		{ NS4_DELETE_NOTE( 9, 1, 1, 1, 0, 13, 53 ) },
+		{ NS4_DELETE_NOTE( 9, 1, 1, 1, 0, 10, 53 ) },
+
+		{ NS4_DELETE_NOTE( 9, 1, 1, 1, 0, 4, 77 ) },
+		{ NS4_DELETE_NOTE( 9, 1, 1, 1, 0, 2, 77 ) },
+
+		{ NS4_STOP_AT_TIME( 586694.0 / 44100.0 ), },
+		{ NS4_SET_CURSOR_BY_TIME( 586694.0 / 44100.0 ), },
 		{ NS4_STORE_RESULT, },
 	},
 },
-{ u8"Beetle Adventure Racing! (U) (M3) 0000000F 00CF1BB6.mid", u8"Beetle Adventure Racing! (U) (M3) 0000000F 00CF1BB6.mid TrackParseDebug.txt", u8"Intro", 0,
+{ u8"Beetle Adventure Racing! (U) (M3) 0000000F 00CF1BB6.mid", u8"Beetle Adventure Racing! (U) (M3) 0000000F 00CF1BB6.mid TrackParseDebug.txt", u8"Intro Groove", 0,
 	1, {
 		{ NS4_PLAY_SAMPLE_AT_TIME( u8"C:\\My Projects\\MIDIWorks\\Exports\\Beetle Adventure Racing!\\SFX\\B00I7AS00.wav",
-			0, 0, uint32_t( (102 * 1000000 + 520705) - (1821712.0 / NS4_ORIG_HZ * 1000000.0) ),
+			0, 0, uint32_t( 777244.0 / 44100.0 * 1000000.0 ),
 			60, 0, 1.0, 64, 0, 60, 0, 0, 127, 64, 0.5, 0, 0, 0, 0, 0, 0, 0, 0 )
 		},
 	},
@@ -104,7 +157,7 @@
 		},
 		{ NS4_PLAY_SAMPLE_AT_TIME( u8"C:\\My Projects\\MIDIWorks\\Exports\\Beetle Adventure Racing!\\SFX\\B00IABS00.wav",	// Menu Selection
 			2, 4, uint32_t( 0.0 * 1000000.0 ),
-			60, 0, 1.0, 64, 0, 60, 0, 0, 127, 64, 1.0, 0, 0, 0, 0, 0, 0, 0, 0 )
+			60, 0, 1.0, 64, 0, 60, 0, 0, NS4_SFX_MOD4, 64, 1.0, 0, 0, 0, 0, 0, 0, 0, 0 )
 		},
 		{ NS4_PLAY_SAMPLE_AT_TIME( u8"C:\\My Projects\\MIDIWorks\\Exports\\Beetle Adventure Racing!\\SFX\\B00IB9S00.wav",	// One Player
 			2, 4, uint32_t( 0.63 * 1000000.0 ),
@@ -112,11 +165,11 @@
 		},
 		{ NS4_PLAY_SAMPLE_AT_TIME( u8"C:\\My Projects\\MIDIWorks\\Exports\\Beetle Adventure Racing!\\SFX\\B00I0CS00.wav",	// Menu Change
 			2, 7, uint32_t( 0.0 * 1000000.0 ),
-			60, 0, 1.0, 64, 0, 60, 0, 0, 127, 64, 1.0, 0, 0, 0, 0, 0, 0, 0, 0 )
+			60, 0, 1.0, 64, 0, 60, 0, 0, NS4_SFX_MOD4, 64, 1.0, 0, 0, 0, 0, 0, 0, 0, 0 )
 		},
 		{ NS4_PLAY_SAMPLE_AT_TIME( u8"C:\\My Projects\\MIDIWorks\\Exports\\Beetle Adventure Racing!\\SFX\\B00IABS00.wav",	// Menu Selection
 			2, 8, uint32_t( 0.0 * 1000000.0 ),
-			60, 0, 1.0, 64, 0, 60, 0, 0, 127, 64, 1.0, 0, 0, 0, 0, 0, 0, 0, 0 )
+			60, 0, 1.0, 64, 0, 60, 0, 0, NS4_SFX_MOD4, 64, 1.0, 0, 0, 0, 0, 0, 0, 0, 0 )
 		},
 
 
@@ -126,19 +179,19 @@
 		},
 		{ NS4_PLAY_SAMPLE_AT_TIME( u8"C:\\My Projects\\MIDIWorks\\Exports\\Beetle Adventure Racing!\\SFX\\B00I0CS00.wav",	// Menu Change
 			2, 12, uint32_t( 0.0 * 1000000.0 ),
-			60, 0, 1.0, 64, 0, 60, 0, 0, 127, 64, 1.0, 0, 0, 0, 0, 0, 0, 0, 0 )
+			60, 0, 1.0, 64, 0, 60, 0, 0, NS4_SFX_MOD4, 64, 1.0, 0, 0, 0, 0, 0, 0, 0, 0 )
 		},
 		{ NS4_PLAY_SAMPLE_AT_TIME( u8"C:\\My Projects\\MIDIWorks\\Exports\\Beetle Adventure Racing!\\SFX\\B00I0CS00.wav",	// Menu Change
 			2, 13, uint32_t( 0.0 * 1000000.0 ),
-			60, 0, 1.0, 64, 0, 60, 0, 0, 127, 64, 1.0, 0, 0, 0, 0, 0, 0, 0, 0 )
+			60, 0, 1.0, 64, 0, 60, 0, 0, NS4_SFX_MOD4, 64, 1.0, 0, 0, 0, 0, 0, 0, 0, 0 )
 		},
 		{ NS4_PLAY_SAMPLE_AT_TIME( u8"C:\\My Projects\\MIDIWorks\\Exports\\Beetle Adventure Racing!\\SFX\\B00I0CS00.wav",	// Menu Change
 			2, 14, uint32_t( 0.0 * 1000000.0 ),
-			60, 0, 1.0, 64, 0, 60, 0, 0, 127, 64, 1.0, 0, 0, 0, 0, 0, 0, 0, 0 )
+			60, 0, 1.0, 64, 0, 60, 0, 0, NS4_SFX_MOD4, 64, 1.0, 0, 0, 0, 0, 0, 0, 0, 0 )
 		},
 		{ NS4_PLAY_SAMPLE_AT_TIME( u8"C:\\My Projects\\MIDIWorks\\Exports\\Beetle Adventure Racing!\\SFX\\B00IABS00.wav",	// Menu Selection
 			2, 15, uint32_t( 0.0 * 1000000.0 ),
-			60, 0, 1.0, 64, 0, 60, 0, 0, 127, 64, 1.0, 0, 0, 0, 0, 0, 0, 0, 0 )
+			60, 0, 1.0, 64, 0, 60, 0, 0, NS4_SFX_MOD4, 64, 1.0, 0, 0, 0, 0, 0, 0, 0, 0 )
 		},
 
 
@@ -148,33 +201,33 @@
 		},
 		{ NS4_PLAY_SAMPLE_AT_TIME( u8"C:\\My Projects\\MIDIWorks\\Exports\\Beetle Adventure Racing!\\SFX\\B00IABS00.wav",	// Menu Selection
 			2, 18, uint32_t( 0.0 * 1000000.0 ),
-			60, 0, 1.0, 64, 0, 60, 0, 0, 127, 64, 1.0, 0, 0, 0, 0, 0, 0, 0, 0 )
+			60, 0, 1.0, 64, 0, 60, 0, 0, NS4_SFX_MOD4, 64, 1.0, 0, 0, 0, 0, 0, 0, 0, 0 )
 		},
 		{ NS4_PLAY_SAMPLE_AT_TIME( u8"C:\\My Projects\\MIDIWorks\\Exports\\Beetle Adventure Racing!\\SFX\\B00I0CS00.wav",	// Menu Change
 			2, 18, uint32_t( 0.63 * 1000000.0 ),
-			60, 0, 1.0, 64, 0, 60, 0, 0, 127, 64, 1.0, 0, 0, 0, 0, 0, 0, 0, 0 )
+			60, 0, 1.0, 64, 0, 60, 0, 0, NS4_SFX_MOD4, 64, 1.0, 0, 0, 0, 0, 0, 0, 0, 0 )
 		},
 		{ NS4_PLAY_SAMPLE_AT_TIME( u8"C:\\My Projects\\MIDIWorks\\Exports\\Beetle Adventure Racing!\\SFX\\B00I0CS00.wav",	// Menu Change
 			2, 21, uint32_t( 0.0 * 1000000.0 ),
-			60, 0, 1.0, 64, 0, 60, 0, 0, 127, 64, 1.0, 0, 0, 0, 0, 0, 0, 0, 0 )
+			60, 0, 1.0, 64, 0, 60, 0, 0, NS4_SFX_MOD4, 64, 1.0, 0, 0, 0, 0, 0, 0, 0, 0 )
 		},
 		{ NS4_PLAY_SAMPLE_AT_TIME( u8"C:\\My Projects\\MIDIWorks\\Exports\\Beetle Adventure Racing!\\SFX\\B00I0CS00.wav",	// Menu Change
 			2, 22, uint32_t( 0.0 * 1000000.0 ),
-			60, 0, 1.0, 64, 0, 60, 0, 0, 127, 64, 1.0, 0, 0, 0, 0, 0, 0, 0, 0 )
+			60, 0, 1.0, 64, 0, 60, 0, 0, NS4_SFX_MOD4, 64, 1.0, 0, 0, 0, 0, 0, 0, 0, 0 )
 		},
 
 
 		{ NS4_PLAY_SAMPLE_AT_TIME( u8"C:\\My Projects\\MIDIWorks\\Exports\\Beetle Adventure Racing!\\SFX\\B00I0CS00.wav",	// Menu Change
 			2, 23, uint32_t( 0.0 * 1000000.0 ),
-			60, 0, 1.0, 64, 0, 60, 0, 0, 127, 64, 1.0, 0, 0, 0, 0, 0, 0, 0, 0 )
+			60, 0, 1.0, 64, 0, 60, 0, 0, NS4_SFX_MOD4, 64, 1.0, 0, 0, 0, 0, 0, 0, 0, 0 )
 		},
 		{ NS4_PLAY_SAMPLE_AT_TIME( u8"C:\\My Projects\\MIDIWorks\\Exports\\Beetle Adventure Racing!\\SFX\\B00I0CS00.wav",	// Menu Change
 			2, 24, uint32_t( 0.0 * 1000000.0 ),
-			60, 0, 1.0, 64, 0, 60, 0, 0, 127, 64, 1.0, 0, 0, 0, 0, 0, 0, 0, 0 )
+			60, 0, 1.0, 64, 0, 60, 0, 0, NS4_SFX_MOD4, 64, 1.0, 0, 0, 0, 0, 0, 0, 0, 0 )
 		},
 		{ NS4_PLAY_SAMPLE_AT_TIME( u8"C:\\My Projects\\MIDIWorks\\Exports\\Beetle Adventure Racing!\\SFX\\B00IABS00.wav",	// Menu Selection
 			2, 26, uint32_t( 0.0 * 1000000.0 ),
-			60, 0, 1.0, 64, 0, 60, 0, 0, 127, 64, 1.0, 0, 0, 0, 0, 0, 0, 0, 0 )
+			60, 0, 1.0, 64, 0, 60, 0, 0, NS4_SFX_MOD4, 64, 1.0, 0, 0, 0, 0, 0, 0, 0, 0 )
 		},
 		{ NS4_PLAY_SAMPLE_AT_TIME( u8"C:\\My Projects\\MIDIWorks\\Exports\\Beetle Adventure Racing!\\SFX\\B00IB6S00.wav",	// Nice Wheels
 			2, 26, uint32_t( 0.63 * 1000000.0 ),
@@ -182,13 +235,13 @@
 		},
 		{ NS4_PLAY_SAMPLE_AT_TIME( u8"C:\\My Projects\\MIDIWorks\\Exports\\Beetle Adventure Racing!\\SFX\\B00IABS00.wav",	// Menu Selection
 			2, 30, uint32_t( 0.0 * 1000000.0 ),
-			60, 0, 1.0, 64, 0, 60, 0, 0, 127, 64, 1.0, 0, 0, 0, 0, 0, 0, 0, 0 )
+			60, 0, 1.0, 64, 0, 60, 0, 0, NS4_SFX_MOD4, 64, 1.0, 0, 0, 0, 0, 0, 0, 0, 0 )
 		},
 
 
 		{ NS4_PLAY_SAMPLE_AT_TIME( u8"C:\\My Projects\\MIDIWorks\\Exports\\Beetle Adventure Racing!\\SFX\\B00IABS00.wav",	// Menu Selection
 			2, 35, uint32_t( 0.0 * 1000000.0 ),
-			60, 0, 1.0, 64, 0, 60, 0, 0, 127, 64, 1.0, 0, 0, 0, 0, 0, 0, 0, 0 )
+			60, 0, 1.0, 64, 0, 60, 0, 0, NS4_SFX_MOD4, 64, 1.0, 0, 0, 0, 0, 0, 0, 0, 0 )
 		},
 	},
 },
@@ -222,26 +275,26 @@
 
 		{ NS4_PLAY_SAMPLE_AT_TIME( u8"C:\\My Projects\\MIDIWorks\\Exports\\Beetle Adventure Racing!\\SFX\\B00I02S00.wav",	// Burning Rubber
 			0, 16, uint32_t( 0.3 * 1000000.0 ),
-			60, 0, 1.0, 64, 0, 60, 0, 0, 127, 64, 1.0, 0, 0, 0, 0, 0, 0, 0, 0 )
+			60, 0, 1.0, 64, 0, 60, 0, 0, NS4_SFX_MOD0, 64, 1.0, 0, 0, 0, 0, 0, 0, 0, 0 )
 		},
 		{ NS4_PLAY_SAMPLE_STOP( uint32_t( ~0 ), 0, 16 + 1, uint32_t( (0.3 + 2.0 / 3.0) * 1000000.0 ), 0.0, 0.5 ) },
 
 		{ NS4_PLAY_SAMPLE_AT_TIME( u8"C:\\My Projects\\MIDIWorks\\Exports\\Beetle Adventure Racing!\\SFX\\B00I42S00.wav",	// Box Break 3
 			0, 40, uint32_t( 0.0 * 1000000.0 ),
-			60, 0, 1.0, 64, 0, 60, 0, 0, 127, 64, 1.0, 0, 0, 0, 0, 0, 0, 0, 0 )
+			60, 0, 1.0, 64, 0, 60, 0, 0, NS4_SFX_MOD0, 64, 1.0, 0, 0, 0, 0, 0, 0, 0, 0 )
 		},
 		{ NS4_PLAY_SAMPLE_AT_TIME( u8"C:\\My Projects\\MIDIWorks\\Exports\\Beetle Adventure Racing!\\SFX\\B00I7DS00.wav",	// Bonus-Small
 			0, 40, uint32_t( 0.0 * 1000000.0 ),
-			60, 0, 1.0, 64, 0, 60, 0, 0, 127, 64, 1.0, 0, 0, 0, 0, 0, 0, 0, 0 )
+			60, 0, 1.0, 64, 0, 60, 0, 0, NS4_SFX_MOD0, 64, 1.0, 0, 0, 0, 0, 0, 0, 0, 0 )
 		},
 		
 		{ NS4_PLAY_SAMPLE_AT_TIME( u8"C:\\My Projects\\MIDIWorks\\Exports\\Beetle Adventure Racing!\\SFX\\B00I42S00.wav",	// Box Break 3
 			0, 40, uint32_t( 0.85 * 1000000.0 ),
-			60, 0, 1.0, 64, 0, 60, 0, 0, 127, 64, 1.0, 0, 0, 0, 0, 0, 0, 0, 0 )
+			60, 0, 1.0, 64, 0, 60, 0, 0, NS4_SFX_MOD0, 64, 1.0, 0, 0, 0, 0, 0, 0, 0, 0 )
 		},
 		{ NS4_PLAY_SAMPLE_AT_TIME( u8"C:\\My Projects\\MIDIWorks\\Exports\\Beetle Adventure Racing!\\SFX\\B00I7DS00.wav",	// Bonus-Small
 			0, 40, uint32_t( 0.85 * 1000000.0 ),
-			60, 0, 1.0, 64, 0, 60, 0, 0, 127, 64, 1.0, 0, 0, 0, 0, 0, 0, 0, 0 )
+			60, 0, 1.0, 64, 0, 60, 0, 0, NS4_SFX_MOD0, 64, 1.0, 0, 0, 0, 0, 0, 0, 0, 0 )
 		},
 
 #define NS4_BELL_END							64.77
@@ -259,24 +312,24 @@
 
 		{ NS4_PLAY_SAMPLE_AT_TIME( u8"C:\\My Projects\\MIDIWorks\\Exports\\Beetle Adventure Racing!\\SFX\\B00I42S00.wav",	// Box Break 3
 			1, 30, uint32_t( 0.0 * 1000000.0 ),
-			60, 0, 1.0, 64, 0, 60, 0, 0, 127, 64, 1.0, 0, 0, 0, 0, 0, 0, 0, 0 )
+			60, 0, 1.0, 64, 0, 60, 0, 0, NS4_SFX_MOD0, 64, 1.0, 0, 0, 0, 0, 0, 0, 0, 0 )
 		},
 		{ NS4_PLAY_SAMPLE_AT_TIME( u8"C:\\My Projects\\MIDIWorks\\Exports\\Beetle Adventure Racing!\\SFX\\B00IB5S00.wav",	// Groovy!
 			1, 30, uint32_t( 0.0 * 1000000.0 ),
-			60, 0, 1.0, 64, 0, 60, 0, 0, 127, 64, 0.5, 0, 0, 0, 0, 0, 0, 0, 0 )
+			60, 0, 1.0, 64, 0, 60, 0, 0, NS4_SFX_MOD2, 64, 0.5, 0, 0, 0, 0, 0, 0, 0, 0 )
 		},
 		{ NS4_PLAY_SAMPLE_AT_TIME( u8"C:\\My Projects\\MIDIWorks\\Exports\\Beetle Adventure Racing!\\SFX\\B00I0BS00.wav",	// Beep Beep
 			2, 00, uint32_t( 0.0 * 1000000.0 ),
-			60, 0, 1.0, 64, 0, 60, 0, 0, 127, 64, 1.0, 0, 0, 0, 0, 0, 0, 0, 0 )
+			60, 0, 1.0, 64, 0, 60, 0, 0, NS4_SFX_MOD0, 64, 1.0, 0, 0, 0, 0, 0, 0, 0, 0 )
 		},
 
 		{ NS4_PLAY_SAMPLE_AT_TIME( u8"C:\\My Projects\\MIDIWorks\\Exports\\Beetle Adventure Racing!\\SFX\\B00I42S00.wav",	// Box Break 3
 			2, 30, uint32_t( 0.0 * 1000000.0 ),
-			60, 0, 1.0, 64, 0, 60, 0, 0, 127, 64, 1.0, 0, 0, 0, 0, 0, 0, 0, 0 )
+			60, 0, 1.0, 64, 0, 60, 0, 0, NS4_SFX_MOD0, 64, 1.0, 0, 0, 0, 0, 0, 0, 0, 0 )
 		},
 		{ NS4_PLAY_SAMPLE_AT_TIME( u8"C:\\My Projects\\MIDIWorks\\Exports\\Beetle Adventure Racing!\\SFX\\B00I6BS00.wav",	// Nitro
 			2, 30, uint32_t( 0.0 * 1000000.0 ),
-			60, 0, 1.0, 64, 0, 60, 0, 0, 127, 64, 1.0, 0, 0, 0, 0, 0, 0, 0, 0 )
+			60, 0, 1.0, 64, 0, 60, 0, 0, NS4_SFX_MOD0, 64, 1.0, 0, 0, 0, 0, 0, 0, 0, 0 )
 		},
 
 		{ NS4_PLAY_SAMPLE_AT_TIME( u8"C:\\My Projects\\MIDIWorks\\Exports\\Beetle Adventure Racing!\\SFX\\B00IC6S00.wav",	// First Place!
@@ -397,25 +450,25 @@
 		},
 		{ NS4_PLAY_SAMPLE_AT_TIME( u8"C:\\My Projects\\MIDIWorks\\Exports\\Beetle Adventure Racing!\\SFX\\B00I42S00.wav",	// Box Break 3
 			0, 30, uint32_t( 0.0 * 1000000.0 ),
-			60, 0, 1.0, 64, 0, 60, 0, 0, 127, 64, 1.0, 0, 0, 0, 0, 0, 0, 0, 0 )
+			60, 0, 1.0, 64, 0, 60, 0, 0, NS4_SFX_MOD0, 64, 1.0, 0, 0, 0, 0, 0, 0, 0, 0 )
 		},
 		{ NS4_PLAY_SAMPLE_AT_TIME( u8"C:\\My Projects\\MIDIWorks\\Exports\\Beetle Adventure Racing!\\SFX\\B00I7ES00.wav",	// Bonus-Medium
 			0, 30, uint32_t( 0.0 * 1000000.0 ),
-			60, 0, 1.0, 64, 0, 60, 0, 0, 127, 64, 1.0, 0, 0, 0, 0, 0, 0, 0, 0 )
+			60, 0, 1.0, 64, 0, 60, 0, 0, NS4_SFX_MOD0, 64, 1.0, 0, 0, 0, 0, 0, 0, 0, 0 )
 		},
 		{ NS4_PLAY_SAMPLE_AT_TIME( u8"C:\\My Projects\\MIDIWorks\\Exports\\Beetle Adventure Racing!\\SFX\\B00I42S00.wav",	// Box Break 3
 			0, 45, uint32_t( 0.0 * 1000000.0 ),
-			60, 0, 1.0, 64, 0, 60, 0, 0, 127, 64, 1.0, 0, 0, 0, 0, 0, 0, 0, 0 )
+			60, 0, 1.0, 64, 0, 60, 0, 0, NS4_SFX_MOD0, 64, 1.0, 0, 0, 0, 0, 0, 0, 0, 0 )
 		},
 		{ NS4_PLAY_SAMPLE_AT_TIME( u8"C:\\My Projects\\MIDIWorks\\Exports\\Beetle Adventure Racing!\\SFX\\B00I6BS00.wav",	// Nitro
 			0, 45, uint32_t( 0.0 * 1000000.0 ),
-			60, 0, 1.0, 64, 0, 60, 0, 0, 127, 64, 1.0, 0, 0, 0, 0, 0, 0, 0, 0 )
+			60, 0, 1.0, 64, 0, 60, 0, 0, NS4_SFX_MOD0, 64, 1.0, 0, 0, 0, 0, 0, 0, 0, 0 )
 		},
 
 #define NS4_DUR			(7.04 + 2.35)
 		{ NS4_PLAY_SAMPLE_AT_TIME( u8"C:\\My Projects\\MIDIWorks\\Exports\\Beetle Adventure Racing!\\SFX\\B00I13S00.wav",	// Helicopter
 			1, 0, uint32_t( 0.0 * 1000000.0 ),
-			60, 0, 1.0, 64, 0, 60, 0, 0, 127, 64, 1.0, 0, 0, 0, 0, 0, 0, 0, 0 )
+			60, 0, 1.0, 64, 0, 60, 0, 0, NS4_SFX_MOD0, 64, 1.0, 0, 0, 0, 0, 0, 0, 0, 0 )
 		},
 		{ NS4_PLAY_SAMPLE_STOP( uint32_t( ~0 ), 1, 0, uint32_t( NS4_DUR * 1000000.0 ), 0.3, 0.3 ) },
 
@@ -428,7 +481,7 @@
 #define NS4_DUR			((76.16 + 1.72) - 71.0)
 		{ NS4_PLAY_SAMPLE_AT_TIME( u8"C:\\My Projects\\MIDIWorks\\Exports\\Beetle Adventure Racing!\\SFX\\B00I14S00.wav",	// Alien Craft
 			1, 11, uint32_t( 0.0 * 1000000.0 ),
-			60, 0, 1.0, 64, 0, 60, 0, 0, 127, 64, 1.0, 0, 0, 0, 0, 0, 0, 0, 0 )
+			60, 0, 1.0, 64, 0, 60, 0, 0, NS4_SFX_MOD0, 64, 1.0, 0, 0, 0, 0, 0, 0, 0, 0 )
 		},
 		{ NS4_PLAY_SAMPLE_STOP( uint32_t( ~0 ), 1, 11, uint32_t( NS4_DUR * 1000000.0 ), 0.3, 0.3 ) },
 
@@ -441,7 +494,7 @@
 #define NS4_DUR			(3.32)
 		{ NS4_PLAY_SAMPLE_AT_TIME( u8"C:\\My Projects\\MIDIWorks\\Exports\\Beetle Adventure Racing!\\SFX\\B00I15S00.wav",	// Craft Passing
 			1, 15, uint32_t( 0.0 * 1000000.0 ),
-			60, 0, 1.0, 64, 0, 60, 0, 0, 127, 64, 1.0, 0, 0, 0, 0, 0, 0, 0, 0 )
+			60, 0, 1.0, 64, 0, 60, 0, 0, NS4_SFX_MOD0, 64, 1.0, 0, 0, 0, 0, 0, 0, 0, 0 )
 		},
 		{ NS4_PLAY_SAMPLE_STOP( uint32_t( ~0 ), 1, 15, uint32_t( NS4_DUR * 1000000.0 ), 0.3, 0.3 ) },
 
@@ -453,26 +506,26 @@
 
 		{ NS4_PLAY_SAMPLE_AT_TIME( u8"C:\\My Projects\\MIDIWorks\\Exports\\Beetle Adventure Racing!\\SFX\\B00I0BS00.wav",	// Beep Beep
 			2, 00, uint32_t( 0.0 * 1000000.0 ),
-			60, 0, 1.0, 64, 0, 60, 0, 0, 127, 64, 1.0, 0, 0, 0, 0, 0, 0, 0, 0 )
+			60, 0, 1.0, 64, 0, 60, 0, 0, NS4_SFX_MOD0, 64, 1.0, 0, 0, 0, 0, 0, 0, 0, 0 )
 		},
 
 		{ NS4_PLAY_SAMPLE_AT_TIME( u8"C:\\My Projects\\MIDIWorks\\Exports\\Beetle Adventure Racing!\\SFX\\B00I42S00.wav",	// Box Break 3
 			2, 30, uint32_t( 0.0 * 1000000.0 ),
-			60, 0, 1.0, 64, 0, 60, 0, 0, 127, 64, 1.0, 0, 0, 0, 0, 0, 0, 0, 0 )
+			60, 0, 1.0, 64, 0, 60, 0, 0, NS4_SFX_MOD0, 64, 1.0, 0, 0, 0, 0, 0, 0, 0, 0 )
 		},
 		{ NS4_PLAY_SAMPLE_AT_TIME( u8"C:\\My Projects\\MIDIWorks\\Exports\\Beetle Adventure Racing!\\SFX\\B00I7FS00.wav",	// Bonus-Large
 			2, 30, uint32_t( 0.0 * 1000000.0 ),
-			60, 0, 1.0, 64, 0, 60, 0, 0, 127, 64, 1.0, 0, 0, 0, 0, 0, 0, 0, 0 )
+			60, 0, 1.0, 64, 0, 60, 0, 0, NS4_SFX_MOD0, 64, 1.0, 0, 0, 0, 0, 0, 0, 0, 0 )
 		},
 		{ NS4_PLAY_SAMPLE_AT_TIME( u8"C:\\My Projects\\MIDIWorks\\Exports\\Beetle Adventure Racing!\\SFX\\B00IEDS00.wav",	// Alright!
 			2, 30, uint32_t( 0.5 * 1000000.0 ),
-			60, 0, 1.0, 64, 0, 60, 0, 0, 127, 64, 0.5, 0, 0, 0, 0, 0, 0, 0, 0 )
+			60, 0, 1.0, 64, 0, 60, 0, 0, NS4_SFX_MOD3, 64, 0.5, 0, 0, 0, 0, 0, 0, 0, 0 )
 		},
 
 #define NS4_DUR			(7.03 + 2.35)
 		{ NS4_PLAY_SAMPLE_AT_TIME( u8"C:\\My Projects\\MIDIWorks\\Exports\\Beetle Adventure Racing!\\SFX\\B00I13S00.wav",	// Helicopter
 			3, 0, uint32_t( 0.0 * 1000000.0 ),
-			60, 0, 1.0, 64, 0, 60, 0, 0, 127, 64, 1.0, 0, 0, 0, 0, 0, 0, 0, 0 )
+			60, 0, 1.0, 64, 0, 60, 0, 0, NS4_SFX_MOD0, 64, 1.0, 0, 0, 0, 0, 0, 0, 0, 0 )
 		},
 		{ NS4_PLAY_SAMPLE_STOP( uint32_t( ~0 ), 3, 0, uint32_t( NS4_DUR * 1000000.0 ), 0.3, 0.3 ) },
 
@@ -485,7 +538,7 @@
 #define NS4_DUR			((196.16 + 1.72) - 191.0)
 		{ NS4_PLAY_SAMPLE_AT_TIME( u8"C:\\My Projects\\MIDIWorks\\Exports\\Beetle Adventure Racing!\\SFX\\B00I14S00.wav",	// Alien Craft
 			3, 11, uint32_t( 0.0 * 1000000.0 ),
-			60, 0, 1.0, 64, 0, 60, 0, 0, 127, 64, 1.0, 0, 0, 0, 0, 0, 0, 0, 0 )
+			60, 0, 1.0, 64, 0, 60, 0, 0, NS4_SFX_MOD0, 64, 1.0, 0, 0, 0, 0, 0, 0, 0, 0 )
 		},
 		{ NS4_PLAY_SAMPLE_STOP( uint32_t( ~0 ), 3, 11, uint32_t( NS4_DUR * 1000000.0 ), 0.3, 0.3 ) },
 
@@ -498,7 +551,7 @@
 #define NS4_DUR			(3.32)
 		{ NS4_PLAY_SAMPLE_AT_TIME( u8"C:\\My Projects\\MIDIWorks\\Exports\\Beetle Adventure Racing!\\SFX\\B00I15S00.wav",	// Craft Passing
 			3, 15, uint32_t( 0.0 * 1000000.0 ),
-			60, 0, 1.0, 64, 0, 60, 0, 0, 127, 64, 1.0, 0, 0, 0, 0, 0, 0, 0, 0 )
+			60, 0, 1.0, 64, 0, 60, 0, 0, NS4_SFX_MOD0, 64, 1.0, 0, 0, 0, 0, 0, 0, 0, 0 )
 		},
 		{ NS4_PLAY_SAMPLE_STOP( uint32_t( ~0 ), 3, 15, uint32_t( NS4_DUR * 1000000.0 ), 0.3, 0.3 ) },
 
@@ -510,11 +563,11 @@
 
 		{ NS4_PLAY_SAMPLE_AT_TIME( u8"C:\\My Projects\\MIDIWorks\\Exports\\Beetle Adventure Racing!\\SFX\\B00I42S00.wav",	// Box Break 3
 			4, 0, uint32_t( 0.0 * 1000000.0 ),
-			60, 0, 1.0, 64, 0, 60, 0, 0, 127, 64, 1.0, 0, 0, 0, 0, 0, 0, 0, 0 )
+			60, 0, 1.0, 64, 0, 60, 0, 0, NS4_SFX_MOD0, 64, 1.0, 0, 0, 0, 0, 0, 0, 0, 0 )
 		},
 		{ NS4_PLAY_SAMPLE_AT_TIME( u8"C:\\My Projects\\MIDIWorks\\Exports\\Beetle Adventure Racing!\\SFX\\B00I6BS00.wav",	// Nitro
 			4, 0, uint32_t( 0.0 * 1000000.0 ),
-			60, 0, 1.0, 64, 0, 60, 0, 0, 127, 64, 1.0, 0, 0, 0, 0, 0, 0, 0, 0 )
+			60, 0, 1.0, 64, 0, 60, 0, 0, NS4_SFX_MOD0, 64, 1.0, 0, 0, 0, 0, 0, 0, 0, 0 )
 		},
 	},
 },
@@ -538,11 +591,11 @@
 
 		{ NS4_PLAY_SAMPLE_AT_TIME( u8"C:\\My Projects\\MIDIWorks\\Exports\\Beetle Adventure Racing!\\SFX\\B00I42S00.wav",	// Box Break 3
 			0, 20, uint32_t( 0.0 * 1000000.0 ),
-			60, 0, 1.0, 64, 0, 60, 0, 0, 127, 64, 1.0, 0, 0, 0, 0, 0, 0, 0, 0 )
+			60, 0, 1.0, 64, 0, 60, 0, 0, NS4_SFX_MOD0, 64, 1.0, 0, 0, 0, 0, 0, 0, 0, 0 )
 		},
-		{ NS4_PLAY_SAMPLE_AT_TIME( u8"C:\\My Projects\\MIDIWorks\\Exports\\Beetle Adventure Racing!\\SFX\\B00I7ES00.wav",	// Bonus-Medium
+		{ NS4_PLAY_SAMPLE_AT_TIME( u8"C:\\My Projects\\MIDIWorks\\Exports\\Beetle Adventure Racing!\\SFX\\B00I7DS00.wav",	// Bonus-Small
 			0, 20, uint32_t( 0.0 * 1000000.0 ),
-			60, 0, 1.0, 64, 0, 60, 0, 0, 127, 64, 1.0, 0, 0, 0, 0, 0, 0, 0, 0 )
+			60, 0, 1.0, 64, 0, 60, 0, 0, NS4_SFX_MOD0, 64, 1.0, 0, 0, 0, 0, 0, 0, 0, 0 )
 		},
 
 
@@ -562,48 +615,48 @@
 
 		{ NS4_PLAY_SAMPLE_AT_TIME( u8"C:\\My Projects\\MIDIWorks\\Exports\\Beetle Adventure Racing!\\SFX\\B00I5AS00.wav",	// TRex Stomp 1
 			0, 43, uint32_t( 0.0 * 1000000.0 ),
-			60, 0, 1.0, 64, 0, 60, 0, 0, 127, 64, 1.0, 0, 0, 0, 0, 0, 0, 0, 0 )
+			60, 0, 1.0, 64, 0, 60, 0, 0, NS4_SFX_MOD0, 64, 1.0, 0, 0, 0, 0, 0, 0, 0, 0 )
 		},
 		{ NS4_PLAY_SAMPLE_AT_TIME( u8"C:\\My Projects\\MIDIWorks\\Exports\\Beetle Adventure Racing!\\SFX\\B00I5AS00.wav",	// TRex Stomp 1
 			0, 46, uint32_t( 0.5 * 1000000.0 ),
-			60, 0, 1.0, 64, 0, 60, 0, 0, 127, 64, 1.0, 0, 0, 0, 0, 0, 0, 0, 0 )
+			60, 0, 1.0, 64, 0, 60, 0, 0, NS4_SFX_MOD0, 64, 1.0, 0, 0, 0, 0, 0, 0, 0, 0 )
 		},
 		{ NS4_PLAY_SAMPLE_AT_TIME( u8"C:\\My Projects\\MIDIWorks\\Exports\\Beetle Adventure Racing!\\SFX\\B00I5AS00.wav",	// TRex Stomp 1
 			0, 50, uint32_t( 0.0 * 1000000.0 ),
-			60, 0, 1.0, 64, 0, 60, 0, 0, 127, 64, 1.0, 0, 0, 0, 0, 0, 0, 0, 0 )
+			60, 0, 1.0, 64, 0, 60, 0, 0, NS4_SFX_MOD0, 64, 1.0, 0, 0, 0, 0, 0, 0, 0, 0 )
 		},
 		{ NS4_PLAY_SAMPLE_AT_TIME( u8"C:\\My Projects\\MIDIWorks\\Exports\\Beetle Adventure Racing!\\SFX\\B00I4ES00.wav",	// TRex Scream
 			0, 54, uint32_t( 0.0 * 1000000.0 ),
-			60, 0, 1.0, 64, 0, 60, 0, 0, 127, 64, 1.0, 0, 0, 0, 0, 0, 0, 0, 0 )
+			60, 0, 1.0, 64, 0, 60, 0, 0, NS4_SFX_MOD0, 64, 1.0, 0, 0, 0, 0, 0, 0, 0, 0 )
 		},
 		{ NS4_PLAY_SAMPLE_STOP( uint32_t( ~0 ), 0, 54, uint32_t( (0.0 + 54136.0 / 22050.0) * 1000000.0 ), 0.0, 0.1 ) },
 
 
 		{ NS4_PLAY_SAMPLE_AT_TIME( u8"C:\\My Projects\\MIDIWorks\\Exports\\Beetle Adventure Racing!\\SFX\\B00I85S00.wav",	// TRex Electric Fence
 			1, 2, uint32_t( 0.0 * 1000000.0 ),
-			60, 0, 1.0, 64, 0, 60, 0, 0, 127, 64, 1.0, 0, 0, 0, 0, 0, 0, 0, 0 )
+			60, 0, 1.0, 64, 0, 60, 0, 0, NS4_SFX_MOD0, 64, 1.0, 0, 0, 0, 0, 0, 0, 0, 0 )
 		},
 		{ NS4_PLAY_SAMPLE_STOP( uint32_t( ~0 ), 1, 2, uint32_t( (0.0 + 54504.0 / 22050.0) * 1000000.0 ), 0.0, 0.8 ) },
 		{ NS4_PLAY_SAMPLE_AT_TIME( u8"C:\\My Projects\\MIDIWorks\\Exports\\Beetle Adventure Racing!\\SFX\\B00I85S00.wav",	// TRex Electric Fence
 			1, 8, uint32_t( 0.0 * 1000000.0 ),
-			60, 0, 1.0, 64, 0, 60, 0, 0, 127, 64, 1.0, 0, 0, 0, 0, 0, 0, 0, 0 )
+			60, 0, 1.0, 64, 0, 60, 0, 0, NS4_SFX_MOD0, 64, 1.0, 0, 0, 0, 0, 0, 0, 0, 0 )
 		},
 		{ NS4_PLAY_SAMPLE_STOP( uint32_t( ~0 ), 1, 8, uint32_t( (0.0 + 54504.0 / 22050.0) * 1000000.0 ), 0.0, 0.8 ) },
 
 
 		{ NS4_PLAY_SAMPLE_AT_TIME( u8"C:\\My Projects\\MIDIWorks\\Exports\\Beetle Adventure Racing!\\SFX\\B00I42S00.wav",	// Box Break 3
 			1, 20, uint32_t( 0.0 * 1000000.0 ),
-			60, 0, 1.0, 64, 0, 60, 0, 0, 127, 64, 1.0, 0, 0, 0, 0, 0, 0, 0, 0 )
+			60, 0, 1.0, 64, 0, 60, 0, 0, NS4_SFX_MOD0, 64, 1.0, 0, 0, 0, 0, 0, 0, 0, 0 )
 		},
 		{ NS4_PLAY_SAMPLE_AT_TIME( u8"C:\\My Projects\\MIDIWorks\\Exports\\Beetle Adventure Racing!\\SFX\\B00I6BS00.wav",	// Nitro
 			1, 20, uint32_t( 0.0 * 1000000.0 ),
-			60, 0, 1.0, 64, 0, 60, 0, 0, 127, 64, 1.0, 0, 0, 0, 0, 0, 0, 0, 0 )
+			60, 0, 1.0, 64, 0, 60, 0, 0, NS4_SFX_MOD0, 64, 1.0, 0, 0, 0, 0, 0, 0, 0, 0 )
 		},
 
 
 		{ NS4_PLAY_SAMPLE_AT_TIME( u8"C:\\My Projects\\MIDIWorks\\Exports\\Beetle Adventure Racing!\\SFX\\B00I0BS00.wav",	// Beep Beep
 			2, 00, uint32_t( 0.0 * 1000000.0 ),
-			60, 0, 1.0, 64, 0, 60, 0, 0, 127, 64, 1.0, 0, 0, 0, 0, 0, 0, 0, 0 )
+			60, 0, 1.0, 64, 0, 60, 0, 0, NS4_SFX_MOD0, 64, 1.0, 0, 0, 0, 0, 0, 0, 0, 0 )
 		},
 
 
@@ -637,53 +690,53 @@
 
 		{ NS4_PLAY_SAMPLE_AT_TIME( u8"C:\\My Projects\\MIDIWorks\\Exports\\Beetle Adventure Racing!\\SFX\\B00I42S00.wav",	// Box Break 3
 			2, 48, uint32_t( 0.82 * 1000000.0 ),
-			60, 0, 1.0, 64, 0, 60, 0, 0, 127, 64, 1.0, 0, 0, 0, 0, 0, 0, 0, 0 )
+			60, 0, 1.0, 64, 0, 60, 0, 0, NS4_SFX_MOD0, 64, 1.0, 0, 0, 0, 0, 0, 0, 0, 0 )
 		},
 		{ NS4_PLAY_SAMPLE_AT_TIME( u8"C:\\My Projects\\MIDIWorks\\Exports\\Beetle Adventure Racing!\\SFX\\B00IEDS00.wav",	// Alright!
 			2, 48, uint32_t( 0.82 * 1000000.0 ),
-			60, 0, 1.0, 64, 0, 60, 0, 0, 127, 64, 0.5, 0, 0, 0, 0, 0, 0, 0, 0 )
+			60, 0, 1.0, 64, 0, 60, 0, 0, NS4_SFX_MOD3, 64, 0.5, 0, 0, 0, 0, 0, 0, 0, 0 )
 		},
 
 
 		{ NS4_PLAY_SAMPLE_AT_TIME( u8"C:\\My Projects\\MIDIWorks\\Exports\\Beetle Adventure Racing!\\SFX\\B00I42S00.wav",	// Box Break 3
 			3, 0, uint32_t( 0.0 * 1000000.0 ),
-			60, 0, 1.0, 64, 0, 60, 0, 0, 127, 64, 1.0, 0, 0, 0, 0, 0, 0, 0, 0 )
+			60, 0, 1.0, 64, 0, 60, 0, 0, NS4_SFX_MOD0, 64, 1.0, 0, 0, 0, 0, 0, 0, 0, 0 )
 		},
 		{ NS4_PLAY_SAMPLE_AT_TIME( u8"C:\\My Projects\\MIDIWorks\\Exports\\Beetle Adventure Racing!\\SFX\\B00I6BS00.wav",	// Nitro
 			3, 0, uint32_t( 0.0 * 1000000.0 ),
-			60, 0, 1.0, 64, 0, 60, 0, 0, 127, 64, 1.0, 0, 0, 0, 0, 0, 0, 0, 0 )
+			60, 0, 1.0, 64, 0, 60, 0, 0, NS4_SFX_MOD0, 64, 1.0, 0, 0, 0, 0, 0, 0, 0, 0 )
 		},
 
 
 		{ NS4_PLAY_SAMPLE_AT_TIME( u8"C:\\My Projects\\MIDIWorks\\Exports\\Beetle Adventure Racing!\\SFX\\B00I1ES00.wav",	// Major Crash
 			3, 35, uint32_t( 0.0 * 1000000.0 ),
-			60, 0, 1.0, 64, 0, 60, 0, 0, 127, 64, 1.0, 0, 0, 0, 0, 0, 0, 0, 0 )
+			60, 0, 1.0, 64, 0, 60, 0, 0, NS4_SFX_MOD0, 64, 1.0, 0, 0, 0, 0, 0, 0, 0, 0 )
 		},
 
 
 		{ NS4_PLAY_SAMPLE_AT_TIME( u8"C:\\My Projects\\MIDIWorks\\Exports\\Beetle Adventure Racing!\\SFX\\B00I8AS00.wav",	// You're Falling Behind!
 			3, 50, uint32_t( 0.0 * 1000000.0 ),
-			60, 0, 1.0, 64, 0, 60, 0, 0, 127, 64, 0.5, 0, 0, 0, 0, 0, 0, 0, 0 )
+			60, 0, 1.0, 64, 0, 60, 0, 0, NS4_SFX_MOD2, 64, 0.5, 0, 0, 0, 0, 0, 0, 0, 0 )
 		},
 
 
 		{ NS4_PLAY_SAMPLE_AT_TIME( u8"C:\\My Projects\\MIDIWorks\\Exports\\Beetle Adventure Racing!\\SFX\\B00I42S00.wav",	// Box Break 3
 			4, 6, uint32_t( 0.0 * 1000000.0 ),
-			60, 0, 1.0, 64, 0, 60, 0, 0, 127, 64, 1.0, 0, 0, 0, 0, 0, 0, 0, 0 )
+			60, 0, 1.0, 64, 0, 60, 0, 0, NS4_SFX_MOD0, 64, 1.0, 0, 0, 0, 0, 0, 0, 0, 0 )
 		},
 		{ NS4_PLAY_SAMPLE_AT_TIME( u8"C:\\My Projects\\MIDIWorks\\Exports\\Beetle Adventure Racing!\\SFX\\B00I6BS00.wav",	// Nitro
 			4, 6, uint32_t( 0.0 * 1000000.0 ),
-			60, 0, 1.0, 64, 0, 60, 0, 0, 127, 64, 1.0, 0, 0, 0, 0, 0, 0, 0, 0 )
+			60, 0, 1.0, 64, 0, 60, 0, 0, NS4_SFX_MOD0, 64, 1.0, 0, 0, 0, 0, 0, 0, 0, 0 )
 		},
 
 
 		{ NS4_PLAY_SAMPLE_AT_TIME( u8"C:\\My Projects\\MIDIWorks\\Exports\\Beetle Adventure Racing!\\SFX\\B00I42S00.wav",	// Box Break 3
 			4, 15, uint32_t( 0.0 * 1000000.0 ),
-			60, 0, 1.0, 64, 0, 60, 0, 0, 127, 64, 1.0, 0, 0, 0, 0, 0, 0, 0, 0 )
+			60, 0, 1.0, 64, 0, 60, 0, 0, NS4_SFX_MOD0, 64, 1.0, 0, 0, 0, 0, 0, 0, 0, 0 )
 		},
 		{ NS4_PLAY_SAMPLE_AT_TIME( u8"C:\\My Projects\\MIDIWorks\\Exports\\Beetle Adventure Racing!\\SFX\\B00I6BS00.wav",	// Nitro
 			4, 15, uint32_t( 0.0 * 1000000.0 ),
-			60, 0, 1.0, 64, 0, 60, 0, 0, 127, 64, 1.0, 0, 0, 0, 0, 0, 0, 0, 0 )
+			60, 0, 1.0, 64, 0, 60, 0, 0, NS4_SFX_MOD0, 64, 1.0, 0, 0, 0, 0, 0, 0, 0, 0 )
 		},
 
 
@@ -701,23 +754,49 @@
 	},
 },
 { u8"Beetle Adventure Racing! (U) (M3) 00000008 00CF1256.mid", u8"Beetle Adventure Racing! (U) (M3) 00000008 00CF1256.mid TrackParseDebug.txt", u8"Player Results", 0,
-	4 + 2 + 1 + 1, {
+	(2+2 + 3+3 + 9+9) + 4 + 2 + 1 + /*1 + */1, {
+		{ NS4_DELETE_NOTE( 0, 25, 2, 1, 0, 1, 63 ) },
+		{ NS4_DELETE_NOTE( 0, 41, 2, 1, 0, 1, 63 ) },
+
+		{ NS4_DELETE_NOTE( 0, 26, 1, 1, 0, 0, 62 ) },
+		{ NS4_DELETE_NOTE( 0, 42, 1, 1, 0, 0, 62 ) },
+
+
+		{ NS4_DELETE_NOTE( 9, 25, 1, 1, 0, 1, 79 ) },
+		{ NS4_DELETE_NOTE( 9, 25, 1, 1, 0, 1, 79 ) },
+		{ NS4_DELETE_NOTE( 9, 25, 1, 1, 0, 1, 79 ) },
+
+		{ NS4_DELETE_NOTE( 9, 41, 1, 1, 0, 1, 79 ) },
+		{ NS4_DELETE_NOTE( 9, 41, 1, 1, 0, 1, 79 ) },
+		{ NS4_DELETE_NOTE( 9, 41, 1, 1, 0, 1, 79 ) },
+
+
+		{ NS4_DELETE_NOTE( 9, 24, 1, 1, 0, 1, 80 ) },
+		{ NS4_DELETE_NOTE( 9, 24, 1, 1, 0, 1, 80 ) },
+		{ NS4_DELETE_NOTE( 9, 24, 1, 1, 0, 1, 80 ) },
+		{ NS4_DELETE_NOTE( 9, 24, 1, 1, 0, 1, 80 ) },
+		{ NS4_DELETE_NOTE( 9, 24, 1, 1, 0, 1, 80 ) },
+		{ NS4_DELETE_NOTE( 9, 24, 1, 1, 0, 1, 80 ) },
+		{ NS4_DELETE_NOTE( 9, 24, 1, 1, 0, 1, 80 ) },
+		{ NS4_DELETE_NOTE( 9, 24, 1, 1, 0, 1, 80 ) },
+		{ NS4_DELETE_NOTE( 9, 24, 1, 1, 0, 1, 80 ) },
+
+		{ NS4_DELETE_NOTE( 9, 40, 1, 1, 0, 1, 80 ) },
+		{ NS4_DELETE_NOTE( 9, 40, 1, 1, 0, 1, 80 ) },
+		{ NS4_DELETE_NOTE( 9, 40, 1, 1, 0, 1, 80 ) },
+		{ NS4_DELETE_NOTE( 9, 40, 1, 1, 0, 1, 80 ) },
+		{ NS4_DELETE_NOTE( 9, 40, 1, 1, 0, 1, 80 ) },
+		{ NS4_DELETE_NOTE( 9, 40, 1, 1, 0, 1, 80 ) },
+		{ NS4_DELETE_NOTE( 9, 40, 1, 1, 0, 1, 80 ) },
+		{ NS4_DELETE_NOTE( 9, 40, 1, 1, 0, 1, 80 ) },
+		{ NS4_DELETE_NOTE( 9, 40, 1, 1, 0, 1, 80 ) },
+
+
+
 		{ NS4_PLAY_SAMPLE_AT_TIME( u8"C:\\My Projects\\MIDIWorks\\Exports\\Beetle Adventure Racing!\\SFX\\B00IF8S00.wav",	// Point Tally
 			0, 3, uint32_t( 0.0 * 1000000.0 ),
-			60, 0, 1.0, 64, 0, 60, 0, 0, 127, 64, 1.0, 0, 0, 0, 0, 0, 0, 0, 0 )
+			60, 0, 1.0, 64, 0, 60, 0, 0, NS4_SFX_MOD4, 64, 1.0, 0, 0, 0, 0, 0, 0, 0, 0 )
 		},
-		//{ NS4_PLAY_SAMPLE_AT_TIME( u8"C:\\My Projects\\MIDIWorks\\Exports\\Beetle Adventure Racing!\\SFX\\B00IF8S00.wav",	// Point Tally
-		//	0, 3, uint32_t( 0.46 * 1000000.0 ),
-		//	60, 0, 1.0, 64, 0, 60, 0, 0, 127, 64, 1.0, 0, 0, 0, 0, 0, 0, 0, 0 )
-		//},
-		//{ NS4_PLAY_SAMPLE_AT_TIME( u8"C:\\My Projects\\MIDIWorks\\Exports\\Beetle Adventure Racing!\\SFX\\B00IF8S00.wav",	// Point Tally
-		//	0, 3, uint32_t( 0.92 * 1000000.0 ),
-		//	60, 0, 1.0, 64, 0, 60, 0, 0, 127, 64, 1.0, 0, 0, 0, 0, 0, 0, 0, 0 )
-		//},
-		//{ NS4_PLAY_SAMPLE_AT_TIME( u8"C:\\My Projects\\MIDIWorks\\Exports\\Beetle Adventure Racing!\\SFX\\B00IF8S00.wav",	// Point Tally
-		//	0, 4, uint32_t( 0.38 * 1000000.0 ),
-		//	60, 0, 1.0, 64, 0, 60, 0, 0, 127, 64, 1.0, 0, 0, 0, 0, 0, 0, 0, 0 )
-		//},
 		{ NS4_PLAY_SAMPLE_STOP( uint32_t( ~0 ), 0, 4, uint32_t( 0.48 * 1000000.0 ), 0.0, 0.1 ) },
 		{ NS4_PLAY_SAMPLE_AT_TIME( u8"C:\\My Projects\\MIDIWorks\\Exports\\Beetle Adventure Racing!\\SFX\\B00IEBS00.wav",	// You Get a Continue!
 			0, 4, uint32_t( 0.38 * 1000000.0 ),
@@ -725,17 +804,17 @@
 		},
 		{ NS4_PLAY_SAMPLE_AT_TIME( u8"C:\\My Projects\\MIDIWorks\\Exports\\Beetle Adventure Racing!\\SFX\\B00IF7S00.wav",	// Point Total Ding
 			0, 4, uint32_t( 0.48 * 1000000.0 ),
-			60, 0, 1.0, 64, 0, 60, 0, 0, 127, 64, 1.0, 0, 0, 0, 0, 0, 0, 0, 0 )
+			60, 0, 1.0, 64, 0, 60, 0, 0, NS4_SFX_MOD4, 64, 1.0, 0, 0, 0, 0, 0, 0, 0, 0 )
 		},
 
 
 		{ NS4_PLAY_SAMPLE_AT_TIME( u8"C:\\My Projects\\MIDIWorks\\Exports\\Beetle Adventure Racing!\\SFX\\B00IABS00.wav",	// Menu Selection
 			1, 0, uint32_t( 0.0 * 1000000.0 ),
-			60, 0, 1.0, 64, 0, 60, 0, 0, 127, 64, 1.0, 0, 0, 0, 0, 0, 0, 0, 0 )
+			60, 0, 1.0, 64, 0, 60, 0, 0, NS4_SFX_MOD4, 64, 1.0, 0, 0, 0, 0, 0, 0, 0, 0 )
 		},
 		{ NS4_PLAY_SAMPLE_AT_TIME( u8"C:\\My Projects\\MIDIWorks\\Exports\\Beetle Adventure Racing!\\SFX\\B00IABS00.wav",	// Menu Selection
 			1, 10, uint32_t( 0.0 * 1000000.0 ),
-			60, 0, 1.0, 64, 0, 60, 0, 0, 127, 64, 1.0, 0, 0, 0, 0, 0, 0, 0, 0 )
+			60, 0, 1.0, 64, 0, 60, 0, 0, NS4_SFX_MOD4, 64, 1.0, 0, 0, 0, 0, 0, 0, 0, 0 )
 		},
 
 
@@ -745,14 +824,14 @@
 		},
 
 
-		{ NS4_PLAY_SAMPLE_AT_TIME( u8"C:\\My Projects\\MIDIWorks\\Exports\\Beetle Adventure Racing!\\SFX\\B00I0BS00.wav",	// Beep Beep
-			2, 00, uint32_t( 0.0 * 1000000.0 ),
-			60, 0, 1.0, 64, 0, 60, 0, 0, 127, 64, 1.0, 0, 0, 0, 0, 0, 0, 0, 0 )
-		},
+		//{ NS4_PLAY_SAMPLE_AT_TIME( u8"C:\\My Projects\\MIDIWorks\\Exports\\Beetle Adventure Racing!\\SFX\\B00I0BS00.wav",	// Beep Beep
+		//	2, 00, uint32_t( 0.0 * 1000000.0 ),
+		//	60, 0, 1.0, 64, 0, 60, 0, 0, 127, 64, 1.0, 0, 0, 0, 0, 0, 0, 0, 0 )
+		//},
 
 
 		{ NS4_PLAY_SAMPLE_AT_TIME( u8"C:\\My Projects\\MIDIWorks\\Exports\\Beetle Adventure Racing!\\SFX\\B00IDES00.wav",	// Hit the Binus Circuit!
-			2, 35, uint32_t( 0.0 * 1000000.0 ),
+			1, 56, uint32_t( 0.0 * 1000000.0 ),
 			60, 0, 1.0, 64, 0, 60, 0, 0, 127, 64, 0.5, 0, 0, 0, 0, 0, 0, 0, 0 )
 		},
 	},
@@ -879,25 +958,25 @@
 
 		{ NS4_PLAY_SAMPLE_AT_TIME( u8"C:\\My Projects\\MIDIWorks\\Exports\\Beetle Adventure Racing!\\SFX\\B00I02S00.wav",	// Burning Rubber
 			0, 16, uint32_t( 0.3 * 1000000.0 ),
-			60, 0, 1.0, 64, 0, 60, 0, 0, 127, 64, 1.0, 0, 0, 0, 0, 0, 0, 0, 0 )
+			60, 0, 1.0, 64, 0, 60, 0, 0, NS4_SFX_MOD0, 64, 1.0, 0, 0, 0, 0, 0, 0, 0, 0 )
 		},
 		{ NS4_PLAY_SAMPLE_STOP( uint32_t( ~0 ), 0, 16 + 1, uint32_t( (0.3 + 2.0 / 3.0) * 1000000.0 ), 0.0, 0.5 ) },
 
 
 		{ NS4_PLAY_SAMPLE_AT_TIME( u8"C:\\My Projects\\MIDIWorks\\Exports\\Beetle Adventure Racing!\\SFX\\B00I42S00.wav",	// Box Break 3
 			0, 32, uint32_t( 0.0 * 1000000.0 ),
-			60, 0, 1.0, 64, 0, 60, 0, 0, 127, 64, 1.0, 0, 0, 0, 0, 0, 0, 0, 0 )
+			60, 0, 1.0, 64, 0, 60, 0, 0, NS4_SFX_MOD0, 64, 1.0, 0, 0, 0, 0, 0, 0, 0, 0 )
 		},
 		{ NS4_PLAY_SAMPLE_AT_TIME( u8"C:\\My Projects\\MIDIWorks\\Exports\\Beetle Adventure Racing!\\SFX\\B00IB5S00.wav",	// Groovy!
 			0, 32, uint32_t( 0.0 * 1000000.0 ),
-			60, 0, 1.0, 64, 0, 60, 0, 0, 127, 64, 0.5, 0, 0, 0, 0, 0, 0, 0, 0 )
+			60, 0, 1.0, 64, 0, 60, 0, 0, NS4_SFX_MOD2, 64, 0.5, 0, 0, 0, 0, 0, 0, 0, 0 )
 		},
 
 
 #define NS4_DUR			(12.77)
 		{ NS4_PLAY_SAMPLE_AT_TIME( u8"C:\\My Projects\\MIDIWorks\\Exports\\Beetle Adventure Racing!\\SFX\\B00I00S00.wav",	// Waterfall
 			1, 30, uint32_t( 0.0 * 1000000.0 ),
-			60, 0, 1.0, 64, 0, 60, 0, 0, 127, 64, 1.0, 0, 0, 0, 0, 0, 0, 0, 0 )
+			60, 0, 1.0, 64, 0, 60, 0, 0, NS4_SFX_MOD0, 64, 1.0, 0, 0, 0, 0, 0, 0, 0, 0 )
 		},
 		{ NS4_PLAY_SAMPLE_STOP( uint32_t( ~0 ), 1, 30, uint32_t( NS4_DUR * 1000000.0 ), 0.3, 0.3 ) },
 
@@ -910,7 +989,7 @@
 
 		{ NS4_PLAY_SAMPLE_AT_TIME( u8"C:\\My Projects\\MIDIWorks\\Exports\\Beetle Adventure Racing!\\SFX\\B00I0AS00.wav",	// Kerplunk
 			1, 35, uint32_t( 0.8 * 1000000.0 ),
-			60, 0, 1.0, 64, 0, 60, 0, 0, 127, 64, 1.0, 0, 0, 0, 0, 0, 0, 0, 0 )
+			60, 0, 1.0, 64, 0, 60, 0, 0, NS4_SFX_MOD0, 64, 1.0, 0, 0, 0, 0, 0, 0, 0, 0 )
 		},
 
 
@@ -930,43 +1009,43 @@
 
 		{ NS4_PLAY_SAMPLE_AT_TIME( u8"C:\\My Projects\\MIDIWorks\\Exports\\Beetle Adventure Racing!\\SFX\\B00I0BS00.wav",	// Beep Beep
 			2, 00, uint32_t( 0.0 * 1000000.0 ),
-			60, 0, 1.0, 64, 0, 60, 0, 0, 127, 64, 1.0, 0, 0, 0, 0, 0, 0, 0, 0 )
+			60, 0, 1.0, 64, 0, 60, 0, 0, NS4_SFX_MOD0, 64, 1.0, 0, 0, 0, 0, 0, 0, 0, 0 )
 		},
 
 
 		{ NS4_PLAY_SAMPLE_AT_TIME( u8"C:\\My Projects\\MIDIWorks\\Exports\\Beetle Adventure Racing!\\SFX\\B00I8BS00.wav",	// Pick Up the Pace!
 			2, 13, uint32_t( 0.0 * 1000000.0 ),
-			60, 0, 1.0, 64, 0, 60, 0, 0, 127, 64, 0.5, 0, 0, 0, 0, 0, 0, 0, 0 )
+			60, 0, 1.0, 64, 0, 60, 0, 0, NS4_SFX_MOD2, 64, 0.5, 0, 0, 0, 0, 0, 0, 0, 0 )
 		},
 
 
 		{ NS4_PLAY_SAMPLE_AT_TIME( u8"C:\\My Projects\\MIDIWorks\\Exports\\Beetle Adventure Racing!\\SFX\\B00I42S00.wav",	// Box Break 3
 			2, 20, uint32_t( 0.0 * 1000000.0 ),
-			60, 0, 1.0, 64, 0, 60, 0, 0, 127, 64, 1.0, 0, 0, 0, 0, 0, 0, 0, 0 )
+			60, 0, 1.0, 64, 0, 60, 0, 0, NS4_SFX_MOD0, 64, 1.0, 0, 0, 0, 0, 0, 0, 0, 0 )
 		},
 		{ NS4_PLAY_SAMPLE_AT_TIME( u8"C:\\My Projects\\MIDIWorks\\Exports\\Beetle Adventure Racing!\\SFX\\B00I6BS00.wav",	// Nitro
 			2, 20, uint32_t( 0.0 * 1000000.0 ),
-			60, 0, 1.0, 64, 0, 60, 0, 0, 127, 64, 1.0, 0, 0, 0, 0, 0, 0, 0, 0 )
+			60, 0, 1.0, 64, 0, 60, 0, 0, NS4_SFX_MOD0, 64, 1.0, 0, 0, 0, 0, 0, 0, 0, 0 )
 		},
 
 
 		{ NS4_PLAY_SAMPLE_AT_TIME( u8"C:\\My Projects\\MIDIWorks\\Exports\\Beetle Adventure Racing!\\SFX\\B00I42S00.wav",	// Box Break 3
 			3, 0, uint32_t( 0.0 * 1000000.0 ),
-			60, 0, 1.0, 64, 0, 60, 0, 0, 127, 64, 1.0, 0, 0, 0, 0, 0, 0, 0, 0 )
+			60, 0, 1.0, 64, 0, 60, 0, 0, NS4_SFX_MOD0, 64, 1.0, 0, 0, 0, 0, 0, 0, 0, 0 )
 		},
 		{ NS4_PLAY_SAMPLE_AT_TIME( u8"C:\\My Projects\\MIDIWorks\\Exports\\Beetle Adventure Racing!\\SFX\\B00I7DS00.wav",	// Bonus-Small
 			3, 0, uint32_t( 0.0 * 1000000.0 ),
-			60, 0, 1.0, 64, 0, 60, 0, 0, 127, 64, 1.0, 0, 0, 0, 0, 0, 0, 0, 0 )
+			60, 0, 1.0, 64, 0, 60, 0, 0, NS4_SFX_MOD0, 64, 1.0, 0, 0, 0, 0, 0, 0, 0, 0 )
 		},
 
 
 		{ NS4_PLAY_SAMPLE_AT_TIME( u8"C:\\My Projects\\MIDIWorks\\Exports\\Beetle Adventure Racing!\\SFX\\B00I42S00.wav",	// Box Break 3
 			3, 30, uint32_t( 0.0 * 1000000.0 ),
-			60, 0, 1.0, 64, 0, 60, 0, 0, 127, 64, 1.0, 0, 0, 0, 0, 0, 0, 0, 0 )
+			60, 0, 1.0, 64, 0, 60, 0, 0, NS4_SFX_MOD0, 64, 1.0, 0, 0, 0, 0, 0, 0, 0, 0 )
 		},
 		{ NS4_PLAY_SAMPLE_AT_TIME( u8"C:\\My Projects\\MIDIWorks\\Exports\\Beetle Adventure Racing!\\SFX\\B00I7FS00.wav",	// Bonus-Large
 			3, 30, uint32_t( 0.0 * 1000000.0 ),
-			60, 0, 1.0, 64, 0, 60, 0, 0, 127, 64, 1.0, 0, 0, 0, 0, 0, 0, 0, 0 )
+			60, 0, 1.0, 64, 0, 60, 0, 0, NS4_SFX_MOD0, 64, 1.0, 0, 0, 0, 0, 0, 0, 0, 0 )
 		},
 	},
 },
@@ -1117,72 +1196,72 @@
 
 		{ NS4_PLAY_SAMPLE_AT_TIME( u8"C:\\My Projects\\MIDIWorks\\Exports\\Beetle Adventure Racing!\\SFX\\B00I47S00.wav",	// Metal Jostle
 			0, 30, uint32_t( 0.0 * 1000000.0 ),
-			60, 0, 1.0, 64, 0, 60, 0, 0, 127, 64, 1.0, 0, 0, 0, 0, 0, 0, 0, 0 )
+			60, 0, 1.0, 64, 0, 60, 0, 0, NS4_SFX_MOD3, 64, 1.0, 0, 0, 0, 0, 0, 0, 0, 0 )
 		},
 		{ NS4_PLAY_SAMPLE_AT_TIME( u8"C:\\My Projects\\MIDIWorks\\Exports\\Beetle Adventure Racing!\\SFX\\B00I9CS00.wav",	// Honk
 			0, 30, uint32_t( 0.2 * 1000000.0 ),
-			60, 0, 1.0, 64, 0, 60, 0, 0, 127, 64, 1.0, 0, 0, 0, 0, 0, 0, 0, 0 )
+			60, 0, 1.0, 64, 0, 60, 0, 0, NS4_SFX_MOD0, 64, 1.0, 0, 0, 0, 0, 0, 0, 0, 0 )
 		},
 
 
 		{ NS4_PLAY_SAMPLE_AT_TIME( u8"C:\\My Projects\\MIDIWorks\\Exports\\Beetle Adventure Racing!\\SFX\\B00I42S00.wav",	// Box Break 3
 			1, 0, uint32_t( 0.0 * 1000000.0 ),
-			60, 0, 1.0, 64, 0, 60, 0, 0, 127, 64, 1.0, 0, 0, 0, 0, 0, 0, 0, 0 )
+			60, 0, 1.0, 64, 0, 60, 0, 0, NS4_SFX_MOD0, 64, 1.0, 0, 0, 0, 0, 0, 0, 0, 0 )
 		},
 		{ NS4_PLAY_SAMPLE_AT_TIME( u8"C:\\My Projects\\MIDIWorks\\Exports\\Beetle Adventure Racing!\\SFX\\B00I6BS00.wav",	// Nitro
 			1, 0, uint32_t( 0.0 * 1000000.0 ),
-			60, 0, 1.0, 64, 0, 60, 0, 0, 127, 64, 1.0, 0, 0, 0, 0, 0, 0, 0, 0 )
+			60, 0, 1.0, 64, 0, 60, 0, 0, NS4_SFX_MOD0, 64, 1.0, 0, 0, 0, 0, 0, 0, 0, 0 )
 		},
 
 
 		{ NS4_PLAY_SAMPLE_AT_TIME( u8"C:\\My Projects\\MIDIWorks\\Exports\\Beetle Adventure Racing!\\SFX\\B00I42S00.wav",	// Box Break 3
 			1, 45, uint32_t( 0.0 * 1000000.0 ),
-			60, 0, 1.0, 64, 0, 60, 0, 0, 127, 64, 1.0, 0, 0, 0, 0, 0, 0, 0, 0 )
+			60, 0, 1.0, 64, 0, 60, 0, 0, NS4_SFX_MOD0, 64, 1.0, 0, 0, 0, 0, 0, 0, 0, 0 )
 		},
 		{ NS4_PLAY_SAMPLE_AT_TIME( u8"C:\\My Projects\\MIDIWorks\\Exports\\Beetle Adventure Racing!\\SFX\\B00I7DS00.wav",	// Bonus-Small
 			1, 45, uint32_t( 0.0 * 1000000.0 ),
-			60, 0, 1.0, 64, 0, 60, 0, 0, 127, 64, 1.0, 0, 0, 0, 0, 0, 0, 0, 0 )
+			60, 0, 1.0, 64, 0, 60, 0, 0, NS4_SFX_MOD0, 64, 1.0, 0, 0, 0, 0, 0, 0, 0, 0 )
 		},
 
 
 		{ NS4_PLAY_SAMPLE_AT_TIME( u8"C:\\My Projects\\MIDIWorks\\Exports\\Beetle Adventure Racing!\\SFX\\B00I0BS00.wav",	// Beep Beep
 			2, 00, uint32_t( 0.0 * 1000000.0 ),
-			60, 0, 1.0, 64, 0, 60, 0, 0, 127, 64, 1.0, 0, 0, 0, 0, 0, 0, 0, 0 )
+			60, 0, 1.0, 64, 0, 60, 0, 0, NS4_SFX_MOD0, 64, 1.0, 0, 0, 0, 0, 0, 0, 0, 0 )
 		},
 
 
 		{ NS4_PLAY_SAMPLE_AT_TIME( u8"C:\\My Projects\\MIDIWorks\\Exports\\Beetle Adventure Racing!\\SFX\\B00I42S00.wav",	// Box Break 3
 			2, 30, uint32_t( 0.0 * 1000000.0 ),
-			60, 0, 1.0, 64, 0, 60, 0, 0, 127, 64, 1.0, 0, 0, 0, 0, 0, 0, 0, 0 )
+			60, 0, 1.0, 64, 0, 60, 0, 0, NS4_SFX_MOD0, 64, 1.0, 0, 0, 0, 0, 0, 0, 0, 0 )
 		},
 		{ NS4_PLAY_SAMPLE_AT_TIME( u8"C:\\My Projects\\MIDIWorks\\Exports\\Beetle Adventure Racing!\\SFX\\B00I7FS00.wav",	// Bonus-Large
 			2, 30, uint32_t( 0.0 * 1000000.0 ),
-			60, 0, 1.0, 64, 0, 60, 0, 0, 127, 64, 1.0, 0, 0, 0, 0, 0, 0, 0, 0 )
+			60, 0, 1.0, 64, 0, 60, 0, 0, NS4_SFX_MOD0, 64, 1.0, 0, 0, 0, 0, 0, 0, 0, 0 )
 		},
 
 
 		{ NS4_PLAY_SAMPLE_AT_TIME( u8"C:\\My Projects\\MIDIWorks\\Exports\\Beetle Adventure Racing!\\SFX\\B00I42S00.wav",	// Box Break 3
 			3, 15, uint32_t( 0.0 * 1000000.0 ),
-			60, 0, 1.0, 64, 0, 60, 0, 0, 127, 64, 1.0, 0, 0, 0, 0, 0, 0, 0, 0 )
+			60, 0, 1.0, 64, 0, 60, 0, 0, NS4_SFX_MOD0, 64, 1.0, 0, 0, 0, 0, 0, 0, 0, 0 )
 		},
 		{ NS4_PLAY_SAMPLE_AT_TIME( u8"C:\\My Projects\\MIDIWorks\\Exports\\Beetle Adventure Racing!\\SFX\\B00I6BS00.wav",	// Nitro
 			3, 15, uint32_t( 0.0 * 1000000.0 ),
-			60, 0, 1.0, 64, 0, 60, 0, 0, 127, 64, 1.0, 0, 0, 0, 0, 0, 0, 0, 0 )
+			60, 0, 1.0, 64, 0, 60, 0, 0, NS4_SFX_MOD0, 64, 1.0, 0, 0, 0, 0, 0, 0, 0, 0 )
 		},
 
 
 		{ NS4_PLAY_SAMPLE_AT_TIME( u8"C:\\My Projects\\MIDIWorks\\Exports\\Beetle Adventure Racing!\\SFX\\B00I42S00.wav",	// Box Break 3
 			3, 16, uint32_t( 0.0 * 1000000.0 ),
-			60, 0, 1.0, 64, 0, 60, 0, 0, 127, 64, 1.0, 0, 0, 0, 0, 0, 0, 0, 0 )
+			60, 0, 1.0, 64, 0, 60, 0, 0, NS4_SFX_MOD0, 64, 1.0, 0, 0, 0, 0, 0, 0, 0, 0 )
 		},
 		{ NS4_PLAY_SAMPLE_AT_TIME( u8"C:\\My Projects\\MIDIWorks\\Exports\\Beetle Adventure Racing!\\SFX\\B00I7DS00.wav",	// Bonus-Small
-			31, 16, uint32_t( 0.0 * 1000000.0 ),
-			60, 0, 1.0, 64, 0, 60, 0, 0, 127, 64, 1.0, 0, 0, 0, 0, 0, 0, 0, 0 )
+			3, 16, uint32_t( 0.0 * 1000000.0 ),
+			60, 0, 1.0, 64, 0, 60, 0, 0, NS4_SFX_MOD0, 64, 1.0, 0, 0, 0, 0, 0, 0, 0, 0 )
 		},
 	},
 },
 { u8"Beetle Adventure Racing! (U) (M3) 00000004 00CEFF2A.mid", u8"Beetle Adventure Racing! (U) (M3) 00000004 00CEFF2A.mid TrackParseDebug.txt", u8"Wicked Woods", 0,
-	(1+3 + 3+4+4+12+14+14+9+18+5+10+10+9+26 + 5+19+9+8) + 1 + 1 + 1 + 2 + 1 + 2 + 1 + 1 + 1 + 2 + 1 + 1 + 1 + 2 + 2 + 2 + 1, {
+	(1+3 + 3+4+4+12+14+14+9+18+5+10+10+9+26 + 5+19+9+8) + 1 + 1 + 1 + 2 + 1 + 2 + 1 + 1 + 1 + 2 + 1 + 1 + 1 + 2 + 2 + 2/* + 1*/, {
 		// 1
 		{ NS4_DELETE_NOTE( 0, 28, 1, 1, 0, 0, 63 ) },
 
@@ -1415,123 +1494,346 @@
 
 		{ NS4_PLAY_SAMPLE_AT_TIME( u8"C:\\My Projects\\MIDIWorks\\Exports\\Beetle Adventure Racing!\\SFX\\B00I98S00.wav",	// Howl
 			0, 16, uint32_t( 0.0 * 1000000.0 ),
-			60, 0, 1.0, 64, 0, 60, 0, 0, 106, 64, 0.5, 0, 0, 0, 0, 0, 0, 0, 0 )
+			60, 0, 1.0, 64, 0, 60, 0, 0, uint8_t( std::pow( 106.0 / 127.0, 2.0 ) * NS4_SFX_MOD1 ), 64, 0.5, 0, 0, 0, 0, 0, 0, 0, 0 )
 		},
 
 
 		{ NS4_PLAY_SAMPLE_AT_TIME( u8"C:\\My Projects\\MIDIWorks\\Exports\\Beetle Adventure Racing!\\SFX\\B00I92S00.wav",	// Owl
 			0, 28, uint32_t( 0.0 * 1000000.0 ),
-			60, 0, 1.0, 64, 0, 60, 0, 0, 127, 64, 0.5, 0, 0, 0, 0, 0, 0, 0, 0 )
+			60, 0, 1.0, 64, 0, 60, 0, 0, NS4_SFX_MOD0, 64, 0.5, 0, 0, 0, 0, 0, 0, 0, 0 )
 		},
 
 
 		{ NS4_PLAY_SAMPLE_AT_TIME( u8"C:\\My Projects\\MIDIWorks\\Exports\\Beetle Adventure Racing!\\SFX\\B00I42S00.wav",	// Box Break 3
 			0, 31, uint32_t( 0.0 * 1000000.0 ),
-			60, 0, 1.0, 64, 0, 60, 0, 0, 127, 64, 1.0, 0, 0, 0, 0, 0, 0, 0, 0 )
+			60, 0, 1.0, 64, 0, 60, 0, 0, NS4_SFX_MOD0, 64, 1.0, 0, 0, 0, 0, 0, 0, 0, 0 )
 		},
 		{ NS4_PLAY_SAMPLE_AT_TIME( u8"C:\\My Projects\\MIDIWorks\\Exports\\Beetle Adventure Racing!\\SFX\\B00IEDS00.wav",	// Alright!
 			0, 31, uint32_t( 0.0 * 1000000.0 ),
-			60, 0, 1.0, 64, 0, 60, 0, 0, 127, 64, 0.5, 0, 0, 0, 0, 0, 0, 0, 0 )
+			60, 0, 1.0, 64, 0, 60, 0, 0, NS4_SFX_MOD3, 64, 0.5, 0, 0, 0, 0, 0, 0, 0, 0 )
 		},
 
 
 		{ NS4_PLAY_SAMPLE_AT_TIME( u8"C:\\My Projects\\MIDIWorks\\Exports\\Beetle Adventure Racing!\\SFX\\B00I9ES00.wav",	// Bell Tower
 			1, 0, uint32_t( 0.0 * 1000000.0 ),
-			60, 0, 1.0, 64, 0, 60, 0, 0, 127, 64, 0.5, 0, 0, 0, 0, 0, 0, 0, 0 )
+			60, 0, 1.0, 64, 0, 60, 0, 0, NS4_SFX_MOD0, 64, 0.5, 0, 0, 0, 0, 0, 0, 0, 0 )
 		},
 
 
 		{ NS4_PLAY_SAMPLE_AT_TIME( u8"C:\\My Projects\\MIDIWorks\\Exports\\Beetle Adventure Racing!\\SFX\\B00I91S00.wav",	// Wind and Chimes
 			1, 10, uint32_t( 0.0 * 1000000.0 ),
-			60, 0, 1.0, 64, 0, 60, 0, 0, 114, 64, 1.0, 0, 0, 0, 0, 0, 0, 0, 0 )
+			60, 0, 1.0, 64, 0, 60, 0, 0, uint8_t( std::pow( 114.0 / 127.0, 2.0 ) * NS4_SFX_MOD0 ), 64, 1.0, 0, 0, 0, 0, 0, 0, 0, 0 )
 		},
 		{ NS4_PLAY_SAMPLE_STOP( uint32_t( ~0 ), 1, 10, uint32_t( 2.41 * 2.0 * 1000000.0 ), 0.0, 0.5 ) },
 
 
 		{ NS4_PLAY_SAMPLE_AT_TIME( u8"C:\\My Projects\\MIDIWorks\\Exports\\Beetle Adventure Racing!\\SFX\\B00I90S00.wav",	// Evil Laugh 1
 			1, 15, uint32_t( 0.0 * 1000000.0 ),
-			60, 0, 1.0, 64, 0, 60, 0, 0, 127, 64, 0.5, 0, 0, 0, 0, 0, 0, 0, 0 )
+			60, 0, 1.0, 64, 0, 60, 0, 0, NS4_SFX_MOD0, 64, 0.5, 0, 0, 0, 0, 0, 0, 0, 0 )
 		},
 
 
 		{ NS4_PLAY_SAMPLE_AT_TIME( u8"C:\\My Projects\\MIDIWorks\\Exports\\Beetle Adventure Racing!\\SFX\\B00I92S00.wav",	// Owl
 			1, 30, uint32_t( 0.0 * 1000000.0 ),
-			60, 0, 1.0, 64, 0, 60, 0, 0, 127, 64, 0.5, 0, 0, 0, 0, 0, 0, 0, 0 )
+			60, 0, 1.0, 64, 0, 60, 0, 0, NS4_SFX_MOD0, 64, 0.5, 0, 0, 0, 0, 0, 0, 0, 0 )
 		},
 
 
 		{ NS4_PLAY_SAMPLE_AT_TIME( u8"C:\\My Projects\\MIDIWorks\\Exports\\Beetle Adventure Racing!\\SFX\\B00I0BS00.wav",	// Beep Beep
 			2, 00, uint32_t( 0.0 * 1000000.0 ),
-			60, 0, 1.0, 64, 0, 60, 0, 0, 127, 64, 1.0, 0, 0, 0, 0, 0, 0, 0, 0 )
+			60, 0, 1.0, 64, 0, 60, 0, 0, NS4_SFX_MOD0, 64, 1.0, 0, 0, 0, 0, 0, 0, 0, 0 )
 		},
 
 
 		{ NS4_PLAY_SAMPLE_AT_TIME( u8"C:\\My Projects\\MIDIWorks\\Exports\\Beetle Adventure Racing!\\SFX\\B00I91S00.wav",	// Wind and Chimes
 			2, 10, uint32_t( 0.0 * 1000000.0 ),
-			60, 0, 1.0, 64, 0, 60, 0, 0, 114, 64, 1.0, 0, 0, 0, 0, 0, 0, 0, 0 )
+			60, 0, 1.0, 64, 0, 60, 0, 0, uint8_t( std::pow( 114.0 / 127.0, 2.0 ) * NS4_SFX_MOD0 ), 64, 1.0, 0, 0, 0, 0, 0, 0, 0, 0 )
 		},
 		{ NS4_PLAY_SAMPLE_STOP( uint32_t( ~0 ), 2, 10, uint32_t( 2.41 * 2.0 * 1000000.0 ), 0.0, 0.5 ) },
 
 
 		{ NS4_PLAY_SAMPLE_AT_TIME( u8"C:\\My Projects\\MIDIWorks\\Exports\\Beetle Adventure Racing!\\SFX\\B00IAAS00.wav",	// Evil Laugh 2
 			2, 15, uint32_t( 0.0 * 1000000.0 ),
-			60, 0, 1.0, 64, 0, 60, 0, 0, 127, 64, 0.5, 0, 0, 0, 0, 0, 0, 0, 0 )
+			60, 0, 1.0, 64, 0, 60, 0, 0, NS4_SFX_MOD0, 64, 0.5, 0, 0, 0, 0, 0, 0, 0, 0 )
 		},
 
 
 		{ NS4_PLAY_SAMPLE_AT_TIME( u8"C:\\My Projects\\MIDIWorks\\Exports\\Beetle Adventure Racing!\\SFX\\B00I9ES00.wav",	// Bell Tower
 			2, 35, uint32_t( 0.0 * 1000000.0 ),
-			60, 0, 1.0, 64, 0, 60, 0, 0, 127, 64, 0.5, 0, 0, 0, 0, 0, 0, 0, 0 )
+			60, 0, 1.0, 64, 0, 60, 0, 0, NS4_SFX_MOD0, 64, 0.5, 0, 0, 0, 0, 0, 0, 0, 0 )
 		},
 
 
 		{ NS4_PLAY_SAMPLE_AT_TIME( u8"C:\\My Projects\\MIDIWorks\\Exports\\Beetle Adventure Racing!\\SFX\\B00I79S00.wav",	// Final Lap
 			2, 47, uint32_t( 0.0 * 1000000.0 ),
-			60, 0, 1.0, 64, 0, 60, 0, 0, 127, 64, 0.5, 0, 0, 0, 0, 0, 0, 0, 0 )
+			60, 0, 1.0, 64, 0, 60, 0, 0, NS4_SFX_MOD0, 64, 0.5, 0, 0, 0, 0, 0, 0, 0, 0 )
 		},
 
 
 		{ NS4_PLAY_SAMPLE_AT_TIME( u8"C:\\My Projects\\MIDIWorks\\Exports\\Beetle Adventure Racing!\\SFX\\B00I42S00.wav",	// Box Break 3
 			3, 15, uint32_t( 0.0 * 1000000.0 ),
-			60, 0, 1.0, 64, 0, 60, 0, 0, 127, 64, 1.0, 0, 0, 0, 0, 0, 0, 0, 0 )
+			60, 0, 1.0, 64, 0, 60, 0, 0, NS4_SFX_MOD0, 64, 1.0, 0, 0, 0, 0, 0, 0, 0, 0 )
 		},
 		{ NS4_PLAY_SAMPLE_AT_TIME( u8"C:\\My Projects\\MIDIWorks\\Exports\\Beetle Adventure Racing!\\SFX\\B00I7DS00.wav",	// Bonus-Small
 			3, 15, uint32_t( 0.0 * 1000000.0 ),
-			60, 0, 1.0, 64, 0, 60, 0, 0, 127, 64, 1.0, 0, 0, 0, 0, 0, 0, 0, 0 )
+			60, 0, 1.0, 64, 0, 60, 0, 0, NS4_SFX_MOD0, 64, 1.0, 0, 0, 0, 0, 0, 0, 0, 0 )
 		},
 
 
 		{ NS4_PLAY_SAMPLE_AT_TIME( u8"C:\\My Projects\\MIDIWorks\\Exports\\Beetle Adventure Racing!\\SFX\\B00I42S00.wav",	// Box Break 3
 			3, 16, uint32_t( 0.0 * 1000000.0 ),
-			60, 0, 1.0, 64, 0, 60, 0, 0, 127, 64, 1.0, 0, 0, 0, 0, 0, 0, 0, 0 )
+			60, 0, 1.0, 64, 0, 60, 0, 0, NS4_SFX_MOD0, 64, 1.0, 0, 0, 0, 0, 0, 0, 0, 0 )
 		},
 		{ NS4_PLAY_SAMPLE_AT_TIME( u8"C:\\My Projects\\MIDIWorks\\Exports\\Beetle Adventure Racing!\\SFX\\B00I7DS00.wav",	// Bonus-Small
 			3, 16, uint32_t( 0.0 * 1000000.0 ),
-			60, 0, 1.0, 64, 0, 60, 0, 0, 127, 64, 1.0, 0, 0, 0, 0, 0, 0, 0, 0 )
+			60, 0, 1.0, 64, 0, 60, 0, 0, NS4_SFX_MOD0, 64, 1.0, 0, 0, 0, 0, 0, 0, 0, 0 )
 		},
 
 
 		{ NS4_PLAY_SAMPLE_AT_TIME( u8"C:\\My Projects\\MIDIWorks\\Exports\\Beetle Adventure Racing!\\SFX\\B00I93S00.wav",	// Eerie Siren
 			3, 26, uint32_t( 0.0 * 1000000.0 ),
-			60, 0, 1.0, 64, 0, 60, 0, 0, 127, 64, 1.0, 0, 0, 0, 0, 0, 0, 0, 0 )
+			60, 0, 1.0, 64, 0, 60, 0, 0, NS4_SFX_MOD0, 64, 1.0, 0, 0, 0, 0, 0, 0, 0, 0 )
 		},
 		{ NS4_PLAY_SAMPLE_STOP( uint32_t( ~0 ), 3, 26, uint32_t( 2.83 * 2.0 * 1000000.0 ), 0.0, 0.5 ) },
 
 
-		{ NS4_PLAY_SAMPLE_AT_TIME( u8"C:\\My Projects\\MIDIWorks\\Exports\\Beetle Adventure Racing!\\SFX\\B00I94S00.wav",	// Scream
-			3, 27, uint32_t( 0.0 * 1000000.0 ),
-			60, 0, 1.0, 64, 0, 60, 0, 0, 127, 64, 0.5, 0, 0, 0, 0, 0, 0, 0, 0 )
-		},
+		//{ NS4_PLAY_SAMPLE_AT_TIME( u8"C:\\My Projects\\MIDIWorks\\Exports\\Beetle Adventure Racing!\\SFX\\B00I94S00.wav",	// Scream
+		//	3, 27, uint32_t( 0.0 * 1000000.0 ),
+		//	60, 0, 1.0, 64, 0, 60, 0, 0, NS4_SFX_MOD0, 64, 0.5, 0, 0, 0, 0, 0, 0, 0, 0 )
+		//},
 	},
 },
 
 #endif
 
-{ u8"Beetle Adventure Racing! (U) (M3) 00000007 00CF0D02.mid", u8"Beetle Adventure Racing! (U) (M3) 00000007 00CF0D02.mid TrackParseDebug.txt", u8"Player Results (Alternative)", 0,
-	1 + 3 + 1 + 2 + 1 + 2 + 1 + 2 + 2 + 2, {
-		{ NS4_FADE_OUT( 0, 1, 1, 1, 0, (60.0 * 3.0 - 5.0) ) }, 
+{ u8"Beetle Adventure Racing! (U) (M3) 00000007 00CF0D02.mid", u8"Beetle Adventure Racing! (U) (M3) 00000007 00CF0D02.mid TrackParseDebug.txt", u8"Beetle Battle", 0,
+	(8+1+2+14+1 + 25+6+4+2+8+7+8+6+9+12+4+7+8+11+5+6+2 + 6 + 13+16) + 1/* + 1 *//*+ 3 + 1 + 2*/ + 1 + 2 + 1 + 2 + 2 + 2, {
+		{ NS4_DELETE_NOTE( 0, 1, 1, 1, 0, 34, 60 ) },
+		{ NS4_DELETE_NOTE( 0, 1, 1, 1, 0, 22, 60 ) },
+		{ NS4_DELETE_NOTE( 0, 1, 1, 1, 0, 18, 60 ) },
+		{ NS4_DELETE_NOTE( 0, 1, 1, 1, 0, 16, 60 ) },
+		{ NS4_DELETE_NOTE( 0, 1, 1, 1, 0, 14, 60 ) },
+		{ NS4_DELETE_NOTE( 0, 1, 1, 1, 0, 12, 60 ) },
+		{ NS4_DELETE_NOTE( 0, 1, 1, 1, 0, 10, 60 ) },
+		{ NS4_DELETE_NOTE( 0, 1, 1, 1, 0, 8, 60 ) },
 
-		{ NS4_PLAY_SAMPLE_AT_TIME( u8"C:\\My Projects\\MIDIWorks\\Exports\\Beetle Adventure Racing!\\SFX\\B00IF8S00.wav",	// Point Tally
+		{ NS4_DELETE_NOTE( 0, 1, 1, 1, 0, 11, 63 ) },
+
+		{ NS4_DELETE_NOTE( 0, 1, 1, 1, 0, 16, 64 ) },
+		{ NS4_DELETE_NOTE( 0, 1, 1, 1, 0, 9, 64 ) },
+
+		{ NS4_DELETE_NOTE( 0, 1, 1, 1, 0, 65, 65 ) },
+		{ NS4_DELETE_NOTE( 0, 1, 1, 1, 0, 63, 65 ) },
+		{ NS4_DELETE_NOTE( 0, 1, 1, 1, 0, 60, 65 ) },
+		{ NS4_DELETE_NOTE( 0, 1, 1, 1, 0, 59, 65 ) },
+		{ NS4_DELETE_NOTE( 0, 1, 1, 1, 0, 57, 65 ) },
+		{ NS4_DELETE_NOTE( 0, 1, 1, 1, 0, 54, 65 ) },
+		{ NS4_DELETE_NOTE( 0, 1, 1, 1, 0, 48, 65 ) },
+		{ NS4_DELETE_NOTE( 0, 1, 1, 1, 0, 45, 65 ) },
+		{ NS4_DELETE_NOTE( 0, 1, 1, 1, 0, 42, 65 ) },
+		{ NS4_DELETE_NOTE( 0, 1, 1, 1, 0, 38, 65 ) },
+		{ NS4_DELETE_NOTE( 0, 1, 1, 1, 0, 36, 65 ) },
+		{ NS4_DELETE_NOTE( 0, 1, 1, 1, 0, 32, 65 ) },
+		{ NS4_DELETE_NOTE( 0, 1, 1, 1, 0, 30, 65 ) },
+		{ NS4_DELETE_NOTE( 0, 1, 1, 1, 0, 27, 65 ) },
+
+		{ NS4_DELETE_NOTE( 0, 1, 1, 1, 0, 11, 67 ) },
+
+
+		{ NS4_DELETE_NOTE( 9, 1, 1, 1, 0, 367, 53 ) },
+		{ NS4_DELETE_NOTE( 9, 1, 1, 1, 0, 366, 53 ) },
+		{ NS4_DELETE_NOTE( 9, 1, 1, 1, 0, 365, 53 ) },
+		{ NS4_DELETE_NOTE( 9, 1, 1, 1, 0, 364, 53 ) },
+		{ NS4_DELETE_NOTE( 9, 1, 1, 1, 0, 363, 53 ) },
+		{ NS4_DELETE_NOTE( 9, 1, 1, 1, 0, 362, 53 ) },
+		{ NS4_DELETE_NOTE( 9, 1, 1, 1, 0, 361, 53 ) },
+		{ NS4_DELETE_NOTE( 9, 1, 1, 1, 0, 360, 53 ) },
+		{ NS4_DELETE_NOTE( 9, 1, 1, 1, 0, 359, 53 ) },
+		{ NS4_DELETE_NOTE( 9, 1, 1, 1, 0, 358, 53 ) },
+		{ NS4_DELETE_NOTE( 9, 1, 1, 1, 0, 357, 53 ) },
+		{ NS4_DELETE_NOTE( 9, 1, 1, 1, 0, 356, 53 ) },
+		{ NS4_DELETE_NOTE( 9, 1, 1, 1, 0, 355, 53 ) },
+		{ NS4_DELETE_NOTE( 9, 1, 1, 1, 0, 354, 53 ) },
+		{ NS4_DELETE_NOTE( 9, 1, 1, 1, 0, 353, 53 ) },
+		{ NS4_DELETE_NOTE( 9, 1, 1, 1, 0, 352, 53 ) },
+		{ NS4_DELETE_NOTE( 9, 1, 1, 1, 0, 351, 53 ) },
+		{ NS4_DELETE_NOTE( 9, 1, 1, 1, 0, 350, 53 ) },
+		{ NS4_DELETE_NOTE( 9, 1, 1, 1, 0, 349, 53 ) },
+		{ NS4_DELETE_NOTE( 9, 1, 1, 1, 0, 348, 53 ) },
+		{ NS4_DELETE_NOTE( 9, 1, 1, 1, 0, 347, 53 ) },
+		{ NS4_DELETE_NOTE( 9, 1, 1, 1, 0, 346, 53 ) },
+		{ NS4_DELETE_NOTE( 9, 1, 1, 1, 0, 345, 53 ) },
+		{ NS4_DELETE_NOTE( 9, 1, 1, 1, 0, 344, 53 ) },
+		{ NS4_DELETE_NOTE( 9, 1, 1, 1, 0, 343, 53 ) },
+
+		{ NS4_DELETE_NOTE( 9, 1, 1, 1, 0, 341, 53 ) },
+		{ NS4_DELETE_NOTE( 9, 1, 1, 1, 0, 340, 53 ) },
+		{ NS4_DELETE_NOTE( 9, 1, 1, 1, 0, 338, 53 ) },
+		{ NS4_DELETE_NOTE( 9, 1, 1, 1, 0, 337, 53 ) },
+		{ NS4_DELETE_NOTE( 9, 1, 1, 1, 0, 335, 53 ) },
+		{ NS4_DELETE_NOTE( 9, 1, 1, 1, 0, 332, 53 ) },
+
+		{ NS4_DELETE_NOTE( 9, 1, 1, 1, 0, 329, 53 ) },
+		{ NS4_DELETE_NOTE( 9, 1, 1, 1, 0, 326, 53 ) },
+		{ NS4_DELETE_NOTE( 9, 1, 1, 1, 0, 323, 53 ) },
+		{ NS4_DELETE_NOTE( 9, 1, 1, 1, 0, 320, 53 ) },
+
+		{ NS4_DELETE_NOTE( 9, 1, 1, 1, 0, 312, 53 ) },
+		{ NS4_DELETE_NOTE( 9, 1, 1, 1, 0, 304, 53 ) },
+
+		{ NS4_DELETE_NOTE( 9, 1, 1, 1, 0, 301, 53 ) },
+		{ NS4_DELETE_NOTE( 9, 1, 1, 1, 0, 298, 53 ) },
+		{ NS4_DELETE_NOTE( 9, 1, 1, 1, 0, 295, 53 ) },
+		{ NS4_DELETE_NOTE( 9, 1, 1, 1, 0, 292, 53 ) },
+		{ NS4_DELETE_NOTE( 9, 1, 1, 1, 0, 289, 53 ) },
+		{ NS4_DELETE_NOTE( 9, 1, 1, 1, 0, 286, 53 ) },
+		{ NS4_DELETE_NOTE( 9, 1, 1, 1, 0, 283, 53 ) },
+		{ NS4_DELETE_NOTE( 9, 1, 1, 1, 0, 280, 53 ) },
+
+		{ NS4_DELETE_NOTE( 9, 1, 1, 1, 0, 277, 53 ) },
+		{ NS4_DELETE_NOTE( 9, 1, 1, 1, 0, 274, 53 ) },
+		{ NS4_DELETE_NOTE( 9, 1, 1, 1, 0, 271, 53 ) },
+		{ NS4_DELETE_NOTE( 9, 1, 1, 1, 0, 268, 53 ) },
+		{ NS4_DELETE_NOTE( 9, 1, 1, 1, 0, 265, 53 ) },
+		{ NS4_DELETE_NOTE( 9, 1, 1, 1, 0, 262, 53 ) },
+		{ NS4_DELETE_NOTE( 9, 1, 1, 1, 0, 261, 53 ) },
+
+		{ NS4_DELETE_NOTE( 9, 1, 1, 1, 0, 259, 53 ) },
+		{ NS4_DELETE_NOTE( 9, 1, 1, 1, 0, 258, 53 ) },
+		{ NS4_DELETE_NOTE( 9, 1, 1, 1, 0, 256, 53 ) },
+		{ NS4_DELETE_NOTE( 9, 1, 1, 1, 0, 255, 53 ) },
+		{ NS4_DELETE_NOTE( 9, 1, 1, 1, 0, 253, 53 ) },
+		{ NS4_DELETE_NOTE( 9, 1, 1, 1, 0, 252, 53 ) },
+		{ NS4_DELETE_NOTE( 9, 1, 1, 1, 0, 250, 53 ) },
+		{ NS4_DELETE_NOTE( 9, 1, 1, 1, 0, 249, 53 ) },
+
+		{ NS4_DELETE_NOTE( 9, 1, 1, 1, 0, 247, 53 ) },
+		{ NS4_DELETE_NOTE( 9, 1, 1, 1, 0, 246, 53 ) },
+		{ NS4_DELETE_NOTE( 9, 1, 1, 1, 0, 244, 53 ) },
+		{ NS4_DELETE_NOTE( 9, 1, 1, 1, 0, 243, 53 ) },
+		{ NS4_DELETE_NOTE( 9, 1, 1, 1, 0, 241, 53 ) },
+		{ NS4_DELETE_NOTE( 9, 1, 1, 1, 0, 240, 53 ) },
+
+		{ NS4_DELETE_NOTE( 9, 1, 1, 1, 0, 237, 53 ) },
+		{ NS4_DELETE_NOTE( 9, 1, 1, 1, 0, 234, 53 ) },
+		{ NS4_DELETE_NOTE( 9, 1, 1, 1, 0, 232, 53 ) },
+		{ NS4_DELETE_NOTE( 9, 1, 1, 1, 0, 231, 53 ) },
+		{ NS4_DELETE_NOTE( 9, 1, 1, 1, 0, 229, 53 ) },
+		{ NS4_DELETE_NOTE( 9, 1, 1, 1, 0, 225, 53 ) },
+		{ NS4_DELETE_NOTE( 9, 1, 1, 1, 0, 224, 53 ) },
+		{ NS4_DELETE_NOTE( 9, 1, 1, 1, 0, 221, 53 ) },
+		{ NS4_DELETE_NOTE( 9, 1, 1, 1, 0, 218, 53 ) },
+
+		{ NS4_DELETE_NOTE( 9, 1, 1, 1, 0, 216, 53 ) },
+		{ NS4_DELETE_NOTE( 9, 1, 1, 1, 0, 215, 53 ) },
+		{ NS4_DELETE_NOTE( 9, 1, 1, 1, 0, 213, 53 ) },
+		{ NS4_DELETE_NOTE( 9, 1, 1, 1, 0, 210, 53 ) },
+		{ NS4_DELETE_NOTE( 9, 1, 1, 1, 0, 209, 53 ) },
+		{ NS4_DELETE_NOTE( 9, 1, 1, 1, 0, 208, 53 ) },
+		{ NS4_DELETE_NOTE( 9, 1, 1, 1, 0, 202, 53 ) },
+		{ NS4_DELETE_NOTE( 9, 1, 1, 1, 0, 200, 53 ) },
+		{ NS4_DELETE_NOTE( 9, 1, 1, 1, 0, 198, 53 ) },
+		{ NS4_DELETE_NOTE( 9, 1, 1, 1, 0, 196, 53 ) },
+		{ NS4_DELETE_NOTE( 9, 1, 1, 1, 0, 194, 53 ) },
+		{ NS4_DELETE_NOTE( 9, 1, 1, 1, 0, 192, 53 ) },
+
+		{ NS4_DELETE_NOTE( 9, 1, 1, 1, 0, 179, 53 ) },
+		{ NS4_DELETE_NOTE( 9, 1, 1, 1, 0, 176, 53 ) },
+		{ NS4_DELETE_NOTE( 9, 1, 1, 1, 0, 173, 53 ) },
+		{ NS4_DELETE_NOTE( 9, 1, 1, 1, 0, 170, 53 ) },
+
+		{ NS4_DELETE_NOTE( 9, 1, 1, 1, 0, 168, 53 ) },
+		{ NS4_DELETE_NOTE( 9, 1, 1, 1, 0, 167, 53 ) },
+		{ NS4_DELETE_NOTE( 9, 1, 1, 1, 0, 165, 53 ) },
+		{ NS4_DELETE_NOTE( 9, 1, 1, 1, 0, 161, 53 ) },
+		{ NS4_DELETE_NOTE( 9, 1, 1, 1, 0, 160, 53 ) },
+		{ NS4_DELETE_NOTE( 9, 1, 1, 1, 0, 154, 53 ) },
+		{ NS4_DELETE_NOTE( 9, 1, 1, 1, 0, 152, 53 ) },
+
+		{ NS4_DELETE_NOTE( 9, 1, 1, 1, 0, 149, 53 ) },
+		{ NS4_DELETE_NOTE( 9, 1, 1, 1, 0, 145, 53 ) },
+		{ NS4_DELETE_NOTE( 9, 1, 1, 1, 0, 144, 53 ) },
+		{ NS4_DELETE_NOTE( 9, 1, 1, 1, 0, 138, 53 ) },
+		{ NS4_DELETE_NOTE( 9, 1, 1, 1, 0, 136, 53 ) },
+		{ NS4_DELETE_NOTE( 9, 1, 1, 1, 0, 135, 53 ) },
+		{ NS4_DELETE_NOTE( 9, 1, 1, 1, 0, 132, 53 ) },
+		{ NS4_DELETE_NOTE( 9, 1, 1, 1, 0, 129, 53 ) },
+
+		{ NS4_DELETE_NOTE( 9, 1, 1, 1, 0, 128, 53 ) },
+		{ NS4_DELETE_NOTE( 9, 1, 1, 1, 0, 125, 53 ) },
+		{ NS4_DELETE_NOTE( 9, 1, 1, 1, 0, 122, 53 ) },
+		{ NS4_DELETE_NOTE( 9, 1, 1, 1, 0, 121, 53 ) },
+		{ NS4_DELETE_NOTE( 9, 1, 1, 1, 0, 120, 53 ) },
+		{ NS4_DELETE_NOTE( 9, 1, 1, 1, 0, 119, 53 ) },
+		{ NS4_DELETE_NOTE( 9, 1, 1, 1, 0, 117, 53 ) },
+		{ NS4_DELETE_NOTE( 9, 1, 1, 1, 0, 116, 53 ) },
+		{ NS4_DELETE_NOTE( 9, 1, 1, 1, 0, 114, 53 ) },
+		{ NS4_DELETE_NOTE( 9, 1, 1, 1, 0, 113, 53 ) },
+		{ NS4_DELETE_NOTE( 9, 1, 1, 1, 0, 112, 53 ) },
+
+		{ NS4_DELETE_NOTE( 9, 1, 1, 1, 0, 105, 53 ) },
+		{ NS4_DELETE_NOTE( 9, 1, 1, 1, 0, 102, 53 ) },
+		{ NS4_DELETE_NOTE( 9, 1, 1, 1, 0, 99, 53 ) },
+		{ NS4_DELETE_NOTE( 9, 1, 1, 1, 0, 98, 53 ) },
+		{ NS4_DELETE_NOTE( 9, 1, 1, 1, 0, 96, 53 ) },
+
+		{ NS4_DELETE_NOTE( 9, 1, 1, 1, 0, 83, 53 ) },
+		{ NS4_DELETE_NOTE( 9, 1, 1, 1, 0, 80, 53 ) },
+		{ NS4_DELETE_NOTE( 9, 1, 1, 1, 0, 77, 53 ) },
+		{ NS4_DELETE_NOTE( 9, 1, 1, 1, 0, 74, 53 ) },
+		{ NS4_DELETE_NOTE( 9, 1, 1, 1, 0, 72, 53 ) },
+		{ NS4_DELETE_NOTE( 9, 1, 1, 1, 0, 65, 53 ) },
+
+		{ NS4_DELETE_NOTE( 9, 1, 1, 1, 0, 49, 53 ) },
+		{ NS4_DELETE_NOTE( 9, 1, 1, 1, 0, 2, 53 ) },
+		
+		{ NS4_DELETE_NOTE( 9, 1, 1, 1, 0, 19, 73 ) },
+		{ NS4_DELETE_NOTE( 9, 1, 1, 1, 0, 18, 73 ) },
+		{ NS4_DELETE_NOTE( 9, 1, 1, 1, 0, 17, 73 ) },
+		{ NS4_DELETE_NOTE( 9, 1, 1, 1, 0, 9, 73 ) },
+		{ NS4_DELETE_NOTE( 9, 1, 1, 1, 0, 7, 73 ) },
+		{ NS4_DELETE_NOTE( 9, 1, 1, 1, 0, 1, 73 ) },
+
+		{ NS4_DELETE_NOTE( 9, 1, 1, 1, 0, 45, 74 ) },
+		{ NS4_DELETE_NOTE( 9, 1, 1, 1, 0, 44, 74 ) },
+		{ NS4_DELETE_NOTE( 9, 1, 1, 1, 0, 43, 74 ) },
+		{ NS4_DELETE_NOTE( 9, 1, 1, 1, 0, 42, 74 ) },
+		{ NS4_DELETE_NOTE( 9, 1, 1, 1, 0, 41, 74 ) },
+		{ NS4_DELETE_NOTE( 9, 1, 1, 1, 0, 40, 74 ) },
+		{ NS4_DELETE_NOTE( 9, 1, 1, 1, 0, 39, 74 ) },
+		{ NS4_DELETE_NOTE( 9, 1, 1, 1, 0, 38, 74 ) },
+		{ NS4_DELETE_NOTE( 9, 1, 1, 1, 0, 37, 74 ) },
+		{ NS4_DELETE_NOTE( 9, 1, 1, 1, 0, 36, 74 ) },
+		{ NS4_DELETE_NOTE( 9, 1, 1, 1, 0, 35, 74 ) },
+		{ NS4_DELETE_NOTE( 9, 1, 1, 1, 0, 34, 74 ) },
+		{ NS4_DELETE_NOTE( 9, 1, 1, 1, 0, 33, 74 ) },
+
+		{ NS4_DELETE_NOTE( 9, 1, 1, 1, 0, 32, 74 ) },
+		{ NS4_DELETE_NOTE( 9, 1, 1, 1, 0, 30, 74 ) },
+		{ NS4_DELETE_NOTE( 9, 1, 1, 1, 0, 28, 74 ) },
+		{ NS4_DELETE_NOTE( 9, 1, 1, 1, 0, 24, 74 ) },
+		{ NS4_DELETE_NOTE( 9, 1, 1, 1, 0, 22, 74 ) },
+		{ NS4_DELETE_NOTE( 9, 1, 1, 1, 0, 21, 74 ) },
+		{ NS4_DELETE_NOTE( 9, 1, 1, 1, 0, 20, 74 ) },
+		{ NS4_DELETE_NOTE( 9, 1, 1, 1, 0, 19, 74 ) },
+		{ NS4_DELETE_NOTE( 9, 1, 1, 1, 0, 18, 74 ) },
+		{ NS4_DELETE_NOTE( 9, 1, 1, 1, 0, 16, 74 ) },
+		{ NS4_DELETE_NOTE( 9, 1, 1, 1, 0, 14, 74 ) },
+		{ NS4_DELETE_NOTE( 9, 1, 1, 1, 0, 12, 74 ) },
+		{ NS4_DELETE_NOTE( 9, 1, 1, 1, 0, 10, 74 ) },
+		{ NS4_DELETE_NOTE( 9, 1, 1, 1, 0, 7, 74 ) },
+		{ NS4_DELETE_NOTE( 9, 1, 1, 1, 0, 5, 74 ) },
+		{ NS4_DELETE_NOTE( 9, 1, 1, 1, 0, 4, 74 ) },
+		//{ NS4_DELETE_NOTE( 9, 1, 1, 1, 0, 0, 74 ) },
+
+		{ NS4_FADE_OUT( 0, 1, 1, 1, 0, (60.0 * 3.0 - 5.0) ) },
+
+		{ NS4_PLAY_SAMPLE_AT_TIME( u8"C:\\My Projects\\MIDIWorks\\Exports\\Beetle Adventure Racing!\\SFX\\B00IB7S00.wav",	// Beetle Battle
+			0, 1, uint32_t( 0.0 * 1000000.0 ),
+			60, 0, 1.0, 64, 0, 60, 0, 0, 127, 64, 0.5, 0, 0, 0, 0, 0, 0, 0, 0 )
+		},
+
+		/*{ NS4_PLAY_SAMPLE_AT_TIME( u8"C:\\My Projects\\MIDIWorks\\Exports\\Beetle Adventure Racing!\\SFX\\B00IF8S00.wav",	// Point Tally
 			0, 3, uint32_t( 0.0 * 1000000.0 ),
 			60, 0, 1.0, 64, 0, 60, 0, 0, 127, 64, 1.0, 0, 0, 0, 0, 0, 0, 0, 0 )
 		},
@@ -1555,18 +1857,18 @@
 		{ NS4_PLAY_SAMPLE_AT_TIME( u8"C:\\My Projects\\MIDIWorks\\Exports\\Beetle Adventure Racing!\\SFX\\B00IABS00.wav",	// Menu Selection
 			1, 10, uint32_t( 0.0 * 1000000.0 ),
 			60, 0, 1.0, 64, 0, 60, 0, 0, 127, 64, 1.0, 0, 0, 0, 0, 0, 0, 0, 0 )
-		},
+		},*/
 
 
-		{ NS4_PLAY_SAMPLE_AT_TIME( u8"C:\\My Projects\\MIDIWorks\\Exports\\Beetle Adventure Racing!\\SFX\\B00I0BS00.wav",	// Beep Beep
-			2, 00, uint32_t( 0.0 * 1000000.0 ),
-			60, 0, 1.0, 64, 0, 60, 0, 0, 127, 64, 1.0, 0, 0, 0, 0, 0, 0, 0, 0 )
-		},
+		//{ NS4_PLAY_SAMPLE_AT_TIME( u8"C:\\My Projects\\MIDIWorks\\Exports\\Beetle Adventure Racing!\\SFX\\B00I0BS00.wav",	// Beep Beep
+		//	2, 00, uint32_t( 0.0 * 1000000.0 ),
+		//	60, 0, 1.0, 64, 0, 60, 0, 0, 127, 64, 1.0, 0, 0, 0, 0, 0, 0, 0, 0 )
+		//},
 
 
 		{ NS4_PLAY_SAMPLE_AT_TIME( u8"C:\\My Projects\\MIDIWorks\\Exports\\Beetle Adventure Racing!\\SFX\\B00IF2S00.wav",	// Crowd Cheer (Bonus)
 			3, 10, uint32_t( 0.0 * 1000000.0 ),
-			60, 0, 1.0, 64, 0, 60, 0, 0, 127, 64, 1.0, 0, 0, 0, 0, 0, 0, 0, 0 )
+			60, 0, 1.0, 64, 0, 60, 0, 0, NS4_SFX_MOD0, 64, 1.0, 0, 0, 0, 0, 0, 0, 0, 0 )
 		},
 		{ NS4_PLAY_SAMPLE_STOP( uint32_t( ~0 ), 3, 10, uint32_t( (9.34) * 1000000.0 ), 0.0, 4.0 ) },
 
@@ -1603,11 +1905,11 @@
 	3
 },
 { u8"Beetle Adventure Racing! (U) (M3) 0000000A 00CF15FE.mid", u8"Beetle Adventure Racing! (U) (M3) 0000000A 00CF15FE.mid TrackParseDebug.txt", u8"Credits", 0,
-	1, {
-		{ NS4_PLAY_SAMPLE_AT_TIME( u8"C:\\My Projects\\MIDIWorks\\Exports\\Beetle Adventure Racing!\\SFX\\B00I0BS00.wav",	// Beep Beep
-			2, 0, uint32_t( 0.0 * 1000000.0 ),
-			60, 0, 1.0, 64, 0, 60, 0, 0, 127, 64, 1.0, 0, 0, 0, 0, 0, 0, 0, 0 )
-		},
+	0, {
+		//{ NS4_PLAY_SAMPLE_AT_TIME( u8"C:\\My Projects\\MIDIWorks\\Exports\\Beetle Adventure Racing!\\SFX\\B00I0BS00.wav",	// Beep Beep
+		//	2, 0, uint32_t( 0.0 * 1000000.0 ),
+		//	60, 0, 1.0, 64, 0, 60, 0, 0, 127, 64, 1.0, 0, 0, 0, 0, 0, 0, 0, 0 )
+		//},
 	},
 },
 

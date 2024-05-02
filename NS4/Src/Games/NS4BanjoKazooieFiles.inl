@@ -594,15 +594,15 @@
 
 		{ ns4::CMidiFile::NS4_ES_PRE_UNROLL, ns4::CMidiFile::NS4_E_MUTE_UNTAGGED_TRACKS },
 	   } },
-/*{ u8"108 Banjo-Kazooie (U) (V1.0) 00000062 00D6D6E8 Gruntilda's Lair (Click Clock Wood).mid", u8"Banjo-Kazooie (U) (V1.0) 00000062 00D6D6E8 Grunty's Lair - Click Clock Wood and Furnace Fun.mid TrackParseDebug.txt", u8"Gruntilda’s Lair (Click Clock Wood Jigsaw Puzzle)", 0,
+{ u8"108 Banjo-Kazooie (U) (V1.0) 00000062 00D6D6E8 Gruntilda's Lair (Click Clock Wood).mid", u8"Banjo-Kazooie (U) (V1.0) 00000062 00D6D6E8 Grunty's Lair - Click Clock Wood and Furnace Fun.mid TrackParseDebug.txt", u8"Gruntilda’s Lair (Click Clock Wood Jigsaw Puzzle)", 0,
 	4 + 1, {
 		{ ns4::CMidiFile::NS4_ES_PRE_UNROLL, ns4::CMidiFile::NS4_E_TAG_TRACK_BY_CHNL, 10 - 1 },
 		{ ns4::CMidiFile::NS4_ES_PRE_UNROLL, ns4::CMidiFile::NS4_E_TAG_TRACK_BY_CHNL, 11 - 1 },
-		{ ns4::CMidiFile::NS4_ES_PRE_UNROLL, ns4::CMidiFile::NS4_E_TAG_TRACK_BY_CHNL, 13 - 1 },
+		//{ ns4::CMidiFile::NS4_ES_PRE_UNROLL, ns4::CMidiFile::NS4_E_TAG_TRACK_BY_CHNL, 13 - 1 },
 		{ ns4::CMidiFile::NS4_ES_PRE_UNROLL, ns4::CMidiFile::NS4_E_TAG_TRACK_BY_CHNL, 16 - 1 },
 
 		{ ns4::CMidiFile::NS4_ES_PRE_UNROLL, ns4::CMidiFile::NS4_E_MUTE_UNTAGGED_TRACKS },
-	   } },*/
+	   } },
 { u8"109 Banjo-Kazooie (U) (V1.0) 0000002F 00D4A3D8 Click Clock Wood (Lobby).mid", u8"Banjo-Kazooie (U) (V1.0) 0000002F 00D4A3D8 Click Clock Wood - Lobby.mid TrackParseDebug.txt", u8"Click Clock Wood Lobby (Summer)", 0,
 	6 + 1, {
 		{ ns4::CMidiFile::NS4_ES_PRE_UNROLL, ns4::CMidiFile::NS4_E_TAG_TRACK_BY_CHNL, 1 - 1 },
@@ -664,7 +664,8 @@
 		{ ns4::CMidiFile::NS4_ES_PRE_UNROLL, ns4::CMidiFile::NS4_E_MUTE_TAGGED_TRACKS },
 	   } },
 { u8"120 Banjo-Kazooie (U) (V1.0) 0000002E 00D48620 Click Clock Wood (Autumn).mid", u8"Banjo-Kazooie (U) (V1.0) 0000002E 00D48620 Click Clock Wood - Autumn.mid TrackParseDebug.txt", u8"Click Clock Wood (Autumn Underwater)", 0,
-	1 + 1, {
+	2 + 1, {
+		{ ns4::CMidiFile::NS4_ES_PRE_UNROLL, ns4::CMidiFile::NS4_E_TAG_TRACK_BY_CHNL, 10 - 1 },
 		{ ns4::CMidiFile::NS4_ES_PRE_UNROLL, ns4::CMidiFile::NS4_E_TAG_TRACK_BY_CHNL, 11 - 1 },
 
 		{ ns4::CMidiFile::NS4_ES_PRE_UNROLL, ns4::CMidiFile::NS4_E_MUTE_UNTAGGED_TRACKS },
@@ -1350,15 +1351,15 @@
 
 		{ ns4::CMidiFile::NS4_ES_PRE_UNROLL, ns4::CMidiFile::NS4_E_MUTE_UNTAGGED_TRACKS },
 	   } },
-/*{ u8"108 Banjo-Kazooie (U) (V1.0) 00000062 00D6D6E8 Gruntilda's Lair (Click Clock Wood).mid", u8"Banjo-Kazooie (U) (V1.0) 00000062 00D6D6E8 Grunty's Lair - Click Clock Wood and Furnace Fun.mid TrackParseDebug.txt", u8"Gruntilda’s Lair (Click Clock Wood Jigsaw Puzzle Sans SFX)", 0,
+{ u8"108 Banjo-Kazooie (U) (V1.0) 00000062 00D6D6E8 Gruntilda's Lair (Click Clock Wood).mid", u8"Banjo-Kazooie (U) (V1.0) 00000062 00D6D6E8 Grunty's Lair - Click Clock Wood and Furnace Fun.mid TrackParseDebug.txt", u8"Gruntilda’s Lair (Click Clock Wood Jigsaw Puzzle 2)", 0,
 	3 + 1, {
 		{ ns4::CMidiFile::NS4_ES_PRE_UNROLL, ns4::CMidiFile::NS4_E_TAG_TRACK_BY_CHNL, 10 - 1 },
 		{ ns4::CMidiFile::NS4_ES_PRE_UNROLL, ns4::CMidiFile::NS4_E_TAG_TRACK_BY_CHNL, 11 - 1 },
-		{ ns4::CMidiFile::NS4_ES_PRE_UNROLL, ns4::CMidiFile::NS4_E_TAG_TRACK_BY_CHNL, 13 - 1 },
+		//{ ns4::CMidiFile::NS4_ES_PRE_UNROLL, ns4::CMidiFile::NS4_E_TAG_TRACK_BY_CHNL, 13 - 1 },
 		//{ ns4::CMidiFile::NS4_ES_PRE_UNROLL, ns4::CMidiFile::NS4_E_TAG_TRACK_BY_CHNL, 16 - 1 },
 
 		{ ns4::CMidiFile::NS4_ES_PRE_UNROLL, ns4::CMidiFile::NS4_E_MUTE_UNTAGGED_TRACKS },
-	   } },*/
+	   } },
 { u8"115 Banjo-Kazooie (U) (V1.0) 00000029 00D45D78 Click Clock Wood (Summer).mid", u8"Banjo-Kazooie (U) (V1.0) 00000029 00D45D78 Click Clock Wood - Summer.mid TrackParseDebug.txt", u8"Click Clock Wood (Summer Sans SFX)", 0,
 	2 + 1, {
 		{ ns4::CMidiFile::NS4_ES_PRE_UNROLL, ns4::CMidiFile::NS4_E_TAG_TRACK_BY_CHNL, 13 - 1 },

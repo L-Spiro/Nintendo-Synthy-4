@@ -189,7 +189,8 @@ namespace ns4 {
 			
 			if ( !m_vSamples[I].wfFile.GetAllSamples( aTmp ) ) { return false; }
 
-			/*if ( m_vSamples[I].ui32Inst == 0x30 ) {
+			/*if ( m_vSamples[I].ui32Inst == 0x0A ) {
+				m_vSamples[I].dAttack = 0.0;
 				m_vSamples[I].ui8DecayLevel = 0x00;
 				m_vSamples[I].dDecay = 2.0;
 			}*/

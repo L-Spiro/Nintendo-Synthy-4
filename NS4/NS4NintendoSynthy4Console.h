@@ -50,7 +50,7 @@
 //#define NS4_PRINT_BEST_BANK
 
 #ifdef NS4_BULK
-//#define NS4_ONE_OFF										(133-1)
+//#define NS4_ONE_OFF										(142-1)
 //#define NS4_EXPORT_SOME
 //#define NS4_EPORT_FROM								(71-1)
 #else
@@ -169,8 +169,8 @@ int oldmain() {
 		ns4::CReverb::HarvestUnfilteredMonoTaps( u8"C:\\My Projects\\Nintendo-Synthy-4\\NS4\\Src\\Reverb\\Research\\ISBTN1 HD.wav", -1, 1, 0, 0, 0 );
 	}
 	{
-		ns4::CWavLib::DetermineLevelsStereo( u8"C:\\My Projects\\Nintendo-Synthy-4\\NS4\\Src\\Reverb\\Research\\BK V 127 R 0 P 64.wav",
-			u8"C:\\My Projects\\Nintendo-Synthy-4\\NS4\\Src\\Reverb\\Research\\BK V 127 R 127 P 64.wav", 4417, size_t( -1 ), 1.0, 0, ns4::CReverb::m_rtBanjoKazooie0, 1370 );
+		ns4::CWavLib::DetermineLevelsStereo( u8"C:\\My Projects\\Nintendo-Synthy-4\\NS4\\Src\\Reverb\\Research\\BM64 V 127 R 0 P 64.wav",
+			u8"C:\\My Projects\\Nintendo-Synthy-4\\NS4\\Src\\Reverb\\Research\\BM64 V 127 R 127 P 64.wav", 2, size_t( -1 ), 1.0, 0, ns4::CReverb::m_rtBomberman640, 425 );
 	}
 #endif
 
@@ -334,8 +334,8 @@ int oldmain() {
 //#include "Src/Games/NS4BanjoKazooieFiles.inl"
 //#include "Src/Games/NS4BlastCorpsFiles.inl"
 //#include "Src/Games/NS4BlastCorpsPALFiles.inl"
-#include "Src/Games/NS4BeetAdventureRacing!Files.inl"
-//#include "Src/Games/NS4BeetAdventureRacing!VinylFiles.inl"
+//#include "Src/Games/NS4BeetAdventureRacing!Files.inl"
+#include "Src/Games/NS4BeetAdventureRacing!VinylFiles.inl"
 //#include "Src/Games/NS4AeroFightersAssaultFiles.inl"
 //#include "Src/Games/NS4AeroFightersAssaultOverSamplingFiles.inl"
 //#include "Src/Games/NS4F1WorldGrandPrixFiles.inl"
