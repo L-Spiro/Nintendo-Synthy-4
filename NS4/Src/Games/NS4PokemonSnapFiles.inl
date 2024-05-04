@@ -7,9 +7,9 @@
 #define NS4_REVERB							ns4::CReverb::NS4_T_POKEMON_SNAP_0
 #define NS4_ORIG_HZ							32006
 #define NS4_CURVE							40.0
-#define NS4_OUT_DIRECTORY					u8"F:\\N64OST\\Pokemon Snap\\"
+#define NS4_OUT_DIRECTORY					u8"C:\\N64OST\\Pokemon Snap\\"
 #define NS4_OUT_DIRECTORY_NUMBERS			NS4_OUT_DIRECTORY u8"Numbered\\"
-#define NS4_WET_FILTER_FREQ					(NS4_ORIG_HZ / std::pow( 2.0, 4.0 ))
+#define NS4_WET_FILTER_FREQ					(6400.0 / 2.0)
 //#define NS4_ENV_MULTIPLIER					(2.0)
 //#define NS4_MASTER_REVERB_VOLUME			(NS4_INV_QRT_0_5 * 5.0)
 

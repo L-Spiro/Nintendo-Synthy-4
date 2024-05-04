@@ -951,13 +951,13 @@ namespace ns4 {
 	NS4_DELAY_N64 CReverb::m_dn64PokemonSnap0[] = {
 		//ui32Input		ui32Output	i16FfCoef		i16FbCoef		i16Gain							 dRsInc						 dRsVal			i32RsDelta						dRsGain						ui16Fc
 		{         0,	       256,	    +9830,		    -9830,	          0 },
-		{       256,	       384,	    +9830,		    -9830,	      11140,		                      0,	                      0,		        +0,		                      0,	/*0xDFEBA8D0*/   10240 },
+		{       256,	       384,	    +9830,		    -9830,	      11140,		                      0,	                      0,		        +0,		                      0,	/*0xDFEBA8D0*/    6400 },
 		{      1312,	      4096,	   +16384,		   -16384,	       4587 },
 		{      1440,	      3296,	    +8192,		    -8192,	          0 },
-		{      5184,	      9024,	   +16384,		   -16384,	       4587,		                      0,	                      0,		        +0,		                      0,	/*0xDFEBA910*/   12288 },
+		{      5184,	      9024,	   +16384,		   -16384,	       4587,		                      0,	                      0,		        +0,		                      0,	/*0xDFEBA910*/    9216 },
 		{      5312,	      7616,	    +8192,		    -8192,	          0 },
 		{      7616,	      8576,	    +8192,		    -8192,	          0 },
-		{         0,	      9568,	   +18000,		       +0,	          0,		                      0,	                      0,		        +0,		                      0,	/*0xDFEBA950*/   14336 },
+		{         0,	      9568,	   +18000,		       +0,	          0,		                      0,	                      0,		        +0,		                      0,	/*0xDFEBA950*/   12544 },
 	};
 
 	/** The comb filter delay lines for Mario Party 2. */
@@ -2057,10 +2057,10 @@ namespace ns4 {
 		// Pokémon Snap.
 		{
 			NS4_TAPS( m_rtPokemonSnap0 ),
-			1.6 / 2.0,																// dTapVol
+			NS4_SQRT_0_5,															// dTapVol
 			0,																		// i64TapOffset
-			NS4_FADE( 2.0, 1.5, 10.0 ),												// dTime
-			NS4_LPF( 32006 / std::pow( 2.0, 6.25 ), 1.75, 2.0, NS4_FILTER_DB_TO_ORDER( 48 ) ),					// dLpfFactor
+			NS4_FADE( 1.0, 1.5, 10.0 ),												// dTime
+			NS4_LPF( 6400.0 / 12.0, (10400.0 * 2.0) / 32006.0, 2.0, NS4_FILTER_DB_TO_ORDER( 6 ) ),					// dLpfFactor
 		},	// 53
 		// Pokémon Snap.
 		{
@@ -3033,7 +3033,7 @@ namespace ns4 {
 			aOut.resize( _ptThread->_tSrc.size() );
 			
 			size_t stInputPtr = 0;
-			double dCurve = _ptThread->_trReverb.fCombReverb.dVolCurve;
+			double dCurve = 20.0;//_ptThread->_trReverb.fCombReverb.dVolCurve;
 			struct NS4_LPF {
 				double dA[3];
 				double dB[3];
@@ -3239,12 +3239,51 @@ namespace ns4 {
 	 * \param _i16SteadySampleTrailSize Unfiltered reverbs tend to fall into a state where a single constant value is being generated over and over.  This is that value.
 	 * \param _stSkipTaps Allows skipping the first _stSkipTaps taps that would have otherwise passed.
 	 * \param _stTrack The track to harvest.
+	 * \param _pcMergPath A 2nd reverb from which the first fades over time.
+	 * \param _dMergeTime The time to fade from the first reverb to the 2nd.
 	 */
-	void CReverb::HarvestUnfilteredMonoTaps( const char8_t * _pcPath, int32_t _i32Offset, size_t _stSpacing, int16_t _i16SteadySampleTrailSize, size_t _stSkipTaps, size_t _stTrack ) {
+	void CReverb::HarvestUnfilteredMonoTaps( const char8_t * _pcPath, int32_t _i32Offset, size_t _stSpacing, int16_t _i16SteadySampleTrailSize, size_t _stSkipTaps, size_t _stTrack,
+			const char8_t * _pcMergPath, double _dMergeTime ) {
 		ns4::CWavFile wfReverb;
 		wfReverb.Open( reinterpret_cast<const char *>(_pcPath) );
 		ns4::lwaudio aReverb;
 		wfReverb.GetAllSamples( aReverb );
+		if ( _pcMergPath && _dMergeTime != 0.0 ) {
+			ns4::CWavFile wfReverb2;
+			wfReverb2.Open( reinterpret_cast<const char *>(_pcMergPath) );
+			ns4::lwaudio aReverb2;
+			wfReverb2.GetAllSamples( aReverb2 );
+			double dHz = wfReverb.Hz();
+			for ( size_t T = 0; T < aReverb.size(); ++T ) {
+				for ( size_t I = 0; I < aReverb[T].size(); ++I ) {
+					double dTime = I / dHz;
+					if ( dTime < _dMergeTime ) {
+						dTime /= _dMergeTime;
+						aReverb[T][I] *= 1.0 - dTime;
+					}
+					else {
+						break;
+					}
+				}
+			}
+			dHz = wfReverb2.Hz();
+			for ( size_t T = 0; T < aReverb2.size(); ++T ) {
+				if ( T < aReverb.size() ) {
+					for ( size_t I = 0; I < aReverb2[T].size(); ++I ) {
+						if ( I < aReverb[T].size() ) {
+							double dTime = I / dHz;
+							if ( dTime < _dMergeTime ) {
+								dTime /= _dMergeTime;
+								aReverb[T][I] += aReverb2[T][I] * dTime;
+							}
+							else {
+								aReverb[T][I] += aReverb2[T][I];
+							}
+						}
+					}
+				}
+			}
+		}
 
 		
 		const size_t stTrack = _stTrack;

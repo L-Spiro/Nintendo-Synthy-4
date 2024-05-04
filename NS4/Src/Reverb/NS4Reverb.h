@@ -843,8 +843,11 @@ namespace ns4 {
 		 * \param _i16SteadySampleTrailSize Unfiltered reverbs tend to fall into a state where a single constant value is being generated over and over.  This is that value.
 		 * \param _stSkipTaps Allows skipping the first _stSkipTaps taps that would have otherwise passed.
 		 * \param _stTrack The track to harvest.
+		 * \param _pcMergPath A 2nd reverb from which the first fades over time.
+		 * \param _dMergeTime The time to fade from the first reverb to the 2nd.
 		 */
-		static void								HarvestUnfilteredMonoTaps( const char8_t * _pcPath, int32_t _i32Offset, size_t _stSpacing = 1, int16_t _i16SteadySampleTrailSize = 40, size_t _stSkipTaps = 0, size_t _stTrack = 0 );
+		static void								HarvestUnfilteredMonoTaps( const char8_t * _pcPath, int32_t _i32Offset, size_t _stSpacing = 1, int16_t _i16SteadySampleTrailSize = 40, size_t _stSkipTaps = 0, size_t _stTrack = 0,
+			const char8_t * _pcMergPath = nullptr, double _dMergeTime = 0.0 );
 
 		/**
 		 * Harvests non-filtered taps from a mono file.  Taps should not have filtering/smoothing applied to them.  Artifacts are characterized by some repeating pattern near the end of the file.
