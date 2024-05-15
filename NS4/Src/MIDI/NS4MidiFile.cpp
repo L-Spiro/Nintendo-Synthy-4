@@ -2348,8 +2348,9 @@ namespace ns4 {
 	 * \param _aRender The current render results.
 	 * \param _paWet If not nullptr, the wet "generator" is accumulated into it.  For mono results, only allocate 1 channel.
 	 * \param _fFade The fade-out object for manual fades.
+	 * \param _sSettings MIDI settings.
 	 */
-	lwaudio CMidiFile::RenderPostSynthesis( const NS4_TRACK_RENDER_OPTIONS &_troOptions, uint32_t _ui32Total, const NS4_MODIFIER * _pmMods, lwaudio &_aRender, lwaudio * _paWet, CFade &_fFade ) {
+	lwaudio CMidiFile::RenderPostSynthesis( const NS4_TRACK_RENDER_OPTIONS &_troOptions, uint32_t _ui32Total, const NS4_MODIFIER * _pmMods, lwaudio &_aRender, lwaudio * _paWet, CFade &_fFade, NS4_SETTINGS &_sSettings ) {
 		lwaudio aResult;
 		for ( uint32_t I = 0; I < _ui32Total; ++I ) {
 			if ( _pmMods[I].esStage == NS4_ES_POST_SYNTHESIS ) {
@@ -2434,7 +2435,7 @@ namespace ns4 {
 							}
 						}
 
-						RenderSample( _troOptions, _pmMods[I], aResult, _paWet, vSampleMods );
+						RenderSample( _troOptions, _pmMods[I], aResult, _paWet, vSampleMods, _sSettings );
 						break;
 					}
 					case NS4_E_FADE_AT : {
@@ -4366,9 +4367,10 @@ namespace ns4 {
 	 * \param _troOptions The rener information.
 	 * \param _mMod The information for the sample to render.
 	 * \param _aAudio The stereo audio to which to render the result.
-	 * \param _paWet The wet output
+	 * \param _paWet The wet output.
+	 * \param _sSettings MIDI settings.
 	 */
-	void CMidiFile::RenderSample( const NS4_TRACK_RENDER_OPTIONS &_troOptions, const NS4_MODIFIER &_mMod, lwaudio &_aAudio, lwaudio * _paWet, const std::vector<NS4_SAMPLE_MODIFIER> &_vMods ) {
+	void CMidiFile::RenderSample( const NS4_TRACK_RENDER_OPTIONS &_troOptions, const NS4_MODIFIER &_mMod, lwaudio &_aAudio, lwaudio * _paWet, const std::vector<NS4_SAMPLE_MODIFIER> &_vMods, NS4_SETTINGS &_sSettings ) {
 		double dTime = 0.0;
 		if ( _mMod.tsTime0.ui32M == ~0 ) {
 			dTime = _mMod.tsTime0.ui32B * 60.0 + _mMod.tsTime0.ui32T + (_mMod.tsTime0.ui32S / 1000000.0);
@@ -4610,6 +4612,7 @@ namespace ns4 {
 			//dVal *= MidiLevelToLinear( nNote.ui8Vel );
 			dVal *= dInstVol;
 			dVal *= dLinearVol;	// Always linear.
+			dVal *= _sSettings.dMasterSfxVol;
 
 
 			double dL, dR;

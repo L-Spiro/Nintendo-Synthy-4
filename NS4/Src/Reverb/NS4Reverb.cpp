@@ -1064,12 +1064,12 @@ namespace ns4 {
 	/** The comb filter delay lines for Turok 3: Shadow of Oblivion. */
 	NS4_DELAY_N64 CReverb::m_dn64Turok3ShadowsOfOblivion0[] = {
 		//ui32Input		ui32Output	i16FfCoef		i16FbCoef		i16Gain							 dRsInc						 dRsVal			i32RsDelta						dRsGain						ui16Fc
-		{       160,	       944,	    +8830,		    -8830,	       1791,		                      0,	                      0,		        +0,		                      0,	/*0xE04D5800*/   11479 },
+		{       160,	       944,	    +8830,		    -8830,	       1791,		                      0,	                      0,		        +0,		                      0,	/*0xE04D5800*/    8042 },
 		{       416,	       768,	   +11107,		   -11107,	          0 },
 		{       784,	       912,	   +17660,		   -17660,	          0 },
-		{      1344,	      3824,	   +12107,		   -12107,	       2719,		                      0,	                      0,		        +0,		                      0,	/*0xE04D5840*/   11479 },
+		{      1344,	      3824,	   +12107,		   -12107,	       2719,		                      0,	                      0,		        +0,		                      0,	/*0xE04D5840*/    8042 },
 		{      1664,	      2816,	    +9107,		    -9107,	          0 },
-		{        64,	      4592,	   +15384,		       +0,	      25343,		                      0,	                      0,		        +0,		                      0,	/*0xE04D5880*/   15103 },
+		{        64,	      4592,	   +15384,		       +0,	      25343,		                      0,	                      0,		        +0,		                      0,	/*0xE04D5880*/   13922 },
 	};
 
 	/** The comb filter delay lines for War Gods. */
@@ -2337,8 +2337,10 @@ namespace ns4 {
 			NS4_TAPS( m_rtTurok3ShadowOfOblivion0 ),
 			NS4_SQRT_0_5,															// dTapVol
 			0,																		// i64TapOffset
-			NS4_NO_FADE,
-			NS4_NO_LPF,//NS4_LPF( 8191.0, 0.00725722320497120, 2.0, 0 ),
+			//NS4_NO_FADE,
+			NS4_FADE( 1.25, 0.5, 4.6 ),
+			//NS4_NO_LPF,
+			NS4_LPF( 8042.0 / 12.0, 4800.0 * 2.0 / 22047.0, 2.0, 0 ),
 		},	// 103
 		// War Gods.
 		{
@@ -3033,7 +3035,7 @@ namespace ns4 {
 			aOut.resize( _ptThread->_tSrc.size() );
 			
 			size_t stInputPtr = 0;
-			double dCurve = 20.0;//_ptThread->_trReverb.fCombReverb.dVolCurve;
+			double dCurve = 5.0;//_ptThread->_trReverb.fCombReverb.dVolCurve;
 			struct NS4_LPF {
 				double dA[3];
 				double dB[3];
@@ -3241,9 +3243,10 @@ namespace ns4 {
 	 * \param _stTrack The track to harvest.
 	 * \param _pcMergPath A 2nd reverb from which the first fades over time.
 	 * \param _dMergeTime The time to fade from the first reverb to the 2nd.
+	 * \param _dMergePow The merge curve.
 	 */
 	void CReverb::HarvestUnfilteredMonoTaps( const char8_t * _pcPath, int32_t _i32Offset, size_t _stSpacing, int16_t _i16SteadySampleTrailSize, size_t _stSkipTaps, size_t _stTrack,
-			const char8_t * _pcMergPath, double _dMergeTime ) {
+			const char8_t * _pcMergPath, double _dMergeTime, double _dMergePow ) {
 		ns4::CWavFile wfReverb;
 		wfReverb.Open( reinterpret_cast<const char *>(_pcPath) );
 		ns4::lwaudio aReverb;
@@ -3259,6 +3262,7 @@ namespace ns4 {
 					double dTime = I / dHz;
 					if ( dTime < _dMergeTime ) {
 						dTime /= _dMergeTime;
+						dTime = std::pow( dTime, _dMergePow );
 						aReverb[T][I] *= 1.0 - dTime;
 					}
 					else {
@@ -3274,6 +3278,7 @@ namespace ns4 {
 							double dTime = I / dHz;
 							if ( dTime < _dMergeTime ) {
 								dTime /= _dMergeTime;
+								dTime = std::pow( dTime, _dMergePow );
 								aReverb[T][I] += aReverb2[T][I] * dTime;
 							}
 							else {

@@ -829,7 +829,13 @@
 
 
 
+{ u8"5 Banjo-Kazooie (U) (V1.0) 0000006B 00D71968 Overture.mid", u8"Banjo-Kazooie (U) (V1.0) 0000006B 00D71968 New game overture.mid TrackParseDebug.txt", u8"Overture (Sans SFX)", 0,
+	2 + 1, {
+		{ ns4::CMidiFile::NS4_ES_PRE_UNROLL, ns4::CMidiFile::NS4_E_TAG_TRACK_BY_CHNL, 14 - 1 },
+		{ ns4::CMidiFile::NS4_ES_PRE_UNROLL, ns4::CMidiFile::NS4_E_TAG_TRACK_BY_CHNL, 16 - 1 },
 
+		{ ns4::CMidiFile::NS4_ES_PRE_UNROLL, ns4::CMidiFile::NS4_E_MUTE_TAGGED_TRACKS },
+	   } },
 { u8"6 Banjo-Kazooie (U) (V1.0) 00000010 00D33AF8 Spiral Mountain.mid", u8"Banjo-Kazooie (U) (V1.0) 00000010 00D33AF8 Spiral Mountain.mid TrackParseDebug.txt", u8"Spiral Mountain (Sans SFX)", 0,
 	2 + 2 + 1, {
 		{ ns4::CMidiFile::NS4_ES_PRE_UNROLL, ns4::CMidiFile::NS4_E_TAG_TRACK_BY_CHNL, 13 - 1 },

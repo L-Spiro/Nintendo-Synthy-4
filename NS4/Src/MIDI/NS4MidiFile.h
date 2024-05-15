@@ -454,6 +454,254 @@ namespace ns4 {
 			uint32_t					ui32TotalMods;
 			const NS4_MODIFIER *		pmMods;
 		};
+		/** Various settings. */
+		struct NS4_SETTINGS {
+			/** Specifies the interpretation of volume and velocity. Defaults to 40.0. */
+			double						dLevelInterpretation = 40.0;
+
+			/** Specifies the interpretation of master volume. Defaults to 0.0, meaning dLevelInterpretation is used for the curve. */
+			double						dMasterLevelInterpretation = 0.0;
+
+			/** Specifies the interpretation of track volume (NS4_C_MAIN_VOLUME). Defaults to 0.0, meaning dLevelInterpretation is used for the curve. */
+			double						dMainVolumeInterpretation = 0.0;
+
+			/** Specifies the interpretation of envelopes. Defaults to 0.0, meaning dLevelInterpretation is used for the curve. */
+			double						dEnvelopeInterpretation = 0.0;
+
+			/** Specifies the interpretation of envelope end points. Defaults to 20.0. */
+			double						dEnvelopeEndPointInterpretation = 20.0;
+
+			/** Specifies the interpretation of note velocities. Defaults to 0.0, meaning dLevelInterpretation is used for the curve. */
+			double						dVelocityInterpretation = 0.0;
+
+			/** Specifies the pow() factor to apply to the track volume. */
+			double						dTrackVolPow = 1.0;
+
+			/** Specifies the pow() factor to apply to the linear volume. */
+			double						dLinearVolPow = 1.0;
+
+			/** Specifies the master level for SFX. */
+			double						dMasterSfxVol = 1.0;
+
+			/** Specifies an amount to add to all base notes. */
+			double						dBaseNoteOffset = 0.0;
+
+			/** Specifies a multiplier to be applied to envelope attack times. */
+			double						dEnvAttackMultiplier = 0.5;
+
+			/** Specifies a multiplier to be applied to envelope decay times. */
+			double						dEnvDecayMultiplier = 0.5;
+
+			/** Specifies a multiplier to be applied to envelope release times. */
+			double						dEnvReleaseMultiplier = 0.5;
+
+			/** Specifies a multiplier to be applied to percussion envelope attack times. */
+			double						dPercEnvAttackMultiplier = 0.0;
+
+			/** Specifies a multiplier to be applied to percussion envelope decay times. */
+			double						dPercEnvDecayMultiplier = 0.0;
+
+			/** Specifies a multiplier to be applied to percussion envelope release times. */
+			double						dPercEnvReleaseMultiplier = 0.0;
+
+			/** Specifies the minimum release time. */
+			double						dMinReleaseTime = 0.0;
+
+			/** Specifies the reverb normalization factor.  Defaults to 127.0. */
+			double						dReverbNormalizationFactor = 127.0;
+
+			/** Specifies the LPF source frequency.  Defaults to 440.0. */
+			double						dLpfBase = 440.0;
+
+			/** Specifies the LPF offset.  Defaults to 10.0 (Jet Force Gemini).  Conker’s Bad Fur Day has it set to 1.0. */
+			double						dLpfOffset = 10.0;
+
+			/** Specifies the LPF multiplier.  Defaults to 1.0 (Jet Force Gemini, Conker’s Bad Fur Day). */
+			double						dLpfScalar = 1.0;
+
+			/** Specifies the minimum value for Q.  Defaults to 10.0. */
+			double						dQMin = 10.0;
+
+			/** Specifies the maximum LPF frequency.  Defaults to 22047.0. */
+			double						dLpfFreqMax = 22047.0;
+
+			/** Specifies the game's output frequency.  Defaults to 22047.0. */
+			double						dGameFreq = 22047.0;
+
+			/** Specifies the vibrato scale.  Defaults to 1.0. */
+			double						dVibScale = 1.0;
+
+			/** Specifies the vibrato rate scale.  Defaults to 1.0. */
+			double						dVibRateScale = 1.0;
+
+			/** Specifies the vibrato delay scale.  Defaults to 1.0. */
+			double						dVibDelayScale = 1.0;
+
+			/** Specifies the vibrato offset.  Defaults to 0.0. */
+			double						dVibOffset = 0.0;
+
+			/** Specifies the tremolo rate scale.  Defaults to 1.0. */
+			double						dTremRateScale = 1.0;
+
+			/** Specifies the tremolo delay scale.  Defaults to 1.0. */
+			double						dTremDelayScale = 1.0;
+
+			/** Specifies the vibrato final multiplier.  Defaults to 1.0. */
+			double						dVibFinalScale = 1.0;
+
+			/** Specifies the minimum attack time in milliseconds.  Defaults to 0.0. */
+			double						dMinAttack = 0.0;
+
+			/** Specifies the maximum playback rate in Hz.  Defaults to 0.0, or no limit. */
+			double						dMaxRate = 0.0;
+
+			/** Specifies the default vibrato/tremolo levels.  1.0 means standard vibrato and tremolo are fully active by default, 0.0 means that they are off until activated by a control. */
+			double						dDefaultVibTremLevels = 1.0;
+
+			/** The tick at which to begin playing the MIDI file. */
+			uint64_t					ui64StartingTick = 0;
+
+			/** If not 0, specifies a tempo override in microseconds-per-quarter-note, the native MIDI timing device. */
+			int32_t						i32TempoOverride = 0;
+
+			/** Specifies a base-note (root key) offset. */
+			int32_t						i32RootKeyOffset = 0;
+
+			/** Specifies a base-note (root key) offset for percussion. */
+			int32_t						i32PercRootKeyOffset = 0;
+
+			/** If not 0, specifies the pitch-bend range, overriding the instrument pitch-bend range. */
+			uint32_t					ui32PitchRangeOverride = 0;
+
+			/** Specifies special-case reverb options. */
+			uint32_t					ui32ExReverbOptions = 0;
+
+			/** Specifies a default release rate for all EAD tracks. */
+			uint32_t					ui32EadReleaseRateForceDefault = uint32_t( -1 );
+
+			/** If not -1 (the default), this specifies the sample to play exclusively.  All other samples will be silenced.  Used for debugging purpose to isolate a single sample out of a MIDI file. */
+			int32_t						i32SampleExclusive = -1;
+
+			/** Specifies the default bank. */
+			uint32_t					ui32Bank = 0;
+
+			/** Specifies the instrument to assume is bank 127 (percussion). */
+			int32_t						i32PercBank = -1;
+
+			/** Specifies the channel to assume is bank 127 (percussion). */
+			int32_t						i32PercChannel = -1;
+
+			/** Channel offset. */
+			int32_t						i32ChanOffset;
+
+			/** The ADSR vibrato mapping.  Defaults to NS4_AVM_VIBRATO. */
+			NS4_ADSR_VIBRATO_MAPPING	avmAdsrVibMap = NS4_AVM_VIBRATO;
+
+			/** The EAD panning mode. */
+			NS4_EAD_PAN_TABLES			eptEadPanning = NS4_EPT_STD;
+			
+			/** If set, dry is unchanged and reverb is a linear value. */
+			bool						bAdditiveReverb = false;
+
+			/** If set, reverb commands are ignored. */
+			bool						bIgnoreReverb = false;
+
+			/** If set, loop points are ignored. */
+			bool						bIgnoreLoops = false;
+
+			/** If set, vibrato is ignored. */
+			bool						bIgnoreVibrato = false;
+
+			/** If set (default), program changes also update the track's current volume and pan with the instrument volume and pan. */
+			bool						bProgChangeSetsVolAndPan = true;
+
+			/** Overrides bProgChangeSetsVolAndPan and causes program changes to change volume and pan using the rule that the changes are always applied rather than having the first program change skipped. */
+			bool						bProgChangeSetsVolAndPanAlways = false;
+
+			/** If set, channel/pan weighting is applied. */
+			bool						bUseChanPanWeighting = false;
+
+			/** If set, the channel volume is linearly premuliplied by the master volume before the master curve is applied.  Deprecated. */
+			bool						bPremultiplyMasterVolume = false;
+
+			/** If set, reverb is clamped between [-1..1] on each accumulation. */
+			bool						bClampReverb = false;
+
+			/** If set, envelope attack values equal to 0 are remapped to 0x7F. */
+			bool						bMap0AttackTo7F = false;
+
+			/** If set, changes to pan and volume cause updates to the notes currently playing.  Defaults to true. */
+			bool						bPanActiveUpdates = true;
+
+			/** If set, program-change events are not handled before other evets on the same tick, but rather strictly in the order within the MIDI data. */
+			bool						bNoSortProgramChange = false;
+
+			/** If set, the channel determines the instrument/program being played. */
+			bool						bChannelDeterinesInstrument = false;
+
+			/** If set, the channel index determines the instrument/program being played. */
+			bool						bChannelIdxDeterinesInstrument = false;
+
+			/** if true, aftertouch is used to modulate vibrato and tremolo. */
+			bool						bAfterTouchModsVibAndTrem = false;
+
+			/** If true, the ADSR for each sample is assumed to be part of the MIDI file, set by NS4_TRK_ADSR, held in the MIDI state. */
+			bool						bAdsrIsInMidi = false;
+
+			/** If true, the NS4_C_LSB control is always set to 0. */
+			bool						bIgnoreBankSelectLsb = false;
+
+			/** If true, the Q factor reflects over the Nyquist frequency of the track. */
+			bool						bReflectQ = false;
+
+			/** If true, envelopes use exponential multiplication to transition between points rather than linear or curved interpolation. */
+			bool						bExpEnvelopes = false;
+
+			/** If not 0, specifies the control to be interpreted as LPF.  Is usually set to 34. */
+			uint8_t						ui8LpfControl = 0;
+
+			/** If not 0, specifies the control to be interpreted as Q.  Is usually set to 33. */
+			uint8_t						ui8QControl = 0;
+
+			/** If not 0, specifies the control to be interpreted as a stereo-effect control.  Is usually set to 65. */
+			uint8_t						ui8StereoEffectControl = 0;
+
+			/** If not 0, specifies the control to be interpreted as distortion.  Is usually set to 35. */
+			uint8_t						ui8DistortionControl = 0;
+
+			/** A mask applied to reverb values.  Defaults to 0xFF. */
+			uint8_t						ui8ReverbMask = 0xFF;
+
+			/** If not 0, specifies the control to be interpreted as a dry control.  Is usually set to 23. */
+			uint8_t						ui8DryControl = 0;
+
+			/** If not 0, specifies the control to be interpreted as a wet control.  Is usually set to 22. */
+			uint8_t						ui8WetControl = 0;
+
+			/** If not 0, specifies the control to be interpreted as a master volume control.  Is usually set to 21. */
+			uint8_t						ui8MasterVolControl = 0;
+
+			/** If not 0, specifies the control to be interpreted as a setting the pitch-bend range.  Is usually set to 20. */
+			uint8_t						ui8PitchRangeControl = 0;
+
+			/** Specifies the default pan when bProgChangeSetsVolAndPan is false. */
+			uint8_t						ui8DefaultPan = 0x40;
+
+			/** Specifies the default main volume when bProgChangeSetsVolAndPan is false. */
+			uint8_t						ui8DefaultMainVol = 127;
+
+			/** Specifies the default master volume.  When ui8MasterVolControl is set, this is usually set to 100, otherwise the default value is 127. */
+			uint8_t						ui8DefaultMasterVol = 127;
+
+			/** Specifies the default dry value.  Usually set to 127. but Kirby 64: The Crystal Shards uses 95. */
+			uint8_t						ui8DefaultDry = 127;
+
+			/** Specifies the global minimum note that can trigger samples.  Defaults to 0. */
+			uint8_t						ui8MinNote = 0;
+
+			/** Specifies the ADSR percussion release rate.  Defaults to 0, making it unused. */
+			uint8_t						ui8AdsrPercReleaseRate = 0;
+		};
 
 
 
@@ -568,8 +816,9 @@ namespace ns4 {
 		 * \param _aRender The current render results.
 		 * \param _paWet If not nullptr, the wet "generator" is accumulated into it.  For mono results, only allocate 1 channel.
 		 * \param _fFade The fade-out object for manual fades.
+		 * \param _sSettings MIDI settings.
 		 */
-		lwaudio							RenderPostSynthesis( const NS4_TRACK_RENDER_OPTIONS &_troOptions, uint32_t _ui32Total, const NS4_MODIFIER * _pmMods, lwaudio &_aRender, lwaudio * _paWet, CFade &_fFade );
+		lwaudio							RenderPostSynthesis( const NS4_TRACK_RENDER_OPTIONS &_troOptions, uint32_t _ui32Total, const NS4_MODIFIER * _pmMods, lwaudio &_aRender, lwaudio * _paWet, CFade &_fFade, NS4_SETTINGS &_sSettings );
 
 		/**
 		 * Determines if there is a global setting of the given type in the given array of modifiers.  Returns a pointer to the
@@ -1440,252 +1689,6 @@ namespace ns4 {
 
 
 		// == Members.
-		/** Various settings. */
-		struct NS4_SETTINGS {
-			/** Specifies the interpretation of volume and velocity. Defaults to 40.0. */
-			double						dLevelInterpretation = 40.0;
-
-			/** Specifies the interpretation of master volume. Defaults to 0.0, meaning dLevelInterpretation is used for the curve. */
-			double						dMasterLevelInterpretation = 0.0;
-
-			/** Specifies the interpretation of track volume (NS4_C_MAIN_VOLUME). Defaults to 0.0, meaning dLevelInterpretation is used for the curve. */
-			double						dMainVolumeInterpretation = 0.0;
-
-			/** Specifies the interpretation of envelopes. Defaults to 0.0, meaning dLevelInterpretation is used for the curve. */
-			double						dEnvelopeInterpretation = 0.0;
-
-			/** Specifies the interpretation of envelope end points. Defaults to 20.0. */
-			double						dEnvelopeEndPointInterpretation = 20.0;
-
-			/** Specifies the interpretation of note velocities. Defaults to 0.0, meaning dLevelInterpretation is used for the curve. */
-			double						dVelocityInterpretation = 0.0;
-
-			/** Specifies the pow() factor to apply to the track volume. */
-			double						dTrackVolPow = 1.0;
-
-			/** Specifies the pow() factor to apply to the linear volume. */
-			double						dLinearVolPow = 1.0;
-
-			/** Specifies an amount to add to all base notes. */
-			double						dBaseNoteOffset = 0.0;
-
-			/** Specifies a multiplier to be applied to envelope attack times. */
-			double						dEnvAttackMultiplier = 0.5;
-
-			/** Specifies a multiplier to be applied to envelope decay times. */
-			double						dEnvDecayMultiplier = 0.5;
-
-			/** Specifies a multiplier to be applied to envelope release times. */
-			double						dEnvReleaseMultiplier = 0.5;
-
-			/** Specifies a multiplier to be applied to percussion envelope attack times. */
-			double						dPercEnvAttackMultiplier = 0.0;
-
-			/** Specifies a multiplier to be applied to percussion envelope decay times. */
-			double						dPercEnvDecayMultiplier = 0.0;
-
-			/** Specifies a multiplier to be applied to percussion envelope release times. */
-			double						dPercEnvReleaseMultiplier = 0.0;
-
-			/** Specifies the minimum release time. */
-			double						dMinReleaseTime = 0.0;
-
-			/** Specifies the reverb normalization factor.  Defaults to 127.0. */
-			double						dReverbNormalizationFactor = 127.0;
-
-			/** Specifies the LPF source frequency.  Defaults to 440.0. */
-			double						dLpfBase = 440.0;
-
-			/** Specifies the LPF offset.  Defaults to 10.0 (Jet Force Gemini).  Conker’s Bad Fur Day has it set to 1.0. */
-			double						dLpfOffset = 10.0;
-
-			/** Specifies the LPF multiplier.  Defaults to 1.0 (Jet Force Gemini, Conker’s Bad Fur Day). */
-			double						dLpfScalar = 1.0;
-
-			/** Specifies the minimum value for Q.  Defaults to 10.0. */
-			double						dQMin = 10.0;
-
-			/** Specifies the maximum LPF frequency.  Defaults to 22047.0. */
-			double						dLpfFreqMax = 22047.0;
-
-			/** Specifies the game's output frequency.  Defaults to 22047.0. */
-			double						dGameFreq = 22047.0;
-
-			/** Specifies the vibrato scale.  Defaults to 1.0. */
-			double						dVibScale = 1.0;
-
-			/** Specifies the vibrato rate scale.  Defaults to 1.0. */
-			double						dVibRateScale = 1.0;
-
-			/** Specifies the vibrato delay scale.  Defaults to 1.0. */
-			double						dVibDelayScale = 1.0;
-
-			/** Specifies the vibrato offset.  Defaults to 0.0. */
-			double						dVibOffset = 0.0;
-
-			/** Specifies the tremolo rate scale.  Defaults to 1.0. */
-			double						dTremRateScale = 1.0;
-
-			/** Specifies the tremolo delay scale.  Defaults to 1.0. */
-			double						dTremDelayScale = 1.0;
-
-			/** Specifies the vibrato final multiplier.  Defaults to 1.0. */
-			double						dVibFinalScale = 1.0;
-
-			/** Specifies the minimum attack time in milliseconds.  Defaults to 0.0. */
-			double						dMinAttack = 0.0;
-
-			/** Specifies the maximum playback rate in Hz.  Defaults to 0.0, or no limit. */
-			double						dMaxRate = 0.0;
-
-			/** Specifies the default vibrato/tremolo levels.  1.0 means standard vibrato and tremolo are fully active by default, 0.0 means that they are off until activated by a control. */
-			double						dDefaultVibTremLevels = 1.0;
-
-			/** The tick at which to begin playing the MIDI file. */
-			uint64_t					ui64StartingTick = 0;
-
-			/** If not 0, specifies a tempo override in microseconds-per-quarter-note, the native MIDI timing device. */
-			int32_t						i32TempoOverride = 0;
-
-			/** Specifies a base-note (root key) offset. */
-			int32_t						i32RootKeyOffset = 0;
-
-			/** Specifies a base-note (root key) offset for percussion. */
-			int32_t						i32PercRootKeyOffset = 0;
-
-			/** If not 0, specifies the pitch-bend range, overriding the instrument pitch-bend range. */
-			uint32_t					ui32PitchRangeOverride = 0;
-
-			/** Specifies special-case reverb options. */
-			uint32_t					ui32ExReverbOptions = 0;
-
-			/** Specifies a default release rate for all EAD tracks. */
-			uint32_t					ui32EadReleaseRateForceDefault = uint32_t( -1 );
-
-			/** If not -1 (the default), this specifies the sample to play exclusively.  All other samples will be silenced.  Used for debugging purpose to isolate a single sample out of a MIDI file. */
-			int32_t						i32SampleExclusive = -1;
-
-			/** Specifies the default bank. */
-			uint32_t					ui32Bank = 0;
-
-			/** Specifies the instrument to assume is bank 127 (percussion). */
-			int32_t						i32PercBank = -1;
-
-			/** Specifies the channel to assume is bank 127 (percussion). */
-			int32_t						i32PercChannel = -1;
-
-			/** Channel offset. */
-			int32_t						i32ChanOffset;
-
-			/** The ADSR vibrato mapping.  Defaults to NS4_AVM_VIBRATO. */
-			NS4_ADSR_VIBRATO_MAPPING	avmAdsrVibMap = NS4_AVM_VIBRATO;
-
-			/** The EAD panning mode. */
-			NS4_EAD_PAN_TABLES			eptEadPanning = NS4_EPT_STD;
-			
-			/** If set, dry is unchanged and reverb is a linear value. */
-			bool						bAdditiveReverb = false;
-
-			/** If set, reverb commands are ignored. */
-			bool						bIgnoreReverb = false;
-
-			/** If set, loop points are ignored. */
-			bool						bIgnoreLoops = false;
-
-			/** If set, vibrato is ignored. */
-			bool						bIgnoreVibrato = false;
-
-			/** If set (default), program changes also update the track's current volume and pan with the instrument volume and pan. */
-			bool						bProgChangeSetsVolAndPan = true;
-
-			/** Overrides bProgChangeSetsVolAndPan and causes program changes to change volume and pan using the rule that the changes are always applied rather than having the first program change skipped. */
-			bool						bProgChangeSetsVolAndPanAlways = false;
-
-			/** If set, channel/pan weighting is applied. */
-			bool						bUseChanPanWeighting = false;
-
-			/** If set, the channel volume is linearly premuliplied by the master volume before the master curve is applied.  Deprecated. */
-			bool						bPremultiplyMasterVolume = false;
-
-			/** If set, reverb is clamped between [-1..1] on each accumulation. */
-			bool						bClampReverb = false;
-
-			/** If set, envelope attack values equal to 0 are remapped to 0x7F. */
-			bool						bMap0AttackTo7F = false;
-
-			/** If set, changes to pan and volume cause updates to the notes currently playing.  Defaults to true. */
-			bool						bPanActiveUpdates = true;
-
-			/** If set, program-change events are not handled before other evets on the same tick, but rather strictly in the order within the MIDI data. */
-			bool						bNoSortProgramChange = false;
-
-			/** If set, the channel determines the instrument/program being played. */
-			bool						bChannelDeterinesInstrument = false;
-
-			/** If set, the channel index determines the instrument/program being played. */
-			bool						bChannelIdxDeterinesInstrument = false;
-
-			/** if true, aftertouch is used to modulate vibrato and tremolo. */
-			bool						bAfterTouchModsVibAndTrem = false;
-
-			/** If true, the ADSR for each sample is assumed to be part of the MIDI file, set by NS4_TRK_ADSR, held in the MIDI state. */
-			bool						bAdsrIsInMidi = false;
-
-			/** If true, the NS4_C_LSB control is always set to 0. */
-			bool						bIgnoreBankSelectLsb = false;
-
-			/** If true, the Q factor reflects over the Nyquist frequency of the track. */
-			bool						bReflectQ = false;
-
-			/** If true, envelopes use exponential multiplication to transition between points rather than linear or curved interpolation. */
-			bool						bExpEnvelopes = false;
-
-			/** If not 0, specifies the control to be interpreted as LPF.  Is usually set to 34. */
-			uint8_t						ui8LpfControl = 0;
-
-			/** If not 0, specifies the control to be interpreted as Q.  Is usually set to 33. */
-			uint8_t						ui8QControl = 0;
-
-			/** If not 0, specifies the control to be interpreted as a stereo-effect control.  Is usually set to 65. */
-			uint8_t						ui8StereoEffectControl = 0;
-
-			/** If not 0, specifies the control to be interpreted as distortion.  Is usually set to 35. */
-			uint8_t						ui8DistortionControl = 0;
-
-			/** A mask applied to reverb values.  Defaults to 0xFF. */
-			uint8_t						ui8ReverbMask = 0xFF;
-
-			/** If not 0, specifies the control to be interpreted as a dry control.  Is usually set to 23. */
-			uint8_t						ui8DryControl = 0;
-
-			/** If not 0, specifies the control to be interpreted as a wet control.  Is usually set to 22. */
-			uint8_t						ui8WetControl = 0;
-
-			/** If not 0, specifies the control to be interpreted as a master volume control.  Is usually set to 21. */
-			uint8_t						ui8MasterVolControl = 0;
-
-			/** If not 0, specifies the control to be interpreted as a setting the pitch-bend range.  Is usually set to 20. */
-			uint8_t						ui8PitchRangeControl = 0;
-
-			/** Specifies the default pan when bProgChangeSetsVolAndPan is false. */
-			uint8_t						ui8DefaultPan = 0x40;
-
-			/** Specifies the default main volume when bProgChangeSetsVolAndPan is false. */
-			uint8_t						ui8DefaultMainVol = 127;
-
-			/** Specifies the default master volume.  When ui8MasterVolControl is set, this is usually set to 100, otherwise the default value is 127. */
-			uint8_t						ui8DefaultMasterVol = 127;
-
-			/** Specifies the default dry value.  Usually set to 127. but Kirby 64: The Crystal Shards uses 95. */
-			uint8_t						ui8DefaultDry = 127;
-
-			/** Specifies the global minimum note that can trigger samples.  Defaults to 0. */
-			uint8_t						ui8MinNote = 0;
-
-			/** Specifies the ADSR percussion release rate.  Defaults to 0, making it unused. */
-			uint8_t						ui8AdsrPercReleaseRate = 0;
-		};
-
 		/** Settings. */
 		static NS4_SETTINGS				m_sSettings;
 
@@ -2411,9 +2414,10 @@ namespace ns4 {
 		 * \param _troOptions The rener information.
 		 * \param _mMod The information for the sample to render.
 		 * \param _aAudio The stereo audio to which to render the result.
-		 * \param _paWet The wet output
+		 * \param _paWet The wet output.
+		 * \param _sSettings MIDI settings.
 		 */
-		void							RenderSample( const NS4_TRACK_RENDER_OPTIONS &_troOptions, const NS4_MODIFIER &_mMod, lwaudio &_aAudio, lwaudio * _paWet, const std::vector<NS4_SAMPLE_MODIFIER> &_vMods );
+		void							RenderSample( const NS4_TRACK_RENDER_OPTIONS &_troOptions, const NS4_MODIFIER &_mMod, lwaudio &_aAudio, lwaudio * _paWet, const std::vector<NS4_SAMPLE_MODIFIER> &_vMods, NS4_SETTINGS &_sSettings );
 
 		/**
 		 * Prepares vibrato for a given note.

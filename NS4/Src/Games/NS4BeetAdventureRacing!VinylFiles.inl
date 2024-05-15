@@ -24,6 +24,8 @@
 #define NS4_OVERSAMPLING					(1 << 2)
 #define NS4_OVERSAMPLING_BW					1500.0
 
+#define NS4_MASTER_SFX_VOLUME				std::pow( 10.0, -2.0 / 20.0 )
+
 #define NS4_SFX_MOD0						106		// 70%.
 #define NS4_SFX_MOD1						98
 #define NS4_SFX_MOD2						94

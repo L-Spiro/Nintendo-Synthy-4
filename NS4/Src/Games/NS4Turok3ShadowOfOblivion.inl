@@ -7,10 +7,26 @@
 #define NS4_REVERB							ns4::CReverb::NS4_T_TUROK_3_SHADOWS_OF_OBLIVION_0
 #define NS4_ORIG_HZ							22047
 #define NS4_CURVE							40.0
-#define NS4_OUT_DIRECTORY					u8"T:\\N64OST\\Turok Shadow of Oblivion\\"
+#define NS4_OUT_DIRECTORY					u8"C:\\N64OST\\Turok Shadow of Oblivion\\"
 #define NS4_OUT_DIRECTORY_NUMBERS			NS4_OUT_DIRECTORY u8"Numbered\\"
-#define NS4_WET_FILTER_FREQ					10879.0//(NS4_ORIG_HZ / std::pow( 2.0, 3.5 ))
+#define NS4_WET_FILTER_FREQ					(8042.0 / 14.0)
 //#define NS4_ROOT_OFFSET						12
+
+#define NS4_NO_PROGRAM_CHANGE_SORT			true
+
+//#define NS4_ENV_MULTIPLIER					(1.0 / 1.0)
+//#define NS4_ENVELOPE_VOL_CURVE				40.0
+//#define NS4_ENVELOPE_POINT_CURVE			20.0
+
+//#define NS4_ENVELOPE_VOL_CURVE				20.0
+//#define NS4_ENVELOPE_POINT_CURVE			40.0
+
+
+#define NS4_ENV_MULTIPLIER					(1.0)	// ?
+#define NS4_REL_MULTIPLIER					(1.0)
+#define NS4_ENVELOPE_VOL_CURVE				20.0
+#define NS4_ENVELOPE_POINT_CURVE			40.0
+#define NS4_EXPONENTIAL_ENVELOPE			true
 
 
 { u8"Turok 3 - Shadow of Oblivion (U) 0000003C 00B2F65C Opening.mid", u8"Turok 3 - Shadow of Oblivion (U) 0000003C 00B2F65C.mid TrackParseDebug.txt", u8"Opening", 0 },

@@ -6,7 +6,7 @@
 #define NS4_REVERB_TRACKS					0
 #define NS4_ORIG_HZ							22047
 #define NS4_CURVE							40.0
-#define NS4_OUT_DIRECTORY					u8"F:\\N64OST\\Bust-A-Move 2 Arcade Edition\\"
+#define NS4_OUT_DIRECTORY					u8"C:\\N64OST\\Bust-A-Move 2 Arcade Edition\\"
 #define NS4_OUT_DIRECTORY_NUMBERS			NS4_OUT_DIRECTORY u8"Numbered\\"
 #define NS4_IGNORE_REVERB					true
 #define NS4_PERC_CHANNEL					9
@@ -19,7 +19,7 @@
 
 { u8"02 Bust-A-Move 2 - Arcade Edition (U) 00000002 00744442 Encounter.mid", u8"", u8"Taito", 0,
 	2, {
-		{ NS4_PLAY_SAMPLE_SIMPLE( u8"J:\\My Projects\\MIDIWorks\\Exports\\Bust-A-Move 2 Arcade Edition\\Samples\\SFX\\B01I00S15.wav", 1, 1, 1, 0, 0, 1.0, 64 ) },
+		{ NS4_PLAY_SAMPLE_SIMPLE( u8"C:\\My Projects\\MIDIWorks\\Exports\\Bust-A-Move 2 Arcade Edition\\Samples\\SFX\\B01I00S15.wav", 1, 1, 1, 0, 0, 1.0, 64 ) },
 		{ ns4::CMidiFile::NS4_ES_PRE_UNROLL, ns4::CMidiFile::NS4_E_MUTE_ALL_TRACKS },
 	   } },
 { u8"00 Bust-A-Move 2 - Arcade Edition (U) 00000000 00743810 Intro.mid", u8"", u8"Intro", 0 },
@@ -47,14 +47,14 @@
 { u8"07 Bust-A-Move 2 - Arcade Edition (U) 00000007 00749874 Puzzle Theme 5.mid", u8"", u8"Puzzle Theme 5", 0,
 	1, {
 		{ ns4::CMidiFile::NS4_ES_PRE_UNROLL, ns4::CMidiFile::NS4_E_SET_LOOP_POINTS_ALL_TRACKS, 0, 0, 0, { 1, 1, 1, 0 }, { 45, 3, 1, 0 } },
-	   } },
+	   }, },
 { u8"08 Bust-A-Move 2 - Arcade Edition (U) 0000000C 0074F472 Final Puzzle.mid", u8"", u8"Final Puzzle", 0,
 	1, {
 		{ ns4::CMidiFile::NS4_ES_PRE_UNROLL, ns4::CMidiFile::NS4_E_SET_LOOP_POINTS_ALL_TRACKS, 0, 0, 0, { 1, 1, 1, 0 }, { 25, 3, 1, 0 } },
 	   } },
 { u8"02 Bust-A-Move 2 - Arcade Edition (U) 00000002 00744442 Encounter.mid", u8"", u8"Puzzle Complete", 0,
 	2, {
-		{ NS4_PLAY_SAMPLE_SIMPLE( u8"J:\\My Projects\\MIDIWorks\\Exports\\Bust-A-Move 2 Arcade Edition\\Samples\\SFX\\B01I00S11.wav", 1, 1, 1, 0, 0, 1.0, 64 ) },
+		{ NS4_PLAY_SAMPLE_SIMPLE( u8"C:\\My Projects\\MIDIWorks\\Exports\\Bust-A-Move 2 Arcade Edition\\Samples\\SFX\\B01I00S11.wav", 1, 1, 1, 0, 0, 1.0, 64 ) },
 		{ ns4::CMidiFile::NS4_ES_PRE_UNROLL, ns4::CMidiFile::NS4_E_MUTE_ALL_TRACKS },
 	   } },
 { u8"10 Bust-A-Move 2 - Arcade Edition (U) 00000008 0074BCCE Mode Complete.mid", u8"", u8"Mode Complete", 0 },
@@ -69,6 +69,6 @@
 	   } },
 { u8"02 Bust-A-Move 2 - Arcade Edition (U) 00000002 00744442 Encounter.mid", u8"", u8"Game Over", 0,
 	2, {
-		{ NS4_PLAY_SAMPLE_SIMPLE( u8"J:\\My Projects\\MIDIWorks\\Exports\\Bust-A-Move 2 Arcade Edition\\Samples\\SFX\\B01I00S43.wav", 1, 1, 1, 0, 0, 1.0, 64 ) },
+		{ NS4_PLAY_SAMPLE_SIMPLE( u8"C:\\My Projects\\MIDIWorks\\Exports\\Bust-A-Move 2 Arcade Edition\\Samples\\SFX\\B01I00S43.wav", 1, 1, 1, 0, 0, 1.0, 64 ) },
 		{ ns4::CMidiFile::NS4_ES_PRE_UNROLL, ns4::CMidiFile::NS4_E_MUTE_ALL_TRACKS },
 	   } },

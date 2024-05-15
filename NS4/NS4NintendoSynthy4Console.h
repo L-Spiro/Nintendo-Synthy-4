@@ -50,7 +50,7 @@
 //#define NS4_PRINT_BEST_BANK
 
 #ifdef NS4_BULK
-//#define NS4_ONE_OFF										(142-1)
+//#define NS4_ONE_OFF										(210-1)
 //#define NS4_EXPORT_SOME
 //#define NS4_EPORT_FROM								(71-1)
 #else
@@ -167,8 +167,10 @@ int oldmain() {
 		//ns4::CReverb::HarvestUnfilteredMonoTaps( u8"C:\\My Projects\\Nintendo-Synthy-4\\NS4\\Src\\Reverb\\Research\\KK64T HD.wav", -1, 1, 0, 0, 0 );
 		//ns4::CReverb::HarvestUnfilteredMonoTaps( u8"C:\\My Projects\\Nintendo-Synthy-4\\NS4\\Src\\Reverb\\Research\\BAR HD.wav", -1, 1, 0, 0, 0 );
 		//ns4::CReverb::HarvestUnfilteredMonoTaps( u8"C:\\My Projects\\Nintendo-Synthy-4\\NS4\\Src\\Reverb\\Research\\ISBTN1 HD.wav", -1, 1, 0, 0, 0 );
-		ns4::CReverb::HarvestUnfilteredMonoTaps( u8"C:\\My Projects\\Nintendo-Synthy-4\\NS4\\Src\\Reverb\\Research\\Psnap Thin.wav", 128, 1, 0, 0, 0,
-			u8"C:\\My Projects\\Nintendo-Synthy-4\\NS4\\Src\\Reverb\\Research\\Psnap Thick.wav", 1.0 );
+		//ns4::CReverb::HarvestUnfilteredMonoTaps( u8"C:\\My Projects\\Nintendo-Synthy-4\\NS4\\Src\\Reverb\\Research\\Psnap Thin.wav", 128, 1, 0, 0, 0,
+		//	u8"C:\\My Projects\\Nintendo-Synthy-4\\NS4\\Src\\Reverb\\Research\\Psnap Thick.wav", 1.0 );
+		ns4::CReverb::HarvestUnfilteredMonoTaps( u8"C:\\My Projects\\Nintendo-Synthy-4\\NS4\\Src\\Reverb\\Research\\T3SoO Thin.wav", 160, 1, 0, 1, 0,
+			u8"C:\\My Projects\\Nintendo-Synthy-4\\NS4\\Src\\Reverb\\Research\\T3SoO Thick.wav", 1.0, 2.0 );
 	}
 	{
 		ns4::CWavLib::DetermineLevelsStereo( u8"C:\\My Projects\\Nintendo-Synthy-4\\NS4\\Src\\Reverb\\Research\\BM64 V 127 R 0 P 64.wav",
@@ -212,11 +214,11 @@ int oldmain() {
 
 #if 0
 	{
-		const uint32_t ui32SampRate = 32006;
+		const uint32_t ui32SampRate = 22047;
 		
 		ns4::lwaudio aWet = ns4::CWavLib::AllocateSamples( 1, ui32SampRate * 30 );
 		aWet[0][0] = 1.0;
-		ns4::lwaudio aAccum = ns4::CReverb::CreateReverb( ns4::CReverb::NS4_T_POKEMON_SNAP_DELAY_0, aWet, ui32SampRate, ui32SampRate, 0.0, 0 );
+		ns4::lwaudio aAccum = ns4::CReverb::CreateReverb( ns4::CReverb::NS4_T_TUROK_3_SHADOWS_OF_OBLIVION_DELAY_0, aWet, ui32SampRate, ui32SampRate, 0.0, 0 );
 		ns4::lwsample sFirst = aWet[0][0];
 		if ( sFirst == 0.0 ) {
 			::OutputDebugStringA( "Measles.\r\n" );
@@ -320,7 +322,7 @@ int oldmain() {
 //#include "Src/Games/NS4BanjoTooieFiles.inl"
 //#include "Src/Games/NS4DonkeyKong64Files.inl"
 //#include "Src/Games/NS4DonkeyKong64KioskFiles.inl"
-//#include "Src/Games/NS4Turok3ShadowOfOblivion.inl"
+#include "Src/Games/NS4Turok3ShadowOfOblivion.inl"
 //#include "Src/Games/NS4Turok2SeedsOfEvilFiles.inl"
 //#include "Src/Games/NS4TurokRageWars.inl"
 //#include "Src/Games/NS4TurokDinosaurHunterFiles.inl"
@@ -399,7 +401,7 @@ int oldmain() {
 //#include "Src/Games/NS4MickeysSpeedwayUsaFiles.inl"
 //#include "Src/Games/NS4MickeysSpeedwayUsaStereoFiles.inl"
 //#include "Src/Games/NS4DenshaDeGo!64Files.inl"
-#include "Src/Games/NS4MaceTheDarkAgesFiles.inl"
+//#include "Src/Games/NS4MaceTheDarkAgesFiles.inl"
 //#include "Src/Games/NS4ArmorinesProjectSWARMFiles.inl"
 //#include "Src/Games/NS4DoraemonNobitaFiles.inl"
 //#include "Src/Games/NS4Doraemon2NobitaFiles.inl"
@@ -840,6 +842,9 @@ int oldmain() {
 #ifdef NS4_DEFAULT_MASTER_VOL
 		ns4::CMidiFile::m_sSettings.ui8DefaultMasterVol = NS4_DEFAULT_MASTER_VOL;
 #endif	// NS4_DEFAULT_MASTER_VOL
+#ifdef NS4_MASTER_SFX_VOLUME
+		ns4::CMidiFile::m_sSettings.dMasterSfxVol = NS4_MASTER_SFX_VOLUME;
+#endif	// NS4_MASTER_SFX_VOLUME
 #ifdef NS4_IGNORE_VIBRATO
 		ns4::CMidiFile::m_sSettings.bIgnoreVibrato = NS4_IGNORE_VIBRATO;
 #endif	// NS4_IGNORE_VIBRATO
@@ -1027,7 +1032,7 @@ int oldmain() {
 		}
 #endif	// NS4_SINGLE_TRACK
 		{
-			ns4::lwaudio aTrack1 = mfMidi.RenderPostSynthesis( troOptions, troOptions.ui32TotalMods, troOptions.pmMods, aTrack0, &aWet, fFade );
+			ns4::lwaudio aTrack1 = mfMidi.RenderPostSynthesis( troOptions, troOptions.ui32TotalMods, troOptions.pmMods, aTrack0, &aWet, fFade, ns4::CMidiFile::m_sSettings );
 			if ( aTrack1.size() ) {
 				ns4::CWavLib::AddSamples( aTrack0, aTrack1, 1.0, 0 );
 			}
