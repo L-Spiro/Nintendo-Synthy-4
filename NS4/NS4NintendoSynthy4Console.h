@@ -322,7 +322,7 @@ int oldmain() {
 //#include "Src/Games/NS4BanjoTooieFiles.inl"
 //#include "Src/Games/NS4DonkeyKong64Files.inl"
 //#include "Src/Games/NS4DonkeyKong64KioskFiles.inl"
-#include "Src/Games/NS4Turok3ShadowOfOblivion.inl"
+//#include "Src/Games/NS4Turok3ShadowOfOblivion.inl"
 //#include "Src/Games/NS4Turok2SeedsOfEvilFiles.inl"
 //#include "Src/Games/NS4TurokRageWars.inl"
 //#include "Src/Games/NS4TurokDinosaurHunterFiles.inl"
@@ -339,7 +339,7 @@ int oldmain() {
 //#include "Src/Games/NS4BlastCorpsFiles.inl"
 //#include "Src/Games/NS4BlastCorpsPALFiles.inl"
 //#include "Src/Games/NS4BeetAdventureRacing!Files.inl"
-//#include "Src/Games/NS4BeetAdventureRacing!VinylFiles.inl"
+#include "Src/Games/NS4BeetAdventureRacing!VinylFiles.inl"
 //#include "Src/Games/NS4AeroFightersAssaultFiles.inl"
 //#include "Src/Games/NS4AeroFightersAssaultOverSamplingFiles.inl"
 //#include "Src/Games/NS4F1WorldGrandPrixFiles.inl"
@@ -503,9 +503,19 @@ int oldmain() {
 #else
 	const uint32_t ui32WetFilterOrder = 2;
 #endif	// NS4_WET_FILTER_ORDER
+
+#ifdef NS4_OUTPUT_HZ
+	const double dNewSampleRate = NS4_OUTPUT_HZ;
+#else
 	const double dNewSampleRate = double( int32_t( 48000.0 * 1.0 ) );
 	//const double dNewSampleRate = 22050.0;
+#endif	// NS4_OUTPUT_HZ
+
+#ifdef NS4_OUTPUT_BITS
+	const uint32_t ui32BitDepth = NS4_OUTPUT_BITS;
+#else
 	const uint32_t ui32BitDepth = 32;
+#endif	// NS4_OUTPUT_BITS
 	const double dMinForBitDepth = 0.5 * (1.0 / ((1ULL << (ui32BitDepth - 1)) - 1));
 #ifdef NS4_MASTER_REVERB_OFFSET
 	const int32_t i32MasterReverbOffset = int32_t( NS4_MASTER_REVERB_OFFSET );

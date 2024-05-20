@@ -17,6 +17,9 @@
 #define NS4_ENVELOPE_POINT_CURVE			40.0
 #define NS4_EXPONENTIAL_ENVELOPE			true
 
+#define NS4_OUTPUT_HZ						44100
+#define NS4_OUTPUT_BITS						24
+
 #define NS4_ALT_NUMBERING					true
 #define NS4_SIDE_DUR						20.0 * 60.0
 #define NS4_COMMENT							u8"Vinyl by Walter Barbour. HD Restoration by Shawn (L. Spiro) Wilcoxen"
