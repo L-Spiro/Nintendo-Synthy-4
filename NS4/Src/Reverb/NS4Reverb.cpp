@@ -627,15 +627,15 @@ namespace ns4 {
 
 	/** The comb filter delay lines for Aero Fighters Assault. */
 	NS4_DELAY_N64 CReverb::m_dn64AeroFightersAssaultComb0[] = {
-		//ui32Input		ui32Output	i16FfCoef		i16FbCoef		i16Gain			dRsInc						dRsVal						i32RsDelta		dRsGain
+		//ui32Input		ui32Output	i16FfCoef		i16FbCoef		i16Gain							 dRsInc						 dRsVal			i32RsDelta						dRsGain						ui16Fc
 		{         0,	      1600,	    +9830,		    -9830,	       3000 },
-		{        64,	      3600,	    +9830,		    -9830,	       2000 },
+		{        64,	      3600,	    +9830,		    -9830,	       2000,		                      0,	                      0,		        +0,		                      0,	/*0xDFE42F70*/    6400 },
 		{       656,	      2048,	   +16384,		   -16384,	       9174 },
 		{       720,	      1648,	    +8192,		    -8192,	          0 },
-		{      2592,	      4512,	   +16384,		   -16384,	       9174 },
+		{      2592,	      4512,	   +16384,		   -16384,	       9174,		                      0,	                      0,		        +0,		                      0,	/*0xDFE42FB0*/    9216 },
 		{      2656,	      3808,	    +8192,		    -8192,	          0 },
 		{      3808,	      4288,	    +8192,		    -8192,	          0 },
-		{         0,	      4784,	   +18000,		       +0,	          0 },
+		{         0,	      4784,	   +18000,		       +0,	          0,		                      0,	                      0,		        +0,		                      0,	/*0xDFE42FF0*/   12544 },
 	};
 
 	/** The comb filter delay lines for Chameleon Twist. */
@@ -1281,12 +1281,12 @@ namespace ns4 {
 	/** The comb filter delay lines for All-Star Baseball ‘99. */
 	NS4_DELAY_N64 CReverb::m_dn64AllStarBaseball990[] = {
 		//ui32Input		ui32Output	i16FfCoef		i16FbCoef		i16Gain							 dRsInc						 dRsVal			i32RsDelta						dRsGain						ui16Fc
-		{       160,	       944,	    +9830,		    -9830,	       2815,		                      0,	                      0,		        +0,		                      0,	/*0xDFECBF80*/    8191 },
+		{       160,	       944,	    +9830,		    -9830,	       2815,		                      0,	                      0,		        +0,		                      0,	/*0xDFECBF80*/    4095 },
 		{       416,	       768,	   +13107,		   -13107,	          0 },
 		{       784,	       912,	   +19660,		   -19660,	          0 },
-		{      1664,	      2864,	   +13107,		   -13107,	       2719,		                      0,	                      0,		        +0,		                      0,	/*0xDFECBFC0*/    8191 },
+		{      1664,	      2864,	   +13107,		   -13107,	       2719,		                      0,	                      0,		        +0,		                      0,	/*0xDFECBFC0*/    4095 },
 		{      1984,	      2496,	   +14107,		   -14107,	          0 },
-		{        64,	      6192,	   +20384,		       +0,	      22015,		                      0,	                      0,		        +0,		                      0,	/*0xDFECC000*/   13695 },
+		{        64,	      6192,	   +20384,		       +0,	      22015,		                      0,	                      0,		        +0,		                      0,	/*0xDFECC000*/   11447 },
 	};
 
 	/** Taps harvested from Getter Love!!: Cho Renai Party Game Tanjo. */
