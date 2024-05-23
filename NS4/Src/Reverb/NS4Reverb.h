@@ -193,6 +193,9 @@ namespace ns4 {
 
 			NS4_T_ITOI_SHIGESATO_NO_BASS_TSURI_NO_1_DELAY_0		= 171,
 			NS4_T_ITOI_SHIGESATO_NO_BASS_TSURI_NO_1_0			= 172,
+
+			NS4_T_BUCK_BUMBLE_DELAY_0			= 173,
+			NS4_T_BUCK_BUMBLE_0					= 174,
 		};
 
 
@@ -811,6 +814,12 @@ namespace ns4 {
 
 		/** The comb filter delay lines for Itoi Shigesato no Bass Tsuri No. 1. */
 		static NS4_DELAY_N64					m_dn64ItoiShigesatoNoBassTsuriNo10[];
+
+		/** Taps harvested from Buck Bumble. */
+		static NS4_REVERB_TAP					m_rtBuckBumble0[];
+
+		/** The comb filter delay lines for Buck Bumble. */
+		static NS4_DELAY_N64					m_dn64BuckBumble0[];
 
 		// == Functions.
 		/**

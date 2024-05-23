@@ -618,6 +618,7 @@ namespace ns4 {
 		{         0,	      6512,	   +13000,		   -13000,	          0,		3.4517212043283507e-005,	   -0.90736204385757446,		        -1,		    0.37614786624908447 },
 	};
 
+
 	/** The comb filter delay lines for Mario Party. */
 	NS4_DELAY_N64 CReverb::m_dn64MarioPartyComb0[] = {
 		//ui32Input		ui32Output	i16FfCoef		i16FbCoef		i16Gain							 dRsInc						 dRsVal			i32RsDelta						dRsGain						ui16Fc
@@ -977,12 +978,12 @@ namespace ns4 {
 	/** The comb filter delay lines for Armorines: Project S.W.A.R.M. */
 	NS4_DELAY_N64 CReverb::m_dn64ArmorinesProjectSwarm0[] = {
 		//ui32Input		ui32Output	i16FfCoef		i16FbCoef		i16Gain							 dRsInc						 dRsVal			i32RsDelta						dRsGain						ui16Fc
-		{       160,	       944,	    +9830,		    -9830,	       2815,		                      0,	                      0,		        +0,		                      0,	/*0xE0598820*/    8191 },
+		{       160,	       944,	    +9830,		    -9830,	       2815,		                      0,	                      0,		        +0,		                      0,	/*0xE0598820*/    4095 },
 		{       416,	       768,	   +13107,		   -13107,	          0 },
 		{       784,	       912,	   +19660,		   -19660,	          0 },
-		{      1664,	      2864,	   +13107,		   -13107,	       2719,		                      0,	                      0,		        +0,		                      0,	/*0xE0598860*/    8191 },
+		{      1664,	      2864,	   +13107,		   -13107,	       2719,		                      0,	                      0,		        +0,		                      0,	/*0xE0598860*/    4095 },
 		{      1984,	      2496,	   +14107,		   -14107,	          0 },
-		{        64,	      4592,	   +19384,		       +0,	      20479,		                      0,	                      0,		        +0,		                      0,	/*0xE05988A0*/   10879 },
+		{        64,	      4592,	   +19384,		       +0,	      20479,		                      0,	                      0,		        +0,		                      0,	/*0xE05988A0*/    7223 },
 	};
 
 	/** The comb filter delay lines for Bomberman 64: The Second Attack!. */
@@ -1114,7 +1115,7 @@ namespace ns4 {
 		{         0,	      2640,	    +9830,		    -9830,	          0 },
 		{       880,	      2160,	    +3276,		    -3276,	      16383 },
 		{      2640,	      3640,	    +3276,		    -3276,	      16383 },
-		{         0,	      3760,	    +8000,		       +0,	          0,		                      0,	                      0,		        +0,		                      0,	/*0xDFF6DD30*/   10240 },
+		{         0,	      3760,	    +8000,		       +0,	          0,		                      0,	                      0,		        +0,		                      0,	/*0xDFF6DD30*/    6400 },
 	};
 
 	/** Taps harvested from Flying Dragon. */
@@ -1571,6 +1572,24 @@ namespace ns4 {
 		{     14400,	     16000,	    +3276,		    -3276,	        255 },
 		{     16000,	     17600,	    +3276,		    -3276,	        255 },
 		{         0,	      9600,	    +5000,		       +0,	          0,		                      0,	                      0,		        +0,		                      0,	/*0xDFEC1D20*/    6400 },
+	};
+
+	/** Taps harvested from Buck Bumble. */
+	NS4_REVERB_TAP CReverb::m_rtBuckBumble0[] = {
+#include "Taps/NS4ReverbBuckBumble0.inl"
+	};
+
+	/** The comb filter delay lines for Buck Bumble. */
+	NS4_DELAY_N64 CReverb::m_dn64BuckBumble0[] = {
+		//ui32Input		ui32Output	i16FfCoef		i16FbCoef		i16Gain							 dRsInc						 dRsVal			i32RsDelta						dRsGain						ui32Fc
+		{         0,	       320,	    +9830,		    -9830,	          0 },
+		{       320,	       480,	    +9830,		    -9830,	      11140,		                      0,	                      0,		        +0,		                      0,	/*0xE01C7AA0*/    6400 },
+		{      1640,	      5120,	   +16384,		   -16384,	       4587 },
+		{      1800,	      4120,	    +8192,		    -8192,	          0 },
+		{      6480,	     11280,	   +16384,		   -16384,	       4587,		                      0,	                      0,		        +0,		                      0,	/*0xE01C7AE0*/    9216 },
+		{      6640,	      9520,	    +8192,		    -8192,	          0 },
+		{      9520,	     10720,	    +8192,		    -8192,	          0 },
+		{         0,	     11960,	   +18000,		       +0,	          0,		+1.7233560356544331e-005,	    -1.3687076568603516,		      -624,			   /*0xE01C7B20*/ 0,	/*0xE01C7B80*/   12544 },
 	};
 
 }	// namespace ns4
@@ -2816,6 +2835,19 @@ namespace ns4 {
 			NS4_NO_FADE,
 			NS4_NO_LPF,
 		},	// 172
+		// Buck Bumble.
+		{
+			NS4_ONLY_COMB( 1.0, 0 ),
+			NS4_COMB( 13000, 320 / 2, m_dn64BuckBumble0, 20.0 ),
+		},	// 173
+		// Buck Bumble.
+		{
+			NS4_TAPS( m_rtBuckBumble0 ),
+			NS4_SQRT_0_5,															// dTapVol
+			0,																		// i64TapOffset
+			NS4_NO_FADE,
+			NS4_NO_LPF,
+		},	// 174
 	};
 
 
