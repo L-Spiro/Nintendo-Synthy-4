@@ -936,7 +936,7 @@ namespace ns4 {
 		//ui32Input		ui32Output	i16FfCoef		i16FbCoef		i16Gain							 dRsInc						 dRsVal			i32RsDelta						dRsGain						ui16Fc
 		{         0,	      2160,	    +9830,		    -9830,	          0 },
 		{       760,	      1520,	    +3276,		    -3276,	      16383 },
-		{         0,	      2400,	    +5000,		       +0,	          0,		                      0,	                      0,		        +0,		                      0,	/*0xDFF1BD60*/   10240 },
+		{         0,	      2400,	    +5000,		       +0,	          0,		                      0,	                      0,		        +0,		                      0,	/*0xDFF1BD60*/    6400 },
 	};
 
 	/** The comb filter delay lines for Extreme-G 2. */
@@ -1098,10 +1098,10 @@ namespace ns4 {
 	/** The comb filter delay lines for Kirby 64: The Crystal Shards. */
 	NS4_DELAY_N64 CReverb::m_dn64Kirby640[] = {
 		//ui32Input		ui32Output	i16FfCoef		i16FbCoef		i16Gain							 dRsInc						 dRsVal			i32RsDelta						dRsGain						ui16Fc
-		{         0,	      2640,	    +9830,		    -9830,	          0,		-7.2266643363388006e-040,	                      1,		        +0,		                      0 },
-		{       880,	      2160,	    +3276,		    -3276,	      16383,		9.1835496157991212e-041,	1.4012984643248171e-045,		        +0,		                      0 },
-		{      2640,	      3640,	    +3276,		    -3276,	      16383,		-7.139783831550662e-040,	                      0,		-2146967824,		-7.2286822061274283e-040 },
-		{         0,	      3760,	    +8000,		       +0,	          0,		-7.2291306216360123e-040,	                      0,		        +0,		1.4012984643248171e-045,	/*0xDFEBE540*/   10240 },
+		{         0,	      2640,	    +9830,		    -9830,	          0 },
+		{       880,	      2160,	    +3276,		    -3276,	      16383 },
+		{      2640,	      3640,	    +3276,		    -3276,	      16383 },
+		{         0,	      3760,	    +8000,		       +0,	          0,		                      0,	                      0,		        +0,		                      0,	/*0xDFEBE240*/    6400 },
 	};
 
 	/** Taps harvested from Mission: Impossible. */
@@ -1581,7 +1581,7 @@ namespace ns4 {
 
 	/** The comb filter delay lines for Buck Bumble. */
 	NS4_DELAY_N64 CReverb::m_dn64BuckBumble0[] = {
-		//ui32Input		ui32Output	i16FfCoef		i16FbCoef		i16Gain							 dRsInc						 dRsVal			i32RsDelta						dRsGain						ui32Fc
+		//ui32Input		ui32Output	i16FfCoef		i16FbCoef		i16Gain							 dRsInc						 dRsVal			i32RsDelta						dRsGain						ui16Fc
 		{         0,	       320,	    +9830,		    -9830,	          0 },
 		{       320,	       480,	    +9830,		    -9830,	      11140,		                      0,	                      0,		        +0,		                      0,	/*0xE01C7AA0*/    6400 },
 		{      1640,	      5120,	   +16384,		   -16384,	       4587 },
