@@ -7,10 +7,10 @@
 #define NS4_REVERB							ns4::CReverb::NS4_T_AERO_FIGHTERS_ASSAULT_0
 #define NS4_ORIG_HZ							22047
 #define NS4_CURVE							40.0
-#define NS4_OUT_DIRECTORY					u8"F:\\N64OST\\Aero Fighters Assault\\"
+#define NS4_OUT_DIRECTORY					u8"C:\\N64OST\\Aero Fighters Assault\\"
 #define NS4_OUT_DIRECTORY_NUMBERS			NS4_OUT_DIRECTORY u8"Numbered\\"
 //#define NS4_PERC_INST						127
-#define NS4_WET_FILTER_FREQ					0.0//(NS4_ORIG_HZ / 2.0)
+#define NS4_WET_FILTER_FREQ					9216
 //#define NS4_ENV_MULTIPLIER					(2.0)
 #define NS4_ENV_MULTIPLIER					(1.0 / 3.0)
 //#define NS4_REL_MULTIPLIER					(1.0 / 3.0)

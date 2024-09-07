@@ -36,12 +36,13 @@ namespace ns4 {
 			int64_t N = int64_t( I ) - i64SignedL;
 			if ( N ) {
 				//vTaps[I] *= Sinc( double( N ), dFc2 );
-				vTaps[I] *= std::sin( dTau * _dFc * N ) / (std::numbers::pi * N);
+				vTaps[I] *= dFc2 * std::sin( std::numbers::pi * dFc2 * N ) / (std::numbers::pi * dFc2 * N);
 			}
-			else {
-				//vTaps[I] *= dTau * _dFc;
-				vTaps[I] *= dFc2;
-			}
+			//else {
+			//	//vTaps[I] *= dTau * _dFc;
+			//	//vTaps[I] *= dFc2;
+			//	vTaps[I] *= 1.0;
+			//}
 		}
 
 		// Normalize.

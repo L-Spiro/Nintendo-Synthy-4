@@ -257,6 +257,7 @@
     <None Include="Src\Games\NS4ChouKuukanNightProYakyuuKingFiles.inl" />
     <None Include="Src\Games\NS4ClayFighter63_3rdFiles.inl" />
     <None Include="Src\Games\NS4ClayFighterSculptorsCutFiles.inl" />
+    <None Include="Src\Games\NS4ConkersBadFurDayECTSFiles.inl" />
     <None Include="Src\Games\NS4ConkersBadFurDayFiles.inl" />
     <None Include="Src\Games\NS4CruisnExoticaFiles.inl" />
     <None Include="Src\Games\NS4CruisnUsaFiles.inl" />
@@ -270,6 +271,7 @@
     <None Include="Src\Games\NS4Doom64Files.inl" />
     <None Include="Src\Games\NS4Doraemon2NobitaFiles.inl" />
     <None Include="Src\Games\NS4DoraemonNobitaFiles.inl" />
+    <None Include="Src\Games\NS4DoubutsuNoMoriFiles.inl" />
     <None Include="Src\Games\NS4DrMario64Files.inl" />
     <None Include="Src\Games\NS4DryDryDocks64Files.inl" />
     <None Include="Src\Games\NS4DualHeroesFiles.inl" />

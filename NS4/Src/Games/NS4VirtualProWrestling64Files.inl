@@ -11,14 +11,15 @@
 #define NS4_OUT_DIRECTORY_NUMBERS			NS4_OUT_DIRECTORY u8"Numbered\\"
 #define NS4_PERC_CHANNEL					9
 #define NS4_WET_FILTER_FREQ					0.0//(NS4_ORIG_HZ / 2.0)
-#define NS4_ENV_MULTIPLIER					(1.0 / 1.0)
-#define NS4_REL_MULTIPLIER					(1.0 / 1.0)
+#define NS4_ENV_MULTIPLIER					(10.0 / 1.0)
+#define NS4_REL_MULTIPLIER					(10.0 / 1.0)
+#define NS4_PERC_REL_MULTIPLIER				20.0
 #define NS4_ENVELOPE_VOL_CURVE				20.0
 #define NS4_ENVELOPE_POINT_CURVE			40.0
 #define NS4_EXPONENTIAL_ENVELOPE			true
 //#define NS4_SND_BNK_FORCE_PERC_SAMPLE_RATE	22050 * 2
 
-{ u8"Virtual Pro Wrestling 64 (J) 00000000 00EF40D4.mid", u8"Virtual Pro Wrestling 64 (J) 00000000 00EF40D4.mid TrackParseDebug.txt", u8"00000000 00EF40D4", 0 },
+{ u8"Virtual Pro Wrestling 64 (J) 00000000 00EF40D4.mid", u8"Virtual Pro Wrestling 64 (J) 00000000 00EF40D4.mid TrackParseDebug.txt", u8"Fight For Your Life!", 0 },
 { u8"Virtual Pro Wrestling 64 (J) 00000001 00EF6DD0.mid", u8"Virtual Pro Wrestling 64 (J) 00000001 00EF6DD0.mid TrackParseDebug.txt", u8"00000001 00EF6DD0", 0 },
 { u8"Virtual Pro Wrestling 64 (J) 00000002 00EF8D90.mid", u8"Virtual Pro Wrestling 64 (J) 00000002 00EF8D90.mid TrackParseDebug.txt", u8"00000002 00EF8D90", 0 },
 { u8"Virtual Pro Wrestling 64 (J) 00000003 00EFB250.mid", u8"Virtual Pro Wrestling 64 (J) 00000003 00EFB250.mid TrackParseDebug.txt", u8"00000003 00EFB250", 0 },
@@ -34,7 +35,7 @@
 { u8"Virtual Pro Wrestling 64 (J) 0000000D 00F0A564.mid", u8"Virtual Pro Wrestling 64 (J) 0000000D 00F0A564.mid TrackParseDebug.txt", u8"0000000D 00F0A564", 0 },
 { u8"Virtual Pro Wrestling 64 (J) 0000000E 00F0A8C8.mid", u8"Virtual Pro Wrestling 64 (J) 0000000E 00F0A8C8.mid TrackParseDebug.txt", u8"0000000E 00F0A8C8", 0 },
 { u8"Virtual Pro Wrestling 64 (J) 0000000F 00F0B3BC.mid", u8"Virtual Pro Wrestling 64 (J) 0000000F 00F0B3BC.mid TrackParseDebug.txt", u8"0000000F 00F0B3BC", 0 },
-{ u8"Virtual Pro Wrestling 64 (J) 00000010 00F0B688.mid", u8"Virtual Pro Wrestling 64 (J) 00000010 00F0B688.mid TrackParseDebug.txt", u8"00000010 00F0B688", 0 },
+{ u8"Virtual Pro Wrestling 64 (J) 00000010 00F0B688.mid", u8"Virtual Pro Wrestling 64 (J) 00000010 00F0B688.mid TrackParseDebug.txt", u8"Ending Credits", 0 },
 { u8"Virtual Pro Wrestling 64 (J) 00000011 00F0DBBC.mid", u8"Virtual Pro Wrestling 64 (J) 00000011 00F0DBBC.mid TrackParseDebug.txt", u8"00000011 00F0DBBC", 0 },
 { u8"Virtual Pro Wrestling 64 (J) 00000012 00F0DEC4.mid", u8"Virtual Pro Wrestling 64 (J) 00000012 00F0DEC4.mid TrackParseDebug.txt", u8"00000012 00F0DEC4", 0 },
 { u8"Virtual Pro Wrestling 64 (J) 00000013 00F0E13C.mid", u8"Virtual Pro Wrestling 64 (J) 00000013 00F0E13C.mid TrackParseDebug.txt", u8"00000013 00F0E13C", 0 },

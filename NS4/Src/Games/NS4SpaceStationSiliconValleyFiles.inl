@@ -9,7 +9,7 @@
 #define NS4_CURVE							40.0
 #define NS4_OUT_DIRECTORY					u8"F:\\N64OST\\Space Station Silicon Valley\\"
 #define NS4_OUT_DIRECTORY_NUMBERS			NS4_OUT_DIRECTORY u8"Numbered\\"
-#define NS4_WET_FILTER_FREQ					10240.0//(NS4_ORIG_HZ / std::pow( 2.0, 3.5 ))
+#define NS4_WET_FILTER_FREQ					9216.0
 #define NS4_ENV_MULTIPLIER					(1.125)
 #define NS4_REL_MULTIPLIER					(1.25)
 #define NS4_ENVELOPE_VOL_CURVE				20.0

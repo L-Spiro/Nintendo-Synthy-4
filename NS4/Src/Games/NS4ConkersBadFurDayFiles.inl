@@ -192,14 +192,14 @@
 		{ ns4::CMidiFile::NS4_ES_PRE_UNROLL, ns4::CMidiFile::NS4_E_MOVE_UNTIL_END, 0, 0, 0, { 68, 1, 1, 0 }, { 66, 2, 1, 0 } },
 		{ ns4::CMidiFile::NS4_ES_PRE_UNROLL, ns4::CMidiFile::NS4_E_MOVE_UNTIL_END, 0, 0, 0, { 38, 4, 3, 0 }, { 37, 2, 1, 0 } },
 
-		{ NS4_PLAY_SAMPLE_SIMPLE_FLAGS( u8"T:/N64OST/Conker’s Bad Fur Day/Research/B00I00S5D8.wav", 10, 2, 4, 78, 57, 1.0, 64, 0 ) },
-		{ NS4_PLAY_SAMPLE_SIMPLE_FLAGS( u8"T:/N64OST/Conker’s Bad Fur Day/Research/B00I00S5D9.wav", 11, 4, 2, 32, 57, 1.0, 43, ns4::CMidiFile::NS4_NRF_INVERT_LEFT ) },
-		{ NS4_PLAY_SAMPLE_SIMPLE_FLAGS( u8"T:/N64OST/Conker’s Bad Fur Day/Research/1CEAC00.wav", 13, 1, 4, 0, 0, 1.0, 64, 0 ) },	// I.  Am.  The Great Mighty Poo, and I'm going to throw my shit at you.  A huge supply of tish comes from my chocolate starfish.  How about some scat you little twat?
-		{ NS4_PLAY_SAMPLE_SIMPLE_FLAGS( u8"T:/N64OST/Conker’s Bad Fur Day/Research/1D01E90.wav", 39, 2, 2, 30, 0, 1.0, 64, 0 ) },	// Do you really think you'll survive in here?  You don't seem to know which creek you're in.
-		{ NS4_PLAY_SAMPLE_SIMPLE_FLAGS( u8"T:/N64OST/Conker’s Bad Fur Day/Research/1D0D7F8.wav", 43, 2, 4, 90, 0, 1.0, 64, 0 ) },	// Sweet corn is the only thing that makes it through my rear.  How do you think I keep this lovely grin?
-		{ NS4_PLAY_SAMPLE_SIMPLE_FLAGS( u8"T:/N64OST/Conker’s Bad Fur Day/Research/1CD8D70.wav", 47, 3, 4, 39, 0, 1.0, 64, 0 ) },	// Have some more caviar.
-		{ NS4_PLAY_SAMPLE_SIMPLE_FLAGS( u8"T:/N64OST/Conker’s Bad Fur Day/Research/1D19338.wav", 68, 2, 4, 90, 0, 1.0, 64, 0 ) },	// Now I'm really getting rather mad.  You're like a niggly tickley shitty little tag nut.  When I've knocked you out with all my bab I'm going to take your head and ram it up my butt.  That's right my butt.  My butt.  MY BUUUTT.
-		{ NS4_PLAY_SAMPLE_SIMPLE_FLAGS( u8"T:/N64OST/Conker’s Bad Fur Day/Research/1CDBD48.wav", 98, 3, 3, 0, 0, 1.0, 64, 0 ) },	// Aaaaah.
+		{ NS4_PLAY_SAMPLE_SIMPLE_FLAGS( u8"C:\\N64OST\\Conker’s Bad Fur Day ECTS\\Research/B00I00S5D8.wav", 10, 2, 4, 78, 57, 1.0, 64, 0 ) },
+		{ NS4_PLAY_SAMPLE_SIMPLE_FLAGS( u8"C:\\N64OST\\Conker’s Bad Fur Day ECTS\\Research/B00I00S5D9.wav", 11, 4, 2, 32, 57, 1.0, 43, ns4::CMidiFile::NS4_NRF_INVERT_LEFT ) },
+		{ NS4_PLAY_SAMPLE_SIMPLE_FLAGS( u8"C:\\N64OST\\Conker’s Bad Fur Day ECTS\\Research/1CEAC00.wav", 13, 1, 4, 0, 0, 1.0, 64, 0 ) },	// I.  Am.  The Great Mighty Poo, and I'm going to throw my shit at you.  A huge supply of tish comes from my chocolate starfish.  How about some scat you little twat?
+		{ NS4_PLAY_SAMPLE_SIMPLE_FLAGS( u8"C:\\N64OST\\Conker’s Bad Fur Day ECTS\\Research/1D01E90.wav", 39, 2, 2, 30, 0, 1.0, 64, 0 ) },	// Do you really think you'll survive in here?  You don't seem to know which creek you're in.
+		{ NS4_PLAY_SAMPLE_SIMPLE_FLAGS( u8"C:\\N64OST\\Conker’s Bad Fur Day ECTS\\Research/1D0D7F8.wav", 43, 2, 4, 90, 0, 1.0, 64, 0 ) },	// Sweet corn is the only thing that makes it through my rear.  How do you think I keep this lovely grin?
+		{ NS4_PLAY_SAMPLE_SIMPLE_FLAGS( u8"C:\\N64OST\\Conker’s Bad Fur Day ECTS\\Research/1CD8D70.wav", 47, 3, 4, 39, 0, 1.0, 64, 0 ) },	// Have some more caviar.
+		{ NS4_PLAY_SAMPLE_SIMPLE_FLAGS( u8"C:\\N64OST\\Conker’s Bad Fur Day ECTS\\Research/1D19338.wav", 68, 2, 4, 90, 0, 1.0, 64, 0 ) },	// Now I'm really getting rather mad.  You're like a niggly tickley shitty little tag nut.  When I've knocked you out with all my bab I'm going to take your head and ram it up my butt.  That's right my butt.  My butt.  MY BUUUTT.
+		{ NS4_PLAY_SAMPLE_SIMPLE_FLAGS( u8"C:\\N64OST\\Conker’s Bad Fur Day ECTS\\Research/1CDBD48.wav", 98, 3, 3, 0, 0, 1.0, 64, 0 ) },	// Aaaaah.
 
 		{ NS4_STOP_AT_TICK( 123 + 16 + 8, 4, 3, 0 ), },
 		{ NS4_SET_CURSOR_BY_TICK( 123 + 16 + 8, 4, 3, 0 ), },
@@ -209,8 +209,8 @@
 },
 { u8"Conker's Bad Fur Day (U) 00000049 03F221B4.mid", u8"Conker's Bad Fur Day (U) 00000049 03F221B4.mid TrackParseDebug.txt", u8"Sloprano", 0,
 	2 + 3, {
-		{ NS4_PLAY_SAMPLE_SIMPLE_FLAGS( u8"T:/N64OST/Conker’s Bad Fur Day/Research/1E6C490.wav", 1, 4, 3, 0, 0, 1.0, 64, 0 ) },		// Ah you cursed squirrel, look what you've done.  I'm flushing I'm flushing.  Oh what a world, what a world!  Who would've thought a good little squirrel like you could've destroyed my beautiful clagginess!  Oh I'm going!  Ahh!  Noo!
-		{ NS4_PLAY_SAMPLE_SIMPLE_FLAGS( u8"T:/N64OST/Conker’s Bad Fur Day/Research/1E7F098.wav", 15, 2, 3, 88, 0, 1.0, 64, 0 ) },	// Now that's what I CALL a bowel movement!
+		{ NS4_PLAY_SAMPLE_SIMPLE_FLAGS( u8"C:\\N64OST\\Conker’s Bad Fur Day ECTS\\Research/1E6C490.wav", 1, 4, 3, 0, 0, 1.0, 64, 0 ) },		// Ah you cursed squirrel, look what you've done.  I'm flushing I'm flushing.  Oh what a world, what a world!  Who would've thought a good little squirrel like you could've destroyed my beautiful clagginess!  Oh I'm going!  Ahh!  Noo!
+		{ NS4_PLAY_SAMPLE_SIMPLE_FLAGS( u8"C:\\N64OST\\Conker’s Bad Fur Day ECTS\\Research/1E7F098.wav", 15, 2, 3, 88, 0, 1.0, 64, 0 ) },	// Now that's what I CALL a bowel movement!
 		{ NS4_STOP_AT_TIME( 30.0 ), },
 		{ NS4_SET_CURSOR_BY_TIME( 30.0 ), },
 		{ NS4_STORE_RESULT, },

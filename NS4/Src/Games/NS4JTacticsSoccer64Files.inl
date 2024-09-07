@@ -4,7 +4,7 @@
 #define NS4_FOLDER							u8"J-League Tactics Soccer"
 #define NS4_BANK							u8"00"
 #define NS4_REVERB_TRACKS					1
-#define NS4_REVERB							ns4::CReverb::NS4_T_J_LEAGUE_DYNAMITE_SOCCER_64_0
+#define NS4_REVERB							ns4::CReverb::NS4_T_MISSION_IMPOSSIBLE_0
 #define NS4_ORIG_HZ							22047
 #define NS4_CURVE							40.0
 #define NS4_OUT_DIRECTORY					u8"C:\\N64OST\\J.League Tactics Soccer\\"

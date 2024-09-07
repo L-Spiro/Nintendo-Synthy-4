@@ -9,7 +9,7 @@
 #define NS4_ORIG_HZ							32006
 #define NS4_CURVE							40.0
 //#define NS4_MASTER_CURVE					40.0
-#define NS4_OUT_DIRECTORY					u8"T:\\N64OST\\The Legend of Zelda Ocarina of Time\\"
+#define NS4_OUT_DIRECTORY					u8"C:\\N64OST\\The Legend of Zelda Ocarina of Time\\"
 #define NS4_OUT_DIRECTORY_NUMBERS			NS4_OUT_DIRECTORY u8"Numbered\\"
 #define NS4_WET_FILTER_FREQ					0.0
 #define NS4_ENV_MULTIPLIER					(1.0)

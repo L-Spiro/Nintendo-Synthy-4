@@ -8,8 +8,8 @@
 
 #define NS4_GE_FADE				NS4_FADE( 1.0, 3.0, 6.0 )
 #define NS4_GE_FILTER			NS4_LPF( 4736.0 / 2.0, 6400.0 / 22047.0, 2.0, NS4_FILTER_DB_TO_ORDER( 6 ) )
-#define NS4_CBFD_FADE			NS4_FADE( 2.0, 0.1, 4.4 )
-#define NS4_CBFD_FILTER			NS4_LPF( 4736.0 /*22018.0 / std::pow( 2.0, 4.0 )*/, 0.18312289944590790, 0.5, NS4_FILTER_DB_TO_ORDER( 6 ) )
+#define NS4_CBFD_FADE			NS4_FADE( 1.0, 3.0, 5.4 )
+#define NS4_CBFD_FILTER			NS4_LPF( 4736.0 /*22018.0 / std::pow( 2.0, 4.0 )*/, 6712.0 / 22018.0, 0.5, NS4_FILTER_DB_TO_ORDER( 6 ) )
 #define NS4_BC_FADE				NS4_FADE( 1.5, 0.1, 5.3 )
 #define NS4_BC_FILTER			NS4_LPF( 4736.0 / 1.0, (6800.0 / 22047.0) / 4.0, 2.0, NS4_FILTER_DB_TO_ORDER( 6 ) )
 #define NS4_PD_FADE				NS4_FADE( 2.0, 0.1, 4.4 )
@@ -669,23 +669,24 @@ namespace ns4 {
 
 	/** The comb filter delay lines for Body Harvest. */
 	NS4_DELAY_N64 CReverb::m_dn64BodyHarvest0[] = {
-		//ui32Input		ui32Output	i16FfCoef		i16FbCoef		i16Gain			dRsInc						dRsVal						i32RsDelta		dRsGain
+		//ui32Input		ui32Output	i16FfCoef		i16FbCoef		i16Gain							 dRsInc						 dRsVal			i32RsDelta						dRsGain						ui16Fc
 		{         0,	       352,	       +0,		    -9830,	       3600 },
-		{       352,	       544,	    +9830,		    -9830,	      11140 },
+		{       352,	       544,	    +9830,		    -9830,	      11140,		                      0,	                      0,		        +0,		                      0,	/*0xDFFBB110*/    6400 },
 		{      1792,	      5632,	   +16384,		   -16384,	       4587 },
 		{      1984,	      4544,	    +8192,		    -8192,	          0 },
-		{      7136,	     12448,	   +16384,		   -16384,	       4587 },
+		{      7136,	     12448,	   +16384,		   -16384,	       4587,		                      0,	                      0,		        +0,		                      0,	/*0xDFFBB150*/    9216 },
 		{      7328,	     10496,	    +8192,		    -8192,	          0 },
 		{     10496,	     11808,	    +8192,		    -8192,	          0 },
-		{         0,	     13184,	   +18000,		       +0,	          0 },
+		{         0,	     13184,	   +18000,		       +0,	          0,		                      0,	                      0,		        +0,		                      0,	/*0xDFFBB190*/   12544 },
+
 	};
 
 	/** The comb filter delay lines for Bomberman 64. */
 	NS4_DELAY_N64 CReverb::m_dn64Bomberman640[] = {
-		//ui32Input		ui32Output	i16FfCoef		i16FbCoef		i16Gain			dRsInc						dRsVal						i32RsDelta		dRsGain
-		{       896,	      2752,	   +10813,		   -10813,	      12451 },
-		{      3456,	      5632,	   +10813,		   -10813,	      12451 },
-		{         0,	      6144,	   +12451,		       +0,	      12451 },
+		//ui32Input		ui32Output	i16FfCoef		i16FbCoef		i16Gain							 dRsInc						 dRsVal			i32RsDelta						dRsGain						ui16Fc
+		{       896,	      2752,	   +10813,		   -10813,	      12451,		                      0,	                      0,		        +0,		                      0,	/*0xDFFDF670*/    4095 },
+		{      3456,	      5632,	   +10813,		   -10813,	      12451,		                      0,	                      0,		        +0,		                      0,	/*0xDFFDF6B0*/    4095 },
+		{         0,	      6144,	   +12451,		       +0,	      12451,		                      0,	                      0,		        +0,		                      0,	/*0xDFFDF6F0*/    4095 },
 	};
 
 	/** The comb filter delay lines for Blast Corps. */
@@ -811,7 +812,7 @@ namespace ns4 {
 		{     12800,	     14400,	    +3276,		    -3276,	       1535 },
 		{     14400,	     16000,	    +3276,		    -3276,	        255 },
 		{     16000,	     17600,	    +3276,		    -3276,	        255 },
-		{         0,	      9600,	    +5000,		       +0,	          0,		                      0,	                      0,		        +0,		                      0,	/*0xDFEC5180*/   10240 },
+		{         0,	      9600,	    +5000,		       +0,	          0,		                      0,	                      0,		        +0,		                      0,	/*0xDFEC5180*/    6400 },
 	};
 
 	/** The comb filter delay lines for Zool. */
@@ -853,12 +854,12 @@ namespace ns4 {
 	/** The comb filter delay lines for Turok 2: Seeds of Evil. */
 	NS4_DELAY_N64 CReverb::m_dn64Turok2SeedsOfEvil0[] = {
 		//ui32Input		ui32Output	i16FfCoef		i16FbCoef		i16Gain							 dRsInc						 dRsVal			i32RsDelta						dRsGain						ui16Fc
-		{       160,	       944,	    +9830,		    -9830,	       2815,		                      0,	                      0,		        +0,		                      0,	/*0xE0598820*/    8191 },
+		{       160,	       944,	    +9830,		    -9830,	       2815,		                      0,	                      0,		        +0,		                      0,	/*0xE0598820*/    4095 },
 		{       416,	       768,	   +13107,		   -13107,	          0 },
 		{       784,	       912,	   +19660,		   -19660,	          0 },
-		{      1664,	      2864,	   +13107,		   -13107,	       2719,		                      0,	                      0,		        +0,		                      0,	/*0xE0598860*/    8191 },
+		{      1664,	      2864,	   +13107,		   -13107,	       2719,		                      0,	                      0,		        +0,		                      0,	/*0xE0598860*/    4095 },
 		{      1984,	      2496,	   +14107,		   -14107,	          0 },
-		{        64,	      4592,	   +19384,		       +0,	      20479,		                      0,	                      0,		        +0,		                      0,	/*0xE05988A0*/   10879 },
+		{        64,	      4592,	   +19384,		       +0,	      20479,		                      0,	                      0,		        +0,		                      0,	/*0xE05988A0*/    7223 },
 	};
 
 	/** The comb filter delay lines for Diddy Kong Racing. */
@@ -922,13 +923,13 @@ namespace ns4 {
 	NS4_DELAY_N64 CReverb::m_dn64SpaceStationSiliconValley0[] = {
 		//ui32Input		ui32Output	i16FfCoef		i16FbCoef		i16Gain							 dRsInc						 dRsVal			i32RsDelta						dRsGain						ui16Fc
 		{         0,	       352,	       +0,		    -9830,	       3600 },
-		{       352,	       544,	    +9830,		    -9830,	      11140,		                      0,	                      0,		        +0,		                      0,	/*0xE009F580*/   10240 },
+		{       352,	       544,	    +9830,		    -9830,	      11140,		                      0,	                      0,		        +0,		                      0,	/*0xE009F580*/    6400 },
 		{      1792,	      5632,	   +16384,		   -16384,	       4587 },
 		{      1984,	      4544,	    +8192,		    -8192,	          0 },
-		{      7136,	     12448,	   +16384,		   -16384,	       4587,		                      0,	                      0,		        +0,		                      0,	/*0xE009F5C0*/   12288 },
+		{      7136,	     12448,	   +16384,		   -16384,	       4587,		                      0,	                      0,		        +0,		                      0,	/*0xE009F5C0*/    9216 },
 		{      7328,	     10496,	    +8192,		    -8192,	          0 },
 		{     10496,	     11808,	    +8192,		    -8192,	          0 },
-		{         0,	     13184,	   +18000,		       +0,	          0,		                      0,	                      0,		        +0,		                      0,	/*0xE009F600*/   14336 },
+		{         0,	     13184,	   +18000,		       +0,	          0,		                      0,	                      0,		        +0,		                      0,	/*0xE009F600*/   12544 },
 	};
 
 	/** The comb filter delay lines for Battlezone: Rise of the Black Dogs. */
@@ -945,7 +946,7 @@ namespace ns4 {
 		{         0,	       608,	    +1024,		    -1024,	      10240 },
 		{         0,	       896,	    +1024,		    -1024,	      12288 },
 		{         0,	      1120,	    +5000,		       +0,	      16384 },
-		{       320,	      2400,	   +10000,		       +0,	       8192,		                      0,	                      0,		        +0,		                      0,	/*0xE0023860*/   10240 },
+		{       320,	      2400,	   +10000,		       +0,	       8192,		                      0,	                      0,		        +0,		                      0,	/*0xE0023860*/    6400 },
 	};
 
 	/** The comb filter delay lines for Pokémon Snap. */
@@ -964,8 +965,8 @@ namespace ns4 {
 	/** The comb filter delay lines for Mario Party 2. */
 	NS4_DELAY_N64 CReverb::m_dn64MarioParty20[] = {
 		//ui32Input		ui32Output	i16FfCoef		i16FbCoef		i16Gain							 dRsInc						 dRsVal			i32RsDelta						dRsGain						ui16Fc
-		{         0,	      6400,	   +16383,		   -16383,	       9830,		                      0,	                      0,		        +0,		                      0,	/*0xE01240B0*/     491 },
-		{       320,	      1600,	   +16383,		   -16383,	       9174,		                      0,	                      0,		        +0,		                      0,	/*0xE01240F0*/    4587 },
+		{         0,	      6400,	   +16383,		   -16383,	       9830 },
+		{       320,	      1600,	   +16383,		   -16383,	       9174 },
 	};
 
 	/** The comb filter delay lines for Mario Party 3. */
@@ -989,8 +990,8 @@ namespace ns4 {
 	/** The comb filter delay lines for Bomberman 64: The Second Attack!. */
 	NS4_DELAY_N64 CReverb::m_dn64Bomberman64TheSecondAttack0[] = {
 		//ui32Input		ui32Output	i16FfCoef		i16FbCoef		i16Gain							 dRsInc						 dRsVal			i32RsDelta						dRsGain						ui16Fc
-		{         0,	      2560,	   +16383,		   -16383,	       2949,		                      0,	                      0,		        +0,		                      0,	/*0xDFF85D70*/    9502 },
-		{         0,	      5760,	   +16383,		   -16383,	      16383,		                      0,	                      0,		        +0,		                      0,	/*0xDFF85DB0*/    9502 },
+		{         0,	      2560,	   +16383,		   -16383,	       2949,		                      0,	                      0,		        +0,		                      0,	/*0xDFF85D70*/    5510 },
+		{         0,	      5760,	   +16383,		   -16383,	      16383,		                      0,	                      0,		        +0,		                      0,	/*0xDFF85DB0*/    5510 },
 	};
 
 	/** The comb filter delay lines for Doraemon: Nobita to Mittsu no Seireiseki. */
@@ -1012,12 +1013,12 @@ namespace ns4 {
 	/** The comb filter delay lines for Iggy’s Reckin’ Balls. */
 	NS4_DELAY_N64 CReverb::m_dn64IggysReckinBalls0[] = {
 		//ui32Input		ui32Output	i16FfCoef		i16FbCoef		i16Gain							 dRsInc						 dRsVal			i32RsDelta						dRsGain						ui16Fc
-		{       160,	       944,	    +9830,		    -9830,	       2815,		                      0,	                      0,		        +0,		                      0,	/*0xDFF5E790*/    8191 },
+		{       160,	       944,	    +9830,		    -9830,	       2815,		                      0,	                      0,		        +0,		                      0,	/*0xDFF5E790*/    4095 },
 		{       416,	       768,	   +13107,		   -13107,	          0 },
 		{       784,	       912,	   +19660,		   -19660,	          0 },
-		{      1664,	      2864,	   +13107,		   -13107,	       2719,		                      0,	                      0,		        +0,		                      0,	/*0xDFF5E7D0*/    8191 },
+		{      1664,	      2864,	   +13107,		   -13107,	       2719,		                      0,	                      0,		        +0,		                      0,	/*0xDFF5E7D0*/    4095 },
 		{      1984,	      2496,	   +14107,		   -14107,	          0 },
-		{        64,	      4592,	   +19384,		       +0,	      20479,		                      0,	                      0,		        +0,		                      0,	/*0xDFF5E810*/   10879 },
+		{        64,	      4592,	   +19384,		       +0,	      20479,		                      0,	                      0,		        +0,		                      0,	/*0xDFF5E810*/    7223 },
 	};
 
 	/** The comb filter delay lines for Mickey’s Speedway USA. */
@@ -1036,25 +1037,25 @@ namespace ns4 {
 	/** The comb filter delay lines for Tonic Trouble. */
 	NS4_DELAY_N64 CReverb::m_dn64TonicTrouble0[] = {
 		//ui32Input		ui32Output	i16FfCoef		i16FbCoef		i16Gain							 dRsInc						 dRsVal			i32RsDelta						dRsGain						ui16Fc
-		{         0,	       320,	       +0,		       +0,	        786,		                      0,	                      1,		        +0,		                      0,	/*0xDFFDFDC0*/       0 },
-		{      1984,	      3824,	   +13819,		   -13819,	       7749,		                      0,	                      1,		        +0,		                      0,	/*0xDFFDFE60*/   11811 },
-		{      1984,	      3200,	    +6520,		    -6520,	       1233,		                      0,	                      1,		        +0,		                      0,	/*0xDFFDFF00*/       0 },
-		{      3264,	      3744,	    +1879,		    -1879,	          0,		                      0,	                      1,		        +0,		                      0,	/*0xDFFDFFA0*/       0 },
-		{       672,	      3744,	    +7448,		       +0,	          0,		                      0,	                      1,		        +0,		                      0,	/*0xDFFE0040*/   10305 },
-		{      3744,	      4784,	       +0,		       +0,	          0,		                      0,	                      1,		        +0,		                      0,	/*0xDFFE00E0*/       0 },
-		{      3744,	      4784,	       +0,		       +0,	          0,		                      0,	                      1,		        +0,		                      0,	/*0xDFFE0180*/       0 },
-		{      3744,	      4784,	       +0,		       +0,	          0,		                      0,	                      1,		        +0,		                      0,	/*0xDFFE0220*/       0 },
+		{         0,	       320,	       +0,		       +0,	        786,		                     +0,	                     +1,		        +0,			   /*0xDFFDFD60*/ 0,	/*0xDFFDFDC0*/       0 },
+		{      1984,	      3824,	   +13819,		   -13819,	       7749,		                     +0,	                     +1,		        +0,			   /*0xDFFDFE00*/ 0,	/*0xDFFDFE60*/    8514 },
+		{      1984,	      3200,	    +6520,		    -6520,	       1233,		                     +0,	                     +1,		        +0,			   /*0xDFFDFEA0*/ 0,	/*0xDFFDFF00*/       0 },
+		{      3264,	      3744,	    +1879,		    -1879,	          0,		                     +0,	                     +1,		        +0,			   /*0xDFFDFF40*/ 0,	/*0xDFFDFFA0*/       0 },
+		{       672,	      3744,	    +7448,		       +0,	          0,		                     +0,	                     +1,		        +0,			   /*0xDFFDFFE0*/ 0,	/*0xDFFE0040*/    6481 },
+		{      3744,	      4784,	       +0,		       +0,	          0,		                     +0,	                     +1,		        +0,			   /*0xDFFE0080*/ 0,	/*0xDFFE00E0*/       0 },
+		{      3744,	      4784,	       +0,		       +0,	          0,		                     +0,	                     +1,		        +0,			   /*0xDFFE0120*/ 0,	/*0xDFFE0180*/       0 },
+		{      3744,	      4784,	       +0,		       +0,	          0,		                     +0,	                     +1,		        +0,			   /*0xDFFE01C0*/ 0,	/*0xDFFE0220*/       0 },
 	};
 
 	/** The comb filter delay lines for Turok: Rage Wars. */
 	NS4_DELAY_N64 CReverb::m_dn64TurokRageWars0[] = {
 		//ui32Input		ui32Output	i16FfCoef		i16FbCoef		i16Gain							 dRsInc						 dRsVal			i32RsDelta						dRsGain						ui16Fc
-		{       160,	       944,	    +9830,		    -9830,	       2815,		                      0,	                      0,		        +0,		                      0,	/*0xE04EA800*/    8191 },
+		{       160,	       944,	    +9830,		    -9830,	       2815,		                      0,	                      0,		        +0,		                      0,	/*0xE04EA800*/    4095 },
 		{       416,	       768,	   +13107,		   -13107,	          0 },
 		{       784,	       912,	   +19660,		   -19660,	          0 },
-		{      1664,	      2864,	   +13107,		   -13107,	       2719,		                      0,	                      0,		        +0,		                      0,	/*0xE04EA840*/    8191 },
+		{      1664,	      2864,	   +13107,		   -13107,	       2719,		                      0,	                      0,		        +0,		                      0,	/*0xE04EA840*/    4095 },
 		{      1984,	      2496,	   +14107,		   -14107,	          0 },
-		{        64,	      4592,	   +19384,		       +0,	      20479,		                      0,	                      0,		        +0,		                      0,	/*0xE04EA880*/   10879 },
+		{        64,	      4592,	   +19384,		       +0,	      20479,		                      0,	                      0,		        +0,		                      0,	/*0xE04EA880*/    7223 },
 	};
 
 	/** Taps harvested from Turok 3: Shadow of Oblivion. */
@@ -1385,14 +1386,14 @@ namespace ns4 {
 	/** The comb filter delay lines for Rayman 2: The Great Escape. */
 	NS4_DELAY_N64 CReverb::m_dn64Rayman20[] = {
 		//ui32Input		ui32Output	i16FfCoef		i16FbCoef		i16Gain							 dRsInc						 dRsVal			i32RsDelta						dRsGain						ui16Fc
-		{         0,	       128,	    +9830,		    -9830,	          0,		                      0,	                      0,		        +0,		                      0,	/*0xDFFBE230*/       0 },
-		{       128,	       192,	    +9830,		    -9830,	       4587,		                      0,	                      0,		        +0,		                      0,	/*0xDFFBE2D0*/    6400 },
-		{       656,	      2048,	   +16384,		   -16384,	       4587,		                      0,	                      0,		        +0,		                      0,	/*0xDFFBE370*/       0 },
-		{       720,	      1648,	    +8192,		    -8192,	          0,		                      0,	                      0,		        +0,		                      0,	/*0xDFFBE410*/       0 },
-		{      2592,	      4512,	   +16384,		   -16384,	       4587,		                      0,	                      0,		        +0,		                      0,	/*0xDFFBE4B0*/    9216 },
-		{      2656,	      3808,	    +8192,		    -8192,	          0,		                      0,	                      0,		        +0,		                      0,	/*0xDFFBE550*/       0 },
-		{      3808,	      4288,	    +8192,		    -8192,	          0,		                      0,	                      0,		        +0,		                      0,	/*0xDFFBE5F0*/       0 },
-		{         0,	      4784,	       +0,		       +0,	          0,		                      0,	                      0,		        +0,		                      0,	/*0xDFFBE690*/   12544 },
+		{         0,	       128,	    +9830,		    -9830,	          0,		                     +0,	                     +1,		        +0,			   /*0xDFFB7CD0*/ 0,	/*0xDFFB7D30*/       0 },
+		{       128,	       192,	    +9830,		    -9830,	       4587,		                     +0,	                     +1,		        +0,			   /*0xDFFB7D70*/ 0,	/*0xDFFB7DD0*/    6400 },
+		{       656,	      2048,	   +16384,		   -16384,	       4587,		                     +0,	                     +1,		        +0,			   /*0xDFFB7E10*/ 0,	/*0xDFFB7E70*/       0 },
+		{       720,	      1648,	    +8192,		    -8192,	          0,		                     +0,	                     +1,		        +0,			   /*0xDFFB7EB0*/ 0,	/*0xDFFB7F10*/       0 },
+		{      2592,	      4512,	   +16384,		   -16384,	       4587,		                     +0,	                     +1,		        +0,			   /*0xDFFB7F50*/ 0,	/*0xDFFB7FB0*/    9216 },
+		{      2656,	      3808,	    +8192,		    -8192,	          0,		                     +0,	                     +1,		        +0,			   /*0xDFFB7FF0*/ 0,	/*0xDFFB8050*/       0 },
+		{      3808,	      4288,	    +8192,		    -8192,	          0,		                     +0,	                     +1,		        +0,			   /*0xDFFB8090*/ 0,	/*0xDFFB80F0*/       0 },
+		{         0,	      4784,	       +0,		       +0,	          0,		+6.8943620135542005e-005,	    +1.2894746065139771,		        -8,			   /*0xDFFB8130*/ 0,	/*0xDFFB8190*/   12544 },
 	};
 
 	/** Taps harvested from South Park. */
@@ -1571,7 +1572,7 @@ namespace ns4 {
 		{     12800,	     14400,	    +3276,		    -3276,	       1535 },
 		{     14400,	     16000,	    +3276,		    -3276,	        255 },
 		{     16000,	     17600,	    +3276,		    -3276,	        255 },
-		{         0,	      9600,	    +5000,		       +0,	          0,		                      0,	                      0,		        +0,		                      0,	/*0xDFEC1D20*/    6400 },
+		{         0,	      9600,	    +5000,		       +0,	          0 },
 	};
 
 	/** Taps harvested from Buck Bumble. */
@@ -1733,7 +1734,7 @@ namespace ns4 {
 			NS4_SQRT_0_5,															// dTapVol
 			0,																		// i64TapOffset
 			NS4_FADE( 1.0, 1.1, 3.5 ),
-			NS4_LPF( 22047.0 / std::pow( 2.0, 5.0 ), 1.25, 1.5, NS4_FILTER_DB_TO_ORDER( 6 ) ),
+			NS4_LPF( 6400.0 / 12.0, 5200.0 / 22047.0, 1.5, NS4_FILTER_DB_TO_ORDER( 6 ) ),
 		},	// 14
 		// F-1 World Grand Prix.
 		{
