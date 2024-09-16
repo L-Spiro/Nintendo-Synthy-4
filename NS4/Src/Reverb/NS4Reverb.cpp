@@ -8,8 +8,8 @@
 
 #define NS4_GE_FADE				NS4_FADE( 1.0, 3.0, 6.0 )
 #define NS4_GE_FILTER			NS4_LPF( 4736.0 / 2.0, 6400.0 / 22047.0, 2.0, NS4_FILTER_DB_TO_ORDER( 6 ) )
-#define NS4_CBFD_FADE			NS4_FADE( 1.0, 3.0, 5.4 )
-#define NS4_CBFD_FILTER			NS4_LPF( 4736.0 /*22018.0 / std::pow( 2.0, 4.0 )*/, 6712.0 / 22018.0, 0.5, NS4_FILTER_DB_TO_ORDER( 6 ) )
+#define NS4_CBFD_FADE			NS4_FADE( 1.0, 3.0, 6.0 )
+#define NS4_CBFD_FILTER			NS4_LPF( 4736.0 / 2.0, 6712.0 / 22018.0, 2.0, NS4_FILTER_DB_TO_ORDER( 6 ) )
 #define NS4_BC_FADE				NS4_FADE( 1.5, 0.1, 5.3 )
 #define NS4_BC_FILTER			NS4_LPF( 4736.0 / 1.0, (6800.0 / 22047.0) / 4.0, 2.0, NS4_FILTER_DB_TO_ORDER( 6 ) )
 #define NS4_PD_FADE				NS4_FADE( 2.0, 0.1, 4.4 )
