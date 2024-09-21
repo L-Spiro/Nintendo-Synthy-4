@@ -7,19 +7,6 @@
 #pragma warning( disable : 4309 )
 
 
-#ifndef max
-#define max(a,b)									(((a) > (b)) ? (a) : (b))
-#endif
-
-#ifndef min
-#define min(a,b)									(((a) < (b)) ? (a) : (b))
-#endif
-
-#ifndef clamp
-#define clamp( a, l, h )							min( max( a, l ), h )
-#endif
-
-
 namespace ns4 {
 
 	CWavFile::CWavFile() :
@@ -909,7 +896,7 @@ namespace ns4 {
 	bool CWavFile::BatchF64ToPcm8( const lwaudio &_vSrc, std::vector<uint8_t> &_vDst ) {
 		for ( size_t I = 0; I < _vSrc[0].size(); ++I ) {
 			for ( size_t J = 0; J < _vSrc.size(); ++J ) {
-				int8_t iSample = static_cast<int8_t>(std::round( clamp( _vSrc[J][I], -1.0, 1.0 ) * 127.0 + 128.0 ));
+				int8_t iSample = static_cast<int8_t>(std::round( std::clamp( _vSrc[J][I], -1.0, 1.0 ) * 127.0 + 128.0 ));
 				_vDst.push_back( static_cast<uint8_t>(iSample) );
 			}
 		}
@@ -927,7 +914,7 @@ namespace ns4 {
 		const double dFactor = std::pow( 2.0, 16.0 - 1.0 ) - 1.0;
 		for ( size_t I = 0; I < _vSrc[0].size(); ++I ) {
 			for ( size_t J = 0; J < _vSrc.size(); ++J ) {
-				int16_t iSample = static_cast<int16_t>(std::round( clamp( _vSrc[J][I], -1.0, 1.0 ) * dFactor ));
+				int16_t iSample = static_cast<int16_t>(std::round( std::clamp( _vSrc[J][I], -1.0, 1.0 ) * dFactor ));
 				_vDst.push_back( static_cast<uint8_t>(iSample) );
 				_vDst.push_back( static_cast<uint8_t>(iSample >> 8) );
 			}
@@ -946,7 +933,7 @@ namespace ns4 {
 		const double dFactor = std::pow( 2.0, 24.0 - 1.0 ) - 1.0;
 		for ( size_t I = 0; I < _vSrc[0].size(); ++I ) {
 			for ( size_t J = 0; J < _vSrc.size(); ++J ) {
-				int32_t iSample = static_cast<int32_t>(std::round( clamp( _vSrc[J][I], -1.0, 1.0 ) * dFactor ));
+				int32_t iSample = static_cast<int32_t>(std::round( std::clamp( _vSrc[J][I], -1.0, 1.0 ) * dFactor ));
 				_vDst.push_back( static_cast<uint8_t>(iSample) );
 				_vDst.push_back( static_cast<uint8_t>(iSample >> 8) );
 				_vDst.push_back( static_cast<uint8_t>(iSample >> 16) );
@@ -963,17 +950,21 @@ namespace ns4 {
 	 * \return Returns trye if all samples were added to the buffer.
 	 */
 	bool CWavFile::BatchF64ToPcm32( const lwaudio &_vSrc, std::vector<uint8_t> &_vDst ) {
-		const double dFactor = std::pow( 2.0, 32.0 - 1.0 ) - 1.0;
-		for ( size_t I = 0; I < _vSrc[0].size(); ++I ) {
-			for ( size_t J = 0; J < _vSrc.size(); ++J ) {
-				int32_t iSample = static_cast<int32_t>(std::round( clamp( _vSrc[J][I], -1.0, 1.0 ) * dFactor ));
-				_vDst.push_back( static_cast<uint8_t>(iSample) );
-				_vDst.push_back( static_cast<uint8_t>(iSample >> 8) );
-				_vDst.push_back( static_cast<uint8_t>(iSample >> 16) );
-				_vDst.push_back( static_cast<uint8_t>(iSample >> 24) );
+		try {
+			const double dFactor = std::pow( 2.0, 32.0 - 1.0 ) - 1.0;
+			auto stNumSamples = _vSrc[0].size();
+			auto stNumChannels = _vSrc.size();
+			auto aSize = _vDst.size();
+			_vDst.resize( _vDst.size() + stNumSamples * stNumChannels * sizeof( int32_t ) );
+			int32_t * pi32Dst = reinterpret_cast<int32_t *>(_vDst.data() + aSize);
+			for ( size_t I = 0; I < _vSrc[0].size(); ++I ) {
+				for ( size_t J = 0; J < _vSrc.size(); ++J ) {
+					(*pi32Dst++) = static_cast<int32_t>(std::round( std::clamp( _vSrc[J][I], -1.0, 1.0 ) * dFactor ));
+				}
 			}
+			return true;
 		}
-		return true;
+		catch ( ... ) { return false; }
 	}
 
 	/**
