@@ -2059,6 +2059,7 @@ namespace ns4 {
 						break;
 					}
 					case NS4_E_REMOVE_LOOP_POINTS : {
+						iTrackByChan = _pmMods[I].ui32Channel;
 						if ( iTrackByChan >= 0 && iTrackByChan < m_vTracks.size() ) {
 							RemoveLoops( m_vTracks[iTrackByChan].vEvents );
 						}
@@ -2071,6 +2072,7 @@ namespace ns4 {
 						break;
 					}
 					case NS4_E_SET_LOOP_POINTS : {
+						iTrackByChan = _pmMods[I].ui32Channel;
 						if ( iTrackByChan >= 0 && iTrackByChan < m_vTracks.size() ) {
 							RemoveLoops( m_vTracks[iTrackByChan].vEvents );
 							uint64_t ui64Start = CubaseToTick( _pmMods[I].tsTime0.ui32M, _pmMods[I].tsTime0.ui32B, _pmMods[I].tsTime0.ui32T, _pmMods[I].tsTime0.ui32S );

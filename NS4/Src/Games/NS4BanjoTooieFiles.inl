@@ -224,6 +224,7 @@
 		{ ns4::CMidiFile::NS4_ES_PRE_UNROLL, ns4::CMidiFile::NS4_E_MUTE_UNTAGGED_TRACKS },
 	   } },
 { u8"093 Banjo-Tooie (U) 0000001F 0133C74C Long Legs.mid", u8"", u8"Wading Boots", 0 },
+{ u8"ZZ Banjo-Tooie (U) 00000010 0133A7E4 Mini-Game Victory.mid", u8"", u8"Solution", 0 },
 { u8"032 Banjo-Tooie (U) 0000002B 01340C6C Mayahem Temple.mid", u8"", u8"Mayahem Temple (Targitzan’s Temple)", 0,
 	7 + 1 + 1, {
 		{ ns4::CMidiFile::NS4_ES_PRE_UNROLL, ns4::CMidiFile::NS4_E_TAG_TRACK_BY_IDX, 21 - 1 },
@@ -344,13 +345,16 @@
 		{ ns4::CMidiFile::NS4_ES_PRE_UNROLL, ns4::CMidiFile::NS4_E_SET_TEMPO_BY_MPQN, 0, 600000 },	// 100.000000
 	   } },
 { u8"051 Banjo-Tooie (U) 00000033 013532BC Racin' With Mary.mid", u8"", u8"Racin’ with Mary", 0 },
-{ u8"049 Banjo-Tooie (U) 0000002F 01346B4C Glitter Gulch Mine.mid", u8"", u8"Glitter Gulch Mine (Near Space Zone)", 0,
-	5 + 1 + 1, {
+
+{ u8"049 Banjo-Tooie (U) 0000002F 01346B4C Glitter Gulch Mine.mid", u8"", u8"Glitter Gulch Mine (Near Space Zone) (As Intended)", 0,
+	6 + 1 + 1, {
 		{ ns4::CMidiFile::NS4_ES_PRE_UNROLL, ns4::CMidiFile::NS4_E_TAG_TRACK_BY_IDX, 12 - 1 },
 		{ ns4::CMidiFile::NS4_ES_PRE_UNROLL, ns4::CMidiFile::NS4_E_TAG_TRACK_BY_IDX, 13 - 1 },
 		{ ns4::CMidiFile::NS4_ES_PRE_UNROLL, ns4::CMidiFile::NS4_E_TAG_TRACK_BY_IDX, 14 - 1 },
 		{ ns4::CMidiFile::NS4_ES_PRE_UNROLL, ns4::CMidiFile::NS4_E_TAG_TRACK_BY_IDX, 17 - 1 },
 		{ ns4::CMidiFile::NS4_ES_PRE_UNROLL, ns4::CMidiFile::NS4_E_TAG_TRACK_BY_IDX, 21 - 1 },
+		{ ns4::CMidiFile::NS4_ES_PRE_UNROLL, ns4::CMidiFile::NS4_E_SET_LOOP_POINTS, 13 - 1, 0, 0, { 1, 1, 1, 12288 * 480 / 384 }, { 1, 1, 1, 110592 * 480 / 384 } },
+		
 
 		{ ns4::CMidiFile::NS4_ES_PRE_UNROLL, ns4::CMidiFile::NS4_E_MUTE_UNTAGGED_TRACKS },
 
@@ -467,11 +471,11 @@
 
 		{ ns4::CMidiFile::NS4_ES_PRE_UNROLL, ns4::CMidiFile::NS4_E_MUTE_UNTAGGED_TRACKS },
 	   } },
+
 { u8"069 Banjo-Tooie (U) 00000038 01358514 Fun 'n' Games.mid", u8"", u8"Fun ‘N’ Games", 0 },
 { u8"ZZ Banjo-Tooie (U) 0000000F 0133A79C Incorrect….mid", u8"", u8"Incorrect…", 0 },
 { u8"ZZ Banjo-Tooie (U) 0000000E 0133A75C Correct!.mid", u8"", u8"Correct!", 0 },
-{ u8"ZZ Banjo-Tooie (U) 00000061 01376E64 Fun 'N' Games Success!.mid", u8"", u8"Fun ‘N’ Games Success!", 0 },
-{ u8"ZZ Banjo-Tooie (U) 00000010 0133A7E4 Mini-Game Victory.mid", u8"", u8"Mini-Game Victory", 0 },
+
 { u8"061 Banjo-Tooie (U) 00000031 0134BD94 Witchyworld.mid", u8"", u8"Witchyworld (Conga’s Big Top)", 0,
 	8 + 2 + 1, {
 		{ ns4::CMidiFile::NS4_ES_PRE_UNROLL, ns4::CMidiFile::NS4_E_TAG_TRACK_BY_IDX, 1 - 1 },
@@ -488,6 +492,7 @@
 
 		{ ns4::CMidiFile::NS4_ES_PRE_UNROLL, ns4::CMidiFile::NS4_E_MUTE_UNTAGGED_TRACKS },
 	   } },
+{ u8"ZZ Banjo-Tooie (U) 00000061 01376E64 Fun 'N' Games Success!.mid", u8"", u8"Collect Big Top Ticket", 0 },
 { u8"066 Banjo-Tooie (U) 0000003B 0135C52C Mr. Patch.mid", u8"", u8"Vs Mr. Patch", 0 },
 { u8"027 Banjo-Tooie (U) 00000046 01369FAC Isle o' Hags.mid", u8"", u8"Isle o’ Hags (Underwater)", 0,
 	1 + 1, {
@@ -1008,6 +1013,22 @@
 
 		{ ns4::CMidiFile::NS4_ES_PRE_UNROLL, ns4::CMidiFile::NS4_E_MUTE_UNTAGGED_TRACKS },
 	   } },
+
+{ u8"014 Banjo-Tooie (U) 00000047 0136E084 Jinjo Village.mid", u8"", u8"Jinjo Village (Sans SFX)", 0,
+	9 + 1, {
+		{ ns4::CMidiFile::NS4_ES_PRE_UNROLL, ns4::CMidiFile::NS4_E_TAG_TRACK_BY_IDX, 2 - 1 },
+		{ ns4::CMidiFile::NS4_ES_PRE_UNROLL, ns4::CMidiFile::NS4_E_TAG_TRACK_BY_IDX, 3 - 1 },
+		{ ns4::CMidiFile::NS4_ES_PRE_UNROLL, ns4::CMidiFile::NS4_E_TAG_TRACK_BY_IDX, 4 - 1 },
+		{ ns4::CMidiFile::NS4_ES_PRE_UNROLL, ns4::CMidiFile::NS4_E_TAG_TRACK_BY_IDX, 5 - 1 },
+		{ ns4::CMidiFile::NS4_ES_PRE_UNROLL, ns4::CMidiFile::NS4_E_TAG_TRACK_BY_IDX, 6 - 1 },
+		{ ns4::CMidiFile::NS4_ES_PRE_UNROLL, ns4::CMidiFile::NS4_E_TAG_TRACK_BY_IDX, 7 - 1 },
+		{ ns4::CMidiFile::NS4_ES_PRE_UNROLL, ns4::CMidiFile::NS4_E_TAG_TRACK_BY_IDX, 8 - 1 },
+		{ ns4::CMidiFile::NS4_ES_PRE_UNROLL, ns4::CMidiFile::NS4_E_TAG_TRACK_BY_IDX, 9 - 1 },
+		//{ ns4::CMidiFile::NS4_ES_PRE_UNROLL, ns4::CMidiFile::NS4_E_TAG_TRACK_BY_IDX, 14 - 1 },
+
+		{ ns4::CMidiFile::NS4_ES_PRE_UNROLL, ns4::CMidiFile::NS4_E_MUTE_UNTAGGED_TRACKS },
+	   } },
+
 { u8"014 Banjo-Tooie (U) 00000047 0136E084 Jinjo Village.mid", u8"", u8"Jinjo Village (Drained Jingaling’s Palace Sans SFX)", 0,
 	1 + 1 + 1, {
 		{ ns4::CMidiFile::NS4_ES_PRE_UNROLL, ns4::CMidiFile::NS4_E_TAG_TRACK_BY_IDX, 12 - 1 },
@@ -1045,6 +1066,49 @@
 
 		{ ns4::CMidiFile::NS4_ES_PRE_UNROLL, ns4::CMidiFile::NS4_E_MUTE_UNTAGGED_TRACKS },
 	   } },
+
+{ u8"049 Banjo-Tooie (U) 0000002F 01346B4C Glitter Gulch Mine.mid", u8"", u8"Glitter Gulch Mine (Near Space Zone)", 0,
+	5 + 1 + 1, {
+		{ ns4::CMidiFile::NS4_ES_PRE_UNROLL, ns4::CMidiFile::NS4_E_TAG_TRACK_BY_IDX, 12 - 1 },
+		{ ns4::CMidiFile::NS4_ES_PRE_UNROLL, ns4::CMidiFile::NS4_E_TAG_TRACK_BY_IDX, 13 - 1 },
+		{ ns4::CMidiFile::NS4_ES_PRE_UNROLL, ns4::CMidiFile::NS4_E_TAG_TRACK_BY_IDX, 14 - 1 },
+		{ ns4::CMidiFile::NS4_ES_PRE_UNROLL, ns4::CMidiFile::NS4_E_TAG_TRACK_BY_IDX, 17 - 1 },
+		{ ns4::CMidiFile::NS4_ES_PRE_UNROLL, ns4::CMidiFile::NS4_E_TAG_TRACK_BY_IDX, 21 - 1 },
+
+		{ ns4::CMidiFile::NS4_ES_PRE_UNROLL, ns4::CMidiFile::NS4_E_MUTE_UNTAGGED_TRACKS },
+
+		{ ns4::CMidiFile::NS4_ES_PRE_UNROLL, ns4::CMidiFile::NS4_E_SET_TEMPO_BY_MPQN, 0, 600000 },	// 100.000000
+	   } },
+
+{ u8"049 Banjo-Tooie (U) 0000002F 01346B4C Glitter Gulch Mine.mid", u8"", u8"Glitter Gulch Mine (Near Space Zone Sans SFX) (As Intended)", 0,
+	4 + 1 + 1, {
+		{ ns4::CMidiFile::NS4_ES_PRE_UNROLL, ns4::CMidiFile::NS4_E_TAG_TRACK_BY_IDX, 12 - 1 },
+		{ ns4::CMidiFile::NS4_ES_PRE_UNROLL, ns4::CMidiFile::NS4_E_TAG_TRACK_BY_IDX, 13 - 1 },
+		{ ns4::CMidiFile::NS4_ES_PRE_UNROLL, ns4::CMidiFile::NS4_E_TAG_TRACK_BY_IDX, 14 - 1 },
+		//{ ns4::CMidiFile::NS4_ES_PRE_UNROLL, ns4::CMidiFile::NS4_E_TAG_TRACK_BY_IDX, 17 - 1 },
+		{ ns4::CMidiFile::NS4_ES_PRE_UNROLL, ns4::CMidiFile::NS4_E_SET_LOOP_POINTS, 13 - 1, 0, 0, { 1, 1, 1, 12288 * 480 / 384 }, { 1, 1, 1, 110592 * 480 / 384 } },
+		//{ ns4::CMidiFile::NS4_ES_PRE_UNROLL, ns4::CMidiFile::NS4_E_TAG_TRACK_BY_IDX, 21 - 1 },
+
+		{ ns4::CMidiFile::NS4_ES_PRE_UNROLL, ns4::CMidiFile::NS4_E_MUTE_UNTAGGED_TRACKS },
+
+		{ ns4::CMidiFile::NS4_ES_PRE_UNROLL, ns4::CMidiFile::NS4_E_SET_TEMPO_BY_MPQN, 0, 600000 },	// 100.000000
+	   } },
+
+{ u8"049 Banjo-Tooie (U) 0000002F 01346B4C Glitter Gulch Mine.mid", u8"", u8"Glitter Gulch Mine (Near Space Zone Sans SFX)", 0,
+	3 + 1 + 1, {
+		{ ns4::CMidiFile::NS4_ES_PRE_UNROLL, ns4::CMidiFile::NS4_E_TAG_TRACK_BY_IDX, 12 - 1 },
+		{ ns4::CMidiFile::NS4_ES_PRE_UNROLL, ns4::CMidiFile::NS4_E_TAG_TRACK_BY_IDX, 13 - 1 },
+		{ ns4::CMidiFile::NS4_ES_PRE_UNROLL, ns4::CMidiFile::NS4_E_TAG_TRACK_BY_IDX, 14 - 1 },
+		//{ ns4::CMidiFile::NS4_ES_PRE_UNROLL, ns4::CMidiFile::NS4_E_TAG_TRACK_BY_IDX, 17 - 1 },
+		//{ ns4::CMidiFile::NS4_ES_PRE_UNROLL, ns4::CMidiFile::NS4_E_TAG_TRACK_BY_IDX, 21 - 1 },
+
+		{ ns4::CMidiFile::NS4_ES_PRE_UNROLL, ns4::CMidiFile::NS4_E_MUTE_UNTAGGED_TRACKS },
+
+		{ ns4::CMidiFile::NS4_ES_PRE_UNROLL, ns4::CMidiFile::NS4_E_SET_TEMPO_BY_MPQN, 0, 600000 },	// 100.000000
+	   } },
+
+
+	   //
 { u8"073 Banjo-Tooie (U) 00000036 0135433C Jolly Roger's Lagoon.mid", u8"", u8"Jolly Roger’s Lagoon (Sans SFX)", 0,
 	10 + 1, {
 		{ ns4::CMidiFile::NS4_ES_PRE_UNROLL, ns4::CMidiFile::NS4_E_TAG_TRACK_BY_IDX, 1 - 1 },
