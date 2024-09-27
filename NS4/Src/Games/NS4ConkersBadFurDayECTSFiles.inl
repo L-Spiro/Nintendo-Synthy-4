@@ -17,7 +17,7 @@
 
 //#define NS4_OVERSAMPLING_BW					3500.0
 #define NS4_OVERSAMPLING					(1 << 2)
-#define NS4_OVERSAMPLING_BW					500.0
+#define NS4_OVERSAMPLING_BW					50.0
 
 
 
@@ -71,7 +71,7 @@
 	   } },
 { u8"Conker's Bad Fur Day ECTS (U) 00000007 038DD97C.mid", u8"Conker's Bad Fur Day ECTS (U) 00000007 038DD97C.mid TrackParseDebug.txt", u8"Marvin the Mouse Explodes", 0 },
 { u8"Conker's Bad Fur Day ECTS (U) 00000001 038D1540.mid", u8"Conker's Bad Fur Day ECTS (U) 00000001 038D1540.mid TrackParseDebug.txt", u8"Windy & Co. (Amazing Exploding Mouse)", 0,
-	13, {
+	11, {
 		{ ns4::CMidiFile::NS4_ES_PRE_UNROLL, ns4::CMidiFile::NS4_E_MUTE_TRACK, 1 },
 		{ ns4::CMidiFile::NS4_ES_PRE_UNROLL, ns4::CMidiFile::NS4_E_MUTE_TRACK, 3 },
 		{ ns4::CMidiFile::NS4_ES_PRE_UNROLL, ns4::CMidiFile::NS4_E_MUTE_TRACK, 4 },
@@ -82,8 +82,8 @@
 		{ ns4::CMidiFile::NS4_ES_PRE_UNROLL, ns4::CMidiFile::NS4_E_MUTE_TRACK, 9 },
 		{ ns4::CMidiFile::NS4_ES_PRE_UNROLL, ns4::CMidiFile::NS4_E_MUTE_TRACK, 10 },
 		{ ns4::CMidiFile::NS4_ES_PRE_UNROLL, ns4::CMidiFile::NS4_E_MUTE_TRACK, 12 },
-		{ ns4::CMidiFile::NS4_ES_PRE_UNROLL, ns4::CMidiFile::NS4_E_MUTE_TRACK, 13 },
-		{ ns4::CMidiFile::NS4_ES_PRE_UNROLL, ns4::CMidiFile::NS4_E_MUTE_TRACK, 14 },
+		/*{ ns4::CMidiFile::NS4_ES_PRE_UNROLL, ns4::CMidiFile::NS4_E_MUTE_TRACK, 13 },
+		{ ns4::CMidiFile::NS4_ES_PRE_UNROLL, ns4::CMidiFile::NS4_E_MUTE_TRACK, 14 },*/
 		{ ns4::CMidiFile::NS4_ES_PRE_UNROLL, ns4::CMidiFile::NS4_E_MUTE_TRACK, 15 },
 	   } },
 { u8"Conker's Bad Fur Day ECTS (U) 00000006 038DC8B0.mid", u8"Conker's Bad Fur Day ECTS (U) 00000006 038DC8B0.mid TrackParseDebug.txt", u8"Mad Pitchfork", 0 },
@@ -144,7 +144,8 @@
 		{ ns4::CMidiFile::NS4_ES_PRE_UNROLL, ns4::CMidiFile::NS4_E_MOVE_UNTIL_END, 0, 0, 0, { 68, 1, 1, 0 }, { 66, 2, 1, 0 } },
 		{ ns4::CMidiFile::NS4_ES_PRE_UNROLL, ns4::CMidiFile::NS4_E_MOVE_UNTIL_END, 0, 0, 0, { 38, 4, 3, 0 }, { 37, 2, 1, 0 } },
 
-		{ NS4_PLAY_SAMPLE_SIMPLE_FLAGS( u8"C:\\N64OST\\Conker’s Bad Fur Day ECTS\\Research/B00I00S5DA.wav", 10, 2, 4, 78, 57, 1.0, 64, 0 ) },
+		//{ NS4_PLAY_SAMPLE_SIMPLE_FLAGS( u8"C:\\N64OST\\Conker’s Bad Fur Day ECTS\\Research/B00I00S5DA.wav", 10, 2, 4, 78, 57, 1.0, 64, 0 ) },
+		{ NS4_PLAY_SAMPLE( u8"C:\\N64OST\\Conker’s Bad Fur Day ECTS\\Research/B00I00S5DA.wav", 10, 2, 4, 78, 0x3C-6, 57, 1.0, 64, 0, 0x3C, 0, 0, 0x7F, 0x40, 1.0, 0, 0, 0, 0, 0, 0, 0, 0 ) },
 		{ NS4_PLAY_SAMPLE( u8"C:\\N64OST\\Conker’s Bad Fur Day ECTS\\Research/B00I00S5DB.wav", 11, 4, 2, 32, 0x3C-6, 57, 1.0, 43, ns4::CMidiFile::NS4_NRF_INVERT_LEFT, 0x3C, 0, 0, 0x7F, 0x40, 1.0, 0, 0, 0, 0, 0, 0, 0, 0 ) },
 		{ NS4_PLAY_SAMPLE_SIMPLE_FLAGS( u8"C:\\N64OST\\Conker’s Bad Fur Day ECTS\\Research/1CEAC00.wav", 13, 1, 4, 0, 0, 1.0, 64, 0 ) },	// I.  Am.  The Great Mighty Poo, and I'm going to throw my shit at you.  A huge supply of tish comes from my chocolate starfish.  How about some scat you little twat?
 		{ NS4_PLAY_SAMPLE_SIMPLE_FLAGS( u8"C:\\N64OST\\Conker’s Bad Fur Day ECTS\\Research/1D01E90.wav", 39, 2, 2, 30, 0, 1.0, 64, 0 ) },	// Do you really think you'll survive in here?  You don't seem to know which creek you're in.
@@ -177,9 +178,24 @@
 { u8"Conker's Bad Fur Day ECTS (U) 0000003D 03910A4C.mid", u8"Conker's Bad Fur Day ECTS (U) 0000003D 03910A4C.mid TrackParseDebug.txt", u8"Rock Solid", 0 },
 { u8"Conker's Bad Fur Day ECTS (U) 00000041 0391DB18.mid", u8"Conker's Bad Fur Day ECTS (U) 00000041 0391DB18.mid TrackParseDebug.txt", u8"Surf Punks", 0 },
 { u8"Conker's Bad Fur Day ECTS (U) 0000001D 038EF268.mid", u8"Conker's Bad Fur Day ECTS (U) 0000001D 038EF268.mid TrackParseDebug.txt", u8"Brown Loincloth Time", 0 },
-{ u8"Conker's Bad Fur Day ECTS (U) 0000001C 038EE4AC.mid", u8"Conker's Bad Fur Day ECTS (U) 0000001C 038EE4AC.mid TrackParseDebug.txt", u8"Taming the Beast", 0 },
+{ u8"Conker's Bad Fur Day ECTS (U) 0000001C 038EE4AC.mid", u8"Conker's Bad Fur Day ECTS (U) 0000001C 038EE4AC.mid TrackParseDebug.txt", u8"Taming the Beast", 0,
+	2, {
+		{ NS4_PLAY_SAMPLE( u8"C:\\N64OST\\Conker’s Bad Fur Day ECTS\\Research\\1766388 Lullaby.wav",
+			1, 1, 1, 0, 60 - 0, 0, 1.0, 64, 0, 60, 0, 0, 127, 64, 1.0, 0, 0, 0, 0, 0, 0, 0, 0 )
+		},
+		{ ns4::CMidiFile::NS4_ES_PRE_UNROLL, ns4::CMidiFile::NS4_E_MUTE_ALL_TRACKS },
+	   } },
+
+
+
 { u8"Conker's Bad Fur Day ECTS (U) 0000001B 038ED4F4.mid", u8"Conker's Bad Fur Day ECTS (U) 0000001B 038ED4F4.mid TrackParseDebug.txt", u8"Raptor vs. Cavemen", 0 },
-{ u8"Conker's Bad Fur Day ECTS (U) 00000044 03923564.mid", u8"Conker's Bad Fur Day ECTS (U) 00000044 03923564.mid TrackParseDebug.txt", u8"Call to Arms", 0 },
+{ u8"Conker's Bad Fur Day ECTS (U) 00000044 03923564.mid", u8"Conker's Bad Fur Day ECTS (U) 00000044 03923564.mid TrackParseDebug.txt", u8"Call to Arms", 0,
+	2, {
+		{ NS4_PLAY_SAMPLE( u8"C:\\N64OST\\Conker’s Bad Fur Day ECTS\\Research\\24BA2B0 We Need You.wav",
+			1, 1, 1, 0, 60 - 0, 0, 1.0, 64, 0, 60, 0, 0, 127, 64, 1.0, 0, 0, 0, 0, 0, 0, 0, 0 )
+		},
+		{ ns4::CMidiFile::NS4_ES_PRE_UNROLL, ns4::CMidiFile::NS4_E_MUTE_ALL_TRACKS },
+	   } },
 { u8"Conker's Bad Fur Day ECTS (U) 00000014 038E7C58.mid", u8"Conker's Bad Fur Day ECTS (U) 00000014 038E7C58.mid TrackParseDebug.txt", u8"Get Me the Heck Outta Here!", 0 },
 { u8"Conker's Bad Fur Day ECTS (U) 00000025 038FA148.mid", u8"Conker's Bad Fur Day ECTS (U) 00000025 038FA148.mid TrackParseDebug.txt", u8"Sole Survivor", 0 },
 { u8"Conker's Bad Fur Day ECTS (U) 0000002C 038FB27C.mid", u8"Conker's Bad Fur Day ECTS (U) 0000002C 038FB27C.mid TrackParseDebug.txt", u8"Assault", 0 },
@@ -271,6 +287,16 @@
 
 	   } },
 { u8"Conker's Bad Fur Day ECTS (U) 0000000E 038E1E20.mid", u8"Conker's Bad Fur Day ECTS (U) 0000000E 038E1E20.mid TrackParseDebug.txt", u8"The Mouse Explodes (Short)", 0 },
+
+{ u8"Conker's Bad Fur Day ECTS (U) 00000035 039063B4.mid", u8"Conker's Bad Fur Day ECTS (U) 00000035 039063B4.mid TrackParseDebug.txt", u8"Poo (Sans SFX)", 0,
+	3,
+	{
+		{ ns4::CMidiFile::NS4_ES_PRE_UNROLL, ns4::CMidiFile::NS4_E_MUTE_TRACK, 11-1 },
+		{ ns4::CMidiFile::NS4_ES_PRE_UNROLL, ns4::CMidiFile::NS4_E_MUTE_TRACK, 12-1 },
+		{ ns4::CMidiFile::NS4_ES_PRE_UNROLL, ns4::CMidiFile::NS4_E_MUTE_TRACK, 13-1 },
+	}
+},
+
 { u8"Conker's Bad Fur Day ECTS (U) 0000004E 03929D48.mid", u8"Conker's Bad Fur Day ECTS (U) 0000004E 03929D48.mid TrackParseDebug.txt", u8"Experimenting", 0 },
 { u8"Conker's Bad Fur Day ECTS (U) 00000042 0391EB74.mid", u8"Conker's Bad Fur Day ECTS (U) 00000042 0391EB74.mid TrackParseDebug.txt", u8"Sloprano (Instrumental)", 0,
 	4,
@@ -284,6 +310,9 @@
 },
 { u8"Conker's Bad Fur Day ECTS (U) 00000049 03926B38.mid", u8"Conker's Bad Fur Day ECTS (U) 00000049 03926B38.mid TrackParseDebug.txt", u8"The Great Mighty Flush", 0 },
 { u8"Conker's Bad Fur Day ECTS (U) 0000004A 03926DFC.mid", u8"Conker's Bad Fur Day ECTS (U) 0000004A 03926DFC.mid TrackParseDebug.txt", u8"Now That’s What I Call a Bowel Movement!", 0 },
+
+{ u8"Conker's Bad Fur Day ECTS (U) 0000001C 038EE4AC.mid", u8"Conker's Bad Fur Day ECTS (U) 0000001C 038EE4AC.mid TrackParseDebug.txt", u8"Taming the Beast (Beta)", 0 },
+{ u8"Conker's Bad Fur Day ECTS (U) 00000044 03923564.mid", u8"Conker's Bad Fur Day ECTS (U) 00000044 03923564.mid TrackParseDebug.txt", u8"Call to Arms (Beta)", 0 },
 { u8"Conker's Bad Fur Day ECTS (U) 00000051 0392E018.mid", u8"Conker's Bad Fur Day ECTS (U) 00000051 0392E018.mid TrackParseDebug.txt", u8"Mono Select", 0 },
 { u8"Conker's Bad Fur Day ECTS (U) 00000052 0392E0A0.mid", u8"Conker's Bad Fur Day ECTS (U) 00000052 0392E0A0.mid TrackParseDebug.txt", u8"Stereo Select", 0 },
 { u8"Conker's Bad Fur Day ECTS (U) 00000053 0392E140.mid", u8"Conker's Bad Fur Day ECTS (U) 00000053 0392E140.mid TrackParseDebug.txt", u8"Surround Select", 0 },

@@ -39,6 +39,13 @@ namespace ns4 {
 		 */
 		std::vector<double> &				RingBuffer() { return m_vRing; }
 
+		/**
+		 * Gets the ring buffer.
+		 *
+		 * \return Returns a constant reference to the filter taps.
+		 */
+		const std::vector<double> &			RingBuffer() const { return m_vRing; }
+
 
 	protected :
 		// == Members.

@@ -2876,10 +2876,16 @@ namespace ns4 {
 		// Conker's Bad Fur Day ESTC.
 		{
 			NS4_TAPS( m_rtConkersBadFurDayECTS0 ),
-			NS4_SQRT_0_5,															// dTapVol
+			0.56470172114050299,													// dTapVol
 			0,																		// i64TapOffset
 			NS4_CBFD_FADE,
 			NS4_NO_LPF,
+			NS4_NO_DELAY,															// dDelayVol
+			nullptr,																// ptrSepReverb
+			false,																	// bSwapSrcChannels
+			false,																	// bSwapDstChannels
+			false,																	// bSwapSrcReverb
+			true,																	// bRChanIsInvertLChan
 		},	// 176
 	};
 
