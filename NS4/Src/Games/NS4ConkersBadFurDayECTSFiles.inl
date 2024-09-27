@@ -4,7 +4,7 @@
 #define NS4_FOLDER							u8"Conker's Bad Fur Day ECTS"
 #define NS4_BANK							u8"00"
 #define NS4_REVERB_TRACKS					1
-#define NS4_REVERB							ns4::CReverb::NS4_T_CONKERS_BAD_FUR_DAY_0
+#define NS4_REVERB							ns4::CReverb::NS4_T_CONKERS_BAD_FUR_DAY_ECTS_0
 #define NS4_ORIG_HZ							22018
 #define NS4_Q_MIN							1.0
 #define NS4_CURVE							20.0
@@ -13,8 +13,11 @@
 //#define NS4_WET_FILTER_FREQ					4736.0//(NS4_ORIG_HZ / std::pow( 2.0, 3.35 ))
 #define NS4_WET_FILTER_ORDER				NS4_FILTER_DB_TO_ORDER( 6 )
 #define NS4_VIB_SCALE						2.0
-//#define NS4_OVERSAMPLING_BW					3500.0
 #define NS4_ENV_MULTIPLIER					(1.0 / 3.0)
+
+//#define NS4_OVERSAMPLING_BW					3500.0
+#define NS4_OVERSAMPLING					(1 << 2)
+#define NS4_OVERSAMPLING_BW					500.0
 
 
 

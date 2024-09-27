@@ -1593,6 +1593,25 @@ namespace ns4 {
 		{         0,	     11960,	   +18000,		       +0,	          0,		+1.7233560356544331e-005,	    -1.3687076568603516,		      -624,			   /*0xE01C7B20*/ 0,	/*0xE01C7B80*/   12544 },
 	};
 
+	/** Taps harvested from Conker's Bad Fur Day ESTC. */
+	NS4_REVERB_TAP CReverb::m_rtConkersBadFurDayECTS0[] = {
+#include "Taps/NS4ReverbConkersBadFurDayESTC0.inl"
+	};
+
+	/** The comb filter delay lines for Conker's Bad Fur Day ESTC. */
+	NS4_DELAY_N64 CReverb::m_dn64ConkersBadFurDayECTS0[] = {
+		//ui32Input		ui32Output	i16FfCoef		i16FbCoef		i16Gain							 dRsInc						 dRsVal			i32RsDelta						dRsGain						ui16Fc
+		{         0,	       192,	    +9830,		    -9830,	          0 },
+		{       192,	       392,	    +9830,		    -9830,	      11140 },
+		{       880,	      2816,	   +16384,		   -16384,	       4587 },
+		{      1056,	      2112,	    +8192,		    -8192,	          0 },
+		{      3520,	      6160,	   +16384,		   -16384,	       4587 },
+		{      3696,	      5280,	    +8192,		    -8192,	          0 },
+		{      5280,	      5944,	    +8192,		    -8192,	          0 },
+		{         0,	      6512,	   +13000,		   -13000,	          0,		+3.4517212043283507e-005,	   +0.72287887334823608,		        +0,			   /*0xDFE74550*/ 0 },
+
+	};
+
 }	// namespace ns4
 
 namespace ns4 {
@@ -2849,6 +2868,19 @@ namespace ns4 {
 			NS4_NO_FADE,
 			NS4_NO_LPF,
 		},	// 174
+		// Conker's Bad Fur Day ESTC.
+		{
+			NS4_ONLY_COMB( 1.0, 0 ),
+			NS4_COMB( 8808, 368 / 2, m_dn64ConkersBadFurDayECTS0, 20.0 ),
+		},	// 175
+		// Conker's Bad Fur Day ESTC.
+		{
+			NS4_TAPS( m_rtConkersBadFurDayECTS0 ),
+			NS4_SQRT_0_5,															// dTapVol
+			0,																		// i64TapOffset
+			NS4_CBFD_FADE,
+			NS4_NO_LPF,
+		},	// 176
 	};
 
 
@@ -3068,7 +3100,9 @@ namespace ns4 {
 			aOut.resize( _ptThread->_tSrc.size() );
 			
 			size_t stInputPtr = 0;
-			double dCurve = 5.0;//_ptThread->_trReverb.fCombReverb.dVolCurve;
+			// FOR THICK REVERBS.
+			//double dCurve = 5.0;//_ptThread->_trReverb.fCombReverb.dVolCurve;
+			double dCurve = _ptThread->_trReverb.fCombReverb.dVolCurve;
 			struct NS4_LPF {
 				double dA[3];
 				double dB[3];

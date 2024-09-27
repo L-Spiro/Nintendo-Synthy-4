@@ -1060,5 +1060,8 @@
     <None Include="Src\Games\NS4ConkersBadFurDayECTSFiles.inl">
       <Filter>Header Files\Games</Filter>
     </None>
+    <None Include="Src\Reverb\Taps\NS4ReverbConkersBadFurDayESTC0.inl">
+      <Filter>Header Files\Reverb\Taps</Filter>
+    </None>
   </ItemGroup>
 </Project>

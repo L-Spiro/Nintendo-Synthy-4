@@ -191,11 +191,14 @@ namespace ns4 {
 			NS4_T_BEETLE_ADVENTURE_RACING_DELAY_0	= 169,
 			NS4_T_BEETLE_ADVENTURE_RACING_0			= 170,
 
-			NS4_T_ITOI_SHIGESATO_NO_BASS_TSURI_NO_1_DELAY_0		= 171,
-			NS4_T_ITOI_SHIGESATO_NO_BASS_TSURI_NO_1_0			= 172,
+			NS4_T_ITOI_SHIGESATO_NO_BASS_TSURI_NO_1_DELAY_0	= 171,
+			NS4_T_ITOI_SHIGESATO_NO_BASS_TSURI_NO_1_0		= 172,
 
 			NS4_T_BUCK_BUMBLE_DELAY_0			= 173,
 			NS4_T_BUCK_BUMBLE_0					= 174,
+
+			NS4_T_CONKERS_BAD_FUR_DAY_ECTS_DELAY_0			= 175,
+			NS4_T_CONKERS_BAD_FUR_DAY_ECTS_0				= 176,
 		};
 
 
@@ -820,6 +823,12 @@ namespace ns4 {
 
 		/** The comb filter delay lines for Buck Bumble. */
 		static NS4_DELAY_N64					m_dn64BuckBumble0[];
+
+		/** Taps harvested from Conker's Bad Fur Day ESTC. */
+		static NS4_REVERB_TAP					m_rtConkersBadFurDayECTS0[];
+
+		/** The comb filter delay lines for Conker's Bad Fur Day ESTC. */
+		static NS4_DELAY_N64					m_dn64ConkersBadFurDayECTS0[];
 
 		// == Functions.
 		/**

@@ -423,6 +423,7 @@
     <None Include="Src\Reverb\Taps\NS4ReverbChameleonTwist20.inl" />
     <None Include="Src\Reverb\Taps\NS4ReverbClayFighter0.inl" />
     <None Include="Src\Reverb\Taps\NS4ReverbConkersBadFurDay0.inl" />
+    <None Include="Src\Reverb\Taps\NS4ReverbConkersBadFurDayESTC0.inl" />
     <None Include="Src\Reverb\Taps\NS4ReverbDiddyKongRacing0.inl" />
     <None Include="Src\Reverb\Taps\NS4ReverbDinosaurPlanet0.inl" />
     <None Include="Src\Reverb\Taps\NS4ReverbDonkeyKong64Left0.inl" />
