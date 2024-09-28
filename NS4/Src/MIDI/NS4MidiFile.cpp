@@ -4750,9 +4750,9 @@ namespace ns4 {
 			}
 			dLastTime = dCurTime;
 			tbWavTime.Tick();
-			if ( _troOptions.uiMaxSamples <= tbWavTime.CurTick() ) {
+			/*if ( _troOptions.uiMaxSamples <= tbWavTime.CurTick() ) {
 				break;
-			}
+			}*/
 		}
 		
 	}

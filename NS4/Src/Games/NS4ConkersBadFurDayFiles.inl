@@ -285,7 +285,9 @@
 			1, 1, 1, 0, 60 - 0, 0, 1.0, 64, 0, 60, 0, 0, 127, 64, 1.0, 0, 0, 0, 0, 0, 0, 0, 0 )
 		},
 		{ ns4::CMidiFile::NS4_ES_PRE_UNROLL, ns4::CMidiFile::NS4_E_MUTE_ALL_TRACKS },
-	   } },
+	   },
+	3
+},
 { u8"Conker's Bad Fur Day (U) 0000001B 03EE873C.mid", u8"Conker's Bad Fur Day (U) 0000001B 03EE873C.mid TrackParseDebug.txt", u8"Raptor vs. Cavemen", 0, },
 { u8"Conker's Bad Fur Day (U) 00000082 03F60760.mid", u8"Conker's Bad Fur Day (U) 00000082 03F60760.mid TrackParseDebug.txt", u8"Sad Fangy", 0, },
 { u8"Conker's Bad Fur Day (U) 00000083 03F61230.mid", u8"Conker's Bad Fur Day (U) 00000083 03F61230.mid TrackParseDebug.txt", u8"Sad Cavewoman", 0, },
@@ -300,7 +302,9 @@
 			1, 1, 1, 0, 60 - 0, 0, 1.0, 64, 0, 60, 0, 0, 127, 64, 1.0, 0, 0, 0, 0, 0, 0, 0, 0 )
 		},
 		{ ns4::CMidiFile::NS4_ES_PRE_UNROLL, ns4::CMidiFile::NS4_E_MUTE_ALL_TRACKS },
-	   } },
+	   },
+	3
+},
 { u8"Conker's Bad Fur Day (U) 00000065 03F42FFC.mid", u8"Conker's Bad Fur Day (U) 00000065 03F42FFC.mid TrackParseDebug.txt", u8"It’s War", 0, },
 { u8"Conker's Bad Fur Day (U) 00000087 03F64474.mid", u8"Conker's Bad Fur Day (U) 00000087 03F64474.mid TrackParseDebug.txt", u8"The Eel", 0, },
 { u8"Conker's Bad Fur Day (U) 00000014 03EE2EA0.mid", u8"Conker's Bad Fur Day (U) 00000014 03EE2EA0.mid TrackParseDebug.txt", u8"Get Me the Heck Outta Here!", 0 },

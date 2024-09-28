@@ -16,8 +16,10 @@
 #define NS4_ENV_MULTIPLIER					(1.0 / 3.0)
 
 //#define NS4_OVERSAMPLING_BW					3500.0
+//#ifndef _DEBUG
 #define NS4_OVERSAMPLING					(1 << 2)
-#define NS4_OVERSAMPLING_BW					50.0
+#define NS4_OVERSAMPLING_BW					5.0
+//#endif	// #ifndef _DEBUG
 
 
 
@@ -184,8 +186,9 @@
 			1, 1, 1, 0, 60 - 0, 0, 1.0, 64, 0, 60, 0, 0, 127, 64, 1.0, 0, 0, 0, 0, 0, 0, 0, 0 )
 		},
 		{ ns4::CMidiFile::NS4_ES_PRE_UNROLL, ns4::CMidiFile::NS4_E_MUTE_ALL_TRACKS },
-	   } },
-
+	   },
+	3
+},
 
 
 { u8"Conker's Bad Fur Day ECTS (U) 0000001B 038ED4F4.mid", u8"Conker's Bad Fur Day ECTS (U) 0000001B 038ED4F4.mid TrackParseDebug.txt", u8"Raptor vs. Cavemen", 0 },
@@ -195,7 +198,9 @@
 			1, 1, 1, 0, 60 - 0, 0, 1.0, 64, 0, 60, 0, 0, 127, 64, 1.0, 0, 0, 0, 0, 0, 0, 0, 0 )
 		},
 		{ ns4::CMidiFile::NS4_ES_PRE_UNROLL, ns4::CMidiFile::NS4_E_MUTE_ALL_TRACKS },
-	   } },
+	   },
+	3
+},
 { u8"Conker's Bad Fur Day ECTS (U) 00000014 038E7C58.mid", u8"Conker's Bad Fur Day ECTS (U) 00000014 038E7C58.mid TrackParseDebug.txt", u8"Get Me the Heck Outta Here!", 0 },
 { u8"Conker's Bad Fur Day ECTS (U) 00000025 038FA148.mid", u8"Conker's Bad Fur Day ECTS (U) 00000025 038FA148.mid TrackParseDebug.txt", u8"Sole Survivor", 0 },
 { u8"Conker's Bad Fur Day ECTS (U) 0000002C 038FB27C.mid", u8"Conker's Bad Fur Day ECTS (U) 0000002C 038FB27C.mid TrackParseDebug.txt", u8"Assault", 0 },
