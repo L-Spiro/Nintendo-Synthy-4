@@ -310,6 +310,7 @@ namespace ns4 {
 							volatile int gjg = 0;
 						}*/
 						if ( iTrack == -1 ) {
+							teEvent.i32ChanOffset = 0;
 							m_vTracks[0].vEvents.push_back( teEvent );
 						}
 						else {
@@ -318,6 +319,7 @@ namespace ns4 {
 								m_vTracks.push_back( NS4_TRACK() );
 								m_vTracks[m_vTracks.size()-1].thHeader = thHeader;
 							}
+							teEvent.i32ChanOffset = iTrack / 16 * 16;
 							m_vTracks[iTrack].vEvents.push_back( teEvent );
 							m_vTracks[iTrack].thHeader.ui32Length = static_cast<uint32_t>(m_vTracks[iTrack].vEvents.size());
 						}
@@ -327,6 +329,7 @@ namespace ns4 {
 						if ( iTrack != -1 && i8Chan == -1 ) {
 							i8Chan = iTrack;
 						}
+						teEvent.i32ChanOffset = int32_t( (m_vTracks.size() - 1) / 16 * 16 );
 						tTrack.vEvents.push_back( teEvent );
 					}
 				}
@@ -334,6 +337,7 @@ namespace ns4 {
 
 		}
 		m_hHeader.ui16Type = 1;
+
 
 #undef NS4_READ_8
 #undef NS4_READ_16
@@ -1833,6 +1837,33 @@ namespace ns4 {
 						}
 						break;
 					}
+					case NS4_E_INSERT_TEMPO_LINE_TO : {
+						if ( iTrackByChan >= 0 && iTrackByChan < m_vTracks.size() ) {
+							uint64_t ui64Tick = CubaseToTick( _pmMods[I].tsTime0.ui32M, _pmMods[I].tsTime0.ui32B, _pmMods[I].tsTime0.ui32T, _pmMods[I].tsTime0.ui32S );
+							bool bToEnd = bool( _pmMods[I].ui32Operand3 );
+							uint32_t ui32TargetVal = _pmMods[I].ui32Operand1;
+							double dDur = _pmMods[I].dOperandDouble0;
+							uint32_t ui32StartVal = ValueOfTempoAtTick( m_vTracks[0].vEvents, ui64Tick, bToEnd );
+							// Operand 2 is a duration, 1 is the final value.
+							
+							double dStep = 1.0 / 60.0;
+							double dCurTime = GetTimeAtTick( ui64Tick );
+							uint32_t ui32LastValue = ui32StartVal;
+							for ( double J = 0; J < dDur; J += dStep ) {
+								double dThisTime = dCurTime + J;
+								double dVal = ((double( ui32TargetVal ) - ui32StartVal) * (J / dDur)) + ui32StartVal;
+								uint32_t ui32Val = uint32_t( std::round( dVal ) );
+								if ( ui32Val != ui32LastValue ) {
+									auto aTempo = CreateTempo( ui32Val, GetTickAtTime( dThisTime ) );
+									InsertEvent( m_vTracks[iTrackByChan].vEvents, aTempo, nullptr );
+									ui32LastValue = ui32Val;
+								}
+							}
+							auto aTempo = CreateTempo( ui32TargetVal, GetTickAtTime( dCurTime + dDur ) );
+							InsertEvent( m_vTracks[iTrackByChan].vEvents, aTempo, nullptr );
+						}
+						break;
+					}
 					case NS4_E_COPY_CONTROL_TO_TICK : {
 						if ( iTrackByChan >= 0 && iTrackByChan < m_vTracks.size() ) {
 							uint64_t ui64SrcTick = CubaseToTick( _pmMods[I].tsTime0.ui32M, _pmMods[I].tsTime0.ui32B, _pmMods[I].tsTime0.ui32T, _pmMods[I].tsTime0.ui32S );
@@ -2059,7 +2090,6 @@ namespace ns4 {
 						break;
 					}
 					case NS4_E_REMOVE_LOOP_POINTS : {
-						iTrackByChan = _pmMods[I].ui32Channel;
 						if ( iTrackByChan >= 0 && iTrackByChan < m_vTracks.size() ) {
 							RemoveLoops( m_vTracks[iTrackByChan].vEvents );
 						}
@@ -2072,7 +2102,6 @@ namespace ns4 {
 						break;
 					}
 					case NS4_E_SET_LOOP_POINTS : {
-						iTrackByChan = _pmMods[I].ui32Channel;
 						if ( iTrackByChan >= 0 && iTrackByChan < m_vTracks.size() ) {
 							RemoveLoops( m_vTracks[iTrackByChan].vEvents );
 							uint64_t ui64Start = CubaseToTick( _pmMods[I].tsTime0.ui32M, _pmMods[I].tsTime0.ui32B, _pmMods[I].tsTime0.ui32T, _pmMods[I].tsTime0.ui32S );
@@ -2597,14 +2626,26 @@ namespace ns4 {
 	uint64_t CMidiFile::GetTickAtTime( double _dTime ) const {
 		if ( !m_vTracks.size() ) { return 0; }
 		std::vector<CTimeBlock> vTimeLine = CreateTimeline( m_vTracks[0].vEvents, _dTime, uint64_t( -1 ) );
+		return GetTickAtTime( vTimeLine, _dTime );
+	}
+
+	/**
+	 * Gets the tick at a given time.
+	 *
+	 * \param _vTimeline The timeline to use to determine the time of the tick.
+	 * \param _dTime The time at which to get the tick.
+	 * \return Returns the tick at a given time.
+	 */
+	uint64_t CMidiFile::GetTickAtTime( const std::vector<CTimeBlock> &_vTimeline, double _dTime ) const {
+		if ( !m_vTracks.size() ) { return 0; }
 		uint64_t ui64TotalTicks = 0;
-		CTimeBlock * ptbLastBlock = nullptr;
-		for ( size_t I = 0; I < vTimeLine.size(); ++I ) {
-			ptbLastBlock = &vTimeLine[I];
-			double dThsTime = vTimeLine[I].Time() / 1000000.0;
-			if ( dThsTime >= _dTime || I == vTimeLine.size() - 1 ) { break; }
+		const CTimeBlock * ptbLastBlock = nullptr;
+		for ( size_t I = 0; I < _vTimeline.size(); ++I ) {
+			ptbLastBlock = &_vTimeline[I];
+			double dThsTime = _vTimeline[I].Time() / 1000000.0;
+			if ( dThsTime >= _dTime || I == _vTimeline.size() - 1 ) { break; }
 			//_dTime -= dThsTime;
-			ui64TotalTicks += vTimeLine[I].CurTick();
+			ui64TotalTicks += _vTimeline[I].CurTick();
 		}
 		if ( !ptbLastBlock ) { return 0; }	// This can't happen, it's just here to remove the warning.
 		double dLastBlockStartTime = ptbLastBlock->TimeAt( -int64_t( ptbLastBlock->CurTick() ) ) / 1000000.0;
@@ -3621,13 +3662,29 @@ namespace ns4 {
 	 * \return Returns a series of time blocks that represent the full timeline of the events up to a given time.
 	 */
 	std::vector<CTimeBlock> CMidiFile::CreateTimeline( const std::vector<NS4_TRACK_EVENT> &_vEvents, double _dMaxTime, uint64_t _ui64ToTick ) const {
-#if 1
 		std::vector<CTimeBlock> vReturn;
-		if ( m_sSettings.i32TempoOverride ) {
-			vReturn.push_back( CTimeBlock( double( m_hHeader.ui16Division ) / m_sSettings.i32TempoOverride ) );
-		}
-		else {
-			vReturn.push_back( CTimeBlock( m_hHeader.ui16Division / 500000.0 ) );
+		return CreateTimeline( vReturn, _vEvents, _dMaxTime, _ui64ToTick );
+	}
+
+	/**
+	 * Goes over tempo changes and creates a timeline.
+	 *
+	 * \param _vInitialTimeLine The initial timeline.
+	 * \param _vEvents The events from which to process tempo events.
+	 * \param _dMaxTime The time after which to stop gathering events.
+	 * \param _ui64ToTick If not uint64_t( -1 ), the timeline is created up to the given tick rather than to _dMaxTime (and _dMaxTime is ignored).
+	 * \return Returns a series of time blocks that represent the full timeline of the events up to a given time.
+	 */
+	std::vector<CTimeBlock> CMidiFile::CreateTimeline( const std::vector<CTimeBlock> &_vInitialTimeLine, const std::vector<NS4_TRACK_EVENT> &_vEvents, double _dMaxTime, uint64_t _ui64ToTick ) const {
+#if 1
+		std::vector<CTimeBlock> vReturn = _vInitialTimeLine;
+		if ( !vReturn.size() ) {
+			if ( m_sSettings.i32TempoOverride ) {
+				vReturn.push_back( CTimeBlock( double( m_hHeader.ui16Division ) / m_sSettings.i32TempoOverride ) );
+			}
+			else {
+				vReturn.push_back( CTimeBlock( m_hHeader.ui16Division / 500000.0 ) );
+			}
 		}
 		NS4_MIDI_WALKER mwWalker;
 		uint64_t ui64TimeOfLastTempo = 0;
@@ -4001,7 +4058,7 @@ namespace ns4 {
 	 * \param _tbTimeBlock An array of time blocks used to calculate the time of events.
 	 */
 	void CMidiFile::ApplyPostUnrollModifiers( std::vector<NS4_TRACK_EVENT> &_vTrack, size_t _stTrackIdx, uint32_t _ui32Mods, const NS4_MODIFIER * _pmMods,
-		const std::vector<CTimeBlock> &_tbTimeBlock, NS4_POST_UNROLL_SETTINGS &_pusSettings ) const {
+		std::vector<CTimeBlock> &_tbTimeBlock, NS4_POST_UNROLL_SETTINGS &_pusSettings ) const {
 		_pusSettings.mInstReplacements.clear();
 		for ( uint32_t I = 0; I < _ui32Mods; ++I ) {
 			if ( _pmMods[I].esStage == NS4_ES_POST_UNROLL ) {
@@ -4173,6 +4230,61 @@ namespace ns4 {
 								}
 							}
 							InsertEvent( _vTrack, ui8Control, ui8TargetVal, uint8_t( iTrackByChan ), ui64Tick, &_tbTimeBlock );
+						}
+						break;
+					}
+					case NS4_E_INSERT_TEMPO_LINE_TO : {
+						// Copy the 
+						uint64_t ui64Tick = CubaseToTick( _pmMods[I].tsTime0.ui32M, _pmMods[I].tsTime0.ui32B, _pmMods[I].tsTime0.ui32T, _pmMods[I].tsTime0.ui32S );
+						bool bToEnd = bool( _pmMods[I].ui32Operand3 );
+						uint32_t ui32TargetVal = _pmMods[I].ui32Operand1;
+						double dDur = _pmMods[I].dOperandDouble0;
+						uint32_t ui32StartVal = ValueOfTempoAtTick( _vTrack, ui64Tick, bToEnd );
+						// Operand 2 is a duration, 1 is the final value.
+							
+						double dStep = 1.0 / 60.0;
+						double dCurTime = GetTimeAtTick( ui64Tick );
+
+						//std::vector<CTimeBlock> vInitialTimeblock = CreateTimeline( 
+						uint32_t ui32LastValue = ui32StartVal;
+						for ( double J = 0; J < dDur; J += dStep ) {
+							double dThisTime = dCurTime + J;
+							double dVal = ((double( ui32TargetVal ) - ui32StartVal) * (J / dDur)) + ui32StartVal;
+							uint32_t ui32Val = uint32_t( std::round( dVal ) );
+							if ( ui32Val != ui32LastValue ) {
+								std::vector<CTimeBlock> vTimeLine = CreateTimeline( _vTrack, 0.0 );
+								if ( vTimeLine.size() == 1 ) {
+									vTimeLine = _tbTimeBlock;
+								}
+
+								auto aTempo = CreateTempo( ui32Val, GetTickAtTime( vTimeLine, dThisTime ) );
+								size_t sIdx = InsertEvent( _vTrack, aTempo, &vTimeLine ) + 1;
+								ui32LastValue = ui32Val;
+								vTimeLine = CreateTimeline( _vTrack, 0.0 );
+
+								// Every insert has to cause all timestamps to be updated.
+								size_t sState = 0;
+								uint64_t ui64State = 0;
+								for ( auto K = sIdx; K < _vTrack.size(); ++K ) {
+									_vTrack[K].dRealTime = GetTimeOfTick( vTimeLine, _vTrack[K].ui64Time, sState, ui64State );
+								}
+							}
+						}
+
+						std::vector<CTimeBlock> vTimeLine = CreateTimeline( _vTrack, 0.0 );
+						if ( vTimeLine.size() == 1 ) {
+							vTimeLine = _tbTimeBlock;
+						}
+
+						auto aTempo = CreateTempo( ui32TargetVal, GetTickAtTime( vTimeLine, dCurTime + dDur ) );
+						size_t sIdx = InsertEvent( _vTrack, aTempo, &_tbTimeBlock ) + 1;
+						vTimeLine = CreateTimeline( _vTrack, 0.0 );
+						// Every insert has to cause all timestamps to be updated.
+						
+						size_t sState = 0;
+						uint64_t ui64State = 0;
+						for ( auto K = sIdx; K < _vTrack.size(); ++K ) {
+							_vTrack[K].dRealTime = GetTimeOfTick( vTimeLine, _vTrack[K].ui64Time, sState, ui64State );
 						}
 						break;
 					}
@@ -5032,6 +5144,27 @@ namespace ns4 {
 			msState.AdvanceMidiState( _vEvents[I] );
 		}
 		return msState.dPitch;
+	}
+
+	/**
+	 * Gets the value of tempo at a given tick.
+	 *
+	 * \param _vEvents The track events to scan.
+	 * \param _ui64Tick The tick at which to return the control's value.
+	 * \param _bGoToEndOfTick If true, the value at the end of the tick is returned, otherwise the value at the start of the tick is returned.
+	 * \return Returns the tempo at the given tick.
+	 */
+	uint32_t CMidiFile::ValueOfTempoAtTick( const std::vector<NS4_TRACK_EVENT> &_vEvents, uint64_t _ui64Tick, bool _bGoToEndOfTick ) {
+		if ( m_sSettings.i32TempoOverride ) { return m_sSettings.i32TempoOverride; }
+		uint32_t ui32Tempo = 500000;
+		if ( _bGoToEndOfTick ) { ++_ui64Tick; }
+		for ( size_t I = 0; I < _vEvents.size(); ++I ) {
+			if ( _vEvents[I].ui64Time >= _ui64Tick ) { break; }
+			if ( IsTempo( _vEvents[I] ) ) {
+				ui32Tempo = uint32_t( _vEvents[I].ui64Data );
+			}
+		}
+		return ui32Tempo;
 	}
 
 	/**

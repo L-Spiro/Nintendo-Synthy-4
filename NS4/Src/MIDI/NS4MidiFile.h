@@ -183,6 +183,7 @@ namespace ns4 {
 			NS4_E_INSERT_CONTROL_LINE_TO,						/**< Inserts an array of controls to a given value from its current value starting from a given tick and taking X ticks to complete. */
 			NS4_E_INSERT_CONTROL_LINE_TO_TIME,					/**< Inserts an array of controls to a given value from its current value starting from a given time (dOperandDouble0) and taking dOperandDouble1 seconds to complete. */
 			NS4_E_INSERT_CONTROL_LINE_TO_TICK_OVER_TIME,		/**< Inserts an array of controls to a given value from its current value ending at a given time (tsTime0) and taking dOperandDouble0 seconds to arrive at the given tick. */
+			NS4_E_INSERT_TEMPO_LINE_TO,							/**< Inserts an array of tempo changes to a given value from its current value starting from a given tick and taking X ticks to complete. */
 			NS4_E_COPY_CONTROL_TO_TICK,							/**< Copies the value of a given control (ui32Operand0) at the given tick (tsTime0) to another tick (tsTime1). */
 			NS4_E_SET_ALL_CONTROL_OF_TYPE_TO_VALUE,				/**< Sets all controls of a given type (ui32Operand0) to a specific value (ui32Operand1). */
 			NS4_E_INSERT_FADE,									/**< The same as NS4_E_INSERT_CONTROL_LINE_TO_TIME except that it is applied to all tracks. */
@@ -899,6 +900,15 @@ namespace ns4 {
 		uint64_t						GetTickAtTime( double _dTime ) const;
 
 		/**
+		 * Gets the tick at a given time.
+		 *
+		 * \param _vTimeline The timeline to use to determine the time of the tick.
+		 * \param _dTime The time at which to get the tick.
+		 * \return Returns the tick at a given time.
+		 */
+		uint64_t						GetTickAtTime( const std::vector<CTimeBlock> &_vTimeline, double _dTime ) const;
+
+		/**
 		 * Gets the time at a given tick.
 		 *
 		 * \param _ui64Tick The tick at which to get the time.
@@ -1191,6 +1201,23 @@ namespace ns4 {
 			teEvent.ui8Event = NS4_ET_META;
 			teEvent.u.sMeta.ui8EventType = NS4_ME_SET_TEMPO;
 			teEvent.ui64Data = ConvertTempo( _dTempo );
+			teEvent.dRealTime = 0.0;
+			return teEvent;
+		}
+
+		/**
+		 * Creates a set-tempo event.
+		 *
+		 * \param _ui32Tempo The tempo of the event in milliseconds-per-quarter.
+		 * \param _ui64Time The time of the event in ticks.
+		 * \return Returns the created event.
+		 */
+		static NS4_TRACK_EVENT			CreateTempo( uint32_t _ui32Tempo, uint64_t _ui64Time ) {
+			NS4_TRACK_EVENT teEvent = {};
+			teEvent.ui64Time = _ui64Time;
+			teEvent.ui8Event = NS4_ET_META;
+			teEvent.u.sMeta.ui8EventType = NS4_ME_SET_TEMPO;
+			teEvent.ui64Data = _ui32Tempo;
 			teEvent.dRealTime = 0.0;
 			return teEvent;
 		}
@@ -2369,6 +2396,17 @@ namespace ns4 {
 		std::vector<CTimeBlock>			CreateTimeline( const std::vector<NS4_TRACK_EVENT> &_vEvents, double _dMaxTime, uint64_t _ui64ToTick = uint64_t( -1 ) ) const;
 
 		/**
+		 * Goes over tempo changes and creates a timeline.
+		 *
+		 * \param _vInitialTimeLine The initial timeline.
+		 * \param _vEvents The events from which to process tempo events.
+		 * \param _dMaxTime The time after which to stop gathering events.
+		 * \param _ui64ToTick If not uint64_t( -1 ), the timeline is created up to the given tick rather than to _dMaxTime (and _dMaxTime is ignored).
+		 * \return Returns a series of time blocks that represent the full timeline of the events up to a given time.
+		 */
+		std::vector<CTimeBlock>			CreateTimeline( const std::vector<CTimeBlock> &_vInitialTimeLine, const std::vector<NS4_TRACK_EVENT> &_vEvents, double _dMaxTime, uint64_t _ui64ToTick = uint64_t( -1 ) ) const;
+
+		/**
 		 * Gathers global events into a track.
 		 *
 		 * \param _vTimeTable The timeline to use for timestamping.
@@ -2406,7 +2444,7 @@ namespace ns4 {
 		 * \param _tbTimeBlock An array of time blocks used to calculate the time of events.
 		 */
 		void							ApplyPostUnrollModifiers( std::vector<NS4_TRACK_EVENT> &_vTrack, size_t _stTrackIdx, uint32_t _ui32Mods, const NS4_MODIFIER * _pmMods,
-			const std::vector<CTimeBlock> &_tbTimeBlock, NS4_POST_UNROLL_SETTINGS &_pusSettings ) const;
+			std::vector<CTimeBlock> &_tbTimeBlock, NS4_POST_UNROLL_SETTINGS &_pusSettings ) const;
 
 		/**
 		 * Plays a sample with the given parameters.  Renders into the existing track, extending its length if necessary.
@@ -2530,6 +2568,16 @@ namespace ns4 {
 		 * \return Returns the value of the given control at the given tick.
 		 */
 		static double					ValueOfPitchBendAtTick( const std::vector<NS4_TRACK_EVENT> &_vEvents, uint64_t _ui64Tick, bool _bGoToEndOfTick );
+
+		/**
+		 * Gets the value of tempo at a given tick.
+		 *
+		 * \param _vEvents The track events to scan.
+		 * \param _ui64Tick The tick at which to return the control's value.
+		 * \param _bGoToEndOfTick If true, the value at the end of the tick is returned, otherwise the value at the start of the tick is returned.
+		 * \return Returns the tempo at the given tick.
+		 */
+		static uint32_t					ValueOfTempoAtTick( const std::vector<NS4_TRACK_EVENT> &_vEvents, uint64_t _ui64Tick, bool _bGoToEndOfTick );
 
 		/**
 		 * Creates an envelope block given an ADSR pair.

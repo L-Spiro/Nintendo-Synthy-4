@@ -16,10 +16,10 @@
 #define NS4_ENV_MULTIPLIER					(1.0 / 3.0)
 
 //#define NS4_OVERSAMPLING_BW					3500.0
-//#ifndef _DEBUG
+#ifndef _DEBUG
 #define NS4_OVERSAMPLING					(1 << 2)
 #define NS4_OVERSAMPLING_BW					5.0
-//#endif	// #ifndef _DEBUG
+#endif	// #ifndef _DEBUG
 
 
 
