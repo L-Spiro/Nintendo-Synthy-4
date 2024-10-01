@@ -22,7 +22,7 @@
 #define NS4_T2_FADE				NS4_FADE( 2.0, 0.25, 4.1 )
 #define NS4_T2_FILTER			NS4_LPF( 22047.0 / std::pow( 2.0, 4.5 ), 0.8, 2.0, NS4_FILTER_DB_TO_ORDER( 54 ) )
 
-#define NS4_JFG_FADE			NS4_FADE( 2.0, 0.1, 5.5 )
+#define NS4_JFG_FADE			NS4_FADE( 1.0, 3.0, 6.0 )
 #define NS4_JFG_FILTER			NS4_NO_LPF//NS4_LPF( 22018.0 / std::pow( 2.0, 2.5 ), 0.25, 1.5, 0 )
 
 #define NS4_BT_FADE				NS4_FADE( 1.0, 0.25, 5.5 )

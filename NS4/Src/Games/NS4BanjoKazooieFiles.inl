@@ -1017,11 +1017,11 @@
 		{ ns4::CMidiFile::NS4_ES_PRE_UNROLL, ns4::CMidiFile::NS4_E_MUTE_UNTAGGED_TRACKS },
 	   } },
 { u8"50 Banjo-Kazooie (U) (V1.0) 0000001C 00D394E8 Clanker's Cavern.mid", u8"Banjo-Kazooie (U) (V1.0) 0000001C 00D394E8 Clanker's Cavern.mid TrackParseDebug.txt", u8"Clanker’s Cavern (Deep Underwater Sans SFX)", 0,
-	2 + 1, {
+	3 + 1, {
 		{ ns4::CMidiFile::NS4_ES_PRE_UNROLL, ns4::CMidiFile::NS4_E_TAG_TRACK_BY_CHNL, 10 - 1 },
-		//{ ns4::CMidiFile::NS4_ES_PRE_UNROLL, ns4::CMidiFile::NS4_E_TAG_TRACK_BY_CHNL, 11 - 1 },
-		//{ ns4::CMidiFile::NS4_ES_PRE_UNROLL, ns4::CMidiFile::NS4_E_TAG_TRACK_BY_CHNL, 12 - 1 },
-		{ ns4::CMidiFile::NS4_ES_PRE_UNROLL, ns4::CMidiFile::NS4_E_TAG_TRACK_BY_CHNL, 13 - 1 },
+		{ ns4::CMidiFile::NS4_ES_PRE_UNROLL, ns4::CMidiFile::NS4_E_TAG_TRACK_BY_CHNL, 11 - 1 },
+		{ ns4::CMidiFile::NS4_ES_PRE_UNROLL, ns4::CMidiFile::NS4_E_TAG_TRACK_BY_CHNL, 12 - 1 },
+		//{ ns4::CMidiFile::NS4_ES_PRE_UNROLL, ns4::CMidiFile::NS4_E_TAG_TRACK_BY_CHNL, 13 - 1 },
 
 		{ ns4::CMidiFile::NS4_ES_PRE_UNROLL, ns4::CMidiFile::NS4_E_MUTE_UNTAGGED_TRACKS },
 	   } },
