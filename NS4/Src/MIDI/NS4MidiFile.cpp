@@ -1846,7 +1846,7 @@ namespace ns4 {
 							uint32_t ui32StartVal = ValueOfTempoAtTick( m_vTracks[0].vEvents, ui64Tick, bToEnd );
 							// Operand 2 is a duration, 1 is the final value.
 							
-							double dStep = 1.0 / 60.0;
+							double dStep = 1.0 / 30.0;
 							double dCurTime = GetTimeAtTick( ui64Tick );
 							uint32_t ui32LastValue = ui32StartVal;
 							for ( double J = 0; J < dDur; J += dStep ) {
@@ -4056,6 +4056,7 @@ namespace ns4 {
 	 * \param _ui32Mods The number of modifiers.
 	 * \param _pmMods The array of modifiers.
 	 * \param _tbTimeBlock An array of time blocks used to calculate the time of events.
+	 * \param _pusSettings Post-unroll settings.
 	 */
 	void CMidiFile::ApplyPostUnrollModifiers( std::vector<NS4_TRACK_EVENT> &_vTrack, size_t _stTrackIdx, uint32_t _ui32Mods, const NS4_MODIFIER * _pmMods,
 		std::vector<CTimeBlock> &_tbTimeBlock, NS4_POST_UNROLL_SETTINGS &_pusSettings ) const {
@@ -4239,53 +4240,73 @@ namespace ns4 {
 						bool bToEnd = bool( _pmMods[I].ui32Operand3 );
 						uint32_t ui32TargetVal = _pmMods[I].ui32Operand1;
 						double dDur = _pmMods[I].dOperandDouble0;
-						uint32_t ui32StartVal = ValueOfTempoAtTick( _vTrack, ui64Tick, bToEnd );
+						uint32_t ui32StartVal = ValueOfTempoAtTick( m_vTracks[0].vEvents, ui64Tick, bToEnd );
 						// Operand 2 is a duration, 1 is the final value.
 							
-						double dStep = 1.0 / 60.0;
+						double dStep = 1.0 / 30.0;
 						double dCurTime = GetTimeAtTick( ui64Tick );
 
-						//std::vector<CTimeBlock> vInitialTimeblock = CreateTimeline( 
+						std::vector<CTimeBlock> vInitialTimeblock = CopyTimeBlocksUpTo( _tbTimeBlock, ui64Tick );
 						uint32_t ui32LastValue = ui32StartVal;
-						for ( double J = 0; J < dDur; J += dStep ) {
+
+						for ( double J = 0.0; J < dDur; J += dStep ) {
 							double dThisTime = dCurTime + J;
 							double dVal = ((double( ui32TargetVal ) - ui32StartVal) * (J / dDur)) + ui32StartVal;
 							uint32_t ui32Val = uint32_t( std::round( dVal ) );
 							if ( ui32Val != ui32LastValue ) {
-								std::vector<CTimeBlock> vTimeLine = CreateTimeline( _vTrack, 0.0 );
-								if ( vTimeLine.size() == 1 ) {
-									vTimeLine = _tbTimeBlock;
-								}
-
-								auto aTempo = CreateTempo( ui32Val, GetTickAtTime( vTimeLine, dThisTime ) );
-								size_t sIdx = InsertEvent( _vTrack, aTempo, &vTimeLine ) + 1;
-								ui32LastValue = ui32Val;
-								vTimeLine = CreateTimeline( _vTrack, 0.0 );
-
-								// Every insert has to cause all timestamps to be updated.
-								size_t sState = 0;
-								uint64_t ui64State = 0;
-								for ( auto K = sIdx; K < _vTrack.size(); ++K ) {
-									_vTrack[K].dRealTime = GetTimeOfTick( vTimeLine, _vTrack[K].ui64Time, sState, ui64State );
-								}
+								uint64_t ui64ThisTick = GetTickAtTime( vInitialTimeblock, dThisTime );
+								vInitialTimeblock[vInitialTimeblock.size()-1].Tick( ui64ThisTick - ui64Tick );
+								double dRate = double( m_hHeader.ui16Division ) / (m_sSettings.i32TempoOverride ? m_sSettings.i32TempoOverride : ui32Val);
+								CTimeBlock tbTmp( dRate );
+								vInitialTimeblock.push_back( tbTmp );
+								ui64Tick = ui64ThisTick;
 							}
 						}
-
-						std::vector<CTimeBlock> vTimeLine = CreateTimeline( _vTrack, 0.0 );
-						if ( vTimeLine.size() == 1 ) {
-							vTimeLine = _tbTimeBlock;
-						}
-
-						auto aTempo = CreateTempo( ui32TargetVal, GetTickAtTime( vTimeLine, dCurTime + dDur ) );
-						size_t sIdx = InsertEvent( _vTrack, aTempo, &_tbTimeBlock ) + 1;
-						vTimeLine = CreateTimeline( _vTrack, 0.0 );
-						// Every insert has to cause all timestamps to be updated.
-						
+						_tbTimeBlock = vInitialTimeblock;
 						size_t sState = 0;
 						uint64_t ui64State = 0;
-						for ( auto K = sIdx; K < _vTrack.size(); ++K ) {
-							_vTrack[K].dRealTime = GetTimeOfTick( vTimeLine, _vTrack[K].ui64Time, sState, ui64State );
+						for ( auto K = 0; K < _vTrack.size(); ++K ) {
+							_vTrack[K].dRealTime = GetTimeOfTick( _tbTimeBlock, _vTrack[K].ui64Time, sState, ui64State );
 						}
+						//for ( double J = 0; J < dDur; J += dStep ) {
+						//	double dThisTime = dCurTime + J;
+						//	double dVal = ((double( ui32TargetVal ) - ui32StartVal) * (J / dDur)) + ui32StartVal;
+						//	uint32_t ui32Val = uint32_t( std::round( dVal ) );
+						//	if ( ui32Val != ui32LastValue ) {
+						//		std::vector<CTimeBlock> vTimeLine = CreateTimeline( _vTrack, 0.0 );
+						//		if ( vTimeLine.size() == 1 ) {
+						//			vTimeLine = _tbTimeBlock;
+						//		}
+
+						//		auto aTempo = CreateTempo( ui32Val, GetTickAtTime( vTimeLine, dThisTime ) );
+						//		size_t sIdx = InsertEvent( _vTrack, aTempo, &vTimeLine ) + 1;
+						//		ui32LastValue = ui32Val;
+						//		vTimeLine = CreateTimeline( _vTrack, 0.0 );
+
+						//		// Every insert has to cause all timestamps to be updated.
+						//		size_t sState = 0;
+						//		uint64_t ui64State = 0;
+						//		for ( auto K = sIdx; K < _vTrack.size(); ++K ) {
+						//			_vTrack[K].dRealTime = GetTimeOfTick( vTimeLine, _vTrack[K].ui64Time, sState, ui64State );
+						//		}
+						//	}
+						//}
+
+						//std::vector<CTimeBlock> vTimeLine = CreateTimeline( _vTrack, 0.0 );
+						//if ( vTimeLine.size() == 1 ) {
+						//	vTimeLine = _tbTimeBlock;
+						//}
+
+						//auto aTempo = CreateTempo( ui32TargetVal, GetTickAtTime( vTimeLine, dCurTime + dDur ) );
+						//size_t sIdx = InsertEvent( _vTrack, aTempo, &_tbTimeBlock ) + 1;
+						//vTimeLine = CreateTimeline( _vTrack, 0.0 );
+						//// Every insert has to cause all timestamps to be updated.
+						//
+						//size_t sState = 0;
+						//uint64_t ui64State = 0;
+						//for ( auto K = sIdx; K < _vTrack.size(); ++K ) {
+						//	_vTrack[K].dRealTime = GetTimeOfTick( vTimeLine, _vTrack[K].ui64Time, sState, ui64State );
+						//}
 						break;
 					}
 					case NS4_E_COPY_CONTROL_TO_TICK : {

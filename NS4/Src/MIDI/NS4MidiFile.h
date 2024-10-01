@@ -938,6 +938,26 @@ namespace ns4 {
 			return dRealTime;
 		}
 
+		static std::vector<CTimeBlock>	CopyTimeBlocksUpTo( const std::vector<CTimeBlock> &_vTimeline, uint64_t _ui64Tick ) {
+			std::vector<CTimeBlock> vRet;
+			uint64_t ui64TotalTicks = 0;
+			const CTimeBlock * ptbLastBlock = nullptr;
+			for ( size_t I = 0; I < _vTimeline.size(); ++I ) {
+				if ( _vTimeline[I].CurTick() == 0 && _vTimeline[I].GetStartingTime() == 0.0 && I + 1 < _vTimeline.size() ) { continue; }
+				if ( _vTimeline[I].CurTick() + ui64TotalTicks < _ui64Tick ) {
+					vRet.push_back( _vTimeline[I] );
+					ui64TotalTicks += _vTimeline[I].CurTick();
+				}
+				else {
+					CTimeBlock tbTmp( _vTimeline[I].GetRate(), _vTimeline[I].GetStartingTime() );
+					tbTmp.Tick( _ui64Tick - ui64TotalTicks );
+					vRet.push_back( tbTmp );
+					return vRet;
+				}
+			}
+			return vRet;
+		}
+
 		/**
 		 * Gets the best duration for the track given a loop count, extra duration, and fade-out time.
 		 *
@@ -2311,6 +2331,7 @@ namespace ns4 {
 		/** Post-unroll settings. */
 		struct NS4_POST_UNROLL_SETTINGS {
 			std::map<uint32_t, uint32_t>mInstReplacements;
+			//uint32_t					
 		};
 
 		/** MIDI events-walker. */
@@ -2442,6 +2463,7 @@ namespace ns4 {
 		 * \param _ui32Mods The number of modifiers.
 		 * \param _pmMods The array of modifiers.
 		 * \param _tbTimeBlock An array of time blocks used to calculate the time of events.
+		 * \param _pusSettings Post-unroll settings.
 		 */
 		void							ApplyPostUnrollModifiers( std::vector<NS4_TRACK_EVENT> &_vTrack, size_t _stTrackIdx, uint32_t _ui32Mods, const NS4_MODIFIER * _pmMods,
 			std::vector<CTimeBlock> &_tbTimeBlock, NS4_POST_UNROLL_SETTINGS &_pusSettings ) const;

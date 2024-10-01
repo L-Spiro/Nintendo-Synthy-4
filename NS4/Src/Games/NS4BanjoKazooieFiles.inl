@@ -12,7 +12,8 @@
 #define NS4_WET_FILTER_FREQ					8832.0//8832.0//(NS4_ORIG_HZ / std::pow( 2.0, 1.75 ))
 #define NS4_ENV_MULTIPLIER					(1.0 / 3.0)
 
-
+#define NS4_OVERSAMPLING					(1 << 2)
+#define NS4_OVERSAMPLING_BW					50.0
 
 { u8"X25 Banjo-Kazooie (U) (V1.0) 0000004D 00D588F0 Zoom In.mid", u8"Banjo-Kazooie (U) (V1.0) 0000004D 00D588F0 Whistle pitch bend up.mid TrackParseDebug.txt", u8"Zoom In", 0 },
 { u8"X22 Banjo-Kazooie (U) (V1.0) 00000032 00D4BD08 Nintendo and Rare Logos.mid", u8"Banjo-Kazooie (U) (V1.0) 00000032 00D4BD08 Nintendo and Rare logos.mid TrackParseDebug.txt", u8"Nintendo and Rare Logos", 0 },
@@ -747,7 +748,15 @@
 { u8"128 Banjo-Kazooie (U) (V1.0) 00000086 00D7BD20 Secret Fanfare 5 (Click Clock Wood).mid", u8"Banjo-Kazooie (U) (V1.0) 00000086 00D7BD20 Click Clock Wood - SNS Secrets Fanfare.mid TrackParseDebug.txt", u8"Secret Fanfare 5 (Click Clock Wood)", 0 },
 { u8"X15 Banjo-Kazooie (U) (V1.0) 00000094 00D80708 Bottles' Game Start 1.mid", u8"Banjo-Kazooie (U) (V1.0) 00000094 00D80708 Start of Bottles game #1.mid TrackParseDebug.txt", u8"Bottles’ Challenge (Start)", 0 },
 { u8"X16 Banjo-Kazooie (U) (V1.0) 00000097 00D808C8 Bottles' Game Start 2.mid", u8"Banjo-Kazooie (U) (V1.0) 00000097 00D808C8 Start of Bottles game #2.mid TrackParseDebug.txt", u8"Bottles’ Challenge (Scatter)", 0 },
-{ u8"17 Banjo-Kazooie (U) (V1.0) 00000093 00D7FD80 Bottles' Puzzle Challenge.mid", u8"Banjo-Kazooie (U) (V1.0) 00000093 00D7FD80 Bottles game music.mid TrackParseDebug.txt", u8"Bottles’ Challenge", 0 },
+{ u8"17 Banjo-Kazooie (U) (V1.0) 00000093 00D7FD80 Bottles' Puzzle Challenge.mid", u8"Banjo-Kazooie (U) (V1.0) 00000093 00D7FD80 Bottles game music.mid TrackParseDebug.txt", u8"Bottles’ Challenge", 0,
+	3,
+	{
+		{ ns4::CMidiFile::NS4_ES_PRE_UNROLL, ns4::CMidiFile::NS4_E_IGNORE_TEMPO_LOOPS },		// Must come before the tempo insertions.
+		//{ ns4::CMidiFile::NS4_ES_POST_UNROLL, ns4::CMidiFile::NS4_E_INSERT_TEMPO_LINE_TO, 0, 0, 329866, { 1, 1, 1, 0 }, { 0 }, 0, true, 100.0 },
+		{ ns4::CMidiFile::NS4_ES_PRE_UNROLL, ns4::CMidiFile::NS4_E_INSERT_TEMPO_LINE_TO, 0, 0, 329866, { 1, 1, 1, 0 }, { 0 }, 0, true, 100.0 },
+		//{ NS4_SET_FADE_START( 100.0 + 10.0 ) },
+	},
+ },
 { u8"X17 Banjo-Kazooie (U) (V1.0) 00000095 00D80848 Pick Up a Piece.mid", u8"Banjo-Kazooie (U) (V1.0) 00000095 00D80848 Pick a piece up.mid TrackParseDebug.txt", u8"Bottles’ Challenge (Pick Up Piece)", 0 },
 { u8"X18 Banjo-Kazooie (U) (V1.0) 00000096 00D80888 Put Down a Piece.mid", u8"Banjo-Kazooie (U) (V1.0) 00000096 00D80888 Put a piece down.mid TrackParseDebug.txt", u8"Bottles’ Challenge (Put Down Piece)", 0 },
 { u8"108 Banjo-Kazooie (U) (V1.0) 00000062 00D6D6E8 Gruntilda's Lair (Click Clock Wood).mid", u8"Banjo-Kazooie (U) (V1.0) 00000062 00D6D6E8 Grunty's Lair - Click Clock Wood and Furnace Fun.mid TrackParseDebug.txt", u8"Gruntilda’s Lair (Grunty’s Furnace Fun)", 0,
@@ -1008,10 +1017,10 @@
 		{ ns4::CMidiFile::NS4_ES_PRE_UNROLL, ns4::CMidiFile::NS4_E_MUTE_UNTAGGED_TRACKS },
 	   } },
 { u8"50 Banjo-Kazooie (U) (V1.0) 0000001C 00D394E8 Clanker's Cavern.mid", u8"Banjo-Kazooie (U) (V1.0) 0000001C 00D394E8 Clanker's Cavern.mid TrackParseDebug.txt", u8"Clanker’s Cavern (Deep Underwater Sans SFX)", 0,
-	4 + 1, {
+	2 + 1, {
 		{ ns4::CMidiFile::NS4_ES_PRE_UNROLL, ns4::CMidiFile::NS4_E_TAG_TRACK_BY_CHNL, 10 - 1 },
-		{ ns4::CMidiFile::NS4_ES_PRE_UNROLL, ns4::CMidiFile::NS4_E_TAG_TRACK_BY_CHNL, 11 - 1 },
-		{ ns4::CMidiFile::NS4_ES_PRE_UNROLL, ns4::CMidiFile::NS4_E_TAG_TRACK_BY_CHNL, 12 - 1 },
+		//{ ns4::CMidiFile::NS4_ES_PRE_UNROLL, ns4::CMidiFile::NS4_E_TAG_TRACK_BY_CHNL, 11 - 1 },
+		//{ ns4::CMidiFile::NS4_ES_PRE_UNROLL, ns4::CMidiFile::NS4_E_TAG_TRACK_BY_CHNL, 12 - 1 },
 		{ ns4::CMidiFile::NS4_ES_PRE_UNROLL, ns4::CMidiFile::NS4_E_TAG_TRACK_BY_CHNL, 13 - 1 },
 
 		{ ns4::CMidiFile::NS4_ES_PRE_UNROLL, ns4::CMidiFile::NS4_E_MUTE_UNTAGGED_TRACKS },
@@ -1373,6 +1382,13 @@
 
 		{ ns4::CMidiFile::NS4_ES_PRE_UNROLL, ns4::CMidiFile::NS4_E_MUTE_TAGGED_TRACKS },
 	   } },
+
+{ u8"112 Banjo-Kazooie (U) (V1.0) 00000045 00D53020 Zubba's Nest.mid", u8"Banjo-Kazooie (U) (V1.0) 00000045 00D53020 Click Clock Wood - Zubba's nest.mid TrackParseDebug.txt", u8"Zubbas’ Nest (Sans SFX)", 0,
+	1 + 1, {
+		{ ns4::CMidiFile::NS4_ES_PRE_UNROLL, ns4::CMidiFile::NS4_E_TAG_TRACK_BY_CHNL, 7 - 1 },
+
+		{ ns4::CMidiFile::NS4_ES_PRE_UNROLL, ns4::CMidiFile::NS4_E_MUTE_TAGGED_TRACKS },
+	   } },
 { u8"120 Banjo-Kazooie (U) (V1.0) 0000002E 00D48620 Click Clock Wood (Autumn).mid", u8"Banjo-Kazooie (U) (V1.0) 0000002E 00D48620 Click Clock Wood - Autumn.mid TrackParseDebug.txt", u8"Click Clock Wood (Autumn Sans SFX)", 0,
 	4 + 1, {
 		{ ns4::CMidiFile::NS4_ES_PRE_UNROLL, ns4::CMidiFile::NS4_E_TAG_TRACK_BY_CHNL, 11 - 1 },
@@ -1394,6 +1410,7 @@
 
 		{ ns4::CMidiFile::NS4_ES_PRE_UNROLL, ns4::CMidiFile::NS4_E_MUTE_TAGGED_TRACKS },
 	   } },
+{ u8"17 Banjo-Kazooie (U) (V1.0) 00000093 00D7FD80 Bottles' Puzzle Challenge.mid", u8"Banjo-Kazooie (U) (V1.0) 00000093 00D7FD80 Bottles game music.mid TrackParseDebug.txt", u8"Bottles’ Challenge (Sans Tempo)", 0 },
 { u8"108 Banjo-Kazooie (U) (V1.0) 00000062 00D6D6E8 Gruntilda's Lair (Click Clock Wood).mid", u8"Banjo-Kazooie (U) (V1.0) 00000062 00D6D6E8 Grunty's Lair - Click Clock Wood and Furnace Fun.mid TrackParseDebug.txt", u8"Gruntilda’s Lair (Grunty’s Furnace Fun Sans SFX)", 0,
 	3 + 1, {
 		{ ns4::CMidiFile::NS4_ES_PRE_UNROLL, ns4::CMidiFile::NS4_E_TAG_TRACK_BY_CHNL, 7 - 1 },
@@ -1446,6 +1463,13 @@
 		{ ns4::CMidiFile::NS4_ES_PRE_UNROLL, ns4::CMidiFile::NS4_E_TAG_TRACK_BY_CHNL, 13 - 1 },
 		{ ns4::CMidiFile::NS4_ES_PRE_UNROLL, ns4::CMidiFile::NS4_E_TAG_TRACK_BY_CHNL, 14 - 1 },
 		{ ns4::CMidiFile::NS4_ES_PRE_UNROLL, ns4::CMidiFile::NS4_E_TAG_TRACK_BY_CHNL, 15 - 1 },
+
+		{ ns4::CMidiFile::NS4_ES_PRE_UNROLL, ns4::CMidiFile::NS4_E_MUTE_TAGGED_TRACKS },
+	   } },
+{ u8"150 Banjo-Kazooie (U) (V1.0) 00000048 00D55C68 Beta 3 (Click Clock Wood).mid", u8"Banjo-Kazooie (U) (V1.0) 00000048 00D55C68 Click Clock Wood - Unused theme 2 (beta).mid TrackParseDebug.txt", u8"Click Clock Wood (Beta Sans SFX)", 0,
+	2 + 1, {
+		{ ns4::CMidiFile::NS4_ES_PRE_UNROLL, ns4::CMidiFile::NS4_E_TAG_TRACK_BY_CHNL, 5 - 1 },
+		{ ns4::CMidiFile::NS4_ES_PRE_UNROLL, ns4::CMidiFile::NS4_E_TAG_TRACK_BY_CHNL, 6 - 1 },
 
 		{ ns4::CMidiFile::NS4_ES_PRE_UNROLL, ns4::CMidiFile::NS4_E_MUTE_TAGGED_TRACKS },
 	   } },

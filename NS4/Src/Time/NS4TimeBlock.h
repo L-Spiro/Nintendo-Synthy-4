@@ -73,6 +73,13 @@ namespace ns4 {
 		double								GetRate() const { return m_dRate; }
 
 		/**
+		 * Gets the starting time.
+		 *
+		 * \return Returns the starting time.
+		 */
+		double								GetStartingTime() const { return m_dPrevAccum; }
+
+		/**
 		 * Advances the timer by 1 unit of time.
 		 */
 		void								Tick() { ++m_ui64Time; }
