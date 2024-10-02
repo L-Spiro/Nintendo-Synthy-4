@@ -1,6 +1,7 @@
 #pragma once
 
 #include "../Filter/NS4Butterworth.h"
+#include "../Filter/NS4IrConvolution.h"
 #include "../WavFile/NS4WavFile.h"
 #include "../WavLib/NS4WavLib.h"
 
@@ -28,18 +29,26 @@ namespace ns4 {
 			ns4::lwaudio aFiltered = ns4::CWavLib::AllocateSamples( uint16_t( _aInOut.size() ), _aInOut.size() ? uint32_t( _aInOut[0].size() ) : 0 );
 			if ( !aFiltered.size() ) { return false; }
 			if ( !aFiltered[0].size() ) { return false; }
-			const uint32_t uiOrder = 2;
-			ns4::CButterworthFilter bfFilter;
-			std::vector<ns4::CBiQuadFilter> vCoeffs;
-			double dGain = 1.0;
-			bfFilter.LoPass( _dNewSampleRate, 100.0, uiOrder, vCoeffs, dGain );
-			ns4::CBiQuadFilterChain bqfcChain;
-			if ( !bqfcChain.SetOrder( static_cast<uint32_t>(vCoeffs.size()) ) ) { return false; }
+
+			const double dBw = 50.0;
+			ns4::CIr iIr = ns4::CIrConvolution::CreateSincFilter( _dNewSampleRate, 100.0, dBw, ns4::CIrConvolution::SynthesizeHammingWindow );
 			for ( auto P = _aInOut.size(); P--; ) {
-				bqfcChain.MakeDefault();
-				bqfcChain.ProcessBiQuad( _aInOut[P], aFiltered[P], &vCoeffs[0] );
-				//ns4::CWavLib::ScaleSamples( aFiltered[P], dGain );
+				ns4::CIrConvolution::Convolve( _aInOut[P], aFiltered[P], iIr );
 			}
+
+
+			//const uint32_t uiOrder = 2;
+			//ns4::CButterworthFilter bfFilter;
+			//std::vector<ns4::CBiQuadFilter> vCoeffs;
+			//double dGain = 1.0;
+			//bfFilter.LoPass( _dNewSampleRate, 100.0, uiOrder, vCoeffs, dGain );
+			//ns4::CBiQuadFilterChain bqfcChain;
+			//if ( !bqfcChain.SetOrder( static_cast<uint32_t>(vCoeffs.size()) ) ) { return false; }
+			//for ( auto P = _aInOut.size(); P--; ) {
+			//	bqfcChain.MakeDefault();
+			//	bqfcChain.ProcessBiQuad( _aInOut[P], aFiltered[P], &vCoeffs[0] );
+			//	//ns4::CWavLib::ScaleSamples( aFiltered[P], dGain );
+			//}
 
 			for ( auto I = _ui64StartSample; true; ++I ) {
 				double dTime = (I - _ui64StartSample) / _dNewSampleRate;
@@ -53,10 +62,13 @@ namespace ns4 {
 				}
 				// Apply fade.
 				double dFadeVal = m_aFadeOut[0][stFadeIdx];
-				double dLFrac = std::sin( dFadeVal * NS4_HALF_PI );
-				double dRFrac = std::cos( dFadeVal * NS4_HALF_PI );
+				/*double dLFrac = std::sin( dFadeVal * NS4_HALF_PI );
+				double dRFrac = std::cos( dFadeVal * NS4_HALF_PI );*/
+				double dLFrac = dFadeVal;
+				double dRFrac = 1.0 - dFadeVal;
 				for ( auto J = _aInOut.size(); J--; ) {
-					_aInOut[J][I] = ((_aInOut[J][I] * dLFrac) + (aFiltered[J][I] * dRFrac * dGain)) * dFadeVal;
+					//_aInOut[J][I] = ((_aInOut[J][I] * dLFrac) + (aFiltered[J][I] * dRFrac * dGain)) * dFadeVal;
+					_aInOut[J][I] = ((_aInOut[J][I] * dLFrac) + (aFiltered[J][I] * dRFrac)) * dFadeVal;
 					//_aInOut[J][I] *= dFadeVal;
 				}
 			}

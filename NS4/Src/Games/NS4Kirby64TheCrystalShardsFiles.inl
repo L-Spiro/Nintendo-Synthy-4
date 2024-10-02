@@ -7,7 +7,7 @@
 #define NS4_REVERB							ns4::CReverb::NS4_T_KIRBY_64_THE_CRYSTAL_SHARDS_0
 #define NS4_ORIG_HZ							31995
 #define NS4_CURVE							40.0
-#define NS4_OUT_DIRECTORY					u8"T:\\N64OST\\Kirby 64 The Crystal Shards\\"
+#define NS4_OUT_DIRECTORY					u8"C:\\N64OST\\Kirby 64 The Crystal Shards\\"
 #define NS4_OUT_DIRECTORY_NUMBERS			NS4_OUT_DIRECTORY u8"Numbered\\"
 #define NS4_DEFAULT_PAN						0x3F
 #define NS4_PROG_CHANGE_SETS_VOL_PAN		false
@@ -28,6 +28,9 @@
 #define NS4_REL_MULTIPLIER					(1.0)
 #define NS4_ENVELOPE_VOL_CURVE				20.0
 #define NS4_ENVELOPE_POINT_CURVE			40.0
+
+#define NS4_OVERSAMPLING					(1 << 2)
+#define NS4_OVERSAMPLING_BW					50.0
 
 
 { u8"Kirby 64 - The Crystal Shards (U) 0000002D 002968E0.mid", u8"Kirby 64 - The Crystal Shards (U) 0000002D 002968E0.mid TrackParseDebug.txt", u8"Opening", 0 },

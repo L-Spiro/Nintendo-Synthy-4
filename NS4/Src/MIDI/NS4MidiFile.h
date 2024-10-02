@@ -215,6 +215,7 @@ namespace ns4 {
 
 			NS4_E_SET_TEMPO,									/**< Inserts a tempo-change event at the given tick.  Only useful in the pre-unroll or post-supplemental stages. */
 			NS4_E_SET_TEMPO_AT_TIME,							/**< Inserts a tempo-change event (dOperandDouble0) at the given time in seconds (dOperandDouble1).  Only useful in the pre-unroll or post-supplemental stages. */
+			NS4_E_SET_TEMPO_BY_MPQN_AT_TICK,					/**< Inserts a tempo-change event by microseconds-per-quarter note (ui32Operand0) at the given tick.  Only useful in the pre-unroll or post-supplemental stages. */
 			NS4_E_SET_FORCE_TEMPO,								/**< Replaces all tempo events with the given tempo (dOperandDouble0) or inserts a tempo at tick=0 if no tempo events are found.  Only useful in the pre-unroll or post-supplemental stages. */
 			NS4_E_SET_CHANNEL_OFFSET,							/**< Sets a value added to the MIDI channel to get the final channel for a track.  This allows there to be more channels than 16.  Only useful in the pre-unroll. */
 			NS4_E_SET_INST,										/**< Inserts a program-change (ui32Operand0) at the given tick (tsTime0) for the given channel (ui32Channel). */

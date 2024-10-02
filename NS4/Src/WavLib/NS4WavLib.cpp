@@ -3,6 +3,7 @@
 #include "../Reverb/NS4ReverbTap.h"
 #include "../WavFile/NS4WavFile.h"
 #include <cassert>
+#include <immintrin.h>
 #include <map>
 #include <set>
 #include <string>
@@ -289,63 +290,116 @@ namespace ns4 {
 				_tSrcAndDst[i64Start] += _tAddMe[sSrcIdx] * _dScale;
 				++i64Start;
 			}
+			if ( i64Start < i64FinalSize ) {
+				if ( (reinterpret_cast<uintptr_t>(&_tSrcAndDst[i64Start]) & 0xF) != 0 && (reinterpret_cast<uintptr_t>(&_tAddMe[i64Start-_iOffset]) & 0xF) != 0 ) {
+					size_t sSrcIdx = size_t( i64Start - _iOffset );
+					_tSrcAndDst[i64Start] += _tAddMe[sSrcIdx] * _dScale;
+					++i64Start;
+				}
+			}
 			if ( _dScale == 1.0 ) {
-				__m128d dAddMe, dToMe, dRes;
-				if ( (reinterpret_cast<uintptr_t>(&_tSrcAndDst[i64Start]) & 0xF) == 0 && (reinterpret_cast<uintptr_t>(&_tAddMe[i64Start-_iOffset]) & 0xF) == 0 ) {
-					// 16-byte aliged, no scale.
-					for ( I = i64Start; I < i64FinalSize; I += 2 ) {
-						size_t sSrcIdx = size_t( I - _iOffset );
+				if ((reinterpret_cast<uintptr_t>(&_tSrcAndDst[i64Start]) & 0x3F) == 0 && (reinterpret_cast<uintptr_t>(&_tAddMe[i64Start - _iOffset]) & 0x3F) == 0) {
+					__m512d dAddMe, dToMe, dRes;
+					// 64-byte aligned, no scale (AVX-512).
+					for (I = i64Start; I <= i64FinalSize - 8; I += 8) {
+						size_t sSrcIdx = size_t(I - _iOffset);
 
-						dAddMe = _mm_load_pd( &_tAddMe[sSrcIdx] );
-						dToMe = _mm_load_pd( &_tSrcAndDst[size_t(I)] );
-						dRes = _mm_add_pd( dAddMe, dToMe );
-						_mm_store_pd( &_tSrcAndDst[I], dRes );
+						dAddMe = _mm512_load_pd(&_tAddMe[sSrcIdx]);
+						dToMe = _mm512_load_pd(&_tSrcAndDst[size_t(I)]);
+						dRes = _mm512_add_pd(dAddMe, dToMe);
+						_mm512_store_pd(&_tSrcAndDst[I], dRes);
 					}
 				}
 				else {
-					// Misaliged, no scale.
-					for ( I = i64Start; I < i64FinalSize; I += 2 ) {
-						size_t sSrcIdx = size_t( I - _iOffset );
+					__m512d dAddMe, dToMe, dRes;
+					// Misaligned, no scale (AVX-512).
+					for (I = i64Start; I <= i64FinalSize - 8; I += 8) {
+						size_t sSrcIdx = size_t(I - _iOffset);
 
-						dAddMe = _mm_loadu_pd( &_tAddMe[sSrcIdx] );
-						dToMe = _mm_loadu_pd( &_tSrcAndDst[size_t(I)] );
-						dRes = _mm_add_pd( dAddMe, dToMe );
-						_mm_storeu_pd( &_tSrcAndDst[I], dRes );
+						dAddMe = _mm512_loadu_pd(&_tAddMe[sSrcIdx]);
+						dToMe = _mm512_loadu_pd(&_tSrcAndDst[size_t(I)]);
+						dRes = _mm512_add_pd(dAddMe, dToMe);
+						_mm512_storeu_pd(&_tSrcAndDst[I], dRes);
 					}
+
+					//__m128d dAddMe, dToMe, dRes;
+					// if ( (reinterpret_cast<uintptr_t>(&_tSrcAndDst[i64Start]) & 0xF) == 0 && (reinterpret_cast<uintptr_t>(&_tAddMe[i64Start-_iOffset]) & 0xF) == 0 ) {
+					//	__m128d dAddMe, dToMe, dRes;
+					//	// 16-byte aliged, no scale.
+					//	for ( I = i64Start; I <= i64FinalSize - 2; I += 2 ) {
+					//		size_t sSrcIdx = size_t( I - _iOffset );
+
+					//		dAddMe = _mm_load_pd( &_tAddMe[sSrcIdx] );
+					//		dToMe = _mm_load_pd( &_tSrcAndDst[size_t(I)] );
+					//		dRes = _mm_add_pd( dAddMe, dToMe );
+					//		_mm_store_pd( &_tSrcAndDst[I], dRes );
+					//	}
+					//} else {
+					//// Misaliged, no scale.
+					//for ( I = i64Start; I <= i64FinalSize - 2; I += 2 ) {
+					//	size_t sSrcIdx = size_t( I - _iOffset );
+
+					//	dAddMe = _mm_loadu_pd( &_tAddMe[sSrcIdx] );
+					//	dToMe = _mm_loadu_pd( &_tSrcAndDst[size_t(I)] );
+					//	dRes = _mm_add_pd( dAddMe, dToMe );
+					//	_mm_storeu_pd( &_tSrcAndDst[I], dRes );
+					//}}
 				}
 			}
 			else {
-				__m128d dScale = _mm_load1_pd( &_dScale );
-				__m128d dAddMe, dToMe, dRes;
-				if ( (reinterpret_cast<uintptr_t>(&_tSrcAndDst[i64Start]) & 0xF) == 0 && (reinterpret_cast<uintptr_t>(&_tAddMe[i64Start-_iOffset]) & 0xF) == 0 ) {
-					// 16-byte aliged, scaled.
-					for ( I = i64Start; I < i64FinalSize; I += 2 ) {
-						size_t sSrcIdx = size_t( I - _iOffset );
+				__m512d dScale = _mm512_set1_pd(_dScale);
+				__m512d dAddMe, dToMe, dRes;
+				if ((reinterpret_cast<uintptr_t>(&_tSrcAndDst[i64Start]) & 0x3F) == 0 && (reinterpret_cast<uintptr_t>(&_tAddMe[i64Start - _iOffset]) & 0x3F) == 0) {
+					// 64-byte aligned, scaled (AVX-512).
+					for (I = i64Start; I <= i64FinalSize - 8; I += 8) {
+						size_t sSrcIdx = size_t(I - _iOffset);
 
-						dAddMe = _mm_load_pd( &_tAddMe[sSrcIdx] );
-						dAddMe = _mm_mul_pd( dAddMe, dScale );
-						dToMe = _mm_load_pd( &_tSrcAndDst[size_t(I)] );
-						dRes = _mm_add_pd( dAddMe, dToMe );
-						_mm_store_pd( &_tSrcAndDst[I], dRes );
+						dAddMe = _mm512_load_pd(&_tAddMe[sSrcIdx]);
+						dToMe = _mm512_load_pd(&_tSrcAndDst[size_t(I)]);
+						dRes = _mm512_fmadd_pd(dAddMe, dScale, dToMe);  // Fused multiply-add (AVX-512)
+						_mm512_store_pd(&_tSrcAndDst[I], dRes);
 					}
 				}
 				else {
-					// Misaligned, scaled.
-					for ( I = i64Start; I < i64FinalSize; I += 2 ) {
-						size_t sSrcIdx = size_t( I - _iOffset );
+					// Misaligned, scaled (AVX-512).
+					for (I = i64Start; I <= i64FinalSize - 8; I += 8) {
+						size_t sSrcIdx = size_t(I - _iOffset);
 
-						dAddMe = _mm_loadu_pd( &_tAddMe[sSrcIdx] );
-						dAddMe = _mm_mul_pd( dAddMe, dScale );
-						dToMe = _mm_loadu_pd( &_tSrcAndDst[size_t(I)] );
-						dRes = _mm_add_pd( dAddMe, dToMe );
-						_mm_storeu_pd( &_tSrcAndDst[I], dRes );
+						dAddMe = _mm512_loadu_pd(&_tAddMe[sSrcIdx]);
+						dToMe = _mm512_loadu_pd(&_tSrcAndDst[size_t(I)]);
+						dRes = _mm512_fmadd_pd(dAddMe, dScale, dToMe);  // Fused multiply-add (AVX-512)
+						_mm512_storeu_pd(&_tSrcAndDst[I], dRes);
 					}
 				}
+
+				//__m128d dScale = _mm_load1_pd( &_dScale );
+				//__m128d dAddMe, dToMe, dRes;
+				//if ( (reinterpret_cast<uintptr_t>(&_tSrcAndDst[i64Start]) & 0xF) == 0 && (reinterpret_cast<uintptr_t>(&_tAddMe[i64Start-_iOffset]) & 0xF) == 0 ) {
+				//	// 16-byte aliged, scaled.
+				//	for ( I = i64Start; I <= i64FinalSize - 2; I += 2 ) {
+				//		size_t sSrcIdx = size_t( I - _iOffset );
+
+				//		dAddMe = _mm_load_pd( &_tAddMe[sSrcIdx] );
+				//		dToMe = _mm_load_pd( &_tSrcAndDst[size_t(I)] );
+				//		dRes = _mm_fmadd_pd( dAddMe, dScale, dToMe );  // Fused multiply-add
+				//		_mm_store_pd( &_tSrcAndDst[I], dRes );
+				//	}
+				//}
+				//else {
+				//	// Misaligned, scaled.
+				//	for ( I = i64Start; I <= i64FinalSize - 2; I += 2 ) {
+				//		size_t sSrcIdx = size_t( I - _iOffset );
+
+				//		dAddMe = _mm_loadu_pd( &_tAddMe[sSrcIdx] );
+				//		dToMe = _mm_loadu_pd( &_tSrcAndDst[size_t(I)] );
+				//		dRes = _mm_fmadd_pd( dAddMe, dScale, dToMe );  // Fused multiply-add
+				//		_mm_storeu_pd( &_tSrcAndDst[I], dRes );
+				//	}
+				//}
 			}
-			if ( I > i64FinalSize ) {
-				I -= 2;
+			while ( I < i64FinalSize ) {
 				size_t sSrcIdx = size_t( I - _iOffset );
-				_tSrcAndDst[I] += _tAddMe[sSrcIdx] * _dScale;
+				_tSrcAndDst[I++] += _tAddMe[sSrcIdx] * _dScale;
 			}
 		}
 		

@@ -13,7 +13,8 @@
 #define NS4_ENV_MULTIPLIER					(1.0 / 3.0)
 
 #define NS4_OVERSAMPLING					(1 << 2)
-#define NS4_OVERSAMPLING_BW					50.0
+#define NS4_OVERSAMPLING_BW					NS4_ORIG_HZ / 2.0
+#define NS4_ANTI_ALIASING_LEVEL				2
 
 { u8"X25 Banjo-Kazooie (U) (V1.0) 0000004D 00D588F0 Zoom In.mid", u8"Banjo-Kazooie (U) (V1.0) 0000004D 00D588F0 Whistle pitch bend up.mid TrackParseDebug.txt", u8"Zoom In", 0 },
 { u8"X22 Banjo-Kazooie (U) (V1.0) 00000032 00D4BD08 Nintendo and Rare Logos.mid", u8"Banjo-Kazooie (U) (V1.0) 00000032 00D4BD08 Nintendo and Rare logos.mid TrackParseDebug.txt", u8"Nintendo and Rare Logos", 0 },

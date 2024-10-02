@@ -106,6 +106,9 @@ namespace ns4 {
 		if ( m_dOversamplingBw == 0.0 ) { return true; }
 		
 		double dBw = min( m_dOversamplingBw, m_uiHz / 2.0 );
+		/*if ( _ui32Factor > (1 << 1) && m_dOversamplingBw > 50.0 ) {
+			dBw = min( 150.0, m_uiHz / 2.0 );
+		}*/
 		uint32_t ui32Extra = uint32_t( 4.0 / (dBw / m_uiHz) );
 		lwtrack tTmp1;
 		_uDst.tSamples = GetUnrolled( 2, ui32Extra * 2 );
@@ -119,11 +122,12 @@ namespace ns4 {
 		
 		double dFreq = m_uiHz;
 		double dFilterFreq = dFreq / 2.0;
-		double dGain = 1.0;
+		//double dGain = 1.0;
 		
+		double dNyFactor = 1.0;
 		_ui32Factor >>= 1;
 		while ( _ui32Factor ) {
-			CIr iIr = CIrConvolution::CreateSincFilter( dFreq * 2.0, dFilterFreq + dBw / 2.0, dBw, CIrConvolution::SynthesizeHammingWindow );
+			CIr iIr = CIrConvolution::CreateSincFilter( dFreq * 2.0, dFilterFreq * dNyFactor + dBw / 2.0, dBw, CIrConvolution::SynthesizeHammingWindow );
 
 			bool bFailed = true;
 			while ( bFailed ) {
@@ -153,6 +157,10 @@ namespace ns4 {
 				_uDst.dLoopStart += 1.0;
 				_uDst.dLoopEnd += 1.0;
 			}
+
+			//dBw = min( m_dOversamplingBw, dFreq / 2.0 );
+			dBw = min( 1050.0, m_uiHz / 2.0 );
+			dNyFactor = 1.0;
 		}
 		_uDst.ui32Hz = m_uiHz * _uDst.ui32Factor;
 		return true;

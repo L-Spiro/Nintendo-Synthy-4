@@ -2250,6 +2250,11 @@ namespace ns4 {
 						InsertEvent( m_vTracks[0].vEvents, CreateTempo( _pmMods[I].dOperandDouble0, uint32_t( ui64Tick ) ), nullptr );
 						break;
 					}
+					case NS4_E_SET_TEMPO_BY_MPQN_AT_TICK : {
+						uint64_t ui64Tick = CubaseToTick( _pmMods[I].tsTime0.ui32M, _pmMods[I].tsTime0.ui32B, _pmMods[I].tsTime0.ui32T, _pmMods[I].tsTime0.ui32S );
+						InsertEvent( m_vTracks[0].vEvents, CreateTempo( _pmMods[I].ui32Operand0, uint32_t( ui64Tick ) ), nullptr );
+						break;
+					}
 					case NS4_E_SET_FORCE_TEMPO : {
 						if ( m_vTracks.size() ) {
 							bool bFoundTempo = false;
