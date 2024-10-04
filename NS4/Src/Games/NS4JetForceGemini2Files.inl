@@ -16,8 +16,12 @@
 #define NS4_VIB_SCALE						2.0
 #define NS4_ENV_MULTIPLIER					(1.0 / 3.0)
 
+#define NS4_OUTPUT_HZ						44100
+#define NS4_OUTPUT_BITS						24
+
 #define NS4_OVERSAMPLING					(1 << 2)
-#define NS4_OVERSAMPLING_BW					50.0
+#define NS4_OVERSAMPLING_BW					NS4_ORIG_HZ / 2.0
+#define NS4_ANTI_ALIASING_LEVEL				2
 
 
 { u8"001 Jet Force Gemini (U) 00000055 01DECFF4 Logo Screens.mid", u8"Jet Force Gemini (U) 00000055 01DECFF4.mid TrackParseDebug.txt", u8"Logo Screens", 0, },
