@@ -22,6 +22,7 @@
 #define NS4_OVERSAMPLING					(1 << 2)
 #define NS4_OVERSAMPLING_BW					NS4_ORIG_HZ / 2.0
 #define NS4_ANTI_ALIASING_LEVEL				2
+#define NS4_ANTI_ALIASING_HZ				20000
 
 
 { u8"001 Jet Force Gemini (U) 00000055 01DECFF4 Logo Screens.mid", u8"Jet Force Gemini (U) 00000055 01DECFF4.mid TrackParseDebug.txt", u8"Logo Screens", 0, },

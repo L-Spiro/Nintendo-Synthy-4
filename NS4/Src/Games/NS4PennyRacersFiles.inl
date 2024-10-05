@@ -16,7 +16,9 @@
 #define NS4_ENVELOPE_POINT_CURVE			40.0
 
 #define NS4_OVERSAMPLING					(1 << 2)
-#define NS4_OVERSAMPLING_BW					50.0
+#define NS4_OVERSAMPLING_BW					22050.0 / 2.0
+#define NS4_ANTI_ALIASING_LEVEL				2
+#define NS4_ANTI_ALIASING_HZ				48000.0 / 2.0
 
 
 { u8"Penny Racers (U) 00000000 005759A4.mid", u8"Penny Racers (U) 00000000 005759A4.mid TrackParseDebug.txt", u8"Title Screen", 0 },

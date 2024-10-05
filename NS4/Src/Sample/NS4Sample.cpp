@@ -148,6 +148,11 @@ namespace ns4 {
 			ns4::CWavLib::ScaleSamples( _uDst.tSamples, 2.0 );
 
 
+			//dBw = min( m_dOversamplingBw, dFreq / 2.0 );
+			//dBw = min( 1050.0, m_uiHz / 2.0 );
+			dBw = dFreq / 10.0;
+			dNyFactor = 1.0;
+
 			_ui32Factor /= 2;
 			dFreq *= 2.0;
 			dBw *= 2.0;
@@ -158,10 +163,7 @@ namespace ns4 {
 				_uDst.dLoopEnd += 1.0;
 			}
 
-			//dBw = min( m_dOversamplingBw, dFreq / 2.0 );
-			//dBw = min( 1050.0, m_uiHz / 2.0 );
-			dBw = m_uiHz / 6.0;
-			dNyFactor = 1.0;
+			
 		}
 		_uDst.ui32Hz = m_uiHz * _uDst.ui32Factor;
 		return true;
