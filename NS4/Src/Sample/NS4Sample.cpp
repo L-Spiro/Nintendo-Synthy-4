@@ -150,12 +150,12 @@ namespace ns4 {
 
 			//dBw = min( m_dOversamplingBw, dFreq / 2.0 );
 			//dBw = min( 1050.0, m_uiHz / 2.0 );
-			dBw = dFreq / 10.0;
+			dBw = dFreq / 6.0;
 			dNyFactor = 1.0;
 
 			_ui32Factor /= 2;
 			dFreq *= 2.0;
-			dBw *= 2.0;
+			//dBw *= 2.0;
 			if ( m_uiType != CWavLib::NS4_LT_NONE ) {
 				_uDst.dLoopStart *= 2.0;
 				_uDst.dLoopEnd *= 2.0;

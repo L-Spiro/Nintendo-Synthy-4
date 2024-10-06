@@ -17,8 +17,18 @@
 #define NS4_ENV_MULTIPLIER					(1.0 / 3.0)
 
 
+//#ifndef _DEBUG
+//#define NS4_OUTPUT_HZ						44100
+//#define NS4_OUTPUT_BITS						24
+
+#define NS4_OVERSAMPLING					(1 << 2)
+#define NS4_OVERSAMPLING_BW					22050.0 / 2.0
+#define NS4_ANTI_ALIASING_LEVEL				2
+#define NS4_ANTI_ALIASING_HZ				20000.0
+//#endif	// #ifndef _DEBUG
 
 
+// 
 { u8"ZZ Banjo-Tooie (U) 0000001C 0133BD74 Zoom In.mid", u8"", u8"Zoom In", 0 },
 { u8"001 Banjo-Tooie (U) 0000006B 01381E0C Banjo's Theme.mid", u8"", u8"Banjo’s Theme", 0 },
 { u8"002 Banjo-Tooie (U) 00000055 013765C4 Game Select.mid", u8"", u8"Game Select", 0 },
@@ -149,12 +159,38 @@
 	   } },
 { u8"030 Banjo-Tooie (U) 0000006D 01384984 Heggy's Egg Shed.mid", u8"", u8"Heggy’s Egg Shed", 0 },
 { u8"028 Banjo-Tooie (U) 0000004C 01371F54 Jiggywiggy's Temple.mid", u8"", u8"Jiggywiggy’s Temple", 0 },
-{ u8"ZZ Banjo-Tooie (U) 00000022 0133CE7C Jiggywiggy's Challenge (Start).mid", u8"", u8"Jiggywiggy’s Challenge (Start)", 0 },
-{ u8"ZZ Banjo-Tooie (U) 00000025 0133D03C Jiggywiggy's Challenge (Scatter).mid", u8"", u8"Jiggywiggy’s Challenge (Scatter)", 0 },
-{ u8"029 Banjo-Tooie (U) 00000071 013876DC Jiggywiggy's Challenge.mid", u8"", u8"Jiggywiggy’s Challenge", 0 },
+
+{ u8"ZZ Banjo-Tooie (U) 00000022 0133CE7C Jiggywiggy's Challenge (Start).mid", u8"", u8"Jiggywiggy’s Challenge (Start)", 0,
+	3, {
+		{ NS4_STOP_AT_TIME( 76728.0 / NS4_ORIG_HZ ), },
+		{ NS4_SET_CURSOR_BY_TIME( 78045.0 / NS4_ORIG_HZ ), },
+		{ NS4_STORE_RESULT, },
+	},
+},
+{ u8"ZZ Banjo-Tooie (U) 00000025 0133D03C Jiggywiggy's Challenge (Scatter).mid", u8"", u8"Jiggywiggy’s Challenge (Scatter)", 0,
+	3, {
+		{ NS4_STOP_AT_TIME( 38426.0 / NS4_ORIG_HZ ), },
+		{ NS4_SET_CURSOR_BY_TIME( 38426.0 / NS4_ORIG_HZ ), },
+		{ NS4_STORE_RESULT, },
+	},
+},
+{ u8"029 Banjo-Tooie (U) 00000071 013876DC Jiggywiggy's Challenge.mid", u8"", u8"Jiggywiggy’s Challenge", 0,
+	2 + 3,
+	{
+		{ ns4::CMidiFile::NS4_ES_PRE_UNROLL, ns4::CMidiFile::NS4_E_IGNORE_TEMPO_LOOPS },		// Must come before the tempo insertions.
+		//{ ns4::CMidiFile::NS4_ES_POST_UNROLL, ns4::CMidiFile::NS4_E_INSERT_TEMPO_LINE_TO, 0, 0, 329866, { 1, 1, 1, 0 }, { 0 }, 0, true, 100.0 },
+		{ ns4::CMidiFile::NS4_ES_PRE_UNROLL, ns4::CMidiFile::NS4_E_INSERT_TEMPO_LINE_TO, 0, 0, 329866, { 1, 1, 1, 0 }, { 0 }, 0, true, 100.0 },
+
+		{ NS4_STOP_AT_TIME( 100.0 ), },
+		{ NS4_SET_CURSOR_BY_TIME( 100.0 ), },
+		{ NS4_STORE_RESULT, },
+	},
+ },
+ { u8"157 Banjo-Tooie (U) 00000016 0133AFE4 Time Trial Failure.mid", u8"", u8"Jiggywiggy’s Challenge (Full)", 0 },
+
 { u8"ZZ Banjo-Tooie (U) 00000023 0133CFBC Jiggywiggy's Challenge (Pick Up a Puzzle Piece).mid", u8"", u8"Jiggywiggy’s Challenge (Pick Up Piece)", 0 },
 { u8"ZZ Banjo-Tooie (U) 00000024 0133CFFC Jiggywiggy's Challenge (Put Down a Puzzle Piece).mid", u8"", u8"Jiggywiggy’s Challenge (Put Down Piece)", 0 },
-{ u8"157 Banjo-Tooie (U) 00000016 0133AFE4 Time Trial Failure.mid", u8"", u8"Failure…", 0 },
+
 { u8"156 Banjo-Tooie (U) 00000015 0133AF0C Time Trial Success.mid", u8"", u8"Success!", 0 },
 { u8"027 Banjo-Tooie (U) 00000046 01369FAC Isle o' Hags.mid", u8"", u8"Isle o’ Hags (Mayahem Temple)", 0,
 	5 + 1, {
@@ -970,12 +1006,26 @@
 	   } },
 { u8"134 Banjo-Tooie (U) 00000014 0133AE24 Dingpot Recharge.mid", u8"", u8"Dingpot Recharge", 0 },
 { u8"011 Banjo-Tooie (U) 00000042 013634BC Here Comes Trouble.mid", u8"", u8"Here Comes Trouble", 0 },
-{ u8"135 Banjo-Tooie (U) 00000068 01379E4C HAG 1.mid", u8"", u8"Vs Hag 1", 0 },
-{ u8"ZZ Banjo-Tooie (U) 0000008A 0138EDA4 Hag Hit 1.mid", u8"", u8"Hag Hit 1", 0 },
-{ u8"ZZ Banjo-Tooie (U) 0000008B 0138EE4C Hag Hit 2.mid", u8"", u8"Hag Hit 2", 0 },
-{ u8"ZZ Banjo-Tooie (U) 0000008C 0138EEF4 Hag Hit 3.mid", u8"", u8"Hag Hit 3", 0 },
-{ u8"ZZ Banjo-Tooie (U) 0000008D 0138EF9C Hag Hit 4.mid", u8"", u8"Hag Hit 4", 0 },
-{ u8"136 Banjo-Tooie (U) 0000006A 0138120C HAG 1 Destroyed.mid", u8"", u8"Hag 1 Destroyed", 0 },
+{ u8"135 Banjo-Tooie (U) 00000068 01379E4C HAG 1.mid", u8"", u8"Vs HAG 1", 0,
+	10 + 1, {
+		{ ns4::CMidiFile::NS4_ES_PRE_UNROLL, ns4::CMidiFile::NS4_E_SET_TEMPO_BY_MPQN_AT_TICK, 0, 844 * 384, 0, { 1, 1, 1, 0 }, },
+		{ ns4::CMidiFile::NS4_ES_PRE_UNROLL, ns4::CMidiFile::NS4_E_SET_TEMPO_BY_MPQN_AT_TICK, 0, 844 * 384, 0, { 3, 1, 1, 0 }, },
+		{ ns4::CMidiFile::NS4_ES_PRE_UNROLL, ns4::CMidiFile::NS4_E_SET_TEMPO_BY_MPQN_AT_TICK, 0, 868 * 384, 0, { 86, 1, 1, 0 }, },
+		{ ns4::CMidiFile::NS4_ES_PRE_UNROLL, ns4::CMidiFile::NS4_E_SET_TEMPO_BY_MPQN_AT_TICK, 0, 877 * 384, 0, { 86+3, 1, 1, 0 }, },
+		{ ns4::CMidiFile::NS4_ES_PRE_UNROLL, ns4::CMidiFile::NS4_E_SET_TEMPO_BY_MPQN_AT_TICK, 0, 908 * 384, 0, { 86+3+2, 1, 1, 0 }, },
+		{ ns4::CMidiFile::NS4_ES_PRE_UNROLL, ns4::CMidiFile::NS4_E_SET_TEMPO_BY_MPQN_AT_TICK, 0, 946 * 384, 0, { 86+3+2+1, 1, 1, 0 }, },
+		{ ns4::CMidiFile::NS4_ES_PRE_UNROLL, ns4::CMidiFile::NS4_E_SET_TEMPO_BY_MPQN_AT_TICK, 0, 919 * 384, 0, { 86+3+2+1+28, 1, 1, 0 }, },
+		{ ns4::CMidiFile::NS4_ES_PRE_UNROLL, ns4::CMidiFile::NS4_E_SET_TEMPO_BY_MPQN_AT_TICK, 0, 892 * 384, 0, { 86+3+2+1+28, 2, 1, 0 }, },
+		{ ns4::CMidiFile::NS4_ES_PRE_UNROLL, ns4::CMidiFile::NS4_E_SET_TEMPO_BY_MPQN_AT_TICK, 0, 868 * 384, 0, { 86+3+2+1+28+15, 1, 1, 0 }, },
+		{ ns4::CMidiFile::NS4_ES_PRE_UNROLL, ns4::CMidiFile::NS4_E_SET_TEMPO_BY_MPQN_AT_TICK, 0, 844 * 384, 0, { 86+3+2+1+28+15+2, 1, 1, 0 }, },
+
+		{ ns4::CMidiFile::NS4_ES_PRE_UNROLL, ns4::CMidiFile::NS4_E_SET_LOOP_POINTS, 0, 0, 0, { 3, 1, 1, 0 }, { 148, 1, 1, 0 } },
+	   } },
+{ u8"ZZ Banjo-Tooie (U) 0000008A 0138EDA4 Hag Hit 1.mid", u8"", u8"HAG Hit 1", 0 },
+{ u8"ZZ Banjo-Tooie (U) 0000008B 0138EE4C Hag Hit 2.mid", u8"", u8"HAG Hit 2", 0 },
+{ u8"ZZ Banjo-Tooie (U) 0000008C 0138EEF4 Hag Hit 3.mid", u8"", u8"HAG Hit 3", 0 },
+{ u8"ZZ Banjo-Tooie (U) 0000008D 0138EF9C Hag Hit 4.mid", u8"", u8"HAG Hit 4", 0 },
+{ u8"136 Banjo-Tooie (U) 0000006A 0138120C HAG 1 Destroyed.mid", u8"", u8"HAG 1 Destroyed", 0 },
 { u8"133 Banjo-Tooie (U) 00000086 0138D9BC So Much for the Party.mid", u8"", u8"So Much for the Party…", 0 },
 { u8"137 Banjo-Tooie (U) 00000087 0138DF9C Kickabout.mid", u8"", u8"The End", 0 },
 { u8"ZZ Banjo-Tooie (U) 00000007 01339834 Collect Extra Life (Banjo-Kazooie).mid", u8"", u8"Beta Collect Extra Life (From Banjo-Kazooie)", 0 },
@@ -1014,6 +1064,14 @@
 		{ ns4::CMidiFile::NS4_ES_PRE_UNROLL, ns4::CMidiFile::NS4_E_MUTE_UNTAGGED_TRACKS },
 	   } },
 
+{ u8"048 Banjo-Tooie (U) 0000004D 0137243C Honey B's Hive.mid", u8"", u8"Honey B’s Hive (Sans SFX)", 0,
+	1 + 1, {
+		{ ns4::CMidiFile::NS4_ES_PRE_UNROLL, ns4::CMidiFile::NS4_E_TAG_TRACK_BY_IDX, 5 - 1 },
+
+		{ ns4::CMidiFile::NS4_ES_PRE_UNROLL, ns4::CMidiFile::NS4_E_MUTE_TAGGED_TRACKS },
+
+	   } },
+
 { u8"014 Banjo-Tooie (U) 00000047 0136E084 Jinjo Village.mid", u8"", u8"Jinjo Village (Sans SFX)", 0,
 	9 + 1, {
 		{ ns4::CMidiFile::NS4_ES_PRE_UNROLL, ns4::CMidiFile::NS4_E_TAG_TRACK_BY_IDX, 2 - 1 },
@@ -1029,6 +1087,8 @@
 		{ ns4::CMidiFile::NS4_ES_PRE_UNROLL, ns4::CMidiFile::NS4_E_MUTE_UNTAGGED_TRACKS },
 	   } },
 
+
+
 { u8"014 Banjo-Tooie (U) 00000047 0136E084 Jinjo Village.mid", u8"", u8"Jinjo Village (Drained Jingaling’s Palace Sans SFX)", 0,
 	1 + 1 + 1, {
 		{ ns4::CMidiFile::NS4_ES_PRE_UNROLL, ns4::CMidiFile::NS4_E_TAG_TRACK_BY_IDX, 12 - 1 },
@@ -1037,6 +1097,23 @@
 
 		{ ns4::CMidiFile::NS4_ES_PRE_UNROLL, ns4::CMidiFile::NS4_E_MUTE_UNTAGGED_TRACKS },
 	   } },
+
+{ u8"ZZ Banjo-Tooie (U) 00000022 0133CE7C Jiggywiggy's Challenge (Start).mid", u8"", u8"Jiggywiggy’s Challenge (Start)", 0 },
+{ u8"ZZ Banjo-Tooie (U) 00000025 0133D03C Jiggywiggy's Challenge (Scatter).mid", u8"", u8"Jiggywiggy’s Challenge (Scatter)", 0 },
+{ u8"029 Banjo-Tooie (U) 00000071 013876DC Jiggywiggy's Challenge.mid", u8"", u8"Jiggywiggy’s Challenge", 0,
+	3,
+	{
+		{ ns4::CMidiFile::NS4_ES_PRE_UNROLL, ns4::CMidiFile::NS4_E_IGNORE_TEMPO_LOOPS },		// Must come before the tempo insertions.
+		//{ ns4::CMidiFile::NS4_ES_POST_UNROLL, ns4::CMidiFile::NS4_E_INSERT_TEMPO_LINE_TO, 0, 0, 329866, { 1, 1, 1, 0 }, { 0 }, 0, true, 100.0 },
+		{ ns4::CMidiFile::NS4_ES_PRE_UNROLL, ns4::CMidiFile::NS4_E_INSERT_TEMPO_LINE_TO, 0, 0, 329866, { 1, 1, 1, 0 }, { 0 }, 0, true, 100.0 },
+		//{ NS4_SET_FADE_START( 100.0 + 10.0 ) },
+	},
+ },
+{ u8"157 Banjo-Tooie (U) 00000016 0133AFE4 Time Trial Failure.mid", u8"", u8"Failure…", 0 },
+
+
+ { u8"029 Banjo-Tooie (U) 00000071 013876DC Jiggywiggy's Challenge.mid", u8"", u8"Jiggywiggy’s Challenge (Sans Tempo)", 0 },
+
 { u8"032 Banjo-Tooie (U) 0000002B 01340C6C Mayahem Temple.mid", u8"", u8"Mayahem Temple (Sans SFX)", 0,
 	11 + 1, {
 		{ ns4::CMidiFile::NS4_ES_PRE_UNROLL, ns4::CMidiFile::NS4_E_TAG_TRACK_BY_IDX, 1 - 1 },
@@ -1107,7 +1184,13 @@
 		{ ns4::CMidiFile::NS4_ES_PRE_UNROLL, ns4::CMidiFile::NS4_E_SET_TEMPO_BY_MPQN, 0, 600000 },	// 100.000000
 	   } },
 
+{ u8"048 Banjo-Tooie (U) 0000004D 0137243C Honey B's Hive.mid", u8"", u8"Honey B’s Hive (Sans SFX)", 0,
+	1 + 1, {
+		{ ns4::CMidiFile::NS4_ES_PRE_UNROLL, ns4::CMidiFile::NS4_E_TAG_TRACK_BY_IDX, 5 - 1 },
 
+		{ ns4::CMidiFile::NS4_ES_PRE_UNROLL, ns4::CMidiFile::NS4_E_MUTE_TAGGED_TRACKS },
+
+	   } },
 	   //
 { u8"073 Banjo-Tooie (U) 00000036 0135433C Jolly Roger's Lagoon.mid", u8"", u8"Jolly Roger’s Lagoon (Sans SFX)", 0,
 	10 + 1, {
@@ -1157,6 +1240,37 @@
 		{ ns4::CMidiFile::NS4_ES_PRE_UNROLL, ns4::CMidiFile::NS4_E_TAG_TRACK_BY_IDX, 12 - 1 },
 
 		{ ns4::CMidiFile::NS4_ES_PRE_UNROLL, ns4::CMidiFile::NS4_E_MUTE_TAGGED_TRACKS },
+	   } },
+{ u8"096 Banjo-Tooie (U) 00000030 01349AE4 Grunty Industries.mid", u8"", u8"Grunty Industries (Inside the Factory Sans SFX)", 0,
+	7 + 1 + 1, {
+		{ ns4::CMidiFile::NS4_ES_PRE_UNROLL, ns4::CMidiFile::NS4_E_TAG_TRACK_BY_IDX, 5 - 1 },
+		//{ ns4::CMidiFile::NS4_ES_PRE_UNROLL, ns4::CMidiFile::NS4_E_TAG_TRACK_BY_IDX, 7 - 1 },
+		{ ns4::CMidiFile::NS4_ES_PRE_UNROLL, ns4::CMidiFile::NS4_E_TAG_TRACK_BY_IDX, 8 - 1 },
+		{ ns4::CMidiFile::NS4_ES_PRE_UNROLL, ns4::CMidiFile::NS4_E_TAG_TRACK_BY_IDX, 9 - 1 },
+		{ ns4::CMidiFile::NS4_ES_PRE_UNROLL, ns4::CMidiFile::NS4_E_TAG_TRACK_BY_IDX, 10 - 1 },
+		{ ns4::CMidiFile::NS4_ES_PRE_UNROLL, ns4::CMidiFile::NS4_E_TAG_TRACK_BY_IDX, 11 - 1 },
+		{ ns4::CMidiFile::NS4_ES_PRE_UNROLL, ns4::CMidiFile::NS4_E_TAG_TRACK_BY_IDX, 12 - 1 },
+		{ ns4::CMidiFile::NS4_ES_PRE_UNROLL, ns4::CMidiFile::NS4_E_TAG_TRACK_BY_IDX, 13 - 1 },
+
+		{ ns4::CMidiFile::NS4_ES_PRE_UNROLL, ns4::CMidiFile::NS4_E_MUTE_UNTAGGED_TRACKS },
+
+		{ ns4::CMidiFile::NS4_ES_PRE_UNROLL, ns4::CMidiFile::NS4_E_SET_TEMPO_BY_MPQN, 0, 437956 },	// 137.000064
+	   } },
+
+{ u8"096 Banjo-Tooie (U) 00000030 01349AE4 Grunty Industries.mid", u8"", u8"Grunty Industries (Basement & Warehouse Interiors Sans SFX)", 0,
+	7 + 1 + 1, {
+		//{ ns4::CMidiFile::NS4_ES_PRE_UNROLL, ns4::CMidiFile::NS4_E_TAG_TRACK_BY_IDX, 7 - 1 },
+		{ ns4::CMidiFile::NS4_ES_PRE_UNROLL, ns4::CMidiFile::NS4_E_TAG_TRACK_BY_IDX, 14 - 1 },
+		{ ns4::CMidiFile::NS4_ES_PRE_UNROLL, ns4::CMidiFile::NS4_E_TAG_TRACK_BY_IDX, 15 - 1 },
+		{ ns4::CMidiFile::NS4_ES_PRE_UNROLL, ns4::CMidiFile::NS4_E_TAG_TRACK_BY_IDX, 16 - 1 },
+		{ ns4::CMidiFile::NS4_ES_PRE_UNROLL, ns4::CMidiFile::NS4_E_TAG_TRACK_BY_IDX, 17 - 1 },
+		{ ns4::CMidiFile::NS4_ES_PRE_UNROLL, ns4::CMidiFile::NS4_E_TAG_TRACK_BY_IDX, 18 - 1 },
+		{ ns4::CMidiFile::NS4_ES_PRE_UNROLL, ns4::CMidiFile::NS4_E_TAG_TRACK_BY_IDX, 19 - 1 },
+		{ ns4::CMidiFile::NS4_ES_PRE_UNROLL, ns4::CMidiFile::NS4_E_TAG_TRACK_BY_IDX, 20 - 1 },
+
+		{ ns4::CMidiFile::NS4_ES_PRE_UNROLL, ns4::CMidiFile::NS4_E_MUTE_UNTAGGED_TRACKS },
+
+		{ ns4::CMidiFile::NS4_ES_PRE_UNROLL, ns4::CMidiFile::NS4_E_SET_TEMPO_BY_MPQN, 0, 461538 },	// 130.000130
 	   } },
 { u8"104 Banjo-Tooie (U) 00000032 013505C4 Hailfire Peaks (Lava Side).mid", u8"", u8"Hailfire Peaks (Lava Side Sans SFX)", 0,
 	9 + 1, {
@@ -1251,4 +1365,5 @@
 
 		{ ns4::CMidiFile::NS4_ES_PRE_UNROLL, ns4::CMidiFile::NS4_E_MUTE_UNTAGGED_TRACKS },
 	   } },
+{ u8"135 Banjo-Tooie (U) 00000068 01379E4C HAG 1.mid", u8"", u8"Vs HAG 1 (Xbox Version)", 0 },
 { u8"ZZ Banjo-Tooie (U) 0000001D 0133C0F4 Zoom Out.mid", u8"", u8"Zoom Out", 0 },

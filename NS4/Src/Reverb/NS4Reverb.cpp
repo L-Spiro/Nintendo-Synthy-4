@@ -1642,15 +1642,15 @@ namespace ns4 {
 		// Diddy Kong Racing.
 		{
 			NS4_TAPS( m_rtDkr0 ),
-			NS4_SQRT_0_5/*1.5159152011755279 / 2.0*/,												// dTapVol
+			NS4_SQRT_0_5/*1.5159152011755279 / 2.0*/,								// dTapVol
 			0,																		// i64TapOffset
-			NS4_FADE( 1.25, 1.75, 4.4 ),												// dTime
+			NS4_FADE( 1.0, 1.75, 4.4 ),												// dTime
 			NS4_LPF( 4736.0 / 2.0, 6240.0 / 22047.0, 2.0, NS4_FILTER_DB_TO_ORDER( 6 ) ),
 		},	// 2
 		// Super Smash Bros.
 		{
 			NS4_TAPS( m_rtSuperSmashBros0 ),
-			0.75201315300001459,													// dTapVol
+			NS4_SQRT_0_5,//0.75201315300001459,										// dTapVol
 			0,																		// i64TapOffset
 			NS4_NO_FADE,															// dTime
 			NS4_NO_LPF,
@@ -1658,7 +1658,7 @@ namespace ns4 {
 		// Super Robot Spirits.
 		{
 			NS4_TAPS( m_rtSuperRobotSpirits0 ),
-			NS4_SQRT_0_5,															// dTapVol
+			NS4_SQRT_0_5,															,															// dTapVol
 			0,																		// i64TapOffset
 			NS4_FADE( 2.0, 0.1, 5.0 ),												// dTime
 			NS4_LPF( 6144/*22047.0 / std::pow( 2.0, 2.5 )*/, 0.31786637637773846, 0.5, NS4_FILTER_DB_TO_ORDER( 6 ) ),
