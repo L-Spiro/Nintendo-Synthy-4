@@ -1063,5 +1063,8 @@
     <None Include="Src\Reverb\Taps\NS4ReverbConkersBadFurDayESTC0.inl">
       <Filter>Header Files\Reverb\Taps</Filter>
     </None>
+    <None Include="Src\Reverb\NS4RevEnum.inl">
+      <Filter>Header Files\Reverb</Filter>
+    </None>
   </ItemGroup>
 </Project>

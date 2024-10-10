@@ -7,7 +7,7 @@
 #define NS4_REVERB							ns4::CReverb::NS4_T_MARIO_PARTY_3_0
 #define NS4_ORIG_HZ							32006
 #define NS4_CURVE							40.0
-#define NS4_OUT_DIRECTORY					u8"T:\\N64OST\\Mario Party 3\\"
+#define NS4_OUT_DIRECTORY					u8"C:\\N64OST\\Mario Party 3\\"
 #define NS4_OUT_DIRECTORY_NUMBERS			NS4_OUT_DIRECTORY u8"Numbered\\"
 #define NS4_VIB_DELAY_SCALE					0.5
 //#define NS4_TREM_RATE_SCALE					0.5
@@ -19,7 +19,10 @@
 #define NS4_ENVELOPE_VOL_CURVE				20.0
 #define NS4_ENVELOPE_POINT_CURVE			20.0
 
-
+#define NS4_OVERSAMPLING					(1 << 2)
+#define NS4_OVERSAMPLING_BW					22050.0 / 2.0
+#define NS4_ANTI_ALIASING_LEVEL				2
+#define NS4_ANTI_ALIASING_HZ				20000.0
 
 { u8"Mario Party 3 (U) 00000001 01882530 Opening Demo.mid", u8"Mario Party 3 (U) 00000001 01882530 Opening Demo.mid TrackParseDebug.txt", u8"Opening Demo", 0x15 },
 { u8"Mario Party 3 (U) 00000002 01885CA0 Title Screen.mid", u8"Mario Party 3 (U) 00000002 01885CA0 Title Screen.mid TrackParseDebug.txt", u8"Title Screen", 0x2F },

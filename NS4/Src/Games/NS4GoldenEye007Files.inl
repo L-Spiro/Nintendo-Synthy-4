@@ -17,6 +17,10 @@
 #define NS4_ENVELOPE_VOL_CURVE				20.0
 #define NS4_ENVELOPE_POINT_CURVE			40.0
 
+#define NS4_OVERSAMPLING					(1 << 2)
+#define NS4_OVERSAMPLING_BW					22050.0 / 2.0
+#define NS4_ANTI_ALIASING_LEVEL				2
+#define NS4_ANTI_ALIASING_HZ				20000.0
 
 
 { u8"00 GoldenEye 007 (U) 00000002 00419B8C Main Theme.mid", u8"GoldenEye 007 (U) 00000002 00419B8C 007 Main Theme (Intro).mid TrackParseDebug.txt", u8"Main Theme", 0,

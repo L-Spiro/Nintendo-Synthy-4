@@ -7,10 +7,10 @@
 #define NS4_REVERB							ns4::CReverb::NS4_T_MARIO_PARTY_2_0
 #define NS4_ORIG_HZ							32006
 #define NS4_CURVE							40.0
-#define NS4_OUT_DIRECTORY					u8"T:\\N64OST\\Mario Party 2\\"
+#define NS4_OUT_DIRECTORY					u8"C:\\N64OST\\Mario Party 2\\"
 #define NS4_OUT_DIRECTORY_NUMBERS			NS4_OUT_DIRECTORY u8"Numbered\\"
 //#define NS4_PERC_INST						127
-#define NS4_WET_FILTER_FREQ					4587.0//(NS4_ORIG_HZ / std::pow( 2.0, 5.0 ))
+#define NS4_WET_FILTER_FREQ					4587.0 * 2.0//(NS4_ORIG_HZ / std::pow( 2.0, 5.0 ))
 //#define NS4_WET_FILTER_ORDER				NS4_FILTER_DB_TO_ORDER( 12 )
 //#define NS4_ENV_MULTIPLIER					(2.0)
 #define NS4_VIB_DELAY_SCALE					0.5
@@ -23,7 +23,10 @@
 #define NS4_ENVELOPE_POINT_CURVE			20.0
 
 
-
+#define NS4_OVERSAMPLING					(1 << 2)
+#define NS4_OVERSAMPLING_BW					22050.0 / 2.0
+#define NS4_ANTI_ALIASING_LEVEL				2
+#define NS4_ANTI_ALIASING_HZ				20000.0
 
 { u8"Mario Party 2 (U) 00000001 01750B30 Story One.mid", u8"Mario Party 2 (U) 00000001 01750B30 Story One.mid TrackParseDebug.txt", u8"Story One", 0x32 },
 { u8"Mario Party 2 (U) 00000040 01791FC8 Story Two.mid", u8"Mario Party 2 (U) 00000040 01791FC8 Story Two.mid TrackParseDebug.txt", u8"Story Two", 0x32 },

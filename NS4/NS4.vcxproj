@@ -402,6 +402,7 @@
     <None Include="Src\Games\NS4WormsArmageddonFiles.inl" />
     <None Include="Src\Games\NS4YoshisStoryFiles.inl" />
     <None Include="Src\Games\NS4ZoorFiles.inl" />
+    <None Include="Src\Reverb\NS4RevEnum.inl" />
     <None Include="Src\Reverb\Taps\NS4PerfectDark0.inl" />
     <None Include="Src\Reverb\Taps\NS4PerfectDark1.inl" />
     <None Include="Src\Reverb\Taps\NS4Reverb0.inl" />

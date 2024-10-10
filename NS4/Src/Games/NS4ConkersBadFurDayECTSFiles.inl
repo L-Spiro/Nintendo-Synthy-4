@@ -18,7 +18,9 @@
 //#define NS4_OVERSAMPLING_BW					3500.0
 #ifndef _DEBUG
 #define NS4_OVERSAMPLING					(1 << 2)
-#define NS4_OVERSAMPLING_BW					50.0
+#define NS4_OVERSAMPLING_BW					22050.0 / 2.0
+#define NS4_ANTI_ALIASING_LEVEL				2
+#define NS4_ANTI_ALIASING_HZ				20000.0
 #endif	// #ifndef _DEBUG
 
 

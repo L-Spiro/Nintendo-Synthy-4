@@ -28,6 +28,11 @@
 #define NS4_ENVELOPE_POINT_CURVE			40.0
 #define NS4_EXPONENTIAL_ENVELOPE			true
 
+#define NS4_OVERSAMPLING					(1 << 2)
+#define NS4_OVERSAMPLING_BW					22050.0 / 2.0
+#define NS4_ANTI_ALIASING_LEVEL				2
+#define NS4_ANTI_ALIASING_HZ				20000.0
+
 
 //{ u8"Mario Party (U) 00000000 017473B0 Two Beeps.mid", u8"Mario Party (U) 00000000 017473B0 Two Beeps.mid TrackParseDebug.txt", u8"Two Beeps", 0 },
 //{ u8"Mario Party (U) 00000001 01747420 Mario Party Theme.mid", u8"Mario Party (U) 00000001 01747420 Mario Party Theme.mid TrackParseDebug.txt", u8"Mario Party Theme", 0 },

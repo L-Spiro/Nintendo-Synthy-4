@@ -9,12 +9,17 @@
 #define NS4_ORIG_HZ							22018
 #define NS4_Q_MIN							10.0
 #define NS4_CURVE							20.0
-#define NS4_OUT_DIRECTORY					u8"T:\\N64OST\\Mickey’s Speedway USA\\"
+#define NS4_OUT_DIRECTORY					u8"C:\\N64OST\\Mickey’s Speedway USA (Surround)\\"
 #define NS4_OUT_DIRECTORY_NUMBERS			NS4_OUT_DIRECTORY u8"Numbered\\"
 #define NS4_WET_FILTER_FREQ					0.0//(NS4_ORIG_HZ / 2.0)
 #define NS4_VIB_SCALE						2.0
 #define NS4_ENV_MULTIPLIER					(1.0 / 3.0)
 
+
+#define NS4_OVERSAMPLING					(1 << 2)
+#define NS4_OVERSAMPLING_BW					22050.0 / 2.0
+#define NS4_ANTI_ALIASING_LEVEL				2
+#define NS4_ANTI_ALIASING_HZ				20000.0
 
 
 { u8"Mickey's Speedway USA (U) 00000001 016AC1A8.mid", u8"Mickey's Speedway USA (U) 00000001 016AC1A8.mid TrackParseDebug.txt", u8"Title", 0 },

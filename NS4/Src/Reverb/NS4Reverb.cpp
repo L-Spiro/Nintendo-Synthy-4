@@ -577,8 +577,8 @@ namespace ns4 {
 		NS4_TAPS( m_rtMickeysSpeedwayUsaRight0 ),
 		1.0,																		// dTapVol
 		0,																			// i64TapOffset
-		NS4_PD_FADE,																// dTime
-		NS4_PD_FILTER,																// dLpfFactor
+		NS4_FADE( 1.0, 3.0, 5.2 ),													// dTime
+		NS4_NO_LPF,																	// dLpfFactor
 		NS4_NO_DELAY,																// dDelayVol
 	};
 
@@ -1658,7 +1658,7 @@ namespace ns4 {
 		// Super Robot Spirits.
 		{
 			NS4_TAPS( m_rtSuperRobotSpirits0 ),
-			NS4_SQRT_0_5,															,															// dTapVol
+			NS4_SQRT_0_5,															// dTapVol
 			0,																		// i64TapOffset
 			NS4_FADE( 2.0, 0.1, 5.0 ),												// dTime
 			NS4_LPF( 6144/*22047.0 / std::pow( 2.0, 2.5 )*/, 0.31786637637773846, 0.5, NS4_FILTER_DB_TO_ORDER( 6 ) ),
@@ -1780,21 +1780,21 @@ namespace ns4 {
 			NS4_TAPS( m_rtMarioParty20 ),
 			NS4_SQRT_0_5,															// dTapVol
 			0,																		// i64TapOffset
-			NS4_FADE( 1.25, 0.1, 4.4 ),
+			NS4_FADE( 1.0, 2.25, 4.8 ),
 			NS4_LPF( 4587.0/*491.0*/, 7.83853027557332993, 2.0, 0 ),
 		},	// 17
 		// Mario Party 3.
 		{
 			NS4_TAPS( m_rtMarioParty30 ),
-			0.69976727928631954,													// dTapVol
+			NS4_SQRT_0_5/*0.69976727928631954*/,									// dTapVol
 			0,																		// i64TapOffset
-			NS4_FADE( 1.25, 0.1, 4.4 ),
+			NS4_FADE( 1.0, 2.25, 4.8 ),
 			NS4_NO_LPF,//NS4_LPF( 4587.0/*491.0*/, 7.83853027557332993, 2.0, 0 ),
 		},	// 18
 		// Armorines: Project S.W.A.R.M.
 		{
 			NS4_TAPS( m_rtArmorinesProjectSwarm0 ),
-			0.77813838174713468,													// dTapVol
+			NS4_SQRT_0_5/*0.77813838174713468*/,													// dTapVol
 			0,																		// i64TapOffset
 			NS4_NO_FADE,
 			NS4_LPF( 8191.0, 0.00725722320497120, 0.5, 0 )
@@ -1810,7 +1810,7 @@ namespace ns4 {
 		// Doraemon: Nobita to Mittsu no Seireiseki.
 		{
 			NS4_TAPS( m_rtDoraemonNobita0 ),
-			0.68472976205032099,													// dTapVol
+			NS4_SQRT_0_5/*0.68472976205032099*/,													// dTapVol
 			0,																		// i64TapOffset
 			NS4_NO_FADE,
 			NS4_NO_LPF,
@@ -1870,7 +1870,7 @@ namespace ns4 {
 		// Extreme-G 2.
 		{
 			NS4_TAPS( m_rtExtremeG20 ),
-			NS4_INV_QRT_0_5 / 2.0,													// dTapVol
+			NS4_SQRT_0_5,															// dTapVol
 			0,																		// i64TapOffset
 			NS4_NO_FADE,															// dTime
 			NS4_NO_LPF,																// dLpfFactor
@@ -1889,9 +1889,9 @@ namespace ns4 {
 		{
 #if 1
 			NS4_TAPS( m_rtMarioParty0 ),
-			1.4236377651161767 / 2.0,
+			NS4_SQRT_0_5,
 			0,
-			NS4_FADE( 2.0, 0.5, 5.0 ),												// dTime
+			NS4_FADE( 1.0, 1.5, 5.0 ),												// dTime
 			NS4_NO_LPF//32006.0 / std::pow( 2.0, 4.25 ), 2.5, 2.0, NS4_FILTER_DB_TO_ORDER( 18 ),	// dLpfFactor
 #else
 			NS4_ONLY_COMB( 1.0, 0 ),
@@ -1901,7 +1901,7 @@ namespace ns4 {
 		// War Gods.
 		{
 			NS4_TAPS( m_rtWarGods0 ),
-			0.69081873183139053,
+			NS4_SQRT_0_5,
 			0,
 			NS4_NO_FADE,//NS4_FADE( 2.0, 0.1, 2.0 ),												// dTime
 			NS4_NO_LPF,//22047.0 / std::pow( 2.0, 1.5 ), 1.0, 2.0, NS4_FILTER_DB_TO_ORDER( 6 ),	// dLpfFactor
@@ -1909,9 +1909,9 @@ namespace ns4 {
 		// WCW vs. NWO: World Tour.
 		{
 			NS4_TAPS( m_rtWcwVsNwoWorldTour0 ),
-			1.3119621551957195 / 2.0,
+			NS4_SQRT_0_5,
 			0,
-			NS4_FADE( 2.0, 0.1, 2.0 ),												// dTime
+			NS4_FADE( 1.0, 1.5, 3.0 ),												// dTime
 			22047.0 / std::pow( 2.0, 1.5 ), (4000.0 * 2.0) / 22047.0, 2.0, NS4_FILTER_DB_TO_ORDER( 6 ),	// dLpfFactor
 		},	// 32
 		// Wonder Project J2.
@@ -2088,8 +2088,8 @@ namespace ns4 {
 			NS4_TAPS( m_rtMickeysSpeedwayUsaLeft0 ),
 			NS4_SQRT_0_5,															// dTapVol
 			0,																		// i64TapOffset
-			NS4_PD_FADE,															// dTime
-			NS4_PD_FILTER,															// dLpfFactor
+			NS4_FADE( 1.0, 3.0, 5.2 ),												// dTime
+			NS4_NO_LPF,																// dLpfFactor
 			NS4_NO_DELAY,															// dDelayVol
 			&m_trMikeysRight0,														// ptrSepReverb
 		},	// 52
@@ -2524,8 +2524,8 @@ namespace ns4 {
 			NS4_TAPS( m_rtMickeysSpeedwayUsaLeft0 ),
 			NS4_SQRT_0_5,															// dTapVol
 			0,																		// i64TapOffset
-			NS4_PD_FADE,															// dTime
-			NS4_PD_FILTER,															// dLpfFactor
+			NS4_FADE( 1.0, 3.0, 5.2 ),												// dTime
+			NS4_NO_LPF,																// dLpfFactor
 			NS4_NO_DELAY,															// dDelayVol
 		},	// 125
 		// MRC: Multi-Racing Championship.

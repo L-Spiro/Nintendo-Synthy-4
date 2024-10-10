@@ -19,6 +19,11 @@
 #define NS4_PREFADE_DUR						1.0
 #define NS4_FADE_FILE						u8"C:\\My Projects\\Nintendo-Synthy-4\\Fades\\StudioFadeCD.wav"
 
+#define NS4_OVERSAMPLING					(1 << 2)
+#define NS4_OVERSAMPLING_BW					22050.0 / 2.0
+#define NS4_ANTI_ALIASING_LEVEL				2
+#define NS4_ANTI_ALIASING_HZ				20000.0
+
 
 
 { u8"00 GoldenEye 007 (U) 0000002C 004310CE Heartbeat.mid", u8"GoldenEye 007 (U) 0000002C 004310CE Opening Logos K.I.A. Heartbeat.mid TrackParseDebug.txt", u8"Heartbeat", 0,
