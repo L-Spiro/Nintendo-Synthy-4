@@ -114,7 +114,7 @@
 },
 { u8"Wave Race 64 (U) (V1.1) 0000000F 007AE8B0.mid", u8"Wave Race 64 (U) (V1.1) 0000000F 007AE8B0.mid TrackParseDebug.txt", u8"1st Place", 0x0C,
 	2, {
-		{ ns4::CMidiFile::NS4_ES_MASTER, ns4::CMidiFile::NS4_E_GLOBAL_SET_IGNORE_REVERB, 0, true },
+		//{ ns4::CMidiFile::NS4_ES_MASTER, ns4::CMidiFile::NS4_E_GLOBAL_SET_IGNORE_REVERB, 0, true },
 		{ ns4::CMidiFile::NS4_ES_MASTER, ns4::CMidiFile::NS4_E_GLOBAL_SET_GAME_HZ, NS4_DOUBLE_OP( 0, 26896.0 ) },
 	},
 },
@@ -157,7 +157,7 @@
 { u8"Wave Race 64 (U) (V1.1) 00000016 007AE8B0.mid", u8"Wave Race 64 (U) (V1.1) 00000016 007AE8B0.mid TrackParseDebug.txt", u8"Score", 0x21,
 	2, {
 		{ ns4::CMidiFile::NS4_ES_MASTER, ns4::CMidiFile::NS4_E_GLOBAL_SET_GAME_HZ, NS4_DOUBLE_OP( 0, 26896.0 ) },
-		{ ns4::CMidiFile::NS4_ES_MASTER, ns4::CMidiFile::NS4_E_GLOBAL_SET_IGNORE_REVERB, 0, true },
+		//{ ns4::CMidiFile::NS4_ES_MASTER, ns4::CMidiFile::NS4_E_GLOBAL_SET_IGNORE_REVERB, 0, true },
 	},
 },
 { u8"Wave Race 64 (U) (V1.1) 00000015 007AE8B0.mid", u8"Wave Race 64 (U) (V1.1) 00000015 007AE8B0.mid TrackParseDebug.txt", u8"VS Mode Goal", 0x12,

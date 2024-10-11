@@ -32,7 +32,7 @@
 #define NS4_OVERSAMPLING					(1 << 2)
 #define NS4_OVERSAMPLING_BW					22050.0 / 2.0
 #define NS4_ANTI_ALIASING_LEVEL				2
-#define NS4_ANTI_ALIASING_HZ				20000.0//48000.0 / 2.0 * 0.9375
+#define NS4_ANTI_ALIASING_HZ				20000.0
 
 
 { u8"Kirby 64 - The Crystal Shards (U) 0000002D 002968E0.mid", u8"Kirby 64 - The Crystal Shards (U) 0000002D 002968E0.mid TrackParseDebug.txt", u8"Opening", 0 },

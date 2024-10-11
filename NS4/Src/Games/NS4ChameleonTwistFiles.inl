@@ -18,6 +18,11 @@
 #define NS4_ENVELOPE_VOL_CURVE				20.0
 #define NS4_ENVELOPE_POINT_CURVE			40.0
 
+#define NS4_OVERSAMPLING					(1 << 2)
+#define NS4_OVERSAMPLING_BW					22050.0 / 2.0
+#define NS4_ANTI_ALIASING_LEVEL				2
+#define NS4_ANTI_ALIASING_HZ				20000.0
+
 { u8"Chameleon Twist (U) 00000019 002B45D4 Main Menu.mid", u8"Chameleon Twist (U) 00000019 002B45D4.mid TrackParseDebug.txt", u8"Main Menu", 0 },
 { u8"Chameleon Twist (U) 00000017 002B3B0C Character Select.mid", u8"Chameleon Twist (U) 00000017 002B3B0C.mid TrackParseDebug.txt", u8"Character Select", 0 },
 { u8"Chameleon Twist (U) 0000001B 002B5D40 Opening Story.mid", u8"Chameleon Twist (U) 0000001B 002B5D40.mid TrackParseDebug.txt", u8"Opening Story", 0 },

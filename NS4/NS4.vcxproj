@@ -402,6 +402,13 @@
     <None Include="Src\Games\NS4WormsArmageddonFiles.inl" />
     <None Include="Src\Games\NS4YoshisStoryFiles.inl" />
     <None Include="Src\Games\NS4ZoorFiles.inl" />
+    <None Include="Src\MIDI\NS4AdsrVibratoMappingEnum.inl" />
+    <None Include="Src\MIDI\NS4ControlsEnum.inl" />
+    <None Include="Src\MIDI\NS4EadPanTableEnum.inl" />
+    <None Include="Src\MIDI\NS4EventEnum.inl" />
+    <None Include="Src\MIDI\NS4EventStageEnum.inl" />
+    <None Include="Src\MIDI\NS4NoteRenderFlagsEnum.inl" />
+    <None Include="Src\MIDI\NS4SampleEventEnum.inl" />
     <None Include="Src\Reverb\NS4RevEnum.inl" />
     <None Include="Src\Reverb\Taps\NS4PerfectDark0.inl" />
     <None Include="Src\Reverb\Taps\NS4PerfectDark1.inl" />

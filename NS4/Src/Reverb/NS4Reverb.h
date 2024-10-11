@@ -646,6 +646,14 @@ namespace ns4 {
 		/** The comb filter delay lines for Conker's Bad Fur Day ESTC. */
 		static NS4_DELAY_N64					m_dn64ConkersBadFurDayECTS0[];
 
+		struct NS4_REVERB_ENUM {
+			const char *						pcName;
+			int32_t								i32Val;
+		};
+		/** Reverb enumerations. */
+		static std::vector<NS4_REVERB_ENUM>		m_vReverbEnums;
+
+
 		// == Functions.
 		/**
 		 * Creates a reverb track given a reverb source and a type of reverb to apply.

@@ -11,6 +11,55 @@
 
 namespace ns4 {
 
+	/** Controls enums. */
+	std::vector<CMidiFile::NS4_ENUM> CMidiFile::m_vControlsEnums = {
+#define NS4_ENUM( NAME, VAL )					{ # NAME, NAME }
+#include "NS4ControlsEnum.inl"
+#undef NS4_ENUM
+	};
+
+	/** Event stage enums. */
+	std::vector<CMidiFile::NS4_ENUM> CMidiFile::m_vEventStageEnums {
+#define NS4_ENUM( NAME )						{ # NAME, NAME }
+#include "NS4EventStageEnum.inl"
+#undef NS4_ENUM
+	};
+
+	/** Event  enums. */
+	std::vector<CMidiFile::NS4_ENUM> CMidiFile::m_vEventsEnums = {
+#define NS4_ENUM( NAME )						{ # NAME, NAME }
+#include "NS4EventEnum.inl"
+#undef NS4_ENUM
+	};
+
+	/** Sample event enums. */
+	std::vector<CMidiFile::NS4_ENUM> CMidiFile::m_vSampleEventEnums = {
+#define NS4_ENUM( NAME )						{ # NAME, NAME }
+#include "NS4SampleEventEnum.inl"
+#undef NS4_ENUM
+	};
+
+	/** Note-render flags enums. */
+	std::vector<CMidiFile::NS4_ENUM> CMidiFile::m_vNoteRenderFlagsEnums = {
+#define NS4_ENUM( NAME, VAL )					{ # NAME, NAME }
+#include "NS4NoteRenderFlagsEnum.inl"
+#undef NS4_ENUM
+	};
+
+	/** ADSR vibrato-mapping enums. */
+	std::vector<CMidiFile::NS4_ENUM> CMidiFile::m_vAdsrVibratoMappingEnums = {
+#define NS4_ENUM( NAME )						{ # NAME, NAME }
+#include "NS4AdsrVibratoMappingEnum.inl"
+#undef NS4_ENUM
+	};
+
+	/** EAD pan-table enums. */
+	std::vector<CMidiFile::NS4_ENUM> CMidiFile::m_vEadPanTableEnums = {
+#define NS4_ENUM( NAME )						{ # NAME, NAME }
+#include "NS4EadPanTableEnum.inl"
+#undef NS4_ENUM
+	};
+
 	/** Settings. */
 	CMidiFile::NS4_SETTINGS CMidiFile::m_sSettings = CMidiFile::NS4_SETTINGS();
 

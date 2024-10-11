@@ -28,6 +28,7 @@
 
 #include "Src/Fade/NS4Fade.h"
 #include "Src/Filter/NS4Butterworth.h"
+#include "Src/Filter/NS4IrConvolution.h"
 #include "Src/MIDI/NS4MidiFile.h"
 #include "Src/Reverb/NS4Reverb.h"
 #include "Src/Sample/NS4Sample.h"
@@ -50,9 +51,9 @@
 //#define NS4_PRINT_BEST_BANK
 
 #ifdef NS4_BULK
-//#define NS4_ONE_OFF										(124-1)
+//#define NS4_ONE_OFF										(28-1)
 //#define NS4_EXPORT_SOME
-//#define NS4_EPORT_FROM								(71-1)
+//#define NS4_EPORT_FROM								(29-1)
 #else
 #define NS4_FOLDER								u8"Super Smash Bros"
 #define NS4_FILE								u8"01 Super Smash Bros. (U) 00000021 00B413A4 Intro"
@@ -169,8 +170,9 @@ int oldmain() {
 		//ns4::CReverb::HarvestUnfilteredMonoTaps( u8"C:\\My Projects\\Nintendo-Synthy-4\\NS4\\Src\\Reverb\\Research\\ISBTN1 HD.wav", -1, 1, 0, 0, 0 );
 		//ns4::CReverb::HarvestUnfilteredMonoTaps( u8"C:\\My Projects\\Nintendo-Synthy-4\\NS4\\Src\\Reverb\\Research\\Psnap Thin.wav", 128, 1, 0, 0, 0,
 		//	u8"C:\\My Projects\\Nintendo-Synthy-4\\NS4\\Src\\Reverb\\Research\\Psnap Thick.wav", 1.0 );
-		ns4::CReverb::HarvestUnfilteredMonoTaps( u8"C:\\My Projects\\Nintendo-Synthy-4\\NS4\\Src\\Reverb\\Research\\T3SoO Thin.wav", 160, 1, 0, 1, 0,
-			u8"C:\\My Projects\\Nintendo-Synthy-4\\NS4\\Src\\Reverb\\Research\\T3SoO Thick.wav", 1.0, 2.0 );
+		/*ns4::CReverb::HarvestUnfilteredMonoTaps( u8"C:\\My Projects\\Nintendo-Synthy-4\\NS4\\Src\\Reverb\\Research\\T3SoO Thin.wav", 160, 1, 0, 1, 0,
+			u8"C:\\My Projects\\Nintendo-Synthy-4\\NS4\\Src\\Reverb\\Research\\T3SoO Thick.wav", 1.0, 2.0 );*/
+		ns4::CReverb::HarvestUnfilteredMonoTaps( u8"C:\\My Projects\\Nintendo-Synthy-4\\NS4\\Src\\Reverb\\Research\\CBFD ESTC HD.wav", 0, 1, 0, 0, 0 );
 	}
 	{
 		ns4::CWavLib::DetermineLevelsStereo( u8"C:\\My Projects\\Nintendo-Synthy-4\\NS4\\Src\\Reverb\\Research\\BM64 V 127 R 0 P 64.wav",
@@ -214,11 +216,11 @@ int oldmain() {
 
 #if 0
 	{
-		const uint32_t ui32SampRate = 22047;
+		const uint32_t ui32SampRate = 22018;
 		
 		ns4::lwaudio aWet = ns4::CWavLib::AllocateSamples( 1, ui32SampRate * 30 );
 		aWet[0][0] = 1.0;
-		ns4::lwaudio aAccum = ns4::CReverb::CreateReverb( ns4::CReverb::NS4_T_TUROK_3_SHADOWS_OF_OBLIVION_DELAY_0, aWet, ui32SampRate, ui32SampRate, 0.0, 0 );
+		ns4::lwaudio aAccum = ns4::CReverb::CreateReverb( ns4::CReverb::NS4_T_CONKERS_BAD_FUR_DAY_ECTS_DELAY_0, aWet, ui32SampRate, ui32SampRate, 0.0, 0 );
 		ns4::lwsample sFirst = aWet[0][0];
 		if ( sFirst == 0.0 ) {
 			::OutputDebugStringA( "Measles.\r\n" );
@@ -302,7 +304,7 @@ int oldmain() {
 	static const NS4_MIDI_FILE mfFiles[] = {
 #ifdef NS4_BULK
 //#include "Src/Games/NS4ConkersBadFurDayFiles.inl"
-#include "Src/Games/NS4ConkersBadFurDayECTSFiles.inl"
+//#include "Src/Games/NS4ConkersBadFurDayECTSFiles.inl"
 //#include "Src/Games/NS4DinosaurPlanetFiles.inl"
 //#include "Src/Games/NS4JetForceGeminiFiles.inl"
 //#include "Src/Games/NS4JetForceGemini2Files.inl"
@@ -313,7 +315,7 @@ int oldmain() {
 //#include "Src/Games/NS4GoldenEye007OstFiles.inl"
 //#include "Src/Games/NS4DiddyKongRacingFiles.inl"
 //#include "Src/Games/NS4SuperSmashBrosFiles.inl"
-//#include "Src/Games/NS4Kirby64TheCrystalShardsFiles.inl"
+#include "Src/Games/NS4Kirby64TheCrystalShardsFiles.inl"
 //#include "Src/Games/NS4SuperRobotSpiritsFiles.inl"
 //#include "Src/Games/NS4SuperRobotSpiritsOverSampledFiles.inl"
 //#include "Src/Games/NS4SuperRobotWars64Files.inl"
@@ -321,6 +323,7 @@ int oldmain() {
 //#include "Src/Games/NS4PennyRacersOverSamplingFiles.inl"
 //#include "Src/Games/NS4JinseiGame64Files.inl"
 //#include "Src/Games/NS4BanjoTooieFiles.inl"
+
 //#include "Src/Games/NS4DonkeyKong64Files.inl"
 //#include "Src/Games/NS4DonkeyKong64KioskFiles.inl"
 //#include "Src/Games/NS4Turok3ShadowOfOblivion.inl"
@@ -331,7 +334,7 @@ int oldmain() {
 //#include "Src/Games/NS4KillerInstinctGoldFiles.inl"
 //#include "Src/Games/NS4KillerInstinctGold2Files.inl"
 //#include "Src/Games/NS4Pilotwings64Files.inl"
-//#include "Src/Games/NS4PuyoPuyoSun64Files.//inl"
+//#include "Src/Games/NS4PuyoPuyoSun64Files.inl"
 //#include "Src/Games/NS4ExtremeGFiles.inl"
 //#include "Src/Games/NS4ExtremeGXG2Files.inl"
 //#include "Src/Games/NS4ChopperAttackFiles.inl"
@@ -539,7 +542,7 @@ int oldmain() {
 #else
 	const double dMasterRevLevel = 1.0;
 #endif
-	const double dMasterHighCutoff = 20000.0;
+	double dMasterHighCutoff = 20000.0;
 	const uint32_t uiMasterCutOffRate = 4;
 
 #ifdef LSN_MASTER_VOL
@@ -557,6 +560,15 @@ int oldmain() {
 #ifdef NS4_SND_BNK_FORCE_PERC_SAMPLE_RATE
 	ns4::CSoundBank::m_ui32ForcePercSampleRate = uint32_t( NS4_SND_BNK_FORCE_PERC_SAMPLE_RATE );
 #endif	// NS4_SND_BNK_FORCE_PERC_SAMPLE_RATE
+	double dAntiAliasLevel = 1.0;
+#ifdef NS4_ANTI_ALIASING_LEVEL
+	dAntiAliasLevel = max( double( std::round( NS4_ANTI_ALIASING_LEVEL ) ), 1.0 );
+#endif	// NS4_ANTI_ALIASING_LEVEL
+	double dAntiAliasingHz = 20000.0;
+#ifdef NS4_ANTI_ALIASING_HZ
+	dAntiAliasingHz = double( NS4_ANTI_ALIASING_HZ );
+	//dMasterHighCutoff = dAntiAliasingHz * 0.9375;
+#endif	// NS4_ANTI_ALIASING_HZ
 	//ns4::CMidiFile::m_sSettings.sfStandardSampleFunc = ns4::CWavLib::NS4_SF_6POINT_5THORDER_HERMITE_Z;
 	std::vector<ns4::CSoundBank> vBanks;
 	vBanks.resize( 0xFF );
@@ -615,6 +627,7 @@ int oldmain() {
 	for ( size_t F = stDoMe; F < sizeof( mfFiles ) / sizeof( mfFiles[0] ); ++F ) {
 #else
 	for ( size_t F = 0; F < sizeof( mfFiles ) / sizeof( mfFiles[0] ); ++F ) {
+		size_t stDoMe = 0;
 #endif	// NS4_ONE_OFF
 		mfMidi.Reset();
 		double dCursor = 0.0;
@@ -1024,7 +1037,7 @@ int oldmain() {
 			}
 		}
 #endif	// NS4_NO_FADE_FILE
-		troOptions.uiSampleRate = static_cast<uint32_t>(dNewSampleRate);
+		troOptions.uiSampleRate = static_cast<uint32_t>(dNewSampleRate * dAntiAliasLevel);
 		troOptions.uiMaxSamples = static_cast<uint32_t>(troOptions.uiSampleRate * dTime);
 		ns4::lwaudio aWet = ns4::CWavLib::AllocateSamples( ui32ReverbTracks, 0 );
 		double dStartTime = 0.0;
@@ -1070,9 +1083,9 @@ int oldmain() {
 				tReverb = static_cast<ns4::CReverb::NS4_TAPS>(pmThis->ui32Operand0);
 			}
 #ifdef NS4_ORIG_HZ
-			aAccum = ns4::CReverb::CreateReverb( tReverb, aWet, NS4_ORIG_HZ, static_cast<int32_t>(dNewSampleRate), dWetFilter, ui32WetFilterOrder );
+			aAccum = ns4::CReverb::CreateReverb( tReverb, aWet, NS4_ORIG_HZ, static_cast<int32_t>(dNewSampleRate * dAntiAliasLevel), dWetFilter, ui32WetFilterOrder );
 #else
-			aAccum = ns4::CReverb::CreateReverb( tReverb, aWet, 32006, static_cast<int32_t>(dNewSampleRate), dWetFilter, ui32WetFilterOrder );
+			aAccum = ns4::CReverb::CreateReverb( tReverb, aWet, 32006, static_cast<int32_t>(dNewSampleRate * dAntiAliasLevel), dWetFilter, ui32WetFilterOrder );
 #endif	// NS4_ORIG_HZ
 
 			double dWetScale = 1.0;//aTrack0.size() == 1 ? 0.70710678118654757273731092936941422522068023681640625 : 1.0;
@@ -1085,7 +1098,21 @@ int oldmain() {
 		aAccum.clear();
 		aWet.clear();
 
-
+		// Apply anti-aliasing.
+		if ( dAntiAliasLevel > 1.0 ) {
+			ns4::lwaudio aTmp;
+			aTmp.resize( aTrack0.size() );
+			for ( auto P = aTrack0.size(); P--; ) {
+				double dBw = ((dNewSampleRate / 2.0) - dAntiAliasingHz) / 1.0;
+				dBw = max( dBw, 50.0 );
+				ns4::CIr iIr = ns4::CIrConvolution::CreateSincFilter( std::floor( dNewSampleRate * dAntiAliasLevel ), min( dNewSampleRate /*+ dBw / 2.0*/, dAntiAliasingHz ), dBw, ns4::CIrConvolution::SynthesizeHammingWindow );
+				ns4::CIrConvolution::Convolve( aTrack0[P], aTmp[P], iIr );
+				aTrack0[P].resize( size_t( aTrack0[P].size() / dAntiAliasLevel ) );
+				for ( auto Q = aTrack0[P].size(); Q--; ) {
+					aTrack0[P][Q] = aTmp[P][size_t(Q*dAntiAliasLevel)];
+				}
+			}
+		}
 
 
 		{
@@ -1126,6 +1153,7 @@ int oldmain() {
 			const ns4::CMidiFile::NS4_MODIFIER * pmThis = ns4::CMidiFile::FindGlobalMod( ns4::CMidiFile::NS4_E_GLOBAL_STORE_RESULT_WITH_CURSOR_TIME, troOptions.ui32TotalMods, troOptions.pmMods );
 			if ( pmThis ) {
 				vStorage.push_back( { aTrack0, dCursor } );
+				++stDoMe;
 				continue;
 			}
 		}
@@ -1146,7 +1174,7 @@ int oldmain() {
 
 
 
-		{	// Filtering.
+		if ( dAntiAliasLevel == 1.0 ) {	// Filtering.
 			// Dampen reflections.
 			if ( dMasterHighCutoff <= ((dNewSampleRate / 2.0) - 200.0) && dMasterHighCutoff > 0.0 ) {
 				const uint32_t uiOrder = uiMasterCutOffRate;

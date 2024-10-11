@@ -1066,5 +1066,26 @@
     <None Include="Src\Reverb\NS4RevEnum.inl">
       <Filter>Header Files\Reverb</Filter>
     </None>
+    <None Include="Src\MIDI\NS4EventEnum.inl">
+      <Filter>Header Files\MIDI</Filter>
+    </None>
+    <None Include="Src\MIDI\NS4EventStageEnum.inl">
+      <Filter>Header Files\MIDI</Filter>
+    </None>
+    <None Include="Src\MIDI\NS4ControlsEnum.inl">
+      <Filter>Header Files\MIDI</Filter>
+    </None>
+    <None Include="Src\MIDI\NS4SampleEventEnum.inl">
+      <Filter>Header Files\MIDI</Filter>
+    </None>
+    <None Include="Src\MIDI\NS4NoteRenderFlagsEnum.inl">
+      <Filter>Header Files\MIDI</Filter>
+    </None>
+    <None Include="Src\MIDI\NS4AdsrVibratoMappingEnum.inl">
+      <Filter>Header Files\MIDI</Filter>
+    </None>
+    <None Include="Src\MIDI\NS4EadPanTableEnum.inl">
+      <Filter>Header Files\MIDI</Filter>
+    </None>
   </ItemGroup>
 </Project>

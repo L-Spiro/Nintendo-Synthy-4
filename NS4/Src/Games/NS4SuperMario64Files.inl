@@ -30,7 +30,10 @@
 #define NS4_ENVELOPE_POINT_CURVE			20.0
 //#define NS4_ENVELOPE_VOL_CURVE				20.0
 
-
+#define NS4_OVERSAMPLING					(1 << 2)
+#define NS4_OVERSAMPLING_BW					22050.0 / 2.0
+#define NS4_ANTI_ALIASING_LEVEL				2
+#define NS4_ANTI_ALIASING_HZ				20000.0
 
 { u8"Super Mario 64 (U) 00000002 007B0860 Game Over, Title Theme.mid", u8"Super Mario 64 (U) 00000002 007B0860 Game Over, Title Theme.mid TrackParseDebug.txt", u8"Title Theme", 0x11,
 	4, {

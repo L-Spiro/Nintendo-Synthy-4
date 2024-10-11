@@ -7,7 +7,7 @@
 #define NS4_REVERB							ns4::CReverb::NS4_T_SUPER_ROBOT_SPIRITS_0
 #define NS4_ORIG_HZ							22047
 #define NS4_CURVE							40.0
-#define NS4_OUT_DIRECTORY					u8"T:\\N64OST\\Super Robot Spirits\\"
+#define NS4_OUT_DIRECTORY					u8"C:\\N64OST\\Super Robot Spirits\\"
 #define NS4_OUT_DIRECTORY_NUMBERS			NS4_OUT_DIRECTORY u8"Numbered\\"
 #define NS4_WET_FILTER_FREQ					0.0//6144.0//(NS4_ORIG_HZ / 2.0)
 /*#define NS4_ENV_MULTIPLIER					(0.80)
@@ -21,7 +21,10 @@
 #define NS4_EXPONENTIAL_ENVELOPE			true
 //#define NS4_OVERSAMPLING_BW					(22050.0 / 2.0) / 2.0//4500.0
 
-
+#define NS4_OVERSAMPLING					(1 << 2)
+#define NS4_OVERSAMPLING_BW					22050.0 / 2.0
+#define NS4_ANTI_ALIASING_LEVEL				2
+#define NS4_ANTI_ALIASING_HZ				20000.0
 
 { u8"Super Robot Spirits (J) 0000000C 0020A89C.mid", u8"Super Robot Spirits (J) 0000000C 0020A89C.mid TrackParseDebug.txt", u8"Wish to the Stars “Spirits on Earth”", 0 },
 { u8"Super Robot Spirits (J) 00000005 001FB77C.mid", u8"Super Robot Spirits (J) 00000005 001FB77C.mid TrackParseDebug.txt", u8"Voltes V’s Song", 0 },

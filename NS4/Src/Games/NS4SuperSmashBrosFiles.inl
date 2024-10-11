@@ -22,7 +22,10 @@
 #define NS4_ENVELOPE_VOL_CURVE				20.0
 #define NS4_ENVELOPE_POINT_CURVE			40.0
 
-
+#define NS4_OVERSAMPLING					(1 << 2)
+#define NS4_OVERSAMPLING_BW					22050.0 / 2.0
+#define NS4_ANTI_ALIASING_LEVEL				2
+#define NS4_ANTI_ALIASING_HZ				20000.0
 
 { u8"01 Super Smash Bros. (U) 00000021 00B413A4 Intro.mid", u8"Super Smash Bros. (U) 00000021 00B413A4.mid TrackParseDebug.txt", u8"Opening", 0 },
 { u8"02 Super Smash Bros. (U) 00000022 00B4469C How to Play.mid", u8"Super Smash Bros. (U) 00000022 00B4469C.mid TrackParseDebug.txt", u8"How to Play", 0 },

@@ -16,8 +16,8 @@
 #define NS4_PD_FILTER			NS4_NO_LPF//NS4_LPF( 22018.0 / std::pow( 2.0, 2.5 ), 2.5, 2.0, 0 )
 #define NS4_DK64_FADE			NS4_FADE( 1.0, 0.25, 5.5 )
 #define NS4_DK64_FILTER			NS4_NO_LPF//NS4_LPF( 22047.0 / std::pow( 2.0, 1.5 ), 1.25, 2.75, 0 )
-#define NS4_KIG_FADE			NS4_FADE( 2.0, 0.1, 6.0 )
-#define NS4_KIG_FILTER			NS4_LPF( 4736.0 / 1.0, 0.3, 2.0, NS4_FILTER_DB_TO_ORDER( 6 ) )//NS4_LPF( 22047.0 / std::pow( 2.0, 4.25 ), 3.0, 1.0, 0 )
+#define NS4_KIG_FADE			NS4_FADE( 1.0, 3.0, 6.0 )
+#define NS4_KIG_FILTER			NS4_LPF( 4736.0 / 1.0, 6400.0 / 22047.0, 2.0, NS4_FILTER_DB_TO_ORDER( 6 ) )//NS4_LPF( 22047.0 / std::pow( 2.0, 4.25 ), 3.0, 1.0, 0 )
 
 #define NS4_T2_FADE				NS4_FADE( 2.0, 0.25, 4.1 )
 #define NS4_T2_FILTER			NS4_LPF( 22047.0 / std::pow( 2.0, 4.5 ), 0.8, 2.0, NS4_FILTER_DB_TO_ORDER( 54 ) )
@@ -35,6 +35,13 @@
 
 
 namespace ns4 {
+
+	/** Reverb enumerations. */
+	std::vector<CReverb::NS4_REVERB_ENUM> CReverb::m_vReverbEnums = {
+#define NS4_ENUM( NAME, VAL )					{ # NAME, NAME }
+#include "NS4RevEnum.inl"
+#undef NS4_ENUM
+	};
 
 	/** Taps harvested from Conker's Bad Fur Day. */
 	NS4_REVERB_TAP CReverb::m_rtCbfdLeft0[] = {
@@ -1660,7 +1667,7 @@ namespace ns4 {
 			NS4_TAPS( m_rtSuperRobotSpirits0 ),
 			NS4_SQRT_0_5,															// dTapVol
 			0,																		// i64TapOffset
-			NS4_FADE( 2.0, 0.1, 5.0 ),												// dTime
+			NS4_FADE( 1.0, 3.0, 5.0 ),												// dTime
 			NS4_LPF( 6144/*22047.0 / std::pow( 2.0, 2.5 )*/, 0.31786637637773846, 0.5, NS4_FILTER_DB_TO_ORDER( 6 ) ),
 		},	// 4
 		// Banjo-Tooie.
@@ -1715,7 +1722,7 @@ namespace ns4 {
 		// Killer Instinct Gold.
 		{
 			NS4_TAPS( m_rtKillerInstinctGold0 ),
-			1.4135305602907258 / 2.0,												// dTapVol
+			NS4_SQRT_0_5,															// dTapVol
 			0,																		// i64TapOffset
 			NS4_KIG_FADE,															// dTime
 			NS4_KIG_FILTER,															// dLpfFactor
