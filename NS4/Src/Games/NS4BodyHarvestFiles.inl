@@ -24,6 +24,11 @@
 #define NS4_ENVELOPE_VOL_CURVE				20.0
 #define NS4_ENVELOPE_POINT_CURVE			40.0*/
 
+#define NS4_OVERSAMPLING					(1 << 2)
+#define NS4_OVERSAMPLING_BW					22050.0 / 2.0
+#define NS4_ANTI_ALIASING_LEVEL				2
+#define NS4_ANTI_ALIASING_HZ				20000.0
+
 { u8"Body Harvest (U) 00000050 00BD8A50.mid", u8"Body Harvest (U) 00000050 00BD8A50.mid TrackParseDebug.txt", u8"Prologue", 0 },
 { u8"Body Harvest (U) 0000004E 00BD7810.mid", u8"Body Harvest (U) 0000004E 00BD7810.mid TrackParseDebug.txt", u8"Main Menu", 0 },
 { u8"Body Harvest (U) 00000053 00BDA710.mid", u8"Body Harvest (U) 00000053 00BDA710.mid TrackParseDebug.txt", u8"Inventory", 0 },

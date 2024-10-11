@@ -13,6 +13,10 @@
 #define NS4_VIB_SCALE						2.0
 #define NS4_ENV_MULTIPLIER					(1.0 / 3.0)
 
+#define NS4_OVERSAMPLING					(1 << 2)
+#define NS4_OVERSAMPLING_BW					22050.0 / 2.0
+#define NS4_ANTI_ALIASING_LEVEL				2
+#define NS4_ANTI_ALIASING_HZ				20000.0
 
 { u8"Donkey Kong 64 (U) 000000AD 001520AC Prelude.mid", u8"Donkey Kong 64 (U) 000000AD 001520AC.mid TrackParseDebug.txt", u8"Prelude", 0 },
 { u8"Donkey Kong 64 (U) 0000004A 00123098 Da Banana Bunch.mid", u8"Donkey Kong 64 (U) 0000004A 00123098.mid TrackParseDebug.txt", u8"Da Banana Bunch (DK Rap)", 0,

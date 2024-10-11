@@ -13,6 +13,11 @@
 //#define NS4_ENV_MULTIPLIER					(2.0)
 //#define NS4_MASTER_REVERB_VOLUME			(NS4_INV_QRT_0_5 * 5.0)
 
+#define NS4_OVERSAMPLING					(1 << 2)
+#define NS4_OVERSAMPLING_BW					22050.0 / 2.0
+#define NS4_ANTI_ALIASING_LEVEL				2
+#define NS4_ANTI_ALIASING_HZ				20000.0
+
 
 { u8"Pokemon Snap (U) 00000019 00AFA96C.mid", u8"Pokemon Snap (U) 00000019 00AFA96C.mid TrackParseDebug.txt", u8"A Mysterious Sighting", 0 },
 { u8"Pokemon Snap (U) 00000017 00AF9C5C.mid", u8"Pokemon Snap (U) 00000017 00AF9C5C.mid TrackParseDebug.txt", u8"Title", 0 },

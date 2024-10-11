@@ -26,6 +26,11 @@
 //#define NS4_ENV_MULTIPLIER					(2.0)
 #define NS4_IGNORE_BANK_SELECT				true
 
+#define NS4_OVERSAMPLING					(1 << 2)
+#define NS4_OVERSAMPLING_BW					22050.0 / 2.0
+#define NS4_ANTI_ALIASING_LEVEL				2
+#define NS4_ANTI_ALIASING_HZ				20000.0
+
 { u8"Hey You, Pikachu! (U) 00000000 00B1422C.mid", u8"", u8"Title Screen", 0,
 	2, {
 		{ ns4::CMidiFile::NS4_ES_PRE_UNROLL, ns4::CMidiFile::NS4_E_SET_LOOP_START_BY_FINDING_CONTROL, uint32_t( -1 ), 102 },
