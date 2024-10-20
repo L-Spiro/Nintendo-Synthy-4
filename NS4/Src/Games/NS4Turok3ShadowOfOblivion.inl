@@ -28,6 +28,10 @@
 #define NS4_ENVELOPE_POINT_CURVE			40.0
 #define NS4_EXPONENTIAL_ENVELOPE			true
 
+#define NS4_OVERSAMPLING					(1 << 2)
+#define NS4_OVERSAMPLING_BW					22050.0 / 2.0
+#define NS4_ANTI_ALIASING_LEVEL				2
+#define NS4_ANTI_ALIASING_HZ				20000.0
 
 { u8"Turok 3 - Shadow of Oblivion (U) 0000003C 00B2F65C Opening.mid", u8"Turok 3 - Shadow of Oblivion (U) 0000003C 00B2F65C.mid TrackParseDebug.txt", u8"Opening", 0 },
 { u8"Turok 3 - Shadow of Oblivion (U) 00000000 00AEF774 Main Menu.mid", u8"Turok 3 - Shadow of Oblivion (U) 00000000 00AEF774.mid TrackParseDebug.txt", u8"Main Menu", 0 },

@@ -28,6 +28,8 @@
 #define NS4_CHN_REVERB_EX					0xD4
 #define NS4_TRK_SET_PITCH_RANGE				0xC2
 
+#define NS4_TRK_SET_PITCH_SCALE				0xA8
+
 #define NS4_TRK_ADSR						0x90
 #define NS4_MAKE_ADSR( RATE, START_LEVEL, ATTACK_RATE, ATTACK_LEVEL, DECAY_RATE, DECAY_LEVEL, RELEASE_RATE ) uint64_t(					\
 	(((RATE) & 0xFF) << 0) |																											\
@@ -422,6 +424,9 @@ namespace ns4 {
 
 			/** Specifies the default vibrato/tremolo levels.  1.0 means standard vibrato and tremolo are fully active by default, 0.0 means that they are off until activated by a control. */
 			double						dDefaultVibTremLevels = 1.0;
+
+			/** Specifies the global pitch-bend scale. */
+			double						dPitchBendScale = 1.0;
 
 			/** The tick at which to begin playing the MIDI file. */
 			uint64_t					ui64StartingTick = 0;
@@ -1649,6 +1654,7 @@ namespace ns4 {
 			uint8_t						ui8State[256];
 			double						dState[256];
 			double						dPitch;
+			double						dPitchScale;
 			double						dTempo;
 			mutable uint64_t			ui64StateBits[256/64];
 			
@@ -1685,6 +1691,7 @@ namespace ns4 {
 				ui8State[NS4_CHN_PAN_WEIGHT] = 128;
 				ui8State[NS4_CHN_LINEAR_VOL_SCALE] = 128;
 				ui8State[NS4_CHN_VIB_RATE] = 0x40;
+				ui8State[NS4_TRK_SET_PITCH_SCALE] = 0x40;
 				dState[NS4_TRACK_PITCH_SCALE] = 1.0;
 				if ( m_sSettings.ui8DryControl != 0 ) {
 					ui8State[m_sSettings.ui8DryControl] = m_sSettings.ui8DefaultDry;
@@ -1698,6 +1705,7 @@ namespace ns4 {
 				ui16PitchBendRange = 200;
 				dTempo = 120.0;
 				dPitch = 0.0;
+				dPitchScale = 1.0;
 				ui8Program = 0;
 				ui8ChannelAfterTouch = 0;
 				return (*this);

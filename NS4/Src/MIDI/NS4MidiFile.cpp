@@ -375,11 +375,17 @@ namespace ns4 {
 					}
 					else {
 						int32_t iTrack = GetEventChannel( teEvent );
-						if ( iTrack != -1 && i8Chan == -1 ) {
-							i8Chan = iTrack;
+						if ( IsTempo( teEvent ) && m_vTracks.size() != 1 ) {
+							// Force to track 0.
+							InsertEvent( m_vTracks[0].vEvents, teEvent, nullptr );
 						}
-						teEvent.i32ChanOffset = int32_t( (m_vTracks.size() - 1) / 16 * 16 );
-						tTrack.vEvents.push_back( teEvent );
+						else {
+							/*if ( iTrack != -1 && i8Chan == -1 ) {
+								i8Chan = iTrack;
+							}*/
+							teEvent.i32ChanOffset = int32_t( (m_vTracks.size() - 1) / 16 * 16 );
+							tTrack.vEvents.push_back( teEvent );
+						}
 					}
 				}
 			}
@@ -688,10 +694,31 @@ namespace ns4 {
 					// 00000927 Time: 00000000 PitchBend 40 (0) Length 872A (1836)
 					if ( std::sscanf( sLine.c_str(), "%X Time: %X PitchBend %X (%d) Length %X (%u)", &ui32Tmp0, &ui32Tmp1, &ui32Tmp2, &ui32Tmp3, &ui32Tmp4, &ui32Tmp5 ) == 6 ) {
 						if ( i32OffsetTrack > 0 && i32OffsetTrack < m_vTracks.size() ) {
-							NS4_TRACK_EVENT teEvent = CreatePitchBend( (int32_t( ui32Tmp3 ) * 128) / 8191.0, ui32Tmp1, uint8_t( i32Chan ) );
-							InsertEvent( m_vTracks[i32OffsetTrack].vEvents, teEvent, nullptr );
+							InsertEvent( m_vTracks[i32OffsetTrack].vEvents, NS4_TRK_SET_PITCH_SCALE, uint8_t( ui32Tmp3 ), i32Chan, ui32Tmp1, nullptr );
+							/*NS4_TRACK_EVENT teEvent = CreatePitchBend( (int32_t( ui32Tmp3 ) * 128) / 8191.0, ui32Tmp1, uint8_t( i32Chan ) );
+							InsertEvent( m_vTracks[i32OffsetTrack].vEvents, teEvent, nullptr );*/
 						}
 					}
+					// 00000B5A Time: 00000C00 Command: A8  Pitch Bend 02 (2)
+					if ( std::sscanf( sLine.c_str(), "%X Time: %X Command: %X  Pitch Bend %X (%u)", &ui32Tmp0, &ui32Tmp1, &ui32Tmp2, &ui32Tmp3, &ui32Tmp4 ) == 5 ) {
+						if ( i32OffsetTrack > 0 && i32OffsetTrack < m_vTracks.size() ) {
+							InsertEvent( m_vTracks[i32OffsetTrack].vEvents, NS4_TRK_SET_PITCH_SCALE, uint8_t( ui32Tmp3 ), i32Chan, ui32Tmp1, nullptr );
+							/*NS4_TRACK_EVENT teEvent = CreatePitchBend( (int32_t( ui32Tmp3 ) * 128) / 8191.0, ui32Tmp1, uint8_t( i32Chan ) );
+							InsertEvent( m_vTracks[i32OffsetTrack].vEvents, teEvent, nullptr );*/
+						}
+					}
+
+					// TEMP TMP
+					// 0000009B Time: 00000540 Command: 9C  Pan 8C (140)
+					//if ( std::sscanf( sLine.c_str(), "%X Time: %X Command: %X  Pan %X (%u)", &ui32Tmp0, &ui32Tmp1, &ui32Tmp2, &ui32Tmp3, &ui32Tmp4 ) == 5 ) {
+					//	if ( i32OffsetTrack > 0 && i32OffsetTrack < m_vTracks.size() ) {
+					//		InsertEvent( m_vTracks[i32OffsetTrack].vEvents, NS4_TRK_SET_PITCH_SCALE, uint8_t( ui32Tmp3 ), i32Chan, ui32Tmp1, nullptr );
+					//		/*NS4_TRACK_EVENT teEvent = CreatePitchBend( (int32_t( ui32Tmp3 ) * 128) / 8191.0, ui32Tmp1, uint8_t( i32Chan ) );
+					//		InsertEvent( m_vTracks[i32OffsetTrack].vEvents, teEvent, nullptr );*/
+					//	}
+					//}
+
+
 					// 00000D73 Time: 00000090 Command: A2  Effect 14 (20)
 					if ( std::sscanf( sLine.c_str(), "%X Time: %X Command: %X  Effect %X (%u)", &ui32Tmp0, &ui32Tmp1, &ui32Tmp2, &ui32Tmp3, &ui32Tmp4 ) == 5 ) {
 						if ( i32OffsetTrack > 0 && i32OffsetTrack < m_vTracks.size() ) {
@@ -963,7 +990,7 @@ namespace ns4 {
 
 		CLinearInterpolator liLinearVolScale( double( msState.ui8State[NS4_CHN_LINEAR_VOL_SCALE] ), 4.0 / m_sSettings.dGameFreq * _troOptions.uiSampleRate );
 		CLinearInterpolator liMasterVol( double( m_sSettings.ui8DefaultMasterVol ), 4.0 / m_sSettings.dGameFreq * _troOptions.uiSampleRate );
-		CLinearInterpolator liPitchBend( msState.dPitch, 16.0 / m_sSettings.dGameFreq * _troOptions.uiSampleRate );	// Not used.
+		CLinearInterpolator liPitchBend( msState.dPitch * msState.dPitchScale, /*16.0*/0.0 / m_sSettings.dGameFreq * _troOptions.uiSampleRate );
 		//bool bHasSetProg = false;
 		uint64_t ui64TickOfLastVolChange = uint64_t( -1 );
 		uint64_t ui64TickOfLastPanChange = uint64_t( -1 );
@@ -1222,7 +1249,7 @@ namespace ns4 {
 								int32_t iOffset = int8_t( nNote.ui8Note ) - int8_t( nNote.i32Base );
 								double dModQ;
 								double dFreq = LpfControlToFrequency( int8_t( msState.ui8State[m_sSettings.ui8LpfControl] ) + iOffset,
-									(msState.dPitch * (nNote.ui16PitchBendRange / 100.0)) +
+									(msState.dPitch * msState.dPitchScale * (nNote.ui16PitchBendRange / 100.0)) +
 										(int8_t( nNote.psSoundbankSample->ui8FineTune ) / 100.0),
 									m_sSettings.dLpfFreqMax, dModQ );
 								//double dFreqAlt = LpfControlToFrequency( uint8_t( msState.ui8State[m_ui8LpfControl] + iOffset ), m_dLpfFreqMax );
@@ -1331,6 +1358,11 @@ namespace ns4 {
 						}
 					}
 				}
+				else if ( IsControllerOfType( teEvent, NS4_TRK_SET_PITCH_SCALE ) ) {
+					liPitchBend.Set( msState.dPitch * msState.dPitchScale );
+					ui64TickOfLastBendChange = teEvent.ui64Time;
+					bUpdateLpf = true;
+				}
 				else if ( IsProgramChange( teEvent ) ) {
 					uint32_t ui32InstVol, ui32InstPan;
 					if ( _sbSoundBank.InstVolAndPan( ui32Bank, ui32Inst,
@@ -1368,7 +1400,7 @@ namespace ns4 {
 					ui64TickOfLastBendChange = uint64_t( -1 );
 				}
 				else if ( IsPitchBend( teEvent ) ) {
-					liPitchBend.Set( msState.dPitch );
+					liPitchBend.Set( msState.dPitch * msState.dPitchScale );
 					ui64TickOfLastBendChange = teEvent.ui64Time;
 					bUpdateLpf = true;
 				}
@@ -1486,7 +1518,7 @@ namespace ns4 {
 									//double dFreq = LpfControlToFrequency( int8_t( msState.ui8State[m_ui8LpfControl] ) + iOffset, m_dLpfFreqMax );
 									double dModQ;
 									double dFreq = LpfControlToFrequency( int8_t( msState.ui8State[m_sSettings.ui8LpfControl] ) + iOffset,
-										(msState.dPitch * (vNotes[J].psSoundbankSample->ui32BendRange / 100.0)) +
+										(msState.dPitch * msState.dPitchScale * (vNotes[J].psSoundbankSample->ui32BendRange / 100.0)) +
 											(int8_t( vNotes[J].psSoundbankSample->ui8FineTune ) / 100.0),
 										m_sSettings.dLpfFreqMax, dModQ );
 #ifdef NS4_USE_NEW_LPF
@@ -1513,8 +1545,8 @@ namespace ns4 {
 
 			for ( auto J = vNotes.size(); J--; ) {
 				vNotes[J].Tick( msState,
-					msState.dPitch
-					//liPitchBend.Value()
+					//msState.dPitch
+					liPitchBend.Value() * m_sSettings.dPitchBendScale
 				);
 				if ( vNotes[J].bActive || (vNotes[J].eEnvelope.InRelease() && vNotes[J].psSoundbankSample && !vNotes[J].eEnvelope.InfiniteRelease()) || vNotes[J].ui32DustSettle ) {
 					if ( vNotes[J].psSoundbankSample ) {
@@ -2017,8 +2049,16 @@ namespace ns4 {
 						for ( auto K = m_vTracks.size(); K--; ) {
 							int32_t iChan = GetTrackChannel( m_vTracks[K].vEvents );
 							if ( iChan != -1 ) {
-								uint64_t ui64Tick = CubaseToTick( _pmMods[I].tsTime0.ui32M, _pmMods[I].tsTime0.ui32B, _pmMods[I].tsTime0.ui32T, _pmMods[I].tsTime0.ui32S );
-								double dFadeStartTime = GetTimeAtTick( ui64Tick );
+								double dFadeStartTime;
+								uint64_t ui64Tick;
+								if ( _pmMods[I].tsTime0.ui32M == ~0 ) {
+									dFadeStartTime = _pmMods[I].tsTime0.ui32B * 60.0 + _pmMods[I].tsTime0.ui32T + (_pmMods[I].tsTime0.ui32S / 1000000.0);
+									ui64Tick = GetTickAtTime( dFadeStartTime );
+								}
+								else {
+									ui64Tick = CubaseToTick( _pmMods[I].tsTime0.ui32M, _pmMods[I].tsTime0.ui32B, _pmMods[I].tsTime0.ui32T, _pmMods[I].tsTime0.ui32S );
+									dFadeStartTime = GetTimeAtTick( ui64Tick );
+								}
 								bool bToEnd = bool( _pmMods[I].ui32Operand3 );
 								uint8_t ui8Control = uint8_t( _pmMods[I].ui32Operand0 );
 								uint8_t ui8TargetVal = uint8_t( (_pmMods[I].ui32Channel & (1 << iChan)) ?
@@ -4464,8 +4504,16 @@ namespace ns4 {
 					case NS4_E_INSERT_TIME_FADE_AT_TICK_TRACK_MASK : {
 						int32_t iChan = GetTrackChannel( _vTrack );
 						if ( iChan != -1 ) {
-							uint64_t ui64Tick = CubaseToTick( _pmMods[I].tsTime0.ui32M, _pmMods[I].tsTime0.ui32B, _pmMods[I].tsTime0.ui32T, _pmMods[I].tsTime0.ui32S );
-							double dFadeStartTime = GetTimeAtTick( ui64Tick );
+							double dFadeStartTime;
+							uint64_t ui64Tick;
+							if ( _pmMods[I].tsTime0.ui32M == ~0 ) {
+								dFadeStartTime = _pmMods[I].tsTime0.ui32B * 60.0 + _pmMods[I].tsTime0.ui32T + (_pmMods[I].tsTime0.ui32S / 1000000.0);
+								ui64Tick = GetTickAtTime( dFadeStartTime );
+							}
+							else {
+								ui64Tick = CubaseToTick( _pmMods[I].tsTime0.ui32M, _pmMods[I].tsTime0.ui32B, _pmMods[I].tsTime0.ui32T, _pmMods[I].tsTime0.ui32S );
+								dFadeStartTime = GetTimeAtTick( ui64Tick );
+							}
 							bool bToEnd = bool( _pmMods[I].ui32Operand3 );
 							uint8_t ui8Control = uint8_t( _pmMods[I].ui32Operand0 );
 							uint8_t ui8TargetVal = uint8_t( (_pmMods[I].ui32Channel & (1 << iChan)) ?
@@ -4786,7 +4834,7 @@ namespace ns4 {
 				
 			}
 
-			nNote.Tick( msState, msState.dPitch );
+			nNote.Tick( msState, msState.dPitch * msState.dPitchScale );
 			
 			double dVal = nNote.sSampler.Sample();
 			dVal *= MidiLevelToLinear( nNote.eEnvelope.CurLevel() );
@@ -5258,6 +5306,10 @@ namespace ns4 {
 				ui8State[_teEvent.u.sMidi.ui8Parm0] = _teEvent.u.sMidi.ui8Parm1;
 				dState[_teEvent.u.sMidi.ui8Parm0] = _teEvent.dFloatData;
 				SetFlag( _teEvent.u.sMidi.ui8Parm0 );
+			}
+
+			if ( IsControllerOfType( _teEvent, NS4_TRK_SET_PITCH_SCALE ) ) {
+				dPitchScale = _teEvent.u.sMidi.ui8Parm1 * 0.015625;
 			}
 		}
 		else if ( IsProgramChange( _teEvent ) ) {

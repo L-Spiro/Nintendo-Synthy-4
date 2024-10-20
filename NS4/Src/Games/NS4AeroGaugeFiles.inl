@@ -23,6 +23,10 @@
 //#define NS4_ROOT_OFFSET						12
 //#define NS4_ENV_MULTIPLIER					(0.25)
 
+#define NS4_OVERSAMPLING					(1 << 2)
+#define NS4_OVERSAMPLING_BW					22050.0 / 2.0
+#define NS4_ANTI_ALIASING_LEVEL				2
+#define NS4_ANTI_ALIASING_HZ				20000.0
 
 { u8"AeroGauge (U) 00000014 0059CF44.mid", u8"AeroGauge (U) 00000014 0059CF44.mid TrackParseDebug.txt", u8"Lean on Instincts", 0 },
 { u8"AeroGauge (U) 00000013 0059B8C0.mid", u8"AeroGauge (U) 00000013 0059B8C0.mid TrackParseDebug.txt", u8"Sonic Prices", 0 },

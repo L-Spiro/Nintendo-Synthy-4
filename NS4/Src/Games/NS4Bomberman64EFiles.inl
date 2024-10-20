@@ -8,13 +8,18 @@
 #define NS4_REVERB							ns4::CReverb::NS4_T_BOMBERMAN_64_0
 #define NS4_ORIG_HZ							31995
 #define NS4_CURVE							40.0
-#define NS4_OUT_DIRECTORY					u8"T:\\N64OST\\Bomberman 64 E\\"
+#define NS4_OUT_DIRECTORY					u8"T:\\N64OST\\Bomberman 64 PAL\\"
 #define NS4_OUT_DIRECTORY_NUMBERS			NS4_OUT_DIRECTORY u8"Numbered\\"
 #define NS4_WET_FILTER_FREQ					8191.0//(NS4_ORIG_HZ / std::pow( 2.0, 5.0 ))
 #define NS4_ENV_MULTIPLIER					(1.0 / 3.0)
 //#define NS4_REL_MULTIPLIER					(1.0 / 3.0)
 #define NS4_ENVELOPE_VOL_CURVE				20.0
 #define NS4_ENVELOPE_POINT_CURVE			40.0
+
+#define NS4_OVERSAMPLING					(1 << 2)
+#define NS4_OVERSAMPLING_BW					22050.0 / 4.0
+#define NS4_ANTI_ALIASING_LEVEL				2
+#define NS4_ANTI_ALIASING_HZ				20000.0
 
 { u8"Bomberman 64 (E) 00000016 003FFCC0.mid", u8"Bomberman 64 (E) 00000016 003FFCC0.mid TrackParseDebug.txt", u8"Advertise", 0 },
 { u8"Bomberman 64 (E) 00000000 003EB5C0.mid", u8"Bomberman 64 (E) 00000000 003EB5C0.mid TrackParseDebug.txt", u8"Opening", 0 },

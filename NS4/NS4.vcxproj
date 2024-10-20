@@ -293,6 +293,7 @@
     <None Include="Src\Games\NS4GetterLoveFiles.inl" />
     <None Include="Src\Games\NS4Gex3DeepCoverGeckoFiles.inl" />
     <None Include="Src\Games\NS4GloverFiles.inl" />
+    <None Include="Src\Games\NS4GoldenEye007CustomFiles.inl" />
     <None Include="Src\Games\NS4GoldenEye007Files.inl" />
     <None Include="Src\Games\NS4GoldenEye007OstFiles.inl" />
     <None Include="Src\Games\NS4HamsterMonogatari64Files.inl" />

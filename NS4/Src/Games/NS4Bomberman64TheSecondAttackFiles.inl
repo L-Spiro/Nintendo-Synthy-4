@@ -17,6 +17,11 @@
 #define NS4_ENVELOPE_POINT_CURVE			40.0
 #define NS4_EXPONENTIAL_ENVELOPE			true
 
+#define NS4_OVERSAMPLING					(1 << 2)
+#define NS4_OVERSAMPLING_BW					22050.0 / 2.0
+#define NS4_ANTI_ALIASING_LEVEL				2
+#define NS4_ANTI_ALIASING_HZ				20000.0
+
 //{ u8"Bomberman 64 - The Second Attack! (U) 00000000 003C6C10.mid", u8"Bomberman 64 - The Second Attack! (U) 00000000 003C6C10.mid TrackParseDebug.txt", u8"00000000 003C6C10", 1 },
 { u8"Bomberman 64 - The Second Attack! (U) 00000003 003CB408.mid", u8"Bomberman 64 - The Second Attack! (U) 00000003 003CB408.mid TrackParseDebug.txt", u8"Demo Loop", 0x03 },
 { u8"Bomberman 64 - The Second Attack! (U) 00000001 003C6C80.mid", u8"Bomberman 64 - The Second Attack! (U) 00000001 003C6C80.mid TrackParseDebug.txt", u8"Title Screen", 0x01 },

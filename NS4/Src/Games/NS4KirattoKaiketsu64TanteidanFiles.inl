@@ -20,7 +20,10 @@
 #define NS4_EXPONENTIAL_ENVELOPE			true
 #define NS4_PERC_CHANNEL					9
 
-
+#define NS4_OVERSAMPLING					(1 << 2)
+#define NS4_OVERSAMPLING_BW					22050.0 / 2.0
+#define NS4_ANTI_ALIASING_LEVEL				2
+#define NS4_ANTI_ALIASING_HZ				20000.0
 
 //{ u8"Kira to Kaiketsu! 64 Tanteidan (J) 00000000 00318AFC.mid", u8"Kira to Kaiketsu! 64 Tanteidan (J) 00000000 00318AFC.mid TrackParseDebug.txt", u8"Track 00", 0 },
 { u8"Kira to Kaiketsu! 64 Tanteidan (J) 00000001 00318B54.mid", u8"Kira to Kaiketsu! 64 Tanteidan (J) 00000001 00318B54.mid TrackParseDebug.txt", u8"Track 01", 0 },

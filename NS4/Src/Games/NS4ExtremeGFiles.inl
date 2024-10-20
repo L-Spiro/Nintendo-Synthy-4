@@ -7,7 +7,7 @@
 //#define NS4_REVERB							ns4::CReverb::NS4_T_DIDDY_KONG_RACING_0
 #define NS4_ORIG_HZ							22047
 #define NS4_CURVE							40.0
-#define NS4_OUT_DIRECTORY					u8"T:\\N64OST\\Extreme-G\\"
+#define NS4_OUT_DIRECTORY					u8"C:\\N64OST\\Extreme-G\\"
 #define NS4_OUT_DIRECTORY_NUMBERS			NS4_OUT_DIRECTORY u8"Numbered\\"
 #define NS4_PERC_CHANNEL					9
 #define NS4_IGNORE_REVERB					true
@@ -22,7 +22,10 @@
 #define NS4_ENVELOPE_VOL_CURVE				20.0
 #define NS4_ENVELOPE_POINT_CURVE			40.0*/
 
-
+#define NS4_OVERSAMPLING					(1 << 2)
+#define NS4_OVERSAMPLING_BW					22050.0 / 2.0
+#define NS4_ANTI_ALIASING_LEVEL				2
+#define NS4_ANTI_ALIASING_HZ				20000.0
 
 { u8"Extreme-G (U) 00000000 0077F9D4 Title Screen.mid", u8"Extreme-G (U) 00000000 0077F9D4.mid TrackParseDebug.txt", u8"Title", 0 },
 { u8"Extreme-G (U) 00000001 00780498 Track 1.mid", u8"Extreme-G (U) 00000001 00780498.mid TrackParseDebug.txt", u8"sequence G - Desert I", 0 },

@@ -27,7 +27,10 @@
 #define NS4_ENVELOPE_POINT_CURVE			40.0
 #define NS4_SND_BNK_FORCE_SAMPLE_RATE		32000
 
-
+#define NS4_OVERSAMPLING					(1 << 2)
+#define NS4_OVERSAMPLING_BW					22050.0 / 2.0
+#define NS4_ANTI_ALIASING_LEVEL				2
+#define NS4_ANTI_ALIASING_HZ				20000.0
 
 { u8"Shigesato Itoi's No. 1 Bass Fishing! Definitive Edition (J) 00000000 009950EC.mid", u8"Shigesato Itoi's No. 1 Bass Fishing! Definitive Edition (J) 00000000 009950EC.mid TrackParseDebug.txt", u8"Track 00", 0 },	// 探していた
 { u8"Shigesato Itoi's No. 1 Bass Fishing! Definitive Edition (J) 00000001 00996F28.mid", u8"Shigesato Itoi's No. 1 Bass Fishing! Definitive Edition (J) 00000001 00996F28.mid TrackParseDebug.txt", u8"Track 01", 0 },

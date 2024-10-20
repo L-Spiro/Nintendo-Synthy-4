@@ -15,6 +15,10 @@
 #define NS4_ENVELOPE_VOL_CURVE				20.0
 #define NS4_ENVELOPE_POINT_CURVE			40.0
 
+#define NS4_OVERSAMPLING					(1 << 2)
+#define NS4_OVERSAMPLING_BW					22050.0 / 2.0
+#define NS4_ANTI_ALIASING_LEVEL				2
+#define NS4_ANTI_ALIASING_HZ				20000.0
 
 { u8"1 Turok - Rage Wars (U) 00000002 00508410 Rage.mid", u8"Turok - Rage Wars (U) 00000002 00508410.mid TrackParseDebug.txt", u8"Rage", 0 },
 { u8"3 Turok - Rage Wars (U) 00000004 0050A068 Starlight.mid", u8"Turok - Rage Wars (U) 00000004 0050A068.mid TrackParseDebug.txt", u8"Starlight", 0, },//NS4_NO_CMDS, 1 },

@@ -6,7 +6,7 @@
 #define NS4_REVERB_TRACKS					0
 #define NS4_ORIG_HZ							22047
 #define NS4_CURVE							40.0
-#define NS4_OUT_DIRECTORY					u8"T:\\N64OST\\Turok Dinosaur Hunter\\"
+#define NS4_OUT_DIRECTORY					u8"C:\\N64OST\\Turok Dinosaur Hunter\\"
 #define NS4_OUT_DIRECTORY_NUMBERS			NS4_OUT_DIRECTORY u8"Numbered\\"
 #define NS4_IGNORE_REVERB					true
 #define NS4_ENV_MULTIPLIER					(1.0 / 3.0)
@@ -14,7 +14,10 @@
 #define NS4_ENVELOPE_VOL_CURVE				20.0
 #define NS4_ENVELOPE_POINT_CURVE			40.0
 
-
+#define NS4_OVERSAMPLING					(1 << 2)
+#define NS4_OVERSAMPLING_BW					22050.0 / 2.0
+#define NS4_ANTI_ALIASING_LEVEL				2
+#define NS4_ANTI_ALIASING_HZ				20000.0
 
 { u8"03 Turok - Dinosaur Hunter (U) (V1.2) 00000006 0061A760 The Hub Ruins.mid", u8"03 Turok - Dinosaur Hunter (U) (V1.2) 00000006 0061A760 The Hub Ruins.mid TrackParseDebug.txt", u8"Opening, The Hub Ruins, First Cave, The Temple", 0 },
 { u8"02 Turok - Dinosaur Hunter (U) (V1.2) 00000000 00614D88 Jungle.mid", u8"02 Turok - Dinosaur Hunter (U) (V1.2) 00000000 00614D88 Jungle.mid TrackParseDebug.txt", u8"Title Screen, The Jungle", 0 },

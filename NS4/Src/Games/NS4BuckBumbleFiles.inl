@@ -7,7 +7,7 @@
 #define NS4_REVERB							ns4::CReverb::NS4_T_MISSION_IMPOSSIBLE_0
 #define NS4_ORIG_HZ							22047
 #define NS4_CURVE							20.0
-#define NS4_OUT_DIRECTORY					u8"T:\\N64OST\\Buck Bumble\\"
+#define NS4_OUT_DIRECTORY					u8"C:\\N64OST\\Buck Bumble\\"
 #define NS4_OUT_DIRECTORY_NUMBERS			NS4_OUT_DIRECTORY u8"Numbered\\"
 #define NS4_NO_PROGRAM_CHANGE_SORT			true
 #define NS4_PROG_CHANGE_SETS_VOL_PAN		false
@@ -15,10 +15,15 @@
 #define NS4_TUNE_IN_MIDI					true
 #define NS4_ENV_MULTIPLIER					(1.0 / 16.0)
 #define NS4_REL_MULTIPLIER					(1.0)
+//#define NS4_PITCH_BEND_SCALE				2.25
 //#define NS4_ROOT_OFFSET						-6
 //#define NS4_SAMPLE_EXCLUSIVE				0x42
 //#define NS4_IGNORE_REVERB					true
 
+#define NS4_OVERSAMPLING					(1 << 2)
+#define NS4_OVERSAMPLING_BW					22050.0 / 4.0
+#define NS4_ANTI_ALIASING_LEVEL				2
+#define NS4_ANTI_ALIASING_HZ				20000.0
 
 { u8"Buck Bumble (U) 00000013 00538E50.mid", u8"Buck Bumble (U) 00000013 00538E50.mid TrackParseDebug.txt", u8"Intro", 0x1D,
 	1,

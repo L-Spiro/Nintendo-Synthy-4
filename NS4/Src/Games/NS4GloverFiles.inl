@@ -21,6 +21,10 @@
 //#define NS4_SAMPLE_EXCLUSIVE				0x42
 //#define NS4_IGNORE_REVERB					true
 
+#define NS4_OVERSAMPLING					(1 << 2)
+#define NS4_OVERSAMPLING_BW					22050.0 / 2.0
+#define NS4_ANTI_ALIASING_LEVEL				2
+#define NS4_ANTI_ALIASING_HZ				20000.0
 
 { u8"Glover (U) 0000003A 00775580.mid", u8"Glover (U) 0000003A 00775580.mid TrackParseDebug.txt", u8"Intro, Logos", 0 },
 { u8"Glover (U) 0000003B 00777420.mid", u8"Glover (U) 0000003B 00777420.mid TrackParseDebug.txt", u8"Main Menu", 0 },

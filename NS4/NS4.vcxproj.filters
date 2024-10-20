@@ -1087,5 +1087,8 @@
     <None Include="Src\MIDI\NS4EadPanTableEnum.inl">
       <Filter>Header Files\MIDI</Filter>
     </None>
+    <None Include="Src\Games\NS4GoldenEye007CustomFiles.inl">
+      <Filter>Header Files\Games</Filter>
+    </None>
   </ItemGroup>
 </Project>

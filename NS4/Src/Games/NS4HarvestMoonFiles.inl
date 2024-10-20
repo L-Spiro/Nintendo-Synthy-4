@@ -7,7 +7,7 @@
 #define NS4_REVERB							ns4::CReverb::NS4_T_MISSION_IMPOSSIBLE_0
 #define NS4_ORIG_HZ							22047
 #define NS4_CURVE							20.0
-#define NS4_OUT_DIRECTORY					u8"T:\\N64OST\\Harvest Moon 64\\"
+#define NS4_OUT_DIRECTORY					u8"C:\\N64OST\\Harvest Moon 64\\"
 #define NS4_OUT_DIRECTORY_NUMBERS			NS4_OUT_DIRECTORY u8"Numbered\\"
 #define NS4_WET_FILTER_FREQ					0.0//(NS4_ORIG_HZ / 4.0)
 #define NS4_NO_PROGRAM_CHANGE_SORT			true
@@ -18,10 +18,15 @@
 #define NS4_TUNE_IN_MIDI					true
 #define NS4_ENV_MULTIPLIER					(1.0 / 32.0)
 #define NS4_REL_MULTIPLIER					(1.0)
+//#define NS4_PITCH_BEND_SCALE				2.25
 //#define NS4_MASTER_REVERB_VOLUME			NS4_INV_QRT_0_5
 //#define NS4_SAMPLE_EXCLUSIVE				0x42
 //#define NS4_IGNORE_REVERB					true
 
+#define NS4_OVERSAMPLING					(1 << 2)
+#define NS4_OVERSAMPLING_BW					22050.0 / 4.0
+#define NS4_ANTI_ALIASING_LEVEL				2
+#define NS4_ANTI_ALIASING_HZ				20000.0
 
 { u8"Harvest Moon 64 (U) 00000000 00FD8510.mid", u8"Harvest Moon 64 (U) 00000000 00FD8510.mid TrackParseDebug.txt", u8"Ceremony of Passing", 0 },
 { u8"Harvest Moon 64 (U) 00000001 00FDAD00.mid", u8"Harvest Moon 64 (U) 00000001 00FDAD00.mid TrackParseDebug.txt", u8"Title Screen", 0 },

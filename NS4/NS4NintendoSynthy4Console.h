@@ -51,7 +51,7 @@
 //#define NS4_PRINT_BEST_BANK
 
 #ifdef NS4_BULK
-//#define NS4_ONE_OFF										(28-1)
+//#define NS4_ONE_OFF										(13-1)
 //#define NS4_EXPORT_SOME
 //#define NS4_EPORT_FROM								(29-1)
 #else
@@ -312,6 +312,7 @@ int oldmain() {
 //#include "Src/Games/NS4PerfectDarkFiles.inl"
 //#include "Src/Games/NS4PerfectDarkOverSamplingFiles.inl"
 //#include "Src/Games/NS4GoldenEye007Files.inl"
+//#include "Src/Games/NS4GoldenEye007CustomFiles.inl"
 //#include "Src/Games/NS4GoldenEye007OstFiles.inl"
 //#include "Src/Games/NS4DiddyKongRacingFiles.inl"
 //#include "Src/Games/NS4SuperSmashBrosFiles.inl"
@@ -339,7 +340,7 @@ int oldmain() {
 //#include "Src/Games/NS4ExtremeGXG2Files.inl"
 //#include "Src/Games/NS4ChopperAttackFiles.inl"
 //#include "Src/Games/NS4ChopperAttackOverSampledFiles.inl"
-#include "Src/Games/NS4BanjoKazooieFiles.inl"
+//#include "Src/Games/NS4BanjoKazooieFiles.inl"
 //#include "Src/Games/NS4BlastCorpsFiles.inl"
 //#include "Src/Games/NS4BlastCorpsPALFiles.inl"
 //#include "Src/Games/NS4BeetAdventureRacing!Files.inl"
@@ -422,7 +423,7 @@ int oldmain() {
 //#include "Src/Games/NS4Gex3DeepCoverGeckoFiles.inl"
 //#include "Src/Games/NS4MonopolyFiles.inl"
 //#include "Src/Games/NS4BuckBumbleFiles.inl"
-//#include "Src/Games/NS4HarvestMoonFiles.inl"
+#include "Src/Games/NS4HarvestMoonFiles.inl"
 //#include "Src/Games/NS4DrMario64Files.inl"
 //#include "Src/Games/NS4F1RacingChampionshipFiles.inl"
 //#include "Src/Games/NS4FlyingDragonFiles.inl"
@@ -444,7 +445,9 @@ int oldmain() {
 //#include "Src/Games/NS4F1PolePositionFiles.inl"
 //#include "Src/Games/NS4ChoroQIIFiles.inl"
 //#include "Src/Games/NS4EikouNoStAndrewsFiles.inl"
+
 //#include "Src/Games/NS4NeonGenesisEvangelionFiles.inl"
+
 //#include "Src/Games/NS4SimCity2000Files.inl"
 //#include "Src/Games/NS4SuperBDamonBattlePhoenix64Files.inl"
 //#include "Src/Games/NS4ToonPanicFiles.inl"
@@ -768,6 +771,9 @@ int oldmain() {
 #ifdef NS4_EAD_PAN
 		ns4::CMidiFile::m_sSettings.eptEadPanning = NS4_EAD_PAN;
 #endif	// NS4_EAD_PAN
+#ifdef NS4_PITCH_BEND_SCALE
+		ns4::CMidiFile::m_sSettings.dPitchBendScale = NS4_PITCH_BEND_SCALE;
+#endif	// NS4_PITCH_BEND_SCALE
 
 	ns4::CMidiFile::NS4_TRACK_RENDER_OPTIONS troOptions;
 #ifdef NS4_BULK

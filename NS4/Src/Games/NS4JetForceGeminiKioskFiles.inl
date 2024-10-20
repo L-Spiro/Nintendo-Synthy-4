@@ -9,14 +9,17 @@
 #define NS4_ORIG_HZ							22018
 #define NS4_Q_MIN							10.0
 #define NS4_CURVE							20.0
-#define NS4_OUT_DIRECTORY					u8"T:\\N64OST\\Jet Force Gemini Kiosk Stereo\\"
+#define NS4_OUT_DIRECTORY					u8"C:\\N64OST\\Jet Force Gemini (Kiosk) (Stereo)\\"
 #define NS4_OUT_DIRECTORY_NUMBERS			NS4_OUT_DIRECTORY u8"Numbered\\"
 #define NS4_WET_FILTER_FREQ					0.0//(NS4_ORIG_HZ / 2.0)
 //#define NS4_MASTER_REVERB_VOLUME			(1.075 * 2.0)
 #define NS4_VIB_SCALE						2.0
 #define NS4_ENV_MULTIPLIER					(1.0 / 3.0)
 
-
+#define NS4_OVERSAMPLING					(1 << 2)
+#define NS4_OVERSAMPLING_BW					22050.0 / 2.0
+#define NS4_ANTI_ALIASING_LEVEL				2
+#define NS4_ANTI_ALIASING_HZ				20000.0
 
 { u8"Jet Force Gemini (U) (Kiosk Demo) 0000000B 0192A2A4.mid", u8"Jet Force Gemini (U) (Kiosk Demo) 0000000B 0192A2A4.mid TrackParseDebug.txt", u8"Main Theme", 0 },
 { u8"Jet Force Gemini (U) (Kiosk Demo) 00000039 019739DC.mid", u8"Jet Force Gemini (U) (Kiosk Demo) 00000039 019739DC.mid TrackParseDebug.txt", u8"Intro Movie", 0 },

@@ -21,7 +21,10 @@
 #define NS4_EXPONENTIAL_ENVELOPE			true
 //#define NS4_OVERSAMPLING_BW					(22050.0 / 2.0) / 2.0//4500.0
 
-
+#define NS4_OVERSAMPLING					(1 << 2)
+#define NS4_OVERSAMPLING_BW					22050.0 / 3.0
+#define NS4_ANTI_ALIASING_LEVEL				2
+#define NS4_ANTI_ALIASING_HZ				20000.0
 
 { u8"Super Robot Taisen 64 (J) 0000002B 006C95D0.mid", u8"Super Robot Taisen 64 (J) 0000002B 006C95D0.mid TrackParseDebug.txt", u8"迷妄宇宙 (Stray Universe)", 0x0C },
 { u8"Super Robot Taisen 64 (J) 00000013 0069F9D8.mid", u8"Super Robot Taisen 64 (J) 00000013 0069F9D8.mid TrackParseDebug.txt", u8"行け！ザンボット3 (Go! Zambot 3)", 0x00 },

@@ -7,7 +7,7 @@
 #define NS4_REVERB							ns4::CReverb::NS4_T_SPACE_STATION_SILICON_VALLEY_0
 #define NS4_ORIG_HZ							32006
 #define NS4_CURVE							40.0
-#define NS4_OUT_DIRECTORY					u8"F:\\N64OST\\Space Station Silicon Valley\\"
+#define NS4_OUT_DIRECTORY					u8"C:\\N64OST\\Space Station Silicon Valley\\"
 #define NS4_OUT_DIRECTORY_NUMBERS			NS4_OUT_DIRECTORY u8"Numbered\\"
 #define NS4_WET_FILTER_FREQ					9216.0
 #define NS4_ENV_MULTIPLIER					(1.125)
@@ -15,6 +15,11 @@
 #define NS4_ENVELOPE_VOL_CURVE				20.0
 #define NS4_ENVELOPE_POINT_CURVE			40.0
 #define NS4_EXPONENTIAL_ENVELOPE			true
+
+#define NS4_OVERSAMPLING					(1 << 2)
+#define NS4_OVERSAMPLING_BW					22050.0 / 2.0
+#define NS4_ANTI_ALIASING_LEVEL				2
+#define NS4_ANTI_ALIASING_HZ				20000.0
 
 { u8"Space Station Silicon Valley (U) 00000011 004252E4 Introduction.mid", u8"Space Station Silicon Valley (U) 00000011 004252E4.mid TrackParseDebug.txt", u8"Introduction", 0 },
 { u8"Space Station Silicon Valley (U) 00000012 00425AB0 Title Screen.mid", u8"Space Station Silicon Valley (U) 00000012 00425AB0.mid TrackParseDebug.txt", u8"Title Screen", 0 },

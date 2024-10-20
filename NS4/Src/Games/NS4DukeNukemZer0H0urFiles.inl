@@ -22,8 +22,10 @@
 //#define NS4_SAMPLE_EXCLUSIVE				0x42
 //#define NS4_IGNORE_REVERB					true
 
-
-
+#define NS4_OVERSAMPLING					(1 << 2)
+#define NS4_OVERSAMPLING_BW					22050.0 / 2.0
+#define NS4_ANTI_ALIASING_LEVEL				2
+#define NS4_ANTI_ALIASING_HZ				20000.0
 
 { u8"Duke Nukem - ZER0 H0UR (U) 00000006 01D2DC30.mid", u8"Duke Nukem - ZER0 H0UR (U) 00000006 01D2DC30.mid TrackParseDebug.txt", u8"Title Screen", 0x03 },
 { u8"Duke Nukem - ZER0 H0UR (U) 00000000 01A8B5D0.mid", u8"Duke Nukem - ZER0 H0UR (U) 00000000 01A8B5D0.mid TrackParseDebug.txt", u8"Training Base", 0x00 },
