@@ -7,7 +7,7 @@
 #define NS4_REVERB							ns4::CReverb::NS4_T_BATTLEZONE_RISE_OF_THE_BLACK_DOGS_0
 #define NS4_ORIG_HZ							44095
 #define NS4_CURVE							40.0
-#define NS4_OUT_DIRECTORY					u8"T:\\N64OST\\Battlezone Rise of the Black Dogs\\"
+#define NS4_OUT_DIRECTORY					u8"C:\\N64OST\\Battlezone Rise of the Black Dogs\\"
 #define NS4_OUT_DIRECTORY_NUMBERS			NS4_OUT_DIRECTORY u8"Numbered\\"
 #define NS4_WET_FILTER_FREQ					0.0
 #define NS4_ENV_MULTIPLIER					(1.0 / 1.0)
@@ -21,7 +21,10 @@
 #define NS4_ROOT_OFFSET						-12
 //#define NS4_OVERSAMPLING_BW					500.0
 
-
+#define NS4_OVERSAMPLING					(1 << 2)
+#define NS4_OVERSAMPLING_BW					22050.0 / 4.0
+#define NS4_ANTI_ALIASING_LEVEL				2
+#define NS4_ANTI_ALIASING_HZ				20000.0
 
 { u8"Battlezone - Rise of the Black Dogs (U) 00000000 00BE4118.mid", u8"Battlezone - Rise of the Black Dogs (U) 00000000 00BE4118.mid TrackParseDebug.txt", u8"Menu", 0 },
 { u8"Battlezone - Rise of the Black Dogs (U) 00000001 00BE4CE8.mid", u8"Battlezone - Rise of the Black Dogs (U) 00000001 00BE4CE8.mid TrackParseDebug.txt", u8"Tutorial", 0 },

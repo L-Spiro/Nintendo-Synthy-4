@@ -1869,7 +1869,7 @@ namespace ns4 {
 		// Transformers: Beast Wars Transmetals.
 		{
 			NS4_TAPS( m_rtBeastWars0 ),
-			1.3922922680943437 / 2.0,												// dTapVol
+			NS4_SQRT_0_5/*1.3922922680943437 / 2.0*/,								// dTapVol
 			0,																		// i64TapOffset
 			NS4_NO_FADE,															// dTime
 			NS4_NO_LPF,																// dLpfFactor
@@ -2076,7 +2076,7 @@ namespace ns4 {
 		// Battlezone: Rise of the Black Dogs.
 		{
 			NS4_TAPS( m_rtBattlezoneRiseOfTheBlackDogs0 ),
-			0.71740191217935745,													// dTapVol
+			NS4_SQRT_0_5,															// dTapVol
 			0,																		// i64TapOffset
 			NS4_NO_FADE,															// dTime
 			NS4_NO_LPF

@@ -8,7 +8,7 @@
 #define NS4_REVERB							ns4::CReverb::NS4_T_BOMBERMAN_64_0
 #define NS4_ORIG_HZ							31995
 #define NS4_CURVE							40.0
-#define NS4_OUT_DIRECTORY					u8"T:\\N64OST\\Bomberman 64 PAL\\"
+#define NS4_OUT_DIRECTORY					u8"C:\\N64OST\\Bomberman 64 PAL\\"
 #define NS4_OUT_DIRECTORY_NUMBERS			NS4_OUT_DIRECTORY u8"Numbered\\"
 #define NS4_WET_FILTER_FREQ					8191.0//(NS4_ORIG_HZ / std::pow( 2.0, 5.0 ))
 #define NS4_ENV_MULTIPLIER					(1.0 / 3.0)

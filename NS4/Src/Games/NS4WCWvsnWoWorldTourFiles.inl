@@ -7,7 +7,7 @@
 #define NS4_REVERB							ns4::CReverb::NS4_T_WCW_VS_NWO_WORLD_TOUR_0
 #define NS4_ORIG_HZ							22047
 #define NS4_CURVE							40.0
-#define NS4_OUT_DIRECTORY					u8"F:\\N64OST\\WCW vs. nWo - World Tour\\"
+#define NS4_OUT_DIRECTORY					u8"C:\\N64OST\\WCW vs. nWo - World Tour\\"
 #define NS4_OUT_DIRECTORY_NUMBERS			NS4_OUT_DIRECTORY u8"Numbered\\"
 #define NS4_WET_FILTER_FREQ					0.0//(NS4_ORIG_HZ / 2.0)
 #define NS4_PERC_CHANNEL					9
@@ -16,7 +16,11 @@
 #define NS4_PERC_ATK_MULTIPLIER				(200.0)
 #define NS4_PERC_DEC_MULTIPLIER				(200.0)
 #define NS4_PERC_REL_MULTIPLIER				(10.0)
-#define NS4_OVERSAMPLING_BW					200.0
+
+#define NS4_OVERSAMPLING					(1 << 2)
+#define NS4_OVERSAMPLING_BW					22050.0 / 4.0
+#define NS4_ANTI_ALIASING_LEVEL				2
+#define NS4_ANTI_ALIASING_HZ				20000.0
 
 { u8"WCW vs. nWo - World Tour (U) (V1.1) 00000007 00A15624.mid", u8"WCW vs. nWo - World Tour (U) (V1.1) 00000007 00A15624.mid TrackParseDebug.txt", u8"WCW vs. nWo, World Tour, Main Menu", 0 },
 { u8"WCW vs. nWo - World Tour (U) (V1.1) 00000005 00A13CE4.mid", u8"WCW vs. nWo - World Tour (U) (V1.1) 00000005 00A13CE4.mid TrackParseDebug.txt", u8"Options", 0 },

@@ -571,6 +571,9 @@ namespace ns4 {
 
 			/** Specifies the ADSR percussion release rate.  Defaults to 0, making it unused. */
 			uint8_t						ui8AdsrPercReleaseRate = 0;
+
+			/** Specifies the default pitch-bend scale value. */
+			uint8_t						ui8PitchBendScaleDefault = 0x40;
 		};
 
 
@@ -1691,7 +1694,7 @@ namespace ns4 {
 				ui8State[NS4_CHN_PAN_WEIGHT] = 128;
 				ui8State[NS4_CHN_LINEAR_VOL_SCALE] = 128;
 				ui8State[NS4_CHN_VIB_RATE] = 0x40;
-				ui8State[NS4_TRK_SET_PITCH_SCALE] = 0x40;
+				ui8State[NS4_TRK_SET_PITCH_SCALE] = m_sSettings.ui8PitchBendScaleDefault;
 				dState[NS4_TRACK_PITCH_SCALE] = 1.0;
 				if ( m_sSettings.ui8DryControl != 0 ) {
 					ui8State[m_sSettings.ui8DryControl] = m_sSettings.ui8DefaultDry;
@@ -1705,7 +1708,7 @@ namespace ns4 {
 				ui16PitchBendRange = 200;
 				dTempo = 120.0;
 				dPitch = 0.0;
-				dPitchScale = 1.0;
+				dPitchScale = ui8State[NS4_TRK_SET_PITCH_SCALE] / 64.0;
 				ui8Program = 0;
 				ui8ChannelAfterTouch = 0;
 				return (*this);
