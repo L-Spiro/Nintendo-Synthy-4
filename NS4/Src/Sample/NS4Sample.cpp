@@ -127,25 +127,43 @@ namespace ns4 {
 		double dNyFactor = 1.0;
 		_ui32Factor >>= 1;
 		while ( _ui32Factor ) {
-			CIr iIr = CIrConvolution::CreateSincFilter( dFreq * 2.0, dFilterFreq * dNyFactor + dBw / 2.0, dBw, CIrConvolution::SynthesizeHammingWindow );
+			{
+				CIr iIr = CIrConvolution::CreateSincFilter( dFreq * 2.0, dFilterFreq * dNyFactor + dBw / 2.0, dBw, CIrConvolution::SynthesizeHammingWindow );
 
-			bool bFailed = true;
-			while ( bFailed ) {
-				try {
-					tTmp1.resize( _uDst.tSamples.size() * 2 + iIr.GetLatency() + 1 );
-					bFailed = false;
+				bool bFailed = true;
+				while ( bFailed ) {
+					try {
+						tTmp1.resize( _uDst.tSamples.size() * 2 + iIr.GetLatency() + 1 );
+						bFailed = false;
+					}
+					catch ( ... ) {}
 				}
-				catch ( ... ) {}
-			}
-			std::memset( tTmp1.data(), 0, tTmp1.size() * sizeof( lwtrack::value_type ) );
-			for ( auto I = _uDst.tSamples.size(); I--; ) {
-				tTmp1[(I<<1)+1] = _uDst.tSamples[I];
-				//tTmp1[(I<<1)+0] = lwsample( 0.0 );
-			}
+				std::memset( tTmp1.data(), 0, tTmp1.size() * sizeof( lwtrack::value_type ) );
+				for ( auto I = _uDst.tSamples.size(); I--; ) {
+					tTmp1[(I<<1)+1] = _uDst.tSamples[I];
+					//tTmp1[(I<<1)+0] = lwsample( 0.0 );
+				}
 
-			
-			CIrConvolution::Convolve( tTmp1, _uDst.tSamples, iIr );
+				CIrConvolution::Convolve( tTmp1, _uDst.tSamples, iIr );
+			}
 			ns4::CWavLib::ScaleSamples( _uDst.tSamples, 2.0 );
+			if ( dFreq > m_uiHz ) {
+				double dThisBw = dFreq / 8.0;
+				CIr iIr = CIrConvolution::CreateSincFilter( dFreq * 2.0, (dFilterFreq * 5.0 / 4.0) + dThisBw / 2.0, dThisBw, CIrConvolution::SynthesizeHammingWindow );
+
+				bool bFailed = true;
+				while ( bFailed ) {
+					try {
+						tTmp1.resize( _uDst.tSamples.size() );
+						bFailed = false;
+					}
+					catch ( ... ) {}
+				}
+				std::memcpy( tTmp1.data(), _uDst.tSamples.data(), tTmp1.size() * sizeof( lwtrack::value_type ) );
+
+				CIrConvolution::Convolve( tTmp1, _uDst.tSamples, iIr );
+				ns4::CWavLib::ScaleSamples( _uDst.tSamples, 2.0 );
+			}
 
 
 			//dBw = min( m_dOversamplingBw, dFreq / 2.0 );
