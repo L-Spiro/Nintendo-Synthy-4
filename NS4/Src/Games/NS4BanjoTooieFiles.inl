@@ -22,7 +22,7 @@
 //#define NS4_OUTPUT_BITS						24
 
 #define NS4_OVERSAMPLING					(1 << 2)
-#define NS4_OVERSAMPLING_BW					22050.0 / 2.0
+#define NS4_OVERSAMPLING_BW					22050.0 / 4.0
 #define NS4_ANTI_ALIASING_LEVEL				2
 #define NS4_ANTI_ALIASING_HZ				20000.0
 //#endif	// #ifndef _DEBUG
@@ -1062,14 +1062,6 @@
 		{ ns4::CMidiFile::NS4_ES_PRE_UNROLL, ns4::CMidiFile::NS4_E_TAG_TRACK_BY_IDX, 10 - 1 },
 
 		{ ns4::CMidiFile::NS4_ES_PRE_UNROLL, ns4::CMidiFile::NS4_E_MUTE_UNTAGGED_TRACKS },
-	   } },
-
-{ u8"048 Banjo-Tooie (U) 0000004D 0137243C Honey B's Hive.mid", u8"", u8"Honey B’s Hive (Sans SFX)", 0,
-	1 + 1, {
-		{ ns4::CMidiFile::NS4_ES_PRE_UNROLL, ns4::CMidiFile::NS4_E_TAG_TRACK_BY_IDX, 5 - 1 },
-
-		{ ns4::CMidiFile::NS4_ES_PRE_UNROLL, ns4::CMidiFile::NS4_E_MUTE_TAGGED_TRACKS },
-
 	   } },
 
 { u8"014 Banjo-Tooie (U) 00000047 0136E084 Jinjo Village.mid", u8"", u8"Jinjo Village (Sans SFX)", 0,

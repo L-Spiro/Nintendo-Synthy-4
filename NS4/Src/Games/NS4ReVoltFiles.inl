@@ -16,6 +16,10 @@
 #define NS4_EXPONENTIAL_ENVELOPE			true
 #define NS4_SND_BNK_FORCE_SAMPLE_RATE		22050
 
+#define NS4_OVERSAMPLING					(1 << 2)
+#define NS4_OVERSAMPLING_BW					22050.0 / 4.0
+#define NS4_ANTI_ALIASING_LEVEL				2
+#define NS4_ANTI_ALIASING_HZ				20000.0
 
 { u8"Re-Volt (U) 00000008 00AF5F60.mid", u8"Re-Volt (U) 00000008 00AF5F60.mid TrackParseDebug.txt", u8"FrontEnd (Main Menu)", 0 },
 { u8"Re-Volt (U) 00000005 00AF3180.mid", u8"Re-Volt (U) 00000005 00AF3180.mid TrackParseDebug.txt", u8"Live Wires (Race Theme 1)", 0 },

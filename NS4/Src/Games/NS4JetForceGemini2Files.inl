@@ -16,8 +16,8 @@
 #define NS4_VIB_SCALE						2.0
 #define NS4_ENV_MULTIPLIER					(1.0 / 3.0)
 
-#define NS4_OUTPUT_HZ						44100
-#define NS4_OUTPUT_BITS						24
+//#define NS4_OUTPUT_HZ						44100
+//#define NS4_OUTPUT_BITS						24
 
 #define NS4_OVERSAMPLING					(1 << 2)
 #define NS4_OVERSAMPLING_BW					22050.0 / 2.0

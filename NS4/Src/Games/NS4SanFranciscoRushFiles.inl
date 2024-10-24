@@ -5,7 +5,7 @@
 #define NS4_BANK							u8"00"
 #define NS4_REVERB_TRACKS					0
 #define NS4_CURVE							40.0
-#define NS4_OUT_DIRECTORY					u8"T:\\N64OST\\San Francisco Rush\\"
+#define NS4_OUT_DIRECTORY					u8"C:\\N64OST\\San Francisco Rush\\"
 #define NS4_OUT_DIRECTORY_NUMBERS			NS4_OUT_DIRECTORY u8"Numbered\\"
 #define NS4_IGNORE_REVERB					true
 #define NS4_NO_PROGRAM_CHANGE_SORT			true
@@ -16,6 +16,12 @@
 #define NS4_ENVELOPE_VOL_CURVE				20.0
 #define NS4_ENVELOPE_POINT_CURVE			40.0
 
+#define NS4_OUTPUT_HZ						22050 * 2
+
+#define NS4_OVERSAMPLING					(1 << 2)
+#define NS4_OVERSAMPLING_BW					22050.0 / 4.0
+#define NS4_ANTI_ALIASING_LEVEL				2
+#define NS4_ANTI_ALIASING_HZ				20000.0
 
 { u8"San Francisco Rush - Extreme Racing (U) (M3) 00000005 006FE9C4 Midway Intro.mid", u8"", u8"Midway Intro", 0 },
 { u8"San Francisco Rush - Extreme Racing (U) (M3) 00000004 006FDA3C.mid", u8"", u8"Title Screen", 0,

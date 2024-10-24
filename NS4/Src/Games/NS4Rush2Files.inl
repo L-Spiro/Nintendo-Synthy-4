@@ -5,7 +5,7 @@
 #define NS4_BANK							u8"00"
 #define NS4_REVERB_TRACKS					0
 #define NS4_CURVE							40.0
-#define NS4_OUT_DIRECTORY					u8"T:\\N64OST\\Rush 2\\"
+#define NS4_OUT_DIRECTORY					u8"C:\\N64OST\\Rush 2\\"
 #define NS4_OUT_DIRECTORY_NUMBERS			NS4_OUT_DIRECTORY u8"Numbered\\"
 #define NS4_IGNORE_REVERB					true
 #define NS4_NO_PROGRAM_CHANGE_SORT			true
@@ -13,6 +13,11 @@
 //#define NS4_REL_MULTIPLIER					(1.0)
 #define NS4_ENVELOPE_VOL_CURVE				20.0
 #define NS4_ENVELOPE_POINT_CURVE			40.0
+
+#define NS4_OVERSAMPLING					(1 << 2)
+#define NS4_OVERSAMPLING_BW					22050.0 / 4.0
+#define NS4_ANTI_ALIASING_LEVEL				2
+#define NS4_ANTI_ALIASING_HZ				20000.0
 
 { u8"Rush 2 - Extreme Racing USA (U) 0000000B 00977C10 Title.mid", u8"", u8"Title", 0,
 	1, {

@@ -12,10 +12,10 @@
 #define NS4_WET_FILTER_FREQ					8832.0//8832.0//(NS4_ORIG_HZ / std::pow( 2.0, 1.75 ))
 #define NS4_ENV_MULTIPLIER					(1.0 / 3.0)
 
-#define NS4_OUTPUT_HZ						44100
+//#define NS4_OUTPUT_HZ						44100
 
 #define NS4_OVERSAMPLING					(1 << 2)
-#define NS4_OVERSAMPLING_BW					22050.0 / 2.0
+#define NS4_OVERSAMPLING_BW					22050.0 / 4.0
 #define NS4_ANTI_ALIASING_LEVEL				2
 #define NS4_ANTI_ALIASING_HZ				20000.0
 
