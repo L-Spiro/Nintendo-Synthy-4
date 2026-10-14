@@ -427,7 +427,7 @@ int oldmain() {
 //#include "Src/Games/NS4WormsArmageddonFiles.inl"
 //#include "Src/Games/NS4MicroMachines64TurboFiles.inl"
 //#include "Src/Games/NS4GloverFiles.inl"
-#include "Src/Games/NS4GloverPrototypeFiles.inl"
+//#include "Src/Games/NS4GloverPrototypeFiles.inl"
 //#include "Src/Games/NS4ArmyMenAirCombatFiles.inl"
 //#include "Src/Games/NS4ArmyMenSargesHeroesFiles.inl"
 //#include "Src/Games/NS4Gex3DeepCoverGeckoFiles.inl"
@@ -511,6 +511,8 @@ int oldmain() {
 //#include "Src/Games/NS4VirtualProWrestling64Files.inl"
 
 //#include "Src/Games/NS4OnegaiMonstersFiles.inl"
+
+#include "Src/Games/NS4Robotron64Files.inl"
 #else
 		{}
 #endif
