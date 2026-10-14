@@ -1123,5 +1123,8 @@
     <None Include="Src\Games\NS4GloverPrototypeFiles.inl">
       <Filter>Header Files\Games</Filter>
     </None>
+    <None Include="Src\Games\NS4Robotron64Files.inl">
+      <Filter>Header Files\Games</Filter>
+    </None>
   </ItemGroup>
 </Project>

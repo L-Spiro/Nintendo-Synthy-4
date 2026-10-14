@@ -361,6 +361,7 @@
     <None Include="Src\Games\NS4ReVoltFiles.inl" />
     <None Include="Src\Games\NS4RoadstersTrophyFiles.inl" />
     <None Include="Src\Games\NS4RobotPonkotsu64Files.inl" />
+    <None Include="Src\Games\NS4Robotron64Files.inl" />
     <None Include="Src\Games\NS4Rush2Files.inl" />
     <None Include="Src\Games\NS4SaikyoHaboShogiFiles.inl" />
     <None Include="Src\Games\NS4SanFranciscoRushFiles.inl" />
