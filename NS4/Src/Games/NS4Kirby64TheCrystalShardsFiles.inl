@@ -96,5 +96,5 @@
 { u8"Kirby 64 - The Crystal Shards (U) 00000018 002806D8.mid", u8"Kirby 64 - The Crystal Shards (U) 00000018 002806D8.mid TrackParseDebug.txt", u8"Game Over", 0 },
 { u8"Kirby 64 - The Crystal Shards (U) 00000005 0025BA60.mid", u8"Kirby 64 - The Crystal Shards (U) 00000005 0025BA60.mid TrackParseDebug.txt", u8"Kirby Clear Dance 1 (Unused)", 0 },
 { u8"Kirby 64 - The Crystal Shards (U) 00000004 0025B518.mid", u8"Kirby 64 - The Crystal Shards (U) 00000004 0025B518.mid TrackParseDebug.txt", u8"Kirby Clear Dance 2 (Unused)", 0 },
-{ u8"Kirby 64 - The Crystal Shards (U) 00000007 0025C274.mid", u8"Kirby 64 - The Crystal Shards (U) 00000007 0025C274.mid TrackParseDebug.txt", u8"Unused [“Kine’s Theme” from Kirby’s Dream Land 2]", 0 },
+{ u8"Kirby 64 - The Crystal Shards (U) 00000007 0025C274.mid", u8"Kirby 64 - The Crystal Shards (U) 00000007 0025C274.mid TrackParseDebug.txt", u8"Unused [“Friends 3” from Kirby’s Dream Land 3]", 0 },
 //{ u8"Kirby 64 - The Crystal Shards (U) 0000003E 002A8C38.mid", u8"Kirby 64 - The Crystal Shards (U) 0000003E 002A8C38.mid TrackParseDebug.txt", u8"0000003E 002A8C38", 0 },
