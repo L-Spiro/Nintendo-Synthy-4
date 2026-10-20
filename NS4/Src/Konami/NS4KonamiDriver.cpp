@@ -1,0 +1,1718 @@
+#include "NS4KonamiDriver.h"
+
+#include <cstdio>
+#include <cstring>
+
+
+namespace ns4 {
+
+	// == Members.
+	/** The pitch table: playback ratios for semitones 0-72 (60 = 1.0), plus a guard entry (ROM 0x0B9A58). */
+	const float CKonamiDriver::m_fPitchTable[74] = {
+		0.03125f, 0.0331082195f, 0.0350769386f, 0.0371627174f, 0.0393725298f, 0.0417137183f,
+		0.0441941544f, 0.0468220636f, 0.0496062487f, 0.0525559671f, 0.0556811243f, 0.0589920953f,
+		0.0625f, 0.066216439f, 0.0701538771f, 0.0743254349f, 0.0787450597f, 0.0834274366f,
+		0.0883883089f, 0.0936441272f, 0.0992124975f, 0.105111934f, 0.111362249f, 0.117984191f,
+		0.125f, 0.132432878f, 0.140307754f, 0.14865087f, 0.157490119f, 0.166854873f,
+		0.176776618f, 0.187288254f, 0.198424995f, 0.210223868f, 0.222724497f, 0.235968381f,
+		0.25f, 0.264865756f, 0.280615509f, 0.297301739f, 0.314980239f, 0.333709747f,
+		0.353553236f, 0.374576509f, 0.39684999f, 0.420447737f, 0.445448995f, 0.471936762f,
+		0.5f, 0.529731512f, 0.561231017f, 0.594603479f, 0.629960477f, 0.667419493f,
+		0.707106471f, 0.749153018f, 0.79369998f, 0.840895474f, 0.890897989f, 0.943873525f,
+		1.0f, 1.05946302f, 1.12246203f, 1.18920696f, 1.25992095f, 1.33483899f,
+		1.41421294f, 1.49830604f, 1.58739996f, 1.68179095f, 1.78179598f, 1.88774705f,
+		2.0f, 2.0f,
+	};
+
+	/** The envelope-time table (ROM 0x0B9B80). */
+	const uint16_t CKonamiDriver::m_ui16EnvelopeTable[128] = {
+		    0,     1,     2,     2,     3,     4,     5,     6,     7,     8,     9,    10,    11,    11,    12,    13,
+		   14,    15,    16,    17,    18,    19,    20,    21,    22,    24,    26,    28,    30,    31,    32,    34,
+		   36,    38,    40,    42,    44,    46,    50,    54,    58,    62,    66,    70,    74,    77,    80,    84,
+		   88,    94,   102,   110,   118,   124,   132,   140,   148,   154,   160,   168,   176,   192,   208,   224,
+		  240,   254,   268,   284,   300,   314,   328,   344,   360,   390,   420,   450,   480,   504,   528,   554,
+		  580,   610,   640,   670,   700,   760,   820,   880,   940,  1000,  1060,  1120,  1180,  1240,  1300,  1360,
+		 1420,  1520,  1640,  1760,  1880,  2000,  2120,  2260,  2400,  2500,  2600,  2700,  2800,  3040,  3280,  3540,
+		 3800,  4040,  4280,  4540,  4800,  5040,  5280,  5540,  5800,  6200,  6600,  7000,  7600,  8200,  8800,  9600,
+	};
+
+	/** The vibrato wave (ROM 0x0B9C80). */
+	const uint8_t CKonamiDriver::m_ui8VibratoTable[32] = {
+		  0,  32,  56,  80, 104, 128, 144, 160, 176, 192, 208, 224, 232, 240, 248, 252,
+		255, 252, 248, 240, 232, 224, 208, 192, 176, 160, 144, 128, 104,  80,  56,  32,
+	};
+
+	/** The random-pitch table (ROM 0x0B9CA0). */
+	const uint8_t CKonamiDriver::m_ui8RandomTable[128] = {
+		0x9F, 0x3C, 0xB2, 0x52, 0xAF, 0x45, 0xC7, 0x89, 0x10, 0x7F, 0xE0, 0x9D, 0xDC, 0x1F, 0x61, 0x16,
+		0x39, 0xC9, 0x9C, 0xEB, 0x57, 0x08, 0x66, 0xF8, 0x5A, 0x24, 0xBF, 0x0E, 0x3E, 0x15, 0x4B, 0xDB,
+		0xAB, 0xF5, 0x31, 0x0C, 0x43, 0x02, 0x55, 0xDE, 0x41, 0xDA, 0xBD, 0xAE, 0x19, 0xB0, 0x48, 0x57,
+		0xBA, 0xA3, 0x36, 0x0B, 0xF9, 0xDF, 0x17, 0xA8, 0x04, 0x0C, 0xE0, 0x91, 0x18, 0x5D, 0xDD, 0xD3,
+		0x28, 0x8A, 0xF2, 0x11, 0x59, 0x6F, 0x06, 0x0A, 0x34, 0x2A, 0x79, 0xAC, 0x5E, 0xA7, 0x83, 0xC6,
+		0x39, 0xC1, 0xB4, 0x3A, 0x3F, 0xFE, 0x4F, 0xEF, 0x1F, 0x00, 0x30, 0x99, 0x4C, 0x28, 0x83, 0xED,
+		0x8A, 0x2F, 0x2C, 0x66, 0x3F, 0xD6, 0x6C, 0xB7, 0x49, 0x22, 0xBC, 0x65, 0xFA, 0xCF, 0x02, 0xB1,
+		0x46, 0xF0, 0x9A, 0xD7, 0xE2, 0x0F, 0x11, 0xC5, 0x74, 0xF6, 0x7A, 0x2C, 0x8F, 0xFB, 0x19, 0x6A,
+	};
+
+	/** The driver's default sound (ROM 0x0BA53C). */
+	const CKonamiDriver::NS4_KON_SOUND CKonamiDriver::m_ksDefaultSound = { 0, 0, 0x7F, 0x00, 0x00, 0x1F, 0x40 };
+
+	/** Castlevania: Legacy of Darkness (U), bank 0 instruments (ROM 0x0B9D28-0x0B9FE4). */
+	static const CKonamiDriver::NS4_KON_SOUND g_ksCastlevaniaLegacyOfDarknessUBank0[] = {
+		// Transpose, Detune, Attack, Decay, Sustain, Release, Pan.
+		{    4,    4, 0x7F, 0x00, 0x00, 0x1F, 0x40 },	// 00
+		{    0,    4, 0x7F, 0x00, 0x00, 0x1F, 0x40 },	// 01
+		{    0,    4, 0x7F, 0x00, 0x00, 0x1F, 0x40 },	// 02
+		{    0,    4, 0x7F, 0x00, 0x00, 0x1F, 0x40 },	// 03
+		{    0,    4, 0x7F, 0x00, 0x00, 0x1F, 0x40 },	// 04
+		{    0,    0, 0x7F, 0x00, 0x00, 0x1F, 0x40 },	// 05
+		{    0,    4, 0x7F, 0x00, 0x00, 0x1F, 0x40 },	// 06
+		{   17,  -30, 0x7F, 0x00, 0x00, 0x1F, 0x40 },	// 07
+		{   -6,   30, 0x7F, 0x00, 0x00, 0x1F, 0x40 },	// 08
+		{   -3,   30, 0x7F, 0x00, 0x00, 0x1F, 0x40 },	// 09
+		{   -4,    0, 0x7F, 0xEF, 0x28, 0x1F, 0x40 },	// 0A
+		{   42,   25, 0x7F, 0x00, 0x00, 0x1F, 0x40 },	// 0B
+		{   30,   25, 0x7F, 0x00, 0x00, 0x1F, 0x40 },	// 0C
+		{   18,   28, 0x7F, 0x00, 0x00, 0x1F, 0x40 },	// 0D
+		{    6,   30, 0x7F, 0x00, 0x00, 0x1F, 0x40 },	// 0E
+		{   -8,   23, 0x7F, 0x00, 0x00, 0x1F, 0x40 },	// 0F
+		{    6,   30, 0x7F, 0x00, 0x00, 0x1F, 0x40 },	// 10
+		{   27,   15, 0x7F, 0x00, 0x00, 0x1F, 0x40 },	// 11
+		{   10,   22, 0x7F, 0x00, 0x00, 0x1F, 0x40 },	// 12
+		{   -4,   15, 0x7F, 0x00, 0x00, 0x1F, 0x40 },	// 13
+		{   11,   20, 0x7F, 0x00, 0x00, 0x1F, 0x40 },	// 14
+		{   -8,    4, 0x7F, 0x00, 0x00, 0x1F, 0x40 },	// 15
+		{   -2,    4, 0x7F, 0x10, 0x29, 0x1F, 0x40 },	// 16
+		{   -2,    4, 0x7F, 0x00, 0x00, 0x1F, 0x40 },	// 17
+		{    6,   28, 0x7F, 0x00, 0x00, 0x1F, 0x40 },	// 18
+		{   25,   20, 0x7F, 0x00, 0x00, 0x1F, 0x40 },	// 19
+		{   19,  -30, 0x7F, 0x00, 0x00, 0x1F, 0x40 },	// 1A
+		{   21,   25, 0x7F, 0x10, 0x09, 0x1F, 0x40 },	// 1B
+		{    4,    8, 0x7F, 0x10, 0x0D, 0x1F, 0x40 },	// 1C
+		{    4,    8, 0x7F, 0x00, 0x00, 0x1F, 0x40 },	// 1D
+		{    4,    8, 0x7F, 0x00, 0x00, 0x1F, 0x40 },	// 1E
+		{   -8,    8, 0x7F, 0x00, 0x00, 0x1F, 0x40 },	// 1F
+		{   25,   30, 0x7F, 0x10, 0x02, 0x14, 0x40 },	// 20
+		{   -8,    8, 0x7F, 0x00, 0x00, 0x1F, 0x40 },	// 21
+		{   -8,    8, 0x7F, 0x00, 0x00, 0x1F, 0x40 },	// 22
+		{   -8,    8, 0x7F, 0x00, 0x00, 0x1F, 0x40 },	// 23
+		{   -8,    8, 0x7F, 0x00, 0x00, 0x1F, 0x40 },	// 24
+		{   -8,    8, 0x7F, 0x00, 0x00, 0x1F, 0x40 },	// 25
+		{   11,    8, 0x7F, 0x00, 0x00, 0x1F, 0x40 },	// 26
+		{   11,   26, 0x7F, 0x00, 0x00, 0x1F, 0x40 },	// 27
+		{   -2,   30, 0x7F, 0x00, 0x00, 0x1F, 0x40 },	// 28
+		{   23,   25, 0x7F, 0x10, 0x19, 0x1F, 0x40 },	// 29
+		{   11,   28, 0x7F, 0x10, 0x20, 0x1F, 0x40 },	// 2A
+		{   -1,   28, 0x7F, 0x10, 0x17, 0x1F, 0x40 },	// 2B
+		{  -13,   28, 0x7F, 0x10, 0x1D, 0x1F, 0x40 },	// 2C
+		{  -25,   28, 0x7F, 0x10, 0x21, 0x1F, 0x40 },	// 2D
+		{   28,    7, 0x7F, 0x00, 0x00, 0x1F, 0x40 },	// 2E
+		{    9,    8, 0x7F, 0x01, 0x1A, 0x1F, 0x40 },	// 2F
+		{   -8,    8, 0x7F, 0x00, 0x00, 0x1F, 0x40 },	// 30
+		{   -1,    7, 0x7F, 0x00, 0x00, 0x1F, 0x40 },	// 31
+		{   -4,   30, 0x7F, 0x10, 0x01, 0x1F, 0x40 },	// 32
+		{   -6,   20, 0x7F, 0x00, 0x00, 0x1F, 0x40 },	// 33
+		{   -6,   28, 0x7F, 0x00, 0x00, 0x1F, 0x40 },	// 34
+		{   -1,   28, 0x7F, 0x00, 0x00, 0x1F, 0x40 },	// 35
+		{    6,   28, 0x7F, 0x00, 0x00, 0x1F, 0x40 },	// 36
+		{  -10,   28, 0x7F, 0x00, 0x00, 0x1F, 0x40 },	// 37
+		{  -23,   19, 0x7F, 0x00, 0x00, 0x1F, 0x40 },	// 38
+		{   -9,  -11, 0x7F, 0x00, 0x00, 0x1F, 0x40 },	// 39
+		{  -30,    4, 0x7F, 0x00, 0x00, 0x1F, 0x40 },	// 3A
+		{    2,    5, 0x7F, 0x00, 0x00, 0x1F, 0x40 },	// 3B
+		{    1,   26, 0x7F, 0x00, 0x00, 0x1F, 0x40 },	// 3C
+		{   -4,   25, 0x7F, 0x10, 0x23, 0x1F, 0x40 },	// 3D
+		{  -10,  -18, 0x7F, 0x00, 0x00, 0x1F, 0x40 },	// 3E
+		{   -5,  -74, 0x7F, 0x00, 0x00, 0x1F, 0x40 },	// 3F
+		{   -6,   35, 0x7F, 0x00, 0x00, 0x1F, 0x40 },	// 40
+		{   -2,   -4, 0x7F, 0x00, 0x00, 0x1F, 0x40 },	// 41
+		{    1,   20, 0x7F, 0x00, 0x00, 0x1F, 0x40 },	// 42
+		{   18,   29, 0x7F, 0x00, 0x00, 0x1F, 0x40 },	// 43
+		{    6,   29, 0x7F, 0x00, 0x00, 0x1F, 0x40 },	// 44
+		{   18,   25, 0x7F, 0x00, 0x00, 0x1F, 0x40 },	// 45
+		{    0,   -3, 0x7F, 0x00, 0x00, 0x1F, 0x40 },	// 46
+		{   15,    4, 0x7F, 0x00, 0x00, 0x1F, 0x40 },	// 47
+		{   -3,    8, 0x7F, 0x00, 0x00, 0x1F, 0x40 },	// 48
+		{   20,    8, 0x7F, 0x00, 0x00, 0x1F, 0x40 },	// 49
+		{    4,    0, 0x7F, 0x00, 0x00, 0x1F, 0x40 },	// 4A
+		{   26,    8, 0x7F, 0x00, 0x00, 0x1F, 0x40 },	// 4B
+		{    4,    8, 0x7F, 0x00, 0x00, 0x1F, 0x40 },	// 4C
+		{    4,    8, 0x7F, 0x00, 0x00, 0x1F, 0x40 },	// 4D
+		{   11,   13, 0x7F, 0x00, 0x00, 0x1F, 0x40 },	// 4E
+		{   -1,   20, 0x7F, 0x00, 0x00, 0x1F, 0x40 },	// 4F
+		{   -9,   25, 0x7F, 0x00, 0x00, 0x1F, 0x40 },	// 50
+		{   -9,   -8, 0x7F, 0x10, 0x1C, 0x1F, 0x40 },	// 51
+		{   -5,    4, 0x7F, 0x00, 0x00, 0x1F, 0x40 },	// 52
+		{   -6,   36, 0x7F, 0x00, 0x00, 0x1F, 0x40 },	// 53
+		{   -6,   36, 0x7F, 0x00, 0x00, 0x1F, 0x40 },	// 54
+		{   -6,   36, 0x7F, 0x00, 0x00, 0x1F, 0x40 },	// 55
+		{    5,    0, 0x7F, 0x00, 0x00, 0x1F, 0x40 },	// 56
+		{    1,   50, 0x7F, 0x10, 0x14, 0x1F, 0x40 },	// 57
+		{   -6,    0, 0x7F, 0x00, 0x00, 0x1F, 0x40 },	// 58
+		{   -6,    0, 0x7F, 0x00, 0x00, 0x1F, 0x40 },	// 59
+		{   -8,   11, 0x7F, 0x00, 0x00, 0x1F, 0x40 },	// 5A
+		{    9,    1, 0x7F, 0x10, 0x1D, 0x1F, 0x40 },	// 5B
+		{   11,    1, 0x7F, 0x10, 0x1E, 0x1F, 0x40 },	// 5C
+		{   26,   90, 0x7F, 0x10, 0x13, 0x1F, 0x40 },	// 5D
+		{  -10,   27, 0x7F, 0x10, 0x05, 0x1F, 0x40 },	// 5E
+		{   31,   27, 0x7F, 0x00, 0x00, 0x1F, 0x40 },	// 5F
+		{   -4,    0, 0x7F, 0x00, 0x00, 0x1F, 0x40 },	// 60
+		{   -5,    0, 0x7F, 0x00, 0x00, 0x1F, 0x40 },	// 61
+		{  -30,   28, 0x7F, 0x00, 0x00, 0x1F, 0x40 },	// 62
+		{   10,   25, 0x7F, 0x00, 0x00, 0x1F, 0x40 },	// 63
+	};
+
+	/** Castlevania: Legacy of Darkness (U), bank 1 instruments (ROM 0x0B9FE4-0x0BA539). */
+	static const CKonamiDriver::NS4_KON_SOUND g_ksCastlevaniaLegacyOfDarknessUBank1[] = {
+		// Transpose, Detune, Attack, Decay, Sustain, Release, Pan.
+		{    6,   28, 0x7F, 0x00, 0x00, 0x1F, 0x40 },	// 00
+		{    6,   28, 0x7F, 0x00, 0x00, 0x1F, 0x40 },	// 01
+		{    1,    4, 0x7F, 0x00, 0x00, 0x1F, 0x40 },	// 02
+		{    0,    4, 0x7F, 0x00, 0x00, 0x1F, 0x40 },	// 03
+		{    0,    4, 0x7F, 0x00, 0x00, 0x1F, 0x40 },	// 04
+		{    0,    4, 0x7F, 0x00, 0x00, 0x1F, 0x40 },	// 05
+		{    1,   29, 0x7F, 0x00, 0x00, 0x1F, 0x40 },	// 06
+		{    1,   29, 0x7F, 0x00, 0x00, 0x1F, 0x40 },	// 07
+		{    1,   29, 0x7F, 0x00, 0x00, 0x1F, 0x40 },	// 08
+		{    1,   29, 0x7F, 0x00, 0x00, 0x1F, 0x40 },	// 09
+		{    1,   29, 0x7F, 0x00, 0x00, 0x1F, 0x40 },	// 0A
+		{    1,   29, 0x7F, 0x00, 0x00, 0x1F, 0x40 },	// 0B
+		{    1,   29, 0x7F, 0x00, 0x00, 0x1F, 0x40 },	// 0C
+		{    1,   29, 0x7F, 0x00, 0x00, 0x1F, 0x40 },	// 0D
+		{    1,   29, 0x7F, 0x00, 0x00, 0x1F, 0x40 },	// 0E
+		{    1,   29, 0x7F, 0x00, 0x00, 0x1F, 0x40 },	// 0F
+		{    1,   29, 0x7F, 0x00, 0x00, 0x1F, 0x40 },	// 10
+		{    1,   29, 0x7F, 0x00, 0x00, 0x1F, 0x40 },	// 11
+		{    1,    4, 0x7F, 0x00, 0x00, 0x1F, 0x40 },	// 12
+		{    1,    4, 0x7F, 0x00, 0x00, 0x1F, 0x40 },	// 13
+		{    1,    4, 0x7F, 0x00, 0x00, 0x1F, 0x40 },	// 14
+		{    1,   29, 0x7F, 0x00, 0x00, 0x1F, 0x40 },	// 15
+		{    1,   29, 0x7F, 0x00, 0x00, 0x1F, 0x40 },	// 16
+		{    1,   29, 0x7F, 0x00, 0x00, 0x1F, 0x40 },	// 17
+		{   -4,   46, 0x7F, 0x00, 0x00, 0x1F, 0x40 },	// 18
+		{   -4,   46, 0x7F, 0x00, 0x00, 0x1F, 0x40 },	// 19
+		{    1,   29, 0x7F, 0x00, 0x00, 0x1F, 0x40 },	// 1A
+		{   -4,   46, 0x7F, 0x00, 0x00, 0x1F, 0x40 },	// 1B
+		{   -4,   46, 0x7F, 0x00, 0x00, 0x1F, 0x40 },	// 1C
+		{   -4,   46, 0x7F, 0x00, 0x00, 0x1F, 0x40 },	// 1D
+		{    1,   29, 0x7F, 0x00, 0x00, 0x1F, 0x40 },	// 1E
+		{    1,   29, 0x7F, 0x00, 0x00, 0x1F, 0x40 },	// 1F
+		{   -4,   46, 0x7F, 0x00, 0x00, 0x1F, 0x40 },	// 20
+		{    1,   29, 0x7F, 0x00, 0x00, 0x1F, 0x40 },	// 21
+		{    1,   29, 0x7F, 0x00, 0x00, 0x1F, 0x40 },	// 22
+		{   -4,   46, 0x7F, 0x00, 0x00, 0x1F, 0x40 },	// 23
+		{   -4,   46, 0x7F, 0x00, 0x00, 0x1F, 0x40 },	// 24
+		{   -4,   46, 0x7F, 0x00, 0x00, 0x1F, 0x40 },	// 25
+		{   -4,   46, 0x7F, 0x00, 0x00, 0x1F, 0x40 },	// 26
+		{   -4,   46, 0x7F, 0x00, 0x00, 0x1F, 0x40 },	// 27
+		{   -4,   46, 0x7F, 0x00, 0x00, 0x1F, 0x40 },	// 28
+		{   -4,   46, 0x7F, 0x00, 0x00, 0x1F, 0x40 },	// 29
+		{   -4,   46, 0x7F, 0x00, 0x00, 0x1F, 0x40 },	// 2A
+		{   -4,   46, 0x7F, 0x00, 0x00, 0x1F, 0x40 },	// 2B
+		{    1,   29, 0x7F, 0x00, 0x00, 0x1F, 0x40 },	// 2C
+		{   -4,   46, 0x7F, 0x00, 0x00, 0x1F, 0x40 },	// 2D
+		{   -4,   46, 0x7F, 0x00, 0x00, 0x1F, 0x40 },	// 2E
+		{   -4,   46, 0x7F, 0x00, 0x00, 0x1F, 0x40 },	// 2F
+		{   -4,   46, 0x7F, 0x00, 0x00, 0x1F, 0x40 },	// 30
+		{   -4,   46, 0x7F, 0x00, 0x00, 0x1F, 0x40 },	// 31
+		{   -4,   46, 0x7F, 0x00, 0x00, 0x1F, 0x40 },	// 32
+		{   -4,   46, 0x7F, 0x00, 0x00, 0x1F, 0x40 },	// 33
+		{   -4,   46, 0x7F, 0x00, 0x00, 0x1F, 0x40 },	// 34
+		{   -4,   46, 0x7F, 0x00, 0x00, 0x1F, 0x40 },	// 35
+		{   -4,   46, 0x7F, 0x00, 0x00, 0x1F, 0x40 },	// 36
+		{   -4,   46, 0x7F, 0x00, 0x00, 0x1F, 0x40 },	// 37
+		{   -4,   46, 0x7F, 0x00, 0x00, 0x1F, 0x40 },	// 38
+		{   -4,   46, 0x7F, 0x00, 0x00, 0x1F, 0x40 },	// 39
+		{   -4,   46, 0x7F, 0x00, 0x00, 0x1F, 0x40 },	// 3A
+		{   -4,   46, 0x7F, 0x00, 0x00, 0x1F, 0x40 },	// 3B
+		{   -4,   46, 0x7F, 0x00, 0x00, 0x1F, 0x40 },	// 3C
+		{   -4,   46, 0x7F, 0x00, 0x00, 0x1F, 0x40 },	// 3D
+		{   -4,   46, 0x7F, 0x00, 0x00, 0x1F, 0x40 },	// 3E
+		{   -4,   46, 0x7F, 0x00, 0x00, 0x1F, 0x40 },	// 3F
+		{    1,   29, 0x7F, 0x00, 0x00, 0x1F, 0x40 },	// 40
+		{    1,   29, 0x7F, 0x00, 0x00, 0x1F, 0x40 },	// 41
+		{   -4,   46, 0x7F, 0x00, 0x00, 0x1F, 0x40 },	// 42
+		{    1,   29, 0x7F, 0x00, 0x00, 0x1F, 0x40 },	// 43
+		{    1,   29, 0x7F, 0x00, 0x00, 0x1F, 0x40 },	// 44
+		{    1,   29, 0x7F, 0x00, 0x00, 0x1F, 0x40 },	// 45
+		{    1,   29, 0x7F, 0x00, 0x00, 0x1F, 0x40 },	// 46
+		{   -4,   46, 0x7F, 0x00, 0x00, 0x1F, 0x40 },	// 47
+		{    1,   29, 0x7F, 0x00, 0x00, 0x1F, 0x40 },	// 48
+		{   -4,   46, 0x7F, 0x00, 0x00, 0x1F, 0x40 },	// 49
+		{   -4,   46, 0x7F, 0x00, 0x00, 0x1F, 0x40 },	// 4A
+		{   -4,   46, 0x7F, 0x00, 0x00, 0x1F, 0x40 },	// 4B
+		{   -4,   46, 0x7F, 0x00, 0x00, 0x1F, 0x40 },	// 4C
+		{    1,   29, 0x7F, 0x00, 0x00, 0x1F, 0x40 },	// 4D
+		{    0,   22, 0x7F, 0x00, 0x00, 0x1F, 0x40 },	// 4E
+		{   -6,   28, 0x7F, 0x00, 0x00, 0x1F, 0x40 },	// 4F
+		{   -8,    8, 0x7F, 0x00, 0x00, 0x1F, 0x40 },	// 50
+		{   -8,    8, 0x7F, 0x00, 0x00, 0x1F, 0x40 },	// 51
+		{   -8,    8, 0x7F, 0x00, 0x00, 0x1F, 0x40 },	// 52
+		{   -8,    8, 0x7F, 0x00, 0x00, 0x1F, 0x40 },	// 53
+		{   -8,    8, 0x7F, 0x00, 0x00, 0x1F, 0x40 },	// 54
+		{   -8,    8, 0x7F, 0x00, 0x00, 0x1F, 0x40 },	// 55
+		{   -8,    8, 0x7F, 0x00, 0x00, 0x1F, 0x40 },	// 56
+		{   -8,    8, 0x7F, 0x00, 0x00, 0x1F, 0x40 },	// 57
+		{   -8,    8, 0x7F, 0x00, 0x00, 0x1F, 0x40 },	// 58
+		{   -8,    8, 0x7F, 0x00, 0x00, 0x1F, 0x40 },	// 59
+		{   -8,    8, 0x7F, 0x00, 0x00, 0x1F, 0x40 },	// 5A
+		{   -6,   28, 0x7F, 0x00, 0x00, 0x1F, 0x40 },	// 5B
+		{   -6,   28, 0x7F, 0x00, 0x00, 0x1F, 0x40 },	// 5C
+		{   -6,   28, 0x7F, 0x00, 0x00, 0x1F, 0x40 },	// 5D
+		{   -6,   28, 0x7F, 0x00, 0x00, 0x1F, 0x40 },	// 5E
+		{   -6,   28, 0x7F, 0x00, 0x00, 0x1F, 0x40 },	// 5F
+		{   -6,   28, 0x7F, 0x00, 0x00, 0x1F, 0x40 },	// 60
+		{   -6,   28, 0x7F, 0x00, 0x00, 0x1F, 0x40 },	// 61
+		{   -6,   28, 0x7F, 0x00, 0x00, 0x1F, 0x40 },	// 62
+		{   -6,   28, 0x7F, 0x00, 0x00, 0x1F, 0x40 },	// 63
+		{   -6,   28, 0x7F, 0x00, 0x00, 0x1F, 0x40 },	// 64
+		{   -6,   28, 0x7F, 0x00, 0x00, 0x1F, 0x40 },	// 65
+		{   -6,   28, 0x7F, 0x00, 0x00, 0x1F, 0x40 },	// 66
+		{   -6,   28, 0x7F, 0x00, 0x00, 0x1F, 0x40 },	// 67
+		{   -6,   28, 0x7F, 0x00, 0x00, 0x1F, 0x40 },	// 68
+		{   -6,   28, 0x7F, 0x00, 0x00, 0x1F, 0x40 },	// 69
+		{   -6,   28, 0x7F, 0x00, 0x00, 0x1F, 0x40 },	// 6A
+		{   -6,   28, 0x7F, 0x00, 0x00, 0x1F, 0x40 },	// 6B
+		{   -6,   28, 0x7F, 0x00, 0x00, 0x1F, 0x40 },	// 6C
+		{   -6,   28, 0x7F, 0x00, 0x00, 0x1F, 0x40 },	// 6D
+		{   -6,   28, 0x7F, 0x00, 0x00, 0x1F, 0x40 },	// 6E
+		{   -6,   28, 0x7F, 0x00, 0x00, 0x1F, 0x40 },	// 6F
+		{  -14,   19, 0x7F, 0x00, 0x00, 0x1F, 0x40 },	// 70
+		{  -14,   19, 0x7F, 0x00, 0x00, 0x1F, 0x40 },	// 71
+		{  -14,   19, 0x7F, 0x00, 0x00, 0x1F, 0x40 },	// 72
+		{  -14,   19, 0x7F, 0x00, 0x00, 0x1F, 0x40 },	// 73
+		{  -14,   19, 0x7F, 0x00, 0x00, 0x1F, 0x40 },	// 74
+		{  -14,   19, 0x7F, 0x00, 0x00, 0x1F, 0x40 },	// 75
+		{  -14,   19, 0x7F, 0x00, 0x00, 0x1F, 0x40 },	// 76
+		{  -14,   19, 0x7F, 0x00, 0x00, 0x1F, 0x40 },	// 77
+		{  -14,   19, 0x7F, 0x00, 0x00, 0x1F, 0x40 },	// 78
+		{  -14,   19, 0x7F, 0x00, 0x00, 0x1F, 0x40 },	// 79
+		{   -8,    8, 0x7F, 0x00, 0x00, 0x1F, 0x40 },	// 7A
+		{   -6,   28, 0x7F, 0x00, 0x00, 0x1F, 0x40 },	// 7B
+		{   12,    0, 0x7F, 0x00, 0x00, 0x1F, 0x40 },	// 7C
+		{   -6,   28, 0x7F, 0x00, 0x00, 0x1F, 0x40 },	// 7D
+		{   12,    0, 0x7F, 0x00, 0x00, 0x1F, 0x40 },	// 7E
+		{   -4,   30, 0x7F, 0x00, 0x00, 0x1F, 0x40 },	// 7F
+		{   -4,   30, 0x7F, 0x00, 0x00, 0x1F, 0x40 },	// 80
+		{   -4,   30, 0x7F, 0x00, 0x00, 0x1F, 0x40 },	// 81
+		{   -4,   30, 0x7F, 0x00, 0x00, 0x1F, 0x40 },	// 82
+		{   -4,   30, 0x7F, 0x00, 0x00, 0x1F, 0x40 },	// 83
+		{   -4,   30, 0x7F, 0x00, 0x00, 0x1F, 0x40 },	// 84
+		{   -4,   30, 0x7F, 0x00, 0x00, 0x1F, 0x40 },	// 85
+		{   -4,   30, 0x7F, 0x00, 0x00, 0x1F, 0x40 },	// 86
+		{   -4,   30, 0x7F, 0x00, 0x00, 0x1F, 0x40 },	// 87
+		{   -4,   30, 0x7F, 0x00, 0x00, 0x1F, 0x40 },	// 88
+		{   -4,   30, 0x7F, 0x00, 0x00, 0x1F, 0x40 },	// 89
+		{   -4,   30, 0x7F, 0x00, 0x00, 0x1F, 0x40 },	// 8A
+		{    6,   28, 0x7F, 0x00, 0x00, 0x1F, 0x40 },	// 8B
+		{    6,   28, 0x7F, 0x00, 0x00, 0x1F, 0x40 },	// 8C
+		{    9,   26, 0x7F, 0x00, 0x00, 0x1F, 0x40 },	// 8D
+		{   -7,   57, 0x7F, 0x00, 0x00, 0x1F, 0x40 },	// 8E
+		{   -7,   57, 0x7F, 0x00, 0x00, 0x1F, 0x40 },	// 8F
+		{   -7,   57, 0x7F, 0x00, 0x00, 0x1F, 0x40 },	// 90
+		{   -7,   57, 0x7F, 0x00, 0x00, 0x1F, 0x40 },	// 91
+		{   -6,   28, 0x7F, 0x00, 0x00, 0x1F, 0x40 },	// 92
+		{   -7,   57, 0x7F, 0x00, 0x00, 0x1F, 0x40 },	// 93
+		{    1,   29, 0x7F, 0x00, 0x00, 0x1F, 0x40 },	// 94
+		{   -6,   28, 0x7F, 0x00, 0x00, 0x1F, 0x40 },	// 95
+		{   -6,   28, 0x7F, 0x00, 0x00, 0x1F, 0x40 },	// 96
+		{   -6,   28, 0x7F, 0x00, 0x00, 0x1F, 0x40 },	// 97
+		{   -6,   28, 0x7F, 0x00, 0x00, 0x1F, 0x40 },	// 98
+		{   -6,   28, 0x7F, 0x00, 0x00, 0x1F, 0x40 },	// 99
+		{   -6,   28, 0x7F, 0x00, 0x00, 0x1F, 0x40 },	// 9A
+		{   -6,   28, 0x7F, 0x00, 0x00, 0x1F, 0x40 },	// 9B
+		{   -6,   28, 0x7F, 0x00, 0x00, 0x1F, 0x40 },	// 9C
+		{   -6,   28, 0x7F, 0x00, 0x00, 0x1F, 0x40 },	// 9D
+		{   -6,   28, 0x7F, 0x00, 0x00, 0x1F, 0x40 },	// 9E
+		{   -6,   28, 0x7F, 0x00, 0x00, 0x1F, 0x40 },	// 9F
+		{   -6,   28, 0x7F, 0x00, 0x00, 0x1F, 0x40 },	// A0
+		{   -6,   28, 0x7F, 0x00, 0x00, 0x1F, 0x40 },	// A1
+		{   -6,   28, 0x7F, 0x00, 0x00, 0x1F, 0x40 },	// A2
+		{   -6,   28, 0x7F, 0x00, 0x00, 0x1F, 0x40 },	// A3
+		{   -6,   28, 0x7F, 0x00, 0x00, 0x1F, 0x40 },	// A4
+		{   -6,   28, 0x7F, 0x00, 0x00, 0x1F, 0x40 },	// A5
+		{   -6,   28, 0x7F, 0x00, 0x00, 0x1F, 0x40 },	// A6
+		{    1,    0, 0x7F, 0x00, 0x00, 0x1F, 0x40 },	// A7
+		{  -48,    4, 0x7F, 0x00, 0x00, 0x1F, 0x40 },	// A8
+		{   -6,   28, 0x7F, 0x00, 0x00, 0x1F, 0x40 },	// A9
+		{   -6,   28, 0x7F, 0x00, 0x00, 0x1F, 0x40 },	// AA
+		{   -8,    8, 0x7F, 0x00, 0x00, 0x1F, 0x40 },	// AB
+		{   -8,    8, 0x7F, 0x00, 0x00, 0x1F, 0x40 },	// AC
+		{    2,   54, 0x7F, 0x00, 0x00, 0x1F, 0x40 },	// AD
+		{   -1,   61, 0x7F, 0x00, 0x00, 0x1F, 0x40 },	// AE
+		{  -48,    4, 0x7F, 0x00, 0x00, 0x1F, 0x40 },	// AF
+		{  -48,    4, 0x7F, 0x00, 0x00, 0x1F, 0x40 },	// B0
+		{   -4,   20, 0x7F, 0x00, 0x00, 0x1F, 0x40 },	// B1
+		{   -6,   28, 0x7F, 0x00, 0x00, 0x1F, 0x40 },	// B2
+		{    5,   20, 0x7F, 0x00, 0x00, 0x1F, 0x40 },	// B3
+		{   -1,   61, 0x7F, 0x00, 0x00, 0x1F, 0x40 },	// B4
+		{  -48,   82, 0x7F, 0x00, 0x00, 0x1F, 0x40 },	// B5
+		{  -48,   87, 0x7F, 0x00, 0x00, 0x1F, 0x40 },	// B6
+		{  -48,    4, 0x7F, 0x00, 0x00, 0x1F, 0x40 },	// B7
+		{  -48,    4, 0x7F, 0x00, 0x00, 0x1F, 0x40 },	// B8
+		{  -48,   82, 0x7F, 0x00, 0x00, 0x1F, 0x40 },	// B9
+		{  -48,   82, 0x7F, 0x00, 0x00, 0x1F, 0x40 },	// BA
+		{    0,    4, 0x7F, 0x00, 0x00, 0x1F, 0x40 },	// BB
+		{    0,    4, 0x7F, 0x00, 0x00, 0x1F, 0x40 },	// BC
+		{    0,    4, 0x7F, 0x00, 0x00, 0x1F, 0x40 },	// BD
+		{    0,    4, 0x7F, 0x00, 0x00, 0x1F, 0x40 },	// BE
+		{   -6,   28, 0x7F, 0x00, 0x00, 0x1F, 0x40 },	// BF
+		{   -6,   28, 0x7F, 0x00, 0x00, 0x1F, 0x40 },	// C0
+		{   -6,   28, 0x7F, 0x00, 0x00, 0x1F, 0x40 },	// C1
+		{   -4,   46, 0x7F, 0x00, 0x00, 0x1F, 0x40 },	// C2
+	};
+
+	/** Instrument tables for Castlevania: Legacy of Darkness (U). */
+	const CKonamiDriver::NS4_KON_TABLES CKonamiDriver::m_ktCastlevaniaLegacyOfDarknessU = {
+		{ g_ksCastlevaniaLegacyOfDarknessUBank0, g_ksCastlevaniaLegacyOfDarknessUBank1 },
+		{ uint32_t( sizeof( g_ksCastlevaniaLegacyOfDarknessUBank0 ) / sizeof( g_ksCastlevaniaLegacyOfDarknessUBank0[0] ) ),
+			uint32_t( sizeof( g_ksCastlevaniaLegacyOfDarknessUBank1 ) / sizeof( g_ksCastlevaniaLegacyOfDarknessUBank1[0] ) ) },
+		nullptr,
+		0
+	};
+
+
+	CKonamiDriver::CKonamiDriver() :
+		m_pvTracks( nullptr ),
+		m_pktTables( nullptr ),
+		m_pkcChannel( nullptr ),
+		m_stChannel( 0 ),
+		m_ui32Needle( 0 ),
+		m_ui64Tick( 0 ),
+		m_bBadRead( false ),
+		m_bStopAtLoops( true ) {
+	}
+
+
+	// == Functions.
+	/**
+	 * Loads the tracks of a Konami "TrackParseDebug" text file.  The stream must be positioned just after the first "Track N: XXXXXXXX" line,
+	 *	whose values are passed in.
+	 *
+	 * \param _isStream The text stream.
+	 * \param _ui32FirstTrack The number of the first track (as printed: 1-based).
+	 * \param _ui32FirstOffset The offset of the first track.
+	 * \return Returns true if at least one track with data was loaded.
+	 */
+	bool CKonamiDriver::LoadDebug( std::istream &_isStream, uint32_t _ui32FirstTrack, uint32_t _ui32FirstOffset ) {
+		m_vImage.clear();
+		m_vKnown.clear();
+		m_vTrackOffsets.clear();
+		m_vWarnings.clear();
+
+		m_vTrackOffsets.push_back( _ui32FirstOffset );
+		uint32_t ui32Expected = _ui32FirstTrack + 1;
+		for ( std::string sLine; std::getline( _isStream, sLine ); ) {
+			uint32_t ui32Track, ui32Offset;
+			if ( IsTrackLine( sLine, ui32Track, ui32Offset ) ) {
+				if ( ui32Track != ui32Expected ) {
+					char szBuffer[128];
+					std::snprintf( szBuffer, sizeof( szBuffer ), "Track %u found where track %u was expected.", ui32Track, ui32Expected );
+					m_vWarnings.push_back( szBuffer );
+				}
+				ui32Expected = ui32Track + 1;
+				m_vTrackOffsets.push_back( ui32Offset );
+				continue;
+			}
+			ParseLine( sLine );
+		}
+		for ( size_t I = 0; I < m_vTrackOffsets.size(); ++I ) {
+			if ( m_vTrackOffsets[I] < m_vKnown.size() && m_vKnown[m_vTrackOffsets[I]] ) { return true; }
+		}
+		return false;
+	}
+
+	/**
+	 * Determines if a line is the start of a Konami track in a "TrackParseDebug" file ("Track N: XXXXXXXX" and nothing else).
+	 *
+	 * \param _sLine The line to check.
+	 * \param _ui32Track Receives the track number.
+	 * \param _ui32Offset Receives the track offset.
+	 * \return Returns true if the line starts a Konami track.
+	 */
+	bool CKonamiDriver::IsTrackLine( const std::string &_sLine, uint32_t &_ui32Track, uint32_t &_ui32Offset ) {
+		int iRead = 0;
+		if ( std::sscanf( _sLine.c_str(), "Track %u: %X%n", &_ui32Track, &_ui32Offset, &iRead ) != 2 ) { return false; }
+		for ( size_t I = size_t( iRead ); I < _sLine.size(); ++I ) {
+			if ( _sLine[I] != '\r' && _sLine[I] != '\n' && _sLine[I] != ' ' && _sLine[I] != '\t' ) { return false; }
+		}
+		return true;
+	}
+
+	/**
+	 * Plays the loaded sequence.
+	 *
+	 * When _bStopAtLoops is true, each track stops being recorded at the end of its first master loop (EC, or an infinite E8/EA), whose
+	 *	start and end are marked with NS4_KVC_LOOP_START and NS4_KVC_LOOP_END, and playing stops once every track has looped or ended.
+	 *	This is used to find the song's structure.  When it is false, the tracks are played (and keep looping) for exactly _ui64MaxTicks
+	 *	updates or until every track has ended, and no loop markers are added.  This is used for rendering, so that tracks whose loops
+	 *	have different lengths drift against each other exactly as they do in the game.
+	 *
+	 * \param _ui32Bank The starting bank (from the play request; music normally uses bank 0).
+	 * \param _pktTables The game's instrument tables, or nullptr to use the driver's default sound for every instrument.
+	 * \param _ui64MaxTicks The maximum number of driver updates to run.
+	 * \param _bStopAtLoops If true, recording stops at each track's first loop.
+	 * \param _vTracks Receives the result of each track.
+	 * \return Returns false if nothing is loaded.
+	 */
+	bool CKonamiDriver::Play( uint32_t _ui32Bank, const NS4_KON_TABLES * _pktTables, uint64_t _ui64MaxTicks, bool _bStopAtLoops, std::vector<NS4_KON_TRACK> &_vTracks ) {
+		_vTracks.clear();
+		if ( !m_vTrackOffsets.size() ) { return false; }
+		m_bStopAtLoops = _bStopAtLoops;
+		if ( !_pktTables && _bStopAtLoops ) {
+			m_vWarnings.push_back( "No instrument tables: every instrument uses the driver's default sound (no transpose, detune, or envelope)." );
+		}
+
+		m_pktTables = _pktTables;
+		m_pvTracks = &_vTracks;
+		_vTracks.resize( m_vTrackOffsets.size() );
+		m_vChannels.resize( m_vTrackOffsets.size() );
+		m_vRecords.resize( m_vTrackOffsets.size() );
+		for ( size_t I = 0; I < m_vTrackOffsets.size(); ++I ) {
+			_vTracks[I].ui32Offset = m_vTrackOffsets[I];
+			_vTracks[I].vEvents.clear();
+			_vTracks[I].bLoops = false;
+			_vTracks[I].bEnded = false;
+
+			NS4_KON_CHANNEL &kcChan = m_vChannels[I];
+			std::memset( &kcChan, 0, sizeof( kcChan ) );
+			kcChan.ui32SeqId = 1;
+			kcChan.ui32Needle = m_vTrackOffsets[I];
+			kcChan.ui8Bank = uint8_t( _ui32Bank );
+			kcChan.ui8WaveBank = uint8_t( _ui32Bank );
+			kcChan.ui16Tempo = 0x8000;
+			kcChan.ui16TempoCounter = 0x80;
+			kcChan.ui8NoteDuration = 1;
+			kcChan.ui8HoldRatio = 1;
+			kcChan.fLastRatio = 0.0f;
+
+			NS4_KON_RECORD &krRec = m_vRecords[I];
+			std::memset( &krRec, 0, sizeof( krRec ) );
+			krRec.bRecording = true;
+		}
+
+		for ( m_ui64Tick = 0; m_ui64Tick < _ui64MaxTicks; ++m_ui64Tick ) {
+			for ( m_stChannel = 0; m_stChannel < m_vChannels.size(); ++m_stChannel ) {
+				m_pkcChannel = &m_vChannels[m_stChannel];
+				if ( m_pkcChannel->ui8StopCountdown ) {
+					if ( --m_pkcChannel->ui8StopCountdown == 0 && m_pkcChannel->bVoicePlaying ) {
+						m_pkcChannel->bVoicePlaying = false;
+						Emit( NS4_KVC_STOP );
+					}
+				}
+				if ( m_pkcChannel->ui32SeqId ) {
+					m_bBadRead = false;
+					UpdateChannel();
+				}
+			}
+
+			bool bDone = true;
+			for ( size_t I = 0; I < m_vChannels.size() && bDone; ++I ) {
+				const NS4_KON_CHANNEL &kcChan = m_vChannels[I];
+				bool bSilent = !kcChan.ui32SeqId && !kcChan.bVoicePlaying && !kcChan.ui8StopCountdown;
+				if ( !bSilent && m_vRecords[I].bRecording ) { bDone = false; }
+			}
+			if ( bDone ) { break; }
+		}
+		if ( m_ui64Tick >= _ui64MaxTicks && _bStopAtLoops ) {
+			m_vWarnings.push_back( "Stopped at the maximum length before every track ended or looped." );
+		}
+		for ( size_t I = 0; I < m_vChannels.size(); ++I ) {
+			if ( m_vRecords[I].bRecording && !m_vChannels[I].ui32SeqId ) {
+				_vTracks[I].bEnded = true;
+			}
+		}
+
+		m_pvTracks = nullptr;
+		m_pkcChannel = nullptr;
+		return true;
+	}
+
+	/**
+	 * Stores a byte in the rebuilt sequence.
+	 *
+	 * \param _ui32Offset The offset.
+	 * \param _ui8Value The byte.
+	 */
+	void CKonamiDriver::SetByte( uint32_t _ui32Offset, uint8_t _ui8Value ) {
+		if ( _ui32Offset >= 0x1000000 ) { return; }
+		if ( _ui32Offset >= m_vImage.size() ) {
+			m_vImage.resize( _ui32Offset + 1, 0 );
+			m_vKnown.resize( _ui32Offset + 1, 0 );
+		}
+		if ( m_vKnown[_ui32Offset] && m_vImage[_ui32Offset] != _ui8Value ) {
+			char szBuffer[128];
+			std::snprintf( szBuffer, sizeof( szBuffer ), "Conflicting values at %08X: %02X and %02X.", _ui32Offset, m_vImage[_ui32Offset], _ui8Value );
+			m_vWarnings.push_back( szBuffer );
+		}
+		m_vImage[_ui32Offset] = _ui8Value;
+		m_vKnown[_ui32Offset] = 1;
+	}
+
+	/**
+	 * Parses one line of the debug text.
+	 *
+	 * \param _sLine The line.
+	 */
+	void CKonamiDriver::ParseLine( const std::string &_sLine ) {
+		uint32_t ui32Offset, ui32Time, ui32Value;
+		// Notes.
+		//	00000023 Time: 00000000 NOTE   : 1A  Duration 26 (38) Length 26 (38) Velocity 78 (120) Keyboard
+		//	0000002B Time: 00000032 NOTE   : 1A  Duration 2E (46) [Repeated Length 40 (64)] Velocity 78* (120) Keyboard
+		//	00000038 Time: 00000090 NOTE   : 18* [Repeated Duration 30 (48)] Length 00 (0) Velocity 78 (120) Keyboard
+		if ( std::sscanf( _sLine.c_str(), "%X Time: %X NOTE   : %X", &ui32Offset, &ui32Time, &ui32Value ) == 3 ) {
+			size_t stPos = _sLine.find( "NOTE   : " );
+			bool bRepeat = stPos != std::string::npos && stPos + 11 < _sLine.size() && _sLine[stPos+11] == '*';
+			uint32_t ui32Pos = ui32Offset;
+			SetByte( ui32Pos++, uint8_t( bRepeat ? ui32Value + 0x68 : ui32Value ) );
+
+			size_t stFound = _sLine.find( "Drum Instrument Lookup " );
+			if ( stFound != std::string::npos && std::sscanf( _sLine.c_str() + stFound, "Drum Instrument Lookup %X", &ui32Value ) == 1 ) {
+				SetByte( ui32Pos++, uint8_t( ui32Value ) );
+			}
+			if ( _sLine.find( "[Repeated Duration" ) == std::string::npos ) {
+				stFound = _sLine.find( " Duration " );
+				if ( stFound != std::string::npos && std::sscanf( _sLine.c_str() + stFound, " Duration %X", &ui32Value ) == 1 ) {
+					SetByte( ui32Pos++, uint8_t( ui32Value ) );
+				}
+			}
+			if ( _sLine.find( "[Repeated Length" ) == std::string::npos ) {
+				stFound = _sLine.find( " Length " );
+				if ( stFound != std::string::npos && std::sscanf( _sLine.c_str() + stFound, " Length %X", &ui32Value ) == 1 ) {
+					SetByte( ui32Pos++, uint8_t( ui32Value ) );
+				}
+				stFound = _sLine.find( " Velocity " );
+				if ( stFound != std::string::npos && std::sscanf( _sLine.c_str() + stFound, " Velocity %X", &ui32Value ) == 1 ) {
+					SetByte( ui32Pos++, uint8_t( ui32Value ) );
+				}
+			}
+			else {
+				// The velocity byte has its high bit set to signal that the length is repeated.
+				stFound = _sLine.find( " Velocity " );
+				if ( stFound != std::string::npos && std::sscanf( _sLine.c_str() + stFound, " Velocity %X", &ui32Value ) == 1 ) {
+					SetByte( ui32Pos++, uint8_t( ui32Value | 0x80 ) );
+				}
+			}
+			return;
+		}
+
+		// Commands.
+		//	0000001D Time: 00000000 Command: D4  ((Instrument/Volume/Pan Initial)) Volume 69 (105) Instrument 14 (20) Pan 06 (6)
+		//	00000048 Time: 00000120 Command: E8  ((Loop from Marker)) 04 (4) Times 00 (0) 00 (0)
+		//	Each parameter byte is printed as two hex digits followed by " (decimal)".
+		int iRead = 0;
+		if ( std::sscanf( _sLine.c_str(), "%X Time: %X Command: %X%n", &ui32Offset, &ui32Time, &ui32Value, &iRead ) == 3 ) {
+			uint32_t ui32Pos = ui32Offset;
+			SetByte( ui32Pos++, uint8_t( ui32Value ) );
+			const char * pcText = _sLine.c_str();
+			// Skip the command's name ("((Name))").
+			size_t stStart = _sLine.find( "))", size_t( iRead ) );
+			stStart = (stStart == std::string::npos) ? size_t( iRead ) : stStart + 2;
+			auto IsHex = []( char _cChar ) { return (_cChar >= '0' && _cChar <= '9') || (_cChar >= 'A' && _cChar <= 'F') || (_cChar >= 'a' && _cChar <= 'f'); };
+			for ( size_t I = stStart; I + 3 < _sLine.size(); ++I ) {
+				if ( IsHex( pcText[I] ) && IsHex( pcText[I+1] ) && pcText[I+2] == ' ' && pcText[I+3] == '(' &&
+					(I == 0 || pcText[I-1] == ' ') ) {
+					uint32_t ui32Byte = 0;
+					std::sscanf( pcText + I, "%2X", &ui32Byte );
+					SetByte( ui32Pos++, uint8_t( ui32Byte ) );
+					I += 3;
+				}
+			}
+		}
+	}
+
+	/**
+	 * Reads a byte at the global read position and advances it.
+	 *
+	 * \return Returns the byte.
+	 */
+	uint8_t CKonamiDriver::ReadByte() {
+		return PeekByte( m_ui32Needle++ );
+	}
+
+	/**
+	 * Reads a byte at a given offset.
+	 *
+	 * \param _ui32Offset The offset.
+	 * \return Returns the byte.
+	 */
+	uint8_t CKonamiDriver::PeekByte( uint32_t _ui32Offset ) {
+		if ( _ui32Offset < m_vImage.size() && m_vKnown[_ui32Offset] ) { return m_vImage[_ui32Offset]; }
+		if ( !m_bBadRead ) {
+			char szBuffer[160];
+			std::snprintf( szBuffer, sizeof( szBuffer ), "Track %u read offset %08X, which is not in the debug text, at tick %llu; the track is ended there.",
+				uint32_t( m_stChannel + 1 ), _ui32Offset, static_cast<unsigned long long>(m_ui64Tick) );
+			Warn( szBuffer );
+		}
+		m_bBadRead = true;
+		return 0xFF;
+	}
+
+	/**
+	 * Adds a warning while playing.  Warnings are only kept while finding the song's structure (the first play), so that rendering
+	 *	does not repeat them.
+	 *
+	 * \param _pcText The warning.
+	 */
+	void CKonamiDriver::Warn( const char * _pcText ) {
+		if ( m_bStopAtLoops ) {
+			m_vWarnings.push_back( _pcText );
+		}
+	}
+
+	/**
+	 * Adds a synthesizer command for the current channel.
+	 *
+	 * \param _kvcCmd The command.
+	 * \param _ui32Parm0 Parameter 0.
+	 * \param _ui32Parm1 Parameter 1.
+	 * \param _fRatio The pitch ratio.
+	 */
+	void CKonamiDriver::Emit( NS4_KON_VOICE_CMDS _kvcCmd, uint32_t _ui32Parm0, uint32_t _ui32Parm1, float _fRatio ) {
+		if ( !m_vRecords[m_stChannel].bRecording ) { return; }
+		NS4_KON_VOICE_EVENT kveEvent;
+		kveEvent.ui64Tick = m_ui64Tick;
+		kveEvent.kvcCmd = _kvcCmd;
+		kveEvent.ui32Parm0 = _ui32Parm0;
+		kveEvent.ui32Parm1 = _ui32Parm1;
+		kveEvent.fRatio = _fRatio;
+		(*m_pvTracks)[m_stChannel].vEvents.push_back( kveEvent );
+	}
+
+	/**
+	 * Gets an envelope-table entry, guarding the index.
+	 *
+	 * \param _i32Idx The index.
+	 * \return Returns the table entry.
+	 */
+	uint16_t CKonamiDriver::EnvTable( int32_t _i32Idx ) {
+		if ( _i32Idx < 0 ) { _i32Idx = 0; }
+		if ( _i32Idx > 127 ) { _i32Idx = 127; }
+		return m_ui16EnvelopeTable[_i32Idx];
+	}
+
+	/**
+	 * Gets the sound-table entry for the current channel's bank and sound.
+	 *
+	 * \return Returns the sound to load.
+	 */
+	const CKonamiDriver::NS4_KON_SOUND & CKonamiDriver::SoundEntry() const {
+		uint8_t ui8Bank = m_pkcChannel->ui8Bank;
+		if ( ui8Bank < 2 && m_pktTables && m_pktTables->pksBank[ui8Bank] && m_pkcChannel->ui8Sound < m_pktTables->ui32BankTotal[ui8Bank] ) {
+			return m_pktTables->pksBank[ui8Bank][m_pkcChannel->ui8Sound];
+		}
+		return m_ksDefaultSound;
+	}
+
+
+	// == Player (player.c).
+	/**
+	 * Updates the current channel (player_update_channel(), 0x80093750).
+	 */
+	void CKonamiDriver::UpdateChannel() {
+		NS4_KON_CHANNEL &kcChan = (*m_pkcChannel);
+		kcChan.ui16TempoCounter = uint16_t( kcChan.ui16TempoCounter + (kcChan.ui16Tempo >> 8) );
+		if ( kcChan.ui16TempoCounter < 0x100 ) {
+			UpdateOffTick();
+		}
+		else {
+			kcChan.ui16TempoCounter &= 0xFF;
+			if ( --kcChan.ui8NoteDuration == 0 ) {
+				ReadData();
+				SetPitchBend();
+			}
+			else {
+				UpdateOnTick();
+			}
+			if ( kcChan.ui8TempoChangeDuration ) { UpdateTempoChange(); }
+			if ( kcChan.ui8VolumeChangeDuration ) { UpdateVolumeChange(); }
+			if ( kcChan.ui8PanChangeDuration ) { UpdatePanChange(); }
+		}
+		if ( kcChan.ui8RandomRate ) { UpdateRandom(); }
+	}
+
+	/**
+	 * Reads commands until a note, rest, tie, or the end (player_read_data(), 0x80093AFC).
+	 */
+	void CKonamiDriver::ReadData() {
+		NS4_KON_CHANNEL &kcChan = (*m_pkcChannel);
+		bool bStillPlaying = false;
+		if ( kcChan.ui8HoldRatio == 0 ) {
+			bStillPlaying = true;
+		}
+		else if ( kcChan.bVoicePlaying ) {
+			kcChan.ui8StopCountdown = 0;
+			kcChan.bVoicePlaying = false;
+			Emit( NS4_KVC_STOP );
+		}
+
+		m_ui32Needle = kcChan.ui32Needle;
+		while ( true ) {
+			uint8_t ui8Cmd = ReadByte();
+			if ( ui8Cmd >= 0xD0 ) {
+				ExecuteCommand( ui8Cmd );
+				if ( ui8Cmd == 0xF2 || ui8Cmd == 0xF3 ) {
+					kcChan.ui32Needle = m_ui32Needle;
+					return;
+				}
+				if ( ui8Cmd == 0xFF || !kcChan.ui32SeqId ) { return; }
+				continue;
+			}
+
+			// A note.
+			kcChan.i32PitchChangeAmount = kcChan.i32Pitch;	// Portamento source.
+			kcChan.ui8NotePitch = ui8Cmd < 0x68 ? ui8Cmd : uint8_t( ui8Cmd - 0x68 );
+			if ( kcChan.ui8NotePitch >= 0x48 ) {
+				if ( kcChan.ui8NotePitch == 0x67 ) {
+					kcChan.ui8NotePitch = ReadByte();
+				}
+				kcChan.ui8Flags |= NS4_KF_DRUM;
+				LoadDrumSound();
+				kcChan.ui8NotePitch = 0x3C;
+			}
+			else {
+				kcChan.ui8Flags &= ~NS4_KF_DRUM;
+			}
+			kcChan.i32Pitch = (int32_t( kcChan.ui8NotePitch ) << 8) + kcChan.i16SoundTransposeDetune + kcChan.i16EffectTranspose +
+				kcChan.i16EffectDetune + kcChan.i16MarkerTranspose + kcChan.i16NestedMarkerTranspose;
+
+			if ( ui8Cmd < 0x68 ) {
+				kcChan.ui8PrevNoteDuration = ReadByte();
+			}
+			kcChan.ui8NoteDuration = kcChan.ui8PrevNoteDuration;
+			uint8_t ui8Byte = ReadByte();
+			if ( ui8Byte < 0x80 ) {
+				kcChan.ui8PrevHoldRatio = ui8Byte;
+				ui8Byte = ReadByte();
+			}
+			kcChan.ui8HoldRatio = kcChan.ui8PrevHoldRatio;
+			if ( kcChan.ui8HoldRatio == 0 ) {
+				kcChan.ui8HoldDuration = 0;
+			}
+			else {
+				kcChan.ui8HoldDuration = uint8_t( (uint32_t( kcChan.ui8NoteDuration ) * kcChan.ui8HoldRatio) >> 7 );
+				if ( kcChan.ui8HoldDuration == 0 ) { kcChan.ui8HoldDuration = 1; }
+			}
+			kcChan.ui8Velocity = ui8Byte & 0x7F;
+			kcChan.ui32Needle = m_ui32Needle;
+			if ( m_bBadRead ) {
+				End();
+				return;
+			}
+
+			if ( kcChan.i16NextPitchChangeParm == 0 ) {
+				kcChan.ui8PitchChangeDuration = 0;
+			}
+			else {
+				CalculatePitchChangeThisNote();
+			}
+			kcChan.i16VibratoPitch = 0;
+			if ( kcChan.ui16VibratoDepthTarget ) {
+				InitializeVibrato();
+			}
+			SetPitch();
+			if ( !bStillPlaying ) {
+				kcChan.ui16LastDuration = 0xFFFF;
+				StartAttack();
+				kcChan.bVoicePlaying = true;
+				Emit( NS4_KVC_START, (uint32_t( kcChan.ui8WaveBank ) << 16) | kcChan.ui8WaveSound, (uint32_t( kcChan.ui8NotePitch ) << 8) | kcChan.ui8Velocity );
+			}
+			else {
+				kcChan.ui8Flags |= NS4_KF_VOLUME_CHANGED;
+				if ( kcChan.ui16EnvPhaseDuration ) { UpdateEnvelope(); }
+				if ( kcChan.ui8Flags & NS4_KF_VOLUME_CHANGED ) { SetVolume(); }
+			}
+			return;
+		}
+	}
+
+	/**
+	 * Updates a channel on a sequence tick that does not read new commands (player_update_on_tick(), 0x80093F34).
+	 */
+	void CKonamiDriver::UpdateOnTick() {
+		NS4_KON_CHANNEL &kcChan = (*m_pkcChannel);
+		if ( kcChan.ui8PitchChangeDuration ) { UpdatePitchChangeOnTick(); }
+		if ( kcChan.ui16VibratoDepthTarget ) { UpdateVibratoOnTick(); }
+		if ( kcChan.ui8Flags & NS4_KF_PITCH_CHANGED ) { SetPitch(); }
+		if ( kcChan.ui8HoldRatio != 0 && kcChan.ui8NoteDuration == 1 ) {
+			StartCutoff();
+			return;
+		}
+		if ( kcChan.ui8HoldDuration ) {
+			if ( --kcChan.ui8HoldDuration == 0 ) {
+				StartRelease();
+				return;
+			}
+		}
+		if ( kcChan.ui16EnvPhaseDuration ) { UpdateEnvelope(); }
+		if ( kcChan.ui8Flags & NS4_KF_VOLUME_CHANGED ) { SetVolume(); }
+	}
+
+	/**
+	 * Updates a channel between sequence ticks (player_update_off_tick(), 0x80094104).
+	 */
+	void CKonamiDriver::UpdateOffTick() {
+		NS4_KON_CHANNEL &kcChan = (*m_pkcChannel);
+		if ( kcChan.ui8PitchChangeDuration ) { UpdatePitchChangeOffTick(); }
+		if ( kcChan.ui16VibratoDepthTarget ) { UpdateVibrato(); }
+		if ( kcChan.ui8Flags & NS4_KF_PITCH_CHANGED ) { SetPitch(); }
+		if ( kcChan.ui16EnvPhaseDuration ) { UpdateEnvelope(); }
+		if ( kcChan.ui8Flags & NS4_KF_VOLUME_CHANGED ) { SetVolume(); }
+	}
+
+	/**
+	 * Sends the channel's pitch to the synthesizer if it changed (player_set_pitch(), 0x800941B0).
+	 */
+	void CKonamiDriver::SetPitch() {
+		NS4_KON_CHANNEL &kcChan = (*m_pkcChannel);
+		kcChan.ui8Flags &= ~NS4_KF_PITCH_CHANGED;
+		int32_t i32Pitch = kcChan.i32Pitch + int32_t( kcChan.ui16RandomPitch ) + kcChan.i16VibratoPitch;
+		if ( i32Pitch < 0 ) { i32Pitch = 0; }
+		else if ( i32Pitch > (72 << 8) ) { i32Pitch = 72 << 8; }
+		// The game does this in single precision.
+		float fLo = m_fPitchTable[i32Pitch>>8];
+		float fHi = m_fPitchTable[(i32Pitch>>8)+1];
+		float fDiff = fHi - fLo;
+		float fFrac = float( i32Pitch & 0xFF );
+		float fMul = fFrac * fDiff;
+		float fRatio = fMul / 256.0f + fLo;
+		if ( fRatio != kcChan.fLastRatio ) {
+			kcChan.fLastRatio = fRatio;
+			Emit( NS4_KVC_PITCH, 0, 0, fRatio );
+		}
+	}
+
+	/**
+	 * Sends the channel's volume and envelope ramp to the synthesizer if they changed (player_set_volume(), 0x800942C0).
+	 */
+	void CKonamiDriver::SetVolume() {
+		NS4_KON_CHANNEL &kcChan = (*m_pkcChannel);
+		kcChan.ui8Flags &= ~NS4_KF_VOLUME_CHANGED;
+		int32_t i32Vol = int32_t( uint32_t( int32_t( kcChan.ui8Velocity ) + kcChan.i16MarkerVolume + kcChan.i16NestedMarkerVolume ) * uint32_t( kcChan.ui16Volume ) );
+		if ( i32Vol < 0x800000 ) {
+			i32Vol = i32Vol < 0 ? 0 : (i32Vol >> 8);
+		}
+		else {
+			i32Vol = 0x7FFF;
+		}
+		i32Vol = int32_t( (uint32_t( kcChan.ui16EnvTarget ) * uint32_t( i32Vol )) >> 8 );
+		int16_t i16Vol = int16_t( i32Vol );
+		uint16_t ui16Duration = kcChan.ui16EnvPhaseDuration;
+		if ( i16Vol == kcChan.i16LastVolume && ui16Duration == kcChan.ui16LastDuration ) { return; }
+		kcChan.i16LastVolume = i16Vol;
+		kcChan.ui16LastDuration = ui16Duration;
+		Emit( NS4_KVC_VOLUME, uint32_t( uint16_t( i16Vol ) ), uint32_t( ui16Duration ) * NS4_KON_CALLBACK_US );
+	}
+
+	/**
+	 * Starts the attack phase (player_start_envelope_attack_phase(), 0x80094690).
+	 */
+	void CKonamiDriver::StartAttack() {
+		NS4_KON_CHANNEL &kcChan = (*m_pkcChannel);
+		kcChan.ui16EnvPhaseDuration = 0;
+		if ( kcChan.ui16EnvAttackDuration == 0 ) {
+			kcChan.ui16EnvTarget = 0x100;
+			SetVolume();
+			StartDecay();
+		}
+		else {
+			kcChan.ui16EnvTarget = 0x20;
+			SetVolume();
+			kcChan.ui8EnvPhase = NS4_KP_ATTACK;
+			kcChan.ui16EnvTarget = 0x100;
+			kcChan.ui16EnvPhaseDuration = kcChan.ui16EnvAttackDuration;
+			SetVolume();
+		}
+	}
+
+	/**
+	 * Starts the decay phase (player_start_envelope_decay_phase(), 0x8009471C).
+	 */
+	void CKonamiDriver::StartDecay() {
+		NS4_KON_CHANNEL &kcChan = (*m_pkcChannel);
+		if ( kcChan.ui16EnvDecayVolume == 0 ) {
+			StartSustain();
+		}
+		else {
+			kcChan.ui8EnvPhase = NS4_KP_DECAY;
+			kcChan.ui16EnvTarget = uint16_t( kcChan.ui16EnvTarget - kcChan.ui16EnvDecayVolume );
+			kcChan.ui16EnvPhaseDuration = kcChan.ui16EnvDecayDuration;
+			SetVolume();
+		}
+	}
+
+	/**
+	 * Starts the sustain phase (player_start_envelope_sustain_phase(), 0x80094788).
+	 */
+	void CKonamiDriver::StartSustain() {
+		NS4_KON_CHANNEL &kcChan = (*m_pkcChannel);
+		kcChan.ui8EnvPhase = NS4_KP_SUSTAIN;
+		if ( kcChan.ui16EnvSustainDuration ) {
+			kcChan.ui16EnvTarget = 0;
+			kcChan.ui16EnvPhaseDuration = kcChan.ui16EnvSustainDuration;
+			SetVolume();
+		}
+	}
+
+	/**
+	 * Starts the release phase (player_start_envelope_release_phase(), 0x800947D8).
+	 */
+	void CKonamiDriver::StartRelease() {
+		NS4_KON_CHANNEL &kcChan = (*m_pkcChannel);
+		kcChan.ui8EnvPhase = NS4_KP_RELEASE;
+		kcChan.ui16EnvTarget = 0;
+		kcChan.ui16EnvPhaseDuration = kcChan.ui16EnvReleaseDuration;
+		SetVolume();
+	}
+
+	/**
+	 * Cuts a note off over one tick and stops its voice on the next (player_start_envelope_cutoff_phase(), 0x8009481C).
+	 */
+	void CKonamiDriver::StartCutoff() {
+		NS4_KON_CHANNEL &kcChan = (*m_pkcChannel);
+		kcChan.ui8StopCountdown = 1;
+		kcChan.ui8EnvPhase = NS4_KP_RELEASE;
+		kcChan.ui16EnvTarget = 0;
+		kcChan.ui16EnvPhaseDuration = 1;
+		SetVolume();
+	}
+
+	/**
+	 * Advances the envelope by one tick (player_update_envelope_phase(), 0x80094868).
+	 */
+	void CKonamiDriver::UpdateEnvelope() {
+		NS4_KON_CHANNEL &kcChan = (*m_pkcChannel);
+		--kcChan.ui16EnvPhaseDuration;
+		if ( kcChan.ui16LastDuration ) { --kcChan.ui16LastDuration; }
+		if ( kcChan.ui16EnvPhaseDuration == 0 ) {
+			switch ( kcChan.ui8EnvPhase ) {
+				case NS4_KP_ATTACK : {
+					StartDecay();
+					break;
+				}
+				case NS4_KP_DECAY : {
+					StartSustain();
+					break;
+				}
+				default : {}
+			}
+		}
+	}
+
+
+	// == Effects (effects.c).
+	/**
+	 * Executes a command (0xD0-0xFF; the game's command table is at 0x800B8CD0).
+	 *
+	 * \param _ui8Cmd The command.
+	 */
+	void CKonamiDriver::ExecuteCommand( uint8_t _ui8Cmd ) {
+		NS4_KON_CHANNEL &kcChan = (*m_pkcChannel);
+		NS4_KON_RECORD &krRec = m_vRecords[m_stChannel];
+		switch ( _ui8Cmd ) {
+			case 0xD0 : {	// Tempo.
+				kcChan.ui16Tempo = uint16_t( ReadByte() << 8 );
+				kcChan.ui8TempoChangeDuration = 0;
+				break;
+			}
+			case 0xD1 : {	// Tempo slide.
+				kcChan.ui8TempoChangeDuration = ReadByte();
+				kcChan.ui8TempoChangeTarget = ReadByte();
+				int32_t i32Delta = int32_t( (uint32_t( kcChan.ui8TempoChangeTarget ) << 8) & 0xFFFF ) - int32_t( kcChan.ui16Tempo );
+				kcChan.i16TempoChangeAmount = kcChan.ui8TempoChangeDuration ? int16_t( i32Delta / int32_t( kcChan.ui8TempoChangeDuration ) ) : int16_t( 0 );
+				break;
+			}
+			case 0xD2 : {	// Instrument.
+				SetSoundCmd();
+				break;
+			}
+			case 0xD3 : {	// Volume and instrument.
+				SetVolumeCmd();
+				SetSoundCmd();
+				break;
+			}
+			case 0xD4 : {	// Volume, instrument, and pan.
+				SetVolumeCmd();
+				SetSoundCmd();
+				SetPanCmd();
+				break;
+			}
+			case 0xD5 : {	// Volume.
+				SetVolumeCmd();
+				break;
+			}
+			case 0xD6 : {	// Volume slide.
+				kcChan.ui8VolumeChangeDuration = ReadByte();
+				kcChan.ui8VolumeChangeTarget = ReadByte();
+				int32_t i32Delta = int32_t( (uint32_t( kcChan.ui8VolumeChangeTarget ) << 8) & 0xFFFF ) - int32_t( kcChan.ui16Volume );
+				kcChan.i16VolumeChangeAmount = kcChan.ui8VolumeChangeDuration ? int16_t( i32Delta / int32_t( kcChan.ui8VolumeChangeDuration ) ) : int16_t( 0 );
+				break;
+			}
+			case 0xD7 : {	// Attack and decay.
+				kcChan.ui16EnvAttackDuration = EnvTable( 0x7F - int32_t( ReadByte() ) );
+				uint8_t ui8Decay = ReadByte();
+				kcChan.ui16EnvDecayDuration = EnvTable( 0x3D - ((ui8Decay & 0xF0) >> 2) );
+				kcChan.ui16EnvDecayVolume = uint16_t( (ui8Decay & 0x0F) << 2 );
+				break;
+			}
+			case 0xD8 : {	// Sustain.
+				uint8_t ui8Sustain = ReadByte();
+				if ( ui8Sustain == 0 ) {
+					kcChan.ui16EnvSustainDuration = 0;
+					if ( kcChan.ui8HoldRatio == 0 && kcChan.ui8EnvPhase == NS4_KP_SUSTAIN ) {
+						kcChan.ui16EnvPhaseDuration = 0x7FFF;
+					}
+				}
+				else {
+					uint16_t ui16Old = kcChan.ui16EnvSustainDuration;
+					kcChan.ui16EnvSustainDuration = uint16_t( EnvTable( 0x7F - int32_t( ui8Sustain ) ) + 1 );
+					if ( kcChan.ui8HoldRatio == 0 && kcChan.ui8EnvPhase == NS4_KP_SUSTAIN ) {
+						kcChan.ui16EnvPhaseDuration = kcChan.ui16EnvSustainDuration;
+						if ( ui16Old == 0 ) {
+							kcChan.ui16EnvTarget = 0;
+						}
+					}
+				}
+				break;
+			}
+			case 0xD9 : {	// Release.
+				kcChan.ui16EnvReleaseDuration = EnvTable( 0x7D - (int32_t( ReadByte() ) << 2) );
+				if ( kcChan.ui8HoldRatio == 0 && kcChan.ui8EnvPhase == NS4_KP_RELEASE ) {
+					kcChan.ui16EnvPhaseDuration = kcChan.ui16EnvReleaseDuration;
+				}
+				break;
+			}
+			case 0xDA : {	// Reverb parameters (global).
+				uint8_t ui8P0 = ReadByte();
+				uint8_t ui8P1 = ReadByte();
+				char szBuffer[128];
+				std::snprintf( szBuffer, sizeof( szBuffer ), "Track %u sets the reverb parameters (DA %02X %02X); this is not rendered.", uint32_t( m_stChannel + 1 ), ui8P0, ui8P1 );
+				Warn( szBuffer );
+				break;
+			}
+			case 0xDC : {	// No-op in this version.
+				break;
+			}
+			case 0xDD : {	// Pan.
+				SetPanCmd();
+				break;
+			}
+			case 0xDE : {	// Pan slide.
+				kcChan.ui8PanChangeDuration = ReadByte();
+				kcChan.ui8PanChangeTarget = ReadByte();
+				if ( kcChan.ui16Pan >= 0x8000 || (kcChan.ui8Flags & NS4_KF_DRUM) == 0 ) {
+					int32_t i32Delta = int32_t( (uint32_t( kcChan.ui8PanChangeTarget ) << 8) & 0xFFFF ) - int32_t( kcChan.ui16Pan & 0x7FFF );
+					kcChan.i16PanChangeAmount = kcChan.ui8PanChangeDuration ? int16_t( i32Delta / int32_t( kcChan.ui8PanChangeDuration ) ) : int16_t( 0 );
+				}
+				break;
+			}
+			case 0xDF : {	// Transpose.
+				kcChan.i16EffectTranspose = int16_t( uint16_t( ReadByte() ) << 8 );
+				break;
+			}
+			case 0xE0 : {	// Detune.
+				kcChan.i16EffectDetune = int16_t( int8_t( ReadByte() ) * 4 );
+				break;
+			}
+			case 0xE1 : {	// Vibrato.
+				uint8_t ui8Delay = ReadByte();
+				if ( ui8Delay < 100 ) {
+					kcChan.ui8VibratoIntendedDelay = ui8Delay;
+				}
+				else {
+					kcChan.ui8VibratoIntendedDelay = 0;
+					kcChan.ui8VibratoIntendedStart = uint8_t( ui8Delay - 100 );
+				}
+				uint8_t ui8Rate = ReadByte();
+				if ( ui8Rate < 0x40 ) {
+					if ( ui8Rate < 0x20 ) {
+						kcChan.ui8VibratoStepSize = 1;
+						ui8Rate = uint8_t( ui8Rate << 3 );
+					}
+					else {
+						kcChan.ui8VibratoStepSize = 2;
+						ui8Rate = uint8_t( ui8Rate << 2 );
+					}
+				}
+				else if ( ui8Rate < 0x80 ) {
+					kcChan.ui8VibratoStepSize = 4;
+					ui8Rate = uint8_t( ui8Rate << 1 );
+				}
+				else if ( ui8Rate == 0xFF ) {
+					kcChan.ui8VibratoStepSize = 16;
+				}
+				else {
+					kcChan.ui8VibratoStepSize = 8;
+				}
+				kcChan.ui8VibratoRate = ui8Rate;
+				kcChan.ui16VibratoDepthTarget = uint16_t( ReadByte() << 8 );
+				if ( kcChan.ui8VibratoIntendedStart ) {
+					kcChan.ui16VibratoDepthChange = uint16_t( kcChan.ui16VibratoDepthTarget / kcChan.ui8VibratoIntendedStart );
+				}
+				break;
+			}
+			case 0xE2 : {	// Vibrato fade-in.
+				kcChan.ui8VibratoIntendedStart = ReadByte();
+				if ( kcChan.ui8VibratoIntendedStart ) {
+					kcChan.ui16VibratoDepthChange = uint16_t( kcChan.ui16VibratoDepthTarget / kcChan.ui8VibratoIntendedStart );
+				}
+				break;
+			}
+			case 0xE3 : {	// Random pitch.
+				kcChan.ui8RandomRate = ReadByte();
+				kcChan.ui16RandomMask = uint16_t( ReadByte() << 8 );
+				kcChan.ui16RandomMask = uint16_t( kcChan.ui16RandomMask + ReadByte() );
+				kcChan.ui8RandomIndex = 0;
+				kcChan.ui16RandomCounter = 0;
+				if ( kcChan.ui8RandomRate == 0 ) {
+					kcChan.ui16RandomPitch = 0;
+				}
+				break;
+			}
+			case 0xE4 : {	// Pitch bend (only used right after a note; see SetPitchBend()).
+				m_ui32Needle += 3;
+				break;
+			}
+			case 0xE5 : {	// Pitch bend into the next note.
+				kcChan.ui8PitchChangeType = 0;
+				kcChan.ui8NextPitchChangeDelay = ReadByte();
+				kcChan.ui8NextPitchChangeDuration = ReadByte();
+				kcChan.i16NextPitchChangeParm = int16_t( int8_t( ReadByte() ) * 256 );
+				break;
+			}
+			case 0xE6 : {	// Portamento.
+				kcChan.ui8PitchChangeType = 1;
+				kcChan.i16NextPitchChangeParm = int16_t( ReadByte() );
+				break;
+			}
+			case 0xE7 : {	// Marker.
+				kcChan.ui8MarkerCount = 0;
+				kcChan.ui32MarkerNeedle = m_ui32Needle;
+				kcChan.i16MarkerVolume = 0;
+				kcChan.i16MarkerTranspose = 0;
+				krRec.bHasMarker = true;
+				krRec.stMarkerIdx = (*m_pvTracks)[m_stChannel].vEvents.size();
+				krRec.ui64MarkerTick = m_ui64Tick;
+				break;
+			}
+			case 0xE8 : {	// Loop to the marker.
+				uint8_t ui8Count = ReadByte();
+				++kcChan.ui8MarkerCount;
+				if ( ui8Count != 0 && kcChan.ui8MarkerCount == ui8Count ) {
+					kcChan.i16MarkerVolume = 0;
+					kcChan.i16MarkerTranspose = 0;
+					m_ui32Needle += 2;
+				}
+				else {
+					kcChan.i16MarkerVolume = int16_t( kcChan.i16MarkerVolume + int8_t( ReadByte() ) );
+					kcChan.i16MarkerTranspose = int16_t( kcChan.i16MarkerTranspose + int8_t( ReadByte() ) * 8 );
+					m_ui32Needle = kcChan.ui32MarkerNeedle;
+					if ( ui8Count == 0 && krRec.bHasMarker ) {
+						RecordLoop( krRec.stMarkerIdx, krRec.ui64MarkerTick );
+					}
+				}
+				break;
+			}
+			case 0xE9 : {	// Nested marker.
+				kcChan.ui8NestedMarkerCount = 0;
+				kcChan.ui32NestedMarkerNeedle = m_ui32Needle;
+				kcChan.i16NestedMarkerVolume = 0;
+				kcChan.i16NestedMarkerTranspose = 0;
+				krRec.bHasNestedMarker = true;
+				krRec.stNestedMarkerIdx = (*m_pvTracks)[m_stChannel].vEvents.size();
+				krRec.ui64NestedMarkerTick = m_ui64Tick;
+				break;
+			}
+			case 0xEA : {	// Loop to the nested marker.
+				uint8_t ui8Count = ReadByte();
+				++kcChan.ui8NestedMarkerCount;
+				if ( ui8Count != 0 && kcChan.ui8NestedMarkerCount == ui8Count ) {
+					kcChan.i16NestedMarkerVolume = 0;
+					kcChan.i16NestedMarkerTranspose = 0;
+					m_ui32Needle += 2;
+				}
+				else {
+					kcChan.i16NestedMarkerVolume = int16_t( kcChan.i16NestedMarkerVolume + int8_t( ReadByte() ) );
+					kcChan.i16NestedMarkerTranspose = int16_t( kcChan.i16NestedMarkerTranspose + int8_t( ReadByte() ) * 8 );
+					m_ui32Needle = kcChan.ui32NestedMarkerNeedle;
+					if ( ui8Count == 0 && krRec.bHasNestedMarker ) {
+						RecordLoop( krRec.stNestedMarkerIdx, krRec.ui64NestedMarkerTick );
+					}
+				}
+				break;
+			}
+			case 0xEB : {	// Master loop start.
+				kcChan.ui32MasterMarkerNeedle = m_ui32Needle;
+				krRec.bHasLoopStart = true;
+				krRec.stLoopStartIdx = (*m_pvTracks)[m_stChannel].vEvents.size();
+				krRec.ui64LoopStartTick = m_ui64Tick;
+				break;
+			}
+			case 0xEC : {	// Master loop end.
+				m_ui32Needle = kcChan.ui32MasterMarkerNeedle;
+				if ( krRec.bHasLoopStart ) {
+					RecordLoop( krRec.stLoopStartIdx, krRec.ui64LoopStartTick );
+				}
+				break;
+			}
+			case 0xED : {	// Conditional marker.
+				kcChan.ui8ConditionalFlag = 0;
+				kcChan.ui32ConditionalNeedle1 = m_ui32Needle;
+				break;
+			}
+			case 0xEE : {	// Conditional jump.
+				switch ( kcChan.ui8ConditionalFlag ) {
+					case 0 : {
+						kcChan.ui8ConditionalFlag = 1;
+						break;
+					}
+					case 1 : {
+						kcChan.ui8ConditionalFlag = 2;
+						kcChan.ui32ConditionalNeedle2 = m_ui32Needle;
+						m_ui32Needle = kcChan.ui32ConditionalNeedle1;
+						break;
+					}
+					case 2 : {
+						kcChan.ui8ConditionalFlag = 1;
+						m_ui32Needle = kcChan.ui32ConditionalNeedle2;
+						break;
+					}
+					default : {}
+				}
+				break;
+			}
+			case 0xEF : {	// Effect (reverb) mix.
+				uint32_t ui32Mix = ReadByte();
+				if ( ui32Mix > 127 ) { ui32Mix = 127; }
+				if ( kcChan.ui8FxMix != ui32Mix ) {
+					kcChan.ui8FxMix = uint8_t( ui32Mix );
+					Emit( NS4_KVC_FXMIX, ui32Mix );
+				}
+				break;
+			}
+			case 0xF0 : {	// Bank.
+				kcChan.ui8Bank = ReadByte();
+				break;
+			}
+			case 0xF1 : {	// No-op in this version.
+				break;
+			}
+			case 0xF2 : {	// Rest.
+				if ( kcChan.bVoicePlaying ) {
+					kcChan.ui8StopCountdown = 1;
+					Emit( NS4_KVC_VOLUME, 0, NS4_KON_CALLBACK_US );
+				}
+				kcChan.ui8NoteDuration = ReadByte();
+				kcChan.ui8HoldRatio = 1;
+				break;
+			}
+			case 0xF3 : {	// Tie.
+				kcChan.ui8NoteDuration = ReadByte();
+				kcChan.ui8HoldRatio = ReadByte();
+				if ( kcChan.ui8HoldRatio == 0 ) {
+					kcChan.ui8HoldDuration = 0;
+				}
+				else {
+					kcChan.ui8HoldDuration = uint8_t( (uint32_t( kcChan.ui8NoteDuration ) * kcChan.ui8HoldRatio) >> 7 );
+					if ( kcChan.ui8HoldDuration == 0 ) { kcChan.ui8HoldDuration = 1; }
+				}
+				kcChan.ui8Flags |= NS4_KF_VOLUME_CHANGED;
+				if ( kcChan.ui16EnvPhaseDuration ) { UpdateEnvelope(); }
+				if ( kcChan.ui8Flags & NS4_KF_VOLUME_CHANGED ) { SetVolume(); }
+				break;
+			}
+			case 0xF8 : {}
+			case 0xFC : {}
+			case 0xFD : {}
+			case 0xFE : {
+				m_ui32Needle += 3;
+				char szBuffer[128];
+				std::snprintf( szBuffer, sizeof( szBuffer ), "Track %u uses command %02X (a signal to the game); it does not affect the sound and is skipped.", uint32_t( m_stChannel + 1 ), _ui8Cmd );
+				Warn( szBuffer );
+				break;
+			}
+			case 0xF9 : {}
+			case 0xFB : {
+				m_ui32Needle += 2;
+				char szBuffer[128];
+				std::snprintf( szBuffer, sizeof( szBuffer ), "Track %u uses command %02X (a signal to the game); it does not affect the sound and is skipped.", uint32_t( m_stChannel + 1 ), _ui8Cmd );
+				Warn( szBuffer );
+				break;
+			}
+			case 0xFA : {
+				m_ui32Needle += 1;
+				char szBuffer[128];
+				std::snprintf( szBuffer, sizeof( szBuffer ), "Track %u uses command %02X (a signal to the game); it does not affect the sound and is skipped.", uint32_t( m_stChannel + 1 ), _ui8Cmd );
+				Warn( szBuffer );
+				break;
+			}
+			default : {	// DB, F4-F7, FF: end of track.
+				End();
+			}
+		}
+	}
+
+	/**
+	 * Loads an instrument's settings (effects_load_sound(), 0x80094B24).
+	 *
+	 * \param _ksSound The instrument.
+	 */
+	void CKonamiDriver::LoadSound( const NS4_KON_SOUND &_ksSound ) {
+		NS4_KON_CHANNEL &kcChan = (*m_pkcChannel);
+		// The wave table comes from the bank selected when the instrument is loaded.
+		kcChan.ui8WaveBank = kcChan.ui8Bank;
+		kcChan.ui8WaveSound = kcChan.ui8Sound;
+		kcChan.i16SoundTransposeDetune = int16_t( int32_t( _ksSound.i8Transpose ) * 256 + int32_t( _ksSound.i8Detune ) * 4 );
+		kcChan.ui16EnvAttackDuration = EnvTable( 0x7F - int32_t( int8_t( _ksSound.ui8Attack ) ) );
+		kcChan.ui16EnvDecayDuration = EnvTable( 0x3D - ((_ksSound.ui8Decay & 0xF0) >> 2) );
+		kcChan.ui16EnvDecayVolume = uint16_t( (_ksSound.ui8Decay & 0x0F) << 2 );
+		if ( _ksSound.ui8Sustain == 0 ) {
+			kcChan.ui16EnvSustainDuration = 0;
+		}
+		else {
+			kcChan.ui16EnvSustainDuration = uint16_t( EnvTable( 0x7F - int32_t( _ksSound.ui8Sustain ) ) + 1 );
+		}
+		kcChan.ui16EnvReleaseDuration = EnvTable( 0x7D - int32_t( int8_t( _ksSound.ui8Release ) ) * 4 );
+		if ( kcChan.ui16Pan < 0x8000 ) {
+			kcChan.ui16Pan = uint16_t( int32_t( int8_t( _ksSound.ui8Pan ) ) * 256 );
+			kcChan.ui8PanChangeDuration = 0;
+		}
+		SetPan();
+	}
+
+	/**
+	 * Loads a drum's settings (effects_load_drum_sound(), 0x80094C90).
+	 */
+	void CKonamiDriver::LoadDrumSound() {
+		NS4_KON_CHANNEL &kcChan = (*m_pkcChannel);
+		uint32_t ui32Drum = uint32_t( kcChan.ui8NotePitch ) - 0x48;
+		if ( m_pktTables && m_pktTables->pui8Drums && ui32Drum < m_pktTables->ui32DrumTotal ) {
+			const uint8_t * pui8Entry = m_pktTables->pui8Drums + ui32Drum * 8;
+			kcChan.ui8Sound = pui8Entry[0];
+			NS4_KON_SOUND ksSound = { int8_t( pui8Entry[1] ), int8_t( pui8Entry[2] ), pui8Entry[3], pui8Entry[4], pui8Entry[5], pui8Entry[6], pui8Entry[7] };
+			LoadSound( ksSound );
+		}
+		else {
+			char szBuffer[128];
+			std::snprintf( szBuffer, sizeof( szBuffer ), "Track %u plays drum %02X, but there is no drum table; the default sound is used.", uint32_t( m_stChannel + 1 ), ui32Drum );
+			Warn( szBuffer );
+			LoadSound( m_ksDefaultSound );
+		}
+	}
+
+	/**
+	 * Sends the channel's pan to the synthesizer (effects_set_pan_(), 0x80093108).
+	 */
+	void CKonamiDriver::SetPan() {
+		NS4_KON_CHANNEL &kcChan = (*m_pkcChannel);
+		kcChan.ui8Flags |= NS4_KF_VOLUME_CHANGED;
+		int32_t i32Pan = (kcChan.ui16Pan >> 8) & 0x7F;
+		Emit( NS4_KVC_PAN, uint32_t( i32Pan ) );
+	}
+
+	/**
+	 * Sets the channel volume (D5; effects_set_volume(), 0x80094D30).
+	 */
+	void CKonamiDriver::SetVolumeCmd() {
+		NS4_KON_CHANNEL &kcChan = (*m_pkcChannel);
+		kcChan.ui16Volume = uint16_t( ReadByte() << 8 );
+		kcChan.ui8VolumeChangeDuration = 0;
+	}
+
+	/**
+	 * Sets the instrument (D2; effects_set_sound(), 0x80094A50).
+	 */
+	void CKonamiDriver::SetSoundCmd() {
+		NS4_KON_CHANNEL &kcChan = (*m_pkcChannel);
+		kcChan.ui8Sound = ReadByte();
+		if ( kcChan.ui8Bank < 2 && m_pktTables && kcChan.ui8Sound >= m_pktTables->ui32BankTotal[kcChan.ui8Bank] ) {
+			char szBuffer[128];
+			std::snprintf( szBuffer, sizeof( szBuffer ), "Track %u uses instrument %02X of bank %u, which is past the end of the table.", uint32_t( m_stChannel + 1 ), kcChan.ui8Sound, kcChan.ui8Bank );
+			Warn( szBuffer );
+		}
+		LoadSound( SoundEntry() );
+	}
+
+	/**
+	 * Sets the pan (DD; effects_set_pan(), 0x8009519C).
+	 */
+	void CKonamiDriver::SetPanCmd() {
+		NS4_KON_CHANNEL &kcChan = (*m_pkcChannel);
+		kcChan.ui8PanChangeDuration = 0;
+		kcChan.ui16Pan = uint16_t( ReadByte() << 8 );
+		SetPan();
+	}
+
+	/**
+	 * Advances a tempo slide (effects_update_tempo_change(), 0x800949D8).
+	 */
+	void CKonamiDriver::UpdateTempoChange() {
+		NS4_KON_CHANNEL &kcChan = (*m_pkcChannel);
+		if ( --kcChan.ui8TempoChangeDuration ) {
+			int32_t i32Tempo = int32_t( kcChan.ui16Tempo ) + kcChan.i16TempoChangeAmount;
+			if ( i32Tempo < 0x100 ) { i32Tempo = 0x100; }
+			else if ( i32Tempo >= 0xFF01 ) { i32Tempo = 0xFF00; }
+			kcChan.ui16Tempo = uint16_t( i32Tempo );
+		}
+		else {
+			kcChan.ui16Tempo = uint16_t( kcChan.ui8TempoChangeTarget << 8 );
+		}
+	}
+
+	/**
+	 * Advances a volume slide (effects_update_volume_change(), 0x80094E28).
+	 */
+	void CKonamiDriver::UpdateVolumeChange() {
+		NS4_KON_CHANNEL &kcChan = (*m_pkcChannel);
+		kcChan.ui8Flags |= NS4_KF_VOLUME_CHANGED;
+		if ( --kcChan.ui8VolumeChangeDuration ) {
+			int32_t i32Vol = int32_t( kcChan.ui16Volume ) + kcChan.i16VolumeChangeAmount;
+			if ( i32Vol < 0 ) { i32Vol = 0; }
+			else if ( i32Vol >= 0xFF01 ) { i32Vol = 0xFF00; }
+			kcChan.ui16Volume = uint16_t( i32Vol );
+		}
+		else {
+			kcChan.ui16Volume = uint16_t( kcChan.ui8VolumeChangeTarget << 8 );
+		}
+	}
+
+	/**
+	 * Advances a pan slide (effects_update_pan_change(), 0x800952B0).
+	 */
+	void CKonamiDriver::UpdatePanChange() {
+		NS4_KON_CHANNEL &kcChan = (*m_pkcChannel);
+		uint16_t ui16Keep = kcChan.ui16Pan & 0x8000;
+		int32_t i32Pan;
+		if ( --kcChan.ui8PanChangeDuration ) {
+			i32Pan = int32_t( kcChan.ui16Pan & 0x7FFF ) + kcChan.i16PanChangeAmount;
+			if ( i32Pan < 0 ) { i32Pan = 0; }
+			else if ( i32Pan > 0x7FFF ) { i32Pan = 0x7F00; }
+		}
+		else {
+			i32Pan = int32_t( kcChan.ui8PanChangeTarget ) << 8;
+		}
+		kcChan.ui16Pan = uint16_t( i32Pan | ui16Keep );
+		SetPan();
+	}
+
+	/**
+	 * Restarts the vibrato for a new note (effects_initialize_vibrato(), 0x80095520).
+	 */
+	void CKonamiDriver::InitializeVibrato() {
+		NS4_KON_CHANNEL &kcChan = (*m_pkcChannel);
+		kcChan.ui8VibratoDelay = kcChan.ui8VibratoIntendedDelay;
+		kcChan.ui8VibratoStart = kcChan.ui8VibratoIntendedStart;
+		kcChan.ui16VibratoDepth = kcChan.ui8VibratoIntendedStart ? uint16_t( 0 ) : kcChan.ui16VibratoDepthTarget;
+		kcChan.ui16VibratoCounter = 0;
+		kcChan.ui8VibratoOscillation = 0;
+	}
+
+	/**
+	 * Advances the vibrato delay and fade-in on a sequence tick (effects_update_vibrato_on_tick(), 0x80095578).
+	 */
+	void CKonamiDriver::UpdateVibratoOnTick() {
+		NS4_KON_CHANNEL &kcChan = (*m_pkcChannel);
+		if ( kcChan.ui8VibratoDelay ) {
+			--kcChan.ui8VibratoDelay;
+			return;
+		}
+		if ( kcChan.ui8VibratoStart ) {
+			if ( --kcChan.ui8VibratoStart == 0 ) {
+				kcChan.ui16VibratoDepth = kcChan.ui16VibratoDepthTarget;
+			}
+			else {
+				kcChan.ui16VibratoDepth = uint16_t( kcChan.ui16VibratoDepth + kcChan.ui16VibratoDepthChange );
+			}
+		}
+		UpdateVibrato();
+	}
+
+	/**
+	 * Advances the vibrato wave (effects_update_vibrato(), 0x800955F4).
+	 */
+	void CKonamiDriver::UpdateVibrato() {
+		NS4_KON_CHANNEL &kcChan = (*m_pkcChannel);
+		if ( kcChan.ui8VibratoDelay ) { return; }
+		kcChan.ui16VibratoCounter = uint16_t( kcChan.ui16VibratoCounter + kcChan.ui8VibratoRate );
+		if ( kcChan.ui16VibratoCounter < 0x100 ) { return; }
+		kcChan.ui16VibratoCounter &= 0xFF;
+		kcChan.ui8Flags |= NS4_KF_PITCH_CHANGED;
+		kcChan.ui8VibratoOscillation = uint8_t( (kcChan.ui8VibratoOscillation + kcChan.ui8VibratoStepSize) & 0x3F );
+		int32_t i32Wave = m_ui8VibratoTable[kcChan.ui8VibratoOscillation&0x1F];
+		int16_t i16Vib;
+		if ( kcChan.ui16VibratoDepth < 0x8000 ) {
+			i16Vib = int16_t( kcChan.ui16VibratoDepth >> 7 );
+			i16Vib = int16_t( (uint32_t( i32Wave ) * uint32_t( i16Vib )) >> 8 );
+		}
+		else {
+			i16Vib = int16_t( ((kcChan.ui16VibratoDepth >> 8) & 0x7F) + 2 );
+			i16Vib = int16_t( (uint32_t( i32Wave ) * uint32_t( i16Vib )) >> 1 );
+		}
+		if ( kcChan.ui8VibratoOscillation >= 0x20 ) {
+			i16Vib = int16_t( -i16Vib );
+		}
+		kcChan.i16VibratoPitch = i16Vib;
+	}
+
+	/**
+	 * Advances the random pitch (effects_update_random(), 0x80095830).
+	 */
+	void CKonamiDriver::UpdateRandom() {
+		NS4_KON_CHANNEL &kcChan = (*m_pkcChannel);
+		kcChan.ui16RandomCounter = uint16_t( kcChan.ui16RandomCounter + kcChan.ui8RandomRate );
+		if ( kcChan.ui16RandomCounter < 0x100 ) { return; }
+		kcChan.ui16RandomCounter &= 0xFF;
+		kcChan.ui8Flags |= NS4_KF_PITCH_CHANGED;
+		kcChan.ui16RandomPitch = m_ui8RandomTable[kcChan.ui8RandomIndex];
+		kcChan.ui8RandomIndex = uint8_t( (kcChan.ui8RandomIndex + 1) & 0x7F );
+		kcChan.ui16RandomPitch = uint16_t( kcChan.ui16RandomPitch + (m_ui8RandomTable[kcChan.ui8RandomIndex] << 8) );
+		kcChan.ui16RandomPitch &= kcChan.ui16RandomMask;
+	}
+
+	/**
+	 * Calculates the per-tick step of a pitch bend (effects_calculate_pitch_change_amount(), 0x80095904).
+	 */
+	void CKonamiDriver::CalculatePitchChangeAmount() {
+		NS4_KON_CHANNEL &kcChan = (*m_pkcChannel);
+		int32_t i32Delta = kcChan.i32PitchChangeTarget - kcChan.i32Pitch;
+		uint32_t ui32Duration = kcChan.ui16Tempo ? ((uint32_t( kcChan.ui8PitchChangeDuration ) << 16) / kcChan.ui16Tempo) : 0;
+		ui32Duration = (ui32Duration + 1) & 0xFFFF;
+		kcChan.i32PitchChangeAmount = ui32Duration ? i32Delta / int32_t( ui32Duration ) : 0;
+		if ( kcChan.i32PitchChangeAmount == 0 ) {
+			kcChan.i32PitchChangeAmount = i32Delta < 0 ? -1 : 1;
+		}
+	}
+
+	/**
+	 * Handles an E4 (pitch bend) that directly follows a note (effects_set_pitch_bend(), 0x800959A4).
+	 */
+	void CKonamiDriver::SetPitchBend() {
+		NS4_KON_CHANNEL &kcChan = (*m_pkcChannel);
+		if ( !kcChan.ui32SeqId ) { return; }
+		if ( PeekByte( m_ui32Needle ) != 0xE4 ) { return; }
+		++m_ui32Needle;
+		if ( kcChan.i16NextPitchChangeParm == 0 ) {
+			kcChan.ui8PitchChangeType = 0;
+			kcChan.ui8PitchChangeDelay = ReadByte();
+			kcChan.ui8PitchChangeDuration = ReadByte();
+			uint8_t ui8Target = ReadByte();
+			kcChan.i32PitchChangeTarget = kcChan.i32Pitch + ((int32_t( ui8Target ) - int32_t( kcChan.ui8NotePitch )) << 8);
+			CalculatePitchChangeAmount();
+		}
+		else {
+			m_ui32Needle += 3;
+		}
+		kcChan.ui32Needle = m_ui32Needle;
+	}
+
+	/**
+	 * Advances a pitch bend on a sequence tick (effects_update_pitch_change_on_tick(), 0x80095AA0).
+	 */
+	void CKonamiDriver::UpdatePitchChangeOnTick() {
+		NS4_KON_CHANNEL &kcChan = (*m_pkcChannel);
+		if ( kcChan.ui8PitchChangeType != 0 ) {
+			UpdatePortamento();
+			return;
+		}
+		if ( kcChan.ui8PitchChangeDelay ) {
+			--kcChan.ui8PitchChangeDelay;
+			return;
+		}
+		kcChan.ui8Flags |= NS4_KF_PITCH_CHANGED;
+		if ( --kcChan.ui8PitchChangeDuration ) {
+			kcChan.i32Pitch += kcChan.i32PitchChangeAmount;
+		}
+		else {
+			kcChan.i32Pitch = kcChan.i32PitchChangeTarget;
+		}
+	}
+
+	/**
+	 * Advances a pitch bend between sequence ticks (effects_update_pitch_change_off_tick(), 0x80095B38).
+	 */
+	void CKonamiDriver::UpdatePitchChangeOffTick() {
+		NS4_KON_CHANNEL &kcChan = (*m_pkcChannel);
+		if ( kcChan.ui8PitchChangeType != 0 ) {
+			UpdatePortamento();
+			return;
+		}
+		if ( kcChan.ui8PitchChangeDelay == 0 ) {
+			kcChan.ui8Flags |= NS4_KF_PITCH_CHANGED;
+			kcChan.i32Pitch += kcChan.i32PitchChangeAmount;
+		}
+	}
+
+	/**
+	 * Starts the pitch bend or portamento set up by E5/E6 for a new note (effects_calculate_pitch_change_amount_this_note(), 0x80095C0C).
+	 */
+	void CKonamiDriver::CalculatePitchChangeThisNote() {
+		NS4_KON_CHANNEL &kcChan = (*m_pkcChannel);
+		if ( kcChan.ui8PitchChangeType == 0 ) {
+			kcChan.ui8PitchChangeDelay = kcChan.ui8NextPitchChangeDelay;
+			kcChan.ui8PitchChangeDuration = kcChan.ui8NextPitchChangeDuration;
+			kcChan.i32PitchChangeTarget = kcChan.i32Pitch;
+			kcChan.i32Pitch -= kcChan.i16NextPitchChangeParm;
+			CalculatePitchChangeAmount();
+		}
+		else {
+			kcChan.i32PitchChangeTarget = kcChan.i32Pitch;
+			kcChan.i32Pitch = kcChan.i32PitchChangeAmount;
+			kcChan.ui8PitchChangeDuration = 1;
+		}
+	}
+
+	/**
+	 * Advances a portamento (effects_update_portamento(), 0x80095CD8).
+	 */
+	void CKonamiDriver::UpdatePortamento() {
+		NS4_KON_CHANNEL &kcChan = (*m_pkcChannel);
+		kcChan.ui8Flags |= NS4_KF_PITCH_CHANGED;
+		int32_t i32Delta = kcChan.i32PitchChangeTarget - kcChan.i32Pitch;
+		uint32_t ui32Abs = uint32_t( i32Delta < 0 ? -i32Delta : i32Delta );
+		int32_t i32Step = int32_t( (uint32_t( uint16_t( kcChan.i16NextPitchChangeParm ) ) * ui32Abs) ) >> 8;
+		if ( i32Step == 0 ) { i32Step = 1; }
+		if ( i32Delta < 0 ) {
+			kcChan.i32Pitch -= i32Step;
+			if ( kcChan.i32Pitch < kcChan.i32PitchChangeTarget ) { kcChan.i32Pitch = kcChan.i32PitchChangeTarget; }
+		}
+		else {
+			kcChan.i32Pitch += i32Step;
+			if ( kcChan.i32Pitch > kcChan.i32PitchChangeTarget ) { kcChan.i32Pitch = kcChan.i32PitchChangeTarget; }
+		}
+		if ( kcChan.i32Pitch == kcChan.i32PitchChangeTarget ) {
+			kcChan.ui8PitchChangeDuration = 0;
+		}
+	}
+
+	/**
+	 * Ends the track (effects_end(), 0x80096698).
+	 */
+	void CKonamiDriver::End() {
+		NS4_KON_CHANNEL &kcChan = (*m_pkcChannel);
+		if ( kcChan.bVoicePlaying ) {
+			kcChan.ui8StopCountdown = 1;
+			Emit( NS4_KVC_VOLUME, 0, NS4_KON_CALLBACK_US );
+		}
+		kcChan.ui32SeqId = 0;
+	}
+
+	/**
+	 * Records the master loop of the current channel.
+	 *
+	 * \param _stStartIdx Index in the track's events where the loop starts.
+	 * \param _ui64StartTick Tick at which the loop starts.
+	 */
+	void CKonamiDriver::RecordLoop( size_t _stStartIdx, uint64_t _ui64StartTick ) {
+		NS4_KON_RECORD &krRec = m_vRecords[m_stChannel];
+		if ( !krRec.bRecording || !m_bStopAtLoops ) { return; }
+		NS4_KON_TRACK &ktTrack = (*m_pvTracks)[m_stChannel];
+		if ( _ui64StartTick == m_ui64Tick ) { return; }	// A loop with no length.
+		NS4_KON_VOICE_EVENT kveEvent = { _ui64StartTick, NS4_KVC_LOOP_START, 0, 0, 0.0f };
+		if ( _stStartIdx > ktTrack.vEvents.size() ) { _stStartIdx = ktTrack.vEvents.size(); }
+		ktTrack.vEvents.insert( ktTrack.vEvents.begin() + _stStartIdx, kveEvent );
+		Emit( NS4_KVC_LOOP_END );
+		ktTrack.bLoops = true;
+		krRec.bRecording = false;
+	}
+
+}	// namespace ns4

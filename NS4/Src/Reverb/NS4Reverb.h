@@ -538,6 +538,9 @@ namespace ns4 {
 		/** Delay line: 0400/3FFF. */
 		static NS4_REVERB_DELAY_LINE			m_rdlDelay0400_3FFF[];
 
+		/** Delay line for Castlevania: Legacy of Darkness (its custom libultra effect: 1 section, output 10200, feedback 12800, gain 32767). */
+		static NS4_REVERB_DELAY_LINE			m_rdlCastlevaniaLegacyOfDarkness0[];
+
 		/** Taps harvested from Fighters Destiny. */
 		static NS4_REVERB_TAP					m_rtFightersDestiny0[];
 

@@ -1,8 +1,11 @@
 #include "NS4MidiFile.h"
 
+#include <algorithm>
 #include <cassert>
+#include <cmath>
 #include <fstream>
 #include <map>
+#include <memory>
 #include <windows.h>
 
 
@@ -124,6 +127,9 @@ namespace ns4 {
 	// == Functions.
 	CMidiFile::CMidiFile() :
 		m_bIgnoreLoopsInTimeLine( false ) {
+		m_bKonami = false;
+		m_ui32KonamiBank = 0;
+		m_ui64KonamiRenderTicks = 0;
 		m_hHeader.ui16Division = 0;
 		m_hHeader.ui16Tracks = 0;
 		m_hHeader.ui32Length = 0;
@@ -418,6 +424,18 @@ namespace ns4 {
 			::OutputDebugStringW( _pwcPath );
 			::OutputDebugStringA( "\r\n" );
 			return false;
+		}
+		if ( m_sSettings.pktKonamiTables ) {
+			// Konami sequences: the file lists every command the driver executes, with its offset and bytes.  The track sections
+			//	begin with "Track N: XXXXXXXX".
+			for ( std::string sLine; std::getline( fFile, sLine ); ) {
+				uint32_t ui32KonTrack, ui32KonOffset;
+				if ( CKonamiDriver::IsTrackLine( sLine, ui32KonTrack, ui32KonOffset ) ) {
+					return AddDebug_Konami( fFile, ui32KonTrack, ui32KonOffset );
+				}
+			}
+			fFile.clear();
+			fFile.seekg( 0 );
 		}
 		uint32_t ui32Track = uint32_t( -1 );
 		uint32_t ui32Offset, ui32Delta, ui32Abs;
@@ -898,6 +916,178 @@ namespace ns4 {
 	}
 
 	/**
+	 * Loads a Konami "TrackParseDebug" file, plays it with the Konami driver to find each track's loop, and replaces the MIDI tracks
+	 *	with tracks that hold the timing (1 MIDI tick = 1 driver update), loop points, and note bookkeeping (used to find the end of
+	 *	songs that do not loop).  The sound itself is rendered by RenderKonamiNotesToStereo().
+	 *
+	 * \param _isStream The text stream, positioned just after the first "Track N: XXXXXXXX" line.
+	 * \param _ui32FirstTrack The number of the first track.
+	 * \param _ui32FirstOffset The offset of the first track.
+	 * \return Returns true if the file contained track data.
+	 */
+	bool CMidiFile::AddDebug_Konami( std::istream &_isStream, uint32_t _ui32FirstTrack, uint32_t _ui32FirstOffset ) {
+		// The longest a song may take to reach its loop (30 minutes).
+		const uint64_t ui64MaxTicks = uint64_t( 30.0 * 60.0 / KonamiTickSeconds() );
+
+		CKonamiDriver kdDriver;
+		if ( !kdDriver.LoadDebug( _isStream, _ui32FirstTrack, _ui32FirstOffset ) ) {
+			std::printf( "KONAMI: No track data found in the debug file.\r\n" );
+			return false;
+		}
+		std::vector<CKonamiDriver::NS4_KON_TRACK> vKonTracks;
+		kdDriver.Play( m_sSettings.ui32Bank, m_sSettings.pktKonamiTables, ui64MaxTicks, true, vKonTracks );
+		for ( size_t I = 0; I < kdDriver.Warnings().size(); ++I ) {
+			std::printf( "KONAMI: %s\r\n", kdDriver.Warnings()[I].c_str() );
+		}
+
+		m_bKonami = true;
+		m_ui32KonamiBank = m_sSettings.ui32Bank;
+		m_kdKonami = kdDriver;
+		m_vKonamiRender.clear();
+		m_ui64KonamiRenderTicks = 0;
+
+		// Rebuild the tracks.  1 MIDI tick = 1 driver update.
+		const uint16_t ui16Division = 480;
+		m_hHeader.ui16Type = 1;
+		m_hHeader.ui16Division = ui16Division;
+		m_hHeader.ui16Tracks = uint16_t( vKonTracks.size() );
+		m_vTracks.clear();
+		m_vTracks.resize( vKonTracks.size() );
+		m_sTimelineTrackIgnoreLoops.clear();
+		m_bIgnoreLoopsInTimeLine = false;
+
+		// Ordering of events on the same tick: tempo, note-offs, controls, then note-ons.
+		struct NS4_KON_SORT {
+			NS4_TRACK_EVENT				teEvent;
+			uint32_t					ui32Order;
+		};
+		const double dTicksPerSecond = 1.0 / KonamiTickSeconds();
+		for ( size_t I = 0; I < vKonTracks.size(); ++I ) {
+			const CKonamiDriver::NS4_KON_TRACK &ktTrack = vKonTracks[I];
+			NS4_TRACK &tTrack = m_vTracks[I];
+			tTrack.thHeader.ui32Header = 0x6B72544D;	// "MTrk"
+			tTrack.thHeader.ui32Length = 0;
+			tTrack.thHeader.bTagged = false;
+
+			const uint8_t ui8Chan = uint8_t( I & 0xF );
+			const int32_t i32ChanOffset = int32_t( I & ~size_t( 0xF ) );
+			std::vector<NS4_KON_SORT> vSort;
+			auto AddEvent = [&]( uint64_t _ui64Tick, uint8_t _ui8Event, uint8_t _ui8Parm0, uint8_t _ui8Parm1, uint32_t _ui32Order ) {
+				NS4_KON_SORT ksSort = {};
+				ksSort.teEvent.ui64Time = _ui64Tick;
+				ksSort.teEvent.ui8Event = _ui8Event;
+				ksSort.teEvent.u.sMidi.ui8Parm0 = _ui8Parm0;
+				ksSort.teEvent.u.sMidi.ui8Parm1 = _ui8Parm1;
+				ksSort.teEvent.ui64Data = 0;
+				ksSort.teEvent.dFloatData = 0.0;
+				ksSort.teEvent.dRealTime = 0.0;
+				ksSort.teEvent.i32ChanOffset = i32ChanOffset;
+				ksSort.ui32Order = _ui32Order;
+				vSort.push_back( ksSort );
+			};
+
+			if ( I == 0 ) {
+				NS4_KON_SORT ksSort = {};
+				ksSort.teEvent.ui64Time = 0;
+				ksSort.teEvent.ui8Event = NS4_ET_META;
+				ksSort.teEvent.u.sMeta.ui8EventType = NS4_ME_SET_TEMPO;
+				ksSort.teEvent.ui64Data = uint64_t( std::round( KonamiTickSeconds() * 1000000.0 * ui16Division ) );
+				ksSort.teEvent.dRealTime = 0.0;
+				ksSort.ui32Order = 0;
+				vSort.push_back( ksSort );
+			}
+
+			// Notes are only bookkeeping: they let TimeOfLastNoise() find the end of songs that do not loop.
+			bool bNoteOn = false;
+			uint8_t ui8Note = 0;
+			uint64_t ui64SilentAt = uint64_t( -1 );		// When a volume ramp to 0 finishes.
+			uint64_t ui64LastTick = 0;
+			auto NoteOff = [&]( uint64_t _ui64Tick ) {
+				if ( bNoteOn ) {
+					AddEvent( min( _ui64Tick, ui64SilentAt ), uint8_t( (NS4_ME_NOTE_OFF << 4) | ui8Chan ), ui8Note, 0, 1 );
+					bNoteOn = false;
+				}
+				ui64SilentAt = uint64_t( -1 );
+			};
+			for ( size_t J = 0; J < ktTrack.vEvents.size(); ++J ) {
+				const CKonamiDriver::NS4_KON_VOICE_EVENT &kveEvent = ktTrack.vEvents[J];
+				ui64LastTick = max( ui64LastTick, kveEvent.ui64Tick );
+				switch ( kveEvent.kvcCmd ) {
+					case CKonamiDriver::NS4_KVC_START : {
+						NoteOff( kveEvent.ui64Tick );
+						ui8Note = uint8_t( std::min<uint32_t>( kveEvent.ui32Parm1 >> 8, 0x7F ) );
+						AddEvent( kveEvent.ui64Tick, uint8_t( (NS4_ME_NOTE_ON << 4) | ui8Chan ), ui8Note, uint8_t( max( kveEvent.ui32Parm1 & 0x7F, 1U ) ), 3 );
+						bNoteOn = true;
+						break;
+					}
+					case CKonamiDriver::NS4_KVC_STOP : {
+						NoteOff( kveEvent.ui64Tick );
+						break;
+					}
+					case CKonamiDriver::NS4_KVC_VOLUME : {
+						if ( kveEvent.ui32Parm0 == 0 ) {
+							if ( ui64SilentAt == uint64_t( -1 ) ) {
+								ui64SilentAt = kveEvent.ui64Tick + uint64_t( std::ceil( kveEvent.ui32Parm1 / 1000000.0 * dTicksPerSecond ) );
+							}
+						}
+						else {
+							ui64SilentAt = uint64_t( -1 );
+						}
+						break;
+					}
+					case CKonamiDriver::NS4_KVC_LOOP_START : {
+						AddEvent( kveEvent.ui64Tick, uint8_t( (NS4_ME_CONTROLLER << 4) | ui8Chan ), NS4_LOOP_START, 0, 2 );
+						break;
+					}
+					case CKonamiDriver::NS4_KVC_LOOP_END : {
+						AddEvent( kveEvent.ui64Tick, uint8_t( (NS4_ME_CONTROLLER << 4) | ui8Chan ), NS4_LOOP_END, 0, 2 );
+						break;
+					}
+					default : {}
+				}
+			}
+			if ( bNoteOn ) {
+				if ( ktTrack.bLoops ) {
+					NoteOff( ui64LastTick );
+				}
+				else {
+					// The last note plays until it is silenced (or forever).
+					NoteOff( ui64SilentAt == uint64_t( -1 ) ? ui64LastTick : ui64SilentAt );
+				}
+			}
+
+			std::stable_sort( vSort.begin(), vSort.end(), []( const NS4_KON_SORT &_ksLeft, const NS4_KON_SORT &_ksRight ) {
+				if ( _ksLeft.teEvent.ui64Time != _ksRight.teEvent.ui64Time ) { return _ksLeft.teEvent.ui64Time < _ksRight.teEvent.ui64Time; }
+				return _ksLeft.ui32Order < _ksRight.ui32Order;
+			} );
+			uint64_t ui64End = 0;
+			for ( size_t J = 0; J < vSort.size(); ++J ) {
+				tTrack.vEvents.push_back( vSort[J].teEvent );
+				ui64End = max( ui64End, vSort[J].teEvent.ui64Time );
+			}
+			NS4_TRACK_EVENT teEnd = {};
+			teEnd.ui64Time = ui64End;
+			teEnd.ui8Event = NS4_ET_META;
+			teEnd.u.sMeta.ui8EventType = NS4_ME_END_OF_TRACK;
+			tTrack.vEvents.push_back( teEnd );
+
+			uint64_t ui64LoopStart = 0, ui64LoopEnd = 0;
+			for ( size_t J = 0; J < ktTrack.vEvents.size(); ++J ) {
+				if ( ktTrack.vEvents[J].kvcCmd == CKonamiDriver::NS4_KVC_LOOP_START ) { ui64LoopStart = ktTrack.vEvents[J].ui64Tick; }
+				if ( ktTrack.vEvents[J].kvcCmd == CKonamiDriver::NS4_KVC_LOOP_END ) { ui64LoopEnd = ktTrack.vEvents[J].ui64Tick; }
+			}
+			if ( ktTrack.bLoops ) {
+				std::printf( "KONAMI: Track %u (%.8X): loops %.3f-%.3f seconds.\r\n", uint32_t( I + 1 ), ktTrack.ui32Offset,
+					ui64LoopStart / dTicksPerSecond, ui64LoopEnd / dTicksPerSecond );
+			}
+			else if ( ktTrack.bEnded ) {
+				std::printf( "KONAMI: Track %u (%.8X): ends at %.3f seconds.\r\n", uint32_t( I + 1 ), ktTrack.ui32Offset, ui64LastTick / dTicksPerSecond );
+			}
+		}
+		return true;
+	}
+
+	/**
 	 * Resets the object back to scratch.
 	 */
 	void CMidiFile::Reset() {
@@ -909,6 +1099,12 @@ namespace ns4 {
 
 		m_sTimelineTrackIgnoreLoops.clear();
 		m_bIgnoreLoopsInTimeLine = false;
+
+		m_bKonami = false;
+		m_ui32KonamiBank = 0;
+		m_kdKonami = CKonamiDriver();
+		m_vKonamiRender.clear();
+		m_ui64KonamiRenderTicks = 0;
 
 		for ( auto I = m_vSampleForManualRender.size(); I--; ) {
 			delete m_vSampleForManualRender[I];
@@ -953,6 +1149,9 @@ namespace ns4 {
 		uint64_t * _pui64TimeOfLastSound,
 		double * _pdStartTime ) const {
 		if ( _stTrack >= m_vTracks.size() ) { return _aResult; }
+		if ( m_bKonami ) {
+			return RenderKonamiNotesToStereo( _aResult, _stTrack, _troOptions, _sbSoundBank, _paWet, _pui64TimeOfLastSound, _pdStartTime );
+		}
 		//lwaudio aResult = CWavLib::AllocateSamples( 2, _troOptions.uiMaxSamples );
 		CTimeBlock tbWavTime( _troOptions.uiSampleRate );
 
@@ -1756,6 +1955,200 @@ namespace ns4 {
 		}
 
 
+		return _aResult;
+	}
+
+	/**
+	 * Renders a track of a Konami sequence to stereo audio.  The driver is played (with its tracks looping freely, as in the game)
+	 *	for the length of the render, and its synthesizer commands are applied the way libultra applies them: volumes are squared
+	 *	and ramped exponentially, pan and effect mix use the equal-power table.
+	 *
+	 * \param _aResult The resulting render.
+	 * \param _stTrack The track to render.
+	 * \param _troOptions The options for rendering the audio.
+	 * \param _sbSoundBank The soundbank to use if m_sSettings.pvKonamiBanks is nullptr.
+	 * \param _paWet If not nullptr, the wet "generator" is accumulated into it.  For mono results, only allocate 1 channel.
+	 * \param _pui64TimeOfLastSound If not nullptr, the time of the last sound (in samples) is returned here.
+	 * \param _pdStartTime If not nullptr, the start time of playback.
+	 * \return Returns the rendered audio.
+	 */
+	lwaudio & CMidiFile::RenderKonamiNotesToStereo( lwaudio &_aResult, size_t _stTrack, const NS4_TRACK_RENDER_OPTIONS &_troOptions, CSoundBank &_sbSoundBank,
+		lwaudio * _paWet,
+		uint64_t * _pui64TimeOfLastSound,
+		double * _pdStartTime ) const {
+		if ( _pdStartTime ) { (*_pdStartTime) = 0.0; }
+		if ( _aResult.size() < 2 || !_troOptions.uiSampleRate ) { return _aResult; }
+		const double dSynthHz = m_sSettings.dKonamiSynthHz;
+		const double dGameHz = m_sSettings.dKonamiGameHz;
+		const double dOutHz = double( _troOptions.uiSampleRate );
+		const double dTickToSamples = KonamiTickSeconds() * dOutHz;		// Output samples per driver update.
+		const uint64_t ui64MaxSamples = min( uint64_t( _troOptions.uiMaxSamples ), uint64_t( _aResult[0].size() ) );
+
+		// Play the driver for the whole render (shared by all tracks).
+		uint64_t ui64Ticks = uint64_t( std::ceil( double( _troOptions.uiMaxSamples ) / dTickToSamples ) ) + 2;
+		if ( ui64Ticks != m_ui64KonamiRenderTicks ) {
+			m_kdKonami.Play( m_ui32KonamiBank, m_sSettings.pktKonamiTables, ui64Ticks, false, m_vKonamiRender );
+			m_ui64KonamiRenderTicks = ui64Ticks;
+		}
+		if ( _stTrack >= m_vKonamiRender.size() ) { return _aResult; }
+		const std::vector<CKonamiDriver::NS4_KON_VOICE_EVENT> &vEvents = m_vKonamiRender[_stTrack].vEvents;
+
+		// Finds the wave for a bank and sound.
+		std::map<uint32_t, const CSoundBank::NS4_SAMPLE *> mSamples;
+		auto FindSample = [&]( uint32_t _ui32Bank, uint32_t _ui32Sound ) -> const CSoundBank::NS4_SAMPLE * {
+			uint32_t ui32Key = (_ui32Bank << 16) | _ui32Sound;
+			auto aFound = mSamples.find( ui32Key );
+			if ( aFound != mSamples.end() ) { return aFound->second; }
+			const CSoundBank * psbBank = &_sbSoundBank;
+			if ( m_sSettings.pvKonamiBanks && _ui32Bank < m_sSettings.pvKonamiBanks->size() ) {
+				psbBank = &(*m_sSettings.pvKonamiBanks)[_ui32Bank];
+			}
+			std::vector<const CSoundBank::NS4_SAMPLE *> vFound = psbBank->GatherSamples( _ui32Bank, _ui32Sound, 0x3C, 0x7F );
+			const CSoundBank::NS4_SAMPLE * psRet = nullptr;
+			for ( size_t I = 0; I < vFound.size() && !psRet; ++I ) {
+				if ( vFound[I]->sSample.Hz() ) { psRet = vFound[I]; }
+			}
+			if ( !psRet ) {
+				std::printf( "KONAMI: Track %u: no sample for bank %.2X sound %.2X.\r\n", uint32_t( _stTrack + 1 ), _ui32Bank, _ui32Sound );
+			}
+			mSamples[ui32Key] = psRet;
+			return psRet;
+		};
+
+		// The voice (libultra envelope mixer).  Levels are 0-0x7FFF.
+		std::unique_ptr<CSampler> upSampler;
+		const CSoundBank::NS4_SAMPLE * psSample = nullptr;
+		bool bPlaying = false;
+		double dRatio = 1.0;
+		uint32_t ui32Pan = 0x40;
+		uint32_t ui32FxMix = 0;
+		double dVolume = 0.0;						// em_volume: the squared volume.
+		double dCurL = 1.0, dCurR = 1.0;			// em_cvolL/em_cvolR.
+		double dTgtL = 0.0, dTgtR = 0.0;			// em_ltgt/em_rtgt.
+		double dStepL = 1.0, dStepR = 1.0;			// Per-sample multipliers.
+		double dSegLen = 0.0;						// Length of the volume ramp in output samples.
+		double dSegPos = 0.0;						// Position within the ramp in output samples.
+		auto Retarget = [&]() {
+			dTgtL = std::floor( dVolume * m_fStdPanTable[ui32Pan] );
+			dTgtR = std::floor( dVolume * m_fStdPanTable[127-ui32Pan] );
+			double dRemaining = dSegLen - dSegPos;
+			if ( dRemaining < 1.0 ) {
+				dCurL = dTgtL;
+				dCurR = dTgtR;
+				dStepL = dStepR = 1.0;
+			}
+			else {
+				// libultra ramps exponentially and never from or to a level below 1.
+				dStepL = std::pow( max( dTgtL, 1.0 ) / max( dCurL, 1.0 ), 1.0 / dRemaining );
+				dStepR = std::pow( max( dTgtR, 1.0 ) / max( dCurR, 1.0 ), 1.0 / dRemaining );
+				dCurL = max( dCurL, 1.0 );
+				dCurR = max( dCurR, 1.0 );
+			}
+		};
+
+		size_t stEvent = 0;
+		for ( uint64_t I = 0; I < ui64MaxSamples; ++I ) {
+			// Apply the commands sent on or before this sample.
+			while ( stEvent < vEvents.size() && uint64_t( std::llround( vEvents[stEvent].ui64Tick * dTickToSamples ) ) <= I ) {
+				const CKonamiDriver::NS4_KON_VOICE_EVENT &kveEvent = vEvents[stEvent++];
+				switch ( kveEvent.kvcCmd ) {
+					case CKonamiDriver::NS4_KVC_START : {
+						psSample = FindSample( kveEvent.ui32Parm0 >> 16, kveEvent.ui32Parm0 & 0xFFFF );
+						upSampler.reset();
+						if ( psSample && (m_sSettings.i32SampleExclusive == -1 || uint32_t( m_sSettings.i32SampleExclusive ) == (kveEvent.ui32Parm0 & 0xFFFF)) ) {
+							upSampler = std::make_unique<CSampler>( &psSample->sSample, 0.0,
+								&CWavLib::m_vSamplers[ns4::CWavLib::m_sfStandardSampleFunc], _troOptions.uiSampleRate );
+						}
+						bPlaying = true;
+						break;
+					}
+					case CKonamiDriver::NS4_KVC_STOP : {
+						bPlaying = false;
+						upSampler.reset();
+						break;
+					}
+					case CKonamiDriver::NS4_KVC_PITCH : {
+						dRatio = kveEvent.fRatio;
+						break;
+					}
+					case CKonamiDriver::NS4_KVC_VOLUME : {
+						double dVol = double( min( kveEvent.ui32Parm0, 0x7FFFU ) );
+						dVolume = std::floor( dVol * dVol / 32768.0 );
+						dSegLen = CKonamiDriver::RampSamples( kveEvent.ui32Parm1, dSynthHz ) / dGameHz * dOutHz;
+						dSegPos = 0.0;
+						Retarget();
+						break;
+					}
+					case CKonamiDriver::NS4_KVC_PAN : {
+						ui32Pan = min( kveEvent.ui32Parm0, 127U );
+						Retarget();
+						break;
+					}
+					case CKonamiDriver::NS4_KVC_FXMIX : {
+						ui32FxMix = min( kveEvent.ui32Parm0, 127U );
+						break;
+					}
+					default : {}
+				}
+			}
+
+			if ( !bPlaying ) { continue; }
+			// The envelope only advances while the voice plays.
+			if ( dSegPos < dSegLen ) {
+				dSegPos += 1.0;
+				if ( dSegPos >= dSegLen ) {
+					dCurL = dTgtL;
+					dCurR = dTgtR;
+				}
+				else {
+					dCurL *= dStepL;
+					dCurR *= dStepR;
+				}
+			}
+			if ( !upSampler ) { continue; }
+
+			double dRate = dRatio * psSample->sSample.Hz() * (dGameHz / dSynthHz);
+			if ( m_sSettings.dMaxRate != 0.0 ) {
+				dRate = min( m_sSettings.dMaxRate, dRate );
+			}
+			upSampler->SetRate( dRate );
+			upSampler->Tick();
+			double dVal = upSampler->Sample();
+			if ( !dVal ) { continue; }
+
+			double dL = dCurL / 32767.0;
+			double dR = dCurR / 32767.0;
+			double dDry = m_fStdPanTable[ui32FxMix];
+			double dWet = m_fStdPanTable[127-ui32FxMix];
+			if ( m_sSettings.bIgnoreReverb ) {
+				dDry = 1.0;
+				dWet = 0.0;
+			}
+			if ( _pui64TimeOfLastSound && (dL || dR) ) {
+				(*_pui64TimeOfLastSound) = max( (*_pui64TimeOfLastSound), I );
+			}
+			if ( _paWet && dWet && _paWet->size() ) {
+				for ( size_t J = 0; J < _paWet->size(); ++J ) {
+					if ( (*_paWet)[J].size() <= I ) {
+						(*_paWet)[J].resize( _troOptions.uiMaxSamples );
+					}
+				}
+				if ( _paWet->size() == 1 ) {
+					(*_paWet)[0][I] += dVal * dWet * (dL + dR);
+				}
+				else {
+					(*_paWet)[0][I] += dVal * dWet * dL;
+					(*_paWet)[1][I] += dVal * dWet * dR;
+				}
+				if ( m_sSettings.bClampReverb ) {
+					for ( size_t J = 0; J < _paWet->size(); ++J ) {
+						(*_paWet)[J][I] = std::clamp( (*_paWet)[J][I], -1.0, 1.0 );
+					}
+				}
+			}
+			_aResult[0][I] += dVal * dDry * dL;
+			_aResult[1][I] += dVal * dDry * dR;
+		}
 		return _aResult;
 	}
 

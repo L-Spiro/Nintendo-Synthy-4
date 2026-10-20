@@ -1344,6 +1344,19 @@ namespace ns4 {
 		},
 	};
 
+	/** Delay line for Castlevania: Legacy of Darkness.  The game's custom libultra effect (ROM 0x0B9320) has 1 section:
+	 *	input 0, output 10200, feedback coefficient 12800, feed-forward coefficient 0, gain 32767, no chorus, no filter.
+	 *	That is an echo every 10,200 samples whose level drops by 12800/32767 with each repeat. */
+	NS4_REVERB_DELAY_LINE CReverb::m_rdlCastlevaniaLegacyOfDarkness0[] = {
+		{
+			10200,																	// ui32Delay
+			10200,																	// ui32FeedbackDelay
+			0x7FFF / double( 0x7FFF ),												// dVol
+			12800 / double( 0x7FFF ),												// dFeedback
+			1.0 / 0x7FFF															// dMinLevel
+		},
+	};
+
 	/** Taps harvested from Fighters Destiny. */
 	NS4_REVERB_TAP CReverb::m_rtFightersDestiny0[] = {
 #include "Taps/NS4ReverbFightersDestiny0.inl"
@@ -2934,6 +2947,15 @@ namespace ns4 {
 			NS4_PD_FILTER,															// dLpfFactor
 			NS4_NO_DELAY,															// dDelayVol
 		},	// 179
+		// Castlevania: Legacy of Darkness.
+		{
+			NS4_NO_TAPS,															// prtTable
+			0.0,																	// dTapVol
+			0,																		// i64TapOffset
+			NS4_NO_FADE,															// dTime
+			NS4_NO_LPF,																// dLpfFactor
+			NS4_DELAY( m_rdlCastlevaniaLegacyOfDarkness0, (double( 0x7FFF ) / double( 0x7FFF )) ),	// dDelayVol
+		},	// 180
 	};
 
 

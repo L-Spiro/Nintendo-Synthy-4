@@ -109,6 +109,12 @@
     <Filter Include="Source Files\Fade">
       <UniqueIdentifier>{b3154d3e-eabb-40a3-badf-68cfaa854235}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\Konami">
+      <UniqueIdentifier>{df004dd2-7e53-47f1-96b6-d94cfc653b7e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Konami">
+      <UniqueIdentifier>{3e219520-633b-480f-b3e3-d1bf3bd17a73}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Src\Reverb\NS4Reverb.cpp">
@@ -128,6 +134,9 @@
     </ClCompile>
     <ClCompile Include="Src\MIDI\NS4MidiFile.cpp">
       <Filter>Source Files\MIDI</Filter>
+    </ClCompile>
+    <ClCompile Include="Src\Konami\NS4KonamiDriver.cpp">
+      <Filter>Source Files\Konami</Filter>
     </ClCompile>
     <ClCompile Include="Src\Operator\NS4Operator.cpp">
       <Filter>Source Files\Operator</Filter>
@@ -205,6 +214,9 @@
     </ClInclude>
     <ClInclude Include="Src\MIDI\NS4MidiFile.h">
       <Filter>Header Files\MIDI</Filter>
+    </ClInclude>
+    <ClInclude Include="Src\Konami\NS4KonamiDriver.h">
+      <Filter>Header Files\Konami</Filter>
     </ClInclude>
     <ClInclude Include="Src\Operator\NS4LinearInterpolator.h">
       <Filter>Header Files\Operator</Filter>
@@ -1124,6 +1136,9 @@
       <Filter>Header Files\Games</Filter>
     </None>
     <None Include="Src\Games\NS4Robotron64Files.inl">
+      <Filter>Header Files\Games</Filter>
+    </None>
+    <None Include="Src\Games\NS4CastlevaniaLegacyOfDarknessFiles.inl">
       <Filter>Header Files\Games</Filter>
     </None>
   </ItemGroup>

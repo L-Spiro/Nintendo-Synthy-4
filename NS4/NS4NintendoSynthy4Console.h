@@ -512,7 +512,8 @@ int oldmain() {
 
 //#include "Src/Games/NS4OnegaiMonstersFiles.inl"
 
-#include "Src/Games/NS4Robotron64Files.inl"
+//#include "Src/Games/NS4Robotron64Files.inl"
+#include "Src/Games/NS4CastlevaniaLegacyOfDarknessFiles.inl"
 #else
 		{}
 #endif
@@ -800,6 +801,24 @@ int oldmain() {
 #ifdef NS4_PITCH_BEND_SCALE
 		ns4::CMidiFile::m_sSettings.dPitchBendScale = NS4_PITCH_BEND_SCALE;
 #endif	// NS4_PITCH_BEND_SCALE
+
+		// Konami sequences (played by the Konami driver from their "TrackParseDebug" files).
+#ifdef NS4_KONAMI_TABLES
+		ns4::CMidiFile::m_sSettings.pktKonamiTables = &NS4_KONAMI_TABLES;
+#else
+		ns4::CMidiFile::m_sSettings.pktKonamiTables = nullptr;
+#endif	// NS4_KONAMI_TABLES
+		ns4::CMidiFile::m_sSettings.pvKonamiBanks = &vBanks;
+#ifdef NS4_KONAMI_SYNTH_HZ
+		ns4::CMidiFile::m_sSettings.dKonamiSynthHz = double( NS4_KONAMI_SYNTH_HZ );
+#else
+		ns4::CMidiFile::m_sSettings.dKonamiSynthHz = 44100.0;
+#endif	// NS4_KONAMI_SYNTH_HZ
+#ifdef NS4_ORIG_HZ
+		ns4::CMidiFile::m_sSettings.dKonamiGameHz = double( NS4_ORIG_HZ );
+#else
+		ns4::CMidiFile::m_sSettings.dKonamiGameHz = ns4::CMidiFile::m_sSettings.dKonamiSynthHz;
+#endif	// NS4_ORIG_HZ
 
 	ns4::CMidiFile::NS4_TRACK_RENDER_OPTIONS troOptions;
 #ifdef NS4_BULK
