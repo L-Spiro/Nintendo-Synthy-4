@@ -2,10 +2,11 @@
 #define NS4_COMPOSERS						u8"Masahiko Kimura"
 #define NS4_YEAR							u8"1999"
 #define NS4_FOLDER							u8"Castlevania Legacy of Darkness"
-#define NS4_BANK							u8"00"
+// No NS4_BANK: each sequence starts in its own bank (the last field of each entry).  The game keeps a {track count, bank} pair per
+// sequence (ROM 0x11DA00); 5A, 5B, 5C, 86, and A2 start in bank 1 and 8F in bank 2.  Tracks without an F0 (Bank Select) use it.
 #define NS4_REVERB_TRACKS					1
 #define NS4_REVERB							ns4::CReverb::NS4_T_CASTLEVANIA_LEGACY_OF_DARKNESS_0
-#define NS4_ORIG_HZ							44095
+#define NS4_ORIG_HZ							44095												// osAiSetFrequency( 44100 ) really sets 48681812 / 1104 Hz.
 #define NS4_KONAMI_SYNTH_HZ					44100.0												// The rate given to alInit(): driver updates are 221 samples apart.
 #define NS4_KONAMI_TABLES					ns4::CKonamiDriver::m_ktCastlevaniaLegacyOfDarknessU
 #define NS4_OUT_DIRECTORY					u8"C:\\N64OST\\Castlevania Legacy of Darkness\\"
@@ -17,6 +18,7 @@
 #define NS4_ANTI_ALIASING_LEVEL				2
 #define NS4_ANTI_ALIASING_HZ				20000.0
 
+
 { u8"Castlevania - Legacy of Darkness (U) 0000000F 0071C0B0.mid", u8"Castlevania - Legacy of Darkness (U) 0000000F 0071C0B0.mid TrackParseDebug.txt", u8"Title (Castlevania: Legacy of Darkness)", 0 },
 { u8"Castlevania - Legacy of Darkness (U) 000000A1 00743F90.mid", u8"Castlevania - Legacy of Darkness (U) 000000A1 00743F90.mid TrackParseDebug.txt", u8"Title (Man Beasts’ Minuet)", 0 },
 { u8"Castlevania - Legacy of Darkness (U) 00000094 0073E950.mid", u8"Castlevania - Legacy of Darkness (U) 00000094 0073E950.mid TrackParseDebug.txt", u8"Main Menu", 0 },
@@ -24,7 +26,7 @@
 { u8"Castlevania - Legacy of Darkness (U) 00000089 0073C0D0.mid", u8"Castlevania - Legacy of Darkness (U) 00000089 0073C0D0.mid TrackParseDebug.txt", u8"Introduction (Part 2)", 0 },
 { u8"Castlevania - Legacy of Darkness (U) 0000008B 0073C6B0.mid", u8"Castlevania - Legacy of Darkness (U) 0000008B 0073C6B0.mid TrackParseDebug.txt", u8"Introduction (Part 3)", 0 },
 { u8"Castlevania - Legacy of Darkness (U) 0000008D 0073D360.mid", u8"Castlevania - Legacy of Darkness (U) 0000008D 0073D360.mid TrackParseDebug.txt", u8"Introduction (Part 4)", 0 },
-{ u8"Castlevania - Legacy of Darkness (U) 0000008F 0073DB10.mid", u8"Castlevania - Legacy of Darkness (U) 0000008F 0073DB10.mid TrackParseDebug.txt", u8"Prologue - Blue Crescent Moon", 0 },
+{ u8"Castlevania - Legacy of Darkness (U) 0000008F 0073DB10.mid", u8"Castlevania - Legacy of Darkness (U) 0000008F 0073DB10.mid TrackParseDebug.txt", u8"Prologue - Blue Crescent Moon", 2 },
 { u8"Castlevania - Legacy of Darkness (U) 00000081 007391D0.mid", u8"Castlevania - Legacy of Darkness (U) 00000081 007391D0.mid TrackParseDebug.txt", u8"Prologue", 0 },
 { u8"Castlevania - Legacy of Darkness (U) 0000001F 0071EF20.mid", u8"Castlevania - Legacy of Darkness (U) 0000001F 0071EF20.mid TrackParseDebug.txt", u8"The Ferryman", 0 },
 { u8"Castlevania - Legacy of Darkness (U) 00000096 0073F680.mid", u8"Castlevania - Legacy of Darkness (U) 00000096 0073F680.mid TrackParseDebug.txt", u8"Foggy Lake A", 0 },
@@ -101,9 +103,9 @@
 { u8"Castlevania - Legacy of Darkness (U) 0000007C 00737E80.mid", u8"Castlevania - Legacy of Darkness (U) 0000007C 00737E80.mid TrackParseDebug.txt", u8"Unknown Terror", 0 },
 { u8"Castlevania - Legacy of Darkness (U) 00000082 00739380.mid", u8"Castlevania - Legacy of Darkness (U) 00000082 00739380.mid TrackParseDebug.txt", u8"Unused Harpsichord Theme", 0 },
 { u8"Castlevania - Legacy of Darkness (U) 0000000E 0071BFC0.mid", u8"Castlevania - Legacy of Darkness (U) 0000000E 0071BFC0.mid TrackParseDebug.txt", u8"SFX Crystal Magic", 0 },
-
+{ u8"Castlevania - Legacy of Darkness (U) 00000086 0073A540.mid", u8"Castlevania - Legacy of Darkness (U) 00000086 0073A540.mid TrackParseDebug.txt", u8"SFX Dark Bombing", 1 },
 { u8"Castlevania - Legacy of Darkness (U) 0000002E 00723320.mid", u8"Castlevania - Legacy of Darkness (U) 0000002E 00723320.mid TrackParseDebug.txt", u8"SFX Deep Bass", 0 },
-{ u8"Castlevania - Legacy of Darkness (U) 000000A2 007441C0.mid", u8"Castlevania - Legacy of Darkness (U) 000000A2 007441C0.mid TrackParseDebug.txt", u8"SFX Electric Charge", 0 },
+{ u8"Castlevania - Legacy of Darkness (U) 000000A2 007441C0.mid", u8"Castlevania - Legacy of Darkness (U) 000000A2 007441C0.mid TrackParseDebug.txt", u8"SFX Electric Charge", 1 },
 //{ u8"Castlevania - Legacy of Darkness (U) 00000088 0073B340.mid", u8"Castlevania - Legacy of Darkness (U) 00000088 0073B340.mid TrackParseDebug.txt", u8"Introduction (Part 1)", 0 },
 //{ u8"Castlevania - Legacy of Darkness (U) 0000008A 0073C3C0.mid", u8"Castlevania - Legacy of Darkness (U) 0000008A 0073C3C0.mid TrackParseDebug.txt", u8"Introduction (Part 2)", 0 },
 { u8"Castlevania - Legacy of Darkness (U) 0000008E 0073D740.mid", u8"Castlevania - Legacy of Darkness (U) 0000008E 0073D740.mid TrackParseDebug.txt", u8"Introduction (Part 4) (Alternate)", 0 },
@@ -116,6 +118,7 @@
 { u8"Castlevania - Legacy of Darkness (U) 00000055 0072D640.mid", u8"Castlevania - Legacy of Darkness (U) 00000055 0072D640.mid TrackParseDebug.txt", u8"A Promise of Light", 0 },
 { u8"Castlevania - Legacy of Darkness (U) 00000028 00721400.mid", u8"Castlevania - Legacy of Darkness (U) 00000028 00721400.mid TrackParseDebug.txt", u8"Absence of Evil", 0 },
 { u8"Castlevania - Legacy of Darkness (U) 00000053 0072CDC0.mid", u8"Castlevania - Legacy of Darkness (U) 00000053 0072CDC0.mid TrackParseDebug.txt", u8"Another Fernandez", 0 },
+{ u8"Castlevania - Legacy of Darkness (U) 0000007D 00738560.mid", u8"Castlevania - Legacy of Darkness (U) 0000007D 00738560.mid TrackParseDebug.txt", u8"Another Fernandez (Alternate)", 0 },
 { u8"Castlevania - Legacy of Darkness (U) 00000016 0071D6E0.mid", u8"Castlevania - Legacy of Darkness (U) 00000016 0071D6E0.mid TrackParseDebug.txt", u8"Another Vampire Hunter (Part 1)", 0 },
 { u8"Castlevania - Legacy of Darkness (U) 00000017 0071D980.mid", u8"Castlevania - Legacy of Darkness (U) 00000017 0071D980.mid TrackParseDebug.txt", u8"Another Vampire Hunter (Part 2)", 0 },
 { u8"Castlevania - Legacy of Darkness (U) 00000020 0071F240.mid", u8"Castlevania - Legacy of Darkness (U) 00000020 0071F240.mid TrackParseDebug.txt", u8"Bloodborn", 0 },
@@ -126,7 +129,7 @@
 { u8"Castlevania - Legacy of Darkness (U) 0000006F 007344D0.mid", u8"Castlevania - Legacy of Darkness (U) 0000006F 007344D0.mid TrackParseDebug.txt", u8"Castle Center - Main Theme", 0 },
 { u8"Castlevania - Legacy of Darkness (U) 00000070 00734A70.mid", u8"Castlevania - Legacy of Darkness (U) 00000070 00734A70.mid TrackParseDebug.txt", u8"Castle Escape", 0 },
 { u8"Castlevania - Legacy of Darkness (U) 00000071 00734E90.mid", u8"Castlevania - Legacy of Darkness (U) 00000071 00734E90.mid TrackParseDebug.txt", u8"Castle Escape (Lead-In)", 0 },
-
+{ u8"Castlevania - Legacy of Darkness (U) 0000005C 0072EA30.mid", u8"Castlevania - Legacy of Darkness (U) 0000005C 0072EA30.mid TrackParseDebug.txt", u8"Castlevania Collapses", 1 },
 { u8"Castlevania - Legacy of Darkness (U) 00000051 0072C1C0.mid", u8"Castlevania - Legacy of Darkness (U) 00000051 0072C1C0.mid TrackParseDebug.txt", u8"Dark Plot", 0 },
 { u8"Castlevania - Legacy of Darkness (U) 00000052 0072C7C0.mid", u8"Castlevania - Legacy of Darkness (U) 00000052 0072C7C0.mid TrackParseDebug.txt", u8"Dark Plot (Actrise’s Theme)", 0 },
 { u8"Castlevania - Legacy of Darkness (U) 0000002A 00721B40.mid", u8"Castlevania - Legacy of Darkness (U) 0000002A 00721B40.mid TrackParseDebug.txt", u8"Death of the Servant", 0 },
@@ -150,7 +153,7 @@
 { u8"Castlevania - Legacy of Darkness (U) 0000003C 00725E60.mid", u8"Castlevania - Legacy of Darkness (U) 0000003C 00725E60.mid TrackParseDebug.txt", u8"Lamented Rose 2", 0 },
 { u8"Castlevania - Legacy of Darkness (U) 00000012 0071CDD0.mid", u8"Castlevania - Legacy of Darkness (U) 00000012 0071CDD0.mid TrackParseDebug.txt", u8"Lizardman Attack", 0 },
 { u8"Castlevania - Legacy of Darkness (U) 00000029 007216C0.mid", u8"Castlevania - Legacy of Darkness (U) 00000029 007216C0.mid TrackParseDebug.txt", u8"Lord of Darkness", 0 },
-{ u8"Castlevania - Legacy of Darkness (U) 0000005B 0072E8A0.mid", u8"Castlevania - Legacy of Darkness (U) 0000005B 0072E8A0.mid TrackParseDebug.txt", u8"Magic Detonation XXX", 0 },
+{ u8"Castlevania - Legacy of Darkness (U) 0000005B 0072E8A0.mid", u8"Castlevania - Legacy of Darkness (U) 0000005B 0072E8A0.mid TrackParseDebug.txt", u8"Magic Detonation", 1 },
 { u8"Castlevania - Legacy of Darkness (U) 00000092 0073E510.mid", u8"Castlevania - Legacy of Darkness (U) 00000092 0073E510.mid TrackParseDebug.txt", u8"Main Menu (Castlevania 64)", 0 },
 { u8"Castlevania - Legacy of Darkness (U) 00000030 00723820.mid", u8"Castlevania - Legacy of Darkness (U) 00000030 00723820.mid TrackParseDebug.txt", u8"Malus Reappears (Part 1)", 0 },
 { u8"Castlevania - Legacy of Darkness (U) 00000022 0071FBC0.mid", u8"Castlevania - Legacy of Darkness (U) 00000022 0071FBC0.mid TrackParseDebug.txt", u8"Malus Reappears (Part 2)", 0 },
@@ -174,7 +177,7 @@
 { u8"Castlevania - Legacy of Darkness (U) 00000038 007254E0.mid", u8"Castlevania - Legacy of Darkness (U) 00000038 007254E0.mid TrackParseDebug.txt", u8"Spread of the Plague", 0 },
 { u8"Castlevania - Legacy of Darkness (U) 0000001E 0071E8F0.mid", u8"Castlevania - Legacy of Darkness (U) 0000001E 0071E8F0.mid TrackParseDebug.txt", u8"The Lost Boy", 0 },
 { u8"Castlevania - Legacy of Darkness (U) 0000009F 00743910.mid", u8"Castlevania - Legacy of Darkness (U) 0000009F 00743910.mid TrackParseDebug.txt", u8"The Lost Boy (Malus’ Theme)", 0 },
-{ u8"Castlevania - Legacy of Darkness (U) 0000005A 0072E710.mid", u8"Castlevania - Legacy of Darkness (U) 0000005A 0072E710.mid TrackParseDebug.txt", u8"Through the Sealed Wall XXX", 0 },
+{ u8"Castlevania - Legacy of Darkness (U) 0000005A 0072E710.mid", u8"Castlevania - Legacy of Darkness (U) 0000005A 0072E710.mid TrackParseDebug.txt", u8"Through the Sealed Wall", 1 },
 { u8"Castlevania - Legacy of Darkness (U) 0000000B 0071AEE0.mid", u8"Castlevania - Legacy of Darkness (U) 0000000B 0071AEE0.mid TrackParseDebug.txt", u8"Underground Waterway (Lead-In)", 0 },
 { u8"Castlevania - Legacy of Darkness (U) 0000003D 00726150.mid", u8"Castlevania - Legacy of Darkness (U) 0000003D 00726150.mid TrackParseDebug.txt", u8"Unexpected Encounter", 0 },
 { u8"Castlevania - Legacy of Darkness (U) 00000024 00720260.mid", u8"Castlevania - Legacy of Darkness (U) 00000024 00720260.mid TrackParseDebug.txt", u8"Vampire Vincent", 0 },
@@ -183,20 +186,11 @@
 
 
 
-
-{ u8"Castlevania - Legacy of Darkness (U) 0000005C 0072EA30.mid", u8"Castlevania - Legacy of Darkness (U) 0000005C 0072EA30.mid TrackParseDebug.txt", u8"Unknown 1", 0 },
-
-
-
-
 //{ u8"Castlevania - Legacy of Darkness (U) 00000064 00731540.mid", u8"Castlevania - Legacy of Darkness (U) 00000064 00731540.mid TrackParseDebug.txt", u8"Legacy of Darkness (Part 1)", 0 },
 //{ u8"Castlevania - Legacy of Darkness (U) 00000065 00731CC0.mid", u8"Castlevania - Legacy of Darkness (U) 00000065 00731CC0.mid TrackParseDebug.txt", u8"Legacy of Darkness (Part 2)", 0 },
 
 
-{ u8"Castlevania - Legacy of Darkness (U) 0000007D 00738560.mid", u8"Castlevania - Legacy of Darkness (U) 0000007D 00738560.mid TrackParseDebug.txt", u8"Unknown 1", 0 },
 
-
-{ u8"Castlevania - Legacy of Darkness (U) 00000086 0073A540.mid", u8"Castlevania - Legacy of Darkness (U) 00000086 0073A540.mid TrackParseDebug.txt", u8"Unknown 1", 0 },
 
 
 //{ u8"Castlevania - Legacy of Darkness (U) 000000A3 007442A0.mid", u8"Castlevania - Legacy of Darkness (U) 000000A3 007442A0.mid TrackParseDebug.txt", u8"Clock Tower - Toothed Wheel (Lead-In)", 0 },
