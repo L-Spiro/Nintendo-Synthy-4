@@ -1037,6 +1037,60 @@ namespace ns4 {
 			uint32_t					ui32Order;
 		};
 		const double dTicksPerSecond = 1.0 / DriverTickSeconds();
+
+		// The song's loop.  Tracks can enter their loops at different times (after intros of different lengths) and can loop over different
+		//	lengths (a 1-bar drum pattern under an 8-bar melody), so the song repeats from the time the last track enters its loop, over the
+		//	shortest length into which every track's loop fits (normally the longest loop).  Every looping track gets this same loop, so that
+		//	GetBestRunTime() counts real loops of the song.  (The sound is not affected: the driver plays continuously when rendering.)
+		//	Tracks that never play a note (such as an SNG master track, which only holds the tempo and rests) are left out unless no track plays.
+		uint64_t ui64SongLoopStart = 0, ui64SongLoopLen = 0;
+		{
+			std::vector<uint64_t> vPeriods;
+			uint64_t ui64MaxPeriod = 0;
+			bool bAnySounding = false;
+			for ( size_t I = 0; I < _vTracks.size() && !bAnySounding; ++I ) {
+				if ( !_vTracks[I].bLoops ) { continue; }
+				for ( size_t J = 0; J < _vTracks[I].vEvents.size(); ++J ) {
+					if ( _vTracks[I].vEvents[J].dvcCmd == CDriverVoiceEvents::NS4_DVC_START ) {
+						bAnySounding = true;
+						break;
+					}
+				}
+			}
+			for ( size_t I = 0; I < _vTracks.size(); ++I ) {
+				if ( !_vTracks[I].bLoops ) { continue; }
+				uint64_t ui64Start = 0, ui64End = 0;
+				bool bSounding = false;
+				for ( size_t J = 0; J < _vTracks[I].vEvents.size(); ++J ) {
+					if ( _vTracks[I].vEvents[J].dvcCmd == CDriverVoiceEvents::NS4_DVC_LOOP_START ) { ui64Start = _vTracks[I].vEvents[J].ui64Tick; }
+					if ( _vTracks[I].vEvents[J].dvcCmd == CDriverVoiceEvents::NS4_DVC_LOOP_END ) { ui64End = _vTracks[I].vEvents[J].ui64Tick; }
+					if ( _vTracks[I].vEvents[J].dvcCmd == CDriverVoiceEvents::NS4_DVC_START ) { bSounding = true; }
+				}
+				if ( ui64End <= ui64Start || (bAnySounding && !bSounding) ) { continue; }
+				ui64SongLoopStart = max( ui64SongLoopStart, ui64Start );
+				vPeriods.push_back( ui64End - ui64Start );
+				ui64MaxPeriod = max( ui64MaxPeriod, ui64End - ui64Start );
+			}
+			ui64SongLoopLen = ui64MaxPeriod;
+			// Driver updates do not divide loops evenly, so each measured loop can be off by an update.
+			for ( uint64_t ui64Mul = 1; ui64Mul <= 8 && vPeriods.size(); ++ui64Mul ) {
+				uint64_t ui64Len = ui64MaxPeriod * ui64Mul;
+				bool bFits = true;
+				for ( size_t I = 0; I < vPeriods.size() && bFits; ++I ) {
+					uint64_t ui64Times = (ui64Len + vPeriods[I] / 2) / vPeriods[I];
+					uint64_t ui64Diff = ui64Len > ui64Times * vPeriods[I] ? ui64Len - ui64Times * vPeriods[I] : ui64Times * vPeriods[I] - ui64Len;
+					if ( ui64Diff > ui64Times + 2 ) { bFits = false; }
+				}
+				if ( bFits ) {
+					ui64SongLoopLen = ui64Len;
+					break;
+				}
+			}
+			if ( ui64SongLoopLen ) {
+				std::printf( "%s: Song loops %.3f-%.3f seconds.\r\n", _pcTag, ui64SongLoopStart / dTicksPerSecond, (ui64SongLoopStart + ui64SongLoopLen) / dTicksPerSecond );
+			}
+		}
+
 		for ( size_t I = 0; I < _vTracks.size(); ++I ) {
 			const CDriverVoiceEvents::NS4_DRIVER_TRACK &dtTrack = _vTracks[I];
 			NS4_TRACK &tTrack = m_vTracks[I];
@@ -1111,11 +1165,16 @@ namespace ns4 {
 						break;
 					}
 					case CDriverVoiceEvents::NS4_DVC_LOOP_START : {
-						AddEvent( dveEvent.ui64Tick, uint8_t( (NS4_ME_CONTROLLER << 4) | ui8Chan ), NS4_LOOP_START, 0, 2 );
+						// Every looping track gets the song's loop (see above).
+						if ( ui64SongLoopLen ) {
+							AddEvent( ui64SongLoopStart, uint8_t( (NS4_ME_CONTROLLER << 4) | ui8Chan ), NS4_LOOP_START, 0, 2 );
+						}
 						break;
 					}
 					case CDriverVoiceEvents::NS4_DVC_LOOP_END : {
-						AddEvent( dveEvent.ui64Tick, uint8_t( (NS4_ME_CONTROLLER << 4) | ui8Chan ), NS4_LOOP_END, 0, 2 );
+						if ( ui64SongLoopLen ) {
+							AddEvent( ui64SongLoopStart + ui64SongLoopLen, uint8_t( (NS4_ME_CONTROLLER << 4) | ui8Chan ), NS4_LOOP_END, 0, 2 );
+						}
 						break;
 					}
 					default : {}
