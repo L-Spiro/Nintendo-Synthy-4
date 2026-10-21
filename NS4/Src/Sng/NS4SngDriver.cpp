@@ -13,6 +13,7 @@ namespace ns4 {
 		m_ui32Flags( 0 ),
 		m_pvDetune( nullptr ),
 		m_ui32Bank( 0 ),
+		m_ui16MasterVolume( 0x7FFF ),
 		m_pscChannel( nullptr ),
 		m_stChannel( 0 ),
 		m_ui64Tick( 0 ),
@@ -893,7 +894,7 @@ namespace ns4 {
 		NS4_SNG_CHANNEL &scChan = (*m_pscChannel);
 		uint32_t ui32Vol = (uint32_t( scChan.ui8Volume ) * uint32_t( scChan.ui8EnvCurrent ) * uint32_t( scChan.ui8Velocity ) * uint32_t( int32_t( scChan.i16VolScale ) )) >> 13;
 		if ( ui32Vol > 32767 ) { ui32Vol = 32767; }
-		ui32Vol *= 0x7FFF;		// mus_master_volume_songs.
+		ui32Vol *= m_ui16MasterVolume;		// mus_master_volume_songs.
 		ui32Vol >>= 15;
 		if ( ui32Vol != scChan.ui16OldVolume ) {
 			scChan.ui16OldVolume = uint16_t( ui32Vol );

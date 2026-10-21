@@ -513,9 +513,9 @@ int oldmain() {
 //#include "Src/Games/NS4OnegaiMonstersFiles.inl"
 
 //#include "Src/Games/NS4Robotron64Files.inl"
-//#include "Src/Games/NS4CastlevaniaLegacyOfDarknessFiles.inl"
+#include "Src/Games/NS4CastlevaniaLegacyOfDarknessFiles.inl"
 //#include "Src/Games/NS4LodeRunner3DFiles.inl"
-#include "Src/Games/NS4MarioGolfFiles.inl"
+//#include "Src/Games/NS4MarioGolfFiles.inl"
 #else
 		{}
 #endif
@@ -817,6 +817,11 @@ int oldmain() {
 		ns4::CMidiFile::m_sSettings.bSng = false;
 		ns4::CMidiFile::m_sSettings.ui32SngFlags = 0;
 #endif	// NS4_SNG_FLAGS
+#ifdef NS4_SNG_MASTER_VOLUME
+		ns4::CMidiFile::m_sSettings.ui16SngMasterVolume = uint16_t( NS4_SNG_MASTER_VOLUME );
+#else
+		ns4::CMidiFile::m_sSettings.ui16SngMasterVolume = 0x7FFF;
+#endif	// NS4_SNG_MASTER_VOLUME
 		ns4::CMidiFile::m_sSettings.pvDriverBanks = &vBanks;
 #if defined( NS4_DRIVER_SYNTH_HZ )
 		ns4::CMidiFile::m_sSettings.dDriverSynthHz = double( NS4_DRIVER_SYNTH_HZ );

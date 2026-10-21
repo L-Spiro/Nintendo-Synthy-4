@@ -448,6 +448,9 @@ namespace ns4 {
 			/** SNG: the version of the libmus player (CSngDriver::NS4_SNG_FLAGS; 0 = libmus 3.14). */
 			uint32_t					ui32SngFlags = 0;
 
+			/** SNG: the songs' master volume set by the game (MusSetMasterVolume( MUSFLAG_SONGS, x )).  libmus starts at 0x7FFF. */
+			uint16_t					ui16SngMasterVolume = 0x7FFF;
+
 			/** Konami/SNG: all loaded sound banks, indexed by bank number (Konami sequences can change banks).  If nullptr, the bank passed to RenderNotesToStereo() is used. */
 			const std::vector<CSoundBank> *
 										pvDriverBanks = nullptr;

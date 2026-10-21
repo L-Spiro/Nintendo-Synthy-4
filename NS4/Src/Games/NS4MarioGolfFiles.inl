@@ -8,6 +8,7 @@
 #define NS4_SNG_FLAGS						(ns4::CSngDriver::NS4_SF_REST_SETS_VELOCITY | ns4::CSngDriver::NS4_SF_ENV_COUNT)
 #define NS4_DRIVER_SYNTH_HZ					32000.0
 #define NS4_ORIG_HZ							32006
+#define NS4_SNG_MASTER_VOLUME				12000
 #define NS4_REVERB_TRACKS					1
 #define NS4_REVERB							ns4::CReverb::NS4_T_MISSION_IMPOSSIBLE_0
 #define NS4_OUT_DIRECTORY					u8"C:\\N64OST\\Mario Golf\\"

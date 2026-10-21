@@ -999,6 +999,7 @@ namespace ns4 {
 		}
 
 		std::vector<CDriverVoiceEvents::NS4_DRIVER_TRACK> vSngTracks;
+		sdDriver.SetMasterVolume( m_sSettings.ui16SngMasterVolume );
 		sdDriver.Play( m_sSettings.ui32Bank, m_sSettings.ui32SngFlags, m_vSngDetune, ui64MaxTicks, true, vSngTracks );
 		for ( size_t I = 0; I < sdDriver.Warnings().size(); ++I ) {
 			std::printf( "SNG: %s\r\n", sdDriver.Warnings()[I].c_str() );
@@ -2127,6 +2128,7 @@ namespace ns4 {
 		uint64_t ui64Ticks = uint64_t( std::ceil( double( _troOptions.uiMaxSamples ) / dTickToSamples ) ) + 2;
 		if ( ui64Ticks != m_ui64DriverRenderTicks ) {
 			if ( m_bSng ) {
+				m_sdSng.SetMasterVolume( m_sSettings.ui16SngMasterVolume );
 				m_sdSng.Play( m_ui32DriverBank, m_sSettings.ui32SngFlags, m_vSngDetune, ui64Ticks, false, m_vDriverRender );
 			}
 			else {

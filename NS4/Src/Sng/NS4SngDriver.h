@@ -80,6 +80,14 @@ namespace ns4 {
 		bool													Play( uint32_t _ui32Bank, uint32_t _ui32Flags, const std::vector<float> &_vDetune, uint64_t _ui64MaxTicks, bool _bStopAtLoops, std::vector<NS4_DRIVER_TRACK> &_vTracks );
 
 		/**
+		 * Sets the songs' master volume (MusSetMasterVolume( MUSFLAG_SONGS, x ); libmus starts at 0x7FFF).  It scales every voice's
+		 *	volume (and so also the amount sent to the effect bus).
+		 *
+		 * \param _ui16Volume The master volume (0-0x7FFF).
+		 */
+		void													SetMasterVolume( uint16_t _ui16Volume ) { m_ui16MasterVolume = _ui16Volume; }
+
+		/**
 		 * Gets the warnings produced while loading and playing.
 		 *
 		 * \return Returns the warnings.
@@ -294,6 +302,9 @@ namespace ns4 {
 
 		/** The sample bank while playing. */
 		uint32_t												m_ui32Bank;
+
+		/** The songs' master volume (mus_master_volume_songs). */
+		uint16_t												m_ui16MasterVolume;
 
 		/** The current channel. */
 		NS4_SNG_CHANNEL *										m_pscChannel;
