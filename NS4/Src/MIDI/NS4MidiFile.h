@@ -3,6 +3,7 @@
 #include "../WavLib/NS4WavLib.h"
 #include "../Fade/NS4Fade.h"
 #include "../Konami/NS4KonamiDriver.h"
+#include "../Sng/NS4SngDriver.h"
 #include "../Envelope/NS4Envelope.h"
 #include "../Operator/NS4LinearInterpolator.h"
 #include "../Sample/NS4Sampler.h"
@@ -431,19 +432,25 @@ namespace ns4 {
 			/** Specifies the global pitch-bend scale. */
 			double						dPitchBendScale = 1.0;
 
-			/** Konami: the output rate the game gives the synthesizer (alInit()).  Driver updates (5,000 microseconds) and volume ramps are converted to samples at this rate, as libultra does.  Defaults to 44100.0. */
-			double						dKonamiSynthHz = 44100.0;
+			/** Konami/SNG: the output rate the game gives the synthesizer (alInit()).  Driver updates (5,000 microseconds for Konami, 16,666 for SNG) and volume ramps are converted to samples at this rate, as libultra does.  Defaults to 44100.0. */
+			double						dDriverSynthHz = 44100.0;
 
-			/** Konami: the real playback rate of the hardware (the rate osAiSetFrequency() actually sets, usually NS4_ORIG_HZ).  Defaults to 44100.0. */
-			double						dKonamiGameHz = 44100.0;
+			/** Konami/SNG: the real playback rate of the hardware (the rate osAiSetFrequency() actually sets, usually NS4_ORIG_HZ).  Defaults to 44100.0. */
+			double						dDriverGameHz = 44100.0;
 
 			/** Konami: the game's instrument tables.  If not nullptr, AddDebug_Standard() recognizes Konami "TrackParseDebug" files and the tracks are played by the Konami driver instead of the MIDI renderer. */
 			const CKonamiDriver::NS4_KON_TABLES *
 										pktKonamiTables = nullptr;
 
-			/** Konami: all loaded sound banks, indexed by bank number (Konami sequences can change banks).  If nullptr, the bank passed to RenderNotesToStereo() is used. */
+			/** SNG: if true, AddDebug_Standard() recognizes SNG ("Binary Song Style") "TrackParseDebug" files and the tracks are played by the SNG driver (libmus) instead of the MIDI renderer.  The samples' tuning comes from the Key Base and Fine Tune of the sound bank (pvDriverBanks). */
+			bool						bSng = false;
+
+			/** SNG: the version of the libmus player (CSngDriver::NS4_SNG_FLAGS; 0 = libmus 3.14). */
+			uint32_t					ui32SngFlags = 0;
+
+			/** Konami/SNG: all loaded sound banks, indexed by bank number (Konami sequences can change banks).  If nullptr, the bank passed to RenderNotesToStereo() is used. */
 			const std::vector<CSoundBank> *
-										pvKonamiBanks = nullptr;
+										pvDriverBanks = nullptr;
 
 			/** The tick at which to begin playing the MIDI file. */
 			uint64_t					ui64StartingTick = 0;
@@ -656,6 +663,13 @@ namespace ns4 {
 		 * \return Returns true if the song is a Konami sequence.
 		 */
 		bool							IsKonami() const { return m_bKonami; }
+
+		/**
+		 * Determines if the loaded song is an SNG song (loaded from an SNG "TrackParseDebug" file and played by the SNG driver).
+		 *
+		 * \return Returns true if the song is an SNG song.
+		 */
+		bool							IsSng() const { return m_bSng; }
 
 		/**
 		 * Resets the object back to scratch.
@@ -2307,15 +2321,21 @@ namespace ns4 {
 		int32_t							m_i32ChanOffset;
 		/** If true, the tracks come from a Konami "TrackParseDebug" file and are rendered by m_kdKonami. */
 		bool							m_bKonami;
-		/** The bank with which the Konami sequence starts. */
-		uint32_t						m_ui32KonamiBank;
+		/** If true, the tracks come from an SNG "TrackParseDebug" file and are rendered by m_sdSng. */
+		bool							m_bSng;
+		/** The bank with which the Konami sequence starts, or the SNG song's sample bank. */
+		uint32_t						m_ui32DriverBank;
 		/** The Konami driver holding the loaded sequence. */
 		mutable CKonamiDriver			m_kdKonami;
-		/** The last Konami render (the commands each track sent to the synthesizer). */
-		mutable std::vector<CKonamiDriver::NS4_KON_TRACK>
-										m_vKonamiRender;
-		/** The number of driver updates in m_vKonamiRender. */
-		mutable uint64_t				m_ui64KonamiRenderTicks;
+		/** The SNG driver holding the loaded song. */
+		mutable CSngDriver				m_sdSng;
+		/** The tuning of each sample of the SNG song's sample bank (libmus detune[], from the sound bank's Key Base and Fine Tune). */
+		std::vector<float>				m_vSngDetune;
+		/** The last Konami/SNG render (the commands each track sent to the synthesizer). */
+		mutable std::vector<CDriverVoiceEvents::NS4_DRIVER_TRACK>
+										m_vDriverRender;
+		/** The number of driver updates in m_vDriverRender. */
+		mutable uint64_t				m_ui64DriverRenderTicks;
 
 		/** The standard pan table. */
 		static float					m_fStdPanTable[];
@@ -2331,7 +2351,7 @@ namespace ns4 {
 		/**
 		 * Loads a Konami "TrackParseDebug" file, plays it with the Konami driver to find each track's loop, and replaces the MIDI tracks
 		 *	with tracks that hold the timing (1 MIDI tick = 1 driver update), loop points, and note bookkeeping (used to find the end of
-		 *	songs that do not loop).  The sound itself is rendered by RenderKonamiNotesToStereo().
+		 *	songs that do not loop).  The sound itself is rendered by RenderDriverNotesToStereo().
 		 *
 		 * \param _isStream The text stream, positioned just after the first "Track N: XXXXXXXX" line.
 		 * \param _ui32FirstTrack The number of the first track.
@@ -2341,32 +2361,54 @@ namespace ns4 {
 		bool							AddDebug_Konami( std::istream &_isStream, uint32_t _ui32FirstTrack, uint32_t _ui32FirstOffset );
 
 		/**
-		 * Renders a track of a Konami sequence to stereo audio.  The driver is played (with its tracks looping freely, as in the game)
-		 *	for the length of the render, and its synthesizer commands are applied the way libultra applies them: volumes are squared
-		 *	and ramped exponentially, pan and effect mix use the equal-power table.
+		 * Loads an SNG ("Binary Song Style") "TrackParseDebug" file, plays it with the SNG driver to find each channel's loop, and replaces
+		 *	the MIDI tracks with tracks that hold the timing (1 MIDI tick = 1 frame), loop points, and note bookkeeping.  Track 0 is the
+		 *	master track.  The sound itself is rendered by RenderDriverNotesToStereo().
+		 *
+		 * \param _isStream The text stream, positioned at the start of the file.
+		 * \return Returns true if the file contained channel data.
+		 */
+		bool							AddDebug_Sng( std::istream &_isStream );
+
+		/**
+		 * Replaces the MIDI tracks with tracks built from the result of a driver's first play (Konami or SNG): 1 MIDI tick = 1 driver
+		 *	update, the loops become NS4_LOOP_START/NS4_LOOP_END controls, and the started voices become notes (bookkeeping used to find
+		 *	the end of songs that do not loop).
+		 *
+		 * \param _vTracks The driver's tracks.
+		 * \param _pcTag The name printed before messages ("KONAMI", "SNG").
+		 */
+		void							BuildDriverTracks( const std::vector<CDriverVoiceEvents::NS4_DRIVER_TRACK> &_vTracks, const char * _pcTag );
+
+		/**
+		 * Renders a track of a Konami sequence or SNG song to stereo audio.  The driver is played (with its tracks looping freely, as in
+		 *	the game) for the length of the render, and its synthesizer commands are applied the way libultra applies them: volumes are
+		 *	squared and ramped exponentially, pan and effect mix use the equal-power table.
 		 *
 		 * \param _aResult The resulting render.
 		 * \param _stTrack The track to render.
 		 * \param _troOptions The options for rendering the audio.
-		 * \param _sbSoundBank The soundbank to use if m_sSettings.pvKonamiBanks is nullptr.
+		 * \param _sbSoundBank The soundbank to use if m_sSettings.pvDriverBanks is nullptr.
 		 * \param _paWet If not nullptr, the wet "generator" is accumulated into it.  For mono results, only allocate 1 channel.
 		 * \param _pui64TimeOfLastSound If not nullptr, the time of the last sound (in samples) is returned here.
 		 * \param _pdStartTime If not nullptr, the start time of playback.
 		 * \return Returns the rendered audio.
 		 */
-		lwaudio &						RenderKonamiNotesToStereo( lwaudio &_aResult, size_t _stTrack, const NS4_TRACK_RENDER_OPTIONS &_troOptions, CSoundBank &_sbSoundBank,
+		lwaudio &						RenderDriverNotesToStereo( lwaudio &_aResult, size_t _stTrack, const NS4_TRACK_RENDER_OPTIONS &_troOptions, CSoundBank &_sbSoundBank,
 			lwaudio * _paWet,
 			uint64_t * _pui64TimeOfLastSound,
 			double * _pdStartTime ) const;
 
 		/**
-		 * Gets the real time between Konami driver updates.  The game asks for an update every 5,000 microseconds, which libultra rounds
-		 *	to whole samples at the synthesizer rate (221 at 44,100 Hz), and those samples are played at the hardware's real rate.
+		 * Gets the real time between driver updates.  Konami asks for an update every 5,000 microseconds and libmus (SNG) every 16,666,
+		 *	which libultra rounds to whole samples at the synthesizer rate (221 at 44,100 Hz), and those samples are played at the
+		 *	hardware's real rate.
 		 *
 		 * \return Returns the time between driver updates in seconds.
 		 */
-		static double					KonamiTickSeconds() {
-			return CKonamiDriver::SamplesPerTick( m_sSettings.dKonamiSynthHz ) / m_sSettings.dKonamiGameHz;
+		double							DriverTickSeconds() const {
+			uint32_t ui32Samples = m_bSng ? CSngDriver::SamplesPerTick( m_sSettings.dDriverSynthHz ) : CKonamiDriver::SamplesPerTick( m_sSettings.dDriverSynthHz );
+			return ui32Samples / m_sSettings.dDriverGameHz;
 		}
 
 		/**

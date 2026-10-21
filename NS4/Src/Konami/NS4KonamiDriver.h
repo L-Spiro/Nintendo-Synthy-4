@@ -1,5 +1,7 @@
 #pragma once
 
+#include "../Driver/NS4DriverVoiceEvents.h"
+
 #include <cstdint>
 #include <istream>
 #include <string>
@@ -27,23 +29,9 @@ namespace ns4 {
 	 *	- Voice "playing" and "stop countdown" are separate flags (a rest or a cut-off ramps the volume to 0, then stops the voice a tick later).
 	 *	- Pitch and volume are only sent to the synthesizer when they change.
 	 */
-	class CKonamiDriver {
+	class CKonamiDriver : public CDriverVoiceEvents {
 	public :
 		CKonamiDriver();
-
-
-		// == Enumerations.
-		/** Commands sent to the synthesizer. */
-		enum NS4_KON_VOICE_CMDS : uint8_t {
-			NS4_KVC_START,		/**< alSynStartVoice().  ui32Parm0 = (bank << 16) | sound.  ui32Parm1 = (note << 8) | velocity (informational). */
-			NS4_KVC_STOP,		/**< alSynStopVoice(). */
-			NS4_KVC_PITCH,		/**< alSynSetPitch().  fRatio = playback ratio (1.0 = the sample's own rate). */
-			NS4_KVC_VOLUME,		/**< alSynSetVol().  ui32Parm0 = volume (0-0x7FFF), ui32Parm1 = ramp time in microseconds. */
-			NS4_KVC_PAN,		/**< alSynSetPan().  ui32Parm0 = pan (0-127). */
-			NS4_KVC_FXMIX,		/**< alSynSetFXMix().  ui32Parm0 = effect mix (0-127). */
-			NS4_KVC_LOOP_START,	/**< The master loop starts here. */
-			NS4_KVC_LOOP_END,	/**< The master loop ends here (the track jumps back to NS4_KVC_LOOP_START). */
-		};
 
 
 		// == Types.
@@ -64,23 +52,6 @@ namespace ns4 {
 			uint32_t											ui32BankTotal[2];	/**< Number of entries in pksBank[]. */
 			const uint8_t *										pui8Drums;			/**< Drum table (8 bytes per drum: sound, then an NS4_KON_SOUND), or nullptr. */
 			uint32_t											ui32DrumTotal;		/**< Number of drums in pui8Drums. */
-		};
-
-		/** A command sent to the synthesizer. */
-		struct NS4_KON_VOICE_EVENT {
-			uint64_t											ui64Tick;	/**< Driver update (callback) on which the command was sent. */
-			NS4_KON_VOICE_CMDS									kvcCmd;		/**< The command. */
-			uint32_t											ui32Parm0;	/**< See NS4_KON_VOICE_CMDS. */
-			uint32_t											ui32Parm1;	/**< See NS4_KON_VOICE_CMDS. */
-			float												fRatio;		/**< See NS4_KON_VOICE_CMDS. */
-		};
-
-		/** The result of playing one track. */
-		struct NS4_KON_TRACK {
-			uint32_t											ui32Offset;	/**< Offset of the track's data in the sequence. */
-			std::vector<NS4_KON_VOICE_EVENT>					vEvents;	/**< Commands sent to the synthesizer, in order. */
-			bool												bLoops;		/**< True if vEvents contains NS4_KVC_LOOP_START and NS4_KVC_LOOP_END. */
-			bool												bEnded;		/**< True if the track ended (FF etc.) before looping. */
 		};
 
 
@@ -110,7 +81,7 @@ namespace ns4 {
 		 * Plays the loaded sequence.
 		 *
 		 * When _bStopAtLoops is true, each track stops being recorded at the end of its first master loop (EC, or an infinite E8/EA), whose
-		 *	start and end are marked with NS4_KVC_LOOP_START and NS4_KVC_LOOP_END, and playing stops once every track has looped or ended.
+		 *	start and end are marked with NS4_DVC_LOOP_START and NS4_DVC_LOOP_END, and playing stops once every track has looped or ended.
 		 *	This is used to find the song's structure.  When it is false, the tracks are played (and keep looping) for exactly _ui64MaxTicks
 		 *	updates or until every track has ended, and no loop markers are added.  This is used for rendering, so that tracks whose loops
 		 *	have different lengths drift against each other exactly as they do in the game.
@@ -122,7 +93,7 @@ namespace ns4 {
 		 * \param _vTracks Receives the result of each track.
 		 * \return Returns false if nothing is loaded.
 		 */
-		bool													Play( uint32_t _ui32Bank, const NS4_KON_TABLES * _pktTables, uint64_t _ui64MaxTicks, bool _bStopAtLoops, std::vector<NS4_KON_TRACK> &_vTracks );
+		bool													Play( uint32_t _ui32Bank, const NS4_KON_TABLES * _pktTables, uint64_t _ui64MaxTicks, bool _bStopAtLoops, std::vector<NS4_DRIVER_TRACK> &_vTracks );
 
 		/**
 		 * Gets the warnings produced while loading and playing.
@@ -137,7 +108,7 @@ namespace ns4 {
 		 * \param _dSynthHz The synthesizer's output rate (44,100 in Legacy of Darkness).
 		 * \return Returns the number of samples between driver updates.
 		 */
-		static uint32_t											SamplesPerTick( double _dSynthHz ) { return uint32_t( float( NS4_KON_CALLBACK_US ) * float( _dSynthHz ) / 1000000.0f + 0.5f ); }
+		static uint32_t											SamplesPerTick( double _dSynthHz ) { return CDriverVoiceEvents::SamplesPerTick( NS4_KON_CALLBACK_US, _dSynthHz ); }
 
 		/**
 		 * Converts a volume-ramp time to samples at the synthesizer's output rate, as libultra does (rounded down to 16 samples).
@@ -146,7 +117,7 @@ namespace ns4 {
 		 * \param _dSynthHz The synthesizer's output rate.
 		 * \return Returns the ramp length in samples.
 		 */
-		static uint32_t											RampSamples( uint32_t _ui32Micros, double _dSynthHz ) { return uint32_t( int32_t( float( _ui32Micros ) * float( _dSynthHz ) / 1000000.0f + 0.5f ) & ~0xF ); }
+		static uint32_t											RampSamples( uint32_t _ui32Micros, double _dSynthHz ) { return CDriverVoiceEvents::RampSamples( _ui32Micros, _dSynthHz ); }
 
 
 		// == Members.
@@ -323,7 +294,7 @@ namespace ns4 {
 		std::vector<NS4_KON_RECORD>								m_vRecords;
 
 		/** The results while playing. */
-		std::vector<NS4_KON_TRACK> *							m_pvTracks;
+		std::vector<NS4_DRIVER_TRACK> *							m_pvTracks;
 
 		/** The instrument tables while playing. */
 		const NS4_KON_TABLES *									m_pktTables;
@@ -388,12 +359,12 @@ namespace ns4 {
 		/**
 		 * Adds a synthesizer command for the current channel.
 		 *
-		 * \param _kvcCmd The command.
+		 * \param _dvcCmd The command.
 		 * \param _ui32Parm0 Parameter 0.
 		 * \param _ui32Parm1 Parameter 1.
 		 * \param _fRatio The pitch ratio.
 		 */
-		void													Emit( NS4_KON_VOICE_CMDS _kvcCmd, uint32_t _ui32Parm0 = 0, uint32_t _ui32Parm1 = 0, float _fRatio = 0.0f );
+		void													Emit( NS4_DRIVER_VOICE_CMDS _dvcCmd, uint32_t _ui32Parm0 = 0, uint32_t _ui32Parm1 = 0, float _fRatio = 0.0f );
 
 		/**
 		 * Gets an envelope-table entry, guarding the index.

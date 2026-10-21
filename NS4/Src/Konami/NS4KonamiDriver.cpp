@@ -443,7 +443,7 @@ namespace ns4 {
 	 * Plays the loaded sequence.
 	 *
 	 * When _bStopAtLoops is true, each track stops being recorded at the end of its first master loop (EC, or an infinite E8/EA), whose
-	 *	start and end are marked with NS4_KVC_LOOP_START and NS4_KVC_LOOP_END, and playing stops once every track has looped or ended.
+	 *	start and end are marked with NS4_DVC_LOOP_START and NS4_DVC_LOOP_END, and playing stops once every track has looped or ended.
 	 *	This is used to find the song's structure.  When it is false, the tracks are played (and keep looping) for exactly _ui64MaxTicks
 	 *	updates or until every track has ended, and no loop markers are added.  This is used for rendering, so that tracks whose loops
 	 *	have different lengths drift against each other exactly as they do in the game.
@@ -455,7 +455,7 @@ namespace ns4 {
 	 * \param _vTracks Receives the result of each track.
 	 * \return Returns false if nothing is loaded.
 	 */
-	bool CKonamiDriver::Play( uint32_t _ui32Bank, const NS4_KON_TABLES * _pktTables, uint64_t _ui64MaxTicks, bool _bStopAtLoops, std::vector<NS4_KON_TRACK> &_vTracks ) {
+	bool CKonamiDriver::Play( uint32_t _ui32Bank, const NS4_KON_TABLES * _pktTables, uint64_t _ui64MaxTicks, bool _bStopAtLoops, std::vector<NS4_DRIVER_TRACK> &_vTracks ) {
 		_vTracks.clear();
 		if ( !m_vTrackOffsets.size() ) { return false; }
 		m_bStopAtLoops = _bStopAtLoops;
@@ -497,7 +497,7 @@ namespace ns4 {
 				if ( m_pkcChannel->ui8StopCountdown ) {
 					if ( --m_pkcChannel->ui8StopCountdown == 0 && m_pkcChannel->bVoicePlaying ) {
 						m_pkcChannel->bVoicePlaying = false;
-						Emit( NS4_KVC_STOP );
+						Emit( NS4_DVC_STOP );
 					}
 				}
 				if ( m_pkcChannel->ui32SeqId ) {
@@ -663,16 +663,16 @@ namespace ns4 {
 	/**
 	 * Adds a synthesizer command for the current channel.
 	 *
-	 * \param _kvcCmd The command.
+	 * \param _dvcCmd The command.
 	 * \param _ui32Parm0 Parameter 0.
 	 * \param _ui32Parm1 Parameter 1.
 	 * \param _fRatio The pitch ratio.
 	 */
-	void CKonamiDriver::Emit( NS4_KON_VOICE_CMDS _kvcCmd, uint32_t _ui32Parm0, uint32_t _ui32Parm1, float _fRatio ) {
+	void CKonamiDriver::Emit( NS4_DRIVER_VOICE_CMDS _dvcCmd, uint32_t _ui32Parm0, uint32_t _ui32Parm1, float _fRatio ) {
 		if ( !m_vRecords[m_stChannel].bRecording ) { return; }
-		NS4_KON_VOICE_EVENT kveEvent;
+		NS4_DRIVER_VOICE_EVENT kveEvent;
 		kveEvent.ui64Tick = m_ui64Tick;
-		kveEvent.kvcCmd = _kvcCmd;
+		kveEvent.dvcCmd = _dvcCmd;
 		kveEvent.ui32Parm0 = _ui32Parm0;
 		kveEvent.ui32Parm1 = _ui32Parm1;
 		kveEvent.fRatio = _fRatio;
@@ -743,7 +743,7 @@ namespace ns4 {
 		else if ( kcChan.bVoicePlaying ) {
 			kcChan.ui8StopCountdown = 0;
 			kcChan.bVoicePlaying = false;
-			Emit( NS4_KVC_STOP );
+			Emit( NS4_DVC_STOP );
 		}
 
 		m_ui32Needle = kcChan.ui32Needle;
@@ -815,7 +815,7 @@ namespace ns4 {
 				kcChan.ui16LastDuration = 0xFFFF;
 				StartAttack();
 				kcChan.bVoicePlaying = true;
-				Emit( NS4_KVC_START, (uint32_t( kcChan.ui8WaveBank ) << 16) | kcChan.ui8WaveSound, (uint32_t( kcChan.ui8NotePitch ) << 8) | kcChan.ui8Velocity );
+				Emit( NS4_DVC_START, (uint32_t( kcChan.ui8WaveBank ) << 16) | kcChan.ui8WaveSound, (uint32_t( kcChan.ui8NotePitch ) << 8) | kcChan.ui8Velocity );
 			}
 			else {
 				kcChan.ui8Flags |= NS4_KF_VOLUME_CHANGED;
@@ -878,7 +878,7 @@ namespace ns4 {
 		float fRatio = fMul / 256.0f + fLo;
 		if ( fRatio != kcChan.fLastRatio ) {
 			kcChan.fLastRatio = fRatio;
-			Emit( NS4_KVC_PITCH, 0, 0, fRatio );
+			Emit( NS4_DVC_PITCH, 0, 0, fRatio );
 		}
 	}
 
@@ -901,7 +901,7 @@ namespace ns4 {
 		if ( i16Vol == kcChan.i16LastVolume && ui16Duration == kcChan.ui16LastDuration ) { return; }
 		kcChan.i16LastVolume = i16Vol;
 		kcChan.ui16LastDuration = ui16Duration;
-		Emit( NS4_KVC_VOLUME, uint32_t( uint16_t( i16Vol ) ), uint32_t( ui16Duration ) * NS4_KON_CALLBACK_US );
+		Emit( NS4_DVC_VOLUME, uint32_t( uint16_t( i16Vol ) ), uint32_t( ui16Duration ) * NS4_KON_CALLBACK_US );
 	}
 
 	/**
@@ -1286,7 +1286,7 @@ namespace ns4 {
 				if ( ui32Mix > 127 ) { ui32Mix = 127; }
 				if ( kcChan.ui8FxMix != ui32Mix ) {
 					kcChan.ui8FxMix = uint8_t( ui32Mix );
-					Emit( NS4_KVC_FXMIX, ui32Mix );
+					Emit( NS4_DVC_FXMIX, ui32Mix );
 				}
 				break;
 			}
@@ -1300,7 +1300,7 @@ namespace ns4 {
 			case 0xF2 : {	// Rest.
 				if ( kcChan.bVoicePlaying ) {
 					kcChan.ui8StopCountdown = 1;
-					Emit( NS4_KVC_VOLUME, 0, NS4_KON_CALLBACK_US );
+					Emit( NS4_DVC_VOLUME, 0, NS4_KON_CALLBACK_US );
 				}
 				kcChan.ui8NoteDuration = ReadByte();
 				kcChan.ui8HoldRatio = 1;
@@ -1407,7 +1407,7 @@ namespace ns4 {
 		NS4_KON_CHANNEL &kcChan = (*m_pkcChannel);
 		kcChan.ui8Flags |= NS4_KF_VOLUME_CHANGED;
 		int32_t i32Pan = (kcChan.ui16Pan >> 8) & 0x7F;
-		Emit( NS4_KVC_PAN, uint32_t( i32Pan ) );
+		Emit( NS4_DVC_PAN, uint32_t( i32Pan ) );
 	}
 
 	/**
@@ -1691,7 +1691,7 @@ namespace ns4 {
 		NS4_KON_CHANNEL &kcChan = (*m_pkcChannel);
 		if ( kcChan.bVoicePlaying ) {
 			kcChan.ui8StopCountdown = 1;
-			Emit( NS4_KVC_VOLUME, 0, NS4_KON_CALLBACK_US );
+			Emit( NS4_DVC_VOLUME, 0, NS4_KON_CALLBACK_US );
 		}
 		kcChan.ui32SeqId = 0;
 	}
@@ -1705,12 +1705,12 @@ namespace ns4 {
 	void CKonamiDriver::RecordLoop( size_t _stStartIdx, uint64_t _ui64StartTick ) {
 		NS4_KON_RECORD &krRec = m_vRecords[m_stChannel];
 		if ( !krRec.bRecording || !m_bStopAtLoops ) { return; }
-		NS4_KON_TRACK &ktTrack = (*m_pvTracks)[m_stChannel];
+		NS4_DRIVER_TRACK &ktTrack = (*m_pvTracks)[m_stChannel];
 		if ( _ui64StartTick == m_ui64Tick ) { return; }	// A loop with no length.
-		NS4_KON_VOICE_EVENT kveEvent = { _ui64StartTick, NS4_KVC_LOOP_START, 0, 0, 0.0f };
+		NS4_DRIVER_VOICE_EVENT kveEvent = { _ui64StartTick, NS4_DVC_LOOP_START, 0, 0, 0.0f };
 		if ( _stStartIdx > ktTrack.vEvents.size() ) { _stStartIdx = ktTrack.vEvents.size(); }
 		ktTrack.vEvents.insert( ktTrack.vEvents.begin() + _stStartIdx, kveEvent );
-		Emit( NS4_KVC_LOOP_END );
+		Emit( NS4_DVC_LOOP_END );
 		ktTrack.bLoops = true;
 		krRec.bRecording = false;
 	}

@@ -513,7 +513,9 @@ int oldmain() {
 //#include "Src/Games/NS4OnegaiMonstersFiles.inl"
 
 //#include "Src/Games/NS4Robotron64Files.inl"
-#include "Src/Games/NS4CastlevaniaLegacyOfDarknessFiles.inl"
+//#include "Src/Games/NS4CastlevaniaLegacyOfDarknessFiles.inl"
+//#include "Src/Games/NS4LodeRunner3DFiles.inl"
+#include "Src/Games/NS4MarioGolfFiles.inl"
 #else
 		{}
 #endif
@@ -802,22 +804,31 @@ int oldmain() {
 		ns4::CMidiFile::m_sSettings.dPitchBendScale = NS4_PITCH_BEND_SCALE;
 #endif	// NS4_PITCH_BEND_SCALE
 
-		// Konami sequences (played by the Konami driver from their "TrackParseDebug" files).
+		// Konami sequences and SNG (libmus) songs (played by their drivers from their "TrackParseDebug" files).
 #ifdef NS4_KONAMI_TABLES
 		ns4::CMidiFile::m_sSettings.pktKonamiTables = &NS4_KONAMI_TABLES;
 #else
 		ns4::CMidiFile::m_sSettings.pktKonamiTables = nullptr;
 #endif	// NS4_KONAMI_TABLES
-		ns4::CMidiFile::m_sSettings.pvKonamiBanks = &vBanks;
-#ifdef NS4_KONAMI_SYNTH_HZ
-		ns4::CMidiFile::m_sSettings.dKonamiSynthHz = double( NS4_KONAMI_SYNTH_HZ );
+#ifdef NS4_SNG_FLAGS
+		ns4::CMidiFile::m_sSettings.bSng = true;
+		ns4::CMidiFile::m_sSettings.ui32SngFlags = uint32_t( NS4_SNG_FLAGS );
 #else
-		ns4::CMidiFile::m_sSettings.dKonamiSynthHz = 44100.0;
-#endif	// NS4_KONAMI_SYNTH_HZ
+		ns4::CMidiFile::m_sSettings.bSng = false;
+		ns4::CMidiFile::m_sSettings.ui32SngFlags = 0;
+#endif	// NS4_SNG_FLAGS
+		ns4::CMidiFile::m_sSettings.pvDriverBanks = &vBanks;
+#if defined( NS4_DRIVER_SYNTH_HZ )
+		ns4::CMidiFile::m_sSettings.dDriverSynthHz = double( NS4_DRIVER_SYNTH_HZ );
+#elif defined( NS4_KONAMI_SYNTH_HZ )
+		ns4::CMidiFile::m_sSettings.dDriverSynthHz = double( NS4_KONAMI_SYNTH_HZ );
+#else
+		ns4::CMidiFile::m_sSettings.dDriverSynthHz = 44100.0;
+#endif	// NS4_DRIVER_SYNTH_HZ
 #ifdef NS4_ORIG_HZ
-		ns4::CMidiFile::m_sSettings.dKonamiGameHz = double( NS4_ORIG_HZ );
+		ns4::CMidiFile::m_sSettings.dDriverGameHz = double( NS4_ORIG_HZ );
 #else
-		ns4::CMidiFile::m_sSettings.dKonamiGameHz = ns4::CMidiFile::m_sSettings.dKonamiSynthHz;
+		ns4::CMidiFile::m_sSettings.dDriverGameHz = ns4::CMidiFile::m_sSettings.dDriverSynthHz;
 #endif	// NS4_ORIG_HZ
 
 	ns4::CMidiFile::NS4_TRACK_RENDER_OPTIONS troOptions;

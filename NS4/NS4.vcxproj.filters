@@ -115,6 +115,15 @@
     <Filter Include="Source Files\Konami">
       <UniqueIdentifier>{3e219520-633b-480f-b3e3-d1bf3bd17a73}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\Sng">
+      <UniqueIdentifier>{0b021343-da52-4746-98b5-e3b88311cfb3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Sng">
+      <UniqueIdentifier>{7bde0cf2-747d-4351-98bd-9f646c2e89b9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Driver">
+      <UniqueIdentifier>{540dcd40-c0cd-4335-b02f-b504cfa316f8}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Src\Reverb\NS4Reverb.cpp">
@@ -137,6 +146,9 @@
     </ClCompile>
     <ClCompile Include="Src\Konami\NS4KonamiDriver.cpp">
       <Filter>Source Files\Konami</Filter>
+    </ClCompile>
+    <ClCompile Include="Src\Sng\NS4SngDriver.cpp">
+      <Filter>Source Files\Sng</Filter>
     </ClCompile>
     <ClCompile Include="Src\Operator\NS4Operator.cpp">
       <Filter>Source Files\Operator</Filter>
@@ -217,6 +229,12 @@
     </ClInclude>
     <ClInclude Include="Src\Konami\NS4KonamiDriver.h">
       <Filter>Header Files\Konami</Filter>
+    </ClInclude>
+    <ClInclude Include="Src\Sng\NS4SngDriver.h">
+      <Filter>Header Files\Sng</Filter>
+    </ClInclude>
+    <ClInclude Include="Src\Driver\NS4DriverVoiceEvents.h">
+      <Filter>Header Files\Driver</Filter>
     </ClInclude>
     <ClInclude Include="Src\Operator\NS4LinearInterpolator.h">
       <Filter>Header Files\Operator</Filter>
@@ -1139,6 +1157,12 @@
       <Filter>Header Files\Games</Filter>
     </None>
     <None Include="Src\Games\NS4CastlevaniaLegacyOfDarknessFiles.inl">
+      <Filter>Header Files\Games</Filter>
+    </None>
+    <None Include="Src\Games\NS4LodeRunner3DFiles.inl">
+      <Filter>Header Files\Games</Filter>
+    </None>
+    <None Include="Src\Games\NS4MarioGolfFiles.inl">
       <Filter>Header Files\Games</Filter>
     </None>
   </ItemGroup>

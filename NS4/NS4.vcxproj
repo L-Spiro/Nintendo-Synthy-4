@@ -178,6 +178,7 @@
     <ClCompile Include="Src\Filter\NS4Butterworth.cpp" />
     <ClCompile Include="Src\Filter\NS4IrConvolution.cpp" />
     <ClCompile Include="Src\Konami\NS4KonamiDriver.cpp" />
+    <ClCompile Include="Src\Sng\NS4SngDriver.cpp" />
     <ClCompile Include="Src\MIDI\NS4MidiFile.cpp" />
     <ClCompile Include="Src\Operator\NS4Operator.cpp" />
     <ClCompile Include="Src\Reverb\NS4Reverb.cpp" />
@@ -199,7 +200,9 @@
     <ClInclude Include="Src\Filter\NS4Ir.h" />
     <ClInclude Include="Src\Filter\NS4IrConvolution.h" />
     <ClInclude Include="Src\Filter\NS4PreEmphasis.h" />
+    <ClInclude Include="Src\Driver\NS4DriverVoiceEvents.h" />
     <ClInclude Include="Src\Konami\NS4KonamiDriver.h" />
+    <ClInclude Include="Src\Sng\NS4SngDriver.h" />
     <ClInclude Include="Src\MIDI\NS4MidiFile.h" />
     <ClInclude Include="Src\Operator\NS4LinearInterpolator.h" />
     <ClInclude Include="Src\Operator\NS4Operator.h" />
@@ -252,6 +255,8 @@
     <None Include="Src\Games\NS4BustAMove99Files.inl" />
     <None Include="Src\Games\NS4CaliforniaSpeedFiles.inl" />
     <None Include="Src\Games\NS4CastlevaniaLegacyOfDarknessFiles.inl" />
+    <None Include="Src\Games\NS4LodeRunner3DFiles.inl" />
+    <None Include="Src\Games\NS4MarioGolfFiles.inl" />
     <None Include="Src\Games\NS4CentreCourtTennisFiles.inl" />
     <None Include="Src\Games\NS4ChameleonTwist2Files.inl" />
     <None Include="Src\Games\NS4ChameleonTwistFiles.inl" />
