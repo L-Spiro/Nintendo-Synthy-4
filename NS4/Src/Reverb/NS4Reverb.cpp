@@ -1377,9 +1377,16 @@ namespace ns4 {
 #include "Taps/NS4ReverbLibultraBigRoom0.inl"
 	};
 
-	/** Taps harvested from Mario Golf. */
-	NS4_REVERB_TAP CReverb::m_rtMarioGolf0[] = {
-#include "Taps/NS4ReverbMarioGolf0.inl"
+	/** Delay line for Mario Golf.  The game selects libmus' Echo effect at start-up (1 section: input 0, output 7160, feedback coefficient 12000,
+	 *	feed-forward coefficient 0, gain 32767). */
+	NS4_REVERB_DELAY_LINE CReverb::m_rdlMarioGolf0[] = {
+		{
+			7160,																	// ui32Delay
+			7160,																	// ui32FeedbackDelay
+			NS4_SQRT_0_5 * (32767.0 / 32768.0),										// dVol
+			12000.0 / 32768.0,														// dFeedback
+			1.0 / 0x7FFF															// dMinLevel
+		},
 	};
 
 	/** The comb filter delay lines for Mario Golf. */
@@ -3014,11 +3021,12 @@ namespace ns4 {
 		},	// 183
 		// Mario Golf.
 		{
-			NS4_TAPS( m_rtMarioGolf0 ),
-			NS4_SQRT_0_5,															// dTapVol
+			NS4_NO_TAPS,															// prtTable
+			0.0,																	// dTapVol
 			0,																		// i64TapOffset
-			NS4_NO_FADE,
-			NS4_NO_LPF,
+			NS4_NO_FADE,															// dTime
+			NS4_NO_LPF,																// dLpfFactor
+			NS4_DELAY( m_rdlMarioGolf0, 1.0 ),										// dDelayVol
 		},	// 184
 	};
 

@@ -547,8 +547,8 @@ namespace ns4 {
 		/** Taps of libultra's AL_FX_BIGROOM (also libmus' default effect), simulated exactly. */
 		static NS4_REVERB_TAP					m_rtLibultraBigRoom0[];
 
-		/** Taps harvested from Mario Golf. */
-		static NS4_REVERB_TAP					m_rtMarioGolf0[];
+		/** Delay line for Mario Golf (libmus' Echo: 1 section, output 7160, feedback 12000, gain 32767). */
+		static NS4_REVERB_DELAY_LINE			m_rdlMarioGolf0[];
 
 		/** The comb filter delay lines for Mario Golf. */
 		static NS4_DELAY_N64					m_dn64MarioGolf0[];
