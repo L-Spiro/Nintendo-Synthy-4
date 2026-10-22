@@ -4,7 +4,7 @@
 #define NS4_FOLDER							u8"Neon Genesis Evangelion"
 //#define NS4_BANK							u8"00"
 #define NS4_REVERB_TRACKS					1
-#define NS4_REVERB							ns4::CReverb::NS4_T_MISSION_IMPOSSIBLE_0
+#define NS4_REVERB							ns4::CReverb::NS4_T_LIBULTRA_BIGROOM_0
 #define NS4_ORIG_HZ							22047
 #define NS4_SNG_FLAGS						0
 #define NS4_DRIVER_SYNTH_HZ					22050.0

@@ -9,7 +9,7 @@
 #define NS4_DRIVER_SYNTH_HZ					19200.0
 #define NS4_ORIG_HZ							19196
 #define NS4_REVERB_TRACKS					1
-#define NS4_REVERB							ns4::CReverb::NS4_T_MISSION_IMPOSSIBLE_0
+#define NS4_REVERB							ns4::CReverb::NS4_T_LIBULTRA_BIGROOM_0
 #define NS4_OUT_DIRECTORY					u8"C:\\N64OST\\Lode Runner 3-D\\"
 #define NS4_OUT_DIRECTORY_NUMBERS			NS4_OUT_DIRECTORY u8"Numbered\\"
 

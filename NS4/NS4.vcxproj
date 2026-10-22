@@ -498,6 +498,7 @@
     <None Include="Src\Reverb\Taps\NS4ReverbMikePiazzasStrikeZone0.inl" />
     <None Include="Src\Reverb\Taps\NS4ReverbMischiefMakers0.inl" />
     <None Include="Src\Reverb\Taps\NS4ReverbMissionImpossible0.inl" />
+    <None Include="Src\Reverb\Taps\NS4ReverbLibultraBigRoom0.inl" />
     <None Include="Src\Reverb\Taps\NS4ReverbMrcMultiRacingChampionship0.inl" />
     <None Include="Src\Reverb\Taps\NS4ReverbPerfectDarkLeft0.inl" />
     <None Include="Src\Reverb\Taps\NS4ReverbPerfectDarkRight0.inl" />

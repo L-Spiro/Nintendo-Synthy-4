@@ -1371,6 +1371,12 @@ namespace ns4 {
 		},
 	};
 
+	/** Taps of libultra's AL_FX_BIGROOM (also libmus' default effect), simulated exactly from alFxPull() for an impulse (4 sections, length 4000:
+	 *	0/2640 9830/-9830, 880/2160 3276/-3276 gain 0x3FFF, 2640/3640 3276/-3276 gain 0x3FFF, 0/3760 8000).  Taps below 0.00001 are dropped. */
+	NS4_REVERB_TAP CReverb::m_rtLibultraBigRoom0[] = {
+#include "Taps/NS4ReverbLibultraBigRoom0.inl"
+	};
+
 	/** Taps harvested from Fighters Destiny. */
 	NS4_REVERB_TAP CReverb::m_rtFightersDestiny0[] = {
 #include "Taps/NS4ReverbFightersDestiny0.inl"
@@ -2979,6 +2985,14 @@ namespace ns4 {
 			NS4_NO_LPF,																// dLpfFactor
 			NS4_DELAY( m_rdlMysticalNinjaStarringGoemon0, (double( 0x7FFF ) / double( 0x7FFF )) ),	// dDelayVol
 		},	// 181
+		// libultra's AL_FX_BIGROOM.
+		{
+			NS4_TAPS( m_rtLibultraBigRoom0 ),
+			NS4_SQRT_0_5,															// dTapVol
+			0,																		// i64TapOffset
+			NS4_NO_FADE,
+			NS4_NO_LPF,
+		},	// 182
 	};
 
 
