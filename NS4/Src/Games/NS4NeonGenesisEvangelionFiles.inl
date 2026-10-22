@@ -125,7 +125,7 @@
 		{ NS4_ADD_MIDI_FILE( u8"Neon Genesis Evangelion (J) 00000003 01BE8A80_AdditionalPart1.mid", false ) },
 	}
 },
-{ u8"Neon Genesis Evangelion (J) 00000007 01BF3020.mid", u8"Neon Genesis Evangelion (J) 00000007 01BF3020.mid TrackParseDebug.txt", u8"II Air [ORCHESTRAL SUITE No.3 in D Major, BWV. 1068] (No Loop)", 2 },
+{ u8"Neon Genesis Evangelion (J) 00000007 01BF3020.mid", u8"Neon Genesis Evangelion (J) 00000007 01BF3020.mid TrackParseDebug.txt", u8"II Air [ORCHESTRAL SUITE No. 3 in D Major, BWV. 1068] (No Loop)", 2 },
 { u8"Neon Genesis Evangelion (J) 00000001 01BD7670.mid", u8"Neon Genesis Evangelion (J) 00000001 01BD7670.mid TrackParseDebug.txt", u8"Komm, süsser Tod", 2,
 	1,
 	{
