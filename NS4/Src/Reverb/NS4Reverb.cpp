@@ -1377,6 +1377,20 @@ namespace ns4 {
 #include "Taps/NS4ReverbLibultraBigRoom0.inl"
 	};
 
+	/** Taps harvested from Mario Golf. */
+	NS4_REVERB_TAP CReverb::m_rtMarioGolf0[] = {
+#include "Taps/NS4ReverbMarioGolf0.inl"
+	};
+
+	/** The comb filter delay lines for Mario Golf. */
+	NS4_DELAY_N64 CReverb::m_dn64MarioGolf0[] = {
+		//ui32Input		ui32Output	i16FfCoef		i16FbCoef		i16Gain							 dRsInc						 dRsVal			i32RsDelta						dRsGain						ui16Fc
+		{         0,	      7160,	   +12000,		       +0,	      32767 },
+		{       880,	      2160,	    +3276,		    -3276,	      16383 },
+		{      2640,	      3640,	    +3276,		    -3276,	      16383 },
+		{         0,	      3760,	    +8000,		       +0,	          0,		                      0,	                      0,		        +0,		                      0,	/*0xE0195430*/    6400 },
+	};
+
 	/** Taps harvested from Fighters Destiny. */
 	NS4_REVERB_TAP CReverb::m_rtFightersDestiny0[] = {
 #include "Taps/NS4ReverbFightersDestiny0.inl"
@@ -2993,6 +3007,19 @@ namespace ns4 {
 			NS4_NO_FADE,
 			NS4_NO_LPF,
 		},	// 182
+		// Mario Golf.
+		{
+			NS4_ONLY_COMB( 1.0, 0 ),
+			NS4_COMB( 8000, 320 / 2, m_dn64MarioGolf0, 20.0 ),
+		},	// 183
+		// Mario Golf.
+		{
+			NS4_TAPS( m_rtMarioGolf0 ),
+			NS4_SQRT_0_5,															// dTapVol
+			0,																		// i64TapOffset
+			NS4_NO_FADE,
+			NS4_NO_LPF,
+		},	// 184
 	};
 
 
