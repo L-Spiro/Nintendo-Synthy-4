@@ -111,14 +111,14 @@
 	}
 },
 
-{ u8"Neon Genesis Evangelion (J) 00000015 01C29390.mid", u8"Neon Genesis Evangelion (J) 00000015 01C29390.mid TrackParseDebug.txt", u8"Messiah Oratorio, “Halleluijah” Chorus", 3,
+{ u8"Neon Genesis Evangelion (J) 00000015 01C29390.mid", u8"Neon Genesis Evangelion (J) 00000015 01C29390.mid TrackParseDebug.txt", u8"Ode to Joy [Symphony No. 9 in D minor, Op. 125]", 3,
 	1,
 	{
 		{ NS4_ADD_MIDI_FILE( u8"Neon Genesis Evangelion (J) 00000015 01C29390_AdditionalPart1.mid", false ) },
 	}
 },
 { u8"Neon Genesis Evangelion (J) 00000000 01BD5660.mid", u8"Neon Genesis Evangelion (J) 00000000 01BD5660.mid TrackParseDebug.txt", u8"THANATOS", 3 },
-{ u8"Neon Genesis Evangelion (J) 00000006 01BF2680.mid", u8"Neon Genesis Evangelion (J) 00000006 01BF2680.mid TrackParseDebug.txt", u8"II Air [ORCHESTRAL SUITE No.3 in D Major, BWV. 1068]", 3 },
+{ u8"Neon Genesis Evangelion (J) 00000006 01BF2680.mid", u8"Neon Genesis Evangelion (J) 00000006 01BF2680.mid TrackParseDebug.txt", u8"II Air [ORCHESTRAL SUITE No. 3 in D Major, BWV. 1068]", 3 },
 { u8"Neon Genesis Evangelion (J) 00000003 01BE8A80.mid", u8"Neon Genesis Evangelion (J) 00000003 01BE8A80.mid TrackParseDebug.txt", u8"THANATOS - If I Can’t Be Yours", 2,
 	1,
 	{
