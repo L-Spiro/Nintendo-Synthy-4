@@ -1159,6 +1159,27 @@
     <None Include="Src\Games\NS4CastlevaniaLegacyOfDarknessFiles.inl">
       <Filter>Header Files\Games</Filter>
     </None>
+    <None Include="Src\Games\NS4CastlevaniaFiles.inl">
+      <Filter>Header Files\Games</Filter>
+    </None>
+    <None Include="Src\Games\NS4DeadlyArtsFiles.inl">
+      <Filter>Header Files\Games</Filter>
+    </None>
+    <None Include="Src\Games\NS4GaspFightersNextreamFiles.inl">
+      <Filter>Header Files\Games</Filter>
+    </None>
+    <None Include="Src\Games\NS4HyperOlympicsInNagano64Files.inl">
+      <Filter>Header Files\Games</Filter>
+    </None>
+    <None Include="Src\Games\NS4InternationalSuperstarSoccer2000Files.inl">
+      <Filter>Header Files\Games</Filter>
+    </None>
+    <None Include="Src\Games\NS4MysticalNinjaStarringGoemonFiles.inl">
+      <Filter>Header Files\Games</Filter>
+    </None>
+    <None Include="Src\Games\NS4NaganoWinterOlympics98Files.inl">
+      <Filter>Header Files\Games</Filter>
+    </None>
     <None Include="Src\Games\NS4LodeRunner3DFiles.inl">
       <Filter>Header Files\Games</Filter>
     </None>

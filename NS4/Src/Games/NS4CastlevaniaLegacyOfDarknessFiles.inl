@@ -2,12 +2,12 @@
 #define NS4_COMPOSERS						u8"Masahiko Kimura"
 #define NS4_YEAR							u8"1999"
 #define NS4_FOLDER							u8"Castlevania Legacy of Darkness"
-// No NS4_BANK: each sequence starts in its own bank (the last field of each entry).  The game keeps a {track count, bank} pair per
-// sequence (ROM 0x11DA00); 5A, 5B, 5C, 86, and A2 start in bank 1 and 8F in bank 2.  Tracks without an F0 (Bank Select) use it.
+
+
 #define NS4_REVERB_TRACKS					1
 #define NS4_REVERB							ns4::CReverb::NS4_T_CASTLEVANIA_LEGACY_OF_DARKNESS_0
-#define NS4_ORIG_HZ							44095												// osAiSetFrequency( 44100 ) really sets 48681812 / 1104 Hz.
-#define NS4_KONAMI_SYNTH_HZ					44100.0												// The rate given to alInit(): driver updates are 221 samples apart.
+#define NS4_ORIG_HZ							44095
+#define NS4_KONAMI_SYNTH_HZ					44100.0
 #define NS4_KONAMI_TABLES					ns4::CKonamiDriver::m_ktCastlevaniaLegacyOfDarknessU
 #define NS4_OUT_DIRECTORY					u8"C:\\N64OST\\Castlevania Legacy of Darkness\\"
 #define NS4_OUT_DIRECTORY_NUMBERS			NS4_OUT_DIRECTORY u8"Numbered\\"

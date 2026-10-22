@@ -52,6 +52,7 @@ namespace ns4 {
 			uint32_t											ui32BankTotal[2];	/**< Number of entries in pksBank[]. */
 			const uint8_t *										pui8Drums;			/**< Drum table (8 bytes per drum: sound, then an NS4_KON_SOUND), or nullptr. */
 			uint32_t											ui32DrumTotal;		/**< Number of drums in pui8Drums. */
+			bool												bDrumsSetBank0;		/**< If true, loading a drum also sets the channel's bank to 0 (International Superstar Soccer 2000). */
 		};
 
 
@@ -141,6 +142,30 @@ namespace ns4 {
 
 		/** Instrument tables for Castlevania: Legacy of Darkness (U). */
 		static const NS4_KON_TABLES								m_ktCastlevaniaLegacyOfDarknessU;
+
+		/** Instrument tables for Castlevania (U) (Rev B). */
+		static const NS4_KON_TABLES								m_ktCastlevaniaU;
+
+		/** Instrument tables for Deadly Arts (U). */
+		static const NS4_KON_TABLES								m_ktDeadlyArtsU;
+
+		/** Instrument tables for G.A.S.P!! Fighters' NEXTream (E). */
+		static const NS4_KON_TABLES								m_ktGaspFightersNextreamE;
+
+		/** Instrument tables for Hybrid Heaven (U). */
+		static const NS4_KON_TABLES								m_ktHybridHeavenU;
+
+		/** Instrument tables for Nagano Winter Olympics '98 (U). */
+		static const NS4_KON_TABLES								m_ktNaganoWinterOlympics98U;
+
+		/** Instrument tables for Hyper Olympics in Nagano 64 (J). */
+		static const NS4_KON_TABLES								m_ktHyperOlympicsInNagano64J;
+
+		/** Instrument tables for International Superstar Soccer 2000 (U) (Rev 1). */
+		static const NS4_KON_TABLES								m_ktInternationalSuperstarSoccer2000U;
+
+		/** Instrument tables for Mystical Ninja Starring Goemon (U). */
+		static const NS4_KON_TABLES								m_ktMysticalNinjaStarringGoemonU;
 
 
 	protected :

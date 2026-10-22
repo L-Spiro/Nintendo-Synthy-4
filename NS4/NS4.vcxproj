@@ -255,6 +255,13 @@
     <None Include="Src\Games\NS4BustAMove99Files.inl" />
     <None Include="Src\Games\NS4CaliforniaSpeedFiles.inl" />
     <None Include="Src\Games\NS4CastlevaniaLegacyOfDarknessFiles.inl" />
+    <None Include="Src\Games\NS4CastlevaniaFiles.inl" />
+    <None Include="Src\Games\NS4DeadlyArtsFiles.inl" />
+    <None Include="Src\Games\NS4GaspFightersNextreamFiles.inl" />
+    <None Include="Src\Games\NS4HyperOlympicsInNagano64Files.inl" />
+    <None Include="Src\Games\NS4InternationalSuperstarSoccer2000Files.inl" />
+    <None Include="Src\Games\NS4MysticalNinjaStarringGoemonFiles.inl" />
+    <None Include="Src\Games\NS4NaganoWinterOlympics98Files.inl" />
     <None Include="Src\Games\NS4LodeRunner3DFiles.inl" />
     <None Include="Src\Games\NS4MarioGolfFiles.inl" />
     <None Include="Src\Games\NS4CentreCourtTennisFiles.inl" />

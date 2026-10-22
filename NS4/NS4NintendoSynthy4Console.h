@@ -513,9 +513,16 @@ int oldmain() {
 //#include "Src/Games/NS4OnegaiMonstersFiles.inl"
 
 //#include "Src/Games/NS4Robotron64Files.inl"
-#include "Src/Games/NS4CastlevaniaLegacyOfDarknessFiles.inl"
+//#include "Src/Games/NS4CastlevaniaLegacyOfDarknessFiles.inl"
+//#include "Src/Games/NS4CastlevaniaFiles.inl"
+//#include "Src/Games/NS4DeadlyArtsFiles.inl"
+//#include "Src/Games/NS4GaspFightersNextreamFiles.inl"
+//#include "Src/Games/NS4HyperOlympicsInNagano64Files.inl"
+//#include "Src/Games/NS4InternationalSuperstarSoccer2000Files.inl"
+//#include "Src/Games/NS4MysticalNinjaStarringGoemonFiles.inl"
+//#include "Src/Games/NS4NaganoWinterOlympics98Files.inl"
 //#include "Src/Games/NS4LodeRunner3DFiles.inl"
-//#include "Src/Games/NS4MarioGolfFiles.inl"
+#include "Src/Games/NS4MarioGolfFiles.inl"
 #else
 		{}
 #endif

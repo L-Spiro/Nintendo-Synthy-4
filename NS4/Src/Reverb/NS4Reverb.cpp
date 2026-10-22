@@ -1357,6 +1357,20 @@ namespace ns4 {
 		},
 	};
 
+	/** Delay line for Mystical Ninja Starring Goemon.  The game's custom libultra effect (ROM 0x06EEB0) has 1 section:
+	 *	input 0, output 7160, feedback coefficient 12000, feed-forward coefficient 0, gain 32767, no chorus, no filter.
+	 *	That is libultra's AL_FX_ECHO echo (every 7,160 samples, dropping by 12000/32767 with each repeat), played by the same Konami driver as
+	 *	Legacy of Darkness, so it uses the same levels. */
+	NS4_REVERB_DELAY_LINE CReverb::m_rdlMysticalNinjaStarringGoemon0[] = {
+		{
+			7160,																	// ui32Delay
+			7160,																	// ui32FeedbackDelay
+			0x7FFF / double( 0x7FFF ),												// dVol
+			12000 / double( 0x7FFF ),												// dFeedback
+			1.0 / 0x7FFF															// dMinLevel
+		},
+	};
+
 	/** Taps harvested from Fighters Destiny. */
 	NS4_REVERB_TAP CReverb::m_rtFightersDestiny0[] = {
 #include "Taps/NS4ReverbFightersDestiny0.inl"
@@ -2956,6 +2970,15 @@ namespace ns4 {
 			NS4_NO_LPF,																// dLpfFactor
 			NS4_DELAY( m_rdlCastlevaniaLegacyOfDarkness0, (double( 0x7FFF ) / double( 0x7FFF )) ),	// dDelayVol
 		},	// 180
+		// Mystical Ninja Starring Goemon.
+		{
+			NS4_NO_TAPS,															// prtTable
+			0.0,																	// dTapVol
+			0,																		// i64TapOffset
+			NS4_NO_FADE,															// dTime
+			NS4_NO_LPF,																// dLpfFactor
+			NS4_DELAY( m_rdlMysticalNinjaStarringGoemon0, (double( 0x7FFF ) / double( 0x7FFF )) ),	// dDelayVol
+		},	// 181
 	};
 
 
