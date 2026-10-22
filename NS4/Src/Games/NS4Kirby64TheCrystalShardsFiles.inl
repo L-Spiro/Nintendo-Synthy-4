@@ -19,6 +19,7 @@
 #define NS4_WET_FILTER_FREQ					0.0
 #define NS4_PITCH_RANGE_CONTROL				20
 #define NS4_DEFAULT_DRY						0x5F
+#define NS4_HAL_FX_MIX						true
 #define NS4_PERC_CHANNEL					9
 #define NS4_PERC_ROOT_OFFSET				-6
 #define NS4_DEFAULT_VIBRATO_TREM_LEVEL		0.0

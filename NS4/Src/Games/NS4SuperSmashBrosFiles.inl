@@ -16,6 +16,7 @@
 #define NS4_IGNORE_VIBRATO					true
 #define NS4_WET_FILTER_FREQ					0.0
 #define NS4_PITCH_RANGE_CONTROL				20
+#define NS4_HAL_FX_MIX						true
 //#define NS4_MAX_RATE						(32000 * 2)
 #define NS4_ENV_MULTIPLIER					(2.0)
 #define NS4_REL_MULTIPLIER					(1.0)

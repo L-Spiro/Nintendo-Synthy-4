@@ -319,7 +319,7 @@ int oldmain() {
 //#include "Src/Games/NS4GoldenEye007CustomFiles.inl"
 //#include "Src/Games/NS4GoldenEye007OstFiles.inl"
 //#include "Src/Games/NS4DiddyKongRacingFiles.inl"
-//#include "Src/Games/NS4SuperSmashBrosFiles.inl"
+#include "Src/Games/NS4SuperSmashBrosFiles.inl"
 //#include "Src/Games/NS4Kirby64TheCrystalShardsFiles.inl"
 //#include "Src/Games/NS4SuperRobotSpiritsFiles.inl"
 //#include "Src/Games/NS4SuperRobotSpiritsOverSampledFiles.inl"
@@ -513,7 +513,7 @@ int oldmain() {
 //#include "Src/Games/NS4OnegaiMonstersFiles.inl"
 
 //#include "Src/Games/NS4Robotron64Files.inl"
-#include "Src/Games/NS4CastlevaniaLegacyOfDarknessFiles.inl"
+//#include "Src/Games/NS4CastlevaniaLegacyOfDarknessFiles.inl"
 //#include "Src/Games/NS4CastlevaniaFiles.inl"
 //#include "Src/Games/NS4DeadlyArtsFiles.inl"
 //#include "Src/Games/NS4GaspFightersNextreamFiles.inl"
@@ -687,6 +687,11 @@ int oldmain() {
 #ifdef NS4_DEFAULT_DRY
 		ns4::CMidiFile::m_sSettings.ui8DefaultDry = NS4_DEFAULT_DRY;
 #endif	// NS4_DEFAULT_DRY
+#ifdef NS4_HAL_FX_MIX
+		ns4::CMidiFile::m_sSettings.bHalFxMix = NS4_HAL_FX_MIX;
+#else
+		ns4::CMidiFile::m_sSettings.bHalFxMix = false;
+#endif	// NS4_HAL_FX_MIX
 #ifdef NS4_DEFAULT_VIBRATO_TREM_LEVEL
 		ns4::CMidiFile::m_sSettings.dDefaultVibTremLevels = NS4_DEFAULT_VIBRATO_TREM_LEVEL;
 #endif	// NS4_DEFAULT_VIBRATO_TREM_LEVEL

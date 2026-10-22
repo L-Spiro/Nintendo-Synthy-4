@@ -599,6 +599,11 @@ namespace ns4 {
 			/** Specifies the default dry value.  Usually set to 127. but Kirby 64: The Crystal Shards uses 95. */
 			uint8_t						ui8DefaultDry = 127;
 
+			/** If true, the wet (ui8WetControl) and dry (ui8DryControl) controls follow HAL's n_audio: they are only used while the wet control is
+			 *	not 0 or the dry control is not ui8DefaultDry; otherwise the standard effect mix (control 91: dry = cos, wet = sin) is used, which is
+			 *	full dry when control 91 is not used (n_alSynStartVoiceParams()). */
+			bool						bHalFxMix = false;
+
 			/** Specifies the global minimum note that can trigger samples.  Defaults to 0. */
 			uint8_t						ui8MinNote = 0;
 

@@ -1345,6 +1345,18 @@ namespace ns4 {
 		double dDryLevel = 1.0;
 		double dWetLevel = 0.0;
 		bool bWetIsOver127 = false;
+		// HAL's n_audio (bHalFxMix): the effect mix (control 91), wet control, and dry control of the channel.
+		uint8_t ui8HalFx = 0, ui8HalWet = 0, ui8HalDry = m_sSettings.ui8DefaultDry;
+		auto UpdateHalFxMix = [&]() {
+			if ( ui8HalWet != 0 || ui8HalDry != m_sSettings.ui8DefaultDry ) {
+				dDryLevel = CWavLib::Sin( ui8HalDry / m_sSettings.dReverbNormalizationFactor * NS4_HALF_PI );
+				dWetLevel = CWavLib::Sin( ui8HalWet / m_sSettings.dReverbNormalizationFactor * NS4_HALF_PI );
+			}
+			else {
+				dDryLevel = CWavLib::Cos( ui8HalFx / m_sSettings.dReverbNormalizationFactor * NS4_HALF_PI );
+				dWetLevel = CWavLib::Sin( ui8HalFx / m_sSettings.dReverbNormalizationFactor * NS4_HALF_PI );
+			}
+		};
 
 		size_t stLastTriggeredEvents = 0;
 		size_t stTriggeredEvents = 0;
@@ -1364,6 +1376,10 @@ namespace ns4 {
 
 			if ( m_sSettings.ui8DryControl != 0 ) {
 				dDryLevel = CWavLib::Sin( msState.ui8State[m_sSettings.ui8DryControl] / m_sSettings.dReverbNormalizationFactor * NS4_HALF_PI );
+				if ( m_sSettings.bHalFxMix ) {
+					ui8HalDry = msState.ui8State[m_sSettings.ui8DryControl];
+					UpdateHalFxMix();
+				}
 			}
 		}
 
@@ -1697,6 +1713,10 @@ namespace ns4 {
 								dWetLevel = 1.0 - dWetLevel;
 							}
 						}
+						else if ( m_sSettings.bHalFxMix ) {
+							ui8HalFx = ui8Val;
+							UpdateHalFxMix();
+						}
 						else {
 							// Avoid issues with any sin/cos routines that don't exactly map to [0..1].
 							dDryLevel = CWavLib::Cos( ui8Val / m_sSettings.dReverbNormalizationFactor * NS4_HALF_PI );
@@ -1799,7 +1819,13 @@ namespace ns4 {
 				else if ( m_sSettings.ui8DryControl && IsControllerOfType( teEvent, m_sSettings.ui8DryControl ) ) {
 					if ( !m_sSettings.bIgnoreReverb ) {
 						uint8_t ui8Val = ControllerValue( teEvent );
-						dDryLevel = CWavLib::Sin( ui8Val / m_sSettings.dReverbNormalizationFactor * NS4_HALF_PI );
+						if ( m_sSettings.bHalFxMix ) {
+							ui8HalDry = ui8Val;
+							UpdateHalFxMix();
+						}
+						else {
+							dDryLevel = CWavLib::Sin( ui8Val / m_sSettings.dReverbNormalizationFactor * NS4_HALF_PI );
+						}
 					}
 				}
 				else if ( m_sSettings.ui8WetControl && IsControllerOfType( teEvent, m_sSettings.ui8WetControl ) ) {
@@ -1807,7 +1833,13 @@ namespace ns4 {
 						uint8_t ui8Val = ControllerValue( teEvent );
 						bWetIsOver127 = ui8Val > 127;
 						ui8Val &= m_sSettings.ui8ReverbMask;
-						dWetLevel = CWavLib::Sin( ui8Val / m_sSettings.dReverbNormalizationFactor * NS4_HALF_PI );
+						if ( m_sSettings.bHalFxMix ) {
+							ui8HalWet = ui8Val;
+							UpdateHalFxMix();
+						}
+						else {
+							dWetLevel = CWavLib::Sin( ui8Val / m_sSettings.dReverbNormalizationFactor * NS4_HALF_PI );
+						}
 					}
 				}
 				else if ( m_sSettings.ui8MasterVolControl && IsControllerOfType( teEvent, m_sSettings.ui8MasterVolControl ) ) {
