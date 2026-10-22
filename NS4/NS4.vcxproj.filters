@@ -1189,5 +1189,14 @@
     <None Include="Src\Games\NS4MarioGolfFiles.inl">
       <Filter>Header Files\Games</Filter>
     </None>
+    <None Include="Src\Games\NS4CommandAndConquerFiles.inl">
+      <Filter>Header Files\Games</Filter>
+    </None>
+    <None Include="Src\Games\NS4QuakeIIFiles.inl">
+      <Filter>Header Files\Games</Filter>
+    </None>
+    <None Include="Src\Games\NS4WinBackCovertOperationsFiles.inl">
+      <Filter>Header Files\Games</Filter>
+    </None>
   </ItemGroup>
 </Project>

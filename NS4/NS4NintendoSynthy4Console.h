@@ -319,7 +319,7 @@ int oldmain() {
 //#include "Src/Games/NS4GoldenEye007CustomFiles.inl"
 //#include "Src/Games/NS4GoldenEye007OstFiles.inl"
 //#include "Src/Games/NS4DiddyKongRacingFiles.inl"
-#include "Src/Games/NS4SuperSmashBrosFiles.inl"
+//#include "Src/Games/NS4SuperSmashBrosFiles.inl"
 //#include "Src/Games/NS4Kirby64TheCrystalShardsFiles.inl"
 //#include "Src/Games/NS4SuperRobotSpiritsFiles.inl"
 //#include "Src/Games/NS4SuperRobotSpiritsOverSampledFiles.inl"
@@ -523,6 +523,10 @@ int oldmain() {
 //#include "Src/Games/NS4NaganoWinterOlympics98Files.inl"
 //#include "Src/Games/NS4LodeRunner3DFiles.inl"
 //#include "Src/Games/NS4MarioGolfFiles.inl"
+
+//#include "Src/Games/NS4CommandAndConquerFiles.inl"
+#include "Src/Games/NS4QuakeIIFiles.inl"
+//#include "Src/Games/NS4WinBackCovertOperationsFiles.inl"
 #else
 		{}
 #endif

@@ -4,7 +4,7 @@
 #define NS4_FOLDER							u8"Mission Impossible"
 #define NS4_BANK							u8"01"
 #define NS4_REVERB_TRACKS					1
-#define NS4_REVERB							ns4::CReverb::NS4_T_MISSION_IMPOSSIBLE_0
+#define NS4_REVERB							ns4::CReverb::NS4_T_LIBULTRA_BIGROOM_0
 #define NS4_ORIG_HZ							22047
 #define NS4_CURVE							20.0
 #define NS4_OUT_DIRECTORY					u8"C:\\N64OST\\Mission Impossible\\"

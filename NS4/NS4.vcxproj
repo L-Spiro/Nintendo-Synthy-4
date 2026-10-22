@@ -264,6 +264,9 @@
     <None Include="Src\Games\NS4NaganoWinterOlympics98Files.inl" />
     <None Include="Src\Games\NS4LodeRunner3DFiles.inl" />
     <None Include="Src\Games\NS4MarioGolfFiles.inl" />
+    <None Include="Src\Games\NS4CommandAndConquerFiles.inl" />
+    <None Include="Src\Games\NS4QuakeIIFiles.inl" />
+    <None Include="Src\Games\NS4WinBackCovertOperationsFiles.inl" />
     <None Include="Src\Games\NS4CentreCourtTennisFiles.inl" />
     <None Include="Src\Games\NS4ChameleonTwist2Files.inl" />
     <None Include="Src\Games\NS4ChameleonTwistFiles.inl" />
