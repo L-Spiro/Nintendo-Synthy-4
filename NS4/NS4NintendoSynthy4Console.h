@@ -423,7 +423,7 @@ int oldmain() {
 //#include "Src/Games/NS4IggysReckinBallsFiles.inl"
 //#include "Src/Games/NS4RoadstersTrophyFiles.inl"
 //#include "Src/Games/NS4WcwBackstageAssaultFiles.inl"
-//#include "Src/Games/NS4MissionImpossibleFiles.inl"
+#include "Src/Games/NS4MissionImpossibleFiles.inl"
 //#include "Src/Games/NS4WormsArmageddonFiles.inl"
 //#include "Src/Games/NS4MicroMachines64TurboFiles.inl"
 //#include "Src/Games/NS4GloverFiles.inl"
@@ -525,7 +525,7 @@ int oldmain() {
 //#include "Src/Games/NS4MarioGolfFiles.inl"
 
 //#include "Src/Games/NS4CommandAndConquerFiles.inl"
-#include "Src/Games/NS4QuakeIIFiles.inl"
+//#include "Src/Games/NS4QuakeIIFiles.inl"
 //#include "Src/Games/NS4WinBackCovertOperationsFiles.inl"
 #else
 		{}

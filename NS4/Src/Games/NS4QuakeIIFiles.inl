@@ -20,9 +20,9 @@
 #define NS4_ANTI_ALIASING_HZ				20000.0
 
 
-{ u8"Quake II (U) 00000000 00A54A64.mid", u8"Quake II (U) 00000000 00A54A64.mid TrackParseDebug.txt", u8"00000000 00A54A64", 0 },
-{ u8"Quake II (U) 00000001 00A55320.mid", u8"Quake II (U) 00000001 00A55320.mid TrackParseDebug.txt", u8"00000001 00A55320", 0 },
-{ u8"Quake II (U) 00000002 00A55844.mid", u8"Quake II (U) 00000002 00A55844.mid TrackParseDebug.txt", u8"00000002 00A55844", 0 },
+{ u8"Quake II (U) 00000000 00A54A64.mid", u8"Quake II (U) 00000000 00A54A64.mid TrackParseDebug.txt", u8"Multiplayer Results", 0 },
+{ u8"Quake II (U) 00000001 00A55320.mid", u8"Quake II (U) 00000001 00A55320.mid TrackParseDebug.txt", u8"Main Menu", 0 },
+{ u8"Quake II (U) 00000002 00A55844.mid", u8"Quake II (U) 00000002 00A55844.mid TrackParseDebug.txt", u8"End Credits", 0 },
 { u8"Quake II (U) 00000003 00A57340.mid", u8"Quake II (U) 00000003 00A57340.mid TrackParseDebug.txt", u8"00000003 00A57340", 0 },
 { u8"Quake II (U) 00000004 00A574F4.mid", u8"Quake II (U) 00000004 00A574F4.mid TrackParseDebug.txt", u8"00000004 00A574F4", 0 },
 { u8"Quake II (U) 00000005 00A575FC.mid", u8"Quake II (U) 00000005 00A575FC.mid TrackParseDebug.txt", u8"00000005 00A575FC", 0 },
