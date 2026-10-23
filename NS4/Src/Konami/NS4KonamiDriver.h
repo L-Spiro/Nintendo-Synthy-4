@@ -143,7 +143,7 @@ namespace ns4 {
 		/** Instrument tables for Castlevania: Legacy of Darkness (U). */
 		static const NS4_KON_TABLES								m_ktCastlevaniaLegacyOfDarknessU;
 
-		/** Instrument tables for Castlevania (U) (Rev B). */
+		/** Instrument tables for Castlevania (U) (V1.0 and V1.1; V1.2 has the same tables 0x380 bytes later). */
 		static const NS4_KON_TABLES								m_ktCastlevaniaU;
 
 		/** Instrument tables for Deadly Arts (U). */

@@ -371,7 +371,7 @@ namespace ns4 {
 		0
 	};
 
-	/** Castlevania (U) (Rev B), bank 0 instruments (ROM 0x0A0B68-0x0A0DFA). */
+	/** Castlevania (U) (V1.0), bank 0 instruments (ROM 0x0A0B68-0x0A0DFA). */
 	static const CKonamiDriver::NS4_KON_SOUND g_ksCastlevaniaUBank0[] = {
 		// Transpose, Detune, Attack, Decay, Sustain, Release, Pan.
 		{    0,    0, 0x7F, 0x00, 0x00, 0x1F, 0x40 },	// 00
@@ -470,7 +470,7 @@ namespace ns4 {
 		{   26,   90, 0x7F, 0x10, 0x13, 0x1F, 0x40 },	// 5D
 	};
 
-	/** Castlevania (U) (Rev B), bank 1 instruments (ROM 0x0A0DFC-0x0A12A9). */
+	/** Castlevania (U) (V1.0), bank 1 instruments (ROM 0x0A0DFC-0x0A12A9). */
 	static const CKonamiDriver::NS4_KON_SOUND g_ksCastlevaniaUBank1[] = {
 		// Transpose, Detune, Attack, Decay, Sustain, Release, Pan.
 		{    0,    4, 0x7F, 0x00, 0x00, 0x1F, 0x40 },	// 00
@@ -646,13 +646,13 @@ namespace ns4 {
 		{   -6,   28, 0x7F, 0x00, 0x00, 0x1F, 0x40 },	// AA
 	};
 
-	/** Castlevania (U) (Rev B), drums for notes 0x48 and up (ROM 0x0A12B4-0x0A12BC). */
+	/** Castlevania (U) (V1.0), drums for notes 0x48 and up (ROM 0x0A12B4-0x0A12BC). */
 	static const uint8_t g_ui8CastlevaniaUDrums[] = {
 		// Sound, Transpose, Detune, Attack, Decay, Sustain, Release, Pan.
 		0x00, 0x00, 0x00, 0x7F, 0x00, 0x00, 0x1F, 0x40,	// 48 (transpose 0, detune 0)
 	};
 
-	/** Instrument tables for Castlevania (U) (Rev B). */
+	/** Instrument tables for Castlevania (U) (V1.0 and V1.1; V1.2 has the same tables 0x380 bytes later). */
 	const CKonamiDriver::NS4_KON_TABLES CKonamiDriver::m_ktCastlevaniaU = {
 		{ g_ksCastlevaniaUBank0, g_ksCastlevaniaUBank1 },
 		{ uint32_t( sizeof( g_ksCastlevaniaUBank0 ) / sizeof( g_ksCastlevaniaUBank0[0] ) ),
