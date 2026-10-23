@@ -442,7 +442,7 @@ namespace ns4 {
 			const CKonamiDriver::NS4_KON_TABLES *
 										pktKonamiTables = nullptr;
 
-			/** SNG: if true, AddDebug_Standard() recognizes SNG ("Binary Song Style") "TrackParseDebug" files and the tracks are played by the SNG driver (libmus) instead of the MIDI renderer.  The samples' tuning comes from the Key Base and Fine Tune of the sound bank (pvDriverBanks). */
+			/** SNG: if true, AddDebug_Standard() recognizes SNG ("Binary Song Style" and "Old Song Style") "TrackParseDebug" files and the tracks are played by the SNG driver (libmus) instead of the MIDI renderer.  The samples' tuning comes from the Key Base and Fine Tune of the sound bank (pvDriverBanks). */
 			bool						bSng = false;
 
 			/** SNG: the version of the libmus player (CSngDriver::NS4_SNG_FLAGS; 0 = libmus 3.14). */
@@ -450,6 +450,9 @@ namespace ns4 {
 
 			/** SNG: the songs' master volume set by the game (MusSetMasterVolume( MUSFLAG_SONGS, x )).  libmus starts at 0x7FFF. */
 			uint16_t					ui16SngMasterVolume = 0x7FFF;
+
+			/** SNG: how many times per second the game runs the libmus player (60 in most games; Quake II runs it 30 times per second). */
+			uint32_t					ui32SngUpdateHz = 60;
 
 			/** Konami/SNG: all loaded sound banks, indexed by bank number (Konami sequences can change banks).  If nullptr, the bank passed to RenderNotesToStereo() is used. */
 			const std::vector<CSoundBank> *
@@ -2369,7 +2372,7 @@ namespace ns4 {
 		bool							AddDebug_Konami( std::istream &_isStream, uint32_t _ui32FirstTrack, uint32_t _ui32FirstOffset );
 
 		/**
-		 * Loads an SNG ("Binary Song Style") "TrackParseDebug" file, plays it with the SNG driver to find each channel's loop, and replaces
+		 * Loads an SNG ("Binary Song Style" or "Old Song Style") "TrackParseDebug" file, plays it with the SNG driver to find each channel's loop, and replaces
 		 *	the MIDI tracks with tracks that hold the timing (1 MIDI tick = 1 frame), loop points, and note bookkeeping.  Track 0 is the
 		 *	master track.  The sound itself is rendered by RenderDriverNotesToStereo().
 		 *
@@ -2408,14 +2411,14 @@ namespace ns4 {
 			double * _pdStartTime ) const;
 
 		/**
-		 * Gets the real time between driver updates.  Konami asks for an update every 5,000 microseconds and libmus (SNG) every 16,666,
+		 * Gets the real time between driver updates.  Konami asks for an update every 5,000 microseconds and libmus (SNG) every 16,666 (at 60 updates per second),
 		 *	which libultra rounds to whole samples at the synthesizer rate (221 at 44,100 Hz), and those samples are played at the
 		 *	hardware's real rate.
 		 *
 		 * \return Returns the time between driver updates in seconds.
 		 */
 		double							DriverTickSeconds() const {
-			uint32_t ui32Samples = m_bSng ? CSngDriver::SamplesPerTick( m_sSettings.dDriverSynthHz ) : CKonamiDriver::SamplesPerTick( m_sSettings.dDriverSynthHz );
+			uint32_t ui32Samples = m_bSng ? CSngDriver::SamplesPerTick( m_sSettings.dDriverSynthHz, m_sSettings.ui32SngUpdateHz ) : CKonamiDriver::SamplesPerTick( m_sSettings.dDriverSynthHz );
 			return ui32Samples / m_sSettings.dDriverGameHz;
 		}
 

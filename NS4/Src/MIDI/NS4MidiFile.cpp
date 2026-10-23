@@ -955,7 +955,7 @@ namespace ns4 {
 	}
 
 	/**
-	 * Loads an SNG ("Binary Song Style") "TrackParseDebug" file, plays it with the SNG driver to find each channel's loop, and replaces
+	 * Loads an SNG ("Binary Song Style" or "Old Song Style") "TrackParseDebug" file, plays it with the SNG driver to find each channel's loop, and replaces
 	 *	the MIDI tracks with tracks that hold the timing (1 MIDI tick = 1 frame), loop points, and note bookkeeping.  Track 0 is the
 	 *	master track.  The sound itself is rendered by RenderDriverNotesToStereo().
 	 *
@@ -1000,6 +1000,7 @@ namespace ns4 {
 
 		std::vector<CDriverVoiceEvents::NS4_DRIVER_TRACK> vSngTracks;
 		sdDriver.SetMasterVolume( m_sSettings.ui16SngMasterVolume );
+		sdDriver.SetUpdateRate( m_sSettings.ui32SngUpdateHz );
 		sdDriver.Play( m_sSettings.ui32Bank, m_sSettings.ui32SngFlags, m_vSngDetune, ui64MaxTicks, true, vSngTracks );
 		for ( size_t I = 0; I < sdDriver.Warnings().size(); ++I ) {
 			std::printf( "SNG: %s\r\n", sdDriver.Warnings()[I].c_str() );
@@ -2183,6 +2184,7 @@ namespace ns4 {
 		if ( ui64Ticks != m_ui64DriverRenderTicks ) {
 			if ( m_bSng ) {
 				m_sdSng.SetMasterVolume( m_sSettings.ui16SngMasterVolume );
+				m_sdSng.SetUpdateRate( m_sSettings.ui32SngUpdateHz );
 				m_sdSng.Play( m_ui32DriverBank, m_sSettings.ui32SngFlags, m_vSngDetune, ui64Ticks, false, m_vDriverRender );
 			}
 			else {

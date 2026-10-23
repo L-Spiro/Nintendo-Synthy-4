@@ -9,11 +9,13 @@
 namespace ns4 {
 
 	CSngDriver::CSngDriver() :
+		m_bOldStyle( false ),
 		m_pvTracks( nullptr ),
 		m_ui32Flags( 0 ),
 		m_pvDetune( nullptr ),
 		m_ui32Bank( 0 ),
 		m_ui16MasterVolume( 0x7FFF ),
+		m_ui32UpdateHz( 60 ),
 		m_pscChannel( nullptr ),
 		m_stChannel( 0 ),
 		m_ui64Tick( 0 ),
@@ -25,10 +27,11 @@ namespace ns4 {
 
 	// == Functions.
 	/**
-	 * Determines if a debug file holds an SNG song that can be played: the format line ("Binary Song Style") is near the top.
+	 * Determines if a debug file holds an SNG song that can be played: the format line ("Binary Song Style" or "Old Song Style") is near
+	 *	the top.
 	 *
 	 * \param _isStream The text stream.  It is returned to the position at which it was given.
-	 * \return Returns true if the text is a "Binary Song Style" SNG debug file.
+	 * \return Returns true if the text is a "Binary Song Style" or "Old Song Style" SNG debug file.
 	 */
 	bool CSngDriver::IsSngDebug( std::istream &_isStream ) {
 		std::streampos spPos = _isStream.tellg();
@@ -36,7 +39,7 @@ namespace ns4 {
 		std::string sLine;
 		for ( int I = 0; I < 8 && std::getline( _isStream, sLine ); ++I ) {
 			while ( sLine.size() && (sLine.back() == '\r' || sLine.back() == '\n' || sLine.back() == ' ') ) { sLine.pop_back(); }
-			if ( sLine == "Binary Song Style" ) {
+			if ( sLine == "Binary Song Style" || sLine == "Old Song Style" ) {
 				bRet = true;
 				break;
 			}
@@ -62,6 +65,7 @@ namespace ns4 {
 		m_vVolumeOffsets.clear();
 		m_vPitchBendOffsets.clear();
 		m_vWarnings.clear();
+		m_bOldStyle = false;
 
 		enum NS4_SECTIONS {
 			NS4_S_NONE,
@@ -96,6 +100,11 @@ namespace ns4 {
 			while ( sLine.size() && (sLine.back() == '\r' || sLine.back() == '\n') ) { sLine.pop_back(); }
 			uint32_t ui32A, ui32B, ui32C, ui32D;
 			int iRead = 0;
+			if ( sLine == "Old Song Style" ) {
+				// No wave table (the waves are the samples) and no master track.
+				m_bOldStyle = true;
+				continue;
+			}
 			if ( std::sscanf( sLine.c_str(), "Instruments: %X", &ui32A ) == 1 ) {
 				sSection = NS4_S_INSTRUMENTS;
 				continue;
@@ -233,7 +242,7 @@ namespace ns4 {
 
 			NS4_SNG_CHANNEL &scChan = m_vChannels[I];
 			InitialiseChannel( scChan );
-			scChan.ui8VelocityOn = 1;
+			scChan.ui8VelocityOn = (m_ui32Flags & NS4_SF_VELOCITY_OFF_AT_START) ? 0 : 1;
 			if ( I == 0 ) {
 				scChan.ui32ChannelFlags |= NS4_SCF_MASTER_TRACK;
 			}
@@ -269,7 +278,9 @@ namespace ns4 {
 					if ( scChan.ui32Data == NS4_SNG_NULL ) { continue; }
 				}
 				// The continuous volume and pitch-bend streams.
-				if ( scChan.ui32Volume != NS4_SNG_NULL && FrameBefore( scChan.ui32VolumeFrame, scChan.ui32ChannelFrame ) ) {
+				// libmus 1998 checks the pitch-bend stream's frame to decide whether to advance the volume stream.
+				if ( scChan.ui32Volume != NS4_SNG_NULL &&
+					FrameBefore( (m_ui32Flags & NS4_SF_VOLUME_ON_PB_FRAME) ? scChan.ui32PitchBendFrame : scChan.ui32VolumeFrame, scChan.ui32ChannelFrame ) ) {
 					ProcessContinuousVolume();
 				}
 				if ( scChan.ui32PitchBend != NS4_SNG_NULL && FrameBefore( scChan.ui32PitchBendFrame, scChan.ui32ChannelFrame ) ) {
@@ -394,7 +405,7 @@ namespace ns4 {
 					sdDrum.ui8Pan = uint8_t( ui32Pan );
 					sdDrum.ui8Note = uint8_t( ui32Note );
 					for ( size_t I = 0; I < 7; ++I ) { sdDrum.ui8Env[I] = uint8_t( ui32Env[I] ); }
-					uint32_t ui32Key = uint32_t( _i32DrumMap ) + _ui32Cmd;
+					uint32_t ui32Key = DrumKey( uint32_t( _i32DrumMap ), _ui32Cmd );
 					auto aFound = m_mDrums.find( ui32Key );
 					if ( aFound != m_mDrums.end() && (aFound->second.ui16Wave != sdDrum.ui16Wave || aFound->second.ui8Pan != sdDrum.ui8Pan ||
 						aFound->second.ui8Note != sdDrum.ui8Note || std::memcmp( aFound->second.ui8Env, sdDrum.ui8Env, sizeof( sdDrum.ui8Env ) ) != 0) ) {
@@ -604,7 +615,7 @@ namespace ns4 {
 	 *
 	 * \param _scChannel The channel.
 	 */
-	void CSngDriver::InitialiseChannel( NS4_SNG_CHANNEL &_scChannel ) {
+	void CSngDriver::InitialiseChannel( NS4_SNG_CHANNEL &_scChannel ) const {
 		std::memset( &_scChannel, 0, sizeof( _scChannel ) );
 		_scChannel.ui32Data = NS4_SNG_NULL;
 		_scChannel.ui32PitchBend = NS4_SNG_NULL;
@@ -624,7 +635,7 @@ namespace ns4 {
 		_scChannel.ui8OldPan = 0xFF;
 		_scChannel.fOldFrequency = 99.9f;
 
-		_scChannel.ui16ChannelTempo = _scChannel.ui16ChannelTempoSave = uint16_t( 96 * 256 / 60 );
+		_scChannel.ui16ChannelTempo = _scChannel.ui16ChannelTempoSave = uint16_t( 96 * 256 / m_ui32UpdateHz );
 		_scChannel.ui16Length = 1;
 		_scChannel.ui8DefaultVelocity = 127;
 		_scChannel.ui8Volume = 127;
@@ -732,7 +743,7 @@ namespace ns4 {
 			// Hit the end (or a byte that is not in the debug text): stop the voice.
 			if ( scChan.ui8Playing ) {
 				scChan.ui8Playing = 0;
-				Emit( NS4_DVC_VOLUME, 0, NS4_SNG_FRAME_US );
+				Emit( NS4_DVC_VOLUME, 0, FrameMicros() );
 				Emit( NS4_DVC_STOP );
 			}
 			return;
@@ -743,7 +754,8 @@ namespace ns4 {
 		uint32_t ui32Note = PeekByte( scChan.ui32Data++ );
 		if ( scChan.ui8VelocityOn ) {
 			uint8_t ui8Vel = PeekByte( scChan.ui32Data++ );
-			if ( ui8Vel >= 0x80 ) {
+			// libmus 1998 uses the byte as it is.
+			if ( ui8Vel >= 0x80 && !(m_ui32Flags & NS4_SF_RAW_VELOCITY) ) {
 				ui8Vel &= 0x7F;
 				scChan.ui8VelocityOn = 0;
 				scChan.ui8DefaultVelocity = ui8Vel;
@@ -781,7 +793,7 @@ namespace ns4 {
 			scChan.ui32Data = NS4_SNG_NULL;
 			if ( scChan.ui8Playing ) {
 				scChan.ui8Playing = 0;
-				Emit( NS4_DVC_VOLUME, 0, NS4_SNG_FRAME_US );
+				Emit( NS4_DVC_VOLUME, 0, FrameMicros() );
 				Emit( NS4_DVC_STOP );
 			}
 			return;
@@ -797,17 +809,17 @@ namespace ns4 {
 
 		// Waves without a sample (0xFFFF in the wave table) are rests.
 		if ( scChan.ui32Drums == NS4_SNG_NULL ) {
-			if ( scChan.ui16Wave < m_vWaveTable.size() && m_vWaveTable[scChan.ui16Wave] == 0xFFFF ) {
+			if ( !m_bOldStyle && scChan.ui16Wave < m_vWaveTable.size() && m_vWaveTable[scChan.ui16Wave] == 0xFFFF ) {
 				ui32Note = NS4_SNG_REST;
 			}
 		}
 
 		if ( ui32Note != NS4_SNG_REST && scChan.ui32Drums != NS4_SNG_NULL ) {
-			auto aFound = m_mDrums.find( scChan.ui32Drums + ui32Note );
+			auto aFound = m_mDrums.find( DrumKey( scChan.ui32Drums, ui32Note ) );
 			if ( aFound == m_mDrums.end() ) {
 				char szBuffer[160];
 				std::snprintf( szBuffer, sizeof( szBuffer ), "Track %u plays drum %u, which is not in the debug text, at frame %llu; it is played as a rest.",
-					uint32_t( m_stChannel ), scChan.ui32Drums + ui32Note, static_cast<unsigned long long>(m_ui64Tick) );
+					uint32_t( m_stChannel ), DrumKey( scChan.ui32Drums, ui32Note ), static_cast<unsigned long long>(m_ui64Tick) );
 				Warn( szBuffer );
 				ui32Note = NS4_SNG_REST;
 			}
@@ -830,7 +842,11 @@ namespace ns4 {
 
 			// The sample.
 			uint32_t ui32Sound = 0xFFFF;
-			if ( scChan.ui16Wave < m_vWaveTable.size() && m_vWaveTable[scChan.ui16Wave] != NS4_SNG_NULL ) {
+			if ( m_bOldStyle ) {
+				// "Old Song Style" waves are the samples.
+				ui32Sound = scChan.ui16Wave;
+			}
+			else if ( scChan.ui16Wave < m_vWaveTable.size() && m_vWaveTable[scChan.ui16Wave] != NS4_SNG_NULL ) {
 				ui32Sound = m_vWaveTable[scChan.ui16Wave];
 			}
 			else {
@@ -845,7 +861,7 @@ namespace ns4 {
 				if ( scChan.ui8Playing && scChan.ui16OldVolume ) {
 					// Fade the old note out over a frame and start the new one on the next frame.
 					scChan.ui16OldVolume = 0;
-					Emit( NS4_DVC_VOLUME, 0, NS4_SNG_FRAME_US );
+					Emit( NS4_DVC_VOLUME, 0, FrameMicros() );
 				}
 				else {
 					FlushPending();
@@ -898,7 +914,7 @@ namespace ns4 {
 		ui32Vol >>= 15;
 		if ( ui32Vol != scChan.ui16OldVolume ) {
 			scChan.ui16OldVolume = uint16_t( ui32Vol );
-			Emit( NS4_DVC_VOLUME, ui32Vol, NS4_SNG_FRAME_US );
+			Emit( NS4_DVC_VOLUME, ui32Vol, FrameMicros() );
 		}
 
 		uint32_t ui32Pan = ((uint32_t( scChan.ui8Pan ) * uint32_t( int32_t( scChan.i16PanScale ) )) >> 7) & 0x7F;
@@ -1094,7 +1110,8 @@ namespace ns4 {
 			scChan.fVibrato = std::sin( float( i32Temp ) * scChan.fVibPrecalc ) * scChan.fVibAmount;
 			return scChan.fVibrato;
 		}
-		return 0.0f;
+		// libmus 1998 keeps applying the last offset during the delay.
+		return (m_ui32Flags & NS4_SF_VIBRATO_HOLDS) ? scChan.fVibrato : 0.0f;
 	}
 
 	/**
@@ -1212,7 +1229,7 @@ namespace ns4 {
 				break;
 			}
 			case 0x85 : {	// Ftempo: the tempo of every channel in the song.
-				int32_t i32Temp = int32_t( PeekByte( _ui32Ptr++ ) ) * 256 * 96 / 120 / 60;
+				int32_t i32Temp = int32_t( PeekByte( _ui32Ptr++ ) ) * 256 * 96 / 120 / int32_t( m_ui32UpdateHz );
 				int32_t i32Temp2 = (i32Temp * scChan.i16TemScale) >> 7;
 				for ( size_t I = 0; I < m_vChannels.size(); ++I ) {
 					if ( m_vChannels[I].ui32Data != NS4_SNG_NULL ) {
@@ -1383,7 +1400,7 @@ namespace ns4 {
 				_ui32Ptr += 2;
 				break;
 			}
-			case 0x9E : {	// Fdrums.
+			case 0x9E : {	// Fdrums ("Old Song Style": the number of a drum map in the song's table of drum maps).
 				scChan.ui32Drums = ReadVar();
 				break;
 			}
@@ -1483,11 +1500,14 @@ namespace ns4 {
 	 */
 	void CSngDriver::SetEnvelope( const uint8_t * _pui8Env ) {
 		NS4_SNG_CHANNEL &scChan = (*m_pscChannel);
+		// libmus 1998 reads the speed and the rates as signed bytes when it calculates the steps (the stored values stay unsigned).
+		const bool bSigned = (m_ui32Flags & NS4_SF_SIGNED_ENV_RATES) != 0;
+		auto Rate = [&]( uint8_t _ui8Value ) -> int32_t { return bSigned ? int32_t( int8_t( _ui8Value ) ) : int32_t( _ui8Value ); };
 		// The speed (cannot be 0).
 		uint8_t ui8Value = _pui8Env[0];
 		if ( ui8Value == 0 ) { ui8Value = 1; }
 		scChan.ui8EnvSpeed = ui8Value;
-		scChan.i32EnvSpeedCalc = 1024 / ui8Value;
+		scChan.i32EnvSpeedCalc = 1024 / Rate( ui8Value );
 
 		scChan.ui8EnvInitVol = _pui8Env[1];
 
@@ -1495,18 +1515,18 @@ namespace ns4 {
 		ui8Value = _pui8Env[2];
 		scChan.ui8EnvAttackSpeed = ui8Value;
 		scChan.ui8EnvMaxVol = _pui8Env[3];
-		scChan.fEnvAttackCalc = float( (1.0 / double( float( ui8Value ) )) * double( float( int32_t( scChan.ui8EnvMaxVol ) - int32_t( scChan.ui8EnvInitVol ) ) ) );
+		scChan.fEnvAttackCalc = float( (1.0 / double( float( Rate( ui8Value ) ) )) * double( float( int32_t( scChan.ui8EnvMaxVol ) - int32_t( scChan.ui8EnvInitVol ) ) ) );
 
 		// The decay.
 		ui8Value = _pui8Env[4];
 		scChan.ui8EnvDecaySpeed = ui8Value;
 		scChan.ui8EnvSustainVol = _pui8Env[5];
-		scChan.fEnvDecayCalc = float( (1.0 / double( float( ui8Value ) )) * double( float( int32_t( scChan.ui8EnvSustainVol ) - int32_t( scChan.ui8EnvMaxVol ) ) ) );
+		scChan.fEnvDecayCalc = float( (1.0 / double( float( Rate( ui8Value ) ) )) * double( float( int32_t( scChan.ui8EnvSustainVol ) - int32_t( scChan.ui8EnvMaxVol ) ) ) );
 
 		// The release.
 		ui8Value = _pui8Env[6];
 		scChan.ui8EnvReleaseSpeed = ui8Value;
-		scChan.fEnvReleaseCalc = float( 1.0 / double( float( ui8Value ) ) );
+		scChan.fEnvReleaseCalc = float( 1.0 / double( float( Rate( ui8Value ) ) ) );
 	}
 
 	/**

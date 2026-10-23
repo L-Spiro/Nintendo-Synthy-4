@@ -6,6 +6,12 @@
 #define NS4_REVERB_TRACKS					1
 #define NS4_REVERB							ns4::CReverb::NS4_T_LIBULTRA_BIGROOM_0
 #define NS4_ORIG_HZ							22047
+#define NS4_SNG_FLAGS						(ns4::CSngDriver::NS4_SF_REST_SETS_VELOCITY | ns4::CSngDriver::NS4_SF_ENV_COUNT | ns4::CSngDriver::NS4_SF_UNSIGNED_FRAMES | \
+												ns4::CSngDriver::NS4_SF_U8_FOR_PITCH_BEND | ns4::CSngDriver::NS4_SF_BEND_RANGE_SQUARES | ns4::CSngDriver::NS4_SF_SIGNED_ENV_RATES | \
+												ns4::CSngDriver::NS4_SF_VIBRATO_HOLDS | ns4::CSngDriver::NS4_SF_VOLUME_ON_PB_FRAME | ns4::CSngDriver::NS4_SF_RAW_VELOCITY | \
+												ns4::CSngDriver::NS4_SF_VELOCITY_OFF_AT_START)
+#define NS4_DRIVER_SYNTH_HZ					22050.0
+#define NS4_SNG_MASTER_VOLUME				16383
 #define NS4_CURVE							20.0
 #define NS4_OUT_DIRECTORY					u8"C:\\N64OST\\Mission Impossible\\"
 #define NS4_OUT_DIRECTORY_NUMBERS			NS4_OUT_DIRECTORY u8"Numbered\\"

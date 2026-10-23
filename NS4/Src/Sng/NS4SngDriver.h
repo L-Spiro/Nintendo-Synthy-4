@@ -13,11 +13,13 @@ namespace ns4 {
 
 	/**
 	 * Class CSngDriver
-	 * \brief A port of Software Creations' "Nintendo 64 Music Tools" player (libmus), which plays the "SNG" ("Binary Song Style") format.
+	 * \brief A port of Software Creations' "Nintendo 64 Music Tools" player (libmus), which plays the "SNG" format ("Binary Song Style" and
+	 *	"Old Song Style").
 	 *
 	 * Description: Rebuilds a song from SubDrag's "TrackParseDebug" text (SubDrag lists every byte of every channel, the continuous volume and
 	 *	pitch-bend streams, the instrument (wave) table, and the envelopes and drums each channel uses) and plays it the way libmus does, one
-	 *	video frame at a time.  The result is the list of commands the player sends to the libultra synthesizer for each channel, plus the
+	 *	player update (normally a video frame) at a time.  "Old Song Style" songs (libmus 1998, such as Mission: Impossible) have no
+	 *	instrument table (the wave numbers are the sample numbers), no master track, and drum maps that are tables of 4-byte drums.  The result is the list of commands the player sends to the libultra synthesizer for each channel, plus the
 	 *	loops.
 	 *
 	 * The player follows libmus 3.14 (player.c, player_commands.c) with the differences found in older versions (NS4_SNG_FLAGS).  Pitches
@@ -38,15 +40,21 @@ namespace ns4 {
 			NS4_SF_UNSIGNED_FRAMES								= (1 << 2),	/**< Frame counters are compared unsigned: the release starts on the frame it is due instead of the frame after. */
 			NS4_SF_U8_FOR_PITCH_BEND							= (1 << 3),	/**< Loops (Ffor) save the pitch bend as an unsigned byte, so negative bends come back as +192..+255 at the loop. */
 			NS4_SF_BEND_RANGE_SQUARES							= (1 << 4),	/**< A8 (bend range) recalculates the bend as bend * bend instead of bend * range. */
+			NS4_SF_SIGNED_ENV_RATES								= (1 << 5),	/**< The envelope speed and rates are signed bytes when the steps are calculated (libmus 1998), so rates of 0x80 and up step the other way and the level wraps. */
+			NS4_SF_VIBRATO_HOLDS								= (1 << 6),	/**< During the vibrato delay the last vibrato offset is applied instead of none (libmus 1998). */
+			NS4_SF_VOLUME_ON_PB_FRAME							= (1 << 7),	/**< The volume stream is advanced when the pitch-bend stream's frame is due, and then by at least one tick (libmus 1998). */
+			NS4_SF_RAW_VELOCITY									= (1 << 8),	/**< Note velocities are used as stored: the high bit does not turn velocities off (libmus 1998). */
+			NS4_SF_VELOCITY_OFF_AT_START						= (1 << 9),	/**< Channels start with velocities off (as after 9A) instead of on (libmus 1998). */
 		};
 
 
 		// == Functions.
 		/**
-		 * Determines if a debug file holds an SNG song that can be played: the format line ("Binary Song Style") is near the top.
+		 * Determines if a debug file holds an SNG song that can be played: the format line ("Binary Song Style" or "Old Song Style") is near
+		 *	the top.
 		 *
 		 * \param _isStream The text stream.  It is returned to the position at which it was given.
-		 * \return Returns true if the text is a "Binary Song Style" SNG debug file.
+		 * \return Returns true if the text is a "Binary Song Style" or "Old Song Style" SNG debug file.
 		 */
 		static bool												IsSngDebug( std::istream &_isStream );
 
@@ -88,6 +96,28 @@ namespace ns4 {
 		void													SetMasterVolume( uint16_t _ui16Volume ) { m_ui16MasterVolume = _ui16Volume; }
 
 		/**
+		 * Sets how many times per second the player runs (musConfig's update rate: 60 in most games, 50 on PAL, 30 in Quake II).  The
+		 *	tempo is divided by it and the player's callback asks to be called again after 1,000,000 / rate microseconds.
+		 *
+		 * \param _ui32Hz The update rate.
+		 */
+		void													SetUpdateRate( uint32_t _ui32Hz ) { m_ui32UpdateHz = _ui32Hz ? _ui32Hz : 60; }
+
+		/**
+		 * Gets the time between player updates in microseconds (1,000,000 / the update rate, rounded down).
+		 *
+		 * \return Returns the time between updates.
+		 */
+		uint32_t												FrameMicros() const { return 1000000 / m_ui32UpdateHz; }
+
+		/**
+		 * Determines if the loaded song is an "Old Song Style" song.
+		 *
+		 * \return Returns true if the loaded song is an "Old Song Style" song.
+		 */
+		bool													IsOldStyle() const { return m_bOldStyle; }
+
+		/**
 		 * Gets the warnings produced while loading and playing.
 		 *
 		 * \return Returns the warnings.
@@ -95,12 +125,16 @@ namespace ns4 {
 		const std::vector<std::string> &						Warnings() const { return m_vWarnings; }
 
 		/**
-		 * Gets the time between frames in samples at the synthesizer's output rate (libultra rounds 16,666 microseconds to whole samples).
+		 * Gets the time between player updates in samples at the synthesizer's output rate (libultra rounds the callback's time, 16,666
+		 *	microseconds at 60 updates per second, to whole samples).
 		 *
 		 * \param _dSynthHz The synthesizer's output rate (musConfig.syn_output_rate).
-		 * \return Returns the number of samples between frames.
+		 * \param _ui32UpdateHz The number of player updates per second.
+		 * \return Returns the number of samples between player updates.
 		 */
-		static uint32_t											SamplesPerTick( double _dSynthHz ) { return CDriverVoiceEvents::SamplesPerTick( NS4_SNG_FRAME_US, _dSynthHz ); }
+		static uint32_t											SamplesPerTick( double _dSynthHz, uint32_t _ui32UpdateHz = 60 ) {
+			return CDriverVoiceEvents::SamplesPerTick( 1000000 / (_ui32UpdateHz ? _ui32UpdateHz : 60), _dSynthHz );
+		}
 
 		/**
 		 * Converts a sample's Key Base and Fine Tune (as SubDrag exports them for "ptr" banks) to libmus' tuning (detune[]).
@@ -121,7 +155,7 @@ namespace ns4 {
 
 
 		// == Members.
-		/** Microseconds between frames (the player's callback returns 1,000,000 / 60). */
+		/** Microseconds between frames at the usual 60 updates per second (the player's callback returns 1,000,000 / 60). */
 		static constexpr uint32_t								NS4_SNG_FRAME_US = 16666;
 
 		/** The tuning of samples that are not in the sample bank (basenote 0 and no fine tune: note 48 plays at the output rate). */
@@ -137,7 +171,7 @@ namespace ns4 {
 
 
 		// == Types.
-		/** A drum (the song's drum table holds 6 bytes per drum: wave, envelope index, pan, note). */
+		/** A drum (the song's drum table holds 6 bytes per drum: wave, envelope index, pan, note; "Old Song Style" drums are 4 bytes). */
 		struct NS4_SNG_DRUM {
 			uint16_t											ui16Wave;		/**< The wave (index into the song's wave table). */
 			uint8_t												ui8Pan;			/**< Pan * 2. */
@@ -264,13 +298,16 @@ namespace ns4 {
 		/** Which bytes of m_vImage were found in the debug text. */
 		std::vector<uint8_t>									m_vKnown;
 
-		/** The wave table (NS4_SNG_NULL where unknown). */
+		/** The wave table (NS4_SNG_NULL where unknown; empty in "Old Song Style" songs, whose waves are the samples themselves). */
 		std::vector<uint32_t>									m_vWaveTable;
+
+		/** If true, the song is an "Old Song Style" song: no wave table, no master track, and drum maps are selected by number. */
+		bool													m_bOldStyle;
 
 		/** The envelope table (only the entries the song uses). */
 		std::map<uint32_t, std::vector<uint8_t>>				m_mEnvelopes;
 
-		/** The drum table (only the drums the song uses), indexed by drum number. */
+		/** The drum table (only the drums the song uses), indexed by drum number (by DrumKey() in "Old Song Style" songs). */
 		std::map<uint32_t, NS4_SNG_DRUM>						m_mDrums;
 
 		/** Channel data offsets (0 = master track). */
@@ -305,6 +342,9 @@ namespace ns4 {
 
 		/** The songs' master volume (mus_master_volume_songs). */
 		uint16_t												m_ui16MasterVolume;
+
+		/** The number of player updates per second. */
+		uint32_t												m_ui32UpdateHz;
 
 		/** The current channel. */
 		NS4_SNG_CHANNEL *										m_pscChannel;
@@ -407,11 +447,21 @@ namespace ns4 {
 		float													Detune( uint32_t _ui32Sound ) const;
 
 		/**
+		 * Gets the key of a drum in m_mDrums: the drum map plus the note, or in "Old Song Style" songs (whose drum maps are selected by
+		 *	number from a table of maps) the map number and the note.
+		 *
+		 * \param _ui32Map The drum map (Fdrums' parameter).
+		 * \param _ui32Note The note.
+		 * \return Returns the key of the drum.
+		 */
+		uint32_t												DrumKey( uint32_t _ui32Map, uint32_t _ui32Note ) const { return m_bOldStyle ? ((_ui32Map << 8) | _ui32Note) : (_ui32Map + _ui32Note); }
+
+		/**
 		 * Sets a channel to its default state (__MusIntInitialiseChannel()).
 		 *
 		 * \param _scChannel The channel.
 		 */
-		static void												InitialiseChannel( NS4_SNG_CHANNEL &_scChannel );
+		void													InitialiseChannel( NS4_SNG_CHANNEL &_scChannel ) const;
 
 		/**
 		 * Stops the current channel's data (Fstop()).

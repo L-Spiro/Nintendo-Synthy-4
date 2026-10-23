@@ -423,7 +423,7 @@ int oldmain() {
 //#include "Src/Games/NS4IggysReckinBallsFiles.inl"
 //#include "Src/Games/NS4RoadstersTrophyFiles.inl"
 //#include "Src/Games/NS4WcwBackstageAssaultFiles.inl"
-#include "Src/Games/NS4MissionImpossibleFiles.inl"
+//#include "Src/Games/NS4MissionImpossibleFiles.inl"
 //#include "Src/Games/NS4WormsArmageddonFiles.inl"
 //#include "Src/Games/NS4MicroMachines64TurboFiles.inl"
 //#include "Src/Games/NS4GloverFiles.inl"
@@ -524,7 +524,7 @@ int oldmain() {
 //#include "Src/Games/NS4LodeRunner3DFiles.inl"
 //#include "Src/Games/NS4MarioGolfFiles.inl"
 
-//#include "Src/Games/NS4CommandAndConquerFiles.inl"
+#include "Src/Games/NS4CommandAndConquerFiles.inl"
 //#include "Src/Games/NS4QuakeIIFiles.inl"
 //#include "Src/Games/NS4WinBackCovertOperationsFiles.inl"
 #else
@@ -838,6 +838,11 @@ int oldmain() {
 #else
 		ns4::CMidiFile::m_sSettings.ui16SngMasterVolume = 0x7FFF;
 #endif	// NS4_SNG_MASTER_VOLUME
+#ifdef NS4_SNG_UPDATE_HZ
+		ns4::CMidiFile::m_sSettings.ui32SngUpdateHz = uint32_t( NS4_SNG_UPDATE_HZ );
+#else
+		ns4::CMidiFile::m_sSettings.ui32SngUpdateHz = 60;
+#endif	// NS4_SNG_UPDATE_HZ
 		ns4::CMidiFile::m_sSettings.pvDriverBanks = &vBanks;
 #if defined( NS4_DRIVER_SYNTH_HZ )
 		ns4::CMidiFile::m_sSettings.dDriverSynthHz = double( NS4_DRIVER_SYNTH_HZ );

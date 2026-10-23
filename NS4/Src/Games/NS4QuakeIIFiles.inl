@@ -7,6 +7,7 @@
 #define NS4_SNG_FLAGS						(ns4::CSngDriver::NS4_SF_REST_SETS_VELOCITY | ns4::CSngDriver::NS4_SF_ENV_COUNT | ns4::CSngDriver::NS4_SF_UNSIGNED_FRAMES | \
 												ns4::CSngDriver::NS4_SF_U8_FOR_PITCH_BEND | ns4::CSngDriver::NS4_SF_BEND_RANGE_SQUARES)
 #define NS4_DRIVER_SYNTH_HZ					22050.0
+#define NS4_SNG_UPDATE_HZ					30
 #define NS4_ORIG_HZ							22047
 #define NS4_SNG_MASTER_VOLUME				26214
 #define NS4_REVERB_TRACKS					1
