@@ -487,7 +487,7 @@ int oldmain() {
 //#include "Src/Games/NS4SouthPark.inl"
 //#include "Src/Games/NS4KenGriffeyJrsSlugfestFiles.inl"
 //#include "Src/Games/NS4MajorLeagueBaseballFeaturingKenGriffeyJrFiles.inl"
-//#include "Src/Games/NS4DukeNukemZer0H0urFiles.inl"
+#include "Src/Games/NS4DukeNukemZer0H0urFiles.inl"
 //#include "Src/Games/NS4DukeNukem64Files.inl"
 //#include "Src/Games/NS4Forsaken.inl"
 //#include "Src/Games/NS4MikePiazzasStrikeZoneFiles.inl"
@@ -526,7 +526,7 @@ int oldmain() {
 
 //#include "Src/Games/NS4CommandAndConquerFiles.inl"
 //#include "Src/Games/NS4QuakeIIFiles.inl"
-#include "Src/Games/NS4WinBackCovertOperationsFiles.inl"
+//#include "Src/Games/NS4WinBackCovertOperationsFiles.inl"
 #else
 		{}
 #endif

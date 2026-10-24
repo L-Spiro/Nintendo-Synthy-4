@@ -129,6 +129,7 @@ namespace ns4 {
 		m_bIgnoreLoopsInTimeLine( false ) {
 		m_bKonami = false;
 		m_bSng = false;
+		m_bMuteDriverTracks = false;
 		m_ui32DriverBank = 0;
 		m_ui64DriverRenderTicks = 0;
 		m_hHeader.ui16Division = 0;
@@ -1259,6 +1260,7 @@ namespace ns4 {
 
 		m_bKonami = false;
 		m_bSng = false;
+		m_bMuteDriverTracks = false;
 		m_ui32DriverBank = 0;
 		m_kdKonami = CKonamiDriver();
 		m_sdSng = CSngDriver();
@@ -2192,7 +2194,7 @@ namespace ns4 {
 			}
 			m_ui64DriverRenderTicks = ui64Ticks;
 		}
-		if ( _stTrack >= m_vDriverRender.size() ) { return _aResult; }
+		if ( _stTrack >= m_vDriverRender.size() || m_bMuteDriverTracks ) { return _aResult; }
 		const std::vector<CDriverVoiceEvents::NS4_DRIVER_VOICE_EVENT> &vEvents = m_vDriverRender[_stTrack].vEvents;
 
 		// Finds the wave for a bank and sound.
@@ -2397,6 +2399,8 @@ namespace ns4 {
 						for ( auto J = m_vTracks.size(); J--; ) {
 							RemoveAllAfterIndex( m_vTracks[J].vEvents, 0, true );
 						}
+						// Konami and SNG songs are rendered by their drivers (whose tracks replace these when the debug file is loaded).
+						m_bMuteDriverTracks = true;
 						break;
 					}
 					case NS4_E_MUTE_TRACK_FROM : {
