@@ -521,12 +521,12 @@ int oldmain() {
 //#include "Src/Games/NS4InternationalSuperstarSoccer2000Files.inl"
 //#include "Src/Games/NS4MysticalNinjaStarringGoemonFiles.inl"
 //#include "Src/Games/NS4NaganoWinterOlympics98Files.inl"
-#include "Src/Games/NS4LodeRunner3DFiles.inl"
+//#include "Src/Games/NS4LodeRunner3DFiles.inl"
 //#include "Src/Games/NS4MarioGolfFiles.inl"
 
 //#include "Src/Games/NS4CommandAndConquerFiles.inl"
 //#include "Src/Games/NS4QuakeIIFiles.inl"
-//#include "Src/Games/NS4WinBackCovertOperationsFiles.inl"
+#include "Src/Games/NS4WinBackCovertOperationsFiles.inl"
 #else
 		{}
 #endif
