@@ -30,6 +30,7 @@ NS4_ENUM( NS4_E_REMOVE_ALL_EVENTS_FROM_TICK ),					/**< Removes all events in al
 NS4_ENUM( NS4_E_TAG_TRACK_BY_IDX ),								/**< Tags a track given a track index. */
 NS4_ENUM( NS4_E_TAG_TRACK_BY_CHNL ),							/**< Tags a track given a track channel. */
 NS4_ENUM( NS4_E_MUTE_UNTAGGED_TRACKS ),							/**< Mutes all tracks that have not been tagged by NS4_E_TAG_TRACK_BY_IDX.  ui32Channel serves as the track index. */
+NS4_ENUM( NS4_E_MUTE_INST ),									/**< Mutes every note played with the given instrument (ui32Operand0) on every track.  For Konami and SNG songs the instrument is the sound-bank sound (the "Looked up" number in the TrackParseDebug file, which is also the MIDI program).  Only useful in the pre-unroll or post-supplemental stages. */
 NS4_ENUM( NS4_E_MUTE_TAGGED_TRACKS ),							/**< Mutes all tracks that have been tagged by NS4_E_TAG_TRACK_BY_IDX.  ui32Channel serves as the track index. */
 NS4_ENUM( NS4_E_SET_TEMPO_BY_MPQN ),							/**< Sets the microseconds-per-quarter note of a song. */
 NS4_ENUM( NS4_E_TIMELINE_IGNORE_TRACK ),						/**< Adds a track (by channel) to the timeline's track-ignore set, causing its loop points to be ignored during the creation of the timeline but present during actual track renering. */

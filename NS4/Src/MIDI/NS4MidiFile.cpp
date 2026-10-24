@@ -130,6 +130,8 @@ namespace ns4 {
 		m_bKonami = false;
 		m_bSng = false;
 		m_bMuteDriverTracks = false;
+		m_sMutedDriverTracks.clear();
+		m_sMutedDriverSounds.clear();
 		m_ui32DriverBank = 0;
 		m_ui64DriverRenderTicks = 0;
 		m_hHeader.ui16Division = 0;
@@ -1261,6 +1263,8 @@ namespace ns4 {
 		m_bKonami = false;
 		m_bSng = false;
 		m_bMuteDriverTracks = false;
+		m_sMutedDriverTracks.clear();
+		m_sMutedDriverSounds.clear();
 		m_ui32DriverBank = 0;
 		m_kdKonami = CKonamiDriver();
 		m_sdSng = CSngDriver();
@@ -2195,6 +2199,8 @@ namespace ns4 {
 			m_ui64DriverRenderTicks = ui64Ticks;
 		}
 		if ( _stTrack >= m_vDriverRender.size() || m_bMuteDriverTracks ) { return _aResult; }
+		// SNG driver tracks are numbered as the MIDI tracks are (track 0 is the master track); Konami driver track N is MIDI track N + 1.
+		if ( m_sMutedDriverTracks.find( m_bSng ? _stTrack : _stTrack + 1 ) != m_sMutedDriverTracks.end() ) { return _aResult; }
 		const std::vector<CDriverVoiceEvents::NS4_DRIVER_VOICE_EVENT> &vEvents = m_vDriverRender[_stTrack].vEvents;
 
 		// Finds the wave for a bank and sound.
@@ -2259,7 +2265,8 @@ namespace ns4 {
 					case CDriverVoiceEvents::NS4_DVC_START : {
 						psSample = FindSample( dveEvent.ui32Parm0 >> 16, dveEvent.ui32Parm0 & 0xFFFF );
 						upSampler.reset();
-						if ( psSample && (m_sSettings.i32SampleExclusive == -1 || uint32_t( m_sSettings.i32SampleExclusive ) == (dveEvent.ui32Parm0 & 0xFFFF)) ) {
+						if ( psSample && (m_sSettings.i32SampleExclusive == -1 || uint32_t( m_sSettings.i32SampleExclusive ) == (dveEvent.ui32Parm0 & 0xFFFF)) &&
+							m_sMutedDriverSounds.find( dveEvent.ui32Parm0 & 0xFFFF ) == m_sMutedDriverSounds.end() ) {
 							upSampler = std::make_unique<CSampler>( &psSample->sSample, 0.0,
 								&CWavLib::m_vSamplers[ns4::CWavLib::m_sfStandardSampleFunc], _troOptions.uiSampleRate );
 						}
@@ -2392,7 +2399,26 @@ namespace ns4 {
 						if ( iTrackByChan >= 0 && iTrackByChan < m_vTracks.size() ) {
 							// Remove notes and loops.
 							RemoveAllAfterIndex( m_vTracks[iTrackByChan].vEvents, 0, true );
+							m_sMutedDriverTracks.insert( size_t( iTrackByChan ) );
 						}
+						break;
+					}
+					case NS4_E_MUTE_INST : {
+						// Remove the notes played with the instrument.
+						for ( auto J = m_vTracks.size(); J--; ) {
+							std::vector<NS4_TRACK_EVENT> &vEvents = m_vTracks[J].vEvents;
+							uint32_t ui32Prog = 0;
+							std::vector<NS4_TRACK_EVENT> vKeep;
+							vKeep.reserve( vEvents.size() );
+							for ( size_t K = 0; K < vEvents.size(); ++K ) {
+								if ( IsProgramChange( vEvents[K] ) ) { ui32Prog = vEvents[K].u.sMidi.ui8Parm0; }
+								if ( IsNoteOn( vEvents[K] ) && ui32Prog == _pmMods[I].ui32Operand0 ) { continue; }
+								vKeep.push_back( vEvents[K] );
+							}
+							vEvents = std::move( vKeep );
+						}
+						// Konami and SNG songs are rendered by their drivers, which skip the sound.
+						m_sMutedDriverSounds.insert( _pmMods[I].ui32Operand0 );
 						break;
 					}
 					case NS4_E_MUTE_ALL_TRACKS : {
@@ -2784,6 +2810,7 @@ namespace ns4 {
 						for ( auto J = m_vTracks.size(); J--; ) {
 							if ( !m_vTracks[J].thHeader.bTagged ) {
 								RemoveAllAfterIndex( m_vTracks[J].vEvents, 0, true );
+								m_sMutedDriverTracks.insert( size_t( J ) );
 							}
 							else {
 								m_vTracks[J].thHeader.bTagged = false;
@@ -2795,6 +2822,7 @@ namespace ns4 {
 						for ( auto J = m_vTracks.size(); J--; ) {
 							if ( m_vTracks[J].thHeader.bTagged ) {
 								RemoveAllAfterIndex( m_vTracks[J].vEvents, 0, true );
+								m_sMutedDriverTracks.insert( size_t( J ) );
 							}
 						}
 						break;

@@ -2336,6 +2336,10 @@ namespace ns4 {
 		bool							m_bSng;
 		/** If true, NS4_E_MUTE_ALL_TRACKS was applied, so a Konami or SNG song (which is rendered by its driver, not from the tracks) renders silence. */
 		bool							m_bMuteDriverTracks;
+		/** The tracks (MIDI track indices) muted by NS4_E_MUTE_TRACK, NS4_E_MUTE_TAGGED_TRACKS, or NS4_E_MUTE_UNTAGGED_TRACKS, applied when a Konami or SNG song is rendered by its driver. */
+		std::set<size_t>				m_sMutedDriverTracks;
+		/** The sounds muted by NS4_E_MUTE_INST, applied when a Konami or SNG song is rendered by its driver. */
+		std::set<uint32_t>				m_sMutedDriverSounds;
 		/** The bank with which the Konami sequence starts, or the SNG song's sample bank. */
 		uint32_t						m_ui32DriverBank;
 		/** The Konami driver holding the loaded sequence. */
