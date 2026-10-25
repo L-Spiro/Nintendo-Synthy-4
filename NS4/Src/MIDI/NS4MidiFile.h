@@ -545,6 +545,15 @@ namespace ns4 {
 			/** if true, aftertouch is used to modulate vibrato and tremolo. */
 			bool						bAfterTouchModsVibAndTrem = false;
 
+			/** If true, the modulation wheel (NS4_C_MODULATION) drives each note's vibrato and tremolo from its instrument's rates and depths (NS4_MOD_LFO), replacing the instrument's vibrato and tremolo types. */
+			bool						bModWheelVibAndTrem = false;
+
+			/** If true, expression (NS4_C_EXPRESSION) scales each channel's volume linearly (value / 128). */
+			bool						bExpressionScalesVolume = false;
+
+			/** The expression each channel starts with when bExpressionScalesVolume is true. */
+			uint8_t						ui8DefaultExpression = 127;
+
 			/** If true, the ADSR for each sample is assumed to be part of the MIDI file, set by NS4_TRK_ADSR, held in the MIDI state. */
 			bool						bAdsrIsInMidi = false;
 
@@ -2158,6 +2167,92 @@ namespace ns4 {
 			}
 		};
 
+		/**
+		 * A modulation-wheel vibrato and tremolo (Hey You, Pikachu!'s MIDI driver).  Each voice has a 16-bit phase for each
+		 *	oscillator that advances by (seconds * 65536 * rate / 16) (the instrument's vibRate or tremRate), so an oscillator runs at
+		 *	rate / 16 Hz, and reads a 16-step table with (phase >> 12).  Vibrato adds (table * mod * vibDepth / 128 / 128) cents (the
+		 *	table runs from -127 to 127) and tremolo scales the volume by (256 - table * mod * tremDepth / 256 / 128) / 256 (the table
+		 *	runs from 0 to 255), where mod is the channel's modulation wheel.
+		 */
+		struct NS4_MOD_LFO {
+			NS4_MOD_LFO() :
+				dVibPhase( 0.0 ),
+				dTremPhase( 0.0 ),
+				dVibStep( 0.0 ),
+				dTremStep( 0.0 ),
+				ui8VibDepth( 0 ),
+				ui8TremDepth( 0 ),
+				ui8Mod( 0 ) {
+			}
+
+
+			// == Functions.
+			/**
+			 * Sets the rates and depths and resets the phases.
+			 *
+			 * \param _ui8VibRate The instrument's vibrato rate.
+			 * \param _ui8VibDepth The instrument's vibrato depth.
+			 * \param _ui8TremRate The instrument's tremolo rate.
+			 * \param _ui8TremDepth The instrument's tremolo depth.
+			 * \param _uiMasterSamplingRate The master output sampling rate.
+			 */
+			void						Set( uint8_t _ui8VibRate, uint8_t _ui8VibDepth, uint8_t _ui8TremRate, uint8_t _ui8TremDepth, uint32_t _uiMasterSamplingRate ) {
+				dVibStep = _ui8VibRate * 4096.0 / _uiMasterSamplingRate;
+				dTremStep = _ui8TremRate * 4096.0 / _uiMasterSamplingRate;
+				ui8VibDepth = _ui8VibDepth;
+				ui8TremDepth = _ui8TremDepth;
+				dVibPhase = dTremPhase = 0.0;
+			}
+
+			/**
+			 * Advances by 1 master sample.
+			 */
+			void						Tick() {
+				dVibPhase = std::fmod( dVibPhase + dVibStep, 65536.0 );
+				dTremPhase = std::fmod( dTremPhase + dTremStep, 65536.0 );
+			}
+
+			/**
+			 * Gets the vibrato in cents.
+			 *
+			 * \return Returns the vibrato offset in cents.
+			 */
+			int32_t						Cents() const {
+				static const int32_t i32Table[16] = { 0, 48, 90, 117, 127, 117, 90, 48, 0, -48, -90, -117, -127, -117, -90, -48 };
+				if ( !ui8Mod || !ui8VibDepth ) { return 0; }
+				return (i32Table[(uint32_t( dVibPhase ) >> 12) & 0xF] * int32_t( ui8Mod ) * int32_t( ui8VibDepth ) / 128) / 128;
+			}
+
+			/**
+			 * Gets the tremolo gain.
+			 *
+			 * \return Returns the factor by which to scale the volume.
+			 */
+			double						Gain() const {
+				static const int32_t i32Table[16] = { 0, 9, 37, 78, 127, 176, 217, 245, 255, 245, 217, 176, 127, 78, 37, 9 };
+				if ( !ui8Mod || !ui8TremDepth ) { return 1.0; }
+				int32_t i32Atten = (int32_t( ui8Mod ) * i32Table[(uint32_t( dTremPhase ) >> 12) & 0xF] * int32_t( ui8TremDepth ) / 256) / 128;
+				return (256 - i32Atten) / 256.0;
+			}
+
+
+			// == Members.
+			/** The vibrato phase (0-65535). */
+			double						dVibPhase;
+			/** The tremolo phase (0-65535). */
+			double						dTremPhase;
+			/** The vibrato phase step per master sample. */
+			double						dVibStep;
+			/** The tremolo phase step per master sample. */
+			double						dTremStep;
+			/** The vibrato depth. */
+			uint8_t						ui8VibDepth;
+			/** The tremolo depth. */
+			uint8_t						ui8TremDepth;
+			/** The modulation wheel. */
+			uint8_t						ui8Mod;
+		};
+
 		/** A note for rendering. */
 		struct NS4_NOTE {
 			uint32_t					ui32Id;
@@ -2179,6 +2274,7 @@ namespace ns4 {
 			NS4_TREMOLO_ADSR			taTremoloAdsr;
 			NS4_VIBRATO					vVibrato;
 			NS4_TREMOLO					tTremolo;
+			NS4_MOD_LFO					mlModLfo;
 			uint32_t					ui32Hz;
 			uint32_t					ui32DustSettle;
 			int32_t						i32Base;
@@ -2247,6 +2343,7 @@ namespace ns4 {
 				taTremoloAdsr.Tick();
 				vVibrato.Tick();
 				tTremolo.Tick();
+				mlModLfo.Tick();
 				if ( bActive ) {
 					dPitchBend = _dPitch;
 					dLinearPitchScale = _msCurState.dState[NS4_TRACK_PITCH_SCALE];
@@ -2273,7 +2370,7 @@ namespace ns4 {
 					std::pow( 2.0, (int8_t( ui8Note ) -
 						int8_t( i32Base ) +
 						dPitchBend * (ui16PitchBendRange / 100.0) +
-						((i8FineTune + i8TrackFineTune) / 100.0) +
+						((i8FineTune + i8TrackFineTune + mlModLfo.Cents()) / 100.0) +
 						dPitchMod) / 12.0 )
 					* vVibrato.Value()
 					* vaVibratoAdsr.Value()
@@ -2362,6 +2459,9 @@ namespace ns4 {
 
 		/** The stereo pan table. */
 		static float					m_fStereoPanTable[];
+
+		/** libultra's (and n_audio's) equal-power pan table (eqpower[], Q15). */
+		static const int16_t			m_i16LibultraEqPower[128];
 
 
 		// == Functions.

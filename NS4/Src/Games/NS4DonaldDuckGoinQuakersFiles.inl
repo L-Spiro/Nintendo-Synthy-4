@@ -6,7 +6,7 @@
 #define NS4_REVERB_TRACKS					1
 #define NS4_REVERB							ns4::CReverb::NS4_T_RAYMAN_2_0
 #define NS4_ORIG_HZ							22047
-#define NS4_CURVE							40.0
+#define NS4_CURVE							20.0
 #define NS4_OUT_DIRECTORY					u8"C:\\N64OST\\Disney's Donald Duck Going Quackers\\"
 #define NS4_OUT_DIRECTORY_NUMBERS			NS4_OUT_DIRECTORY u8"Numbered\\"
 //#define NS4_IGNORE_REVERB					true
@@ -16,7 +16,7 @@
 #define NS4_ENVELOPE_VOL_CURVE				20.0
 #define NS4_ENVELOPE_POINT_CURVE			40.0
 #define NS4_EXPONENTIAL_ENVELOPE			true
-#define NS4_EAD_PAN							ns4::CMidiFile::NS4_EPT_STEREO
+#define NS4_EAD_PAN							ns4::CMidiFile::NS4_EPT_LIBULTRA
 //#define NS4_ENV_MULTIPLIER					(1.0)
 //#define NS4_MAX_RATE						44100
 //#define NS4_OVERSAMPLING_BW					500.0

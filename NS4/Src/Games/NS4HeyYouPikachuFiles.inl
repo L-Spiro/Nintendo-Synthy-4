@@ -6,7 +6,7 @@
 #define NS4_REVERB_TRACKS					1
 #define NS4_REVERB							ns4::CReverb::NS4_T_HEY_YOU_PIKACHU_0
 #define NS4_ORIG_HZ							32006
-#define NS4_CURVE							40.0
+#define NS4_CURVE							20.0
 #define NS4_OUT_DIRECTORY					u8"C:\\N64OST\\Hey You, Pikachu!\\"
 #define NS4_OUT_DIRECTORY_NUMBERS			NS4_OUT_DIRECTORY u8"Numbered\\"
 #define NS4_NO_PROGRAM_CHANGE_SORT			true
@@ -15,10 +15,12 @@
 #define NS4_ENVELOPE_VOL_CURVE				20.0
 #define NS4_ENVELOPE_POINT_CURVE			40.0
 #define NS4_EXPONENTIAL_ENVELOPE			true
-#define NS4_EAD_PAN							ns4::CMidiFile::NS4_EPT_STEREO
+#define NS4_EAD_PAN							ns4::CMidiFile::NS4_EPT_LIBULTRA
+#define NS4_EXPRESSION_SCALES_VOLUME		true
+#define NS4_MOD_WHEEL_VIB_TREM				true
 //#define NS4_MAX_RATE						44100
 //#define NS4_OVERSAMPLING_BW					500.0
-//#define NS4_PROG_CHANGE_SETS_VOL_PAN		false
+#define NS4_PROG_CHANGE_SETS_VOL_PAN		false
 #define NS4_PERC_ROOT_OFFSET				-6
 //#define NS4_SND_BNK_FORCE_PERC_SAMPLE_RATE	44100
 #define NS4_PERC_CHANNEL					9

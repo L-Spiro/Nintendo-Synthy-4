@@ -428,8 +428,9 @@ int oldmain() {
 //#include "Src/Games/NS4MicroMachines64TurboFiles.inl"
 //#include "Src/Games/NS4GloverFiles.inl"
 //#include "Src/Games/NS4GloverPrototypeFiles.inl"
-//#include "Src/Games/NS4ArmyMenAirCombatFiles.inl"
+#include "Src/Games/NS4ArmyMenAirCombatFiles.inl"
 //#include "Src/Games/NS4ArmyMenSargesHeroesFiles.inl"
+//#include "Src/Games/NS4ArmyMenSargesHeroes2Files.inl"
 //#include "Src/Games/NS4Gex3DeepCoverGeckoFiles.inl"
 //#include "Src/Games/NS4MonopolyFiles.inl"
 //#include "Src/Games/NS4BuckBumbleFiles.inl"
@@ -449,6 +450,7 @@ int oldmain() {
 //#include "Src/Games/NS4Doom64Files.inl"
 //#include "Src/Games/NS4LastLegionUxFiles.inl"
 //#include "Src/Games/NS4DonaldDuckGoinQuakersFiles.inl"
+//#include "Src/Games/NS4HeyYouPikachuFiles.inl"
 //#include "Src/Games/NS4HeyYouPikachuFiles.inl"
 //#include "Src/Games/NS4MonacoGrandPrixFiles.inl"
 //#include "Src/Games/NS4MRCMultiRacingChampionshipFiles.inl"
@@ -526,7 +528,7 @@ int oldmain() {
 
 //#include "Src/Games/NS4CommandAndConquerFiles.inl"
 //#include "Src/Games/NS4QuakeIIFiles.inl"
-#include "Src/Games/NS4WinBackCovertOperationsFiles.inl"
+//#include "Src/Games/NS4WinBackCovertOperationsFiles.inl"
 #else
 		{}
 #endif
@@ -702,6 +704,15 @@ int oldmain() {
 #ifdef NS4_AFTERTOUCH_MODS_VIB_TREM
 		ns4::CMidiFile::m_sSettings.bAfterTouchModsVibAndTrem = NS4_AFTERTOUCH_MODS_VIB_TREM;
 #endif	// NS4_AFTERTOUCH_MODS_VIB_TREM
+#ifdef NS4_MOD_WHEEL_VIB_TREM
+		ns4::CMidiFile::m_sSettings.bModWheelVibAndTrem = NS4_MOD_WHEEL_VIB_TREM;
+#endif	// NS4_MOD_WHEEL_VIB_TREM
+#ifdef NS4_EXPRESSION_SCALES_VOLUME
+		ns4::CMidiFile::m_sSettings.bExpressionScalesVolume = NS4_EXPRESSION_SCALES_VOLUME;
+#endif	// NS4_EXPRESSION_SCALES_VOLUME
+#ifdef NS4_DEFAULT_EXPRESSION
+		ns4::CMidiFile::m_sSettings.ui8DefaultExpression = NS4_DEFAULT_EXPRESSION;
+#endif	// NS4_DEFAULT_EXPRESSION
 		
 
 

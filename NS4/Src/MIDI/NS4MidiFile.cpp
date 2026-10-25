@@ -123,6 +123,26 @@ namespace ns4 {
 		0.342366f, 0.3535f
 	};
 
+	/** libultra's (and n_audio's) equal-power pan table (eqpower[], Q15). */
+	const int16_t CMidiFile::m_i16LibultraEqPower[128] = {
+		32767, 32764, 32757, 32744, 32727, 32704, 32677, 32644,
+		32607, 32564, 32517, 32464, 32407, 32344, 32277, 32205,
+		32127, 32045, 31958, 31866, 31770, 31668, 31561, 31450,
+		31334, 31213, 31087, 30957, 30822, 30682, 30537, 30388,
+		30234, 30075, 29912, 29744, 29572, 29395, 29214, 29028,
+		28838, 28643, 28444, 28241, 28033, 27821, 27605, 27385,
+		27160, 26931, 26698, 26461, 26220, 25975, 25726, 25473,
+		25216, 24956, 24691, 24423, 24151, 23875, 23596, 23313,
+		23026, 22736, 22442, 22145, 21845, 21541, 21234, 20924,
+		20610, 20294, 19974, 19651, 19325, 18997, 18665, 18331,
+		17993, 17653, 17310, 16965, 16617, 16266, 15913, 15558,
+		15200, 14840, 14477, 14113, 13746, 13377, 13006, 12633,
+		12258, 11881, 11503, 11122, 10740, 10357,  9971,  9584,
+		 9196,  8806,  8415,  8023,  7630,  7235,  6839,  6442,
+		 6044,  5646,  5246,  4845,  4444,  4042,  3640,  3237,
+		 2833,  2429,  2025,  1620,  1216,   810,   405,     0,
+	};
+
 
 	// == Functions.
 	CMidiFile::CMidiFile() :
@@ -1391,6 +1411,7 @@ namespace ns4 {
 		}
 
 		CLinearInterpolator liLinearVolScale( double( msState.ui8State[NS4_CHN_LINEAR_VOL_SCALE] ), 4.0 / m_sSettings.dGameFreq * _troOptions.uiSampleRate );
+		CLinearInterpolator liExpression( double( m_sSettings.ui8DefaultExpression ), 4.0 / m_sSettings.dGameFreq * _troOptions.uiSampleRate );
 		CLinearInterpolator liMasterVol( double( m_sSettings.ui8DefaultMasterVol ), 4.0 / m_sSettings.dGameFreq * _troOptions.uiSampleRate );
 		CLinearInterpolator liPitchBend( msState.dPitch * msState.dPitchScale, /*16.0*/0.0 / m_sSettings.dGameFreq * _troOptions.uiSampleRate );
 		//bool bHasSetProg = false;
@@ -1608,12 +1629,21 @@ namespace ns4 {
 
 						// Vibrato.
 						uint8_t ui8Vib = uint8_t( nNote.psSoundbankSample->ui32VibratoType );
+						uint8_t ui8Trem = uint8_t( nNote.psSoundbankSample->ui32TremType );
+						if ( m_sSettings.bModWheelVibAndTrem ) {
+							nNote.mlModLfo.Set( uint8_t( nNote.psSoundbankSample->ui32VibratoSpeed ),
+								uint8_t( nNote.psSoundbankSample->ui32VibratoAmount ),
+								uint8_t( nNote.psSoundbankSample->ui32TremSpeed ),
+								uint8_t( nNote.psSoundbankSample->ui32TremAmount ),
+								_troOptions.uiSampleRate );
+							nNote.mlModLfo.ui8Mod = msState.ui8State[NS4_C_MODULATION];
+							ui8Vib = ui8Trem = 0;
+						}
 						ApplyVibratoToNote( nNote, ui8Vib,
 							uint8_t( nNote.psSoundbankSample->ui32VibratoSpeed ),
 							uint8_t( nNote.psSoundbankSample->ui32VibratoAmount ),
 							uint8_t( nNote.psSoundbankSample->ui32VibratoDelay ),
 							_troOptions.uiSampleRate, msState );
-						uint8_t ui8Trem = uint8_t( nNote.psSoundbankSample->ui32TremType );
 						ApplyTremoloToNote( nNote, ui8Trem,
 							uint8_t( nNote.psSoundbankSample->ui32TremSpeed ),
 							uint8_t( nNote.psSoundbankSample->ui32TremAmount ),
@@ -1865,6 +1895,25 @@ namespace ns4 {
 					uint8_t ui8Val = ControllerValue( teEvent );
 					liLinearVolScale.Set( ui8Val );
 				}
+				else if ( m_sSettings.bExpressionScalesVolume && IsControllerOfType( teEvent, NS4_C_EXPRESSION ) ) {
+					liExpression.Set( ControllerValue( teEvent ) );
+				}
+				else if ( m_sSettings.bModWheelVibAndTrem && IsControllerOfType( teEvent, NS4_C_MODULATION ) ) {
+					uint8_t ui8Val = ControllerValue( teEvent );
+					for ( auto J = vNotes.size(); J--; ) {
+						vNotes[J].mlModLfo.ui8Mod = ui8Val;
+					}
+				}
+				else if ( (m_sSettings.bExpressionScalesVolume || m_sSettings.bModWheelVibAndTrem) && IsControllerOfType( teEvent, NS4_C_MODE_MESSAGES ) ) {
+					// Reset All Controllers: expression back to its default and the modulation wheel to 0.
+					liExpression.Set( m_sSettings.ui8DefaultExpression );
+					if ( m_sSettings.bModWheelVibAndTrem ) {
+						msState.ui8State[NS4_C_MODULATION] = 0;
+						for ( auto J = vNotes.size(); J--; ) {
+							vNotes[J].mlModLfo.ui8Mod = 0;
+						}
+					}
+				}
 				else if ( IsControllerOfType( teEvent, NS4_CHN_VIB_DEPTH ) ) {
 					uint8_t uiValue = ControllerValue( teEvent );
 					for ( auto J = vNotes.size(); J--; ) {
@@ -1982,6 +2031,7 @@ namespace ns4 {
 						dVal = (dVal * (dTremAmnt * dTremPhase + 1.0)) / (1.0 + dTremAmnt);
 						dTremAmnt = vNotes[J].taTremoloAdsr.Values( dTremPhase );
 						dVal = (dVal * (dTremAmnt * dTremPhase + 1.0)) / (1.0 + dTremAmnt);
+						dVal *= vNotes[J].mlModLfo.Gain();
 						if ( vNotes[J].bLpf ) {
 #ifdef NS4_USE_NEW_LPF
 							dVal = CWavLib::BiQuadFilter6_Recursive_Step( dVal, vNotes[J].dA0, vNotes[J].dA1, vNotes[J].dA2,
@@ -2006,6 +2056,9 @@ namespace ns4 {
 						dVal *= MidiLevelToLinear( vNotes[J].ui8Vel, m_sSettings.dVelocityInterpretation );
 						dVal *= MidiLevelToLinear( vNotes[J].psSoundbankSample->ui8Vol );
 						dVal *= CWavLib::Pow( liLinearVolScale.Value() / 128.0, m_sSettings.dLinearVolPow );
+						if ( m_sSettings.bExpressionScalesVolume ) {
+							dVal *= liExpression.Value() / 128.0;
+						}
 						
 
 						
@@ -2033,6 +2086,11 @@ namespace ns4 {
 									dR = m_fStereoPanTable[127-ui8Pan];
 									break;
 								}
+								case NS4_EPT_LIBULTRA : {
+									dL = m_i16LibultraEqPower[ui8Pan] / 32768.0;
+									dR = m_i16LibultraEqPower[127-ui8Pan] / 32768.0;
+									break;
+								}
 								default : {
 									dL = m_fStdPanTable[ui8Pan];
 									dR = m_fStdPanTable[127-ui8Pan];
@@ -2058,6 +2116,13 @@ namespace ns4 {
 									ui8Pan = uint8_t( std::round( std::clamp( dPan, 0.0, 127.0 ) ) );
 									dL = m_fStereoPanTable[ui8Pan];
 									dR = m_fStereoPanTable[127-ui8Pan];
+									break;
+								}
+								case NS4_EPT_LIBULTRA : {
+									int32_t i32Pan = int32_t( std::round( vNotes[J].liPanInterpolator.Value() ) ) - 0x40 + int32_t( vNotes[J].psSoundbankSample->ui8Pan );
+									ui8Pan = uint8_t( std::clamp( i32Pan, 0, 127 ) );
+									dL = m_i16LibultraEqPower[ui8Pan] / 32768.0;
+									dR = m_i16LibultraEqPower[127-ui8Pan] / 32768.0;
 									break;
 								}
 								default : {
@@ -2145,6 +2210,7 @@ namespace ns4 {
 			liPitchBend.Tick();
 			liMasterVol.Tick();
 			liLinearVolScale.Tick();
+			liExpression.Tick();
 			//7485556
 			/*if ( tbWavTime.CurTick() == 6527875 ) {
 				volatile int kdhfkjhf = 0;
@@ -5549,6 +5615,11 @@ namespace ns4 {
 						dR = m_fStereoPanTable[127-ui8Pan];
 						break;
 					}
+					case NS4_EPT_LIBULTRA : {
+						dL = m_i16LibultraEqPower[ui8Pan] / 32768.0;
+						dR = m_i16LibultraEqPower[127-ui8Pan] / 32768.0;
+						break;
+					}
 					default : {
 						dL = m_fStdPanTable[ui8Pan];
 						dR = m_fStdPanTable[127-ui8Pan];
@@ -5574,6 +5645,13 @@ namespace ns4 {
 						ui8Pan = uint8_t( std::round( std::clamp( dPan, 0.0, 127.0 ) ) );
 						dL = m_fStereoPanTable[ui8Pan];
 						dR = m_fStereoPanTable[127-ui8Pan];
+						break;
+					}
+					case NS4_EPT_LIBULTRA : {
+						int32_t i32Pan = int32_t( std::round( nNote.liPanInterpolator.Value() ) ) - 0x40 + int32_t( ui8InstPan );
+						ui8Pan = uint8_t( std::clamp( i32Pan, 0, 127 ) );
+						dL = m_i16LibultraEqPower[ui8Pan] / 32768.0;
+						dR = m_i16LibultraEqPower[127-ui8Pan] / 32768.0;
 						break;
 					}
 					default : {

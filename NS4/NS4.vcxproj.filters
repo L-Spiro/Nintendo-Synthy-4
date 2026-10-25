@@ -715,6 +715,9 @@
     <None Include="Src\Games\NS4ArmyMenSargesHeroesFiles.inl">
       <Filter>Header Files\Games</Filter>
     </None>
+    <None Include="Src\Games\NS4ArmyMenSargesHeroes2Files.inl">
+      <Filter>Header Files\Games</Filter>
+    </None>
     <None Include="Src\Games\NS4DrMario64Files.inl">
       <Filter>Header Files\Games</Filter>
     </None>

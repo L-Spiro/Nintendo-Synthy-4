@@ -236,6 +236,7 @@
     <None Include="Src\Games\NS4ArmorinesProjectSWARMFiles.inl" />
     <None Include="Src\Games\NS4ArmyMenAirCombatFiles.inl" />
     <None Include="Src\Games\NS4ArmyMenSargesHeroesFiles.inl" />
+    <None Include="Src\Games\NS4ArmyMenSargesHeroes2Files.inl" />
     <None Include="Src\Games\NS4AutomobiliLamborghiniFiles.inl" />
     <None Include="Src\Games\NS4BanjoKazooieFiles.inl" />
     <None Include="Src\Games\NS4BanjoTooieFiles.inl" />
