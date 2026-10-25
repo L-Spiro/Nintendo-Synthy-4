@@ -21,72 +21,72 @@
 #define NS4_ANTI_ALIASING_LEVEL				2
 #define NS4_ANTI_ALIASING_HZ				20000.0
 
-{ u8"Army Men - Sarges Heroes (U) 0000000A 00337128 Main Theme.mid", u8"Army Men - Sarges Heroes (U) 0000000A 00337128.mid TrackParseDebug.txt", u8"Main Theme", 0,
+{ u8"Army Men - Sarges Heroes (U) 0000000A 00337128.mid", u8"Army Men - Sarges Heroes (U) 0000000A 00337128.mid TrackParseDebug.txt", u8"Main Theme", 0,
 	1,
 	{
-		{ NS4_ADD_MIDI_FILE( u8"Army Men - Sarges Heroes (U) 0000000A 00337128_AdditionalPart1 Main Theme.mid", false ) },
+		{ NS4_ADD_MIDI_FILE( u8"Army Men - Sarges Heroes (U) 0000000A 00337128_AdditionalPart1.mid", false ) },
 	}
 },
-{ u8"Army Men - Sarges Heroes (U) 0000000D 00345E78 Level 1.mid", u8"Army Men - Sarges Heroes (U) 0000000D 00345E78.mid TrackParseDebug.txt", u8"Level 1", 0,
+{ u8"Army Men - Sarges Heroes (U) 0000000D 00345E78.mid", u8"Army Men - Sarges Heroes (U) 0000000D 00345E78.mid TrackParseDebug.txt", u8"Level 1", 0,
 	1,
 	{
-		{ NS4_ADD_MIDI_FILE( u8"Army Men - Sarges Heroes (U) 0000000D 00345E78_AdditionalPart1 Level 1.mid", false ) },
+		{ NS4_ADD_MIDI_FILE( u8"Army Men - Sarges Heroes (U) 0000000D 00345E78_AdditionalPart1.mid", false ) },
 	}
 },
-{ u8"Army Men - Sarges Heroes (U) 00000004 00319BF0 Minefield.mid", u8"Army Men - Sarges Heroes (U) 00000004 00319BF0.mid TrackParseDebug.txt", u8"Minefield", 0,
+{ u8"Army Men - Sarges Heroes (U) 00000004 00319BF0.mid", u8"Army Men - Sarges Heroes (U) 00000004 00319BF0.mid TrackParseDebug.txt", u8"Minefield", 0,
 	1,
 	{
-		{ NS4_ADD_MIDI_FILE( u8"Army Men - Sarges Heroes (U) 00000004 00319BF0_AdditionalPart1 Minefield.mid", false ) },
+		{ NS4_ADD_MIDI_FILE( u8"Army Men - Sarges Heroes (U) 00000004 00319BF0_AdditionalPart1.mid", false ) },
 	}
 },
-{ u8"Army Men - Sarges Heroes (U) 00000011 003638A0 Spy Blue.mid", u8"Army Men - Sarges Heroes (U) 00000011 003638A0.mid TrackParseDebug.txt", u8"Spy Blue", 0,
+{ u8"Army Men - Sarges Heroes (U) 00000011 003638A0.mid", u8"Army Men - Sarges Heroes (U) 00000011 003638A0.mid TrackParseDebug.txt", u8"Spy Blue", 0,
 	1,
 	{
-		{ NS4_ADD_MIDI_FILE( u8"Army Men - Sarges Heroes (U) 00000011 003638A0_AdditionalPart1 Spy Blue.mid", false ) },
+		{ NS4_ADD_MIDI_FILE( u8"Army Men - Sarges Heroes (U) 00000011 003638A0_AdditionalPart1.mid", false ) },
 	}
 },
-{ u8"Army Men - Sarges Heroes (U) 0000000C 00342CF8 The Bathroom.mid", u8"Army Men - Sarges Heroes (U) 0000000C 00342CF8.mid TrackParseDebug.txt", u8"The Bathroom", 0 },
-{ u8"Army Men - Sarges Heroes (U) 00000002 003079F0 The Tan Army.mid", u8"Army Men - Sarges Heroes (U) 00000002 003079F0.mid TrackParseDebug.txt", u8"The Tan Army", 0,
+{ u8"Army Men - Sarges Heroes (U) 0000000C 00342CF8.mid", u8"Army Men - Sarges Heroes (U) 0000000C 00342CF8.mid TrackParseDebug.txt", u8"The Bathroom", 0 },
+{ u8"Army Men - Sarges Heroes (U) 00000002 003079F0.mid", u8"Army Men - Sarges Heroes (U) 00000002 003079F0.mid TrackParseDebug.txt", u8"The Tan Army", 0,
 	1,
 	{
-		{ NS4_ADD_MIDI_FILE( u8"Army Men - Sarges Heroes (U) 00000002 003079F0_AdditionalPart1 The Tan Army.mid", false ) },
+		{ NS4_ADD_MIDI_FILE( u8"Army Men - Sarges Heroes (U) 00000002 003079F0_AdditionalPart1.mid", false ) },
 	}
 },
-{ u8"Army Men - Sarges Heroes (U) 00000003 0030F668 Escape.mid", u8"Army Men - Sarges Heroes (U) 00000003 0030F668.mid TrackParseDebug.txt", u8"Escape", 0,
+{ u8"Army Men - Sarges Heroes (U) 00000003 0030F668.mid", u8"Army Men - Sarges Heroes (U) 00000003 0030F668.mid TrackParseDebug.txt", u8"Escape", 0,
 	1,
 	{
-		{ NS4_ADD_MIDI_FILE( u8"Army Men - Sarges Heroes (U) 00000003 0030F668_AdditionalPart1 Escape.mid", false ) },
+		{ NS4_ADD_MIDI_FILE( u8"Army Men - Sarges Heroes (U) 00000003 0030F668_AdditionalPart1.mid", false ) },
 	}
 },
-{ u8"Army Men - Sarges Heroes (U) 00000006 00324308 The Black Forest.mid", u8"Army Men - Sarges Heroes (U) 00000006 00324308.mid TrackParseDebug.txt", u8"The Black Forest", 0,
+{ u8"Army Men - Sarges Heroes (U) 00000006 00324308.mid", u8"Army Men - Sarges Heroes (U) 00000006 00324308.mid TrackParseDebug.txt", u8"The Black Forest", 0,
 	1,
 	{
-		{ NS4_ADD_MIDI_FILE( u8"Army Men - Sarges Heroes (U) 00000006 00324308_AdditionalPart1 The Black Forest.mid", false ) },
+		{ NS4_ADD_MIDI_FILE( u8"Army Men - Sarges Heroes (U) 00000006 00324308_AdditionalPart1.mid", false ) },
 	}
 },
-{ u8"Army Men - Sarges Heroes (U) 00000000 002FD860 The Black Forest II.mid", u8"Army Men - Sarges Heroes (U) 00000000 002FD860.mid TrackParseDebug.txt", u8"The Black Forest II", 0,
+{ u8"Army Men - Sarges Heroes (U) 00000000 002FD860.mid", u8"Army Men - Sarges Heroes (U) 00000000 002FD860.mid TrackParseDebug.txt", u8"The Black Forest II", 0,
 	1,
 	{
-		{ NS4_ADD_MIDI_FILE( u8"Army Men - Sarges Heroes (U) 00000000 002FD860_AdditionalPart1 The Black Forest II.mid", false ) },
+		{ NS4_ADD_MIDI_FILE( u8"Army Men - Sarges Heroes (U) 00000000 002FD860_AdditionalPart1.mid", false ) },
 	}
 },
-{ u8"Army Men - Sarges Heroes (U) 00000001 00305780 The Black Forest III.mid", u8"Army Men - Sarges Heroes (U) 00000001 00305780.mid TrackParseDebug.txt", u8"The Black Forest III", 0,
+{ u8"Army Men - Sarges Heroes (U) 00000001 00305780.mid", u8"Army Men - Sarges Heroes (U) 00000001 00305780.mid TrackParseDebug.txt", u8"The Black Forest III", 0,
 	1,
 	{
-		{ NS4_ADD_MIDI_FILE( u8"Army Men - Sarges Heroes (U) 00000001 00305780_AdditionalPart1 The Black Forest III.mid", false ) },
+		{ NS4_ADD_MIDI_FILE( u8"Army Men - Sarges Heroes (U) 00000001 00305780_AdditionalPart1.mid", false ) },
 	}
 },
-{ u8"Army Men - Sarges Heroes (U) 00000017 00395280 Flower Garden-Island.mid", u8"Army Men - Sarges Heroes (U) 00000017 00395280.mid TrackParseDebug.txt", u8"Flower Garden-Island", 0,
+{ u8"Army Men - Sarges Heroes (U) 00000017 00395280.mid", u8"Army Men - Sarges Heroes (U) 00000017 00395280.mid TrackParseDebug.txt", u8"Flower Garden-Island", 0,
 	1,
 	{
-		{ NS4_ADD_MIDI_FILE( u8"Army Men - Sarges Heroes (U) 00000017 00395280_AdditionalPart1 Flower Garden-Island.mid", false ) },
+		{ NS4_ADD_MIDI_FILE( u8"Army Men - Sarges Heroes (U) 00000017 00395280_AdditionalPart1.mid", false ) },
 	}
 },
 
-{ u8"Army Men - Sarges Heroes (U) 00000005 0031DD98 Snow.mid", u8"Army Men - Sarges Heroes (U) 00000005 0031DD98.mid TrackParseDebug.txt", u8"Snow", 0,
+{ u8"Army Men - Sarges Heroes (U) 00000005 0031DD98.mid", u8"Army Men - Sarges Heroes (U) 00000005 0031DD98.mid TrackParseDebug.txt", u8"Snow", 0,
 	1,
 	{
-		{ NS4_ADD_MIDI_FILE( u8"Army Men - Sarges Heroes (U) 00000005 0031DD98_AdditionalPart1 Snow.mid", false ) },
+		{ NS4_ADD_MIDI_FILE( u8"Army Men - Sarges Heroes (U) 00000005 0031DD98_AdditionalPart1.mid", false ) },
 	}
 },
 { u8"Army Men - Sarges Heroes (U) 00000010 00360518.mid", u8"Army Men - Sarges Heroes (U) 00000010 00360518.mid TrackParseDebug.txt", u8"Ice Station Gulag", 0,
@@ -95,72 +95,72 @@
 		{ NS4_ADD_MIDI_FILE( u8"Army Men - Sarges Heroes (U) 00000010 00360518_AdditionalPart1.mid", false ) },
 	}
 },
-{ u8"Army Men - Sarges Heroes (U) 0000000F 00354D10 Escape II.mid", u8"Army Men - Sarges Heroes (U) 0000000F 00354D10.mid TrackParseDebug.txt", u8"Escape II", 0,
+{ u8"Army Men - Sarges Heroes (U) 0000000F 00354D10.mid", u8"Army Men - Sarges Heroes (U) 0000000F 00354D10.mid TrackParseDebug.txt", u8"Escape II", 0,
 	1,
 	{
-		{ NS4_ADD_MIDI_FILE( u8"Army Men - Sarges Heroes (U) 0000000F 00354D10_AdditionalPart1 Escape II.mid", false ) },
+		{ NS4_ADD_MIDI_FILE( u8"Army Men - Sarges Heroes (U) 0000000F 00354D10_AdditionalPart1.mid", false ) },
 	}
 },
-{ u8"Army Men - Sarges Heroes (U) 00000013 00376D98 Outside Fort Plastro.mid", u8"Army Men - Sarges Heroes (U) 00000013 00376D98.mid TrackParseDebug.txt", u8"Outside Fort Plastro", 0,
+{ u8"Army Men - Sarges Heroes (U) 00000013 00376D98.mid", u8"Army Men - Sarges Heroes (U) 00000013 00376D98.mid TrackParseDebug.txt", u8"Outside Fort Plastro", 0,
 	1,
 	{
-		{ NS4_ADD_MIDI_FILE( u8"Army Men - Sarges Heroes (U) 00000013 00376D98_AdditionalPart1 Outside Fort Plastro.mid", false ) },
+		{ NS4_ADD_MIDI_FILE( u8"Army Men - Sarges Heroes (U) 00000013 00376D98_AdditionalPart1.mid", false ) },
 	}
 },
-{ u8"Army Men - Sarges Heroes (U) 00000012 0036AD58 Fort Plastro.mid", u8"Army Men - Sarges Heroes (U) 00000012 0036AD58.mid TrackParseDebug.txt", u8"Fort Plastro", 0,
+{ u8"Army Men - Sarges Heroes (U) 00000012 0036AD58.mid", u8"Army Men - Sarges Heroes (U) 00000012 0036AD58.mid TrackParseDebug.txt", u8"Fort Plastro", 0,
 	1,
 	{
-		{ NS4_ADD_MIDI_FILE( u8"Army Men - Sarges Heroes (U) 00000012 0036AD58_AdditionalPart1 Fort Plastro.mid", false ) },
+		{ NS4_ADD_MIDI_FILE( u8"Army Men - Sarges Heroes (U) 00000012 0036AD58_AdditionalPart1.mid", false ) },
 	}
 },
-{ u8"Army Men - Sarges Heroes (U) 00000018 0039DAB0 The Backyard.mid", u8"Army Men - Sarges Heroes (U) 00000018 0039DAB0.mid TrackParseDebug.txt", u8"The Backyard", 0,
+{ u8"Army Men - Sarges Heroes (U) 00000018 0039DAB0.mid", u8"Army Men - Sarges Heroes (U) 00000018 0039DAB0.mid TrackParseDebug.txt", u8"The Backyard", 0,
 	1,
 	{
-		{ NS4_ADD_MIDI_FILE( u8"Army Men - Sarges Heroes (U) 00000018 0039DAB0_AdditionalPart1 The Backyard.mid", false ) },
+		{ NS4_ADD_MIDI_FILE( u8"Army Men - Sarges Heroes (U) 00000018 0039DAB0_AdditionalPart1.mid", false ) },
 	}
 },
-{ u8"Army Men - Sarges Heroes (U) 0000000E 0034D3F0 The Backyard II.mid", u8"Army Men - Sarges Heroes (U) 0000000E 0034D3F0.mid TrackParseDebug.txt", u8"The Backyard II", 0,
+{ u8"Army Men - Sarges Heroes (U) 0000000E 0034D3F0.mid", u8"Army Men - Sarges Heroes (U) 0000000E 0034D3F0.mid TrackParseDebug.txt", u8"The Backyard II", 0,
 	1,
 	{
-		{ NS4_ADD_MIDI_FILE( u8"Army Men - Sarges Heroes (U) 0000000E 0034D3F0_AdditionalPart1 The Backyard II.mid", false ) },
+		{ NS4_ADD_MIDI_FILE( u8"Army Men - Sarges Heroes (U) 0000000E 0034D3F0_AdditionalPart1.mid", false ) },
 	}
 },
-{ u8"Army Men - Sarges Heroes (U) 00000014 00380468 Showdown.mid", u8"Army Men - Sarges Heroes (U) 00000014 00380468.mid TrackParseDebug.txt", u8"Showdown", 0,
+{ u8"Army Men - Sarges Heroes (U) 00000014 00380468.mid", u8"Army Men - Sarges Heroes (U) 00000014 00380468.mid TrackParseDebug.txt", u8"Showdown", 0,
 	1,
 	{
-		{ NS4_ADD_MIDI_FILE( u8"Army Men - Sarges Heroes (U) 00000014 00380468_AdditionalPart1 Showdown.mid", false ) },
+		{ NS4_ADD_MIDI_FILE( u8"Army Men - Sarges Heroes (U) 00000014 00380468_AdditionalPart1.mid", false ) },
 	}
 },
-{ u8"Army Men - Sarges Heroes (U) 00000007 00326510 The Sandbox.mid", u8"Army Men - Sarges Heroes (U) 00000007 00326510.mid TrackParseDebug.txt", u8"The Sandbox", 0,
+{ u8"Army Men - Sarges Heroes (U) 00000007 00326510.mid", u8"Army Men - Sarges Heroes (U) 00000007 00326510.mid TrackParseDebug.txt", u8"The Sandbox", 0,
 	1,
 	{
-		{ NS4_ADD_MIDI_FILE( u8"Army Men - Sarges Heroes (U) 00000007 00326510_AdditionalPart1 The Sandbox.mid", false ) },
+		{ NS4_ADD_MIDI_FILE( u8"Army Men - Sarges Heroes (U) 00000007 00326510_AdditionalPart1.mid", false ) },
 	}
 },
-{ u8"Army Men - Sarges Heroes (U) 00000009 0032ED50 The Kitchen.mid", u8"Army Men - Sarges Heroes (U) 00000009 0032ED50.mid TrackParseDebug.txt", u8"The Kitchen", 0,
+{ u8"Army Men - Sarges Heroes (U) 00000009 0032ED50.mid", u8"Army Men - Sarges Heroes (U) 00000009 0032ED50.mid TrackParseDebug.txt", u8"The Kitchen", 0,
 	1,
 	{
-		{ NS4_ADD_MIDI_FILE( u8"Army Men - Sarges Heroes (U) 00000009 0032ED50_AdditionalPart1 The Kitchen.mid", false ) },
-	}
-},
-
-{ u8"Army Men - Sarges Heroes (U) 00000016 00390CA0 Stealth.mid", u8"Army Men - Sarges Heroes (U) 00000016 00390CA0.mid TrackParseDebug.txt", u8"Stealth", 0,
-	1,
-	{
-		{ NS4_ADD_MIDI_FILE( u8"Army Men - Sarges Heroes (U) 00000016 00390CA0_AdditionalPart1 Stealth.mid", false ) },
-	}
-},
-{ u8"Army Men - Sarges Heroes (U) 00000015 00384220 The Living Room.mid", u8"Army Men - Sarges Heroes (U) 00000015 00384220.mid TrackParseDebug.txt", u8"The Living Room", 0,
-	1,
-	{
-		{ NS4_ADD_MIDI_FILE( u8"Army Men - Sarges Heroes (U) 00000015 00384220_AdditionalPart1 The Living Room.mid", false ) },
+		{ NS4_ADD_MIDI_FILE( u8"Army Men - Sarges Heroes (U) 00000009 0032ED50_AdditionalPart1.mid", false ) },
 	}
 },
 
-{ u8"Army Men - Sarges Heroes (U) 0000000B 0033D640 Bootcamp.mid", u8"Army Men - Sarges Heroes (U) 0000000B 0033D640.mid TrackParseDebug.txt", u8"Bootcamp", 0,
+{ u8"Army Men - Sarges Heroes (U) 00000016 00390CA0.mid", u8"Army Men - Sarges Heroes (U) 00000016 00390CA0.mid TrackParseDebug.txt", u8"Stealth", 0,
 	1,
 	{
-		{ NS4_ADD_MIDI_FILE( u8"Army Men - Sarges Heroes (U) 0000000B 0033D640_AdditionalPart1 Bootcamp.mid", false ) },
+		{ NS4_ADD_MIDI_FILE( u8"Army Men - Sarges Heroes (U) 00000016 00390CA0_AdditionalPart1.mid", false ) },
+	}
+},
+{ u8"Army Men - Sarges Heroes (U) 00000015 00384220.mid", u8"Army Men - Sarges Heroes (U) 00000015 00384220.mid TrackParseDebug.txt", u8"The Living Room", 0,
+	1,
+	{
+		{ NS4_ADD_MIDI_FILE( u8"Army Men - Sarges Heroes (U) 00000015 00384220_AdditionalPart1.mid", false ) },
+	}
+},
+
+{ u8"Army Men - Sarges Heroes (U) 0000000B 0033D640.mid", u8"Army Men - Sarges Heroes (U) 0000000B 0033D640.mid TrackParseDebug.txt", u8"Bootcamp", 0,
+	1,
+	{
+		{ NS4_ADD_MIDI_FILE( u8"Army Men - Sarges Heroes (U) 0000000B 0033D640_AdditionalPart1.mid", false ) },
 	}
 },
 
