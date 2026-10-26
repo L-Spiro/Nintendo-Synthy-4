@@ -4,20 +4,22 @@
 #define NS4_FOLDER							u8"Dr. Mario"
 #define NS4_BANK							u8"00"
 #define NS4_REVERB_TRACKS					1
-#define NS4_REVERB							ns4::CReverb::NS4_T_MISSION_IMPOSSIBLE_0
-#define NS4_ORIG_HZ							22047
+#define NS4_REVERB							ns4::CReverb::NS4_T_LIBULTRA_BIGROOM_0
+#define NS4_ORIG_HZ							32006
+#define NS4_SNG_FLAGS						0
+#define NS4_DRIVER_SYNTH_HZ					32000.0
 #define NS4_CURVE							20.0
-#define NS4_OUT_DIRECTORY					u8"T:\\N64OST\\Dr. Mario 64\\"
+#define NS4_OUT_DIRECTORY					u8"C:\\N64OST\\Dr. Mario 64\\"
 #define NS4_OUT_DIRECTORY_NUMBERS			NS4_OUT_DIRECTORY u8"Numbered\\"
 #define NS4_NO_PROGRAM_CHANGE_SORT			true
 #define NS4_PROG_CHANGE_SETS_VOL_PAN		false
 #define NS4_ADSR_IN_MIDI					true
 #define NS4_TUNE_IN_MIDI					true
-#define NS4_ENV_MULTIPLIER					(1.0 / 16.0)
+#define NS4_ENV_MULTIPLIER					(1.0 / 1.0)
 #define NS4_REL_MULTIPLIER					(1.0)
 #define NS4_ROOT_OFFSET						-6
 //#define NS4_SAMPLE_EXCLUSIVE				0x42
-#define NS4_IGNORE_REVERB					true
+//#define NS4_IGNORE_REVERB					true
 
 
 
@@ -25,7 +27,7 @@
 { u8"Dr. Mario 64 (U) 00000001 001750C0.mid", u8"Dr. Mario 64 (U) 00000001 001750C0.mid TrackParseDebug.txt", u8"Chill (Critical!)", 0 },
 { u8"Dr. Mario 64 (U) 00000002 00177420.mid", u8"Dr. Mario 64 (U) 00000002 00177420.mid TrackParseDebug.txt", u8"Fever", 0 },
 { u8"Dr. Mario 64 (U) 00000003 00179620.mid", u8"Dr. Mario 64 (U) 00000003 00179620.mid TrackParseDebug.txt", u8"Fever (Critical!)", 0 },
-{ u8"Dr. Mario 64 (U) 00000004 0017B790.mid", u8"Dr. Mario 64 (U) 00000004 0017B790.mid TrackParseDebug.txt", u8"00000004 0017B790", 0 },
+{ u8"Dr. Mario 64 (U) 00000004 0017B790.mid", u8"Dr. Mario 64 (U) 00000004 0017B790.mid TrackParseDebug.txt", u8"Select a Mode", 0 },
 { u8"Dr. Mario 64 (U) 00000005 0017C1E0.mid", u8"Dr. Mario 64 (U) 00000005 0017C1E0.mid TrackParseDebug.txt", u8"00000005 0017C1E0", 0 },
 { u8"Dr. Mario 64 (U) 00000006 0017D130.mid", u8"Dr. Mario 64 (U) 00000006 0017D130.mid TrackParseDebug.txt", u8"00000006 0017D130", 0 },
 { u8"Dr. Mario 64 (U) 00000007 0017E090.mid", u8"Dr. Mario 64 (U) 00000007 0017E090.mid TrackParseDebug.txt", u8"00000007 0017E090", 0 },

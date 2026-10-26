@@ -571,6 +571,9 @@
     <None Include="Src\Games\NS4BattleTanxFiles.inl">
       <Filter>Header Files\Games</Filter>
     </None>
+    <None Include="Src\Games\NS4BattleTanxGlobalAssaultFiles.inl">
+      <Filter>Header Files\Games</Filter>
+    </None>
     <None Include="Src\Games\NS4CaliforniaSpeedFiles.inl">
       <Filter>Header Files\Games</Filter>
     </None>

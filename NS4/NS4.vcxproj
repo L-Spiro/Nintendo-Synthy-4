@@ -241,6 +241,7 @@
     <None Include="Src\Games\NS4BanjoKazooieFiles.inl" />
     <None Include="Src\Games\NS4BanjoTooieFiles.inl" />
     <None Include="Src\Games\NS4BattleTanxFiles.inl" />
+    <None Include="Src\Games\NS4BattleTanxGlobalAssaultFiles.inl" />
     <None Include="Src\Games\NS4BattlezoneRiseOfTheBlackDogsFiles.inl" />
     <None Include="Src\Games\NS4BeetAdventureRacing!Files.inl" />
     <None Include="Src\Games\NS4BeetAdventureRacing!VinylFiles.inl" />
