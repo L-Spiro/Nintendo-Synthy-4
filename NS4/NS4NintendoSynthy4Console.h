@@ -306,7 +306,7 @@ int oldmain() {
 #ifdef NS4_BULK
 //#include "Src/Games/NS4ConkersBadFurDayFiles.inl"
 //#include "Src/Games/NS4ConkersBadFurDayECTSFiles.inl"
-//#include "Src/Games/NS4DinosaurPlanetFiles.inl"
+#include "Src/Games/NS4DinosaurPlanetFiles.inl"
 //#include "Src/Games/NS4JetForceGeminiFiles.inl"
 //#include "Src/Games/NS4JetForceGemini2Files.inl"
 //#include "Src/Games/NS4JetForceGeminiKioskFiles.inl"
@@ -436,7 +436,7 @@ int oldmain() {
 //#include "Src/Games/NS4MonopolyFiles.inl"
 //#include "Src/Games/NS4BuckBumbleFiles.inl"
 //#include "Src/Games/NS4HarvestMoonFiles.inl"
-#include "Src/Games/NS4DrMario64Files.inl"
+//#include "Src/Games/NS4DrMario64Files.inl"
 //#include "Src/Games/NS4F1RacingChampionshipFiles.inl"
 //#include "Src/Games/NS4FlyingDragonFiles.inl"
 //#include "Src/Games/NS4Quest64Files.inl"
@@ -678,6 +678,24 @@ int oldmain() {
 		ns4::CMidiFile::m_sSettings.ui8DistortionControl = 35;
 		ns4::CMidiFile::m_sSettings.ui8DryControl = 23;
 		ns4::CMidiFile::m_sSettings.ui8WetControl = 22;
+#ifdef NS4_LPF_CONTROL
+		ns4::CMidiFile::m_sSettings.ui8LpfControl = NS4_LPF_CONTROL;
+#endif	// NS4_LPF_CONTROL
+#ifdef NS4_Q_CONTROL
+		ns4::CMidiFile::m_sSettings.ui8QControl = NS4_Q_CONTROL;
+#endif	// NS4_Q_CONTROL
+#ifdef NS4_STEREO_EFFECT_CONTROL
+		ns4::CMidiFile::m_sSettings.ui8StereoEffectControl = NS4_STEREO_EFFECT_CONTROL;
+#endif	// NS4_STEREO_EFFECT_CONTROL
+#ifdef NS4_DISTORTION_CONTROL
+		ns4::CMidiFile::m_sSettings.ui8DistortionControl = NS4_DISTORTION_CONTROL;
+#endif	// NS4_DISTORTION_CONTROL
+#ifdef NS4_DRY_CONTROL
+		ns4::CMidiFile::m_sSettings.ui8DryControl = NS4_DRY_CONTROL;
+#endif	// NS4_DRY_CONTROL
+#ifdef NS4_WET_CONTROL
+		ns4::CMidiFile::m_sSettings.ui8WetControl = NS4_WET_CONTROL;
+#endif	// NS4_WET_CONTROL
 		ns4::CMidiFile::m_sSettings.bAutoTrackOffsetDuringLoad = false;
 
 #ifdef NS4_AUTO_OFFSET_TRACK_CHAN
@@ -798,6 +816,11 @@ int oldmain() {
 #ifdef NS4_ADSR_IN_MIDI
 		ns4::CMidiFile::m_sSettings.bAdsrIsInMidi = NS4_ADSR_IN_MIDI;
 #endif	// NS4_ADSR_IN_MIDI
+#ifdef NS4_NAUDIO_CHANNEL_CONTROLS
+		ns4::CMidiFile::m_sSettings.bNAudioChannelControls = NS4_NAUDIO_CHANNEL_CONTROLS;
+#else
+		ns4::CMidiFile::m_sSettings.bNAudioChannelControls = false;
+#endif	// NS4_NAUDIO_CHANNEL_CONTROLS
 #ifdef NS4_REVERB_MASK
 		ns4::CMidiFile::m_sSettings.ui8ReverbMask = uint8_t( NS4_REVERB_MASK );
 #endif	// NS4_REVERB_MASK

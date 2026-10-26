@@ -15,6 +15,12 @@
 #define NS4_VIB_SCALE						2.0
 //#define NS4_OVERSAMPLING_BW					3500.0
 #define NS4_ENV_MULTIPLIER					(1.0 / 3.0)
+#define NS4_NAUDIO_CHANNEL_CONTROLS			true
+#define NS4_MASTER_VOL_CONTROL				0
+#define NS4_WET_CONTROL						0
+#define NS4_DRY_CONTROL						0
+#define NS4_STEREO_EFFECT_CONTROL			0
+#define NS4_EAD_PAN							ns4::CMidiFile::NS4_EPT_LIBULTRA
 //#define NS4_ADDITIVE_REVERB					true
 //#define NS4_REVERB_MASK						0x7F
 
@@ -136,7 +142,7 @@
 
 
 
-/*
+
 //{ u8"Dinosaur Planet (Proto) 0000006E 00159D20.mid", u8"Dinosaur Planet (Proto) 0000006E 00159D20.mid TrackParseDebug.txt", u8"Track 6E", 0 },
 //{ u8"Dinosaur Planet (Proto) 0000006F 00159EB8.mid", u8"Dinosaur Planet (Proto) 0000006F 00159EB8.mid TrackParseDebug.txt", u8"Track 6F", 0 },
 { u8"Dinosaur Planet (Proto) 00000070 00159F1C.mid", u8"Dinosaur Planet (Proto) 00000070 00159F1C.mid TrackParseDebug.txt", u8"Track 70", 0 },
@@ -176,4 +182,3 @@
 { u8"Dinosaur Planet (Proto) 00000092 001B8D80.mid", u8"Dinosaur Planet (Proto) 00000092 001B8D80.mid TrackParseDebug.txt", u8"Track 92", 0 },
 { u8"Dinosaur Planet (Proto) 00000093 001BAC48.mid", u8"Dinosaur Planet (Proto) 00000093 001BAC48.mid TrackParseDebug.txt", u8"Track 93", 0 },
 { u8"Dinosaur Planet (Proto) 00000094 001BC614.mid", u8"Dinosaur Planet (Proto) 00000094 001BC614.mid TrackParseDebug.txt", u8"Track 94", 0 },
-*/

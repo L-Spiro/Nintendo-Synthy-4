@@ -143,6 +143,26 @@ namespace ns4 {
 		 2833,  2429,  2025,  1620,  1216,   810,   405,     0,
 	};
 
+	/** Rare's n_audio envelope-time table (microseconds), indexed by controls 20 (attack), 22 (decay), and 24 (release).  The game's table has 127 entries; entry 127 is what the game reads past its end (the bits of the float 0.05f). */
+	const uint32_t CMidiFile::m_ui32NAudioEnvTimes[128] = {
+		0, 10000, 20000, 30000, 40000, 50000, 60000, 70000,
+		80000, 90000, 100000, 110000, 110000, 120000, 130000, 140000,
+		150000, 160000, 170000, 190000, 200000, 220000, 230000, 250000,
+		270000, 290000, 310000, 330000, 350000, 380000, 410000, 440000,
+		470000, 500000, 540000, 580000, 620000, 660000, 710000, 760000,
+		820000, 880000, 940000, 1000000, 1000000, 1100000, 1200000, 1300000,
+		1400000, 1500000, 1600000, 1700000, 1800000, 2000000, 2100000, 2300000,
+		2400000, 2600000, 2800000, 3000000, 3200000, 3500000, 3700000, 4000000,
+		4300000, 4600000, 4900000, 5300000, 5700000, 6100000, 6500000, 7000000,
+		7500000, 8100000, 8600000, 9300000, 9900000, 10000000, 11000000, 12000000,
+		13000000, 14000000, 15000000, 16000000, 17000000, 18000000, 19000000, 21000000,
+		22000000, 24000000, 26000000, 28000000, 30000000, 32000000, 34000000, 37000000,
+		39000000, 42000000, 45000000, 49000000, 50000000, 55000000, 60000000, 65000000,
+		70000000, 75000000, 80000000, 85000000, 90000000, 95000000, 100000000, 105000000,
+		110000000, 115000000, 120000000, 125000000, 130000000, 135000000, 140000000, 145000000,
+		150000000, 155000000, 160000000, 165000000, 170000000, 175000000, 180000000, 1028443341,
+	};
+
 
 	// == Functions.
 	CMidiFile::CMidiFile() :
@@ -1542,6 +1562,19 @@ namespace ns4 {
 						}
 
 						// Envelope.
+						double dSmpAttack = vTriggered[J]->dAttack;
+						double dSmpDecay = vTriggered[J]->dDecay;
+						double dSmpRelease = vTriggered[J]->dRelease;
+						uint8_t ui8SmpAttackLevel = vTriggered[J]->ui8AttackLevel;
+						uint8_t ui8SmpDecayLevel = vTriggered[J]->ui8DecayLevel;
+						if ( m_sSettings.bNAudioChannelControls ) {
+							// Rare's n_audio: controls 20-24 replace the instrument's envelope until the next program change.
+							if ( msState.ui8NAudioEnvMask & (1 << 0) ) { dSmpAttack = m_ui32NAudioEnvTimes[msState.ui8State[NS4_NAUDIO_ENV_ATTACK_TIME] & 0x7F] / 1000000.0; }
+							if ( msState.ui8NAudioEnvMask & (1 << 1) ) { ui8SmpAttackLevel = msState.ui8State[NS4_NAUDIO_ENV_ATTACK_VOL]; }
+							if ( msState.ui8NAudioEnvMask & (1 << 2) ) { dSmpDecay = m_ui32NAudioEnvTimes[msState.ui8State[NS4_NAUDIO_ENV_DECAY_TIME] & 0x7F] / 1000000.0; }
+							if ( msState.ui8NAudioEnvMask & (1 << 3) ) { ui8SmpDecayLevel = msState.ui8State[NS4_NAUDIO_ENV_DECAY_VOL]; }
+							if ( msState.ui8NAudioEnvMask & (1 << 4) ) { dSmpRelease = m_ui32NAudioEnvTimes[msState.ui8State[NS4_NAUDIO_ENV_RELEASE_TIME] & 0x7F] / 1000000.0; }
+						}
 						CEnvelope::NS4_BLOCK bThis;
 						if ( m_sSettings.bAdsrIsInMidi ) {
 							bThis.tType = CEnvelope::NS4_T_LINEAR;
@@ -1569,24 +1602,24 @@ namespace ns4 {
 						else if ( vTriggered[J]->ui32Adsr0 == 0xFFFFFFFF ) {
 							bThis.tType = CEnvelope::NS4_T_LINEAR;
 							bThis.ui16StartLevel = 0;
-							bThis.ui16EndLevel = vTriggered[J]->ui8AttackLevel;
+							bThis.ui16EndLevel = ui8SmpAttackLevel;
 							if ( m_sSettings.bMap0AttackTo7F && bThis.ui16EndLevel == 0 ) {
 								bThis.ui16EndLevel = 0x7F;
 							}
 							double dAtkFactor = (ui32Bank == 127 && m_sSettings.dPercEnvAttackMultiplier) ? m_sSettings.dPercEnvAttackMultiplier : m_sSettings.dEnvAttackMultiplier;
-							double dAtkTime = vTriggered[J]->dAttack * dAtkFactor;
+							double dAtkTime = dSmpAttack * dAtkFactor;
 							bThis.ui32Samples = static_cast<uint32_t>(std::round( max( m_sSettings.dMinAttack, dAtkTime ) * _troOptions.uiSampleRate ));						
 							nNote.eEnvelope.AddBlock( bThis );
 
 							bThis.ui16StartLevel = bThis.ui16EndLevel;
-							bThis.ui16EndLevel = vTriggered[J]->ui8DecayLevel;
-							bThis.tType = vTriggered[J]->dDecay == -1.0 ? CEnvelope::NS4_T_STARTVALUE : CEnvelope::NS4_T_LINEAR;
+							bThis.ui16EndLevel = ui8SmpDecayLevel;
+							bThis.tType = dSmpDecay == -1.0 ? CEnvelope::NS4_T_STARTVALUE : CEnvelope::NS4_T_LINEAR;
 							double dDecFactor = (ui32Bank == 127 && m_sSettings.dPercEnvDecayMultiplier) ? m_sSettings.dPercEnvDecayMultiplier : m_sSettings.dEnvDecayMultiplier;
-							bThis.ui32Samples = static_cast<uint32_t>(std::round( vTriggered[J]->dDecay * dDecFactor * _troOptions.uiSampleRate ));
+							bThis.ui32Samples = static_cast<uint32_t>(std::round( dSmpDecay * dDecFactor * _troOptions.uiSampleRate ));
 							nNote.eEnvelope.AddBlock( bThis );
 
 							double dReleaseFactor = (ui32Bank == 127 && m_sSettings.dPercEnvReleaseMultiplier) ? m_sSettings.dPercEnvReleaseMultiplier : m_sSettings.dEnvReleaseMultiplier;
-							nNote.eEnvelope.SetReleaseSamples( static_cast<uint32_t>(max( max( vTriggered[J]->dRelease * dReleaseFactor, m_sSettings.dMinReleaseTime ), 16.0 / m_sSettings.dGameFreq ) * _troOptions.uiSampleRate) );
+							nNote.eEnvelope.SetReleaseSamples( static_cast<uint32_t>(max( max( dSmpRelease * dReleaseFactor, m_sSettings.dMinReleaseTime ), 16.0 / m_sSettings.dGameFreq ) * _troOptions.uiSampleRate) );
 						}
 						else {
 							nNote.eEnvelope.SetLevelDivisor( double( 0x7FFF ) );
@@ -6064,9 +6097,23 @@ namespace ns4 {
 			if ( IsControllerOfType( _teEvent, NS4_TRK_SET_PITCH_SCALE ) ) {
 				dPitchScale = _teEvent.u.sMidi.ui8Parm1 * 0.015625;
 			}
+			if ( m_sSettings.bNAudioChannelControls ) {
+				uint8_t ui8Control = _teEvent.u.sMidi.ui8Parm0;
+				uint8_t ui8Val = _teEvent.u.sMidi.ui8Parm1;
+				if ( ui8Control >= NS4_NAUDIO_ENV_ATTACK_TIME && ui8Control <= NS4_NAUDIO_ENV_RELEASE_TIME ) {
+					ui8NAudioEnvMask |= uint8_t( 1 << (ui8Control - NS4_NAUDIO_ENV_ATTACK_TIME) );
+				}
+				else if ( ui8Control == NS4_NAUDIO_BEND_RANGE_CENTS && !m_sSettings.ui32PitchRangeOverride ) {
+					ui16PitchBendRange = uint16_t( ui16PitchBendRange / 100 * 100 + ui8Val );
+				}
+				else if ( ui8Control == NS4_NAUDIO_BEND_RANGE_SEMITONES && !m_sSettings.ui32PitchRangeOverride ) {
+					ui16PitchBendRange = uint16_t( ui16PitchBendRange % 100 + ui8Val * 100 );
+				}
+			}
 		}
 		else if ( IsProgramChange( _teEvent ) ) {
 			ui8Program = GetProgramChange( _teEvent );
+			ui8NAudioEnvMask = 0;
 		}
 		else if ( IsTempo( _teEvent ) ) {
 			dTempo = GetTempo( _teEvent );

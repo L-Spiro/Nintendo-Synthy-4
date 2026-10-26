@@ -59,6 +59,14 @@
 #define NS4_VIBRATO_LEVEL( VAL)				uint8_t( (VAL) >> 8 )
 #define NS4_VIBRATO_SPEED( VAL)				uint8_t( (VAL) >> 16 )
 #define NS4_TRK_SET_RELEASE_TIME			0x86
+// == Rare n_audio controls.
+#define NS4_NAUDIO_BEND_RANGE_CENTS			0x03
+#define NS4_NAUDIO_BEND_RANGE_SEMITONES		0x04
+#define NS4_NAUDIO_ENV_ATTACK_TIME			0x14
+#define NS4_NAUDIO_ENV_ATTACK_VOL			0x15
+#define NS4_NAUDIO_ENV_DECAY_TIME			0x16
+#define NS4_NAUDIO_ENV_DECAY_VOL			0x17
+#define NS4_NAUDIO_ENV_RELEASE_TIME			0x18
 
 
 namespace ns4 {
@@ -556,6 +564,9 @@ namespace ns4 {
 
 			/** If true, the ADSR for each sample is assumed to be part of the MIDI file, set by NS4_TRK_ADSR, held in the MIDI state. */
 			bool						bAdsrIsInMidi = false;
+
+			/** If true, Rare's later n_audio channel controls are used: 20-24 override the envelope (attack time, attack volume, decay time, decay volume, release time) until the next program change, and 3/4 set the pitch-bend range (cents/semitones). */
+			bool						bNAudioChannelControls = false;
 
 			/** If true, the NS4_C_LSB control is always set to 0. */
 			bool						bIgnoreBankSelectLsb = false;
@@ -1734,6 +1745,7 @@ namespace ns4 {
 			int8_t						i8FineTune;
 			uint8_t						ui8Program;
 			uint8_t						ui8ChannelAfterTouch;
+			uint8_t						ui8NAudioEnvMask;
 
 
 			/**
@@ -1778,6 +1790,7 @@ namespace ns4 {
 				dPitchScale = ui8State[NS4_TRK_SET_PITCH_SCALE] / 64.0;
 				ui8Program = 0;
 				ui8ChannelAfterTouch = 0;
+				ui8NAudioEnvMask = 0;
 				return (*this);
 			}
 
@@ -2462,6 +2475,9 @@ namespace ns4 {
 
 		/** libultra's (and n_audio's) equal-power pan table (eqpower[], Q15). */
 		static const int16_t			m_i16LibultraEqPower[128];
+
+		/** Rare's n_audio envelope-time table (microseconds), indexed by controls 20 (attack), 22 (decay), and 24 (release). */
+		static const uint32_t			m_ui32NAudioEnvTimes[128];
 
 
 		// == Functions.
