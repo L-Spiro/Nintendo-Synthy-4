@@ -163,6 +163,20 @@ namespace ns4 {
 		150000000, 155000000, 160000000, 165000000, 170000000, 175000000, 180000000, 1028443341,
 	};
 
+	/** Rare's n_audio oscillator-rate table (Hz), indexed by the vibrato/tremolo rate. */
+	const float CMidiFile::m_fNAudioOscRates[100] = {
+		0.05f, 0.05f, 0.06f, 0.06f, 0.06f, 0.07f, 0.07f, 0.08f, 0.08f, 0.09f,
+		0.10f, 0.11f, 0.13f, 0.14f, 0.17f, 0.20f, 0.25f, 0.33f, 0.5f, 1.0f,
+		1.25f, 1.5f, 1.75f, 2.0f, 2.25f, 2.5f, 2.75f, 3.0f, 3.25f, 3.5f,
+		3.75f, 4.0f, 4.25f, 4.5f, 4.75f, 5.0f, 5.25f, 5.5f, 5.75f, 6.0f,
+		6.25f, 6.5f, 6.75f, 7.0f, 7.25f, 7.5f, 7.75f, 8.0f, 8.25f, 8.5f,
+		8.75f, 9.0f, 9.25f, 9.5f, 9.75f, 10.0f, 10.25f, 10.5f, 10.75f, 11.0f,
+		11.25f, 11.5f, 11.75f, 12.0f, 12.25f, 12.5f, 12.75f, 13.0f, 13.25f, 13.5f,
+		13.75f, 14.0f, 14.25f, 14.5f, 14.75f, 15.0f, 15.25f, 15.5f, 15.75f, 16.0f,
+		16.25f, 16.5f, 16.75f, 17.0f, 17.25f, 17.5f, 17.75f, 18.0f, 18.25f, 18.5f,
+		18.75f, 19.0f, 19.25f, 19.5f, 19.75f, 20.0f, 20.25f, 20.5f, 20.75f, 21.0f,
+	};
+
 
 	// == Functions.
 	CMidiFile::CMidiFile() :
@@ -1562,18 +1576,25 @@ namespace ns4 {
 						}
 
 						// Envelope.
-						double dSmpAttack = vTriggered[J]->dAttack;
-						double dSmpDecay = vTriggered[J]->dDecay;
-						double dSmpRelease = vTriggered[J]->dRelease;
-						uint8_t ui8SmpAttackLevel = vTriggered[J]->ui8AttackLevel;
-						uint8_t ui8SmpDecayLevel = vTriggered[J]->ui8DecayLevel;
+						const CSoundBank::NS4_SAMPLE * psEnvSrc = vTriggered[J];
+						if ( m_sSettings.bNAudioChannelControls && (msState.ui16NAudioChanMask & NS4_NAUDIO_OVERRIDE_MASK) ) {
+							// Once a channel control overrides the instrument, n_audio takes the envelope from the channel, which the program change filled from the instrument's first sound.
+							const CSoundBank::NS4_SAMPLE * psFirst = _sbSoundBank.InstSample( ui32Bank, ui32Inst, 0 );
+							if ( psFirst ) { psEnvSrc = psFirst; }
+						}
+						double dSmpAttack = psEnvSrc->dAttack;
+						double dSmpDecay = psEnvSrc->dDecay;
+						double dSmpRelease = psEnvSrc->dRelease;
+						uint8_t ui8SmpAttackLevel = psEnvSrc->ui8AttackLevel;
+						uint8_t ui8SmpDecayLevel = psEnvSrc->ui8DecayLevel;
 						if ( m_sSettings.bNAudioChannelControls ) {
 							// Rare's n_audio: controls 20-24 replace the instrument's envelope until the next program change.
-							if ( msState.ui8NAudioEnvMask & (1 << 0) ) { dSmpAttack = m_ui32NAudioEnvTimes[msState.ui8State[NS4_NAUDIO_ENV_ATTACK_TIME] & 0x7F] / 1000000.0; }
-							if ( msState.ui8NAudioEnvMask & (1 << 1) ) { ui8SmpAttackLevel = msState.ui8State[NS4_NAUDIO_ENV_ATTACK_VOL]; }
-							if ( msState.ui8NAudioEnvMask & (1 << 2) ) { dSmpDecay = m_ui32NAudioEnvTimes[msState.ui8State[NS4_NAUDIO_ENV_DECAY_TIME] & 0x7F] / 1000000.0; }
-							if ( msState.ui8NAudioEnvMask & (1 << 3) ) { ui8SmpDecayLevel = msState.ui8State[NS4_NAUDIO_ENV_DECAY_VOL]; }
-							if ( msState.ui8NAudioEnvMask & (1 << 4) ) { dSmpRelease = m_ui32NAudioEnvTimes[msState.ui8State[NS4_NAUDIO_ENV_RELEASE_TIME] & 0x7F] / 1000000.0; }
+							if ( msState.ui16NAudioChanMask & (1 << 0) ) { dSmpAttack = m_ui32NAudioEnvTimes[msState.ui8State[NS4_NAUDIO_ENV_ATTACK_TIME] & 0x7F] / 1000000.0; }
+							if ( msState.ui16NAudioChanMask & (1 << 1) ) { ui8SmpAttackLevel = msState.ui8State[NS4_NAUDIO_ENV_ATTACK_VOL]; }
+							if ( msState.ui16NAudioChanMask & (1 << 2) ) { dSmpDecay = m_ui32NAudioEnvTimes[msState.ui8State[NS4_NAUDIO_ENV_DECAY_TIME] & 0x7F] / 1000000.0; }
+							if ( msState.ui16NAudioChanMask & (1 << 3) ) { ui8SmpDecayLevel = msState.ui8State[NS4_NAUDIO_ENV_DECAY_VOL]; }
+							if ( msState.ui16NAudioChanMask & (1 << 4) ) { dSmpRelease = m_ui32NAudioEnvTimes[msState.ui8State[NS4_NAUDIO_ENV_RELEASE_TIME] & 0x7F] / 1000000.0; }
+							if ( msState.ui16NAudioChanMask & (1 << 5) ) { nNote.dPitchMod += (int32_t( msState.ui8State[NS4_NAUDIO_FINE_TUNE] ) - 64) / 100.0; }
 						}
 						CEnvelope::NS4_BLOCK bThis;
 						if ( m_sSettings.bAdsrIsInMidi ) {
@@ -1663,7 +1684,26 @@ namespace ns4 {
 						// Vibrato.
 						uint8_t ui8Vib = uint8_t( nNote.psSoundbankSample->ui32VibratoType );
 						uint8_t ui8Trem = uint8_t( nNote.psSoundbankSample->ui32TremType );
-						if ( m_sSettings.bModWheelVibAndTrem ) {
+						if ( m_sSettings.bNAudioChannelControls ) {
+							// n_audio's oscillators: each field comes from its channel control if one was received since the program change, otherwise from the instrument.
+							uint16_t ui16Mask = msState.ui16NAudioChanMask;
+							uint8_t ui8TremType = (ui16Mask & (1 << 10)) ? msState.ui8State[NS4_NAUDIO_TREM_TYPE] : ui8Trem;
+							uint8_t ui8TremRate = (ui16Mask & (1 << 11)) ? msState.ui8State[NS4_NAUDIO_TREM_RATE] : uint8_t( nNote.psSoundbankSample->ui32TremSpeed );
+							uint8_t ui8TremDepth = (ui16Mask & (1 << 12)) ? msState.ui8State[NS4_NAUDIO_TREM_DEPTH] : uint8_t( nNote.psSoundbankSample->ui32TremAmount );
+							uint8_t ui8TremDelay = (ui16Mask & (1 << 13)) ? msState.ui8State[NS4_NAUDIO_TREM_DELAY] : uint8_t( nNote.psSoundbankSample->ui32TremDelay );
+							uint8_t ui8VibType = ui8Vib;
+							if ( ui16Mask & (1 << 6) ) {
+								ui8VibType = msState.ui8State[NS4_NAUDIO_VIB_TYPE] ? uint8_t( msState.ui8State[NS4_NAUDIO_VIB_TYPE] + 0x80 ) : 0;
+							}
+							uint8_t ui8VibRate = (ui16Mask & (1 << 7)) ? msState.ui8State[NS4_NAUDIO_VIB_RATE] : uint8_t( nNote.psSoundbankSample->ui32VibratoSpeed );
+							uint8_t ui8VibDepth = (ui16Mask & (1 << 8)) ? uint8_t( msState.ui8State[NS4_NAUDIO_VIB_DEPTH] * 2 ) : uint8_t( nNote.psSoundbankSample->ui32VibratoAmount );
+							uint8_t ui8VibDelay = (ui16Mask & (1 << 9)) ? msState.ui8State[NS4_NAUDIO_VIB_DELAY] : uint8_t( nNote.psSoundbankSample->ui32VibratoDelay );
+							uint8_t ui8Rise = (ui16Mask & (1 << 14)) ? msState.ui8State[NS4_NAUDIO_OSC_RISE] : 0;
+							nNote.noTremOsc.Init( ui8TremType, ui8TremRate, ui8TremDepth, ui8TremDelay, ui8Rise, _troOptions.uiSampleRate );
+							nNote.noVibOsc.Init( ui8VibType, ui8VibRate, ui8VibDepth, ui8VibDelay, ui8Rise, _troOptions.uiSampleRate );
+							ui8Vib = ui8Trem = 0;
+						}
+						else if ( m_sSettings.bModWheelVibAndTrem ) {
 							nNote.mlModLfo.Set( uint8_t( nNote.psSoundbankSample->ui32VibratoSpeed ),
 								uint8_t( nNote.psSoundbankSample->ui32VibratoAmount ),
 								uint8_t( nNote.psSoundbankSample->ui32TremSpeed ),
@@ -1931,6 +1971,12 @@ namespace ns4 {
 				else if ( m_sSettings.bExpressionScalesVolume && IsControllerOfType( teEvent, NS4_C_EXPRESSION ) ) {
 					liExpression.Set( ControllerValue( teEvent ) );
 				}
+				else if ( m_sSettings.bNAudioChannelControls && IsControllerOfType( teEvent, NS4_C_MODULATION ) ) {
+					uint8_t ui8Val = ControllerValue( teEvent );
+					for ( auto J = vNotes.size(); J--; ) {
+						vNotes[J].noVibOsc.SetModWheel( ui8Val );
+					}
+				}
 				else if ( m_sSettings.bModWheelVibAndTrem && IsControllerOfType( teEvent, NS4_C_MODULATION ) ) {
 					uint8_t ui8Val = ControllerValue( teEvent );
 					for ( auto J = vNotes.size(); J--; ) {
@@ -2065,6 +2111,7 @@ namespace ns4 {
 						dTremAmnt = vNotes[J].taTremoloAdsr.Values( dTremPhase );
 						dVal = (dVal * (dTremAmnt * dTremPhase + 1.0)) / (1.0 + dTremAmnt);
 						dVal *= vNotes[J].mlModLfo.Gain();
+						dVal *= vNotes[J].noTremOsc.Gain();
 						if ( vNotes[J].bLpf ) {
 #ifdef NS4_USE_NEW_LPF
 							dVal = CWavLib::BiQuadFilter6_Recursive_Step( dVal, vNotes[J].dA0, vNotes[J].dA1, vNotes[J].dA2,
@@ -6100,20 +6147,55 @@ namespace ns4 {
 			if ( m_sSettings.bNAudioChannelControls ) {
 				uint8_t ui8Control = _teEvent.u.sMidi.ui8Parm0;
 				uint8_t ui8Val = _teEvent.u.sMidi.ui8Parm1;
-				if ( ui8Control >= NS4_NAUDIO_ENV_ATTACK_TIME && ui8Control <= NS4_NAUDIO_ENV_RELEASE_TIME ) {
-					ui8NAudioEnvMask |= uint8_t( 1 << (ui8Control - NS4_NAUDIO_ENV_ATTACK_TIME) );
-				}
-				else if ( ui8Control == NS4_NAUDIO_BEND_RANGE_CENTS && !m_sSettings.ui32PitchRangeOverride ) {
-					ui16PitchBendRange = uint16_t( ui16PitchBendRange / 100 * 100 + ui8Val );
-				}
-				else if ( ui8Control == NS4_NAUDIO_BEND_RANGE_SEMITONES && !m_sSettings.ui32PitchRangeOverride ) {
-					ui16PitchBendRange = uint16_t( ui16PitchBendRange % 100 + ui8Val * 100 );
+				switch ( ui8Control ) {
+					case NS4_NAUDIO_ENV_ATTACK_TIME : {}
+					case NS4_NAUDIO_ENV_ATTACK_VOL : {}
+					case NS4_NAUDIO_ENV_DECAY_TIME : {}
+					case NS4_NAUDIO_ENV_DECAY_VOL : {}
+					case NS4_NAUDIO_ENV_RELEASE_TIME : {
+						ui16NAudioChanMask |= uint16_t( 1 << (ui8Control - NS4_NAUDIO_ENV_ATTACK_TIME) );
+						break;
+					}
+					case NS4_NAUDIO_FINE_TUNE : {
+						ui16NAudioChanMask |= uint16_t( 1 << 5 );
+						break;
+					}
+					case NS4_NAUDIO_VIB_TYPE : {}
+					case NS4_NAUDIO_VIB_RATE : {}
+					case NS4_NAUDIO_VIB_DEPTH : {}
+					case NS4_NAUDIO_VIB_DELAY : {}
+					case NS4_NAUDIO_TREM_TYPE : {
+						ui16NAudioChanMask |= uint16_t( 1 << (ui8Control - NS4_NAUDIO_VIB_TYPE + 6) );
+						break;
+					}
+					case NS4_NAUDIO_TREM_RATE : {}
+					case NS4_NAUDIO_TREM_DEPTH : {}
+					case NS4_NAUDIO_TREM_DELAY : {
+						ui16NAudioChanMask |= uint16_t( 1 << (ui8Control - NS4_NAUDIO_TREM_RATE + 11) );
+						break;
+					}
+					case NS4_NAUDIO_OSC_RISE : {
+						ui16NAudioChanMask |= uint16_t( 1 << 14 );
+						break;
+					}
+					case NS4_NAUDIO_BEND_RANGE_CENTS : {
+						if ( !m_sSettings.ui32PitchRangeOverride ) {
+							ui16PitchBendRange = uint16_t( ui16PitchBendRange / 100 * 100 + ui8Val );
+						}
+						break;
+					}
+					case NS4_NAUDIO_BEND_RANGE_SEMITONES : {
+						if ( !m_sSettings.ui32PitchRangeOverride ) {
+							ui16PitchBendRange = uint16_t( ui16PitchBendRange % 100 + ui8Val * 100 );
+						}
+						break;
+					}
 				}
 			}
 		}
 		else if ( IsProgramChange( _teEvent ) ) {
 			ui8Program = GetProgramChange( _teEvent );
-			ui8NAudioEnvMask = 0;
+			ui16NAudioChanMask = 0;
 		}
 		else if ( IsTempo( _teEvent ) ) {
 			dTempo = GetTempo( _teEvent );

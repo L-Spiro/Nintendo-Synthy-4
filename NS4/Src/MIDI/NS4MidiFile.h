@@ -67,6 +67,19 @@
 #define NS4_NAUDIO_ENV_DECAY_TIME			0x16
 #define NS4_NAUDIO_ENV_DECAY_VOL			0x17
 #define NS4_NAUDIO_ENV_RELEASE_TIME			0x18
+#define NS4_NAUDIO_FINE_TUNE				0x02
+#define NS4_NAUDIO_VIB_TYPE					0x0B
+#define NS4_NAUDIO_VIB_RATE					0x0C
+#define NS4_NAUDIO_VIB_DEPTH				0x0D
+#define NS4_NAUDIO_VIB_DELAY				0x0E
+#define NS4_NAUDIO_TREM_TYPE				0x0F
+#define NS4_NAUDIO_TREM_RATE				0x11
+#define NS4_NAUDIO_TREM_DEPTH				0x12
+#define NS4_NAUDIO_TREM_DELAY				0x13
+#define NS4_NAUDIO_OSC_RISE					0x19
+#define NS4_NAUDIO_OVERRIDE_MASK			0x3FFF
+#define NS4_NAUDIO_USEC_PER_FRAME			16000
+#define NS4_NAUDIO_GAIN_CHANGE_TIME			1000
 
 
 namespace ns4 {
@@ -565,7 +578,7 @@ namespace ns4 {
 			/** If true, the ADSR for each sample is assumed to be part of the MIDI file, set by NS4_TRK_ADSR, held in the MIDI state. */
 			bool						bAdsrIsInMidi = false;
 
-			/** If true, Rare's later n_audio channel controls are used: 20-24 override the envelope (attack time, attack volume, decay time, decay volume, release time) until the next program change, and 3/4 set the pitch-bend range (cents/semitones). */
+			/** If true, Rare's later n_audio channel controls are used until the next program change: 20-24 override the envelope (attack time, attack volume, decay time, decay volume, release time), 2 is a fine tune, 11-14 override the vibrato (type, rate, depth, delay), 15 and 17-19 override the tremolo (type, rate, depth, delay), 25 is the oscillators' rise time, 1 sets the depth of sounding vibratos, and 3/4 set the pitch-bend range (cents/semitones).  Vibratos and tremolos use n_audio's oscillators. */
 			bool						bNAudioChannelControls = false;
 
 			/** If true, the NS4_C_LSB control is always set to 0. */
@@ -1745,7 +1758,7 @@ namespace ns4 {
 			int8_t						i8FineTune;
 			uint8_t						ui8Program;
 			uint8_t						ui8ChannelAfterTouch;
-			uint8_t						ui8NAudioEnvMask;
+			uint16_t					ui16NAudioChanMask;
 
 
 			/**
@@ -1790,7 +1803,7 @@ namespace ns4 {
 				dPitchScale = ui8State[NS4_TRK_SET_PITCH_SCALE] / 64.0;
 				ui8Program = 0;
 				ui8ChannelAfterTouch = 0;
-				ui8NAudioEnvMask = 0;
+				ui16NAudioChanMask = 0;
 				return (*this);
 			}
 
@@ -2266,6 +2279,338 @@ namespace ns4 {
 			uint8_t						ui8Mod;
 		};
 
+		/** Rare's n_audio vibrato/tremolo oscillator (Dinosaur Planet's amseq_initOscMain()/amseq_updateOscMain()), run on the sequencer's microsecond clock. */
+		struct NS4_NAUDIO_OSC {
+			NS4_NAUDIO_OSC() :
+				dUsPerTick( 0.0 ),
+				dTime( 0.0 ),
+				dNextUpdate( 0.0 ),
+				dGain( 1.0 ),
+				dGainTarget( 1.0 ),
+				dGainStep( 0.0 ),
+				fDepth( 0.0f ),
+				fOffset( 0.0f ),
+				fRise( 1.0f ),
+				fRiseStep( 0.0f ),
+				fValue( 0.0f ),
+				i32Interval( 0 ),
+				ui16Count( 0 ),
+				ui16Period( 0 ),
+				ui8Type( 0 ),
+				bActive( false ) {
+			}
+
+
+			// == Functions.
+			/**
+			 * Starts the oscillator (amseq_initOscMain()).
+			 *
+			 * \param _ui8Type The oscillator type.  Bit 0x80 makes it a vibrato (depth in cents); otherwise it is a tremolo.
+			 * \param _ui8Rate The rate (index into the game's rate table, 0-99).
+			 * \param _ui8Depth The depth.
+			 * \param _ui8Delay The delay (index into the envelope-time table).
+			 * \param _ui8Rise The rise time (index into the envelope-time table; 0 = no rise).
+			 * \param _uiMasterSamplingRate The master output sampling rate.
+			 * \return Returns true if the oscillator was started.
+			 */
+			bool						Init( uint8_t _ui8Type, uint8_t _ui8Rate, uint8_t _ui8Depth, uint8_t _ui8Delay, uint8_t _ui8Rise, uint32_t _uiMasterSamplingRate ) {
+				bActive = false;
+				if ( !_ui8Type ) { return false; }
+				if ( _ui8Rate > 99 ) { _ui8Rate = 99; }
+				if ( _ui8Delay > 127 ) { _ui8Delay = 127; }
+				if ( _ui8Rise > 127 ) { _ui8Rise = 127; }
+				if ( _ui8Rise == 0 ) {
+					fRise = 1.0f;
+					fRiseStep = 0.0f;
+				}
+				else {
+					fRise = 0.0f;
+					fRiseStep = 1.0f / (float( m_ui32NAudioEnvTimes[_ui8Rise] ) / float( NS4_NAUDIO_USEC_PER_FRAME ));
+				}
+				ui8Type = _ui8Type;
+				ui16Count = 0;
+				ui16Period = uint16_t( 1000000.0f / m_fNAudioOscRates[_ui8Rate] / float( NS4_NAUDIO_USEC_PER_FRAME ) );
+				i32Interval = NS4_NAUDIO_USEC_PER_FRAME;
+				float fDepthF = float( _ui8Depth );
+				if ( ui8Type & 0x80 ) {
+					fDepthF = Depth2Cents( _ui8Depth );
+				}
+				switch ( ui8Type & 0x7F ) {
+					case 2 : {}
+					case 3 : {}
+					case 4 : {}
+					case 5 : {
+						fDepth = fDepthF;
+						fOffset = (ui8Type & 0x7F) == 2 ? -fDepthF : 0.0f;
+						i32Interval = int32_t( 500000.0f / m_fNAudioOscRates[_ui8Rate] );
+						break;
+					}
+					case 6 : {}
+					case 8 : {}
+					case 11 : {}
+					case 12 : {
+						fOffset = 0.0f;
+						fDepth = fDepthF;
+						break;
+					}
+					case 7 : {}
+					case 9 : {}
+					case 13 : {
+						fOffset = fDepthF * 0.5f;
+						fDepth = fDepthF * 0.5f;
+						break;
+					}
+					case 10 : {
+						fOffset = -fDepthF;
+						fDepth = fDepthF * 2.0f;
+						break;
+					}
+					default : { return false; }
+				}
+				fValue = fOffset;
+				dUsPerTick = 1000000.0 / _uiMasterSamplingRate;
+				dTime = 0.0;
+				dNextUpdate = _ui8Delay ? double( m_ui32NAudioEnvTimes[_ui8Delay] ) : double( NS4_NAUDIO_USEC_PER_FRAME );
+				dGain = dGainTarget = TremoloGain();
+				dGainStep = 0.0;
+				bActive = true;
+				return true;
+			}
+
+			/**
+			 * Advances by 1 master sample.
+			 */
+			void						Tick() {
+				if ( !bActive ) { return; }
+				dTime += dUsPerTick;
+				while ( dTime >= dNextUpdate ) {
+					Update();
+					dNextUpdate += double( i32Interval );
+					if ( !(ui8Type & 0x80) ) {
+						double dNew = TremoloGain();
+						if ( dNew != dGainTarget ) {
+							dGainTarget = dNew;
+							dGainStep = (dGainTarget - dGain) / max( 1.0, double( NS4_NAUDIO_GAIN_CHANGE_TIME ) / dUsPerTick );
+						}
+					}
+				}
+				if ( dGain != dGainTarget ) {
+					dGain += dGainStep;
+					if ( (dGainStep >= 0.0 && dGain >= dGainTarget) || (dGainStep < 0.0 && dGain <= dGainTarget) ) {
+						dGain = dGainTarget;
+					}
+				}
+			}
+
+			/**
+			 * Applies the modulation wheel to a running vibrato (control 1).
+			 *
+			 * \param _ui8Mod The modulation-wheel value.
+			 */
+			void						SetModWheel( uint8_t _ui8Mod ) {
+				if ( !bActive || !(ui8Type & 0x80) ) { return; }
+				float fCents = Depth2Cents( uint8_t( _ui8Mod * 2 ) );
+				switch ( ui8Type & 0x7F ) {
+					case 2 : {
+						fOffset = -fCents;
+						fDepth = fCents;
+						break;
+					}
+					case 3 : {}
+					case 4 : {}
+					case 5 : {
+						fDepth = fCents;
+						break;
+					}
+					case 7 : {}
+					case 9 : {}
+					case 13 : {
+						fDepth = fCents / 2.0f;
+						break;
+					}
+					case 10 : {
+						fDepth = fCents * 2.0f;
+						break;
+					}
+					default : {
+						fDepth = fCents;
+					}
+				}
+			}
+
+			/**
+			 * Gets the vibrato's pitch ratio.
+			 *
+			 * \return Returns the factor by which to scale the pitch.
+			 */
+			double						Ratio() const {
+				if ( !bActive || !(ui8Type & 0x80) ) { return 1.0; }
+				return std::pow( 2.0, int32_t( fValue ) / 1200.0 );
+			}
+
+			/**
+			 * Gets the tremolo's gain.
+			 *
+			 * \return Returns the factor by which to scale the volume.
+			 */
+			double						Gain() const {
+				if ( !bActive || (ui8Type & 0x80) ) { return 1.0; }
+				return dGain;
+			}
+
+			/**
+			 * Converts a depth to cents (_depth2Cents()).
+			 *
+			 * \param _ui8Depth The depth to convert.
+			 * \return Returns the depth in cents.
+			 */
+			static float				Depth2Cents( uint8_t _ui8Depth ) {
+				float fX = 1.0309929847717f;
+				float fCents = 1.0f;
+				while ( _ui8Depth ) {
+					if ( _ui8Depth & 1 ) {
+						fCents *= fX;
+					}
+					fX *= fX;
+					_ui8Depth >>= 1;
+				}
+				return fCents;
+			}
+
+
+			// == Members.
+			/** Microseconds per master sample. */
+			double						dUsPerTick;
+			/** Microseconds since the note started. */
+			double						dTime;
+			/** The time of the next update in microseconds. */
+			double						dNextUpdate;
+			/** The current (ramping) tremolo gain. */
+			double						dGain;
+			/** The tremolo gain being ramped toward. */
+			double						dGainTarget;
+			/** The per-sample tremolo-gain ramp step. */
+			double						dGainStep;
+			/** The depth (unk0c). */
+			float						fDepth;
+			/** The offset (unk10). */
+			float						fOffset;
+			/** The rise level (unk18). */
+			float						fRise;
+			/** The rise step per update (unk1C). */
+			float						fRiseStep;
+			/** The current output (cents for vibrato, level offset for tremolo). */
+			float						fValue;
+			/** Microseconds between updates (unk08). */
+			int32_t						i32Interval;
+			/** The phase counter (unk14). */
+			uint16_t					ui16Count;
+			/** The period in updates (unk16). */
+			uint16_t					ui16Period;
+			/** The oscillator type (unk04). */
+			uint8_t						ui8Type;
+			/** Whether the oscillator is running. */
+			bool						bActive;
+
+
+		protected :
+			// == Functions.
+			/**
+			 * Runs 1 update (amseq_updateOscMain()).
+			 */
+			void						Update() {
+				float fPhase = 0.0f;
+				if ( (ui8Type & 0x7F) >= 6 ) {
+					++ui16Count;
+					if ( ui16Count >= ui16Period ) {
+						ui16Count = 0;
+					}
+					fPhase = float( ui16Count ) / float( ui16Period );
+				}
+				if ( fRiseStep != 0.0f ) {
+					fRise += fRiseStep;
+					if ( fRise >= 1.0f ) {
+						fRise = 1.0f;
+						fRiseStep = 0.0f;
+					}
+				}
+				float fD = fDepth;
+				if ( fRise != 1.0f ) {
+					fD *= fRise;
+				}
+				switch ( ui8Type & 0x7F ) {
+					case 2 : {}
+					case 3 : {}
+					case 4 : {}
+					case 5 : {
+						fPhase = ui16Count ? fD : fOffset;
+						ui16Count ^= 1;
+						break;
+					}
+					case 6 : {}
+					case 7 : {
+						fPhase = Triangle( fPhase, fD ) + fOffset;
+						break;
+					}
+					case 8 : {}
+					case 9 : {
+						fPhase = Sine( fPhase ) * fD + fOffset;
+						break;
+					}
+					case 10 : {}
+					case 11 : {
+						fPhase = fPhase * fD + fOffset;
+						break;
+					}
+					case 12 : {}
+					case 13 : {
+						float fTri = fOffset + Triangle( fPhase, fD );
+						fPhase = Sine( float( ui16Count ) / float( ui16Period ) ) * fD + fOffset;
+						fPhase = (fPhase + fTri) / 2.0f;
+						break;
+					}
+				}
+				fValue = fPhase;
+			}
+
+			/**
+			 * The triangle wave used by types 6, 7, 12, and 13.
+			 *
+			 * \param _fPhase The phase (0-1).
+			 * \param _fDepth The depth.
+			 * \return Returns the triangle-wave value.
+			 */
+			static float				Triangle( float _fPhase, float _fDepth ) {
+				if ( _fPhase < 0.25f ) {
+					return _fPhase * (4.0f * _fDepth);
+				}
+				if ( _fPhase >= 0.75f ) {
+					return (_fPhase - 0.75f) * (4.0f * _fDepth) - _fDepth;
+				}
+				return _fDepth - (_fPhase - 0.25f) * (4.0f * _fDepth);
+			}
+
+			/**
+			 * The sine wave used by types 8, 9, 12, and 13 (mathSinfInterp() on a 16-bit angle).
+			 *
+			 * \param _fPhase The phase (0-1).
+			 * \return Returns the sine of the phase.
+			 */
+			static float				Sine( float _fPhase ) {
+				int16_t i16Angle = int16_t( int32_t( _fPhase * 65536.0f ) );
+				return float( std::sin( i16Angle * (2.0 * 3.1415926535897932384626433832795 / 65536.0) ) );
+			}
+
+			/**
+			 * Gets the tremolo gain for the current output (the game stores it in a u8 and treats 127 as unity).
+			 *
+			 * \return Returns the tremolo gain.
+			 */
+			double						TremoloGain() const {
+				return uint8_t( int32_t( fValue + 127.0f ) ) / 127.0;
+			}
+		};
+
 		/** A note for rendering. */
 		struct NS4_NOTE {
 			uint32_t					ui32Id;
@@ -2288,6 +2633,8 @@ namespace ns4 {
 			NS4_VIBRATO					vVibrato;
 			NS4_TREMOLO					tTremolo;
 			NS4_MOD_LFO					mlModLfo;
+			NS4_NAUDIO_OSC				noVibOsc;
+			NS4_NAUDIO_OSC				noTremOsc;
 			uint32_t					ui32Hz;
 			uint32_t					ui32DustSettle;
 			int32_t						i32Base;
@@ -2357,6 +2704,8 @@ namespace ns4 {
 				vVibrato.Tick();
 				tTremolo.Tick();
 				mlModLfo.Tick();
+				noVibOsc.Tick();
+				noTremOsc.Tick();
 				if ( bActive ) {
 					dPitchBend = _dPitch;
 					dLinearPitchScale = _msCurState.dState[NS4_TRACK_PITCH_SCALE];
@@ -2387,6 +2736,7 @@ namespace ns4 {
 						dPitchMod) / 12.0 )
 					* vVibrato.Value()
 					* vaVibratoAdsr.Value()
+					* noVibOsc.Ratio()
 					* dLinearPitchScale;
 				if ( m_sSettings.dMaxRate != 0.0 ) {
 					dRate = min( m_sSettings.dMaxRate, dRate );
@@ -2478,6 +2828,9 @@ namespace ns4 {
 
 		/** Rare's n_audio envelope-time table (microseconds), indexed by controls 20 (attack), 22 (decay), and 24 (release). */
 		static const uint32_t			m_ui32NAudioEnvTimes[128];
+
+		/** Rare's n_audio oscillator-rate table (Hz), indexed by the vibrato/tremolo rate. */
+		static const float				m_fNAudioOscRates[100];
 
 
 		// == Functions.

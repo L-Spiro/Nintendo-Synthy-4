@@ -219,6 +219,23 @@ namespace ns4 {
 			uint32_t &_ui32Vol, uint32_t &_ui32Pan ) const;
 
 		/**
+		 * Gets a sample of an instrument by its index within the instrument.
+		 *
+		 * \param _ui32Bank The bank to scan.
+		 * \param _ui32Inst The instrument to match.
+		 * \param _ui32Sample The sample index within the instrument.
+		 * \return Returns the sample or nullptr if it is not found.
+		 */
+		const NS4_SAMPLE *				InstSample( uint32_t _ui32Bank, uint32_t _ui32Inst, uint32_t _ui32Sample ) const {
+			for ( auto I = m_vSamples.size(); I--; ) {
+				if ( m_vSamples[I].ui32Bank == _ui32Bank && m_vSamples[I].ui32Inst == _ui32Inst && m_vSamples[I].ui32Samp == _ui32Sample ) {
+					return &m_vSamples[I];
+				}
+			}
+			return nullptr;
+		}
+
+		/**
 		 * Gets an instrument pitch-bend range.
 		 *
 		 * \param _ui32Bank The bank to scan.
