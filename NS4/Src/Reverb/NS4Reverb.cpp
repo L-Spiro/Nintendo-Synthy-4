@@ -1540,11 +1540,21 @@ namespace ns4 {
 	NS4_DELAY_N64 CReverb::m_dn64DinosaurPlanet0[] = {
 		//ui32Input		ui32Output	i16FfCoef		i16FbCoef		i16Gain							 dRsInc						 dRsVal			i32RsDelta						dRsGain						ui16Fc
 		{         0,	       352,	    +9830,		    -9830,	          0 },
-		{       392,	      1600,	    +9054,		    -9830,	       2000,		                      0,	                      0,		        +0,		                      0,	/*0xDFF1CE80*/    1509 },
+		{       392,	      1600,	    +9830,		    -9054,	       2000,		                      0,	                      0,		        +0,		                      0,	/*0xDFF1CE80*/    1509 },
 		{       792,	      2552,	   +16384,		   -16384,	       4000,		                      0,	                      0,		        +0,		                      0,	/*0xDFF1CF20*/    2371 },
-		{      3192,	      5592,	   +21018,		   -16384,	       8000,		                      0,	                      0,		        +0,		                      0,	/*0xDFF1CFD0*/    2856 },
-		{      3368,	      4800,	    +8515,		    -8192,	      12000,		                      0,	                      0,		        +0,		                      0,	/*0xDFF1D070*/    4419 },
+		{      3192,	      5592,	   +16384,		   -21018,	       8000,		                      0,	                      0,		        +0,		                      0,	/*0xDFF1CFD0*/    2856 },
+		{      3368,	      4800,	    +8192,		    -8515,	      12000,		                      0,	                      0,		        +0,		                      0,	/*0xDFF1D070*/    4419 },
 		{         0,	      5920,	   +13000,		   -13000,	          0,		                      0,	                      0,		        +0,		                      0,	/*0xDFF1D120*/    8832 },
+	};
+
+	/** The right table for Dinosaur Planet. */
+	NS4_TABLE_REVERB CReverb::m_trDinosaurPlanetRight0 = {
+		NS4_TAPS( m_rtDinosaurPlanet0 ),
+		32767.0 / 32768.0,															// dTapVol
+		0,																			// i64TapOffset
+		NS4_NO_FADE,																// dTime
+		NS4_LPF( 1700.0, 33024.0 / 22018.0, 1.0e7, NS4_FILTER_DB_TO_ORDER( 12 ) ),	// dLpfFactor
+		NS4_NO_DELAY,
 	};
 
 	/** Taps harvested from All-Star Baseball 2000. */
@@ -2840,17 +2850,17 @@ namespace ns4 {
 		// Dinosaur Planet.
 		{
 			NS4_ONLY_COMB( 1.0, 0 ),
-			NS4_COMB( 6712, 368 / 2, m_dn64DinosaurPlanet0, 20.0 ),
+			NS4_COMB( 6248, 368 / 2, m_dn64DinosaurPlanet0, 20.0 ),
 		},	// 160
 		// Dinosaur Planet.
 		{
 			NS4_TAPS( m_rtDinosaurPlanet0 ),
-			NS4_SQRT_0_5,//0.56470172114050299,													// dTapVol
+			23170.0 / 32768.0,														// dTapVol
 			0,																		// i64TapOffset
-			NS4_FADE( 1.0, 3.0, 6.0 ),
-			NS4_LPF( 1509.0 /*22018.0 / std::pow( 2.0, 4.0 )*/, 10552.0 / 22018.0, 0.5, NS4_FILTER_DB_TO_ORDER( 6 ) ),														// dLpfFactor
+			NS4_NO_FADE,
+			NS4_LPF( 1700.0, 33024.0 / 22018.0, 1.0e7, NS4_FILTER_DB_TO_ORDER( 12 ) ),	// dLpfFactor
 			NS4_NO_DELAY,															// dDelayVol
-			nullptr,																// ptrSepReverb
+			&m_trDinosaurPlanetRight0,												// ptrSepReverb
 			false,																	// bSwapSrcChannels
 			false,																	// bSwapDstChannels
 			false,																	// bSwapSrcReverb
@@ -3185,10 +3195,10 @@ namespace ns4 {
 			}
 			if ( dFactor >= 1.0 / 0x7FFF ) {
 				if ( bLpfValid ) {
-					ns4::CWavLib::MixAndAddSamples( aRes, _ptThread->_tSrc, aLpf, dLpfFrac, dFinalVol, static_cast<int32_t>(dRealTime * _ptThread->_ui32FinalHz) );
+					ns4::CWavLib::MixAndAddSamples( aRes, _ptThread->_tSrc, aLpf, dLpfFrac, dFinalVol, static_cast<int32_t>(std::round( dRealTime * _ptThread->_ui32FinalHz )) );
 				}
 				else {
-					ns4::CWavLib::AddSamples( aRes, _ptThread->_tSrc, dFinalVol, static_cast<int32_t>(dRealTime * _ptThread->_ui32FinalHz) );
+					ns4::CWavLib::AddSamples( aRes, _ptThread->_tSrc, dFinalVol, static_cast<int32_t>(std::round( dRealTime * _ptThread->_ui32FinalHz )) );
 				}
 			}
 		}

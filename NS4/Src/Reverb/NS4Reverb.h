@@ -619,6 +619,9 @@ namespace ns4 {
 		/** The comb filter delay lines for Dinosaur Planet. */
 		static NS4_DELAY_N64					m_dn64DinosaurPlanet0[];
 
+		/** The right table for Dinosaur Planet. */
+		static NS4_TABLE_REVERB					m_trDinosaurPlanetRight0;
+
 		/** Taps harvested from All-Star Baseball 2000. */
 		static NS4_REVERB_TAP					m_rtAllStarBaseball20000[];
 

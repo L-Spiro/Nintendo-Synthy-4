@@ -3,18 +3,18 @@
 //#define NS4_YEAR							u8"2002"
 #define NS4_FOLDER							u8"Dinosaur Planet"
 #define NS4_BANK							u8"02"
-#define NS4_REVERB_TRACKS					1
+#define NS4_REVERB_TRACKS					2
 #define NS4_REVERB							ns4::CReverb::NS4_T_DINOSAUR_PLANET_0
 #define NS4_ORIG_HZ							22018
 #define NS4_Q_MIN							1.0
 #define NS4_CURVE							20.0
 #define NS4_OUT_DIRECTORY					u8"C:\\N64OST\\Dinosaur Planet\\"
 #define NS4_OUT_DIRECTORY_NUMBERS			NS4_OUT_DIRECTORY u8"Numbered\\"
-#define NS4_WET_FILTER_FREQ					8832.0//(NS4_ORIG_HZ / std::pow( 2.0, 3.35 ))
+#define NS4_WET_FILTER_FREQ					(NS4_ORIG_HZ / 2.0)//(NS4_ORIG_HZ / std::pow( 2.0, 3.35 ))
 #define NS4_WET_FILTER_ORDER				NS4_FILTER_DB_TO_ORDER( 6 )
 #define NS4_VIB_SCALE						2.0
 //#define NS4_OVERSAMPLING_BW					3500.0
-#define NS4_ENV_MULTIPLIER					(1.0 / 3.0)
+#define NS4_ENV_MULTIPLIER					(1.0 / 1.0)
 #define NS4_NAUDIO_CHANNEL_CONTROLS			true
 #define NS4_MASTER_VOL_CONTROL				0
 #define NS4_WET_CONTROL						0
@@ -35,7 +35,7 @@
 { u8"Dinosaur Planet (Proto) 00000003 000B0740.mid", u8"Dinosaur Planet (Proto) 00000003 000B0740.mid TrackParseDebug.txt", u8"A Meteor Hits Moon Mountain Pass", 0 },
 { u8"Dinosaur Planet (Proto) 00000004 000B0EE4.mid", u8"Dinosaur Planet (Proto) 00000004 000B0EE4.mid TrackParseDebug.txt", u8"EarthWalker Temple", 0 },
 { u8"Dinosaur Planet (Proto) 00000005 000B3458.mid", u8"Dinosaur Planet (Proto) 00000005 000B3458.mid TrackParseDebug.txt", u8"Swapstone Circle Cutscene", 0 },
-{ u8"Dinosaur Planet (Proto) 00000006 000B4214.mid", u8"Dinosaur Planet (Proto) 00000006 000B4214.mid TrackParseDebug.txt", u8"Track 06", 0 },
+{ u8"Dinosaur Planet (Proto) 00000006 000B4214.mid", u8"Dinosaur Planet (Proto) 00000006 000B4214.mid TrackParseDebug.txt", u8"Track 06", 0 },      // Sparse07.
 { u8"Dinosaur Planet (Proto) 00000007 000B54BC.mid", u8"Dinosaur Planet (Proto) 00000007 000B54BC.mid TrackParseDebug.txt", u8"Hostile Area", 0 },
 { u8"Dinosaur Planet (Proto) 00000008 000B629C.mid", u8"Dinosaur Planet (Proto) 00000008 000B629C.mid TrackParseDebug.txt", u8"Sabre Freezing by the Campfire", 0 },
 { u8"Dinosaur Planet (Proto) 00000009 000B74A0.mid", u8"Dinosaur Planet (Proto) 00000009 000B74A0.mid TrackParseDebug.txt", u8"Opening Sequence", 0 },
@@ -145,7 +145,7 @@
 
 //{ u8"Dinosaur Planet (Proto) 0000006E 00159D20.mid", u8"Dinosaur Planet (Proto) 0000006E 00159D20.mid TrackParseDebug.txt", u8"Track 6E", 0 },
 //{ u8"Dinosaur Planet (Proto) 0000006F 00159EB8.mid", u8"Dinosaur Planet (Proto) 0000006F 00159EB8.mid TrackParseDebug.txt", u8"Track 6F", 0 },
-{ u8"Dinosaur Planet (Proto) 00000070 00159F1C.mid", u8"Dinosaur Planet (Proto) 00000070 00159F1C.mid TrackParseDebug.txt", u8"Track 70", 0 },
+/*{ u8"Dinosaur Planet (Proto) 00000070 00159F1C.mid", u8"Dinosaur Planet (Proto) 00000070 00159F1C.mid TrackParseDebug.txt", u8"Track 70", 0 },
 { u8"Dinosaur Planet (Proto) 00000071 0015AC2C.mid", u8"Dinosaur Planet (Proto) 00000071 0015AC2C.mid TrackParseDebug.txt", u8"Track 71", 0 },
 { u8"Dinosaur Planet (Proto) 00000072 00160948.mid", u8"Dinosaur Planet (Proto) 00000072 00160948.mid TrackParseDebug.txt", u8"Track 72", 0 },
 { u8"Dinosaur Planet (Proto) 00000073 001631D4.mid", u8"Dinosaur Planet (Proto) 00000073 001631D4.mid TrackParseDebug.txt", u8"Track 73", 0 },
@@ -182,3 +182,4 @@
 { u8"Dinosaur Planet (Proto) 00000092 001B8D80.mid", u8"Dinosaur Planet (Proto) 00000092 001B8D80.mid TrackParseDebug.txt", u8"Track 92", 0 },
 { u8"Dinosaur Planet (Proto) 00000093 001BAC48.mid", u8"Dinosaur Planet (Proto) 00000093 001BAC48.mid TrackParseDebug.txt", u8"Track 93", 0 },
 { u8"Dinosaur Planet (Proto) 00000094 001BC614.mid", u8"Dinosaur Planet (Proto) 00000094 001BC614.mid TrackParseDebug.txt", u8"Track 94", 0 },
+*/
