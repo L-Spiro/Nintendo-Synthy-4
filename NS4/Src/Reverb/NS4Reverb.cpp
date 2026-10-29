@@ -28,6 +28,8 @@
 #define NS4_BT_FADE				NS4_FADE( 1.0, 0.25, 5.5 )
 #define NS4_BT_FILTER			NS4_NO_LPF//NS4_LPF( 22047.0 / std::pow( 2.0, 2.25 ), 0.75, 0.25, NS4_FILTER_DB_TO_ORDER( 6 ) )
 
+#define NS4_DINOP_FADE			NS4_FADE( 1.0, 3.0, 6.0 )
+
 
 #ifndef min
 #define min(a,b)				(((a) < (b)) ? (a) : (b))
@@ -1552,7 +1554,7 @@ namespace ns4 {
 		NS4_TAPS( m_rtDinosaurPlanet0 ),
 		32767.0 / 32768.0,															// dTapVol
 		0,																			// i64TapOffset
-		NS4_NO_FADE,																// dTime
+		NS4_DINOP_FADE,																// dTime
 		NS4_LPF( 1700.0, 33024.0 / 22018.0, 1.0e7, NS4_FILTER_DB_TO_ORDER( 12 ) ),	// dLpfFactor
 		NS4_NO_DELAY,
 	};
@@ -2857,7 +2859,7 @@ namespace ns4 {
 			NS4_TAPS( m_rtDinosaurPlanet0 ),
 			23170.0 / 32768.0,														// dTapVol
 			0,																		// i64TapOffset
-			NS4_NO_FADE,
+			NS4_DINOP_FADE,
 			NS4_LPF( 1700.0, 33024.0 / 22018.0, 1.0e7, NS4_FILTER_DB_TO_ORDER( 12 ) ),	// dLpfFactor
 			NS4_NO_DELAY,															// dDelayVol
 			&m_trDinosaurPlanetRight0,												// ptrSepReverb

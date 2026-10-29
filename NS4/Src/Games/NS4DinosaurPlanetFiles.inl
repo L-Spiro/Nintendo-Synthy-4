@@ -29,122 +29,146 @@
 #define NS4_ANTI_ALIASING_LEVEL				2
 #define NS4_ANTI_ALIASING_HZ				20000.0
 
-//{ u8"Dinosaur Planet (Proto) 00000000 000AF688.mid", u8"Dinosaur Planet (Proto) 00000000 000AF688.mid TrackParseDebug.txt", u8"Track 00", 0 },
-//{ u8"Dinosaur Planet (Proto) 00000001 000AF6EC.mid", u8"Dinosaur Planet (Proto) 00000001 000AF6EC.mid TrackParseDebug.txt", u8"Track 01", 0 },
-{ u8"Dinosaur Planet (Proto) 00000002 000AF750.mid", u8"Dinosaur Planet (Proto) 00000002 000AF750.mid TrackParseDebug.txt", u8"Cape Claw", 0 },
-{ u8"Dinosaur Planet (Proto) 00000003 000B0740.mid", u8"Dinosaur Planet (Proto) 00000003 000B0740.mid TrackParseDebug.txt", u8"A Meteor Hits Moon Mountain Pass", 0 },
-{ u8"Dinosaur Planet (Proto) 00000004 000B0EE4.mid", u8"Dinosaur Planet (Proto) 00000004 000B0EE4.mid TrackParseDebug.txt", u8"EarthWalker Temple", 0 },
-{ u8"Dinosaur Planet (Proto) 00000005 000B3458.mid", u8"Dinosaur Planet (Proto) 00000005 000B3458.mid TrackParseDebug.txt", u8"Swapstone Circle Cutscene", 0 },
-{ u8"Dinosaur Planet (Proto) 00000006 000B4214.mid", u8"Dinosaur Planet (Proto) 00000006 000B4214.mid TrackParseDebug.txt", u8"Track 06", 0 },      // Sparse07.
-{ u8"Dinosaur Planet (Proto) 00000007 000B54BC.mid", u8"Dinosaur Planet (Proto) 00000007 000B54BC.mid TrackParseDebug.txt", u8"Hostile Area", 0 },
-{ u8"Dinosaur Planet (Proto) 00000008 000B629C.mid", u8"Dinosaur Planet (Proto) 00000008 000B629C.mid TrackParseDebug.txt", u8"Sabre Freezing by the Campfire", 0 },
+
+
+
+
+
+{ u8"Dinosaur Planet (Proto) 0000005E 00142D60.mid", u8"Dinosaur Planet (Proto) 0000005E 00142D60.mid TrackParseDebug.txt", u8"Title Theme (Main Menu)", 0 },
 { u8"Dinosaur Planet (Proto) 00000009 000B74A0.mid", u8"Dinosaur Planet (Proto) 00000009 000B74A0.mid TrackParseDebug.txt", u8"Opening Sequence", 0 },
-{ u8"Dinosaur Planet (Proto) 0000000A 000B7CF0.mid", u8"Dinosaur Planet (Proto) 0000000A 000B7CF0.mid TrackParseDebug.txt", u8"Crashing into the Hot Spring", 0 },
-{ u8"Dinosaur Planet (Proto) 0000000B 000B88DC.mid", u8"Dinosaur Planet (Proto) 0000000B 000B88DC.mid TrackParseDebug.txt", u8"CloudRunner Fortress", 0 },
-{ u8"Dinosaur Planet (Proto) 0000000C 000B96D4.mid", u8"Dinosaur Planet (Proto) 0000000C 000B96D4.mid TrackParseDebug.txt", u8"Track 0C", 0 },
-{ u8"Dinosaur Planet (Proto) 0000000D 000BA5D8.mid", u8"Dinosaur Planet (Proto) 0000000D 000BA5D8.mid TrackParseDebug.txt", u8"Krystal Tied to the LightFoot Totem Pole", 0 },
-{ u8"Dinosaur Planet (Proto) 0000000E 000BAEB4.mid", u8"Dinosaur Planet (Proto) 0000000E 000BAEB4.mid TrackParseDebug.txt", u8"Track 0E", 0 },
-{ u8"Dinosaur Planet (Proto) 0000000F 000BBEB0.mid", u8"Dinosaur Planet (Proto) 0000000F 000BBEB0.mid TrackParseDebug.txt", u8"Volcano Force Point Temple", 0 },
-{ u8"Dinosaur Planet (Proto) 00000010 000BD500.mid", u8"Dinosaur Planet (Proto) 00000010 000BD500.mid TrackParseDebug.txt", u8"Klanadack Battle", 0 },
-{ u8"Dinosaur Planet (Proto) 00000011 000BEE04.mid", u8"Dinosaur Planet (Proto) 00000011 000BEE04.mid TrackParseDebug.txt", u8"SwapStone Hollow (SwapStone Circle)", 0 },
-{ u8"Dinosaur Planet (Proto) 00000012 000C19DC.mid", u8"Dinosaur Planet (Proto) 00000012 000C19DC.mid TrackParseDebug.txt", u8"Track 12", 0 },
-{ u8"Dinosaur Planet (Proto) 00000013 000C2818.mid", u8"Dinosaur Planet (Proto) 00000013 000C2818.mid TrackParseDebug.txt", u8"Track 13", 0 },
-{ u8"Dinosaur Planet (Proto) 00000014 000CA6BC.mid", u8"Dinosaur Planet (Proto) 00000014 000CA6BC.mid TrackParseDebug.txt", u8"Track 14", 0 },
-{ u8"Dinosaur Planet (Proto) 00000015 000CC074.mid", u8"Dinosaur Planet (Proto) 00000015 000CC074.mid TrackParseDebug.txt", u8"Track 15", 0 },
-{ u8"Dinosaur Planet (Proto) 00000016 000CE454.mid", u8"Dinosaur Planet (Proto) 00000016 000CE454.mid TrackParseDebug.txt", u8"Docking the Galleon at Warlock Mountain", 0 },
-{ u8"Dinosaur Planet (Proto) 00000017 000D0474.mid", u8"Dinosaur Planet (Proto) 00000017 000D0474.mid TrackParseDebug.txt", u8"Track 17", 0 },
-{ u8"Dinosaur Planet (Proto) 00000018 000D0F38.mid", u8"Dinosaur Planet (Proto) 00000018 000D0F38.mid TrackParseDebug.txt", u8"LightFoot Village Battle", 0 },
-{ u8"Dinosaur Planet (Proto) 00000019 000D1800.mid", u8"Dinosaur Planet (Proto) 00000019 000D1800.mid TrackParseDebug.txt", u8"Track 19", 0 },
-{ u8"Dinosaur Planet (Proto) 0000001A 000D2970.mid", u8"Dinosaur Planet (Proto) 0000001A 000D2970.mid TrackParseDebug.txt", u8"GuardClaw Theme", 0 },
-{ u8"Dinosaur Planet (Proto) 0000001B 000D3E34.mid", u8"Dinosaur Planet (Proto) 0000001B 000D3E34.mid TrackParseDebug.txt", u8"Losing the Snow Bike Slope Race", 0 },
-{ u8"Dinosaur Planet (Proto) 0000001C 000D4214.mid", u8"Dinosaur Planet (Proto) 0000001C 000D4214.mid TrackParseDebug.txt", u8"Golden Plains", 0 },
-{ u8"Dinosaur Planet (Proto) 0000001D 000D6660.mid", u8"Dinosaur Planet (Proto) 0000001D 000D6660.mid TrackParseDebug.txt", u8"Riding the Galleon to Warlock Mountain", 0 },
-{ u8"Dinosaur Planet (Proto) 0000001E 000D6E34.mid", u8"Dinosaur Planet (Proto) 0000001E 000D6E34.mid TrackParseDebug.txt", u8"Track 1E", 0 },
-{ u8"Dinosaur Planet (Proto) 0000001F 000D8984.mid", u8"Dinosaur Planet (Proto) 0000001F 000D8984.mid TrackParseDebug.txt", u8"Track 1F", 0 },
-{ u8"Dinosaur Planet (Proto) 00000020 000DBC5C.mid", u8"Dinosaur Planet (Proto) 00000020 000DBC5C.mid TrackParseDebug.txt", u8"General Scales", 0 },
+{ u8"Dinosaur Planet (Proto) 00000014 000CA6BC.mid", u8"Dinosaur Planet (Proto) 00000014 000CA6BC.mid TrackParseDebug.txt", u8"The Galleon Attacks Krystal", 0 },
 { u8"Dinosaur Planet (Proto) 00000021 000DD66C.mid", u8"Dinosaur Planet (Proto) 00000021 000DD66C.mid TrackParseDebug.txt", u8"Galleon Battle", 0 },
-{ u8"Dinosaur Planet (Proto) 00000022 000DEB0C.mid", u8"Dinosaur Planet (Proto) 00000022 000DEB0C.mid TrackParseDebug.txt", u8"Krazoa Palace", 0 },
-{ u8"Dinosaur Planet (Proto) 00000023 000DF8D0.mid", u8"Dinosaur Planet (Proto) 00000023 000DF8D0.mid TrackParseDebug.txt", u8"Arriving at SwapStone Circle", 0 },
-{ u8"Dinosaur Planet (Proto) 00000024 000E0CC8.mid", u8"Dinosaur Planet (Proto) 00000024 000E0CC8.mid TrackParseDebug.txt", u8"Snow Bike Slope Race", 0 },
-{ u8"Dinosaur Planet (Proto) 00000025 000E137C.mid", u8"Dinosaur Planet (Proto) 00000025 000E137C.mid TrackParseDebug.txt", u8"Warlock Mountain Warp Arch Appears", 0 },
-{ u8"Dinosaur Planet (Proto) 00000026 000E2878.mid", u8"Dinosaur Planet (Proto) 00000026 000E2878.mid TrackParseDebug.txt", u8"General Scales Takes the Galleon", 0 },
-{ u8"Dinosaur Planet (Proto) 00000027 000E39C4.mid", u8"Dinosaur Planet (Proto) 00000027 000E39C4.mid TrackParseDebug.txt", u8"Track 27", 0 },
-{ u8"Dinosaur Planet (Proto) 00000028 000E4990.mid", u8"Dinosaur Planet (Proto) 00000028 000E4990.mid TrackParseDebug.txt", u8"Confronting Tricky’s Captors", 0 },
-{ u8"Dinosaur Planet (Proto) 00000029 000E5AA0.mid", u8"Dinosaur Planet (Proto) 00000029 000E5AA0.mid TrackParseDebug.txt", u8"Track 29", 0 },
-{ u8"Dinosaur Planet (Proto) 0000002A 000E8348.mid", u8"Dinosaur Planet (Proto) 0000002A 000E8348.mid TrackParseDebug.txt", u8"Entering Krazoa Test", 0 },
-{ u8"Dinosaur Planet (Proto) 0000002B 000E8570.mid", u8"Dinosaur Planet (Proto) 0000002B 000E8570.mid TrackParseDebug.txt", u8"Krazoa Shrine", 0 },
-{ u8"Dinosaur Planet (Proto) 0000002C 000EB74C.mid", u8"Dinosaur Planet (Proto) 0000002C 000EB74C.mid TrackParseDebug.txt", u8"Krazoa Test of Combat", 0 },
-{ u8"Dinosaur Planet (Proto) 0000002D 000EBEA4.mid", u8"Dinosaur Planet (Proto) 0000002D 000EBEA4.mid TrackParseDebug.txt", u8"Krazoa Test of Strength", 0 },
-{ u8"Dinosaur Planet (Proto) 0000002E 000EC8C8.mid", u8"Dinosaur Planet (Proto) 0000002E 000EC8C8.mid TrackParseDebug.txt", u8"Krazoa Test of Fear", 0 },
-{ u8"Dinosaur Planet (Proto) 0000002F 000ED6E0.mid", u8"Dinosaur Planet (Proto) 0000002F 000ED6E0.mid TrackParseDebug.txt", u8"Krazoa Test of Skill", 0 },
-{ u8"Dinosaur Planet (Proto) 00000030 000EE288.mid", u8"Dinosaur Planet (Proto) 00000030 000EE288.mid TrackParseDebug.txt", u8"Krazoa Test of Knowledge", 0 },
-{ u8"Dinosaur Planet (Proto) 00000031 000F04C8.mid", u8"Dinosaur Planet (Proto) 00000031 000F04C8.mid TrackParseDebug.txt", u8"SwapStone Hollow (SwapStone Circle)", 0 },
-{ u8"Dinosaur Planet (Proto) 00000032 000F3030.mid", u8"Dinosaur Planet (Proto) 00000032 000F3030.mid TrackParseDebug.txt", u8"Riding a SnowHorn", 0 },
-{ u8"Dinosaur Planet (Proto) 00000033 000F4790.mid", u8"Dinosaur Planet (Proto) 00000033 000F4790.mid TrackParseDebug.txt", u8"Krazoa Test of Sacrifice", 0 },
-{ u8"Dinosaur Planet (Proto) 00000034 000F5470.mid", u8"Dinosaur Planet (Proto) 00000034 000F5470.mid TrackParseDebug.txt", u8"Warlock Mountain’s Krazoa Secrets", 0 },
-//{ u8"Dinosaur Planet (Proto) 00000035 000F71CC.mid", u8"Dinosaur Planet (Proto) 00000035 000F71CC.mid TrackParseDebug.txt", u8"Track 35", 0 },
-//{ u8"Dinosaur Planet (Proto) 00000036 000F7230.mid", u8"Dinosaur Planet (Proto) 00000036 000F7230.mid TrackParseDebug.txt", u8"Track 36", 0 },
-{ u8"Dinosaur Planet (Proto) 00000037 000F7294.mid", u8"Dinosaur Planet (Proto) 00000037 000F7294.mid TrackParseDebug.txt", u8"Desert Force Point Temple (All Instruments)", 0 },
-//{ u8"Dinosaur Planet (Proto) 00000038 000F8C98.mid", u8"Dinosaur Planet (Proto) 00000038 000F8C98.mid TrackParseDebug.txt", u8"Track 38", 0 },
-//{ u8"Dinosaur Planet (Proto) 00000039 000F8CFC.mid", u8"Dinosaur Planet (Proto) 00000039 000F8CFC.mid TrackParseDebug.txt", u8"Track 39", 0 },
-{ u8"Dinosaur Planet (Proto) 0000003A 000F8D60.mid", u8"Dinosaur Planet (Proto) 0000003A 000F8D60.mid TrackParseDebug.txt", u8"Track 3A", 0 },
-{ u8"Dinosaur Planet (Proto) 0000003B 000FB060.mid", u8"Dinosaur Planet (Proto) 0000003B 000FB060.mid TrackParseDebug.txt", u8"Galadon Battle Phase 1", 0 },
-//{ u8"Dinosaur Planet (Proto) 0000003C 000FDFBC.mid", u8"Dinosaur Planet (Proto) 0000003C 000FDFBC.mid TrackParseDebug.txt", u8"Track 3C", 0 },
-//{ u8"Dinosaur Planet (Proto) 0000003D 000FE020.mid", u8"Dinosaur Planet (Proto) 0000003D 000FE020.mid TrackParseDebug.txt", u8"Track 3D", 0 },
-//{ u8"Dinosaur Planet (Proto) 0000003E 000FE084.mid", u8"Dinosaur Planet (Proto) 0000003E 000FE084.mid TrackParseDebug.txt", u8"Track 3E", 0 },
-{ u8"Dinosaur Planet (Proto) 0000003F 000FE0E8.mid", u8"Dinosaur Planet (Proto) 0000003F 000FE0E8.mid TrackParseDebug.txt", u8"Discovery Falls (All Instruments)", 0 },
-//{ u8"Dinosaur Planet (Proto) 00000040 0010148C.mid", u8"Dinosaur Planet (Proto) 00000040 0010148C.mid TrackParseDebug.txt", u8"Track 40", 0 },
-{ u8"Dinosaur Planet (Proto) 00000041 001014F0.mid", u8"Dinosaur Planet (Proto) 00000041 001014F0.mid TrackParseDebug.txt", u8"Darkice Mines Theme", 0 },
-//{ u8"Dinosaur Planet (Proto) 00000042 0010A37C.mid", u8"Dinosaur Planet (Proto) 00000042 0010A37C.mid TrackParseDebug.txt", u8"Track 42", 0 },
-{ u8"Dinosaur Planet (Proto) 00000043 0010A3E0.mid", u8"Dinosaur Planet (Proto) 00000043 0010A3E0.mid TrackParseDebug.txt", u8"Galadon Battle Phase 2 (More Intense)", 0 },
-{ u8"Dinosaur Planet (Proto) 00000044 0010BDC4.mid", u8"Dinosaur Planet (Proto) 00000044 0010BDC4.mid TrackParseDebug.txt", u8"Walled City (All Instruments)", 0 },	// Walled City
-//{ u8"Dinosaur Planet (Proto) 00000045 0011344C.mid", u8"Dinosaur Planet (Proto) 00000045 0011344C.mid TrackParseDebug.txt", u8"Track 45", 0 },
-{ u8"Dinosaur Planet (Proto) 00000046 001134B0.mid", u8"Dinosaur Planet (Proto) 00000046 001134B0.mid TrackParseDebug.txt", u8"Fast Drum Beat", 0 },
-//{ u8"Dinosaur Planet (Proto) 00000047 00113B28.mid", u8"Dinosaur Planet (Proto) 00000047 00113B28.mid TrackParseDebug.txt", u8"Track 47", 0 },
-{ u8"Dinosaur Planet (Proto) 00000048 00113B8C.mid", u8"Dinosaur Planet (Proto) 00000048 00113B8C.mid TrackParseDebug.txt", u8"Galadon Battle Phase 2", 0 },
-{ u8"Dinosaur Planet (Proto) 00000049 00115560.mid", u8"Dinosaur Planet (Proto) 00000049 00115560.mid TrackParseDebug.txt", u8"Lava Path to Northern Wastes", 0 },
-//{ u8"Dinosaur Planet (Proto) 0000004A 0011731C.mid", u8"Dinosaur Planet (Proto) 0000004A 0011731C.mid TrackParseDebug.txt", u8"Track 4A", 0 },
-{ u8"Dinosaur Planet (Proto) 0000004B 00117380.mid", u8"Dinosaur Planet (Proto) 0000004B 00117380.mid TrackParseDebug.txt", u8"Escaping the Conveyor Belt", 0 },
-{ u8"Dinosaur Planet (Proto) 0000004C 001176F0.mid", u8"Dinosaur Planet (Proto) 0000004C 001176F0.mid TrackParseDebug.txt", u8"Darkice Mines Waterfall Cave", 0 },
-{ u8"Dinosaur Planet (Proto) 0000004D 0011DDAC.mid", u8"Dinosaur Planet (Proto) 0000004D 0011DDAC.mid TrackParseDebug.txt", u8"Darkice Mines Conveyor Belt", 0 },
-//{ u8"Dinosaur Planet (Proto) 0000004E 0011F044.mid", u8"Dinosaur Planet (Proto) 0000004E 0011F044.mid TrackParseDebug.txt", u8"Track 4E", 0 },
-{ u8"Dinosaur Planet (Proto) 0000004F 0011F0A8.mid", u8"Dinosaur Planet (Proto) 0000004F 0011F0A8.mid TrackParseDebug.txt", u8"CloudRunner Fortress Snow Bike Chase", 0 },
-{ u8"Dinosaur Planet (Proto) 00000050 0011FC7C.mid", u8"Dinosaur Planet (Proto) 00000050 0011FC7C.mid TrackParseDebug.txt", u8"Entering CloudRunner Fortress", 0 },
-{ u8"Dinosaur Planet (Proto) 00000051 001204E0.mid", u8"Dinosaur Planet (Proto) 00000051 001204E0.mid TrackParseDebug.txt", u8"Track 51", 0 },
-{ u8"Dinosaur Planet (Proto) 00000052 00122EE4.mid", u8"Dinosaur Planet (Proto) 00000052 00122EE4.mid TrackParseDebug.txt", u8"Track 52", 0 },
-{ u8"Dinosaur Planet (Proto) 00000053 001234A4.mid", u8"Dinosaur Planet (Proto) 00000053 001234A4.mid TrackParseDebug.txt", u8"Warlock Mountain Waters", 0 },
-{ u8"Dinosaur Planet (Proto) 00000054 0012C174.mid", u8"Dinosaur Planet (Proto) 00000054 0012C174.mid TrackParseDebug.txt", u8"Track 54", 0 },
-{ u8"Dinosaur Planet (Proto) 00000055 0012FBC4.mid", u8"Dinosaur Planet (Proto) 00000055 0012FBC4.mid TrackParseDebug.txt", u8"Protect The Eggs", 0 },
-{ u8"Dinosaur Planet (Proto) 00000056 00130CA0.mid", u8"Dinosaur Planet (Proto) 00000056 00130CA0.mid TrackParseDebug.txt", u8"Track 56", 0 },
-{ u8"Dinosaur Planet (Proto) 00000057 0013103C.mid", u8"Dinosaur Planet (Proto) 00000057 0013103C.mid TrackParseDebug.txt", u8"Diamond Bay (All Instruments)", 0 },
+{ u8"Dinosaur Planet (Proto) 00000007 000B54BC.mid", u8"Dinosaur Planet (Proto) 00000007 000B54BC.mid TrackParseDebug.txt", u8"Hostile Area", 0 },
+{ u8"Dinosaur Planet (Proto) 00000020 000DBC5C.mid", u8"Dinosaur Planet (Proto) 00000020 000DBC5C.mid TrackParseDebug.txt", u8"General Scales", 0 },
+{ u8"Dinosaur Planet (Proto) 0000001D 000D6660.mid", u8"Dinosaur Planet (Proto) 0000001D 000D6660.mid TrackParseDebug.txt", u8"Riding the Galleon to Warlock Mountain", 0 },
+{ u8"Dinosaur Planet (Proto) 00000016 000CE454.mid", u8"Dinosaur Planet (Proto) 00000016 000CE454.mid TrackParseDebug.txt", u8"Docking the Galleon at Warlock Mountain", 0 },
 { u8"Dinosaur Planet (Proto) 00000058 00133884.mid", u8"Dinosaur Planet (Proto) 00000058 00133884.mid TrackParseDebug.txt", u8"Warlock Mountain Outside Ambience", 0 },
-{ u8"Dinosaur Planet (Proto) 00000059 00139A50.mid", u8"Dinosaur Planet (Proto) 00000059 00139A50.mid TrackParseDebug.txt", u8"Track 59", 0 },
+// Warlock Mountain Tunnel Ambience
+{ u8"Dinosaur Planet (Proto) 00000027 000E39C4.mid", u8"Dinosaur Planet (Proto) 00000027 000E39C4.mid TrackParseDebug.txt", u8"Dying EarthWalker", 0 },
+{ u8"Dinosaur Planet (Proto) 00000034 000F5470.mid", u8"Dinosaur Planet (Proto) 00000034 000F5470.mid TrackParseDebug.txt", u8"Warlock Mountain’s Krazoa Secrets", 0 },
+{ u8"Dinosaur Planet (Proto) 00000026 000E2878.mid", u8"Dinosaur Planet (Proto) 00000026 000E2878.mid TrackParseDebug.txt", u8"General Scales Takes the Galleon", 0 },
+{ u8"Dinosaur Planet (Proto) 00000023 000DF8D0.mid", u8"Dinosaur Planet (Proto) 00000023 000DF8D0.mid TrackParseDebug.txt", u8"Arriving at SwapStone Circle", 0 },
+{ u8"Dinosaur Planet (Proto) 00000008 000B629C.mid", u8"Dinosaur Planet (Proto) 00000008 000B629C.mid TrackParseDebug.txt", u8"Sabre Freezing by the Campfire", 0 },
+{ u8"Dinosaur Planet (Proto) 0000003A 000F8D60.mid", u8"Dinosaur Planet (Proto) 0000003A 000F8D60.mid TrackParseDebug.txt", u8"SnowHorn Wastes", 0 },
+{ u8"Dinosaur Planet (Proto) 00000028 000E4990.mid", u8"Dinosaur Planet (Proto) 00000028 000E4990.mid TrackParseDebug.txt", u8"Confronting Tricky’s Captors", 0 },
+{ u8"Dinosaur Planet (Proto) 00000024 000E0CC8.mid", u8"Dinosaur Planet (Proto) 00000024 000E0CC8.mid TrackParseDebug.txt", u8"Snow Bike Slope Race", 0 },
+{ u8"Dinosaur Planet (Proto) 0000001B 000D3E34.mid", u8"Dinosaur Planet (Proto) 0000001B 000D3E34.mid TrackParseDebug.txt", u8"Losing the Snow Bike Slope Race", 0 },
+{ u8"Dinosaur Planet (Proto) 0000000A 000B7CF0.mid", u8"Dinosaur Planet (Proto) 0000000A 000B7CF0.mid TrackParseDebug.txt", u8"Crashing into the Hot Spring", 0 },
+{ u8"Dinosaur Planet (Proto) 0000001A 000D2970.mid", u8"Dinosaur Planet (Proto) 0000001A 000D2970.mid TrackParseDebug.txt", u8"GuardClaw Theme", 0 },
+{ u8"Dinosaur Planet (Proto) 00000011 000BEE04.mid", u8"Dinosaur Planet (Proto) 00000011 000BEE04.mid TrackParseDebug.txt", u8"SwapStone Hollow (SwapStone Circle)", 0 },
+// SwapStone Circle (Night)
+// SwapStone Circle Totem Poles
+// SwapStone Circle Totem Poles (Isolated Chanting)
+{ u8"Dinosaur Planet (Proto) 00000031 000F04C8.mid", u8"Dinosaur Planet (Proto) 00000031 000F04C8.mid TrackParseDebug.txt", u8"SwapStone Circle (All Instruments)", 0 },
+{ u8"Dinosaur Planet (Proto) 00000067 00150EAC.mid", u8"Dinosaur Planet (Proto) 00000067 00150EAC.mid TrackParseDebug.txt", u8"The Shop", 0 },
+{ u8"Dinosaur Planet (Proto) 00000069 00154A0C.mid", u8"Dinosaur Planet (Proto) 00000069 00154A0C.mid TrackParseDebug.txt", u8"Scarab-Catching Game", 0 },
+{ u8"Dinosaur Planet (Proto) 00000002 000AF750.mid", u8"Dinosaur Planet (Proto) 00000002 000AF750.mid TrackParseDebug.txt", u8"Cape Claw", 0 },
 { u8"Dinosaur Planet (Proto) 0000005A 0013C6C0.mid", u8"Dinosaur Planet (Proto) 0000005A 0013C6C0.mid TrackParseDebug.txt", u8"Cape Claw Waters", 0 },
+{ u8"Dinosaur Planet (Proto) 00000003 000B0740.mid", u8"Dinosaur Planet (Proto) 00000003 000B0740.mid TrackParseDebug.txt", u8"LightFoot Ambush", 0 },
+{ u8"Dinosaur Planet (Proto) 0000000D 000BA5D8.mid", u8"Dinosaur Planet (Proto) 0000000D 000BA5D8.mid TrackParseDebug.txt", u8"Krystal Tied to the LightFoot Totem Pole", 0 },
+{ u8"Dinosaur Planet (Proto) 00000018 000D0F38.mid", u8"Dinosaur Planet (Proto) 00000018 000D0F38.mid TrackParseDebug.txt", u8"LightFoot Village Battle", 0 },
+// Discovery Falls
+// Discovery Falls Path to Moon Mountain Pass
+{ u8"Dinosaur Planet (Proto) 0000003F 000FE0E8.mid", u8"Dinosaur Planet (Proto) 0000003F 000FE0E8.mid TrackParseDebug.txt", u8"Discovery Falls (All Instruments)", 0 },
+{ u8"Dinosaur Planet (Proto) 0000002B 000E8570.mid", u8"Dinosaur Planet (Proto) 0000002B 000E8570.mid TrackParseDebug.txt", u8"Krazoa Shrine", 0 },
+{ u8"Dinosaur Planet (Proto) 0000002A 000E8348.mid", u8"Dinosaur Planet (Proto) 0000002A 000E8348.mid TrackParseDebug.txt", u8"Entering Krazoa Test", 0 },
+{ u8"Dinosaur Planet (Proto) 0000002C 000EB74C.mid", u8"Dinosaur Planet (Proto) 0000002C 000EB74C.mid TrackParseDebug.txt", u8"Krazoa Test of Combat", 0 },
+{ u8"Dinosaur Planet (Proto) 00000049 00115560.mid", u8"Dinosaur Planet (Proto) 00000049 00115560.mid TrackParseDebug.txt", u8"Lava Path to Northern Wastes", 0 },
+// Northern Wastes
+// Northern Wastes Caves
 { u8"Dinosaur Planet (Proto) 0000005B 001429B4.mid", u8"Dinosaur Planet (Proto) 0000005B 001429B4.mid TrackParseDebug.txt", u8"Horn of Truth", 0 },
 { u8"Dinosaur Planet (Proto) 0000005C 00142B40.mid", u8"Dinosaur Planet (Proto) 0000005C 00142B40.mid TrackParseDebug.txt", u8"Summoning SnowHorn with Horn of Truth", 0 },
-//{ u8"Dinosaur Planet (Proto) 0000005D 00142CFC.mid", u8"Dinosaur Planet (Proto) 0000005D 00142CFC.mid TrackParseDebug.txt", u8"Track 5D", 0 },
-{ u8"Dinosaur Planet (Proto) 0000005E 00142D60.mid", u8"Dinosaur Planet (Proto) 0000005E 00142D60.mid TrackParseDebug.txt", u8"Title Theme (Main Menu)", 0 },
-{ u8"Dinosaur Planet (Proto) 0000005F 00145BD0.mid", u8"Dinosaur Planet (Proto) 0000005F 00145BD0.mid TrackParseDebug.txt", u8"Track 5F", 0 },		// Desert Force Point Temple Spellstone Pedestal
-//{ u8"Dinosaur Planet (Proto) 00000060 0014E6C0.mid", u8"Dinosaur Planet (Proto) 00000060 0014E6C0.mid TrackParseDebug.txt", u8"Track 60", 0 },
-//{ u8"Dinosaur Planet (Proto) 00000061 0014E724.mid", u8"Dinosaur Planet (Proto) 00000061 0014E724.mid TrackParseDebug.txt", u8"Track 61", 0 },
-//{ u8"Dinosaur Planet (Proto) 00000062 0014E788.mid", u8"Dinosaur Planet (Proto) 00000062 0014E788.mid TrackParseDebug.txt", u8"Track 62", 0 },
-//{ u8"Dinosaur Planet (Proto) 00000063 0014E7EC.mid", u8"Dinosaur Planet (Proto) 00000063 0014E7EC.mid TrackParseDebug.txt", u8"Track 63", 0 },
-//{ u8"Dinosaur Planet (Proto) 00000064 0014E850.mid", u8"Dinosaur Planet (Proto) 00000064 0014E850.mid TrackParseDebug.txt", u8"Track 64", 0 },
-//{ u8"Dinosaur Planet (Proto) 00000065 0014E8B4.mid", u8"Dinosaur Planet (Proto) 00000065 0014E8B4.mid TrackParseDebug.txt", u8"Track 65", 0 },
+{ u8"Dinosaur Planet (Proto) 00000032 000F3030.mid", u8"Dinosaur Planet (Proto) 00000032 000F3030.mid TrackParseDebug.txt", u8"Riding a SnowHorn", 0 },
+{ u8"Dinosaur Planet (Proto) 0000004D 0011DDAC.mid", u8"Dinosaur Planet (Proto) 0000004D 0011DDAC.mid TrackParseDebug.txt", u8"Darkice Mines Conveyor Belt", 0 },
+{ u8"Dinosaur Planet (Proto) 0000004B 00117380.mid", u8"Dinosaur Planet (Proto) 0000004B 00117380.mid TrackParseDebug.txt", u8"Escaping the Conveyor Belt", 0 },
+{ u8"Dinosaur Planet (Proto) 00000041 001014F0.mid", u8"Dinosaur Planet (Proto) 00000041 001014F0.mid TrackParseDebug.txt", u8"Darkice Mines Theme", 0 },
+{ u8"Dinosaur Planet (Proto) 0000004C 001176F0.mid", u8"Dinosaur Planet (Proto) 0000004C 001176F0.mid TrackParseDebug.txt", u8"Darkice Mines Waterfall Cave", 0 },
+// Darkice Mines Dark cave
+{ u8"Dinosaur Planet (Proto) 0000003B 000FB060.mid", u8"Dinosaur Planet (Proto) 0000003B 000FB060.mid TrackParseDebug.txt", u8"Galadon Battle Phase 1", 0 },
+{ u8"Dinosaur Planet (Proto) 00000048 00113B8C.mid", u8"Dinosaur Planet (Proto) 00000048 00113B8C.mid TrackParseDebug.txt", u8"Galadon Battle Phase 2", 0 },
+// Galadon Battle Phase 2 (Intense)
+{ u8"Dinosaur Planet (Proto) 00000043 0010A3E0.mid", u8"Dinosaur Planet (Proto) 00000043 0010A3E0.mid TrackParseDebug.txt", u8"Galadon Battle Phase 2 (More Intense)", 0 },
 { u8"Dinosaur Planet (Proto) 00000066 0014E918.mid", u8"Dinosaur Planet (Proto) 00000066 0014E918.mid TrackParseDebug.txt", u8"Diamond Bay", 0 },
-{ u8"Dinosaur Planet (Proto) 00000067 00150EAC.mid", u8"Dinosaur Planet (Proto) 00000067 00150EAC.mid TrackParseDebug.txt", u8"The Shop", 0 },
+// Diamond Bay River Path
+// Diamond Bay River Path (Isolated Layer Instruments)
+{ u8"Dinosaur Planet (Proto) 00000057 0013103C.mid", u8"Dinosaur Planet (Proto) 00000057 0013103C.mid TrackParseDebug.txt", u8"Diamond Bay (All Instruments)", 0 },
+{ u8"Dinosaur Planet (Proto) 0000000F 000BBEB0.mid", u8"Dinosaur Planet (Proto) 0000000F 000BBEB0.mid TrackParseDebug.txt", u8"Volcano Force Point Temple", 0 },
+{ u8"Dinosaur Planet (Proto) 0000002D 000EBEA4.mid", u8"Dinosaur Planet (Proto) 0000002D 000EBEA4.mid TrackParseDebug.txt", u8"Krazoa Test of Strength", 0 },
+{ u8"Dinosaur Planet (Proto) 00000053 001234A4.mid", u8"Dinosaur Planet (Proto) 00000053 001234A4.mid TrackParseDebug.txt", u8"Warlock Mountain Waters", 0 },
+{ u8"Dinosaur Planet (Proto) 00000025 000E137C.mid", u8"Dinosaur Planet (Proto) 00000025 000E137C.mid TrackParseDebug.txt", u8"Warlock Mountain Warp Arch Appears", 0 },
+// Moon Mountain Pass
+{ u8"Dinosaur Planet (Proto) 00000050 0011FC7C.mid", u8"Dinosaur Planet (Proto) 00000050 0011FC7C.mid TrackParseDebug.txt", u8"Entering CloudRunner Fortress", 0 },
+{ u8"Dinosaur Planet (Proto) 0000000B 000B88DC.mid", u8"Dinosaur Planet (Proto) 0000000B 000B88DC.mid TrackParseDebug.txt", u8"CloudRunner Fortress", 0 },
+{ u8"Dinosaur Planet (Proto) 0000004F 0011F0A8.mid", u8"Dinosaur Planet (Proto) 0000004F 0011F0A8.mid TrackParseDebug.txt", u8"CloudRunner Fortress Snow Bike Chase", 0 },
+{ u8"Dinosaur Planet (Proto) 0000001C 000D4214.mid", u8"Dinosaur Planet (Proto) 0000001C 000D4214.mid TrackParseDebug.txt", u8"Golden Plains", 0 },
+// Desert Force Point Temple
+{ u8"Dinosaur Planet (Proto) 00000037 000F7294.mid", u8"Dinosaur Planet (Proto) 00000037 000F7294.mid TrackParseDebug.txt", u8"Desert Force Point Temple (All Instruments)", 0 },
+{ u8"Dinosaur Planet (Proto) 0000005F 00145BD0.mid", u8"Dinosaur Planet (Proto) 0000005F 00145BD0.mid TrackParseDebug.txt", u8"Desert Force Point Temple Spellstone Pedestal", 0 },
+// Walled City
+{ u8"Dinosaur Planet (Proto) 00000004 000B0EE4.mid", u8"Dinosaur Planet (Proto) 00000004 000B0EE4.mid TrackParseDebug.txt", u8"EarthWalker Temple", 0 },
+{ u8"Dinosaur Planet (Proto) 00000044 0010BDC4.mid", u8"Dinosaur Planet (Proto) 00000044 0010BDC4.mid TrackParseDebug.txt", u8"Walled City (All Instruments)", 0 },	// Walled City
+{ u8"Dinosaur Planet (Proto) 00000010 000BD500.mid", u8"Dinosaur Planet (Proto) 00000010 000BD500.mid TrackParseDebug.txt", u8"Klanadack Battle", 0 },
+{ u8"Dinosaur Planet (Proto) 0000000C 000B96D4.mid", u8"Dinosaur Planet (Proto) 0000000C 000B96D4.mid TrackParseDebug.txt", u8"A Meteor Hits Moon Mountain Pass", 0 },
+{ u8"Dinosaur Planet (Proto) 0000002E 000EC8C8.mid", u8"Dinosaur Planet (Proto) 0000002E 000EC8C8.mid TrackParseDebug.txt", u8"Krazoa Test of Fear", 0 },
+{ u8"Dinosaur Planet (Proto) 0000002F 000ED6E0.mid", u8"Dinosaur Planet (Proto) 0000002F 000ED6E0.mid TrackParseDebug.txt", u8"Krazoa Test of Skill", 0 },
 { u8"Dinosaur Planet (Proto) 00000068 001534BC.mid", u8"Dinosaur Planet (Proto) 00000068 001534BC.mid TrackParseDebug.txt", u8"Thorntail Village", 0 },
-{ u8"Dinosaur Planet (Proto) 00000069 00154A0C.mid", u8"Dinosaur Planet (Proto) 00000069 00154A0C.mid TrackParseDebug.txt", u8"Track 69", 0 },
+{ u8"Dinosaur Planet (Proto) 00000005 000B3458.mid", u8"Dinosaur Planet (Proto) 00000005 000B3458.mid TrackParseDebug.txt", u8"Swapstone Circle Cutscene", 0 },
+{ u8"Dinosaur Planet (Proto) 00000006 000B4214.mid", u8"Dinosaur Planet (Proto) 00000006 000B4214.mid TrackParseDebug.txt", u8"Track 06", 0 },      // Sparse07.
+{ u8"Dinosaur Planet (Proto) 0000000E 000BAEB4.mid", u8"Dinosaur Planet (Proto) 0000000E 000BAEB4.mid TrackParseDebug.txt", u8"Track 0E", 0 },      // Sparse0F.
+{ u8"Dinosaur Planet (Proto) 00000012 000C19DC.mid", u8"Dinosaur Planet (Proto) 00000012 000C19DC.mid TrackParseDebug.txt", u8"Track 12", 0 },      // Sparse13.
+{ u8"Dinosaur Planet (Proto) 00000015 000CC074.mid", u8"Dinosaur Planet (Proto) 00000015 000CC074.mid TrackParseDebug.txt", u8"Track 15", 0 },      // Sparse16.
+{ u8"Dinosaur Planet (Proto) 00000017 000D0474.mid", u8"Dinosaur Planet (Proto) 00000017 000D0474.mid TrackParseDebug.txt", u8"Track 17", 0 },      // Sparse18.
+{ u8"Dinosaur Planet (Proto) 00000019 000D1800.mid", u8"Dinosaur Planet (Proto) 00000019 000D1800.mid TrackParseDebug.txt", u8"Track 19", 0 },      // Sparse1A.
+{ u8"Dinosaur Planet (Proto) 0000001E 000D6E34.mid", u8"Dinosaur Planet (Proto) 0000001E 000D6E34.mid TrackParseDebug.txt", u8"Track 1E", 0 },      // Sparse1F.
+{ u8"Dinosaur Planet (Proto) 0000001F 000D8984.mid", u8"Dinosaur Planet (Proto) 0000001F 000D8984.mid TrackParseDebug.txt", u8"Track 1F", 0 },      // Sparse20.
+{ u8"Dinosaur Planet (Proto) 00000029 000E5AA0.mid", u8"Dinosaur Planet (Proto) 00000029 000E5AA0.mid TrackParseDebug.txt", u8"Track 29", 0 },      // Sparse2A.
+{ u8"Dinosaur Planet (Proto) 00000051 001204E0.mid", u8"Dinosaur Planet (Proto) 00000051 001204E0.mid TrackParseDebug.txt", u8"Track 51", 0 },      // Sparse52.
+{ u8"Dinosaur Planet (Proto) 00000052 00122EE4.mid", u8"Dinosaur Planet (Proto) 00000052 00122EE4.mid TrackParseDebug.txt", u8"Track 52", 0 },      // Sparse53.
+{ u8"Dinosaur Planet (Proto) 00000054 0012C174.mid", u8"Dinosaur Planet (Proto) 00000054 0012C174.mid TrackParseDebug.txt", u8"Track 54", 0 },      // Sparse55.
+{ u8"Dinosaur Planet (Proto) 00000056 00130CA0.mid", u8"Dinosaur Planet (Proto) 00000056 00130CA0.mid TrackParseDebug.txt", u8"Track 56", 0 },      // Sparse57.
+{ u8"Dinosaur Planet (Proto) 00000059 00139A50.mid", u8"Dinosaur Planet (Proto) 00000059 00139A50.mid TrackParseDebug.txt", u8"Track 59", 0 },      // Sparse5A.
+{ u8"Dinosaur Planet (Proto) 0000006B 0015621C.mid", u8"Dinosaur Planet (Proto) 0000006B 0015621C.mid TrackParseDebug.txt", u8"Track 6B", 0 },      // Sparse6C.
+{ u8"Dinosaur Planet (Proto) 0000006C 00157518.mid", u8"Dinosaur Planet (Proto) 0000006C 00157518.mid TrackParseDebug.txt", u8"Track 6C", 0 },      // Sparse6D.
 { u8"Dinosaur Planet (Proto) 0000006A 00155054.mid", u8"Dinosaur Planet (Proto) 0000006A 00155054.mid TrackParseDebug.txt", u8"Riding an Earthwalker", 0 },
-{ u8"Dinosaur Planet (Proto) 0000006B 0015621C.mid", u8"Dinosaur Planet (Proto) 0000006B 0015621C.mid TrackParseDebug.txt", u8"Track 6B", 0 },
-{ u8"Dinosaur Planet (Proto) 0000006C 00157518.mid", u8"Dinosaur Planet (Proto) 0000006C 00157518.mid TrackParseDebug.txt", u8"Track 6C", 0 },
+{ u8"Dinosaur Planet (Proto) 00000055 0012FBC4.mid", u8"Dinosaur Planet (Proto) 00000055 0012FBC4.mid TrackParseDebug.txt", u8"Protect The Eggs", 0 },
+{ u8"Dinosaur Planet (Proto) 00000033 000F4790.mid", u8"Dinosaur Planet (Proto) 00000033 000F4790.mid TrackParseDebug.txt", u8"Krazoa Test of Sacrifice", 0 },
+{ u8"Dinosaur Planet (Proto) 00000030 000EE288.mid", u8"Dinosaur Planet (Proto) 00000030 000EE288.mid TrackParseDebug.txt", u8"Krazoa Test of Knowledge", 0 },
+{ u8"Dinosaur Planet (Proto) 00000022 000DEB0C.mid", u8"Dinosaur Planet (Proto) 00000022 000DEB0C.mid TrackParseDebug.txt", u8"Krazoa Palace", 0 },
+{ u8"Dinosaur Planet (Proto) 00000046 001134B0.mid", u8"Dinosaur Planet (Proto) 00000046 001134B0.mid TrackParseDebug.txt", u8"Fast Drum Beat", 0 },
+{ u8"Dinosaur Planet (Proto) 00000013 000C2818.mid", u8"Dinosaur Planet (Proto) 00000013 000C2818.mid TrackParseDebug.txt", u8"Dragon Rock", 0 },
 { u8"Dinosaur Planet (Proto) 0000006D 001586EC.mid", u8"Dinosaur Planet (Proto) 0000006D 001586EC.mid TrackParseDebug.txt", u8"Drakor Battle", 0 },
 
 
 
 
-//{ u8"Dinosaur Planet (Proto) 0000006E 00159D20.mid", u8"Dinosaur Planet (Proto) 0000006E 00159D20.mid TrackParseDebug.txt", u8"Track 6E", 0 },
-//{ u8"Dinosaur Planet (Proto) 0000006F 00159EB8.mid", u8"Dinosaur Planet (Proto) 0000006F 00159EB8.mid TrackParseDebug.txt", u8"Track 6F", 0 },
+/*
+{ u8"Dinosaur Planet (Proto) 00000000 000AF688.mid", u8"Dinosaur Planet (Proto) 00000000 000AF688.mid TrackParseDebug.txt", u8"Track 00", 0 },
+{ u8"Dinosaur Planet (Proto) 00000001 000AF6EC.mid", u8"Dinosaur Planet (Proto) 00000001 000AF6EC.mid TrackParseDebug.txt", u8"Track 01", 0 },
+{ u8"Dinosaur Planet (Proto) 00000035 000F71CC.mid", u8"Dinosaur Planet (Proto) 00000035 000F71CC.mid TrackParseDebug.txt", u8"Track 35", 0 },
+{ u8"Dinosaur Planet (Proto) 00000036 000F7230.mid", u8"Dinosaur Planet (Proto) 00000036 000F7230.mid TrackParseDebug.txt", u8"Track 36", 0 },
+{ u8"Dinosaur Planet (Proto) 00000038 000F8C98.mid", u8"Dinosaur Planet (Proto) 00000038 000F8C98.mid TrackParseDebug.txt", u8"Track 38", 0 },
+{ u8"Dinosaur Planet (Proto) 00000039 000F8CFC.mid", u8"Dinosaur Planet (Proto) 00000039 000F8CFC.mid TrackParseDebug.txt", u8"Track 39", 0 },
+{ u8"Dinosaur Planet (Proto) 0000003C 000FDFBC.mid", u8"Dinosaur Planet (Proto) 0000003C 000FDFBC.mid TrackParseDebug.txt", u8"Track 3C", 0 },
+{ u8"Dinosaur Planet (Proto) 0000003D 000FE020.mid", u8"Dinosaur Planet (Proto) 0000003D 000FE020.mid TrackParseDebug.txt", u8"Track 3D", 0 },
+{ u8"Dinosaur Planet (Proto) 0000003E 000FE084.mid", u8"Dinosaur Planet (Proto) 0000003E 000FE084.mid TrackParseDebug.txt", u8"Track 3E", 0 },
+{ u8"Dinosaur Planet (Proto) 00000040 0010148C.mid", u8"Dinosaur Planet (Proto) 00000040 0010148C.mid TrackParseDebug.txt", u8"Track 40", 0 },
+{ u8"Dinosaur Planet (Proto) 00000042 0010A37C.mid", u8"Dinosaur Planet (Proto) 00000042 0010A37C.mid TrackParseDebug.txt", u8"Track 42", 0 },
+{ u8"Dinosaur Planet (Proto) 00000045 0011344C.mid", u8"Dinosaur Planet (Proto) 00000045 0011344C.mid TrackParseDebug.txt", u8"Track 45", 0 },
+{ u8"Dinosaur Planet (Proto) 00000047 00113B28.mid", u8"Dinosaur Planet (Proto) 00000047 00113B28.mid TrackParseDebug.txt", u8"Track 47", 0 },
+{ u8"Dinosaur Planet (Proto) 0000004A 0011731C.mid", u8"Dinosaur Planet (Proto) 0000004A 0011731C.mid TrackParseDebug.txt", u8"Track 4A", 0 },
+{ u8"Dinosaur Planet (Proto) 0000004E 0011F044.mid", u8"Dinosaur Planet (Proto) 0000004E 0011F044.mid TrackParseDebug.txt", u8"Track 4E", 0 },
+{ u8"Dinosaur Planet (Proto) 0000005D 00142CFC.mid", u8"Dinosaur Planet (Proto) 0000005D 00142CFC.mid TrackParseDebug.txt", u8"Track 5D", 0 },
+{ u8"Dinosaur Planet (Proto) 00000060 0014E6C0.mid", u8"Dinosaur Planet (Proto) 00000060 0014E6C0.mid TrackParseDebug.txt", u8"Track 60", 0 },
+{ u8"Dinosaur Planet (Proto) 00000061 0014E724.mid", u8"Dinosaur Planet (Proto) 00000061 0014E724.mid TrackParseDebug.txt", u8"Track 61", 0 },
+{ u8"Dinosaur Planet (Proto) 00000062 0014E788.mid", u8"Dinosaur Planet (Proto) 00000062 0014E788.mid TrackParseDebug.txt", u8"Track 62", 0 },
+{ u8"Dinosaur Planet (Proto) 00000063 0014E7EC.mid", u8"Dinosaur Planet (Proto) 00000063 0014E7EC.mid TrackParseDebug.txt", u8"Track 63", 0 },
+{ u8"Dinosaur Planet (Proto) 00000064 0014E850.mid", u8"Dinosaur Planet (Proto) 00000064 0014E850.mid TrackParseDebug.txt", u8"Track 64", 0 },
+{ u8"Dinosaur Planet (Proto) 00000065 0014E8B4.mid", u8"Dinosaur Planet (Proto) 00000065 0014E8B4.mid TrackParseDebug.txt", u8"Track 65", 0 },
+{ u8"Dinosaur Planet (Proto) 0000006E 00159D20.mid", u8"Dinosaur Planet (Proto) 0000006E 00159D20.mid TrackParseDebug.txt", u8"Track 6E", 0 },
+{ u8"Dinosaur Planet (Proto) 0000006F 00159EB8.mid", u8"Dinosaur Planet (Proto) 0000006F 00159EB8.mid TrackParseDebug.txt", u8"Track 6F", 0 },
+*/
+
+
 /*{ u8"Dinosaur Planet (Proto) 00000070 00159F1C.mid", u8"Dinosaur Planet (Proto) 00000070 00159F1C.mid TrackParseDebug.txt", u8"Track 70", 0 },
 { u8"Dinosaur Planet (Proto) 00000071 0015AC2C.mid", u8"Dinosaur Planet (Proto) 00000071 0015AC2C.mid TrackParseDebug.txt", u8"Track 71", 0 },
 { u8"Dinosaur Planet (Proto) 00000072 00160948.mid", u8"Dinosaur Planet (Proto) 00000072 00160948.mid TrackParseDebug.txt", u8"Track 72", 0 },
