@@ -285,6 +285,7 @@
     <None Include="Src\Games\NS4CruisnWorldFiles.inl" />
     <None Include="Src\Games\NS4DenshaDeGo!64Files.inl" />
     <None Include="Src\Games\NS4DiddyKongRacingFiles.inl" />
+    <None Include="Src\Games\NS4DinosaurPlanetAmbienceFiles.inl" />
     <None Include="Src\Games\NS4DinosaurPlanetFiles.inl" />
     <None Include="Src\Games\NS4DonaldDuckGoinQuakersFiles.inl" />
     <None Include="Src\Games\NS4DonkeyKong64Files.inl" />
