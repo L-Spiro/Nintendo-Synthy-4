@@ -1781,7 +1781,7 @@ namespace ns4 {
 					bool bFound = false;
 					for ( size_t J = 0; J < vNotes.size(); ++J ) {
 						if ( vNotes[J].bActive && vNotes[J].ui8Note == ui8Note && !vNotes[J].bInSustain ) {
-							if ( msState.ui8State[NS4_C_DAMPER_PEDAL] ) {
+							if ( msState.ui8State[NS4_C_DAMPER_PEDAL] > 63 ) {
 								vNotes[J].bInSustain = true;
 							}
 							else {
@@ -1791,7 +1791,7 @@ namespace ns4 {
 							bFound = true;
 							for ( auto K = J + 1; K < vNotes.size(); ++K ) {
 								if ( vNotes[J].ui32Id == vNotes[K].ui32Id && vNotes[K].bActive && !vNotes[K].bInSustain ) {
-									if ( msState.ui8State[NS4_C_DAMPER_PEDAL] ) {
+									if ( msState.ui8State[NS4_C_DAMPER_PEDAL] > 63 ) {
 										vNotes[K].bInSustain = true;
 									}
 									else {
@@ -1858,7 +1858,7 @@ namespace ns4 {
 					}
 				}
 				else if ( IsControllerOfType( teEvent, NS4_C_DAMPER_PEDAL ) ) {
-					if ( !msState.ui8State[NS4_C_DAMPER_PEDAL] ) {
+					if ( msState.ui8State[NS4_C_DAMPER_PEDAL] <= 63 ) {
 						for ( auto J = vNotes.size(); J--; ) {
 							if ( vNotes[J].bInSustain && vNotes[J].bActive ) {
 								vNotes[J].bActive = false;
