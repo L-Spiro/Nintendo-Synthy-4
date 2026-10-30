@@ -1024,9 +1024,6 @@
     <None Include="Src\Games\NS4RazorFreestyleScooterFiles.inl">
       <Filter>Header Files\Games</Filter>
     </None>
-    <None Include="Src\Games\NS4DinosaurPlanetAmbienceFiles.inl">
-      <Filter>Header Files\Games</Filter>
-    </None>
     <None Include="Src\Games\NS4DinosaurPlanetFiles.inl">
       <Filter>Header Files\Games</Filter>
     </None>
