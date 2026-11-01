@@ -6,6 +6,7 @@
 #include <fstream>
 #include <map>
 #include <memory>
+#include <sstream>
 #include <windows.h>
 
 
@@ -696,6 +697,60 @@ namespace ns4 {
 							if ( ui32Tmp2 == 0 ) {
 								InsertEvent( m_vTracks[ui32Track].vEvents, CreatePitchBend( 0.0, ui32Tmp1, uint8_t( ui32Channel ) ), nullptr );
 							}
+						}
+						continue;
+					}
+					// CHN 00000073 Time: 00000000 CMD:      DA Envelope Offset 0080 Points 0035 0000 002E 7FBC 0001 7FBC 7FBC 72F6 FFFF 0000
+					if ( std::sscanf( sLine.c_str(), "CHN %X Time: %X CMD:      DA Envelope Offset %X Points", &ui32Tmp0, &ui32Tmp1, &ui32Tmp2 ) == 3 ) {
+						if ( ui32Track != uint32_t( -1 ) ) {
+							size_t stIdx = InsertEvent( m_vTracks[ui32Track].vEvents, NS4_CHN_ENVELOPE, 0, uint8_t( ui32Channel ), ui32Tmp1, nullptr );
+							std::istringstream issPoints( sLine.substr( sLine.find( "Points" ) + 6 ) );
+							std::string sValue;
+							while ( issPoints >> sValue ) {
+								uint16_t ui16Value = uint16_t( std::strtoul( sValue.c_str(), nullptr, 16 ) );
+								m_vTracks[ui32Track].vEvents[stIdx].vData.push_back( uint8_t( ui16Value ) );
+								m_vTracks[ui32Track].vEvents[stIdx].vData.push_back( uint8_t( ui16Value >> 8 ) );
+							}
+						}
+						continue;
+					}
+					// CHN 00000155 Time: 00000000 CMD:      B0 Set Filter Offset 10E0 Coefficients 0000 0000 0000 0000 0000 0000 0000 0000
+					{
+						uint32_t ui32Coef[8];
+						if ( std::sscanf( sLine.c_str(), "CHN %X Time: %X CMD:      B0 Set Filter Offset %X Coefficients %X %X %X %X %X %X %X %X", &ui32Tmp0, &ui32Tmp1, &ui32Tmp2,
+							&ui32Coef[0], &ui32Coef[1], &ui32Coef[2], &ui32Coef[3], &ui32Coef[4], &ui32Coef[5], &ui32Coef[6], &ui32Coef[7] ) == 11 ) {
+							if ( ui32Track != uint32_t( -1 ) ) {
+								size_t stIdx = InsertEvent( m_vTracks[ui32Track].vEvents, NS4_CHN_FILTER, 0, uint8_t( ui32Channel ), ui32Tmp1, nullptr );
+								m_vTracks[ui32Track].vEvents[stIdx].vData.resize( 16 );
+								for ( size_t J = 0; J < 8; ++J ) {
+									m_vTracks[ui32Track].vEvents[stIdx].vData[J*2+0] = uint8_t( ui32Coef[J] );
+									m_vTracks[ui32Track].vEvents[stIdx].vData[J*2+1] = uint8_t( ui32Coef[J] >> 8 );
+								}
+							}
+							continue;
+						}
+					}
+					// CHN 00000C9E Time: 000009F0 CMD:      B1 Clear Filter
+					if ( sLine.find( "CMD:      B1 Clear Filter" ) != std::string::npos && std::sscanf( sLine.c_str(), "CHN %X Time: %X", &ui32Tmp0, &ui32Tmp1 ) == 2 ) {
+						if ( ui32Track != uint32_t( -1 ) ) {
+							InsertEvent( m_vTracks[ui32Track].vEvents, NS4_CHN_FILTER_OFF, 0, uint8_t( ui32Channel ), ui32Tmp1, nullptr );
+						}
+						continue;
+					}
+					// CHN 00000158 Time: 00000000 CMD:      B3 Load Filter 10 (16)
+					if ( std::sscanf( sLine.c_str(), "CHN %X Time: %X CMD:      B3 Load Filter %X (%u)", &ui32Tmp0, &ui32Tmp1, &ui32Tmp2, &ui32Tmp3 ) == 4 ) {
+						if ( ui32Track != uint32_t( -1 ) ) {
+							InsertEvent( m_vTracks[ui32Track].vEvents, NS4_CHN_FILTER_CUTOFFS, uint8_t( ui32Tmp2 ), uint8_t( ui32Channel ), ui32Tmp1, nullptr );
+						}
+						continue;
+					}
+					// CHN 0000118D Time: 000003C1 CMD:      BB Comb Filter Size 10 Gain 5100
+					// CHN 0000118D Time: 000003C1 CMD:      BB Control Change? 10 5100
+					if ( std::sscanf( sLine.c_str(), "CHN %X Time: %X CMD:      BB Comb Filter Size %X Gain %X", &ui32Tmp0, &ui32Tmp1, &ui32Tmp2, &ui32Tmp3 ) == 4 ||
+						std::sscanf( sLine.c_str(), "CHN %X Time: %X CMD:      BB Control Change? %X %X", &ui32Tmp0, &ui32Tmp1, &ui32Tmp2, &ui32Tmp3 ) == 4 ) {
+						if ( ui32Track != uint32_t( -1 ) ) {
+							size_t stIdx = InsertEvent( m_vTracks[ui32Track].vEvents, NS4_CHN_COMB_FILTER, uint8_t( ui32Tmp2 ), uint8_t( ui32Channel ), ui32Tmp1, nullptr );
+							m_vTracks[ui32Track].vEvents[stIdx].ui64Data = uint16_t( ui32Tmp3 );
 						}
 						continue;
 					}
@@ -1406,6 +1461,21 @@ namespace ns4 {
 		double dDryLevel = 1.0;
 		double dWetLevel = 0.0;
 		bool bWetIsOver127 = false;
+		// EAD channel envelope (Ocarina of Time): replaces the instrument's envelope until the next program change.  Pairs of delay and level.
+		std::vector<int16_t> vEadChanEnv;
+		// EAD channel filters (Ocarina of Time, Majora's Mask): playing notes follow the channel, released notes keep what they had.
+		int16_t i16EadFilter[8] = { 0 };
+		bool bEadFilter = false;
+		uint8_t ui8EadCombSize = 0;
+		int16_t i16EadCombGain = 0;
+		auto UpdateEadFx = [&]( NS4_NOTE &_nNote ) {
+			_nNote.enfEadFx.Set( bEadFilter ? i16EadFilter : nullptr, ui8EadCombSize, i16EadCombGain, m_sSettings.dGameFreq, double( _troOptions.uiSampleRate ) );
+		};
+		auto UpdateActiveEadFx = [&]() {
+			for ( size_t J = 0; J < vNotes.size(); ++J ) {
+				if ( vNotes[J].bActive ) { UpdateEadFx( vNotes[J] ); }
+			}
+		};
 		// HAL's n_audio (bHalFxMix): the effect mix (control 91), wet control, and dry control of the channel.
 		uint8_t ui8HalFx = 0, ui8HalWet = 0, ui8HalDry = m_sSettings.ui8DefaultDry;
 		auto UpdateHalFxMix = [&]() {
@@ -1651,23 +1721,40 @@ namespace ns4 {
 							double dAtkFactor = (ui32Bank == 127 && m_sSettings.dPercEnvAttackMultiplier) ? m_sSettings.dPercEnvAttackMultiplier : m_sSettings.dEnvAttackMultiplier;
 							double dAtkTime = AdsrTime( vTriggered[J]->ui32Adsr0, uint32_t( m_sSettings.dGameFreq ) ) * dAtkFactor;
 							bThis.ui32Samples = static_cast<uint32_t>(std::round( max( m_sSettings.dMinAttack, dAtkTime ) * _troOptions.uiSampleRate ));*/
-							bThis = MakeAdsrEnvBlock( vTriggered[J]->ui32Adsr0, vTriggered[J]->ui32Adsr1, bThis.ui16EndLevel, ui32Bank, uint32_t( m_sSettings.dGameFreq ), _troOptions.uiSampleRate,
-								(ui32Bank == 127 && m_sSettings.dPercEnvAttackMultiplier) ? m_sSettings.dPercEnvAttackMultiplier : m_sSettings.dEnvAttackMultiplier );
-							nNote.eEnvelope.AddBlock( bThis );
-							bThis = MakeAdsrEnvBlock( vTriggered[J]->ui32Adsr2, vTriggered[J]->ui32Adsr3, bThis.ui16EndLevel, ui32Bank, uint32_t( m_sSettings.dGameFreq ), _troOptions.uiSampleRate,
-								(ui32Bank == 127 && m_sSettings.dPercEnvDecayMultiplier) ? m_sSettings.dPercEnvDecayMultiplier : m_sSettings.dEnvDecayMultiplier );
-							nNote.eEnvelope.AddBlock( bThis );
-							bThis = MakeAdsrEnvBlock( vTriggered[J]->ui32Adsr4, vTriggered[J]->ui32Adsr5, bThis.ui16EndLevel, ui32Bank, uint32_t( m_sSettings.dGameFreq ), _troOptions.uiSampleRate,
-								(ui32Bank == 127 && m_sSettings.dPercEnvDecayMultiplier) ? m_sSettings.dPercEnvDecayMultiplier : m_sSettings.dEnvDecayMultiplier );
-							nNote.eEnvelope.AddBlock( bThis );
-							bThis = MakeAdsrEnvBlock( vTriggered[J]->ui32Adsr6, vTriggered[J]->ui32Adsr7, bThis.ui16EndLevel, ui32Bank, uint32_t( m_sSettings.dGameFreq ), _troOptions.uiSampleRate,
-								(ui32Bank == 127 && m_sSettings.dPercEnvDecayMultiplier) ? m_sSettings.dPercEnvDecayMultiplier : m_sSettings.dEnvDecayMultiplier );
-							nNote.eEnvelope.AddBlock( bThis );
+							if ( vEadChanEnv.size() >= 2 && ui32Bank != 127 ) {
+								for ( size_t K = 0; K + 1 < vEadChanEnv.size(); K += 2 ) {
+									bThis = MakeAdsrEnvBlock( vEadChanEnv[K], vEadChanEnv[K+1], bThis.ui16EndLevel, ui32Bank, uint32_t( m_sSettings.dGameFreq ), _troOptions.uiSampleRate,
+										K == 0 ? m_sSettings.dEnvAttackMultiplier : m_sSettings.dEnvDecayMultiplier );
+									nNote.eEnvelope.AddBlock( bThis );
+								}
+							}
+							else {
+								bThis = MakeAdsrEnvBlock( vTriggered[J]->ui32Adsr0, vTriggered[J]->ui32Adsr1, bThis.ui16EndLevel, ui32Bank, uint32_t( m_sSettings.dGameFreq ), _troOptions.uiSampleRate,
+									(ui32Bank == 127 && m_sSettings.dPercEnvAttackMultiplier) ? m_sSettings.dPercEnvAttackMultiplier : m_sSettings.dEnvAttackMultiplier );
+								nNote.eEnvelope.AddBlock( bThis );
+								bThis = MakeAdsrEnvBlock( vTriggered[J]->ui32Adsr2, vTriggered[J]->ui32Adsr3, bThis.ui16EndLevel, ui32Bank, uint32_t( m_sSettings.dGameFreq ), _troOptions.uiSampleRate,
+									(ui32Bank == 127 && m_sSettings.dPercEnvDecayMultiplier) ? m_sSettings.dPercEnvDecayMultiplier : m_sSettings.dEnvDecayMultiplier );
+								nNote.eEnvelope.AddBlock( bThis );
+								bThis = MakeAdsrEnvBlock( vTriggered[J]->ui32Adsr4, vTriggered[J]->ui32Adsr5, bThis.ui16EndLevel, ui32Bank, uint32_t( m_sSettings.dGameFreq ), _troOptions.uiSampleRate,
+									(ui32Bank == 127 && m_sSettings.dPercEnvDecayMultiplier) ? m_sSettings.dPercEnvDecayMultiplier : m_sSettings.dEnvDecayMultiplier );
+								nNote.eEnvelope.AddBlock( bThis );
+								bThis = MakeAdsrEnvBlock( vTriggered[J]->ui32Adsr6, vTriggered[J]->ui32Adsr7, bThis.ui16EndLevel, ui32Bank, uint32_t( m_sSettings.dGameFreq ), _troOptions.uiSampleRate,
+									(ui32Bank == 127 && m_sSettings.dPercEnvDecayMultiplier) ? m_sSettings.dPercEnvDecayMultiplier : m_sSettings.dEnvDecayMultiplier );
+								nNote.eEnvelope.AddBlock( bThis );
+							}
 
 							double dReleaseFactor = (ui32Bank == 127 && m_sSettings.dPercEnvReleaseMultiplier) ? m_sSettings.dPercEnvReleaseMultiplier : m_sSettings.dEnvReleaseMultiplier;
-							double dRelTime = AdsrReleaseRateToTime(
-								(ui32Bank == 127 && m_sSettings.ui8AdsrPercReleaseRate) ? m_sSettings.ui8AdsrPercReleaseRate : uint8_t( msState.ui16ReleaseRate ),
-								uint32_t( m_sSettings.dGameFreq ) );
+							uint8_t ui8RelRate = uint8_t( msState.ui16ReleaseRate );
+							if ( ui32Bank == 127 ) {
+								if ( m_sSettings.ui8AdsrPercReleaseRate ) { ui8RelRate = m_sSettings.ui8AdsrPercReleaseRate; }
+								else if ( m_sSettings.bEadDecayTable ) {
+									// A drum's own release, else the channel's (which starts at 0xF0 in Ocarina of Time and Majora's Mask).
+									if ( vTriggered[J]->ui32SplitsRel & 0xFF ) { ui8RelRate = uint8_t( vTriggered[J]->ui32SplitsRel ); }
+									else if ( !ui8RelRate ) { ui8RelRate = 0xF0; }
+								}
+							}
+							double dRelTime = m_sSettings.bEadDecayTable ? AdsrDecayTableToTime( ui8RelRate ) :
+								AdsrReleaseRateToTime( ui8RelRate, uint32_t( m_sSettings.dGameFreq ) );
 							if ( dRelTime < 0.0 ) {
 								nNote.eEnvelope.SetInfiniteRelease();
 							}
@@ -1773,6 +1860,9 @@ namespace ns4 {
 						else {
 							nNote.bLpf = false;
 						}
+						if ( bEadFilter || (ui8EadCombSize && i16EadCombGain) ) {
+							UpdateEadFx( nNote );
+						}
 						vNotes.push_back( nNote );
 					}
 				}
@@ -1873,6 +1963,7 @@ namespace ns4 {
 					bUpdateLpf = true;
 				}
 				else if ( IsProgramChange( teEvent ) ) {
+					vEadChanEnv.clear();
 					uint32_t ui32InstVol, ui32InstPan;
 					if ( _sbSoundBank.InstVolAndPan( ui32Bank, ui32Inst,
 						ui32InstVol, ui32InstPan ) ) {
@@ -1963,6 +2054,34 @@ namespace ns4 {
 				}
 				else if ( IsControllerOfType( teEvent, NS4_CHN_RELEASE_RATE ) ) {
 					msState.ui16ReleaseRate = ControllerValue( teEvent );
+				}
+				else if ( IsControllerOfType( teEvent, NS4_CHN_ENVELOPE ) ) {
+					vEadChanEnv.clear();
+					for ( size_t J = 0; J + 1 < teEvent.vData.size(); J += 2 ) {
+						vEadChanEnv.push_back( int16_t( teEvent.vData[J] | (teEvent.vData[J+1] << 8) ) );
+					}
+				}
+				else if ( IsControllerOfType( teEvent, NS4_CHN_FILTER ) ) {
+					for ( size_t J = 0; J < 8; ++J ) {
+						i16EadFilter[J] = (J * 2 + 1 < teEvent.vData.size()) ? int16_t( teEvent.vData[J*2] | (teEvent.vData[J*2+1] << 8) ) : 0;
+					}
+					bEadFilter = true;
+					UpdateActiveEadFx();
+				}
+				else if ( IsControllerOfType( teEvent, NS4_CHN_FILTER_CUTOFFS ) ) {
+					if ( bEadFilter ) {
+						LoadEadFilter( i16EadFilter, ControllerValue( teEvent ) );
+						UpdateActiveEadFx();
+					}
+				}
+				else if ( IsControllerOfType( teEvent, NS4_CHN_FILTER_OFF ) ) {
+					bEadFilter = false;
+					UpdateActiveEadFx();
+				}
+				else if ( IsControllerOfType( teEvent, NS4_CHN_COMB_FILTER ) ) {
+					ui8EadCombSize = ControllerValue( teEvent );
+					i16EadCombGain = int16_t( teEvent.ui64Data );
+					UpdateActiveEadFx();
 				}
 				else if ( IsControllerOfType( teEvent, NS4_CHN_LINEAR_VOL_SCALE ) ) {
 					uint8_t ui8Val = ControllerValue( teEvent );
@@ -2097,6 +2216,9 @@ namespace ns4 {
 				if ( vNotes[J].bActive || (vNotes[J].eEnvelope.InRelease() && vNotes[J].psSoundbankSample && !vNotes[J].eEnvelope.InfiniteRelease()) || vNotes[J].ui32DustSettle ) {
 					if ( vNotes[J].psSoundbankSample ) {
 						double dVal = vNotes[J].sSampler.Sample();
+						if ( vNotes[J].enfEadFx.Active() ) {
+							dVal = vNotes[J].enfEadFx.Process( dVal );
+						}
 						if ( dVal ) {
 							volatile int gjhg = 0;
 						}
@@ -6222,6 +6344,126 @@ namespace ns4 {
 					ksKeyStates[ui8Note].dEndTime = _teEvent.dRealTime;
 				}
 			}
+		}
+	}
+
+	/**
+	 * Fills an EAD channel filter (Ocarina of Time, Majora's Mask) from the game's low-pass and high-pass tables.
+	 *
+	 * \param _pi16Filter The 8 filter coefficients to fill.
+	 * \param _ui8Cutoffs The low-pass cutoff in the high 4 bits and the high-pass cutoff in the low 4 bits.
+	 */
+	void CMidiFile::LoadEadFilter( int16_t * _pi16Filter, uint8_t _ui8Cutoffs ) {
+		static const int16_t i16LowPass[16*8] = {
+			0,		0,		0,		32767,	0,		0,		0,		0,
+			3854,	4188,	4398,	4469,	4398,	4188,	3854,	3416,
+			3415,	4314,	4915,	5126,	4915,	4314,	3415,	2351,
+			2636,	4433,	5762,	6252,	5762,	4433,	2636,	849,
+			1334,	4196,	6646,	7609,	6646,	4196,	1334,	-802,
+			-265,	3421,	7292,	8944,	7292,	3421,	-265,	-1863,
+			-1558,	2065,	7146,	9546,	7146,	2065,	-1558,	-1682,
+			-2353,	726,	7441,	11028,	7441,	726,	-2353,	-697,
+			-2252,	-693,	7121,	11962,	7121,	-693,	-2252,	668,
+			-1373,	-1819,	6299,	12298,	6299,	-1819,	-1373,	1484,
+			-213,	-2740,	5843,	13680,	5843,	-2740,	-213,	1494,
+			980,	-3081,	4883,	14286,	4883,	-3081,	980,	590,
+			1769,	-2973,	3866,	14981,	3866,	-2973,	1769,	-568,
+			2023,	-2554,	2911,	16397,	2911,	-2554,	2023,	-1391,
+			1766,	-1918,	2016,	19800,	2016,	-1918,	1766,	-1564,
+			841,	-853,	863,	26829,	863,	-853,	841,	-820,
+		};
+		static const int16_t i16HighPass[15*8] = {
+			-289,	-291,	-289,	30736,	-289,	-291,	-289,	-290,
+			-464,	-467,	-467,	29506,	-467,	-467,	-464,	-463,
+			-662,	-670,	-672,	28101,	-672,	-670,	-662,	-656,
+			-839,	-855,	-861,	26830,	-861,	-855,	-839,	-822,
+			-996,	-1024,	-1038,	25685,	-1038,	-1024,	-996,	-963,
+			-1184,	-1236,	-1266,	24272,	-1266,	-1236,	-1184,	-1118,
+			-1357,	-1450,	-1506,	22900,	-1506,	-1450,	-1357,	-1238,
+			-1514,	-1680,	-1784,	21498,	-1784,	-1680,	-1514,	-1307,
+			-1613,	-1877,	-2048,	20390,	-2048,	-1877,	-1613,	-1298,
+			-1657,	-2185,	-2559,	18869,	-2559,	-2185,	-1657,	-1093,
+			-1524,	-2395,	-3078,	18030,	-3078,	-2395,	-1524,	-739,
+			-1253,	-2504,	-3621,	17642,	-3621,	-2504,	-1253,	-367,
+			-525,	-2367,	-4732,	17517,	-4732,	-2367,	-525,	0,
+			-34,	-1762,	-5706,	17503,	-5706,	-1762,	-34,	-258,
+			-772,	-3,		-6985,	17240,	-6985,	-3,		-772,	-3,
+		};
+		uint32_t ui32Low = _ui8Cutoffs >> 4;
+		uint32_t ui32High = _ui8Cutoffs & 0xF;
+		for ( uint32_t I = 0; I < 8; ++I ) {
+			if ( ui32High == 0 ) {
+				_pi16Filter[I] = i16LowPass[ui32Low*8+I];
+			}
+			else if ( ui32Low == 0 ) {
+				_pi16Filter[I] = i16HighPass[(ui32High-1)*8+I];
+			}
+			else {
+				_pi16Filter[I] = int16_t( (i16LowPass[ui32Low*8+I] + i16HighPass[(ui32High-1)*8+I]) / 2 );
+			}
+		}
+	}
+
+	/**
+	 * Sets the filters from a channel's state.  The histories are kept so the filters can change while a note plays.
+	 *
+	 * \param _pi16Filter The 8 FIR coefficients (1.15 fixed-point) at the game's rate, or nullptr for no FIR filter.
+	 * \param _ui8CombSize The comb-filter size in bytes (the delay is half as many samples at the game's rate).  0 for no comb filter.
+	 * \param _i16CombGain The comb-filter gain (1.15 fixed-point) of the undelayed signal.  0 for no comb filter.
+	 * \param _dGameHz The game's output rate.
+	 * \param _dOutHz The render rate.
+	 */
+	void CMidiFile::NS4_EAD_NOTE_FX::Set( const int16_t * _pi16Filter, uint8_t _ui8CombSize, int16_t _i16CombGain, double _dGameHz, double _dOutHz ) {
+		if ( _pi16Filter ) {
+			std::vector<double> vTaps;
+			if ( std::round( _dGameHz ) == std::round( _dOutHz ) ) {
+				for ( size_t I = 0; I < 8; ++I ) {
+					vTaps.push_back( _pi16Filter[I] / 32768.0 );
+				}
+			}
+			else {
+				// The game runs the filter at its own rate; band-limit each tap (Hann-windowed sinc) and sample it at the render rate.
+				const double dReach = 5.0;
+				const double dCut = min( _dGameHz, _dOutHz );
+				int32_t i32First = int32_t( std::floor( -dReach / dCut * _dOutHz ) );
+				int32_t i32Last = int32_t( std::ceil( (7.0 / _dGameHz + dReach / dCut) * _dOutHz ) );
+				for ( int32_t M = i32First; M <= i32Last; ++M ) {
+					double dTap = 0.0;
+					for ( int32_t K = 0; K < 8; ++K ) {
+						double dX = dCut * (M / _dOutHz - K / _dGameHz);
+						if ( std::abs( dX ) >= dReach ) { continue; }
+						double dSinc = dX == 0.0 ? 1.0 : std::sin( NS4_PI * dX ) / (NS4_PI * dX);
+						double dWindow = 0.5 + 0.5 * std::cos( NS4_PI * dX / dReach );
+						dTap += _pi16Filter[K] / 32768.0 * dSinc * dWindow;
+					}
+					vTaps.push_back( dTap * dCut / _dOutHz );
+				}
+			}
+			if ( vFirTaps.size() != vTaps.size() ) {
+				vFirHistory.assign( vTaps.size(), 0.0 );
+				stFirPos = 0;
+			}
+			vFirTaps = vTaps;
+		}
+		else {
+			vFirTaps.clear();
+			vFirHistory.clear();
+			stFirPos = 0;
+		}
+
+		if ( _ui8CombSize && _i16CombGain ) {
+			if ( dCombDelay == 0.0 ) {
+				vCombHistory.assign( size_t( std::ceil( 128.0 * _dOutHz / _dGameHz ) ) + 2, 0.0 );
+				stCombPos = 0;
+			}
+			dCombDelay = (_ui8CombSize / 2) * _dOutHz / _dGameHz;
+			dCombGain = _i16CombGain / 32768.0;
+		}
+		else {
+			dCombDelay = 0.0;
+			dCombGain = 0.0;
+			vCombHistory.clear();
+			stCombPos = 0;
 		}
 	}
 

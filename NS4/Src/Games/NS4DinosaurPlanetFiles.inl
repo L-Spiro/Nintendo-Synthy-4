@@ -121,7 +121,7 @@
 	   } },
 { u8"Dinosaur Planet (Proto) 00000069 00154A0C.mid", u8"Dinosaur Planet (Proto) 00000069 00154A0C.mid TrackParseDebug.txt", u8"Scarab-Catching Game", 2 },
 { u8"Dinosaur Planet (Proto) 00000002 000AF750.mid", u8"Dinosaur Planet (Proto) 00000002 000AF750.mid TrackParseDebug.txt", u8"Cape Claw", 2 },
-{ u8"Dinosaur Planet (Proto) 0000005A 0013C6C0.mid", u8"Dinosaur Planet (Proto) 0000005A 0013C6C0.mid TrackParseDebug.txt", u8"Cape Claw Waters", 2 },
+{ u8"Dinosaur Planet (Proto) 0000005A 0013C6C0.mid", u8"Dinosaur Planet (Proto) 0000005A 0013C6C0.mid TrackParseDebug.txt", u8"Cape Claw Waters", 2 },              // Suspect.
 { u8"Dinosaur Planet (Proto) 00000003 000B0740.mid", u8"Dinosaur Planet (Proto) 00000003 000B0740.mid TrackParseDebug.txt", u8"LightFoot Ambush", 2 },
 { u8"Dinosaur Planet (Proto) 0000000D 000BA5D8.mid", u8"Dinosaur Planet (Proto) 0000000D 000BA5D8.mid TrackParseDebug.txt", u8"Krystal Tied to the LightFoot Totem Pole", 2 },
 { u8"Dinosaur Planet (Proto) 00000018 000D0F38.mid", u8"Dinosaur Planet (Proto) 00000018 000D0F38.mid TrackParseDebug.txt", u8"LightFoot Village Battle", 2 },
@@ -172,7 +172,7 @@
 		{ ns4::CMidiFile::NS4_ES_PRE_UNROLL, ns4::CMidiFile::NS4_E_MUTE_TRACK, 13 },
 		{ ns4::CMidiFile::NS4_ES_PRE_UNROLL, ns4::CMidiFile::NS4_E_MUTE_TRACK, 14 },
 	   } },
-{ u8"Dinosaur Planet (Proto) 00000049 00115560.mid", u8"Dinosaur Planet (Proto) 00000049 00115560.mid TrackParseDebug.txt", u8"Northern Wastes Caves", 2,
+{ u8"Dinosaur Planet (Proto) 00000049 00115560.mid", u8"Dinosaur Planet (Proto) 00000049 00115560.mid TrackParseDebug.txt", u8"Northern Wastes Caves", 2,       // Suspect.
 	10, {
 		{ ns4::CMidiFile::NS4_ES_PRE_UNROLL, ns4::CMidiFile::NS4_E_MUTE_TRACK, 0 },
 		{ ns4::CMidiFile::NS4_ES_PRE_UNROLL, ns4::CMidiFile::NS4_E_MUTE_TRACK, 2 },
@@ -193,10 +193,10 @@
 { u8"Dinosaur Planet (Proto) 0000004B 00117380.mid", u8"Dinosaur Planet (Proto) 0000004B 00117380.mid TrackParseDebug.txt", u8"Escaping the Conveyor Belt", 2 },
 { u8"Dinosaur Planet (Proto) 00000041 001014F0.mid", u8"Dinosaur Planet (Proto) 00000041 001014F0.mid TrackParseDebug.txt", u8"Darkice Mines Theme", 2 },
 { u8"Dinosaur Planet (Proto) 0000004C 001176F0.mid", u8"Dinosaur Planet (Proto) 0000004C 001176F0.mid TrackParseDebug.txt", u8"Darkice Mines Waterfall Cave", 2 },
-{ u8"Dinosaur Planet (Proto) 00000073 001631D4.mid", u8"Dinosaur Planet (Proto) 00000073 001631D4.mid TrackParseDebug.txt", u8"Darkice Mines Dark Cave", 1 },
+{ u8"Dinosaur Planet (Proto) 00000073 001631D4.mid", u8"Dinosaur Planet (Proto) 00000073 001631D4.mid TrackParseDebug.txt", u8"Darkice Mines Dark Cave", 1 },                   // Incorrect.
 { u8"Dinosaur Planet (Proto) 0000003B 000FB060.mid", u8"Dinosaur Planet (Proto) 0000003B 000FB060.mid TrackParseDebug.txt", u8"Galadon Battle Phase 1", 2 },
-{ u8"Dinosaur Planet (Proto) 00000048 00113B8C.mid", u8"Dinosaur Planet (Proto) 00000048 00113B8C.mid TrackParseDebug.txt", u8"Galadon Battle Phase 2", 2 },
-{ u8"Dinosaur Planet (Proto) 00000048 00113B8C.mid", u8"Dinosaur Planet (Proto) 00000048 00113B8C.mid TrackParseDebug.txt", u8"Galadon Battle Phase 2 (Start)", 2,
+//{ u8"Dinosaur Planet (Proto) 00000048 00113B8C.mid", u8"Dinosaur Planet (Proto) 00000048 00113B8C.mid TrackParseDebug.txt", u8"Galadon Battle Phase 2", 2 },
+{ u8"Dinosaur Planet (Proto) 00000048 00113B8C.mid", u8"Dinosaur Planet (Proto) 00000048 00113B8C.mid TrackParseDebug.txt", u8"Galadon Battle Phase 2 (Start)", 2,              // One of these Galadon Battle Phase 2 tracks should have some horns, according to the "Galadon Battle Phase 2 (Intense)" reference.
 	10, {
 		{ ns4::CMidiFile::NS4_ES_PRE_UNROLL, ns4::CMidiFile::NS4_E_MUTE_TRACK, 3 },
 		{ ns4::CMidiFile::NS4_ES_PRE_UNROLL, ns4::CMidiFile::NS4_E_MUTE_TRACK, 4 },
@@ -243,18 +243,18 @@
 		{ ns4::CMidiFile::NS4_ES_PRE_UNROLL, ns4::CMidiFile::NS4_E_MUTE_TRACK, 3 },
 		{ ns4::CMidiFile::NS4_ES_PRE_UNROLL, ns4::CMidiFile::NS4_E_MUTE_TRACK, 4 },
 	   } },
-{ u8"Dinosaur Planet (Proto) 00000057 0013103C.mid", u8"Dinosaur Planet (Proto) 00000057 0013103C.mid TrackParseDebug.txt", u8"Diamond Bay River Path (Isolated Layer Instruments)", 2,
-	9, {
-		{ ns4::CMidiFile::NS4_ES_PRE_UNROLL, ns4::CMidiFile::NS4_E_MUTE_TRACK, 2 },
-		{ ns4::CMidiFile::NS4_ES_PRE_UNROLL, ns4::CMidiFile::NS4_E_MUTE_TRACK, 3 },
-		{ ns4::CMidiFile::NS4_ES_PRE_UNROLL, ns4::CMidiFile::NS4_E_MUTE_TRACK, 4 },
-		{ ns4::CMidiFile::NS4_ES_PRE_UNROLL, ns4::CMidiFile::NS4_E_MUTE_TRACK, 5 },
-		{ ns4::CMidiFile::NS4_ES_PRE_UNROLL, ns4::CMidiFile::NS4_E_MUTE_TRACK, 6 },
-		{ ns4::CMidiFile::NS4_ES_PRE_UNROLL, ns4::CMidiFile::NS4_E_MUTE_TRACK, 7 },
-		{ ns4::CMidiFile::NS4_ES_PRE_UNROLL, ns4::CMidiFile::NS4_E_MUTE_TRACK, 9 },
-		{ ns4::CMidiFile::NS4_ES_PRE_UNROLL, ns4::CMidiFile::NS4_E_MUTE_TRACK, 10 },
-		{ ns4::CMidiFile::NS4_ES_PRE_UNROLL, ns4::CMidiFile::NS4_E_MUTE_TRACK, 11 },
-	   } },
+//{ u8"Dinosaur Planet (Proto) 00000057 0013103C.mid", u8"Dinosaur Planet (Proto) 00000057 0013103C.mid TrackParseDebug.txt", u8"Diamond Bay River Path (Isolated Layer Instruments)", 2,
+//	9, {
+//		{ ns4::CMidiFile::NS4_ES_PRE_UNROLL, ns4::CMidiFile::NS4_E_MUTE_TRACK, 2 },
+//		{ ns4::CMidiFile::NS4_ES_PRE_UNROLL, ns4::CMidiFile::NS4_E_MUTE_TRACK, 3 },
+//		{ ns4::CMidiFile::NS4_ES_PRE_UNROLL, ns4::CMidiFile::NS4_E_MUTE_TRACK, 4 },
+//		{ ns4::CMidiFile::NS4_ES_PRE_UNROLL, ns4::CMidiFile::NS4_E_MUTE_TRACK, 5 },
+//		{ ns4::CMidiFile::NS4_ES_PRE_UNROLL, ns4::CMidiFile::NS4_E_MUTE_TRACK, 6 },
+//		{ ns4::CMidiFile::NS4_ES_PRE_UNROLL, ns4::CMidiFile::NS4_E_MUTE_TRACK, 7 },
+//		{ ns4::CMidiFile::NS4_ES_PRE_UNROLL, ns4::CMidiFile::NS4_E_MUTE_TRACK, 9 },
+//		{ ns4::CMidiFile::NS4_ES_PRE_UNROLL, ns4::CMidiFile::NS4_E_MUTE_TRACK, 10 },
+//		{ ns4::CMidiFile::NS4_ES_PRE_UNROLL, ns4::CMidiFile::NS4_E_MUTE_TRACK, 11 },
+//	   } },
 { u8"Dinosaur Planet (Proto) 00000057 0013103C.mid", u8"Dinosaur Planet (Proto) 00000057 0013103C.mid TrackParseDebug.txt", u8"Diamond Bay River Path (Mix B)", 2,
 	4, {
 		{ ns4::CMidiFile::NS4_ES_PRE_UNROLL, ns4::CMidiFile::NS4_E_MUTE_TRACK, 12 },
@@ -275,7 +275,7 @@
 //{ u8"Dinosaur Planet (Proto) 00000057 0013103C.mid", u8"Dinosaur Planet (Proto) 00000057 0013103C.mid TrackParseDebug.txt", u8"Diamond Bay (All Instruments)", 2 },
 { u8"Dinosaur Planet (Proto) 0000000F 000BBEB0.mid", u8"Dinosaur Planet (Proto) 0000000F 000BBEB0.mid TrackParseDebug.txt", u8"Volcano Force Point Temple", 2 },
 { u8"Dinosaur Planet (Proto) 0000002D 000EBEA4.mid", u8"Dinosaur Planet (Proto) 0000002D 000EBEA4.mid TrackParseDebug.txt", u8"Krazoa Test of Strength", 2 },
-{ u8"Dinosaur Planet (Proto) 00000053 001234A4.mid", u8"Dinosaur Planet (Proto) 00000053 001234A4.mid TrackParseDebug.txt", u8"Warlock Mountain Waters", 2 },
+{ u8"Dinosaur Planet (Proto) 00000053 001234A4.mid", u8"Dinosaur Planet (Proto) 00000053 001234A4.mid TrackParseDebug.txt", u8"Warlock Mountain Waters", 2 },           // Suspect.
 { u8"Dinosaur Planet (Proto) 00000025 000E137C.mid", u8"Dinosaur Planet (Proto) 00000025 000E137C.mid TrackParseDebug.txt", u8"Warlock Mountain Warp Arch Appears", 2 },
 { u8"Dinosaur Planet (Proto) 00000084 0019160C.mid", u8"Dinosaur Planet (Proto) 00000084 0019160C.mid TrackParseDebug.txt", u8"Moon Mountain Pass", 1 },
 { u8"Dinosaur Planet (Proto) 00000050 0011FC7C.mid", u8"Dinosaur Planet (Proto) 00000050 0011FC7C.mid TrackParseDebug.txt", u8"Entering CloudRunner Fortress", 2 },
@@ -325,7 +325,7 @@
 		{ ns4::CMidiFile::NS4_ES_PRE_UNROLL, ns4::CMidiFile::NS4_E_MUTE_TRACK, 14 },
 		{ ns4::CMidiFile::NS4_ES_PRE_UNROLL, ns4::CMidiFile::NS4_E_MUTE_TRACK, 15 },
 	   } },
-{ u8"Dinosaur Planet (Proto) 00000044 0010BDC4.mid", u8"Dinosaur Planet (Proto) 00000044 0010BDC4.mid TrackParseDebug.txt", u8"Walled City (Alternate Layer)", 2,
+{ u8"Dinosaur Planet (Proto) 00000044 0010BDC4.mid", u8"Dinosaur Planet (Proto) 00000044 0010BDC4.mid TrackParseDebug.txt", u8"Walled City (Alternate Layer)", 2,   // Remove opening silence.
 	8, {
 		{ ns4::CMidiFile::NS4_ES_PRE_UNROLL, ns4::CMidiFile::NS4_E_MUTE_TRACK, 0 },
 		{ ns4::CMidiFile::NS4_ES_PRE_UNROLL, ns4::CMidiFile::NS4_E_MUTE_TRACK, 1 },

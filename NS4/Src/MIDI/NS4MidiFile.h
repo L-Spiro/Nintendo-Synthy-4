@@ -24,11 +24,16 @@
 #define NS4_CHN_VIB_DELEY					0xE3
 #define NS4_CHN_LINEAR_VOL_SCALE			0xE0
 #define NS4_CHN_PAN_WEIGHT					0xDC
+#define NS4_CHN_ENVELOPE					0xDA
 #define NS4_CHN_RELEASE_RATE				0xD9
 #define NS4_CHN_VIB_DEPTH					0xD8
 #define NS4_CHN_VIB_RATE					0xD7
 #define NS4_CHN_REVERB_EX					0xD4
 #define NS4_TRK_SET_PITCH_RANGE				0xC2
+#define NS4_CHN_COMB_FILTER					0xBB
+#define NS4_CHN_FILTER_CUTOFFS				0xB3
+#define NS4_CHN_FILTER_OFF					0xB1
+#define NS4_CHN_FILTER						0xB0
 
 #define NS4_TRK_SET_PITCH_SCALE				0xA8
 
@@ -645,6 +650,9 @@ namespace ns4 {
 
 			/** Specifies the ADSR percussion release rate.  Defaults to 0, making it unused. */
 			uint8_t						ui8AdsrPercReleaseRate = 0;
+
+			/** If true, EAD release rates are decay-table indices (Yoshi's Story, Ocarina of Time, Majora's Mask) and percussion uses each drum's own release. */
+			bool						bEadDecayTable = false;
 
 			/** Specifies the default pitch-bend scale value. */
 			uint8_t						ui8PitchBendScaleDefault = 0x40;
@@ -1642,6 +1650,38 @@ namespace ns4 {
 		}
 
 		/**
+		 * Gets the time it takes an EAD decay-table index (Yoshi's Story, Ocarina of Time, Majora's Mask) to fade a note from full volume to silence.
+		 *
+		 * \param _ui8Rate The decay-table index.
+		 * \return Returns the fade time in seconds, or -1.0 if the index never fades.
+		 */
+		static double					AdsrDecayTableToTime( uint8_t _ui8Rate ) {
+			double dScaleInv;
+			switch ( _ui8Rate ) {
+				case 0 : { return -1.0; }
+				case 255 : { dScaleInv = 0.25; break; }
+				case 254 : { dScaleInv = 0.33; break; }
+				case 253 : { dScaleInv = 0.5; break; }
+				case 252 : { dScaleInv = 0.66; break; }
+				case 251 : { dScaleInv = 0.75; break; }
+				default : {
+					if ( _ui8Rate >= 128 ) { dScaleInv = 251.0 - _ui8Rate; }
+					else if ( _ui8Rate >= 16 ) { dScaleInv = 4.0 * (143 - _ui8Rate); }
+					else { dScaleInv = 60.0 * (23 - _ui8Rate); }
+				}
+			}
+			return dScaleInv / 60.0;
+		}
+
+		/**
+		 * Fills an EAD channel filter (Ocarina of Time, Majora's Mask) from the game's low-pass and high-pass tables.
+		 *
+		 * \param _pi16Filter The 8 filter coefficients to fill.
+		 * \param _ui8Cutoffs The low-pass cutoff in the high 4 bits and the high-pass cutoff in the low 4 bits.
+		 */
+		static void						LoadEadFilter( int16_t * _pi16Filter, uint8_t _ui8Cutoffs );
+
+		/**
 		 * Converts from a MIDI value to a linear volume, applying _dCurve.
 		 *
 		 * \param _ui8Volume The MIDI volume level to convert to linear.
@@ -2612,6 +2652,76 @@ namespace ns4 {
 		};
 
 		/** A note for rendering. */
+		/** EAD channel filters (Ocarina of Time, Majora's Mask) applied to a note before its envelope: the 8-tap FIR filter, then the comb filter. */
+		struct NS4_EAD_NOTE_FX {
+			/** The FIR filter at the output rate.  Empty when no filter is set. */
+			std::vector<double>			vFirTaps;
+			/** The FIR input history. */
+			std::vector<double>			vFirHistory;
+			/** The FIR history write position. */
+			size_t						stFirPos = 0;
+			/** The comb-filter delay in output samples.  0.0 when no comb filter is set. */
+			double						dCombDelay = 0.0;
+			/** The gain of the undelayed signal in the comb filter. */
+			double						dCombGain = 0.0;
+			/** The comb-filter input history. */
+			std::vector<double>			vCombHistory;
+			/** The comb-filter history write position. */
+			size_t						stCombPos = 0;
+
+
+			// == Functions.
+			/**
+			 * Sets the filters from a channel's state.  The histories are kept so the filters can change while a note plays.
+			 *
+			 * \param _pi16Filter The 8 FIR coefficients (1.15 fixed-point) at the game's rate, or nullptr for no FIR filter.
+			 * \param _ui8CombSize The comb-filter size in bytes (the delay is half as many samples at the game's rate).  0 for no comb filter.
+			 * \param _i16CombGain The comb-filter gain (1.15 fixed-point) of the undelayed signal.  0 for no comb filter.
+			 * \param _dGameHz The game's output rate.
+			 * \param _dOutHz The render rate.
+			 */
+			void						Set( const int16_t * _pi16Filter, uint8_t _ui8CombSize, int16_t _i16CombGain, double _dGameHz, double _dOutHz );
+
+			/**
+			 * Is any filter set?
+			 *
+			 * \return Returns true if the FIR filter or the comb filter is set.
+			 */
+			bool						Active() const { return vFirTaps.size() != 0 || dCombDelay != 0.0; }
+
+			/**
+			 * Runs 1 sample through the filters.
+			 *
+			 * \param _dIn The input sample.
+			 * \return Returns the filtered sample.
+			 */
+			double						Process( double _dIn ) {
+				if ( vFirTaps.size() ) {
+					vFirHistory[stFirPos] = _dIn;
+					double dSum = 0.0;
+					size_t stIdx = stFirPos;
+					for ( size_t I = 0; I < vFirTaps.size(); ++I ) {
+						dSum += vFirTaps[I] * vFirHistory[stIdx];
+						stIdx = stIdx ? stIdx - 1 : vFirHistory.size() - 1;
+					}
+					stFirPos = (stFirPos + 1) % vFirHistory.size();
+					_dIn = dSum;
+				}
+				if ( dCombDelay != 0.0 ) {
+					const size_t stSize = vCombHistory.size();
+					vCombHistory[stCombPos] = _dIn;
+					double dPos = double( stCombPos ) - dCombDelay;
+					while ( dPos < 0.0 ) { dPos += double( stSize ); }
+					size_t stOld = size_t( dPos ) % stSize;
+					double dFrac = dPos - std::floor( dPos );
+					double dDelayed = vCombHistory[stOld] * (1.0 - dFrac) + vCombHistory[(stOld+1)%stSize] * dFrac;
+					stCombPos = (stCombPos + 1) % stSize;
+					_dIn = dDelayed + _dIn * dCombGain;
+				}
+				return _dIn;
+			}
+		};
+
 		struct NS4_NOTE {
 			uint32_t					ui32Id;
 			CSampler					sSampler;
@@ -2635,6 +2745,7 @@ namespace ns4 {
 			NS4_MOD_LFO					mlModLfo;
 			NS4_NAUDIO_OSC				noVibOsc;
 			NS4_NAUDIO_OSC				noTremOsc;
+			NS4_EAD_NOTE_FX				enfEadFx;
 			uint32_t					ui32Hz;
 			uint32_t					ui32DustSettle;
 			int32_t						i32Base;

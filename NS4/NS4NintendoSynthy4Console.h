@@ -848,6 +848,11 @@ int oldmain() {
 #ifdef NS4_ADSR_PERC_RELEASE
 		ns4::CMidiFile::m_sSettings.ui8AdsrPercReleaseRate = NS4_ADSR_PERC_RELEASE;
 #endif	// NS4_ADSR_PERC_RELEASE
+#ifdef NS4_EAD_DECAY_TABLE
+		ns4::CMidiFile::m_sSettings.bEadDecayTable = NS4_EAD_DECAY_TABLE;
+#else
+		ns4::CMidiFile::m_sSettings.bEadDecayTable = false;
+#endif	// NS4_EAD_DECAY_TABLE
 #ifdef NS4_EAD_PAN
 		ns4::CMidiFile::m_sSettings.eptEadPanning = NS4_EAD_PAN;
 #endif	// NS4_EAD_PAN
