@@ -19,6 +19,7 @@
 #define NS4_EAD_PAN							ns4::CMidiFile::NS4_EPT_LIBULTRA
 #define NS4_EXPRESSION_SCALES_VOLUME		true
 #define NS4_MOD_WHEEL_VIB_TREM				true
+#define NS4_PORTAMENTO_RATE					1.0
 //#define NS4_MAX_RATE						44100
 //#define NS4_OVERSAMPLING_BW					500.0
 #define NS4_PROG_CHANGE_SETS_VOL_PAN		false

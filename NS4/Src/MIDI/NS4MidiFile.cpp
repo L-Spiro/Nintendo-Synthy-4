@@ -1522,6 +1522,7 @@ namespace ns4 {
 		uint64_t ui64TickOfLastVolChange = uint64_t( -1 );
 		uint64_t ui64TickOfLastPanChange = uint64_t( -1 );
 		uint64_t ui64TickOfLastBendChange = uint64_t( -1 );
+		int32_t i32PortamentoLastNote = -1;
 
 		std::set<uint8_t> sUnknownVibs;
 		std::set<uint8_t> sUnknownTrems;
@@ -1577,6 +1578,13 @@ namespace ns4 {
 					}*/
 					uint8_t ui8Note = GetNote( teEvent );
 					uint8_t ui8Vel = GetNoteVel( teEvent );
+					// Portamento glides from the channel's previous note, which every note-on updates (even a silent one).
+					double dPortamentoFrom = 0.0, dPortamentoStep = 0.0;
+					if ( m_sSettings.dPortamentoRate > 0.0 && i32PortamentoLastNote >= 0 && msState.ui8State[NS4_C_PORTAMENTO] >= 64 && msState.ui8State[NS4_C_PORT_TIME] ) {
+						dPortamentoFrom = double( i32PortamentoLastNote - int32_t( ui8Note ) );
+						dPortamentoStep = msState.ui8State[NS4_C_PORT_TIME] * m_sSettings.dPortamentoRate / _troOptions.uiSampleRate;
+					}
+					i32PortamentoLastNote = ui8Note;
 					std::vector<const CSoundBank::NS4_SAMPLE *> vTriggered = _sbSoundBank.GatherSamples( ui32Bank,
 						ui32Inst,
 						ui8Note,
@@ -1628,6 +1636,8 @@ namespace ns4 {
 						nNote.msInitialState = msState;
 						nNote.ui8Note = ui8ThisNote;
 						nNote.ui8Vel = ui8Vel;
+						nNote.dPortamento = dPortamentoFrom;
+						nNote.dPortamentoStep = dPortamentoStep;
 						nNote.dPitchBend = liPitchBend.Value();
 						nNote.ui8Channel = static_cast<uint8_t>(ui32Channel);
 						nNote.ui16PitchBendRange = msState.ui16PitchBendRange;

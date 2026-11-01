@@ -853,6 +853,11 @@ int oldmain() {
 #else
 		ns4::CMidiFile::m_sSettings.bEadDecayTable = false;
 #endif	// NS4_EAD_DECAY_TABLE
+#ifdef NS4_PORTAMENTO_RATE
+		ns4::CMidiFile::m_sSettings.dPortamentoRate = NS4_PORTAMENTO_RATE;
+#else
+		ns4::CMidiFile::m_sSettings.dPortamentoRate = 0.0;
+#endif	// NS4_PORTAMENTO_RATE
 #ifdef NS4_EAD_PAN
 		ns4::CMidiFile::m_sSettings.eptEadPanning = NS4_EAD_PAN;
 #endif	// NS4_EAD_PAN

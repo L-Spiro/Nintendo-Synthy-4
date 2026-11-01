@@ -445,7 +445,7 @@
 		{ ns4::CMidiFile::NS4_ES_POST_SUPPLEMENTAL, ns4::CMidiFile::NS4_E_REMOVE_ALL_LOOP_POINTS, 0, 0 },
 	},
 },
-{ u8"Legend of Zelda, The - Majora's Mask (U) 0000006C 00A684D0 Zora guitar playing color dungeon music from the legend of zelda- link's awakening dx.mid", u8"Legend of Zelda, The - Majora's Mask (U) 0000006C 00A684D0 Zora guitar playing color dungeon music from the legend of zelda- link's awakening dx.mid TrackParseDebug.txt", u8"Bass Practice Music", 0x13,
+{ u8"Legend of Zelda, The - Majora's Mask (U) 0000006C 00A684D0 Zora guitar playing color dungeon music from link's awakening dx.mid", u8"Legend of Zelda, The - Majora's Mask (U) 0000006C 00A684D0 Zora guitar playing color dungeon music from link's awakening dx.mid TrackParseDebug.txt", u8"Bass Practice Music", 0x13,
 	2, {
 		{ ns4::CMidiFile::NS4_ES_MASTER, ns4::CMidiFile::NS4_E_GLOBAL_SET_REVERB, 0, ns4::CReverb::NS4_T_DELAY_0C00_2FFF },	// Guess.
 		{ ns4::CMidiFile::NS4_ES_POST_SUPPLEMENTAL, ns4::CMidiFile::NS4_E_REMOVE_ALL_LOOP_POINTS, 0, 0 },
@@ -579,7 +579,7 @@
 		{ ns4::CMidiFile::NS4_ES_MASTER, ns4::CMidiFile::NS4_E_GLOBAL_SET_REVERB, 0, ns4::CReverb::NS4_T_DELAY_0C00_2FFF },	// Guess.
 	},
 },
-{ u8"Legend of Zelda, The - Majora's Mask (U) 0000006C 00A684D0 Zora guitar playing color dungeon music from the legend of zelda- link's awakening dx.mid", u8"Legend of Zelda, The - Majora's Mask (U) 0000006C 00A684D0 Zora guitar playing color dungeon music from the legend of zelda- link's awakening dx.mid TrackParseDebug.txt", u8"Bass Practice Music (with Loop)", 0x13,
+{ u8"Legend of Zelda, The - Majora's Mask (U) 0000006C 00A684D0 Zora guitar playing color dungeon music from link's awakening dx.mid", u8"Legend of Zelda, The - Majora's Mask (U) 0000006C 00A684D0 Zora guitar playing color dungeon music from link's awakening dx.mid TrackParseDebug.txt", u8"Bass Practice Music (with Loop)", 0x13,
 	1, {
 		{ ns4::CMidiFile::NS4_ES_MASTER, ns4::CMidiFile::NS4_E_GLOBAL_SET_REVERB, 0, ns4::CReverb::NS4_T_DELAY_0C00_2FFF },	// Guess.
 	},

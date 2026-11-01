@@ -654,6 +654,10 @@ namespace ns4 {
 			/** If true, EAD release rates are decay-table indices (Yoshi's Story, Ocarina of Time, Majora's Mask) and percussion uses each drum's own release. */
 			bool						bEadDecayTable = false;
 
+			/** If not 0.0, portamento (NS4_C_PORTAMENTO at 64 or above) glides each new note from the previous note of its channel, linearly in semitones, at this many
+			 *	semitones per second for each unit of NS4_C_PORT_TIME (Hey You, Pikachu!: 1.0).  Defaults to 0.0. */
+			double						dPortamentoRate = 0.0;
+
 			/** Specifies the default pitch-bend scale value. */
 			uint8_t						ui8PitchBendScaleDefault = 0x40;
 		};
@@ -2750,6 +2754,8 @@ namespace ns4 {
 			uint32_t					ui32DustSettle;
 			int32_t						i32Base;
 			double						dPitchMod;
+			double						dPortamento;
+			double						dPortamentoStep;
 			uint16_t					ui16PitchBendRange;
 			
 			bool						bLpf;
@@ -2769,6 +2775,8 @@ namespace ns4 {
 				bInSustain( false ),
 				dPitchBend( 0.0 ),
 				dLinearPitchScale( 1.0 ),
+				dPortamento( 0.0 ),
+				dPortamentoStep( 0.0 ),
 				ui32Inst( _ui32Inst ),
 				psSoundbankSample( _psSoundBankSample ),
 				vaVibratoAdsr( _uiGameSamplingRate, _uiMasterSamplingRate ),
@@ -2826,6 +2834,12 @@ namespace ns4 {
 						--ui32DustSettle;
 					}
 				}
+				if ( dPortamento > 0.0 ) {
+					dPortamento = max( dPortamento - dPortamentoStep, 0.0 );
+				}
+				else if ( dPortamento < 0.0 ) {
+					dPortamento = min( dPortamento + dPortamentoStep, 0.0 );
+				}
 				sSampler.SetRate( PlayRate() );
 				if ( ui32Hz ) {
 					sSampler.Tick();
@@ -2842,6 +2856,7 @@ namespace ns4 {
 				double dRate = ui32Hz *
 					std::pow( 2.0, (int8_t( ui8Note ) -
 						int8_t( i32Base ) +
+						dPortamento +
 						dPitchBend * (ui16PitchBendRange / 100.0) +
 						((i8FineTune + i8TrackFineTune + mlModLfo.Cents()) / 100.0) +
 						dPitchMod) / 12.0 )
