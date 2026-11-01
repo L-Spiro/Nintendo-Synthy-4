@@ -306,7 +306,7 @@ int oldmain() {
 #ifdef NS4_BULK
 //#include "Src/Games/NS4ConkersBadFurDayFiles.inl"
 //#include "Src/Games/NS4ConkersBadFurDayECTSFiles.inl"
-#include "Src/Games/NS4DinosaurPlanetFiles.inl"
+//#include "Src/Games/NS4DinosaurPlanetFiles.inl"
 //#include "Src/Games/NS4JetForceGeminiFiles.inl"
 //#include "Src/Games/NS4JetForceGemini2Files.inl"
 //#include "Src/Games/NS4JetForceGeminiKioskFiles.inl"
@@ -391,7 +391,7 @@ int oldmain() {
 //#include "Src/Games/NS4Starfox64HeadphonesFiles.inl"
 //#include "Src/Games/NS4Starfox64UncompressedFiles.inl"
 //#include "Src/Games/NS4TheLegendOfZeldaOcarinaOfTimeFiles.inl"
-//#include "Src/Games/NS4TheLegendOfZeldaMajorasMaskFiles.inl"
+#include "Src/Games/NS4TheLegendOfZeldaMajorasMaskFiles.inl"
 //#include "Src/Games/NS4TheLegendOfZeldaOcarinaOfTimeLonLonRanchFiles.inl"
 //#include "Src/Games/NS4YoshisStoryFiles.inl"
 //#include "Src/Games/NS4MarioKart64Files.inl"
