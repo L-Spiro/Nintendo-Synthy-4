@@ -12,7 +12,7 @@
 #define NS4_OUT_DIRECTORY_NUMBERS			NS4_OUT_DIRECTORY u8"Numbered\\"
 #define NS4_WET_FILTER_FREQ					0.0//(NS4_ORIG_HZ / std::pow( 2.0, 3.0 ))
 #define NS4_ENV_MULTIPLIER					(1.0)
-#define NS4_REL_MULTIPLIER					2.0
+#define NS4_REL_MULTIPLIER					2.5
 #define NS4_PERC_INST						127
 #define NS4_ADSR_PERC_RELEASE				0xFF
 #define NS4_NO_PROGRAM_CHANGE_SORT			true

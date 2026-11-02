@@ -61,7 +61,7 @@
 { u8"Dinosaur Planet (Proto) 0000001A 000D2970.mid", u8"Dinosaur Planet (Proto) 0000001A 000D2970.mid TrackParseDebug.txt", u8"GuardClaw Theme", 2 },
 { u8"Dinosaur Planet (Proto) 00000011 000BEE04.mid", u8"Dinosaur Planet (Proto) 00000011 000BEE04.mid TrackParseDebug.txt", u8"SwapStone Hollow (SwapStone Circle)", 2 },
 { u8"Dinosaur Planet (Proto) 00000031 000F04C8.mid", u8"Dinosaur Planet (Proto) 00000031 000F04C8.mid TrackParseDebug.txt", u8"SwapStone Circle (Night)", 2,
-	12, {
+	12 + 2, {
 		{ ns4::CMidiFile::NS4_ES_PRE_UNROLL, ns4::CMidiFile::NS4_E_MUTE_TRACK, 1 },
 		{ ns4::CMidiFile::NS4_ES_PRE_UNROLL, ns4::CMidiFile::NS4_E_MUTE_TRACK, 2 },
 		{ ns4::CMidiFile::NS4_ES_PRE_UNROLL, ns4::CMidiFile::NS4_E_MUTE_TRACK, 3 },
@@ -74,9 +74,11 @@
 		{ ns4::CMidiFile::NS4_ES_PRE_UNROLL, ns4::CMidiFile::NS4_E_MUTE_TRACK, 10 },
 		{ ns4::CMidiFile::NS4_ES_PRE_UNROLL, ns4::CMidiFile::NS4_E_MUTE_TRACK, 11 },
 		{ ns4::CMidiFile::NS4_ES_PRE_UNROLL, ns4::CMidiFile::NS4_E_MUTE_TRACK, 12 },
+		{ ns4::CMidiFile::NS4_ES_MASTER, ns4::CMidiFile::NS4_E_GLOBAL_SET_CURSOR_BY_TICK, 0, 0, 0, { 6, 1, 1, 0 } },
+		{ ns4::CMidiFile::NS4_ES_MASTER, ns4::CMidiFile::NS4_E_GLOBAL_TRIM_OPENING_SILENCE_TO_CURSOR },
 	   } },
 { u8"Dinosaur Planet (Proto) 00000011 000BEE04.mid", u8"Dinosaur Planet (Proto) 00000011 000BEE04.mid TrackParseDebug.txt", u8"SwapStone Circle Totem Poles", 2,
-	12, {
+	12 + 2, {
 		{ ns4::CMidiFile::NS4_ES_PRE_UNROLL, ns4::CMidiFile::NS4_E_MUTE_TRACK, 1 },
 		{ ns4::CMidiFile::NS4_ES_PRE_UNROLL, ns4::CMidiFile::NS4_E_MUTE_TRACK, 2 },
 		{ ns4::CMidiFile::NS4_ES_PRE_UNROLL, ns4::CMidiFile::NS4_E_MUTE_TRACK, 3 },
@@ -89,9 +91,11 @@
 		{ ns4::CMidiFile::NS4_ES_PRE_UNROLL, ns4::CMidiFile::NS4_E_MUTE_TRACK, 10 },
 		{ ns4::CMidiFile::NS4_ES_PRE_UNROLL, ns4::CMidiFile::NS4_E_MUTE_TRACK, 11 },
 		{ ns4::CMidiFile::NS4_ES_PRE_UNROLL, ns4::CMidiFile::NS4_E_MUTE_TRACK, 12 },
+		{ ns4::CMidiFile::NS4_ES_MASTER, ns4::CMidiFile::NS4_E_GLOBAL_SET_CURSOR_BY_TICK, 0, 0, 0, { 6, 1, 1, 0 } },
+		{ ns4::CMidiFile::NS4_ES_MASTER, ns4::CMidiFile::NS4_E_GLOBAL_TRIM_OPENING_SILENCE_TO_CURSOR },
 	   } },
 { u8"Dinosaur Planet (Proto) 00000011 000BEE04.mid", u8"Dinosaur Planet (Proto) 00000011 000BEE04.mid TrackParseDebug.txt", u8"SwapStone Circle Totem Poles (Isolated Chanting)", 2,
-	13, {
+	13 + 2, {
 		{ ns4::CMidiFile::NS4_ES_PRE_UNROLL, ns4::CMidiFile::NS4_E_MUTE_TRACK, 0 },
 		{ ns4::CMidiFile::NS4_ES_PRE_UNROLL, ns4::CMidiFile::NS4_E_MUTE_TRACK, 1 },
 		{ ns4::CMidiFile::NS4_ES_PRE_UNROLL, ns4::CMidiFile::NS4_E_MUTE_TRACK, 2 },
@@ -105,6 +109,8 @@
 		{ ns4::CMidiFile::NS4_ES_PRE_UNROLL, ns4::CMidiFile::NS4_E_MUTE_TRACK, 10 },
 		{ ns4::CMidiFile::NS4_ES_PRE_UNROLL, ns4::CMidiFile::NS4_E_MUTE_TRACK, 11 },
 		{ ns4::CMidiFile::NS4_ES_PRE_UNROLL, ns4::CMidiFile::NS4_E_MUTE_TRACK, 12 },
+		{ ns4::CMidiFile::NS4_ES_MASTER, ns4::CMidiFile::NS4_E_GLOBAL_SET_CURSOR_BY_TICK, 0, 0, 0, { 8, 1, 1, 0 } },
+		{ ns4::CMidiFile::NS4_ES_MASTER, ns4::CMidiFile::NS4_E_GLOBAL_TRIM_OPENING_SILENCE_TO_CURSOR },
 	   } },
 //{ u8"Dinosaur Planet (Proto) 00000031 000F04C8.mid", u8"Dinosaur Planet (Proto) 00000031 000F04C8.mid TrackParseDebug.txt", u8"SwapStone Circle (All Instruments)", 2 },
 { u8"Dinosaur Planet (Proto) 00000067 00150EAC.mid", u8"Dinosaur Planet (Proto) 00000067 00150EAC.mid TrackParseDebug.txt", u8"The Shop", 2 },
@@ -326,7 +332,7 @@
 		{ ns4::CMidiFile::NS4_ES_PRE_UNROLL, ns4::CMidiFile::NS4_E_MUTE_TRACK, 15 },
 	   } },
 { u8"Dinosaur Planet (Proto) 00000044 0010BDC4.mid", u8"Dinosaur Planet (Proto) 00000044 0010BDC4.mid TrackParseDebug.txt", u8"Walled City (Alternate Layer)", 2,   // Remove opening silence.
-	8, {
+	8 + 2, {
 		{ ns4::CMidiFile::NS4_ES_PRE_UNROLL, ns4::CMidiFile::NS4_E_MUTE_TRACK, 0 },
 		{ ns4::CMidiFile::NS4_ES_PRE_UNROLL, ns4::CMidiFile::NS4_E_MUTE_TRACK, 1 },
 		{ ns4::CMidiFile::NS4_ES_PRE_UNROLL, ns4::CMidiFile::NS4_E_MUTE_TRACK, 2 },
@@ -335,6 +341,8 @@
 		{ ns4::CMidiFile::NS4_ES_PRE_UNROLL, ns4::CMidiFile::NS4_E_MUTE_TRACK, 5 },
 		{ ns4::CMidiFile::NS4_ES_PRE_UNROLL, ns4::CMidiFile::NS4_E_MUTE_TRACK, 6 },
 		{ ns4::CMidiFile::NS4_ES_PRE_UNROLL, ns4::CMidiFile::NS4_E_MUTE_TRACK, 7 },
+		{ ns4::CMidiFile::NS4_ES_MASTER, ns4::CMidiFile::NS4_E_GLOBAL_SET_CURSOR_BY_TICK, 0, 0, 0, { 3, 1, 1, 0 } },
+		{ ns4::CMidiFile::NS4_ES_MASTER, ns4::CMidiFile::NS4_E_GLOBAL_TRIM_OPENING_SILENCE_TO_CURSOR },
 	   } },
 { u8"Dinosaur Planet (Proto) 00000004 000B0EE4.mid", u8"Dinosaur Planet (Proto) 00000004 000B0EE4.mid TrackParseDebug.txt", u8"EarthWalker Temple", 2 },
 //{ u8"Dinosaur Planet (Proto) 00000044 0010BDC4.mid", u8"Dinosaur Planet (Proto) 00000044 0010BDC4.mid TrackParseDebug.txt", u8"Walled City (All Instruments)", 2 },	// Walled City

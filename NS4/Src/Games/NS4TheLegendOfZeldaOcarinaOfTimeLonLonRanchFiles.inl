@@ -16,10 +16,9 @@
 #define NS4_DEC_MULTIPLIER					(1.0)
 #define NS4_PERC_ATK_MULTIPLIER				(1.0)
 #define NS4_PERC_DEC_MULTIPLIER				(1.0)
-#define NS4_REL_MULTIPLIER					10.0
+#define NS4_REL_MULTIPLIER					1.0
 #define NS4_PITCH_RANGE						1200
 #define NS4_PERC_INST						127
-#define NS4_ADSR_PERC_RELEASE				10
 #define NS4_NO_PROGRAM_CHANGE_SORT			true
 #define NS4_PROG_CHANGE_SETS_VOL_PAN		false
 #define NS4_ADDITIVE_REVERB					true
@@ -31,18 +30,14 @@
 //#define NS4_PREMULTIPLY_MASTER				true
 #define NS4_MAIN_VOL_CURVE					20.0
 #define NS4_ENVELOPE_VOL_CURVE				20.0
+#define NS4_ENVELOPE_POINT_CURVE			40.0
+#define NS4_EAD_DECAY_TABLE					true
 #define NS4_MAIN_VOL_POW					2.0
 #define NS4_LINEAR_VOL_POW					2.0
 //#define NS4_OVERSAMPLING					(1 << 0)
 #define NS4_REVERB_OPTIONS					ns4::CMidiFile::NS4_OVER_127_SWAP_L_AND_R
 //#define NS4_CHANNEL_IDX_DETERMINES_PROGRAM	true
 //#define NS4_CHANNEL_DETERMINES_PROGRAM		true
-#define LSN_HYRULE_FIELD_REL				NS4_REL_MULTIPLIER * 0.5
-
-#define NS4_OVERSAMPLING					(1 << 2)
-#define NS4_OVERSAMPLING_BW					22050.0 / 3.0
-#define NS4_ANTI_ALIASING_LEVEL				2
-#define NS4_ANTI_ALIASING_HZ				20000.0
 
 
 { u8"Legend of Zelda, The - Ocarina of Time (U) (V1.2) 0000002F 00A62D40 Lon Lon Ranch.mid", u8"Legend of Zelda, The - Ocarina of Time (U) (V1.2) 0000002F 00A62D40 Lon Lon Ranch.mid TrackParseDebug.txt", u8"Lon Lon Ranch (Sans Melody)", 0x0D,
