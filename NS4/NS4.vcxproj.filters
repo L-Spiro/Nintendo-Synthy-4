@@ -709,6 +709,12 @@
     <None Include="Src\Games\NS4Gex3DeepCoverGeckoFiles.inl">
       <Filter>Header Files\Games</Filter>
     </None>
+    <None Include="Src\Games\NS4Gex64EnterTheGeckoFiles.inl">
+      <Filter>Header Files\Games</Filter>
+    </None>
+    <None Include="Src\Games\NS4Glover2PrototypeFiles.inl">
+      <Filter>Header Files\Games</Filter>
+    </None>
     <None Include="Src\Games\NS4MonopolyFiles.inl">
       <Filter>Header Files\Games</Filter>
     </None>
