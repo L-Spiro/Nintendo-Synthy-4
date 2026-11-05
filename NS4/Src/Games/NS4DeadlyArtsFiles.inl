@@ -1,5 +1,5 @@
 ﻿#define NS4_GAME							u8"Deadly Arts"
-//#define NS4_COMPOSERS						u8""
+#define NS4_COMPOSERS						u8"Kazuhiko Uehara"
 #define NS4_YEAR							u8"1998"
 #define NS4_FOLDER							u8"Deadly Arts"
 
@@ -17,7 +17,15 @@
 #define NS4_ANTI_ALIASING_LEVEL				2
 #define NS4_ANTI_ALIASING_HZ				20000.0
 
-{ u8"Deadly Arts (U) 00000002 0033F330.mid", u8"Deadly Arts (U) 00000002 0033F330.mid TrackParseDebug.txt", u8"Konami Logo", 0 },
+{ u8"Deadly Arts (U) 00000002 0033F330.mid", u8"Deadly Arts (U) 00000002 0033F330.mid TrackParseDebug.txt", u8"Konami Logo", 0,
+	6, {
+		{ ns4::CMidiFile::NS4_ES_PRE_UNROLL, ns4::CMidiFile::NS4_E_MUTE_TRACK, 11 - 1 },
+		{ ns4::CMidiFile::NS4_ES_PRE_UNROLL, ns4::CMidiFile::NS4_E_MUTE_TRACK, 12 - 1 },
+		{ ns4::CMidiFile::NS4_ES_PRE_UNROLL, ns4::CMidiFile::NS4_E_MUTE_TRACK, 13 - 1 },
+		{ ns4::CMidiFile::NS4_ES_PRE_UNROLL, ns4::CMidiFile::NS4_E_MUTE_TRACK, 14 - 1 },
+		{ ns4::CMidiFile::NS4_ES_PRE_UNROLL, ns4::CMidiFile::NS4_E_MUTE_TRACK, 15 - 1 },
+		{ ns4::CMidiFile::NS4_ES_PRE_UNROLL, ns4::CMidiFile::NS4_E_MUTE_TRACK, 16 - 1 },
+	   } },
 { u8"Deadly Arts (U) 00000004 0033F510.mid", u8"Deadly Arts (U) 00000004 0033F510.mid TrackParseDebug.txt", u8"Title Theme", 0 },
 { u8"Deadly Arts (U) 00000005 0033FB10.mid", u8"Deadly Arts (U) 00000005 0033FB10.mid TrackParseDebug.txt", u8"Character Select", 0 },
 { u8"Deadly Arts (U) 00000009 00341070.mid", u8"Deadly Arts (U) 00000009 00341070.mid TrackParseDebug.txt", u8"Kai Stage", 0 },
