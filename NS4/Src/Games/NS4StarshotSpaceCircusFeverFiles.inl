@@ -31,9 +31,15 @@
 #define NS4_ANTI_ALIASING_LEVEL				2
 #define NS4_ANTI_ALIASING_HZ				20000.0
 
+
+
+
+//{ u8"Starshot - Space Circus Fever (U) (M3) 00000016 00892BA4.mid", u8"Starshot - Space Circus Fever (U) (M3) 00000016 00892BA4.mid TrackParseDebug.txt", u8"00000016 00892BA4", 0 },
+
+
 { u8"Starshot - Space Circus Fever (U) (M3) 00000000 000F2C90.mid", u8"Starshot - Space Circus Fever (U) (M3) 00000000 000F2C90.mid TrackParseDebug.txt", u8"Title Screen", 0 },
-
-
+{ u8"Starshot - Space Circus Fever (U) (M3) 00000015 00892A0A.mid", u8"Starshot - Space Circus Fever (U) (M3) 00000015 00892A0A.mid TrackParseDebug.txt", u8"Space Circus Fanfare", 0 },
+{ u8"Starshot - Space Circus Fever (U) (M3) 00000017 00892BFA.mid", u8"Starshot - Space Circus Fever (U) (M3) 00000017 00892BFA.mid TrackParseDebug.txt", u8"Parade", 0 },
 { u8"Starshot - Space Circus Fever (U) (M3) 0000000B 0064D4B6.mid", u8"Starshot - Space Circus Fever (U) (M3) 0000000B 0064D4B6.mid TrackParseDebug.txt", u8"Strategy", 0 },
 { u8"Starshot - Space Circus Fever (U) (M3) 00000001 0021439A.mid", u8"Starshot - Space Circus Fever (U) (M3) 00000001 0021439A.mid TrackParseDebug.txt", u8"Tensuns", 0 },
 { u8"Starshot - Space Circus Fever (U) (M3) 00000002 00214A74.mid", u8"Starshot - Space Circus Fever (U) (M3) 00000002 00214A74.mid TrackParseDebug.txt", u8"Virtua Circus Fanfare", 0 },
@@ -52,7 +58,7 @@
 { u8"Starshot - Space Circus Fever (U) (M3) 00000008 0060942E.mid", u8"Starshot - Space Circus Fever (U) (M3) 00000008 0060942E.mid TrackParseDebug.txt", u8"TechnoMummy Walkway", 0 },
 { u8"Starshot - Space Circus Fever (U) (M3) 00000009 00609722.mid", u8"Starshot - Space Circus Fever (U) (M3) 00000009 00609722.mid TrackParseDebug.txt", u8"TechnoMummy Museum", 0 },
 { u8"Starshot - Space Circus Fever (U) (M3) 00000007 00559452.mid", u8"Starshot - Space Circus Fever (U) (M3) 00000007 00559452.mid TrackParseDebug.txt", u8"Earth", 0 },
-
+{ u8"Starshot - Space Circus Fever (U) (M3) 00000014 008700D4.mid", u8"Starshot - Space Circus Fever (U) (M3) 00000014 008700D4.mid TrackParseDebug.txt", u8"Wolfgang", 0 },
 
 
 
