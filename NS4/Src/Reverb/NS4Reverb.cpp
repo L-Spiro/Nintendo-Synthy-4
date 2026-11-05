@@ -1359,6 +1359,19 @@ namespace ns4 {
 		},
 	};
 
+	/** Delay line for Deadly Arts.  The game's custom libultra effect (ROM 0x032CD0) is the same as Legacy of Darkness's, but the songs' DA command
+	 *	(DA FF 80) sets section 0's output to 0xFF * 40 = 10200 and its feedback coefficient to 0x80 << 7 = 16384 with alSynSetFXParam().  The setting
+	 *	persists between songs, so every song uses it. */
+	NS4_REVERB_DELAY_LINE CReverb::m_rdlDeadlyArts0[] = {
+		{
+			10200,																	// ui32Delay
+			10200,																	// ui32FeedbackDelay
+			0x7FFF / double( 0x7FFF ),												// dVol
+			16384 / double( 0x7FFF ),												// dFeedback
+			1.0 / 0x7FFF															// dMinLevel
+		},
+	};
+
 	/** Delay line for Mystical Ninja Starring Goemon.  The game's custom libultra effect (ROM 0x06EEB0) has 1 section:
 	 *	input 0, output 7160, feedback coefficient 12000, feed-forward coefficient 0, gain 32767, no chorus, no filter.
 	 *	That is libultra's AL_FX_ECHO echo (every 7,160 samples, dropping by 12000/32767 with each repeat), played by the same Konami driver as
@@ -3040,6 +3053,15 @@ namespace ns4 {
 			NS4_NO_LPF,																// dLpfFactor
 			NS4_DELAY( m_rdlMarioGolf0, 1.0 ),										// dDelayVol
 		},	// 184
+		// Deadly Arts.
+		{
+			NS4_NO_TAPS,															// prtTable
+			0.0,																	// dTapVol
+			0,																		// i64TapOffset
+			NS4_NO_FADE,															// dTime
+			NS4_NO_LPF,																// dLpfFactor
+			NS4_DELAY( m_rdlDeadlyArts0, (double( 0x7FFF ) / double( 0x7FFF )) ),	// dDelayVol
+		},	// 185
 	};
 
 

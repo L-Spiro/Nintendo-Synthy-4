@@ -434,7 +434,7 @@ int oldmain() {
 //#include "Src/Games/NS4ArmyMenSargesHeroesFiles.inl"
 //#include "Src/Games/NS4ArmyMenSargesHeroes2Files.inl"
 //#include "Src/Games/NS4Gex3DeepCoverGeckoFiles.inl"
-#include "Src/Games/NS4Gex64EnterTheGeckoFiles.inl"
+//#include "Src/Games/NS4Gex64EnterTheGeckoFiles.inl"
 //#include "Src/Games/NS4MonopolyFiles.inl"
 //#include "Src/Games/NS4BuckBumbleFiles.inl"
 //#include "Src/Games/NS4HarvestMoonFiles.inl"
@@ -452,6 +452,7 @@ int oldmain() {
 //#include "Src/Games/NS4StarSoldierVanishingEarthOverSampledFiles.inl"
 //#include "Src/Games/NS4Doom64Files.inl"
 //#include "Src/Games/NS4LastLegionUxFiles.inl"
+//#include "Src/Games/NS4DonaldDuckGoinQuakersFiles.inl"
 //#include "Src/Games/NS4DonaldDuckGoinQuakersFiles.inl"
 
 //#include "Src/Games/NS4HeyYouPikachuFiles.inl"
@@ -520,7 +521,7 @@ int oldmain() {
 //#include "Src/Games/NS4Robotron64Files.inl"
 //#include "Src/Games/NS4CastlevaniaLegacyOfDarknessFiles.inl"
 //#include "Src/Games/NS4CastlevaniaFiles.inl"
-//#include "Src/Games/NS4DeadlyArtsFiles.inl"
+#include "Src/Games/NS4DeadlyArtsFiles.inl"
 //#include "Src/Games/NS4GaspFightersNextreamFiles.inl"
 //#include "Src/Games/NS4HyperOlympicsInNagano64Files.inl"
 //#include "Src/Games/NS4InternationalSuperstarSoccer2000Files.inl"
@@ -885,6 +886,11 @@ int oldmain() {
 #else
 		ns4::CMidiFile::m_sSettings.ui16SngMasterVolume = 0x7FFF;
 #endif	// NS4_SNG_MASTER_VOLUME
+#ifdef NS4_SNG_REVERB_BASE
+		ns4::CMidiFile::m_sSettings.ui8SngReverbBase = uint8_t( NS4_SNG_REVERB_BASE );
+#else
+		ns4::CMidiFile::m_sSettings.ui8SngReverbBase = 0;
+#endif	// NS4_SNG_REVERB_BASE
 #ifdef NS4_SNG_UPDATE_HZ
 		ns4::CMidiFile::m_sSettings.ui32SngUpdateHz = uint32_t( NS4_SNG_UPDATE_HZ );
 #else

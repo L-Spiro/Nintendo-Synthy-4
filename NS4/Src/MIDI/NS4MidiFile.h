@@ -477,6 +477,9 @@ namespace ns4 {
 			/** SNG: the songs' master volume set by the game (MusSetMasterVolume( MUSFLAG_SONGS, x )).  libmus starts at 0x7FFF. */
 			uint16_t					ui16SngMasterVolume = 0x7FFF;
 
+			/** SNG: the effect-mix base the game gives every channel (MusHandleSetReverb()).  libmus starts at 0. */
+			uint8_t						ui8SngReverbBase = 0;
+
 			/** SNG: how many times per second the game runs the libmus player (60 in most games; Quake II runs it 30 times per second). */
 			uint32_t					ui32SngUpdateHz = 60;
 

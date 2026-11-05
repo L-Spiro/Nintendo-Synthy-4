@@ -9,6 +9,7 @@
 												ns4::CSngDriver::NS4_SF_U8_FOR_PITCH_BEND | ns4::CSngDriver::NS4_SF_BEND_RANGE_SQUARES | ns4::CSngDriver::NS4_SF_SIGNED_ENV_RATES | \
 												ns4::CSngDriver::NS4_SF_VIBRATO_HOLDS | ns4::CSngDriver::NS4_SF_VOLUME_ON_PB_FRAME)
 #define NS4_DRIVER_SYNTH_HZ					22050.0
+#define NS4_SNG_REVERB_BASE					10
 #define NS4_CURVE							20.0
 #define NS4_OUT_DIRECTORY					u8"C:\\N64OST\\Gex 64 Enter the Gecko\\"
 #define NS4_OUT_DIRECTORY_NUMBERS			NS4_OUT_DIRECTORY u8"Numbered\\"
@@ -30,10 +31,13 @@
 #define NS4_ANTI_ALIASING_HZ				20000.0
 
 
+/*
 { u8"Gex 64 - Enter the Gecko (U) ZLib 00000016 004931C0.mid", u8"Gex 64 - Enter the Gecko (U) ZLib 00000016 004931C0.mid TrackParseDebug.txt", u8"Media Dimension", 0x01 },
 { u8"Gex 64 - Enter the Gecko (U) ZLib 0000000A 00458B70.mid", u8"Gex 64 - Enter the Gecko (U) ZLib 0000000A 00458B70.mid TrackParseDebug.txt", u8"Toon TV", 0x01 },
 
 { u8"Gex 64 - Enter the Gecko (U) ZLib 0000000C 0045A5C0.mid", u8"Gex 64 - Enter the Gecko (U) ZLib 0000000C 0045A5C0.mid TrackParseDebug.txt", u8"Toon TV (Construction Zone)", 0x01 },
+{ u8"Gex 64 - Enter the Gecko (U) ZLib 0000000F 0045CBC0.mid", u8"Gex 64 - Enter the Gecko (U) ZLib 0000000F 0045CBC0.mid TrackParseDebug.txt", u8"Toon TV (Wild West)", 0x01 },
+{ u8"Gex 64 - Enter the Gecko (U) ZLib 00000010 0045D100.mid", u8"Gex 64 - Enter the Gecko (U) ZLib 00000010 0045D100.mid TrackParseDebug.txt", u8"Toon TV (Castle)", 0x01 },
 { u8"Gex 64 - Enter the Gecko (U) ZLib 00000011 0045D6D0.mid", u8"Gex 64 - Enter the Gecko (U) ZLib 00000011 0045D6D0.mid TrackParseDebug.txt", u8"Toon TV (Rocket Ride)", 0x01 },
 
 { u8"Gex 64 - Enter the Gecko (U) ZLib 00000006 0041B390.mid", u8"Gex 64 - Enter the Gecko (U) ZLib 00000006 0041B390.mid TrackParseDebug.txt", u8"Scream TV", 0x03 },
@@ -45,6 +49,8 @@
 { u8"Gex 64 - Enter the Gecko (U) ZLib 00000012 0047A340.mid", u8"Gex 64 - Enter the Gecko (U) ZLib 00000012 0047A340.mid TrackParseDebug.txt", u8"Pre-History Channel", 0x06 },
 { u8"Gex 64 - Enter the Gecko (U) ZLib 00000009 00457A80.mid", u8"Gex 64 - Enter the Gecko (U) ZLib 00000009 00457A80.mid TrackParseDebug.txt", u8"Bonus Bonanza (In Drag Net)", 0x05 },
 
+{ u8"Gex 64 - Enter the Gecko (U) ZLib 00000003 004030B0.mid", u8"Gex 64 - Enter the Gecko (U) ZLib 00000003 004030B0.mid TrackParseDebug.txt", u8"Boss TV (Gexzilla vs. Mecharez)", 0x01 },
+*/
 
 
 //{ u8"Gex 64 - Enter the Gecko (U) 00000001 00498300_AdditionalPart1.mid", u8"Gex 64 - Enter the Gecko (U) 00000001 00498300_AdditionalPart1.mid TrackParseDebug.txt", u8"00000001 00498300_AdditionalPart1", 0 },
@@ -53,26 +59,32 @@
 
 //{ u8"Gex 64 - Enter the Gecko (U) 00000003 00499550_AdditionalPart1.mid", u8"Gex 64 - Enter the Gecko (U) 00000003 00499550_AdditionalPart1.mid TrackParseDebug.txt", u8"00000003 00499550_AdditionalPart1", 0 },
 
-{ u8"Gex 64 - Enter the Gecko (U) ZLib 00000000 003EB590.mid", u8"Gex 64 - Enter the Gecko (U) ZLib 00000000 003EB590.mid TrackParseDebug.txt", u8"Track 1", 0x03 },
-
-//{ u8"Gex 64 - Enter the Gecko (U) ZLib 00000003 004030B0.mid", u8"Gex 64 - Enter the Gecko (U) ZLib 00000003 004030B0.mid TrackParseDebug.txt", u8"Track 4", 0x02 },
-{ u8"Gex 64 - Enter the Gecko (U) ZLib 00000004 00403DD0.mid", u8"Gex 64 - Enter the Gecko (U) ZLib 00000004 00403DD0.mid TrackParseDebug.txt", u8"Track 5", 0x03 },
-{ u8"Gex 64 - Enter the Gecko (U) ZLib 00000005 00405C60.mid", u8"Gex 64 - Enter the Gecko (U) ZLib 00000005 00405C60.mid TrackParseDebug.txt", u8"Track 6", 0x03 },
+{ u8"Gex 64 - Enter the Gecko (U) ZLib 00000000 003EB590.mid", u8"Gex 64 - Enter the Gecko (U) ZLib 00000000 003EB590.mid TrackParseDebug.txt", u8"Track 1", 0x01 },
 
 
-{ u8"Gex 64 - Enter the Gecko (U) ZLib 0000000B 00459FF0.mid", u8"Gex 64 - Enter the Gecko (U) ZLib 0000000B 00459FF0.mid TrackParseDebug.txt", u8"Track 12", 0x03 },
-
-{ u8"Gex 64 - Enter the Gecko (U) ZLib 0000000D 0045AE70.mid", u8"Gex 64 - Enter the Gecko (U) ZLib 0000000D 0045AE70.mid TrackParseDebug.txt", u8"Track 14", 0x03 },
-{ u8"Gex 64 - Enter the Gecko (U) ZLib 0000000E 0045B420.mid", u8"Gex 64 - Enter the Gecko (U) ZLib 0000000E 0045B420.mid TrackParseDebug.txt", u8"Track 15", 0x03 },
-//{ u8"Gex 64 - Enter the Gecko (U) ZLib 0000000F 0045CBC0.mid", u8"Gex 64 - Enter the Gecko (U) ZLib 0000000F 0045CBC0.mid TrackParseDebug.txt", u8"Track 16", 0x05 },
-//{ u8"Gex 64 - Enter the Gecko (U) ZLib 00000010 0045D100.mid", u8"Gex 64 - Enter the Gecko (U) ZLib 00000010 0045D100.mid TrackParseDebug.txt", u8"Track 17", 0x05 },
+{ u8"Gex 64 - Enter the Gecko (U) ZLib 00000004 00403DD0.mid", u8"Gex 64 - Enter the Gecko (U) ZLib 00000004 00403DD0.mid TrackParseDebug.txt", u8"Track 5", 0x01 },
+{ u8"Gex 64 - Enter the Gecko (U) ZLib 00000005 00405C60.mid", u8"Gex 64 - Enter the Gecko (U) ZLib 00000005 00405C60.mid TrackParseDebug.txt", u8"Track 6", 0x01 },
 
 
-{ u8"Gex 64 - Enter the Gecko (U) ZLib 00000013 0047B670.mid", u8"Gex 64 - Enter the Gecko (U) ZLib 00000013 0047B670.mid TrackParseDebug.txt", u8"Track 20", 0x03 },
-{ u8"Gex 64 - Enter the Gecko (U) ZLib 00000014 00490EC0.mid", u8"Gex 64 - Enter the Gecko (U) ZLib 00000014 00490EC0.mid TrackParseDebug.txt", u8"Track 21", 0x03 },
+{ u8"Gex 64 - Enter the Gecko (U) ZLib 0000000B 00459FF0.mid", u8"Gex 64 - Enter the Gecko (U) ZLib 0000000B 00459FF0.mid TrackParseDebug.txt", u8"Track 12", 0x01 },
+
+{ u8"Gex 64 - Enter the Gecko (U) ZLib 0000000D 0045AE70.mid", u8"Gex 64 - Enter the Gecko (U) ZLib 0000000D 0045AE70.mid TrackParseDebug.txt", u8"Toon TV (Carrot Patch)", 0x01 },
+{ u8"Gex 64 - Enter the Gecko (U) ZLib 0000000E 0045B420.mid", u8"Gex 64 - Enter the Gecko (U) ZLib 0000000E 0045B420.mid TrackParseDebug.txt", u8"Toon TV (Wabbit Season)", 0x01 },
+
+{ u8"Gex 64 - Enter the Gecko (U) ZLib 00000013 0047B670.mid", u8"Gex 64 - Enter the Gecko (U) ZLib 00000013 0047B670.mid TrackParseDebug.txt", u8"Track 20", 0x01 },
+{ u8"Gex 64 - Enter the Gecko (U) ZLib 00000014 00490EC0.mid", u8"Gex 64 - Enter the Gecko (U) ZLib 00000014 00490EC0.mid TrackParseDebug.txt", u8"Track 21", 0x01 },
 
 
-{ u8"Gex 64 - Enter the Gecko (U) 00000000 00497E00.mid", u8"Gex 64 - Enter the Gecko (U) 00000000 00497E00.mid TrackParseDebug.txt", u8"Got Special Item", 0x03 },
-{ u8"Gex 64 - Enter the Gecko (U) 00000003 00499550.mid", u8"Gex 64 - Enter the Gecko (U) 00000003 00499550.mid TrackParseDebug.txt", u8"Level Win", 0x03 },
-{ u8"Gex 64 - Enter the Gecko (U) 00000001 00498300.mid", u8"Gex 64 - Enter the Gecko (U) 00000001 00498300.mid TrackParseDebug.txt", u8"Gex Dies", 0x03 },
-{ u8"Gex 64 - Enter the Gecko (U) 00000002 00498A50.mid", u8"Gex 64 - Enter the Gecko (U) 00000002 00498A50.mid TrackParseDebug.txt", u8"Game Over", 0x03 },
+{ u8"Gex 64 - Enter the Gecko (U) 00000000 00497E00.mid", u8"Gex 64 - Enter the Gecko (U) 00000000 00497E00.mid TrackParseDebug.txt", u8"Got Special Item", 0x06,
+    1,
+    { ns4::CMidiFile::NS4_ES_POST_SUPPLEMENTAL, ns4::CMidiFile::NS4_E_REMOVE_ALL_LOOP_POINTS, 0, 0 },
+},
+{ u8"Gex 64 - Enter the Gecko (U) 00000003 00499550.mid", u8"Gex 64 - Enter the Gecko (U) 00000003 00499550.mid TrackParseDebug.txt", u8"Level Win", 0x06,
+    1,
+    { ns4::CMidiFile::NS4_ES_POST_SUPPLEMENTAL, ns4::CMidiFile::NS4_E_REMOVE_ALL_LOOP_POINTS, 0, 0 },
+},
+{ u8"Gex 64 - Enter the Gecko (U) 00000001 00498300.mid", u8"Gex 64 - Enter the Gecko (U) 00000001 00498300.mid TrackParseDebug.txt", u8"Gex Dies", 0x06,
+    1,
+    { ns4::CMidiFile::NS4_ES_POST_SUPPLEMENTAL, ns4::CMidiFile::NS4_E_REMOVE_ALL_LOOP_POINTS, 0, 0 },
+},
+{ u8"Gex 64 - Enter the Gecko (U) 00000002 00498A50.mid", u8"Gex 64 - Enter the Gecko (U) 00000002 00498A50.mid TrackParseDebug.txt", u8"Game Over", 0x06 },

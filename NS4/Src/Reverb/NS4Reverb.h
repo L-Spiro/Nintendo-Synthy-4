@@ -544,6 +544,9 @@ namespace ns4 {
 		/** Delay line for Mystical Ninja Starring Goemon (its custom libultra effect: 1 section, output 7160, feedback 12000, gain 32767). */
 		static NS4_REVERB_DELAY_LINE			m_rdlMysticalNinjaStarringGoemon0[];
 
+		/** Delay line for Deadly Arts (Legacy of Darkness' effect with the feedback its songs set with DA FF 80: output 10200, feedback 16384, gain 32767). */
+		static NS4_REVERB_DELAY_LINE			m_rdlDeadlyArts0[];
+
 		/** Taps of libultra's AL_FX_BIGROOM (also libmus' default effect), simulated exactly. */
 		static NS4_REVERB_TAP					m_rtLibultraBigRoom0[];
 

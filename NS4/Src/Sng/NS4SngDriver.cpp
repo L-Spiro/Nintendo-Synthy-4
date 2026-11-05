@@ -15,6 +15,7 @@ namespace ns4 {
 		m_pvDetune( nullptr ),
 		m_ui32Bank( 0 ),
 		m_ui16MasterVolume( 0x7FFF ),
+		m_ui8ReverbBase( 0 ),
 		m_ui32UpdateHz( 60 ),
 		m_pscChannel( nullptr ),
 		m_stChannel( 0 ),
@@ -632,6 +633,7 @@ namespace ns4 {
 
 		_scChannel.ui16OldVolume = 0xFFFF;
 		_scChannel.ui8OldReverb = 0xFF;
+		_scChannel.ui8ReverbBase = m_ui8ReverbBase;
 		_scChannel.ui8OldPan = 0xFF;
 		_scChannel.fOldFrequency = 99.9f;
 

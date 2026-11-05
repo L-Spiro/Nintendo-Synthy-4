@@ -96,6 +96,14 @@ namespace ns4 {
 		void													SetMasterVolume( uint16_t _ui16Volume ) { m_ui16MasterVolume = _ui16Volume; }
 
 		/**
+		 * Sets the effect-mix base of every channel (MusHandleSetReverb(); libmus starts at 0).  Each channel sends
+		 *	base + (128 - base) * reverb / 128 to the effect bus, so songs whose reverb commands are all 0 still send the base.
+		 *
+		 * \param _ui8Base The effect-mix base (0-127).
+		 */
+		void													SetReverbBase( uint8_t _ui8Base ) { m_ui8ReverbBase = _ui8Base; }
+
+		/**
 		 * Sets how many times per second the player runs (musConfig's update rate: 60 in most games, 50 on PAL, 30 in Quake II).  The
 		 *	tempo is divided by it and the player's callback asks to be called again after 1,000,000 / rate microseconds.
 		 *
@@ -342,6 +350,9 @@ namespace ns4 {
 
 		/** The songs' master volume (mus_master_volume_songs). */
 		uint16_t												m_ui16MasterVolume;
+
+		/** The effect-mix base given to each channel (MusHandleSetReverb()). */
+		uint8_t													m_ui8ReverbBase;
 
 		/** The number of player updates per second. */
 		uint32_t												m_ui32UpdateHz;
