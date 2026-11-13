@@ -34,6 +34,7 @@
 { u8"Hybrid Heaven (U) 0000006E 00059CD0.mid", u8"Hybrid Heaven (U) 0000006E 00059CD0.mid TrackParseDebug.txt", u8"Murder in the Subway… (Diaz Shoots Johnny)", 0 },
 { u8"Hybrid Heaven (U) 0000006F 0005A090.mid", u8"Hybrid Heaven (U) 0000006F 0005A090.mid TrackParseDebug.txt", u8"Struggle with Mr. Diaz (Why Did You Shoot?)", 0 },
 { u8"Hybrid Heaven (U) 00000071 0005AFA0.mid", u8"Hybrid Heaven (U) 00000071 0005AFA0.mid TrackParseDebug.txt", u8"Enter the Unknown… (Into Level 1)", 0 },
+// Door Opening
 { u8"Hybrid Heaven (U) 00000009 0004EAB0.mid", u8"Hybrid Heaven (U) 00000009 0004EAB0.mid TrackParseDebug.txt", u8"Bioweapon Storage Facility (Level 1)", 0 },							// Should be played in conjunction with 00000005 0004E9F0 
 // Bioweapon Storage Facility (Level 1 Version 2)
 { u8"Hybrid Heaven (U) 00000009 0004EAB0.mid", u8"Hybrid Heaven (U) 00000009 0004EAB0.mid TrackParseDebug.txt", u8"Bioweapon Storage Facility (Level 1 Version 3)", 0 },
