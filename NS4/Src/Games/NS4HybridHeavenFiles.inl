@@ -34,10 +34,10 @@
 { u8"Hybrid Heaven (U) 0000006E 00059CD0.mid", u8"Hybrid Heaven (U) 0000006E 00059CD0.mid TrackParseDebug.txt", u8"Murder in the Subway… (Diaz Shoots Johnny)", 0 },
 { u8"Hybrid Heaven (U) 0000006F 0005A090.mid", u8"Hybrid Heaven (U) 0000006F 0005A090.mid TrackParseDebug.txt", u8"Struggle with Mr. Diaz (Why Did You Shoot?)", 0 },
 { u8"Hybrid Heaven (U) 00000071 0005AFA0.mid", u8"Hybrid Heaven (U) 00000071 0005AFA0.mid TrackParseDebug.txt", u8"Enter the Unknown… (Into Level 1)", 0 },
-{ u8"Hybrid Heaven (U) 00000009 0004EAB0.mid", u8"Hybrid Heaven (U) 00000009 0004EAB0.mid TrackParseDebug.txt", u8"Bioweapon Storage Facility (Level 1)", 0 },						// Should be played in conjunction with 00000005 0004E9F0 
-
+{ u8"Hybrid Heaven (U) 00000009 0004EAB0.mid", u8"Hybrid Heaven (U) 00000009 0004EAB0.mid TrackParseDebug.txt", u8"Bioweapon Storage Facility (Level 1)", 0 },							// Should be played in conjunction with 00000005 0004E9F0 
+// Bioweapon Storage Facility (Level 1 Version 2)
 { u8"Hybrid Heaven (U) 00000009 0004EAB0.mid", u8"Hybrid Heaven (U) 00000009 0004EAB0.mid TrackParseDebug.txt", u8"Bioweapon Storage Facility (Level 1 Version 3)", 0 },
-{ u8"Hybrid Heaven (U) 0000000F 0004F090.mid", u8"Hybrid Heaven (U) 0000000F 0004F090.mid TrackParseDebug.txt", u8"Bioweapon Storage Facility (Level 1 Version 4)", 0 },	// Should be played in conjunction with 00000005 0004E9F0 
+{ u8"Hybrid Heaven (U) 0000000F 0004F090.mid", u8"Hybrid Heaven (U) 0000000F 0004F090.mid TrackParseDebug.txt", u8"Bioweapon Storage Facility (Level 1 Version 4)", 0 },				// Should be played in conjunction with 00000005 0004E9F0 
 { u8"Hybrid Heaven (U) 00000013 0004F1B0.mid", u8"Hybrid Heaven (U) 00000013 0004F1B0.mid TrackParseDebug.txt", u8"Approaching Danger… (Bioweapon Storage Facility Version 5)", 0 },    // Should be played in conjunction with 00000005 0004E9F0.
 { u8"Hybrid Heaven (U) 00000053 00054860.mid", u8"Hybrid Heaven (U) 00000053 00054860.mid TrackParseDebug.txt", u8"Bioweapons Unleashed… (We Need to Talk)", 0 },
 { u8"Hybrid Heaven (U) 0000004E 000522B0.mid", u8"Hybrid Heaven (U) 0000004E 000522B0.mid TrackParseDebug.txt", u8"Fight!", 0 },
@@ -48,7 +48,7 @@
 { u8"Hybrid Heaven (U) 00000015 0004F3A0.mid", u8"Hybrid Heaven (U) 00000015 0004F3A0.mid TrackParseDebug.txt", u8"The Experiment (Dr. Bross’ Blue Rex Chase)", 0 },
 { u8"Hybrid Heaven (U) 00000061 00056AE0.mid", u8"Hybrid Heaven (U) 00000061 00056AE0.mid TrackParseDebug.txt", u8"Pacifists (Theme of Gargatuans)", 0 },
 { u8"Hybrid Heaven (U) 00000065 00057F50.mid", u8"Hybrid Heaven (U) 00000065 00057F50.mid TrackParseDebug.txt", u8"Explosion (Johnny Wakes Up)", 0 },
-
+// Clone Storage Facility (Level 3 - Level 7)
 { u8"Hybrid Heaven (U) 0000006C 00059150.mid", u8"Hybrid Heaven (U) 0000006C 00059150.mid TrackParseDebug.txt", u8"Old Man’s Guise (Kevin Young’s Theme)", 0 },
 { u8"Hybrid Heaven (U) 0000004F 00052D90.mid", u8"Hybrid Heaven (U) 0000004F 00052D90.mid TrackParseDebug.txt", u8"Fight Hard! (Boss Fight)", 0 },
 { u8"Hybrid Heaven (U) 0000006B 00058D90.mid", u8"Hybrid Heaven (U) 0000006B 00058D90.mid TrackParseDebug.txt", u8"Johnny Prevails", 0 },
@@ -67,7 +67,7 @@
 { u8"Hybrid Heaven (U) 00000068 000588E0.mid", u8"Hybrid Heaven (U) 00000068 000588E0.mid TrackParseDebug.txt", u8"A Trap… (Anna Pulls a Gun on Johnny)", 0 },
 { u8"Hybrid Heaven (U) 00000059 00055230.mid", u8"Hybrid Heaven (U) 00000059 00055230.mid TrackParseDebug.txt", u8"Good Job Anna (Diaz’s Trap Succeeded)", 0 },
 { u8"Hybrid Heaven (U) 0000005A 000555F0.mid", u8"Hybrid Heaven (U) 0000005A 000555F0.mid TrackParseDebug.txt", u8"Settle the Score with Diaz", 0 },
-{ u8"Hybrid Heaven (U) 00000045 00051B30.mid", u8"Hybrid Heaven (U) 00000045 00051B30.mid TrackParseDebug.txt", u8"Clone Cultivation Site (Level 8)", 0 },				// Needs to be played in conjunction with another track (provides right-speak pulsing ambience).
+{ u8"Hybrid Heaven (U) 00000045 00051B30.mid", u8"Hybrid Heaven (U) 00000045 00051B30.mid TrackParseDebug.txt", u8"Clone Cultivation Site (Level 8)", 0 },								// Needs to be played in conjunction with another track (provides right-speak pulsing ambience).
 { u8"Hybrid Heaven (U) 00000075 0005B820.mid", u8"Hybrid Heaven (U) 00000075 0005B820.mid TrackParseDebug.txt", u8"Escape! (Johnny and Anna Run for Their Lives)", 0 },
 { u8"Hybrid Heaven (U) 00000000 0004E7D0.mid", u8"Hybrid Heaven (U) 00000000 0004E7D0.mid TrackParseDebug.txt", u8"Underground Shelter: Top Level (Level 9)", 0 },
 { u8"Hybrid Heaven (U) 00000079 0005D980.mid", u8"Hybrid Heaven (U) 00000079 0005D980.mid TrackParseDebug.txt", u8"Overground Dreams (Jerry Silver’s Theme)", 0 },
