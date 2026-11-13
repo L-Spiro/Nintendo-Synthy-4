@@ -69,6 +69,19 @@ namespace ns4 {
 		bool													LoadDebug( std::istream &_isStream, uint32_t _ui32FirstTrack, uint32_t _ui32FirstOffset );
 
 		/**
+		 * Adds the tracks of another Konami "TrackParseDebug" text file to the loaded sequence, as when the game plays 2 songs at once on different
+		 *	channels (an area's ambience under its music).  The stream must be positioned at the start of the file.  The added tracks are placed
+		 *	at _ui32FirstTrack and up; as in the game, a song started on channels that are already in use takes them over, so any tracks already
+		 *	there are replaced.  Tracks between the last loaded track and _ui32FirstTrack are left empty.
+		 *
+		 * \param _isStream The text stream.
+		 * \param _ui32FirstTrack The index of the track (0-based) that receives the file's first track, or ~0 to add the tracks after the last loaded track.
+		 * \param _ui32MaxTracks The most tracks to take from the file (the game's song table can give a song fewer channels than it has tracks), or 0 to take them all.
+		 * \return Returns true if at least one track with data was added.
+		 */
+		bool													AddDebug( std::istream &_isStream, uint32_t _ui32FirstTrack, uint32_t _ui32MaxTracks = 0 );
+
+		/**
 		 * Determines if a line is the start of a Konami track in a "TrackParseDebug" file ("Track N: XXXXXXXX" and nothing else).
 		 *
 		 * \param _sLine The line to check.
@@ -124,6 +137,9 @@ namespace ns4 {
 		// == Members.
 		/** Microseconds between driver updates. */
 		static constexpr uint32_t								NS4_KON_CALLBACK_US = 5000;
+
+		/** The offset of a track that has nothing to play (an unused channel between sequences that are played together). */
+		static constexpr uint32_t								NS4_KON_NO_TRACK = 0xFFFFFFFF;
 
 		/** The pitch table: playback ratios for semitones 0-72 (60 = 1.0), plus a guard entry. */
 		static const float										m_fPitchTable[74];
@@ -308,6 +324,21 @@ namespace ns4 {
 
 		/** Track offsets. */
 		std::vector<uint32_t>									m_vTrackOffsets;
+
+		/** A sequence added with AddDebug(). */
+		struct NS4_KON_ADDED_SEQUENCE {
+			std::vector<uint8_t>								vImage;					/**< The rebuilt sequence. */
+			std::vector<uint8_t>								vKnown;					/**< Which bytes of vImage were found in the debug text. */
+		};
+
+		/** The sequences added with AddDebug(). */
+		std::vector<NS4_KON_ADDED_SEQUENCE>						m_vAddedSequences;
+
+		/** The sequence each track reads: 0 is m_vImage, N is m_vAddedSequences[N-1]. */
+		std::vector<uint32_t>									m_vTrackSequences;
+
+		/** The sequence that SetByte() writes to: 0 is m_vImage, N is m_vAddedSequences[N-1]. */
+		uint32_t												m_ui32LoadSequence = 0;
 
 		/** Warnings. */
 		std::vector<std::string>								m_vWarnings;

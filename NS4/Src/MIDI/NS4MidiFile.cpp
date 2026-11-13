@@ -1067,6 +1067,46 @@ namespace ns4 {
 	}
 
 	/**
+	 * Adds the tracks of another Konami "TrackParseDebug" file to the loaded Konami sequence (songs the game plays at the same time on
+	 *	different channels), then plays the result again to rebuild the tracks and find the loop.
+	 *
+	 * \param _pwcPath The UTF-16 path to open.
+	 * \param _ui32FirstTrack The index of the driver track (0-based) that receives the file's first track, or ~0 to add the tracks after the last track.
+	 * \param _ui32MaxTracks The most tracks to take from the file, or 0 to take them all.
+	 * \return Returns true if the file contained track data.
+	 */
+	bool CMidiFile::AddKonamiSequence( const wchar_t * _pwcPath, uint32_t _ui32FirstTrack, uint32_t _ui32MaxTracks ) {
+		if ( !m_bKonami ) {
+			std::printf( "KONAMI: A sequence can only be added to a Konami sequence.\r\n" );
+			return false;
+		}
+		std::ifstream fFile( _pwcPath );
+		if ( !fFile.is_open() ) {
+			std::printf( "KONAMI: Failed to open the debug file of the sequence to add.\r\n" );
+			return false;
+		}
+		if ( !m_kdKonami.AddDebug( fFile, _ui32FirstTrack, _ui32MaxTracks ) ) {
+			std::printf( "KONAMI: No track data found in the debug file of the sequence to add.\r\n" );
+			return false;
+		}
+		// The longest a song may take to reach its loop (30 minutes).
+		const uint64_t ui64MaxTicks = uint64_t( 30.0 * 60.0 / DriverTickSeconds() );
+
+		CKonamiDriver kdDriver = m_kdKonami;
+		std::vector<CDriverVoiceEvents::NS4_DRIVER_TRACK> vKonTracks;
+		kdDriver.Play( m_ui32DriverBank, m_sSettings.pktKonamiTables, ui64MaxTicks, true, vKonTracks );
+		for ( size_t I = 0; I < kdDriver.Warnings().size(); ++I ) {
+			std::printf( "KONAMI: %s\r\n", kdDriver.Warnings()[I].c_str() );
+		}
+
+		m_kdKonami = kdDriver;
+		m_vDriverRender.clear();
+		m_ui64DriverRenderTicks = 0;
+		BuildDriverTracks( vKonTracks, "KONAMI" );
+		return true;
+	}
+
+	/**
 	 * Loads an SNG ("Binary Song Style" or "Old Song Style") "TrackParseDebug" file, plays it with the SNG driver to find each channel's loop, and replaces
 	 *	the MIDI tracks with tracks that hold the timing (1 MIDI tick = 1 frame), loop points, and note bookkeeping.  Track 0 is the
 	 *	master track.  The sound itself is rendered by RenderDriverNotesToStereo().
@@ -3399,6 +3439,11 @@ namespace ns4 {
 								}
 							}
 						}
+						break;
+					}
+					case NS4_E_ADD_KONAMI_FILE : {
+						std::string sFinal = std::string( _pcMidiFolder ) + "DBG\\" + _pmMods[I].pcStringOp;
+						AddKonamiSequence( std::wstring_convert<std::codecvt_utf8_utf16<wchar_t>, wchar_t>{}.from_bytes( sFinal ).c_str(), _pmMods[I].ui32Operand0, _pmMods[I].ui32Operand1 );
 						break;
 					}
 					case NS4_E_SET_BANK_PUNK7890 : {

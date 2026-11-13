@@ -276,6 +276,7 @@ namespace ns4 {
 #define NS4_SET_ADSR_PERC_REL_RATE( VAL )						ns4::CMidiFile::NS4_ES_MASTER, ns4::CMidiFile::NS4_E_GLOBAL_SET_PERC_RELEASE_ADSR, (VAL)
 #define NS4_SET_CHANNEL_OFFSET( VAL )							ns4::CMidiFile::NS4_ES_PRE_UNROLL, ns4::CMidiFile::NS4_E_SET_CHANNEL_OFFSET, (VAL)
 #define NS4_ADD_MIDI_FILE( FILE, KEEP_FIRST_TRK )				ns4::CMidiFile::NS4_ES_PRE_UNROLL, ns4::CMidiFile::NS4_E_ADD_MIDI_FILE, 0, KEEP_FIRST_TRK, 0, {}, {}, 0, 0, 0.0, 0.0, reinterpret_cast<const char *>(FILE)
+#define NS4_ADD_KONAMI_FILE( DBG_FILE, FIRST_TRACK, MAX_TRACKS )	ns4::CMidiFile::NS4_ES_POST_SUPPLEMENTAL, ns4::CMidiFile::NS4_E_ADD_KONAMI_FILE, 0, uint32_t( FIRST_TRACK ), uint32_t( MAX_TRACKS ), {}, {}, 0, 0, 0.0, 0.0, reinterpret_cast<const char *>(DBG_FILE)
 #define NS4_MAKE_TUNING( BASENOTE, COURSETUNE, FINETUNE )		uint32_t( (uint8_t( BASENOTE ) << 24) | (uint8_t( COURSETUNE ) << 16) | uint16_t( FINETUNE ) )
 #define NS4_MAKE_VIB_TREM( TYPE, RATE, DEPTH, DELAY )			uint32_t( (uint8_t( TYPE ) << 24) | (uint8_t( RATE ) << 16) | (uint8_t( DEPTH ) << 8) | (uint8_t( DELAY ) << 0) )
 #define NS4_MAKE_NOTE_INST( NOTE, SAMPLE_VOL, SAMPLE_PAN, REV )	uint32_t( (uint8_t( NOTE ) << 24) | (uint8_t( SAMPLE_VOL ) << 16) | (uint8_t( SAMPLE_PAN ) << 8) | (uint8_t( REV ) << 0) )
@@ -2974,6 +2975,17 @@ namespace ns4 {
 		 * \return Returns true if the file contained track data.
 		 */
 		bool							AddDebug_Konami( std::istream &_isStream, uint32_t _ui32FirstTrack, uint32_t _ui32FirstOffset );
+
+		/**
+		 * Adds the tracks of another Konami "TrackParseDebug" file to the loaded Konami sequence (songs the game plays at the same time on
+		 *	different channels), then plays the result again to rebuild the tracks and find the loop.
+		 *
+		 * \param _pwcPath The UTF-16 path to open.
+		 * \param _ui32FirstTrack The index of the driver track (0-based) that receives the file's first track, or ~0 to add the tracks after the last track.
+		 * \param _ui32MaxTracks The most tracks to take from the file, or 0 to take them all.
+		 * \return Returns true if the file contained track data.
+		 */
+		bool							AddKonamiSequence( const wchar_t * _pwcPath, uint32_t _ui32FirstTrack, uint32_t _ui32MaxTracks );
 
 		/**
 		 * Loads an SNG ("Binary Song Style" or "Old Song Style") "TrackParseDebug" file, plays it with the SNG driver to find each channel's loop, and replaces

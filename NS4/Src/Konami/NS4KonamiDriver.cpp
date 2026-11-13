@@ -2322,6 +2322,9 @@ namespace ns4 {
 		m_vImage.clear();
 		m_vKnown.clear();
 		m_vTrackOffsets.clear();
+		m_vAddedSequences.clear();
+		m_vTrackSequences.clear();
+		m_ui32LoadSequence = 0;
 		m_vWarnings.clear();
 
 		m_vTrackOffsets.push_back( _ui32FirstOffset );
@@ -2340,10 +2343,63 @@ namespace ns4 {
 			}
 			ParseLine( sLine );
 		}
+		m_vTrackSequences.assign( m_vTrackOffsets.size(), 0 );
 		for ( size_t I = 0; I < m_vTrackOffsets.size(); ++I ) {
 			if ( m_vTrackOffsets[I] < m_vKnown.size() && m_vKnown[m_vTrackOffsets[I]] ) { return true; }
 		}
 		return false;
+	}
+
+	/**
+	 * Adds the tracks of another Konami "TrackParseDebug" text file to the loaded sequence, as when the game plays 2 songs at once on different
+	 *	channels (an area's ambience under its music).  The stream must be positioned at the start of the file.  The added tracks are placed
+	 *	at _ui32FirstTrack and up; as in the game, a song started on channels that are already in use takes them over, so any tracks already
+	 *	there are replaced.  Tracks between the last loaded track and _ui32FirstTrack are left empty.
+	 *
+	 * \param _isStream The text stream.
+	 * \param _ui32FirstTrack The index of the track (0-based) that receives the file's first track, or ~0 to add the tracks after the last loaded track.
+	 * \param _ui32MaxTracks The most tracks to take from the file (the game's song table can give a song fewer channels than it has tracks), or 0 to take them all.
+	 * \return Returns true if at least one track with data was added.
+	 */
+	bool CKonamiDriver::AddDebug( std::istream &_isStream, uint32_t _ui32FirstTrack, uint32_t _ui32MaxTracks ) {
+		m_vWarnings.clear();
+		m_vAddedSequences.push_back( NS4_KON_ADDED_SEQUENCE() );
+		const uint32_t ui32Sequence = uint32_t( m_vAddedSequences.size() );
+		m_vTrackSequences.resize( m_vTrackOffsets.size(), 0 );
+
+		std::vector<uint32_t> vOffsets;
+		m_ui32LoadSequence = ui32Sequence;
+		for ( std::string sLine; std::getline( _isStream, sLine ); ) {
+			uint32_t ui32Track, ui32Offset;
+			if ( IsTrackLine( sLine, ui32Track, ui32Offset ) ) {
+				vOffsets.push_back( ui32Offset );
+				continue;
+			}
+			if ( vOffsets.size() ) { ParseLine( sLine ); }
+		}
+		m_ui32LoadSequence = 0;
+		if ( _ui32MaxTracks && vOffsets.size() > _ui32MaxTracks ) { vOffsets.resize( _ui32MaxTracks ); }
+
+		const NS4_KON_ADDED_SEQUENCE &kasSeq = m_vAddedSequences[ui32Sequence-1];
+		bool bFound = false;
+		for ( size_t I = 0; I < vOffsets.size() && !bFound; ++I ) {
+			bFound = vOffsets[I] < kasSeq.vKnown.size() && kasSeq.vKnown[vOffsets[I]];
+		}
+		if ( !bFound ) {
+			m_vAddedSequences.pop_back();
+			return false;
+		}
+
+		size_t stFirst = (_ui32FirstTrack == uint32_t( ~0 )) ? m_vTrackOffsets.size() : size_t( _ui32FirstTrack );
+		if ( stFirst + vOffsets.size() > m_vTrackOffsets.size() ) {
+			m_vTrackOffsets.resize( stFirst + vOffsets.size(), NS4_KON_NO_TRACK );
+			m_vTrackSequences.resize( stFirst + vOffsets.size(), 0 );
+		}
+		for ( size_t I = 0; I < vOffsets.size(); ++I ) {
+			m_vTrackOffsets[stFirst+I] = vOffsets[I];
+			m_vTrackSequences[stFirst+I] = ui32Sequence;
+		}
+		return true;
 	}
 
 	/**
@@ -2400,7 +2456,7 @@ namespace ns4 {
 
 			NS4_KON_CHANNEL &kcChan = m_vChannels[I];
 			std::memset( &kcChan, 0, sizeof( kcChan ) );
-			kcChan.ui32SeqId = 1;
+			kcChan.ui32SeqId = (m_vTrackOffsets[I] == NS4_KON_NO_TRACK) ? 0 : 1;
 			kcChan.ui32Needle = m_vTrackOffsets[I];
 			kcChan.ui8Bank = uint8_t( _ui32Bank );
 			kcChan.ui8WaveBank = uint8_t( _ui32Bank );
@@ -2460,17 +2516,19 @@ namespace ns4 {
 	 */
 	void CKonamiDriver::SetByte( uint32_t _ui32Offset, uint8_t _ui8Value ) {
 		if ( _ui32Offset >= 0x1000000 ) { return; }
-		if ( _ui32Offset >= m_vImage.size() ) {
-			m_vImage.resize( _ui32Offset + 1, 0 );
-			m_vKnown.resize( _ui32Offset + 1, 0 );
+		std::vector<uint8_t> &vImage = m_ui32LoadSequence ? m_vAddedSequences[m_ui32LoadSequence-1].vImage : m_vImage;
+		std::vector<uint8_t> &vKnown = m_ui32LoadSequence ? m_vAddedSequences[m_ui32LoadSequence-1].vKnown : m_vKnown;
+		if ( _ui32Offset >= vImage.size() ) {
+			vImage.resize( _ui32Offset + 1, 0 );
+			vKnown.resize( _ui32Offset + 1, 0 );
 		}
-		if ( m_vKnown[_ui32Offset] && m_vImage[_ui32Offset] != _ui8Value ) {
+		if ( vKnown[_ui32Offset] && vImage[_ui32Offset] != _ui8Value ) {
 			char szBuffer[128];
-			std::snprintf( szBuffer, sizeof( szBuffer ), "Conflicting values at %08X: %02X and %02X.", _ui32Offset, m_vImage[_ui32Offset], _ui8Value );
+			std::snprintf( szBuffer, sizeof( szBuffer ), "Conflicting values at %08X: %02X and %02X.", _ui32Offset, vImage[_ui32Offset], _ui8Value );
 			m_vWarnings.push_back( szBuffer );
 		}
-		m_vImage[_ui32Offset] = _ui8Value;
-		m_vKnown[_ui32Offset] = 1;
+		vImage[_ui32Offset] = _ui8Value;
+		vKnown[_ui32Offset] = 1;
 	}
 
 	/**
@@ -2561,7 +2619,10 @@ namespace ns4 {
 	 * \return Returns the byte.
 	 */
 	uint8_t CKonamiDriver::PeekByte( uint32_t _ui32Offset ) {
-		if ( _ui32Offset < m_vImage.size() && m_vKnown[_ui32Offset] ) { return m_vImage[_ui32Offset]; }
+		const uint32_t ui32Sequence = (m_stChannel < m_vTrackSequences.size()) ? m_vTrackSequences[m_stChannel] : 0;
+		const std::vector<uint8_t> &vImage = ui32Sequence ? m_vAddedSequences[ui32Sequence-1].vImage : m_vImage;
+		const std::vector<uint8_t> &vKnown = ui32Sequence ? m_vAddedSequences[ui32Sequence-1].vKnown : m_vKnown;
+		if ( _ui32Offset < vImage.size() && vKnown[_ui32Offset] ) { return vImage[_ui32Offset]; }
 		if ( !m_bBadRead ) {
 			char szBuffer[160];
 			std::snprintf( szBuffer, sizeof( szBuffer ), "Track %u read offset %08X, which is not in the debug text, at tick %llu; the track is ended there.",

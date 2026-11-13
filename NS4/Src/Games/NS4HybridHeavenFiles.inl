@@ -35,11 +35,37 @@
 { u8"Hybrid Heaven (U) 0000006F 0005A090.mid", u8"Hybrid Heaven (U) 0000006F 0005A090.mid TrackParseDebug.txt", u8"Struggle with Mr. Diaz (Why Did You Shoot?)", 0 },
 { u8"Hybrid Heaven (U) 00000071 0005AFA0.mid", u8"Hybrid Heaven (U) 00000071 0005AFA0.mid TrackParseDebug.txt", u8"Enter the Unknown… (Into Level 1)", 0 },
 // Door Opening
-{ u8"Hybrid Heaven (U) 00000009 0004EAB0.mid", u8"Hybrid Heaven (U) 00000009 0004EAB0.mid TrackParseDebug.txt", u8"Bioweapon Storage Facility (Level 1)", 0 },							// Should be played in conjunction with 00000005 0004E9F0 
-// Bioweapon Storage Facility (Level 1 Version 2)
+{ u8"Hybrid Heaven (U) 00000005 0004E9F0.mid", u8"Hybrid Heaven (U) 00000005 0004E9F0.mid TrackParseDebug.txt", u8"Bioweapon Storage Facility (Level 1, Version 1)", 0,
+	1, {
+		{ NS4_ADD_KONAMI_FILE( u8"Hybrid Heaven (U) 00000009 0004EAB0.mid TrackParseDebug.txt", 1, 0 ) },
+	   } },
+{ u8"Hybrid Heaven (U) 00000005 0004E9F0.mid", u8"Hybrid Heaven (U) 00000005 0004E9F0.mid TrackParseDebug.txt", u8"Bioweapon Storage Facility (Level 1, Version 2)", 0,
+	1, {
+		{ NS4_ADD_KONAMI_FILE( u8"Hybrid Heaven (U) 0000000C 0004EE10.mid TrackParseDebug.txt", 1, 0 ) },
+	   } },
 { u8"Hybrid Heaven (U) 00000009 0004EAB0.mid", u8"Hybrid Heaven (U) 00000009 0004EAB0.mid TrackParseDebug.txt", u8"Bioweapon Storage Facility (Level 1 Version 3)", 0 },
-{ u8"Hybrid Heaven (U) 0000000F 0004F090.mid", u8"Hybrid Heaven (U) 0000000F 0004F090.mid TrackParseDebug.txt", u8"Bioweapon Storage Facility (Level 1 Version 4)", 0 },				// Should be played in conjunction with 00000005 0004E9F0 
-{ u8"Hybrid Heaven (U) 00000013 0004F1B0.mid", u8"Hybrid Heaven (U) 00000013 0004F1B0.mid TrackParseDebug.txt", u8"Approaching Danger… (Bioweapon Storage Facility Version 5)", 0 },    // Should be played in conjunction with 00000005 0004E9F0.
+{ u8"Hybrid Heaven (U) 00000005 0004E9F0.mid", u8"Hybrid Heaven (U) 00000005 0004E9F0.mid TrackParseDebug.txt", u8"Bioweapon Storage Facility (Level 1 Version 4)", 0,
+	1, {
+		{ NS4_ADD_KONAMI_FILE( u8"Hybrid Heaven (U) 0000000F 0004F090.mid TrackParseDebug.txt", 1, 0 ) },
+	   } },
+{ u8"Hybrid Heaven (U) 00000005 0004E9F0.mid", u8"Hybrid Heaven (U) 00000005 0004E9F0.mid TrackParseDebug.txt", u8"Bioweapon Storage Facility (Level 1, Version 5)", 0,
+	1, {
+		{ NS4_ADD_KONAMI_FILE( u8"Hybrid Heaven (U) 0000000A 0004EC80.mid TrackParseDebug.txt", 1, 0 ) },
+	   } },
+{ u8"Hybrid Heaven (U) 00000005 0004E9F0.mid", u8"Hybrid Heaven (U) 00000005 0004E9F0.mid TrackParseDebug.txt", u8"Bioweapon Storage Facility (Level 1, Version 6)", 0,
+	1, {
+		{ NS4_ADD_KONAMI_FILE( u8"Hybrid Heaven (U) 0000000B 0004ED20.mid TrackParseDebug.txt", 1, 5 ) },
+	   } },
+
+{ u8"Hybrid Heaven (U) 00000005 0004E9F0.mid", u8"Hybrid Heaven (U) 00000005 0004E9F0.mid TrackParseDebug.txt", u8"Bioweapon Storage Facility (Level 1, Version 7)", 0,
+	1, {
+		{ NS4_ADD_KONAMI_FILE( u8"Hybrid Heaven (U) 0000000E 0004EF80.mid TrackParseDebug.txt", 1, 0 ) },
+	   } },
+
+{ u8"Hybrid Heaven (U) 00000005 0004E9F0.mid", u8"Hybrid Heaven (U) 00000005 0004E9F0.mid TrackParseDebug.txt", u8"Approaching Danger… (Bioweapon Storage Facility Version 5)", 0,
+	1, {
+		{ NS4_ADD_KONAMI_FILE( u8"Hybrid Heaven (U) 00000013 0004F1B0.mid TrackParseDebug.txt", 1, 0 ) },
+	   } },
 { u8"Hybrid Heaven (U) 00000053 00054860.mid", u8"Hybrid Heaven (U) 00000053 00054860.mid TrackParseDebug.txt", u8"Bioweapons Unleashed… (We Need to Talk)", 0 },
 { u8"Hybrid Heaven (U) 0000004E 000522B0.mid", u8"Hybrid Heaven (U) 0000004E 000522B0.mid TrackParseDebug.txt", u8"Fight!", 0 },
 { u8"Hybrid Heaven (U) 0000007B 0005E280.mid", u8"Hybrid Heaven (U) 0000007B 0005E280.mid TrackParseDebug.txt", u8"Superior (Alex Hunter’s Theme)", 0 },
@@ -49,28 +75,227 @@
 { u8"Hybrid Heaven (U) 00000015 0004F3A0.mid", u8"Hybrid Heaven (U) 00000015 0004F3A0.mid TrackParseDebug.txt", u8"The Experiment (Dr. Bross’ Blue Rex Chase)", 0 },
 { u8"Hybrid Heaven (U) 00000061 00056AE0.mid", u8"Hybrid Heaven (U) 00000061 00056AE0.mid TrackParseDebug.txt", u8"Pacifists (Theme of Gargatuans)", 0 },
 { u8"Hybrid Heaven (U) 00000065 00057F50.mid", u8"Hybrid Heaven (U) 00000065 00057F50.mid TrackParseDebug.txt", u8"Explosion (Johnny Wakes Up)", 0 },
-// Clone Storage Facility (Level 3 - Level 7)
+
+{ u8"Hybrid Heaven (U) 00000016 0004F920.mid", u8"Hybrid Heaven (U) 00000016 0004F920.mid TrackParseDebug.txt", u8"Clone Storage Facility (Level 3, Version 1)", 0,
+	2, {
+		{ NS4_ADD_KONAMI_FILE( u8"Hybrid Heaven (U) 00000017 0004F950.mid TrackParseDebug.txt", 1, 0 ) },
+		{ NS4_ADD_KONAMI_FILE( u8"Hybrid Heaven (U) 00000018 0004F990.mid TrackParseDebug.txt", 3, 0 ) },
+	   } },
+{ u8"Hybrid Heaven (U) 00000016 0004F920.mid", u8"Hybrid Heaven (U) 00000016 0004F920.mid TrackParseDebug.txt", u8"Clone Storage Facility (Level 3, Version 2)", 0,
+	3, {
+		{ NS4_ADD_KONAMI_FILE( u8"Hybrid Heaven (U) 00000017 0004F950.mid TrackParseDebug.txt", 1, 0 ) },
+		{ NS4_ADD_KONAMI_FILE( u8"Hybrid Heaven (U) 00000018 0004F990.mid TrackParseDebug.txt", 3, 0 ) },
+		{ NS4_ADD_KONAMI_FILE( u8"Hybrid Heaven (U) 00000019 0004F9F0.mid TrackParseDebug.txt", 4, 0 ) },
+	   } },
+{ u8"Hybrid Heaven (U) 00000016 0004F920.mid", u8"Hybrid Heaven (U) 00000016 0004F920.mid TrackParseDebug.txt", u8"Clone Storage Facility (Level 3, Version 3)", 0,
+	2, {
+		{ NS4_ADD_KONAMI_FILE( u8"Hybrid Heaven (U) 00000017 0004F950.mid TrackParseDebug.txt", 1, 0 ) },
+		{ NS4_ADD_KONAMI_FILE( u8"Hybrid Heaven (U) 0000001A 0004FA90.mid TrackParseDebug.txt", 3, 0 ) },
+	   } },
+{ u8"Hybrid Heaven (U) 00000016 0004F920.mid", u8"Hybrid Heaven (U) 00000016 0004F920.mid TrackParseDebug.txt", u8"Clone Storage Facility (Level 3, Version 4)", 0,
+	2, {
+		{ NS4_ADD_KONAMI_FILE( u8"Hybrid Heaven (U) 00000017 0004F950.mid TrackParseDebug.txt", 1, 0 ) },
+		{ NS4_ADD_KONAMI_FILE( u8"Hybrid Heaven (U) 0000001B 0004FB10.mid TrackParseDebug.txt", 4, 0 ) },
+	   } },
+{ u8"Hybrid Heaven (U) 00000016 0004F920.mid", u8"Hybrid Heaven (U) 00000016 0004F920.mid TrackParseDebug.txt", u8"Clone Storage Facility (Level 3, Version 5)", 0,
+	2, {
+		{ NS4_ADD_KONAMI_FILE( u8"Hybrid Heaven (U) 00000017 0004F950.mid TrackParseDebug.txt", 1, 0 ) },
+		{ NS4_ADD_KONAMI_FILE( u8"Hybrid Heaven (U) 0000001C 0004FB60.mid TrackParseDebug.txt", 3, 0 ) },
+	   } },
+{ u8"Hybrid Heaven (U) 00000016 0004F920.mid", u8"Hybrid Heaven (U) 00000016 0004F920.mid TrackParseDebug.txt", u8"Clone Storage Facility (Level 3, Version 6)", 0,
+	2, {
+		{ NS4_ADD_KONAMI_FILE( u8"Hybrid Heaven (U) 00000017 0004F950.mid TrackParseDebug.txt", 1, 0 ) },
+		{ NS4_ADD_KONAMI_FILE( u8"Hybrid Heaven (U) 0000001E 0004FC80.mid TrackParseDebug.txt", 4, 0 ) },
+	   } },
+{ u8"Hybrid Heaven (U) 00000016 0004F920.mid", u8"Hybrid Heaven (U) 00000016 0004F920.mid TrackParseDebug.txt", u8"Clone Storage Facility (Level 3, Version 7)", 0,
+	1, {
+		{ NS4_ADD_KONAMI_FILE( u8"Hybrid Heaven (U) 0000001D 0004FBC0.mid TrackParseDebug.txt", 1, 0 ) },
+	   } },
+{ u8"Hybrid Heaven (U) 00000016 0004F920.mid", u8"Hybrid Heaven (U) 00000016 0004F920.mid TrackParseDebug.txt", u8"Clone Storage Facility (Level 3, Version 8)", 0,
+	1, {
+		{ NS4_ADD_KONAMI_FILE( u8"Hybrid Heaven (U) 0000001F 0004FCB0.mid TrackParseDebug.txt", 1, 0 ) },
+	   } },
+{ u8"Hybrid Heaven (U) 00000016 0004F920.mid", u8"Hybrid Heaven (U) 00000016 0004F920.mid TrackParseDebug.txt", u8"Clone Storage Facility (Level 3, Version 9)", 0,
+	1, {
+		{ NS4_ADD_KONAMI_FILE( u8"Hybrid Heaven (U) 00000020 0004FF70.mid TrackParseDebug.txt", 1, 0 ) },
+	   } },
+{ u8"Hybrid Heaven (U) 00000016 0004F920.mid", u8"Hybrid Heaven (U) 00000016 0004F920.mid TrackParseDebug.txt", u8"Clone Storage Facility (Level 3, Version 10)", 0,
+	1, {
+		{ NS4_ADD_KONAMI_FILE( u8"Hybrid Heaven (U) 00000021 0004FFC0.mid TrackParseDebug.txt", 1, 0 ) },
+	   } },
+{ u8"Hybrid Heaven (U) 00000016 0004F920.mid", u8"Hybrid Heaven (U) 00000016 0004F920.mid TrackParseDebug.txt", u8"Clone Storage Facility (Level 3, Version 11)", 0,
+	1, {
+		{ NS4_ADD_KONAMI_FILE( u8"Hybrid Heaven (U) 00000022 00050330.mid TrackParseDebug.txt", 1, 0 ) },
+	   } },
+{ u8"Hybrid Heaven (U) 00000016 0004F920.mid", u8"Hybrid Heaven (U) 00000016 0004F920.mid TrackParseDebug.txt", u8"Clone Storage Facility (Level 3, Version 12)", 0,
+	1, {
+		{ NS4_ADD_KONAMI_FILE( u8"Hybrid Heaven (U) 00000023 00050420.mid TrackParseDebug.txt", 1, 0 ) },
+	   } },
+{ u8"Hybrid Heaven (U) 00000016 0004F920.mid", u8"Hybrid Heaven (U) 00000016 0004F920.mid TrackParseDebug.txt", u8"Clone Storage Facility (Level 3, Version 13)", 0,
+	1, {
+		{ NS4_ADD_KONAMI_FILE( u8"Hybrid Heaven (U) 00000024 000504A0.mid TrackParseDebug.txt", 1, 0 ) },
+	   } },
+{ u8"Hybrid Heaven (U) 00000016 0004F920.mid", u8"Hybrid Heaven (U) 00000016 0004F920.mid TrackParseDebug.txt", u8"Clone Storage Facility (Level 3, Version 14)", 0,
+	1, {
+		{ NS4_ADD_KONAMI_FILE( u8"Hybrid Heaven (U) 00000025 00050530.mid TrackParseDebug.txt", 1, 0 ) },
+	   } },
+
 { u8"Hybrid Heaven (U) 0000006C 00059150.mid", u8"Hybrid Heaven (U) 0000006C 00059150.mid TrackParseDebug.txt", u8"Old Man’s Guise (Kevin Young’s Theme)", 0 },
 { u8"Hybrid Heaven (U) 0000004F 00052D90.mid", u8"Hybrid Heaven (U) 0000004F 00052D90.mid TrackParseDebug.txt", u8"Fight Hard! (Boss Fight)", 0 },
 { u8"Hybrid Heaven (U) 0000006B 00058D90.mid", u8"Hybrid Heaven (U) 0000006B 00058D90.mid TrackParseDebug.txt", u8"Johnny Prevails", 0 },
 { u8"Hybrid Heaven (U) 00000062 00056F20.mid", u8"Hybrid Heaven (U) 00000062 00056F20.mid TrackParseDebug.txt", u8"Gargatuan’s Hideout", 0 },
 { u8"Hybrid Heaven (U) 00000064 00057940.mid", u8"Hybrid Heaven (U) 00000064 00057940.mid TrackParseDebug.txt", u8"Mr. President (Theme of Weller)", 0 },
-{ u8"Hybrid Heaven (U) 00000026 000505C0.mid", u8"Hybrid Heaven (U) 00000026 000505C0.mid TrackParseDebug.txt", u8"Weapon Factory (Level 4)", 0 },
+{ u8"Hybrid Heaven (U) 00000026 000505C0.mid", u8"Hybrid Heaven (U) 00000026 000505C0.mid TrackParseDebug.txt", u8"Weapon Factory (Level 4, Version 1)", 0 },
+
+{ u8"Hybrid Heaven (U) 00000026 000505C0.mid", u8"Hybrid Heaven (U) 00000026 000505C0.mid TrackParseDebug.txt", u8"Weapon Factory (Level 4, Version 2)", 0,
+	1, {
+		{ NS4_ADD_KONAMI_FILE( u8"Hybrid Heaven (U) 00000027 00050620.mid TrackParseDebug.txt", 2, 0 ) },
+	   } },
+{ u8"Hybrid Heaven (U) 00000026 000505C0.mid", u8"Hybrid Heaven (U) 00000026 000505C0.mid TrackParseDebug.txt", u8"Weapon Factory (Level 4, Version 3)", 0,
+	1, {
+		{ NS4_ADD_KONAMI_FILE( u8"Hybrid Heaven (U) 00000028 00050720.mid TrackParseDebug.txt", 2, 0 ) },
+	   } },
+{ u8"Hybrid Heaven (U) 00000026 000505C0.mid", u8"Hybrid Heaven (U) 00000026 000505C0.mid TrackParseDebug.txt", u8"Weapon Factory (Level 4, Version 4)", 0,
+	1, {
+		{ NS4_ADD_KONAMI_FILE( u8"Hybrid Heaven (U) 00000029 000507D0.mid TrackParseDebug.txt", 2, 0 ) },
+	   } },
+{ u8"Hybrid Heaven (U) 00000026 000505C0.mid", u8"Hybrid Heaven (U) 00000026 000505C0.mid TrackParseDebug.txt", u8"Weapon Factory (Level 4, Version 5)", 0,
+	1, {
+		{ NS4_ADD_KONAMI_FILE( u8"Hybrid Heaven (U) 0000002A 00050850.mid TrackParseDebug.txt", 2, 0 ) },
+	   } },
+{ u8"Hybrid Heaven (U) 00000026 000505C0.mid", u8"Hybrid Heaven (U) 00000026 000505C0.mid TrackParseDebug.txt", u8"Weapon Factory (Level 4, Version 6)", 0,
+	1, {
+		{ NS4_ADD_KONAMI_FILE( u8"Hybrid Heaven (U) 0000002B 00050920.mid TrackParseDebug.txt", 2, 0 ) },
+	   } },
+{ u8"Hybrid Heaven (U) 00000026 000505C0.mid", u8"Hybrid Heaven (U) 00000026 000505C0.mid TrackParseDebug.txt", u8"Weapon Factory (Level 4, Version 7)", 0,
+	1, {
+		{ NS4_ADD_KONAMI_FILE( u8"Hybrid Heaven (U) 0000002C 000509E0.mid TrackParseDebug.txt", 2, 0 ) },
+	   } },
+{ u8"Hybrid Heaven (U) 00000026 000505C0.mid", u8"Hybrid Heaven (U) 00000026 000505C0.mid TrackParseDebug.txt", u8"Weapon Factory (Level 4, Version 8)", 0,
+	1, {
+		{ NS4_ADD_KONAMI_FILE( u8"Hybrid Heaven (U) 0000002D 00050B80.mid TrackParseDebug.txt", 2, 0 ) },
+	   } },
+{ u8"Hybrid Heaven (U) 00000026 000505C0.mid", u8"Hybrid Heaven (U) 00000026 000505C0.mid TrackParseDebug.txt", u8"Weapon Factory (Level 4, Version 9)", 0,
+	1, {
+		{ NS4_ADD_KONAMI_FILE( u8"Hybrid Heaven (U) 0000002E 00050D00.mid TrackParseDebug.txt", 2, 0 ) },
+	   } },
+{ u8"Hybrid Heaven (U) 00000026 000505C0.mid", u8"Hybrid Heaven (U) 00000026 000505C0.mid TrackParseDebug.txt", u8"Weapon Factory (Level 4, Version 10)", 0,
+	1, {
+		{ NS4_ADD_KONAMI_FILE( u8"Hybrid Heaven (U) 0000002F 00050DB0.mid TrackParseDebug.txt", 2, 0 ) },
+	   } },
+{ u8"Hybrid Heaven (U) 00000026 000505C0.mid", u8"Hybrid Heaven (U) 00000026 000505C0.mid TrackParseDebug.txt", u8"Weapon Factory (Level 4, Version 11)", 0,
+	1, {
+		{ NS4_ADD_KONAMI_FILE( u8"Hybrid Heaven (U) 00000030 00050E30.mid TrackParseDebug.txt", 2, 0 ) },
+	   } },
+
 { u8"Hybrid Heaven (U) 00000058 00054E70.mid", u8"Hybrid Heaven (U) 00000058 00054E70.mid TrackParseDebug.txt", u8"Vengeance (Diaz’s Theme)", 0 },
-{ u8"Hybrid Heaven (U) 00000031 00050EE0.mid", u8"Hybrid Heaven (U) 00000031 00050EE0.mid TrackParseDebug.txt", u8"Underground Shelter: Lowest Area (Level 5)", 0 },
+{ u8"Hybrid Heaven (U) 00000031 00050EE0.mid", u8"Hybrid Heaven (U) 00000031 00050EE0.mid TrackParseDebug.txt", u8"Underground Shelter: Lowest Area (Level 5, Version 1)", 0 },
+{ u8"Hybrid Heaven (U) 00000031 00050EE0.mid", u8"Hybrid Heaven (U) 00000031 00050EE0.mid TrackParseDebug.txt", u8"Underground Shelter: Lowest Area (Level 5, Version 2)", 0,
+	1, {
+		{ NS4_ADD_KONAMI_FILE( u8"Hybrid Heaven (U) 00000032 00050F40.mid TrackParseDebug.txt", 4, 0 ) },
+	   } },
+{ u8"Hybrid Heaven (U) 00000031 00050EE0.mid", u8"Hybrid Heaven (U) 00000031 00050EE0.mid TrackParseDebug.txt", u8"Underground Shelter: Lowest Area (Level 5, Version 3)", 0,
+	1, {
+		{ NS4_ADD_KONAMI_FILE( u8"Hybrid Heaven (U) 00000033 00051020.mid TrackParseDebug.txt", 4, 0 ) },
+	   } },
+{ u8"Hybrid Heaven (U) 00000031 00050EE0.mid", u8"Hybrid Heaven (U) 00000031 00050EE0.mid TrackParseDebug.txt", u8"Underground Shelter: Lowest Area (Level 5, Version 4)", 0,
+	3, {
+		{ NS4_ADD_KONAMI_FILE( u8"Hybrid Heaven (U) 00000032 00050F40.mid TrackParseDebug.txt", 4, 0 ) },
+		{ NS4_ADD_KONAMI_FILE( u8"Hybrid Heaven (U) 00000035 00051120.mid TrackParseDebug.txt", 6, 0 ) },
+		{ NS4_ADD_KONAMI_FILE( u8"Hybrid Heaven (U) 00000037 000511A0.mid TrackParseDebug.txt", 7, 0 ) },
+	   } },
+{ u8"Hybrid Heaven (U) 00000031 00050EE0.mid", u8"Hybrid Heaven (U) 00000031 00050EE0.mid TrackParseDebug.txt", u8"Underground Shelter: Lowest Area (Level 5, Version 5)", 0,
+	1, {
+		{ NS4_ADD_KONAMI_FILE( u8"Hybrid Heaven (U) 00000034 00051080.mid TrackParseDebug.txt", 4, 0 ) },
+	   } },
+{ u8"Hybrid Heaven (U) 00000031 00050EE0.mid", u8"Hybrid Heaven (U) 00000031 00050EE0.mid TrackParseDebug.txt", u8"Underground Shelter: Lowest Area (Level 5, Version 6)", 0,
+	1, {
+		{ NS4_ADD_KONAMI_FILE( u8"Hybrid Heaven (U) 00000039 00051210.mid TrackParseDebug.txt", 4, 0 ) },
+	   } },
+
 { u8"Hybrid Heaven (U) 00000063 00057520.mid", u8"Hybrid Heaven (U) 00000063 00057520.mid TrackParseDebug.txt", u8"The Navigator (Theme of the Navigator)", 0 },
 { u8"Hybrid Heaven (U) 0000004D 00051EF0.mid", u8"Hybrid Heaven (U) 0000004D 00051EF0.mid TrackParseDebug.txt", u8"Save The Navigator", 0 },
-{ u8"Hybrid Heaven (U) 0000003A 000512B0.mid", u8"Hybrid Heaven (U) 0000003A 000512B0.mid TrackParseDebug.txt", u8"Bioweapon Factory (Level 6)", 0 },
+{ u8"Hybrid Heaven (U) 0000003A 000512B0.mid", u8"Hybrid Heaven (U) 0000003A 000512B0.mid TrackParseDebug.txt", u8"Bioweapon Factory (Level 6, Version 1)", 0 },
+{ u8"Hybrid Heaven (U) 0000003A 000512B0.mid", u8"Hybrid Heaven (U) 0000003A 000512B0.mid TrackParseDebug.txt", u8"Bioweapon Factory (Level 6, Version 2)", 0,
+	1, {
+		{ NS4_ADD_KONAMI_FILE( u8"Hybrid Heaven (U) 0000003B 000512F0.mid TrackParseDebug.txt", 2, 0 ) },
+	   } },
+{ u8"Hybrid Heaven (U) 0000003A 000512B0.mid", u8"Hybrid Heaven (U) 0000003A 000512B0.mid TrackParseDebug.txt", u8"Bioweapon Factory (Level 6, Version 3)", 0,
+	1, {
+		{ NS4_ADD_KONAMI_FILE( u8"Hybrid Heaven (U) 0000003C 000513C0.mid TrackParseDebug.txt", 2, 0 ) },
+	   } },
+{ u8"Hybrid Heaven (U) 0000003A 000512B0.mid", u8"Hybrid Heaven (U) 0000003A 000512B0.mid TrackParseDebug.txt", u8"Bioweapon Factory (Level 6, Version 4)", 0,
+	1, {
+		{ NS4_ADD_KONAMI_FILE( u8"Hybrid Heaven (U) 0000003D 00051490.mid TrackParseDebug.txt", 2, 0 ) },
+	   } },
+{ u8"Hybrid Heaven (U) 0000003A 000512B0.mid", u8"Hybrid Heaven (U) 0000003A 000512B0.mid TrackParseDebug.txt", u8"Bioweapon Factory (Level 6, Version 5)", 0,
+	1, {
+		{ NS4_ADD_KONAMI_FILE( u8"Hybrid Heaven (U) 0000003E 00051510.mid TrackParseDebug.txt", 2, 0 ) },
+	   } },
+{ u8"Hybrid Heaven (U) 0000003A 000512B0.mid", u8"Hybrid Heaven (U) 0000003A 000512B0.mid TrackParseDebug.txt", u8"Bioweapon Factory (Level 6, Version 6)", 0,
+	1, {
+		{ NS4_ADD_KONAMI_FILE( u8"Hybrid Heaven (U) 0000003F 00051580.mid TrackParseDebug.txt", 2, 0 ) },
+	   } },
+{ u8"Hybrid Heaven (U) 0000003A 000512B0.mid", u8"Hybrid Heaven (U) 0000003A 000512B0.mid TrackParseDebug.txt", u8"Bioweapon Factory (Level 6, Version 7)", 0,
+	1, {
+		{ NS4_ADD_KONAMI_FILE( u8"Hybrid Heaven (U) 00000040 00051680.mid TrackParseDebug.txt", 2, 0 ) },
+	   } },
+{ u8"Hybrid Heaven (U) 0000003A 000512B0.mid", u8"Hybrid Heaven (U) 0000003A 000512B0.mid TrackParseDebug.txt", u8"Bioweapon Factory (Level 6, Version 8)", 0,
+	1, {
+		{ NS4_ADD_KONAMI_FILE( u8"Hybrid Heaven (U) 00000041 00051750.mid TrackParseDebug.txt", 2, 0 ) },
+	   } },
+{ u8"Hybrid Heaven (U) 0000003A 000512B0.mid", u8"Hybrid Heaven (U) 0000003A 000512B0.mid TrackParseDebug.txt", u8"Bioweapon Factory (Level 6, Version 9)", 0,
+	1, {
+		{ NS4_ADD_KONAMI_FILE( u8"Hybrid Heaven (U) 00000042 000517F0.mid TrackParseDebug.txt", 2, 0 ) },
+	   } },
+{ u8"Hybrid Heaven (U) 0000003A 000512B0.mid", u8"Hybrid Heaven (U) 0000003A 000512B0.mid TrackParseDebug.txt", u8"Bioweapon Factory (Level 6, Version 10)", 0,
+	1, {
+		{ NS4_ADD_KONAMI_FILE( u8"Hybrid Heaven (U) 00000043 000518E0.mid TrackParseDebug.txt", 2, 0 ) },
+	   } },
+
 { u8"Hybrid Heaven (U) 0000007E 0005E970.mid", u8"Hybrid Heaven (U) 0000007E 0005E970.mid TrackParseDebug.txt", u8"Showtime! (Dr. Gary Bross’ Theme): Alternate", 0 },
 { u8"Hybrid Heaven (U) 00000044 000519A0.mid", u8"Hybrid Heaven (U) 00000044 000519A0.mid TrackParseDebug.txt", u8"Human Desperation (Bross’ Final Show)", 0 },
 { u8"Hybrid Heaven (U) 00000067 000587B0.mid", u8"Hybrid Heaven (U) 00000067 000587B0.mid TrackParseDebug.txt", u8"Return to the Hideout (Johnny Finds Anna at the Hideout)", 0 },
 { u8"Hybrid Heaven (U) 00000069 00058A90.mid", u8"Hybrid Heaven (U) 00000069 00058A90.mid TrackParseDebug.txt", u8"The Mother Figure (Anna Moody’s Theme)", 0 },
 { u8"Hybrid Heaven (U) 00000068 000588E0.mid", u8"Hybrid Heaven (U) 00000068 000588E0.mid TrackParseDebug.txt", u8"A Trap… (Anna Pulls a Gun on Johnny)", 0 },
 { u8"Hybrid Heaven (U) 00000059 00055230.mid", u8"Hybrid Heaven (U) 00000059 00055230.mid TrackParseDebug.txt", u8"Good Job Anna (Diaz’s Trap Succeeded)", 0 },
+{ u8"Hybrid Heaven (U) 00000057 00054DD0.mid", u8"Hybrid Heaven (U) 00000057 00054DD0.mid TrackParseDebug.txt", u8"Level 6 to Level 8 Cutscene", 0 },
 { u8"Hybrid Heaven (U) 0000005A 000555F0.mid", u8"Hybrid Heaven (U) 0000005A 000555F0.mid TrackParseDebug.txt", u8"Settle the Score with Diaz", 0 },
-{ u8"Hybrid Heaven (U) 00000045 00051B30.mid", u8"Hybrid Heaven (U) 00000045 00051B30.mid TrackParseDebug.txt", u8"Clone Cultivation Site (Level 8)", 0 },								// Needs to be played in conjunction with another track (provides right-speak pulsing ambience).
+{ u8"Hybrid Heaven (U) 00000045 00051B30.mid", u8"Hybrid Heaven (U) 00000045 00051B30.mid TrackParseDebug.txt", u8"Clone Cultivation Site (Level 8, Version 1)", 0 },
+{ u8"Hybrid Heaven (U) 00000045 00051B30.mid", u8"Hybrid Heaven (U) 00000045 00051B30.mid TrackParseDebug.txt", u8"Clone Cultivation Site (Level 8, Version 2)", 0,
+	1, {
+		{ NS4_ADD_KONAMI_FILE( u8"Hybrid Heaven (U) 00000046 00051BA0.mid TrackParseDebug.txt", 4, 0 ) },
+	   } },
+{ u8"Hybrid Heaven (U) 00000045 00051B30.mid", u8"Hybrid Heaven (U) 00000045 00051B30.mid TrackParseDebug.txt", u8"Clone Cultivation Site (Level 8, Version 3)", 0,
+	1, {
+		{ NS4_ADD_KONAMI_FILE( u8"Hybrid Heaven (U) 00000048 00051C40.mid TrackParseDebug.txt", 4, 0 ) },
+	   } },
+{ u8"Hybrid Heaven (U) 00000045 00051B30.mid", u8"Hybrid Heaven (U) 00000045 00051B30.mid TrackParseDebug.txt", u8"Clone Cultivation Site (Level 8, Version 4)", 0,
+	1, {
+		{ NS4_ADD_KONAMI_FILE( u8"Hybrid Heaven (U) 00000049 00051D00.mid TrackParseDebug.txt", 4, 0 ) },
+	   } },
+{ u8"Hybrid Heaven (U) 00000045 00051B30.mid", u8"Hybrid Heaven (U) 00000045 00051B30.mid TrackParseDebug.txt", u8"Clone Cultivation Site (Level 8, Version 5)", 0,
+	2, {
+		{ NS4_ADD_KONAMI_FILE( u8"Hybrid Heaven (U) 00000046 00051BA0.mid TrackParseDebug.txt", 4, 0 ) },
+		{ NS4_ADD_KONAMI_FILE( u8"Hybrid Heaven (U) 00000047 00051BE0.mid TrackParseDebug.txt", 5, 0 ) },
+	   } },
+
 { u8"Hybrid Heaven (U) 00000075 0005B820.mid", u8"Hybrid Heaven (U) 00000075 0005B820.mid TrackParseDebug.txt", u8"Escape! (Johnny and Anna Run for Their Lives)", 0 },
-{ u8"Hybrid Heaven (U) 00000000 0004E7D0.mid", u8"Hybrid Heaven (U) 00000000 0004E7D0.mid TrackParseDebug.txt", u8"Underground Shelter: Top Level (Level 9)", 0 },
+{ u8"Hybrid Heaven (U) 00000000 0004E7D0.mid", u8"Hybrid Heaven (U) 00000000 0004E7D0.mid TrackParseDebug.txt", u8"Underground Shelter: Top Level (Level 9, Version 1)", 0 },
+{ u8"Hybrid Heaven (U) 00000000 0004E7D0.mid", u8"Hybrid Heaven (U) 00000000 0004E7D0.mid TrackParseDebug.txt", u8"Underground Shelter: Top Level (Level 9, Version 2)", 0,
+	1, {
+		{ NS4_ADD_KONAMI_FILE( u8"Hybrid Heaven (U) 00000001 0004E830.mid TrackParseDebug.txt", 3, 0 ) },
+	   } },
+{ u8"Hybrid Heaven (U) 00000000 0004E7D0.mid", u8"Hybrid Heaven (U) 00000000 0004E7D0.mid TrackParseDebug.txt", u8"Underground Shelter: Top Level (Level 9, Version 3)", 0,
+	1, {
+		{ NS4_ADD_KONAMI_FILE( u8"Hybrid Heaven (U) 00000002 0004E8C0.mid TrackParseDebug.txt", 3, 0 ) },
+	   } },
+{ u8"Hybrid Heaven (U) 00000000 0004E7D0.mid", u8"Hybrid Heaven (U) 00000000 0004E7D0.mid TrackParseDebug.txt", u8"Underground Shelter: Top Level (Level 9, Version 4)", 0,
+	2, {
+		{ NS4_ADD_KONAMI_FILE( u8"Hybrid Heaven (U) 00000001 0004E830.mid TrackParseDebug.txt", 3, 0 ) },
+		{ NS4_ADD_KONAMI_FILE( u8"Hybrid Heaven (U) 00000003 0004E950.mid TrackParseDebug.txt", 6, 0 ) },
+	   } },
+
 { u8"Hybrid Heaven (U) 00000079 0005D980.mid", u8"Hybrid Heaven (U) 00000079 0005D980.mid TrackParseDebug.txt", u8"Overground Dreams (Jerry Silver’s Theme)", 0 },
 { u8"Hybrid Heaven (U) 00000078 0005D490.mid", u8"Hybrid Heaven (U) 00000078 0005D490.mid TrackParseDebug.txt", u8"Superior (Alex Hunter’s Theme 2)", 0 },
 { u8"Hybrid Heaven (U) 0000007C 0005E770.mid", u8"Hybrid Heaven (U) 0000007C 0005E770.mid TrackParseDebug.txt", u8"Johnny Awakens… (The Master’s Theme)", 0 },
@@ -91,80 +316,25 @@
 { u8"Hybrid Heaven (U) 0000007F 0005ED20.mid", u8"Hybrid Heaven (U) 0000007F 0005ED20.mid TrackParseDebug.txt", u8"Unused", 0 },
 
 
-
-{ u8"Hybrid Heaven (U) 00000001 0004E830.mid", u8"Hybrid Heaven (U) 00000001 0004E830.mid TrackParseDebug.txt", u8"00000001 0004E830", 0 },
-{ u8"Hybrid Heaven (U) 00000002 0004E8C0.mid", u8"Hybrid Heaven (U) 00000002 0004E8C0.mid TrackParseDebug.txt", u8"00000002 0004E8C0", 0 },
-{ u8"Hybrid Heaven (U) 00000003 0004E950.mid", u8"Hybrid Heaven (U) 00000003 0004E950.mid TrackParseDebug.txt", u8"00000003 0004E950", 0 },
-{ u8"Hybrid Heaven (U) 00000005 0004E9F0.mid", u8"Hybrid Heaven (U) 00000005 0004E9F0.mid TrackParseDebug.txt", u8"00000005 0004E9F0", 0 },
+{ u8"Hybrid Heaven (U) 00000003 0004E950.mid", u8"Hybrid Heaven (U) 00000003 0004E950.mid TrackParseDebug.txt", u8"Unknown 1", 0 },
+{ u8"Hybrid Heaven (U) 00000005 0004E9F0.mid", u8"Hybrid Heaven (U) 00000005 0004E9F0.mid TrackParseDebug.txt", u8"Unknown 2", 0 },
 //{ u8"Hybrid Heaven (U) 00000006 0004EA20.mid", u8"Hybrid Heaven (U) 00000006 0004EA20.mid TrackParseDebug.txt", u8"00000006 0004EA20", 0 },
 //{ u8"Hybrid Heaven (U) 00000007 0004EA50.mid", u8"Hybrid Heaven (U) 00000007 0004EA50.mid TrackParseDebug.txt", u8"00000007 0004EA50", 0 },
 //{ u8"Hybrid Heaven (U) 00000008 0004EA80.mid", u8"Hybrid Heaven (U) 00000008 0004EA80.mid TrackParseDebug.txt", u8"00000008 0004EA80", 0 },
 
-{ u8"Hybrid Heaven (U) 0000000A 0004EC80.mid", u8"Hybrid Heaven (U) 0000000A 0004EC80.mid TrackParseDebug.txt", u8"0000000A 0004EC80", 0 },
-{ u8"Hybrid Heaven (U) 0000000B 0004ED20.mid", u8"Hybrid Heaven (U) 0000000B 0004ED20.mid TrackParseDebug.txt", u8"0000000B 0004ED20", 0 },
-{ u8"Hybrid Heaven (U) 0000000C 0004EE10.mid", u8"Hybrid Heaven (U) 0000000C 0004EE10.mid TrackParseDebug.txt", u8"0000000C 0004EE10", 0 },
-{ u8"Hybrid Heaven (U) 0000000D 0004EF20.mid", u8"Hybrid Heaven (U) 0000000D 0004EF20.mid TrackParseDebug.txt", u8"0000000D 0004EF20", 0 },
-{ u8"Hybrid Heaven (U) 0000000E 0004EF80.mid", u8"Hybrid Heaven (U) 0000000E 0004EF80.mid TrackParseDebug.txt", u8"0000000E 0004EF80", 0 },
+{ u8"Hybrid Heaven (U) 0000000D 0004EF20.mid", u8"Hybrid Heaven (U) 0000000D 0004EF20.mid TrackParseDebug.txt", u8"Unknown 3", 0 },
 
-{ u8"Hybrid Heaven (U) 00000010 0004F110.mid", u8"Hybrid Heaven (U) 00000010 0004F110.mid TrackParseDebug.txt", u8"00000010 0004F110", 0 },
-{ u8"Hybrid Heaven (U) 00000011 0004F160.mid", u8"Hybrid Heaven (U) 00000011 0004F160.mid TrackParseDebug.txt", u8"00000011 0004F160", 0 },
+{ u8"Hybrid Heaven (U) 00000010 0004F110.mid", u8"Hybrid Heaven (U) 00000010 0004F110.mid TrackParseDebug.txt", u8"Unknown 4", 0 },
+{ u8"Hybrid Heaven (U) 00000011 0004F160.mid", u8"Hybrid Heaven (U) 00000011 0004F160.mid TrackParseDebug.txt", u8"Unknown 5", 0 },
 
 
-
-{ u8"Hybrid Heaven (U) 00000017 0004F950.mid", u8"Hybrid Heaven (U) 00000017 0004F950.mid TrackParseDebug.txt", u8"00000017 0004F950", 0 },
-{ u8"Hybrid Heaven (U) 00000018 0004F990.mid", u8"Hybrid Heaven (U) 00000018 0004F990.mid TrackParseDebug.txt", u8"00000018 0004F990", 0 },
-{ u8"Hybrid Heaven (U) 00000019 0004F9F0.mid", u8"Hybrid Heaven (U) 00000019 0004F9F0.mid TrackParseDebug.txt", u8"00000019 0004F9F0", 0 },
-{ u8"Hybrid Heaven (U) 0000001A 0004FA90.mid", u8"Hybrid Heaven (U) 0000001A 0004FA90.mid TrackParseDebug.txt", u8"0000001A 0004FA90", 0 },
-{ u8"Hybrid Heaven (U) 0000001B 0004FB10.mid", u8"Hybrid Heaven (U) 0000001B 0004FB10.mid TrackParseDebug.txt", u8"0000001B 0004FB10", 0 },
-{ u8"Hybrid Heaven (U) 0000001C 0004FB60.mid", u8"Hybrid Heaven (U) 0000001C 0004FB60.mid TrackParseDebug.txt", u8"0000001C 0004FB60", 0 },
-{ u8"Hybrid Heaven (U) 0000001D 0004FBC0.mid", u8"Hybrid Heaven (U) 0000001D 0004FBC0.mid TrackParseDebug.txt", u8"0000001D 0004FBC0", 0 },
-{ u8"Hybrid Heaven (U) 0000001E 0004FC80.mid", u8"Hybrid Heaven (U) 0000001E 0004FC80.mid TrackParseDebug.txt", u8"0000001E 0004FC80", 0 },
-{ u8"Hybrid Heaven (U) 0000001F 0004FCB0.mid", u8"Hybrid Heaven (U) 0000001F 0004FCB0.mid TrackParseDebug.txt", u8"0000001F 0004FCB0", 0 },
-{ u8"Hybrid Heaven (U) 00000020 0004FF70.mid", u8"Hybrid Heaven (U) 00000020 0004FF70.mid TrackParseDebug.txt", u8"00000020 0004FF70", 0 },
-{ u8"Hybrid Heaven (U) 00000021 0004FFC0.mid", u8"Hybrid Heaven (U) 00000021 0004FFC0.mid TrackParseDebug.txt", u8"00000021 0004FFC0", 0 },
-{ u8"Hybrid Heaven (U) 00000022 00050330.mid", u8"Hybrid Heaven (U) 00000022 00050330.mid TrackParseDebug.txt", u8"00000022 00050330", 0 },
-{ u8"Hybrid Heaven (U) 00000023 00050420.mid", u8"Hybrid Heaven (U) 00000023 00050420.mid TrackParseDebug.txt", u8"00000023 00050420", 0 },
-{ u8"Hybrid Heaven (U) 00000024 000504A0.mid", u8"Hybrid Heaven (U) 00000024 000504A0.mid TrackParseDebug.txt", u8"00000024 000504A0", 0 },
-{ u8"Hybrid Heaven (U) 00000025 00050530.mid", u8"Hybrid Heaven (U) 00000025 00050530.mid TrackParseDebug.txt", u8"00000025 00050530", 0 },
-
-{ u8"Hybrid Heaven (U) 00000027 00050620.mid", u8"Hybrid Heaven (U) 00000027 00050620.mid TrackParseDebug.txt", u8"00000027 00050620", 0 },
-{ u8"Hybrid Heaven (U) 00000028 00050720.mid", u8"Hybrid Heaven (U) 00000028 00050720.mid TrackParseDebug.txt", u8"00000028 00050720", 0 },
-{ u8"Hybrid Heaven (U) 00000029 000507D0.mid", u8"Hybrid Heaven (U) 00000029 000507D0.mid TrackParseDebug.txt", u8"00000029 000507D0", 0 },
-{ u8"Hybrid Heaven (U) 0000002A 00050850.mid", u8"Hybrid Heaven (U) 0000002A 00050850.mid TrackParseDebug.txt", u8"0000002A 00050850", 0 },
-{ u8"Hybrid Heaven (U) 0000002B 00050920.mid", u8"Hybrid Heaven (U) 0000002B 00050920.mid TrackParseDebug.txt", u8"0000002B 00050920", 0 },
-{ u8"Hybrid Heaven (U) 0000002C 000509E0.mid", u8"Hybrid Heaven (U) 0000002C 000509E0.mid TrackParseDebug.txt", u8"0000002C 000509E0", 0 },
-{ u8"Hybrid Heaven (U) 0000002D 00050B80.mid", u8"Hybrid Heaven (U) 0000002D 00050B80.mid TrackParseDebug.txt", u8"0000002D 00050B80", 0 },
-{ u8"Hybrid Heaven (U) 0000002E 00050D00.mid", u8"Hybrid Heaven (U) 0000002E 00050D00.mid TrackParseDebug.txt", u8"0000002E 00050D00", 0 },
-{ u8"Hybrid Heaven (U) 0000002F 00050DB0.mid", u8"Hybrid Heaven (U) 0000002F 00050DB0.mid TrackParseDebug.txt", u8"0000002F 00050DB0", 0 },
-{ u8"Hybrid Heaven (U) 00000030 00050E30.mid", u8"Hybrid Heaven (U) 00000030 00050E30.mid TrackParseDebug.txt", u8"00000030 00050E30", 0 },
-
-{ u8"Hybrid Heaven (U) 00000032 00050F40.mid", u8"Hybrid Heaven (U) 00000032 00050F40.mid TrackParseDebug.txt", u8"00000032 00050F40", 0 },
-{ u8"Hybrid Heaven (U) 00000033 00051020.mid", u8"Hybrid Heaven (U) 00000033 00051020.mid TrackParseDebug.txt", u8"00000033 00051020", 0 },
-{ u8"Hybrid Heaven (U) 00000034 00051080.mid", u8"Hybrid Heaven (U) 00000034 00051080.mid TrackParseDebug.txt", u8"00000034 00051080", 0 },
-{ u8"Hybrid Heaven (U) 00000035 00051120.mid", u8"Hybrid Heaven (U) 00000035 00051120.mid TrackParseDebug.txt", u8"00000035 00051120", 0 },
-{ u8"Hybrid Heaven (U) 00000037 000511A0.mid", u8"Hybrid Heaven (U) 00000037 000511A0.mid TrackParseDebug.txt", u8"00000037 000511A0", 0 },
-{ u8"Hybrid Heaven (U) 00000039 00051210.mid", u8"Hybrid Heaven (U) 00000039 00051210.mid TrackParseDebug.txt", u8"00000039 00051210", 0 },
-
-{ u8"Hybrid Heaven (U) 0000003B 000512F0.mid", u8"Hybrid Heaven (U) 0000003B 000512F0.mid TrackParseDebug.txt", u8"0000003B 000512F0", 0 },
-{ u8"Hybrid Heaven (U) 0000003C 000513C0.mid", u8"Hybrid Heaven (U) 0000003C 000513C0.mid TrackParseDebug.txt", u8"0000003C 000513C0", 0 },
-{ u8"Hybrid Heaven (U) 0000003D 00051490.mid", u8"Hybrid Heaven (U) 0000003D 00051490.mid TrackParseDebug.txt", u8"0000003D 00051490", 0 },
-{ u8"Hybrid Heaven (U) 0000003E 00051510.mid", u8"Hybrid Heaven (U) 0000003E 00051510.mid TrackParseDebug.txt", u8"0000003E 00051510", 0 },
-{ u8"Hybrid Heaven (U) 0000003F 00051580.mid", u8"Hybrid Heaven (U) 0000003F 00051580.mid TrackParseDebug.txt", u8"0000003F 00051580", 0 },
-{ u8"Hybrid Heaven (U) 00000040 00051680.mid", u8"Hybrid Heaven (U) 00000040 00051680.mid TrackParseDebug.txt", u8"00000040 00051680", 0 },
-{ u8"Hybrid Heaven (U) 00000041 00051750.mid", u8"Hybrid Heaven (U) 00000041 00051750.mid TrackParseDebug.txt", u8"00000041 00051750", 0 },
-{ u8"Hybrid Heaven (U) 00000042 000517F0.mid", u8"Hybrid Heaven (U) 00000042 000517F0.mid TrackParseDebug.txt", u8"00000042 000517F0", 0 },
-{ u8"Hybrid Heaven (U) 00000043 000518E0.mid", u8"Hybrid Heaven (U) 00000043 000518E0.mid TrackParseDebug.txt", u8"00000043 000518E0", 0 },
+{ u8"Hybrid Heaven (U) 00000035 00051120.mid", u8"Hybrid Heaven (U) 00000035 00051120.mid TrackParseDebug.txt", u8"Unknown 6", 0 },
+{ u8"Hybrid Heaven (U) 00000037 000511A0.mid", u8"Hybrid Heaven (U) 00000037 000511A0.mid TrackParseDebug.txt", u8"Unknown 7", 0 },
 
 
-{ u8"Hybrid Heaven (U) 00000047 00051BE0.mid", u8"Hybrid Heaven (U) 00000047 00051BE0.mid TrackParseDebug.txt", u8"00000047 00051BE0", 0 },
-{ u8"Hybrid Heaven (U) 00000048 00051C40.mid", u8"Hybrid Heaven (U) 00000048 00051C40.mid TrackParseDebug.txt", u8"00000048 00051C40", 0 },
-{ u8"Hybrid Heaven (U) 00000049 00051D00.mid", u8"Hybrid Heaven (U) 00000049 00051D00.mid TrackParseDebug.txt", u8"00000049 00051D00", 0 },
+{ u8"Hybrid Heaven (U) 00000047 00051BE0.mid", u8"Hybrid Heaven (U) 00000047 00051BE0.mid TrackParseDebug.txt", u8"Unknown 8", 0 },
 
 
-{ u8"Hybrid Heaven (U) 00000054 00054910.mid", u8"Hybrid Heaven (U) 00000054 00054910.mid TrackParseDebug.txt", u8"00000054 00054910", 0 },
-
-
-{ u8"Hybrid Heaven (U) 00000057 00054DD0.mid", u8"Hybrid Heaven (U) 00000057 00054DD0.mid TrackParseDebug.txt", u8"00000057 00054DD0", 0 },
-
+{ u8"Hybrid Heaven (U) 00000054 00054910.mid", u8"Hybrid Heaven (U) 00000054 00054910.mid TrackParseDebug.txt", u8"Unknown 9", 0 },
 
 
