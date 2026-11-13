@@ -54,7 +54,7 @@
 { u8"Starshot - Space Circus Fever (U) (M3) 00000010 007A06D2.mid", u8"Starshot - Space Circus Fever (U) (M3) 00000010 007A06D2.mid TrackParseDebug.txt", u8"Leika’s house", 0 },
 { u8"Starshot - Space Circus Fever (U) (M3) 00000012 00802B78.mid", u8"Starshot - Space Circus Fever (U) (M3) 00000012 00802B78.mid TrackParseDebug.txt", u8"Happy Bump Bar", 0 },
 { u8"Starshot - Space Circus Fever (U) (M3) 00000011 007DBDD4.mid", u8"Starshot - Space Circus Fever (U) (M3) 00000011 007DBDD4.mid TrackParseDebug.txt", u8"Iron Museum", 0 },
-{ u8"Starshot - Space Circus Fever (U) (M3) 0000000A 006099BE.mid", u8"Starshot - Space Circus Fever (U) (M3) 0000000A 006099BE.mid TrackParseDebug.txt", u8"Technomummy Entrance", 0 },
+{ u8"Starshot - Space Circus Fever (U) (M3) 0000000A 006099BE.mid", u8"Starshot - Space Circus Fever (U) (M3) 0000000A 006099BE.mid TrackParseDebug.txt", u8"TechnoMummy Entrance", 0 },
 { u8"Starshot - Space Circus Fever (U) (M3) 00000008 0060942E.mid", u8"Starshot - Space Circus Fever (U) (M3) 00000008 0060942E.mid TrackParseDebug.txt", u8"TechnoMummy Walkway", 0 },
 { u8"Starshot - Space Circus Fever (U) (M3) 00000009 00609722.mid", u8"Starshot - Space Circus Fever (U) (M3) 00000009 00609722.mid TrackParseDebug.txt", u8"TechnoMummy Museum", 0 },
 { u8"Starshot - Space Circus Fever (U) (M3) 00000007 00559452.mid", u8"Starshot - Space Circus Fever (U) (M3) 00000007 00559452.mid TrackParseDebug.txt", u8"Earth", 0 },
