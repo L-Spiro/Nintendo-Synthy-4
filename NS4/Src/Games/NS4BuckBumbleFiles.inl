@@ -7,7 +7,7 @@
 #define NS4_REVERB							ns4::CReverb::NS4_T_LIBULTRA_BIGROOM_0
 #define NS4_ORIG_HZ							44095
 #define NS4_SNG_FLAGS						(ns4::CSngDriver::NS4_SF_REST_SETS_VELOCITY | ns4::CSngDriver::NS4_SF_ENV_COUNT | ns4::CSngDriver::NS4_SF_UNSIGNED_FRAMES | \
-												ns4::CSngDriver::NS4_SF_U8_FOR_PITCH_BEND | ns4::CSngDriver::NS4_SF_BEND_RANGE_SQUARES | ns4::CSngDriver::NS4_SF_SIGNED_ENV_RATES | \
+												ns4::CSngDriver::NS4_SF_U8_FOR_PITCH_BEND | ns4::CSngDriver::NS4_SF_BEND_RANGE_SQUARES | \
 												ns4::CSngDriver::NS4_SF_VIBRATO_HOLDS | ns4::CSngDriver::NS4_SF_VOLUME_ON_PB_FRAME)
 #define NS4_DRIVER_SYNTH_HZ					44100.0
 #define NS4_CURVE							20.0
