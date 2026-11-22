@@ -29,20 +29,22 @@
 #define NS4_ANTI_ALIASING_LEVEL				2
 #define NS4_ANTI_ALIASING_HZ				20000.0
 
-{ u8"Buck Bumble (U) 00000013 00538E50.mid", u8"Buck Bumble (U) 00000013 00538E50.mid TrackParseDebug.txt", u8"Intro", 0x1D },
-{ u8"Buck Bumble (U) 00000000 005193F0.mid", u8"Buck Bumble (U) 00000000 005193F0.mid TrackParseDebug.txt", u8"Title", 0x1D },
+{ u8"Buck Bumble (U) 00000000 005193F0.mid", u8"Buck Bumble (U) 00000000 005193F0.mid TrackParseDebug.txt", u8"Buck Bumble Main Theme", 0x1D },
+{ u8"Buck Bumble (U) 00000013 00538E50.mid", u8"Buck Bumble (U) 00000013 00538E50.mid TrackParseDebug.txt", u8"Buck Bumble Intro", 0x1D },
+
 { u8"Buck Bumble (U) 00000002 005228B0.mid", u8"Buck Bumble (U) 00000002 005228B0.mid TrackParseDebug.txt", u8"Shock Strike", 0x1D },
 { u8"Buck Bumble (U) 00000001 0051B030.mid", u8"Buck Bumble (U) 00000001 0051B030.mid TrackParseDebug.txt", u8"Radar Run", 0x1D },
 { u8"Buck Bumble (U) 00000009 00528230.mid", u8"Buck Bumble (U) 00000009 00528230.mid TrackParseDebug.txt", u8"Short Fuse", 0x1D },
 { u8"Buck Bumble (U) 0000000C 0052CA50.mid", u8"Buck Bumble (U) 0000000C 0052CA50.mid TrackParseDebug.txt", u8"Outpost", 0x1D },
 { u8"Buck Bumble (U) 00000010 00535510.mid", u8"Buck Bumble (U) 00000010 00535510.mid TrackParseDebug.txt", u8"Mucus Storage", 0x1D },
 { u8"Buck Bumble (U) 0000000E 00532E30.mid", u8"Buck Bumble (U) 0000000E 00532E30.mid TrackParseDebug.txt", u8"Depot Attack", 0x1D },
-{ u8"Buck Bumble (U) 0000000F 005344B0.mid", u8"Buck Bumble (U) 0000000F 005344B0.mid TrackParseDebug.txt", u8"Queen", 0x1D },
-{ u8"Buck Bumble (U) 0000000B 0052BB50.mid", u8"Buck Bumble (U) 0000000B 0052BB50.mid TrackParseDebug.txt", u8"Outro", 0x1D },
+{ u8"Buck Bumble (U) 0000000F 005344B0.mid", u8"Buck Bumble (U) 0000000F 005344B0.mid TrackParseDebug.txt", u8"Buck Bumble Queen", 0x1D },
 //{ u8"Buck Bumble (U) 0000000A 0052B770.mid", u8"Buck Bumble (U) 0000000A 0052B770.mid TrackParseDebug.txt", u8"0000000A 0052B770", 0x1E },
-{ u8"Buck Bumble (U) 0000000D 0052DF50.mid", u8"Buck Bumble (U) 0000000D 0052DF50.mid TrackParseDebug.txt", u8"Zeppelin 2", 0x1D },
-{ u8"Buck Bumble (U) 00000011 00538430.mid", u8"Buck Bumble (U) 00000011 00538430.mid TrackParseDebug.txt", u8"Unknown 1", 0x1D },
-{ u8"Buck Bumble (U) 00000012 00538990.mid", u8"Buck Bumble (U) 00000012 00538990.mid TrackParseDebug.txt", u8"Unknown 2", 0x1D },
+{ u8"Buck Bumble (U) 0000000D 0052DF50.mid", u8"Buck Bumble (U) 0000000D 0052DF50.mid TrackParseDebug.txt", u8"Buck Bumble Big Boss", 0x1D },
+{ u8"Buck Bumble (U) 0000000B 0052BB50.mid", u8"Buck Bumble (U) 0000000B 0052BB50.mid TrackParseDebug.txt", u8"Buck Bumble Mission Screen", 0x1D },
+
+{ u8"Buck Bumble (U) 00000012 00538990.mid", u8"Buck Bumble (U) 00000012 00538990.mid TrackParseDebug.txt", u8"Buck Bumble Level Complete", 0x1D },
+{ u8"Buck Bumble (U) 00000011 00538430.mid", u8"Buck Bumble (U) 00000011 00538430.mid TrackParseDebug.txt", u8"Buck Bumble Name Entry", 0x1D },
 
 { u8"Buck Bumble (U) 00000003 00524A30.mid", u8"Buck Bumble (U) 00000003 00524A30.mid TrackParseDebug.txt", u8"Garden SFX", 0x1E },
 { u8"Buck Bumble (U) 00000004 00525D50.mid", u8"Buck Bumble (U) 00000004 00525D50.mid TrackParseDebug.txt", u8"Grave SFX", 0x1F },
