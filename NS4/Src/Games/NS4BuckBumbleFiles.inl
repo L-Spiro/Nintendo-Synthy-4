@@ -4,8 +4,12 @@
 #define NS4_FOLDER							u8"Buck Bumble"
 //#define NS4_BANK							u8"00"
 #define NS4_REVERB_TRACKS					1
-#define NS4_REVERB							ns4::CReverb::NS4_T_MISSION_IMPOSSIBLE_0
-#define NS4_ORIG_HZ							22047
+#define NS4_REVERB							ns4::CReverb::NS4_T_LIBULTRA_BIGROOM_0
+#define NS4_ORIG_HZ							44095
+#define NS4_SNG_FLAGS						(ns4::CSngDriver::NS4_SF_REST_SETS_VELOCITY | ns4::CSngDriver::NS4_SF_ENV_COUNT | ns4::CSngDriver::NS4_SF_UNSIGNED_FRAMES | \
+												ns4::CSngDriver::NS4_SF_U8_FOR_PITCH_BEND | ns4::CSngDriver::NS4_SF_BEND_RANGE_SQUARES | ns4::CSngDriver::NS4_SF_SIGNED_ENV_RATES | \
+												ns4::CSngDriver::NS4_SF_VIBRATO_HOLDS | ns4::CSngDriver::NS4_SF_VOLUME_ON_PB_FRAME)
+#define NS4_DRIVER_SYNTH_HZ					44100.0
 #define NS4_CURVE							20.0
 #define NS4_OUT_DIRECTORY					u8"C:\\N64OST\\Buck Bumble\\"
 #define NS4_OUT_DIRECTORY_NUMBERS			NS4_OUT_DIRECTORY u8"Numbered\\"
@@ -25,12 +29,7 @@
 #define NS4_ANTI_ALIASING_LEVEL				2
 #define NS4_ANTI_ALIASING_HZ				20000.0
 
-{ u8"Buck Bumble (U) 00000013 00538E50.mid", u8"Buck Bumble (U) 00000013 00538E50.mid TrackParseDebug.txt", u8"Intro", 0x1D,
-	1,
-	{
-		{ NS4_ADD_MIDI_FILE( u8"Buck Bumble (U) 00000013 00538E50_AdditionalPart1.mid", false ) },
-	}
-},
+{ u8"Buck Bumble (U) 00000013 00538E50.mid", u8"Buck Bumble (U) 00000013 00538E50.mid TrackParseDebug.txt", u8"Intro", 0x1D },
 { u8"Buck Bumble (U) 00000000 005193F0.mid", u8"Buck Bumble (U) 00000000 005193F0.mid TrackParseDebug.txt", u8"Title", 0x1D },
 { u8"Buck Bumble (U) 00000002 005228B0.mid", u8"Buck Bumble (U) 00000002 005228B0.mid TrackParseDebug.txt", u8"Shock Strike", 0x1D },
 { u8"Buck Bumble (U) 00000001 0051B030.mid", u8"Buck Bumble (U) 00000001 0051B030.mid TrackParseDebug.txt", u8"Radar Run", 0x1D },

@@ -1195,6 +1195,9 @@
     <None Include="Src\Games\NS4NaganoWinterOlympics98Files.inl">
       <Filter>Header Files\Games</Filter>
     </None>
+    <None Include="Src\Games\NS4LegoRacersFiles.inl">
+      <Filter>Header Files\Games</Filter>
+    </None>
     <None Include="Src\Games\NS4LodeRunner3DFiles.inl">
       <Filter>Header Files\Games</Filter>
     </None>

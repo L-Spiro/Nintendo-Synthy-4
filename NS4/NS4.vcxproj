@@ -264,6 +264,7 @@
     <None Include="Src\Games\NS4InternationalSuperstarSoccer2000Files.inl" />
     <None Include="Src\Games\NS4MysticalNinjaStarringGoemonFiles.inl" />
     <None Include="Src\Games\NS4NaganoWinterOlympics98Files.inl" />
+    <None Include="Src\Games\NS4LegoRacersFiles.inl" />
     <None Include="Src\Games\NS4LodeRunner3DFiles.inl" />
     <None Include="Src\Games\NS4MarioGolfFiles.inl" />
     <None Include="Src\Games\NS4CommandAndConquerFiles.inl" />
