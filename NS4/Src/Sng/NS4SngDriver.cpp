@@ -328,6 +328,20 @@ namespace ns4 {
 	}
 
 	/**
+	 * Replaces a byte of the loaded song (NS4_E_SNG_SET_BYTE), to fix a wrong value in the song data.  Call after LoadDebug() and
+	 *	before Play().
+	 *
+	 * \param _ui32Offset The offset of the byte, as printed in the debug text.
+	 * \param _ui8Value The new value.
+	 * \return Returns false if the byte is not in the debug text.
+	 */
+	bool CSngDriver::SetSongByte( uint32_t _ui32Offset, uint8_t _ui8Value ) {
+		if ( _ui32Offset >= m_vImage.size() || !m_vKnown[_ui32Offset] ) { return false; }
+		m_vImage[_ui32Offset] = _ui8Value;
+		return true;
+	}
+
+	/**
 	 * Stores a byte in the rebuilt song.
 	 *
 	 * \param _ui32Offset The offset.

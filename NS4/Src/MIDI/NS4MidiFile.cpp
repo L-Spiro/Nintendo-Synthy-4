@@ -187,6 +187,7 @@ namespace ns4 {
 		m_bMuteDriverTracks = false;
 		m_sMutedDriverTracks.clear();
 		m_sMutedDriverSounds.clear();
+		m_vSngSetBytes.clear();
 		m_ui32DriverBank = 0;
 		m_ui64DriverRenderTicks = 0;
 		m_hHeader.ui16Division = 0;
@@ -1123,6 +1124,11 @@ namespace ns4 {
 			std::printf( "SNG: No channel data found in the debug file.\r\n" );
 			return false;
 		}
+		for ( size_t I = 0; I < m_vSngSetBytes.size(); ++I ) {
+			if ( !sdDriver.SetSongByte( m_vSngSetBytes[I].first, m_vSngSetBytes[I].second ) ) {
+				std::printf( "SNG: Byte %.8X is not in the debug file and cannot be set.\r\n", m_vSngSetBytes[I].first );
+			}
+		}
 		m_bKonami = false;
 		m_bSng = true;
 		// The longest a song may take to reach its loop (30 minutes).
@@ -1415,6 +1421,7 @@ namespace ns4 {
 		m_bMuteDriverTracks = false;
 		m_sMutedDriverTracks.clear();
 		m_sMutedDriverSounds.clear();
+		m_vSngSetBytes.clear();
 		m_ui32DriverBank = 0;
 		m_kdKonami = CKonamiDriver();
 		m_sdSng = CSngDriver();
@@ -2721,6 +2728,11 @@ namespace ns4 {
 							RemoveAllAfterIndex( m_vTracks[iTrackByChan].vEvents, 0, true );
 							m_sMutedDriverTracks.insert( size_t( iTrackByChan ) );
 						}
+						break;
+					}
+					case NS4_E_SNG_SET_BYTE : {
+						// SNG songs are played by their driver as soon as the debug file is loaded, so the bytes are replaced then.
+						m_vSngSetBytes.push_back( std::make_pair( _pmMods[I].ui32Operand0, uint8_t( _pmMods[I].ui32Operand1 ) ) );
 						break;
 					}
 					case NS4_E_MUTE_INST : {

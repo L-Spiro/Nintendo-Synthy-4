@@ -126,6 +126,16 @@ namespace ns4 {
 		bool													IsOldStyle() const { return m_bOldStyle; }
 
 		/**
+		 * Replaces a byte of the loaded song (NS4_E_SNG_SET_BYTE), to fix a wrong value in the song data.  Call after LoadDebug() and
+		 *	before Play().
+		 *
+		 * \param _ui32Offset The offset of the byte, as printed in the debug text.
+		 * \param _ui8Value The new value.
+		 * \return Returns false if the byte is not in the debug text.
+		 */
+		bool													SetSongByte( uint32_t _ui32Offset, uint8_t _ui8Value );
+
+		/**
 		 * Gets the warnings produced while loading and playing.
 		 *
 		 * \return Returns the warnings.

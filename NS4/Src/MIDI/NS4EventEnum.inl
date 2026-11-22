@@ -76,6 +76,7 @@ NS4_ENUM( NS4_E_FADE_AT ),										/**< Fades the rendered result at the given 
 
 NS4_ENUM( NS4_E_ADD_MIDI_FILE ),								/**< Loads the given MIDI file (pcStringOp), appending it to the end of the current list of tracks.  If ui32Operand0 is non-zero, the first track of the loaded MIDI file is not appended. */
 NS4_ENUM( NS4_E_ADD_KONAMI_FILE ),								/**< Adds the tracks of another Konami "TrackParseDebug" file (pcStringOp, in the DBG folder), as when the game plays 2 songs at once on different channels.  ui32Operand0 is the track (0-based) that receives the file's first track (or ~0 to add after the last track); tracks already there are replaced.  ui32Operand1 is the most tracks to take from the file (0 for all).  Applied after the debug file is loaded (post-supplemental). */
+NS4_ENUM( NS4_E_SNG_SET_BYTE ),									/**< SNG: replaces the byte at an offset in the song (ui32Operand0, as printed in the "TrackParseDebug" file) with ui32Operand1 before the SNG driver plays it, to fix a wrong value in the song data (an ADSR index, an instrument, etc.).  The offset must be one of the bytes in the debug file.  Only useful in the pre-unroll stage. */
 NS4_ENUM( NS4_E_SET_BANK_PUNK7890 ),							/**< Overwrites envelopes, key ranges, etc., based off the file format created by punk7890.  Changes made to the sound bank are permanent, so this is typically used on every track in a set. */
 
 NS4_ENUM( NS4_E_GLOBAL_SET_PERC_RELEASE_ADSR ),					/**< Sets the ADSR percussion release rate for a given track. */

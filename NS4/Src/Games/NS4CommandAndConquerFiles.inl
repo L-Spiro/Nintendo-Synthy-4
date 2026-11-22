@@ -51,3 +51,13 @@
 { u8"Command & Conquer (U) 0000001D 00D4989A.mid", u8"Command & Conquer (U) 0000001D 00D4989A.mid TrackParseDebug.txt", u8"Cutscene 6 (Demolition: Prepare for Battle)", 0 },
 //{ u8"Command & Conquer (U) 0000001E 00D49CAA.mid", u8"Command & Conquer (U) 0000001E 00D49CAA.mid TrackParseDebug.txt", u8"0000001E 00D49CAA", 0 },
 //{ u8"Command & Conquer (U) 0000001F 00D4A2D8.mid", u8"Command & Conquer (U) 0000001F 00D4A2D8.mid TrackParseDebug.txt", u8"0000001F 00D4A2D8", 0 },
+
+
+{ u8"Command & Conquer (U) 00000000 00D17D40.mid", u8"Command & Conquer (U) 00000000 00D17D40.mid TrackParseDebug.txt", u8"Act On Instinct (As Intended)", 0,
+	3,
+	{
+		{ NS4_SNG_SET_BYTE( 0x1FB8, 0x02 ) },
+		{ NS4_SNG_SET_BYTE( 0x22D4, 0x06 ) },
+		{ NS4_SNG_SET_BYTE( 0x262C, 0x02 ) },
+	}
+},

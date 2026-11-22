@@ -277,6 +277,7 @@ namespace ns4 {
 #define NS4_SET_CHANNEL_OFFSET( VAL )							ns4::CMidiFile::NS4_ES_PRE_UNROLL, ns4::CMidiFile::NS4_E_SET_CHANNEL_OFFSET, (VAL)
 #define NS4_ADD_MIDI_FILE( FILE, KEEP_FIRST_TRK )				ns4::CMidiFile::NS4_ES_PRE_UNROLL, ns4::CMidiFile::NS4_E_ADD_MIDI_FILE, 0, KEEP_FIRST_TRK, 0, {}, {}, 0, 0, 0.0, 0.0, reinterpret_cast<const char *>(FILE)
 #define NS4_ADD_KONAMI_FILE( DBG_FILE, FIRST_TRACK, MAX_TRACKS )	ns4::CMidiFile::NS4_ES_POST_SUPPLEMENTAL, ns4::CMidiFile::NS4_E_ADD_KONAMI_FILE, 0, uint32_t( FIRST_TRACK ), uint32_t( MAX_TRACKS ), {}, {}, 0, 0, 0.0, 0.0, reinterpret_cast<const char *>(DBG_FILE)
+#define NS4_SNG_SET_BYTE( OFFSET, VALUE )						ns4::CMidiFile::NS4_ES_PRE_UNROLL, ns4::CMidiFile::NS4_E_SNG_SET_BYTE, 0, uint32_t( OFFSET ), uint32_t( VALUE )
 #define NS4_MAKE_TUNING( BASENOTE, COURSETUNE, FINETUNE )		uint32_t( (uint8_t( BASENOTE ) << 24) | (uint8_t( COURSETUNE ) << 16) | uint16_t( FINETUNE ) )
 #define NS4_MAKE_VIB_TREM( TYPE, RATE, DEPTH, DELAY )			uint32_t( (uint8_t( TYPE ) << 24) | (uint8_t( RATE ) << 16) | (uint8_t( DEPTH ) << 8) | (uint8_t( DELAY ) << 0) )
 #define NS4_MAKE_NOTE_INST( NOTE, SAMPLE_VOL, SAMPLE_PAN, REV )	uint32_t( (uint8_t( NOTE ) << 24) | (uint8_t( SAMPLE_VOL ) << 16) | (uint8_t( SAMPLE_PAN ) << 8) | (uint8_t( REV ) << 0) )
@@ -2930,6 +2931,9 @@ namespace ns4 {
 		std::set<size_t>				m_sMutedDriverTracks;
 		/** The sounds muted by NS4_E_MUTE_INST, applied when a Konami or SNG song is rendered by its driver. */
 		std::set<uint32_t>				m_sMutedDriverSounds;
+		/** The bytes replaced by NS4_E_SNG_SET_BYTE (offset, value), applied to the SNG song when its debug file is loaded. */
+		std::vector<std::pair<uint32_t, uint8_t>>
+										m_vSngSetBytes;
 		/** The bank with which the Konami sequence starts, or the SNG song's sample bank. */
 		uint32_t						m_ui32DriverBank;
 		/** The Konami driver holding the loaded sequence. */
